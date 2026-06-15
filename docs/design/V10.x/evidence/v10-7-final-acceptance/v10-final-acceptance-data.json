@@ -1,0 +1,155 @@
+{
+  "stage_id": "V10-7",
+  "status": "PASS",
+  "allowed_claim": "V10-1..V10-7 complete: CLI-native read-model TUI experience baseline ready for review.",
+  "final_v10_completion_blocked_until_v10_8": true,
+  "agent_backed_gateway_turn_evidence_present": false,
+  "stage_evidence": [
+    {
+      "stage_id": "V10-1",
+      "status": "PASS",
+      "evidence_scope": "real_tui_render_fixture",
+      "real_tui_screenshots": [
+        "docs/design/V10.x/evidence/v10-1-mission-tui-shell/real-tui-80x24.txt",
+        "docs/design/V10.x/evidence/v10-1-mission-tui-shell/real-tui-120x40.txt"
+      ],
+      "component_model": "dependency-free CLI-native block renderer; React/Ink package boundary pending external dependency approval",
+      "openharness_primary_copy_present": false,
+      "concept_images_are_runtime_evidence": false,
+      "runtime_truth_boundary": "tui_read_model_not_runtime_truth",
+      "errors": []
+    },
+    {
+      "stage_id": "V10-2",
+      "status": "PASS",
+      "evidence_scope": "fixture_render",
+      "required_blocks": [
+        "tool_block",
+        "permission_block",
+        "plan_block"
+      ],
+      "negative_fixtures": [
+        "permission_denial_without_reason",
+        "tool_block_without_evidence_ref"
+      ],
+      "forbidden_reasons_visible": true,
+      "runtime_truth_boundary": "tui_read_model_not_runtime_truth",
+      "evidence_ref": "docs/design/V10.x/evidence/v10-2-tool-permission-plan-blocks/acceptance-data.json"
+    },
+    {
+      "stage_id": "V10-3",
+      "status": "PASS",
+      "evidence_scope": "v9_evidence_backed_fixture_render",
+      "required_blocks": [
+        "station_block"
+      ],
+      "scenario_refs": [
+        "US-V10-01",
+        "US-V10-02",
+        "US-V10-03",
+        "US-V10-04"
+      ],
+      "every_station_has_evidence_refs": true,
+      "runtime_truth_boundary": "tui_read_model_not_runtime_truth",
+      "evidence_ref": "docs/design/V10.x/evidence/v10-3-workflow-explainability-blocks/acceptance-data.json"
+    },
+    {
+      "stage_id": "V10-4",
+      "status": "PASS",
+      "evidence_scope": "v9_evidence_backed_fixture_render",
+      "required_blocks": [
+        "output_preview_block"
+      ],
+      "raw_artifact_content_present": false,
+      "quality_refs_visible": true,
+      "runtime_truth_boundary": "tui_read_model_not_runtime_truth",
+      "evidence_ref": "docs/design/V10.x/evidence/v10-4-output-quality-preview/acceptance-data.json"
+    },
+    {
+      "stage_id": "V10-5",
+      "status": "PASS",
+      "evidence_scope": "fixture_render",
+      "required_blocks": [
+        "workflowdiff_block"
+      ],
+      "proposal_first": true,
+      "auto_apply_exposed": false,
+      "source_agent_direct_mutation_allowed": false,
+      "runtime_truth_boundary": "tui_read_model_not_runtime_truth",
+      "evidence_ref": "docs/design/V10.x/evidence/v10-5-workflowdiff-preview/acceptance-data.json"
+    },
+    {
+      "stage_id": "V10-6",
+      "status": "PASS",
+      "evidence_scope": "supporting_html_export",
+      "html_ref": "docs/design/V10.x/evidence/v10-1-mission-tui-shell/supporting-html-explainer.html",
+      "html_explainer_is_primary_tui": false,
+      "html_explainer_is_runtime_truth": false,
+      "runtime_truth_boundary": "tui_read_model_not_runtime_truth",
+      "evidence_ref": "docs/design/V10.x/evidence/v10-6-html-explainer/acceptance-data.json"
+    }
+  ],
+  "user_scenarios": [
+    {
+      "id": "US-V10-01",
+      "name": "Local Markdown workflow",
+      "status": "PASS",
+      "evidence_scope": "real_tui_render_fixture",
+      "evidence_refs": [
+        "docs/design/V9.x/evidence/v9-8-final-acceptance/v9-final-acceptance-data.json",
+        "docs/design/V9.x/evidence/v9-user-scenario-coverage-review/coverage-data.json"
+      ]
+    },
+    {
+      "id": "US-V10-02",
+      "name": "Roman Forum parallel Agent discussion",
+      "status": "PASS",
+      "evidence_scope": "real_tui_render_fixture",
+      "evidence_refs": [
+        "docs/design/V9.x/evidence/v9-8-final-acceptance/v9-final-acceptance-data.json",
+        "docs/design/V9.x/evidence/v9-user-scenario-coverage-review/coverage-data.json"
+      ]
+    },
+    {
+      "id": "US-V10-03",
+      "name": "Video storyboard workflow",
+      "status": "PASS",
+      "evidence_scope": "real_tui_render_fixture",
+      "evidence_refs": [
+        "docs/design/V9.x/evidence/v9-8-final-acceptance/v9-final-acceptance-data.json",
+        "docs/design/V9.x/evidence/v9-user-scenario-coverage-review/coverage-data.json"
+      ]
+    },
+    {
+      "id": "US-V10-04",
+      "name": "Coding proposal workflow",
+      "status": "PASS",
+      "evidence_scope": "real_tui_render_fixture",
+      "evidence_refs": [
+        "docs/design/V9.x/evidence/v9-8-final-acceptance/v9-final-acceptance-data.json",
+        "docs/design/V9.x/evidence/v9-user-scenario-coverage-review/coverage-data.json"
+      ]
+    },
+    {
+      "id": "US-V10-05",
+      "name": "Natural-language workflow revision",
+      "status": "PASS",
+      "evidence_scope": "real_tui_render_fixture",
+      "evidence_refs": [
+        "docs/design/V9.x/evidence/v9-8-final-acceptance/v9-final-acceptance-data.json",
+        "docs/design/V9.x/evidence/v9-user-scenario-coverage-review/coverage-data.json"
+      ]
+    }
+  ],
+  "real_tui_screenshots": [
+    "docs/design/V10.x/evidence/v10-1-mission-tui-shell/real-tui-80x24.txt",
+    "docs/design/V10.x/evidence/v10-1-mission-tui-shell/real-tui-120x40.txt"
+  ],
+  "claim_scan": "PASS",
+  "redaction_scan": "PASS",
+  "drawio_xml": "PASS",
+  "forbidden_claim_violations": [],
+  "runtime_truth_boundary": "tui_read_model_not_runtime_truth",
+  "read_model_baseline_claim_allowed": true,
+  "final_claim_allowed": false
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": "v12.light_studio_annotated_component_sketches_static_render_report.v1",
+  "stage_id": "V12-0A",
+  "status": "PASS",
+  "created_at": "2026-06-14T09:05:00+08:00",
+  "render_command": "qlmanage -t -s 1440 -o docs/design/V12-V15.x/evidence/v12-component-prototype docs/design/V12-V15.x/evidence/v12-component-prototype/light-studio-annotated-component-sketches.html",
+  "html_path": "docs/design/V12-V15.x/evidence/v12-component-prototype/light-studio-annotated-component-sketches.html",
+  "html_sha256": "fced2d7da6a01fa1720a6bb10b69c3a78c10884ba45461f31ff3711dce1e2e75",
+  "thumbnail_path": "docs/design/V12-V15.x/evidence/v12-component-prototype/light-studio-annotated-component-sketches.html.png",
+  "thumbnail_sha256": "f24f86c38deb6e0377a24abc966b7c607bbd2ff9578a099fc95618c5c8387780",
+  "evidence_scope": "design_only_annotated_component_sketch_static_render",
+  "contains_full_workbench_overview": true,
+  "contains_component_location_annotations": true,
+  "contains_component_base_style_sketches": true,
+  "browser_implementation_backed": false,
+  "bff_backed": false,
+  "runtime_backed": false,
+  "not_runtime_evidence": true
+}

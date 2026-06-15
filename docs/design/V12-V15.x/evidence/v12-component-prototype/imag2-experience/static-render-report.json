@@ -1,0 +1,62 @@
+{
+  "schema_version": "v12.imag2_experience_static_render_report.v1",
+  "stage_id": "V12-0A",
+  "status": "PASS",
+  "evidence_scope": "design_only",
+  "runtime_backed": false,
+  "browser_implementation_backed": false,
+  "figma_backed": false,
+  "mode": "gpt-image-2 Mode B host-native",
+  "render_command": "qlmanage -t -s 1440 -o docs/design/V12-V15.x/evidence/v12-component-prototype/imag2-experience docs/design/V12-V15.x/evidence/v12-component-prototype/imag2-experience/index.html",
+  "render_output": "index.html.png",
+  "xml_validation": {
+    "assets/01-overall-workbench.svg": "PASS",
+    "assets/02-component-sheet.svg": "PASS",
+    "assets/03-interaction-flow.svg": "PASS"
+  },
+  "artifacts": [
+    {
+      "path": "index.html",
+      "sha256": "fcd5b859c5ee8c0fa6dbf7fbc10862b3b515e542c2319717a48160e310f68af7"
+    },
+    {
+      "path": "index.html.png",
+      "sha256": "1f5eb4aead7a9a633b5e03d92ef6fedb339fc0d6b9673443457dedcf18370ed5"
+    },
+    {
+      "path": "assets/01-overall-workbench.svg",
+      "sha256": "0005c09eea008ef992e731bc0c901a496f26db5519449604cd72f5d7534c768f"
+    },
+    {
+      "path": "assets/01-overall-workbench-imag2.png",
+      "sha256": "ac880750f0f26d4c18b34d90c252c8e72614ae182821c0717f9b35ffb9e8b103",
+      "pixel_size": "1672x941"
+    },
+    {
+      "path": "assets/02-component-sheet.svg",
+      "sha256": "44feacbf17b125296a882a2175c5b61db37dd35833fd5d73ce253c12b51d8e46"
+    },
+    {
+      "path": "assets/02-component-sheet-imag2.png",
+      "sha256": "79b593550dc56f098ec2b183b01b18041fc9ccb4cf9356ee235005749a8feb68",
+      "pixel_size": "1536x1024"
+    },
+    {
+      "path": "assets/03-interaction-flow.svg",
+      "sha256": "b62c061a3a06fb009ee0e5f1ad94b8fc1056f4da5c797d7a818fa9b49f9e132b"
+    },
+    {
+      "path": "assets/03-interaction-flow-imag2.png",
+      "sha256": "ef93b29208ad64e3a52aa78174ef4515ee20c14d42e8987736669c8f82df242e",
+      "pixel_size": "1672x941"
+    }
+  ],
+  "boundary": {
+    "not_runtime_evidence": true,
+    "not_browser_implementation_evidence": true,
+    "not_bff_or_dto_evidence": true,
+    "not_figma_freeze": true,
+    "requires_v12_0p_review_before_browser_implementation": true
+  },
+  "created_at": "2026-06-14T00:00:00+08:00"
+}

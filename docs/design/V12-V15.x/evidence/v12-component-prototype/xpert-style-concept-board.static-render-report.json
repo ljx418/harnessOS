@@ -1,0 +1,23 @@
+{
+  "schema_version": "v12.component_prototype_concept_board_static_render_report.v1",
+  "stage_id": "V12-0A",
+  "status": "PASS",
+  "created_at": "2026-06-14T08:14:00+08:00",
+  "render_command": "qlmanage -t -s 1440 -o docs/design/V12-V15.x/evidence/v12-component-prototype docs/design/V12-V15.x/evidence/v12-component-prototype/xpert-style-concept-board.html",
+  "html_path": "docs/design/V12-V15.x/evidence/v12-component-prototype/xpert-style-concept-board.html",
+  "html_sha256": "c6d45aa72d3ce0acbf3314c0d21e1fd0026ed420641a987b9d46d211060ffd12",
+  "thumbnail_path": "docs/design/V12-V15.x/evidence/v12-component-prototype/xpert-style-concept-board.html.png",
+  "thumbnail_sha256": "a2fb5e2e194e6a8a096a516ee5d2199237e7e7531404973934da88b126a527c7",
+  "evidence_scope": "design_only_static_render",
+  "concept_variants": [
+    "Light Studio Workbench",
+    "Dense Operator Console",
+    "Creative Workflow Studio"
+  ],
+  "recommended_default_direction": "Light Studio Workbench",
+  "browser_implementation_backed": false,
+  "bff_backed": false,
+  "runtime_backed": false,
+  "xpert_parity_claimed": false,
+  "not_runtime_evidence": true
+}

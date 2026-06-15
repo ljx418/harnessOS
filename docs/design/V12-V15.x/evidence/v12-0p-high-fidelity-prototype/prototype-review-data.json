@@ -1,0 +1,95 @@
+{
+  "schema_version": "v12_0p_high_fidelity_prototype_review.v1",
+  "stage_id": "V12-0P",
+  "status": "READY_FOR_HUMAN_REVIEW",
+  "current_decision": "DESIGN_ONLY_PROTOTYPE_READY_FOR_REVIEW",
+  "evidence_scope": "high_fidelity_prototype_design_only",
+  "runtime_backed": false,
+  "browser_implementation_backed": false,
+  "bff_backed": false,
+  "dto_backed": false,
+  "figma_backed": false,
+  "xpert_reference_used_as_harnessos_runtime_evidence": false,
+  "created_at": "2026-06-15T00:00:00+08:00",
+  "inputs": [
+    "docs/design/V12-V15.x/v12_component_prototype_plan.md",
+    "docs/design/V12-V15.x/v12_component_prototype_execution_plan.md",
+    "docs/design/V12-V15.x/v12_0p_interaction_experience_spec.md",
+    "docs/design/V12-V15.x/v12_figma_prototype_review_plan.md",
+    "docs/design/V12-V15.x/v12_to_v15_target_prd.md",
+    "docs/design/V12-V15.x/v12_to_v15_target_architecture.md",
+    "docs/design/V12-V15.x/evidence/v12-component-prototype/index.html",
+    "docs/design/V12-V15.x/evidence/v12-component-prototype/imag2-experience/index.html"
+  ],
+  "prototype_artifacts": {
+    "html_review_page": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/index.html",
+    "static_render_screenshot": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/index.html.png",
+    "prd_spec_review": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/prd-spec-review.md",
+    "acceptance_audit": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/v12-0p-acceptance-audit.md"
+  },
+  "component_coverage": [
+    {
+      "component_id": "global_top_bar",
+      "status": "COVERED",
+      "evidence": "workspace/project/app route context, API status, read-only canvas state, proposal-only publish state"
+    },
+    {
+      "component_id": "left_l1_l2_navigation",
+      "status": "COVERED",
+      "evidence": "L1 rail domains and L2 object examples for workbench, agents, workflows, skills, evidence, runs and settings"
+    },
+    {
+      "component_id": "canvas_workbench",
+      "status": "COVERED",
+      "evidence": "dot-grid canvas, toolbar, minimap, curved edges, trigger/station/tool/quality nodes"
+    },
+    {
+      "component_id": "agent_station_node_card",
+      "status": "COVERED",
+      "evidence": "role, goal, provider/model, tools, MCP refs, evidence refs, multi-input and multi-output ports"
+    },
+    {
+      "component_id": "right_inspector",
+      "status": "COVERED",
+      "evidence": "overview, policy, quality, evidence, validation and read-only boundary"
+    },
+    {
+      "component_id": "bottom_workbench",
+      "status": "COVERED",
+      "evidence": "Chat, proposal timeline, Trace, quality and evidence tab semantics"
+    }
+  ],
+  "interaction_state_coverage": {
+    "api_online": "COVERED",
+    "api_offline": "COVERED_AS_STATE_ENUM",
+    "node_hover": "COVERED",
+    "node_selected": "COVERED",
+    "invalid_edge": "COVERED_AS_STATE_ENUM",
+    "awaiting_confirmation": "COVERED",
+    "evidence_missing": "COVERED_AS_STATE_ENUM",
+    "blocked": "COVERED"
+  },
+  "acceptance_checks": {
+    "index_html_exists": "PASS",
+    "static_render_exists": "PASS",
+    "prd_spec_review": "PASS",
+    "no_false_green_scan": "PASS_WITH_SAFE_CONTEXT_ONLY",
+    "redaction_scan": "PASS_WITH_SAFE_CONTEXT_ONLY",
+    "human_review_required": true
+  },
+  "blocked_claims": [
+    "Xpert parity complete",
+    "Xpert-level UX complete",
+    "product-grade frontend complete",
+    "complete Workflow Studio ready",
+    "production ready",
+    "Agent executor ready"
+  ],
+  "next_allowed_stage_after_acceptance": "V12 implementation-readiness audit",
+  "blocked_next_stages": [
+    "V12 real browser implementation before readiness acceptance",
+    "V13 editable Workflow Studio implementation",
+    "V14 plugin runtime implementation",
+    "V15 final acceptance"
+  ]
+}

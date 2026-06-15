@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>V10 CLI 本地运行验收报告</title>
+  <style>
+    body { margin:0; background:#f8fafc; color:#0f172a; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    header { background:#0b1020; color:#f8fafc; padding:32px 40px; }
+    main { max-width:1180px; margin:0 auto; padding:28px 28px 60px; }
+    section { background:white; border:1px solid #e2e8f0; border-radius:10px; padding:22px; margin:18px 0; box-shadow:0 8px 22px rgba(15,23,42,.06); }
+    h1,h2 { margin-top:0; }
+    .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+    img { width:100%; border:1px solid #cbd5e1; border-radius:8px; background:#020617; }
+    table { width:100%; border-collapse:collapse; } td,th { border-bottom:1px solid #e2e8f0; padding:10px; text-align:left; vertical-align:top; }
+    code { background:#f1f5f9; padding:2px 5px; border-radius:5px; }
+    .pass { color:#15803d; font-weight:700; } .fail { color:#b91c1c; font-weight:700; }
+    .note { background:#ecfeff; border-left:4px solid #0891b2; padding:12px 14px; border-radius:6px; }
+    .warn { background:#fff7ed; border-left:4px solid #ea580c; padding:12px 14px; border-radius:6px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>V10 CLI 本地运行验收报告</h1>
+    <p>本报告由真实 CLI 命令 stdout/stderr 生成，用于审查 V10 CLI-native Mission TUI 的本地运行证据。</p>
+  </header>
+  <main>
+    <section>
+      <h2>结论</h2>
+      <p><span class="pass">PASS</span>：V10 CLI 层可运行，80x24 与 120x40 终端输出存在，五个用户场景进入 final scenario matrix，负例校验能够拒绝自动 apply / source=agent durable mutation 风险。</p>
+      <p class="warn">边界：macOS Terminal 截图证明本地 CLI 被真实拉起并运行；80x24 / 120x40 截图是同一次 CLI stdout 证据的干净渲染版，用于审查可读性。HTML 解释页仍是辅助审计导出，不是 runtime truth。</p>
+    </section>
+    <section>
+      <h2>运行界面截图证据</h2>
+      <div class="grid">
+        <figure><img src="screenshots/macos-terminal-v10-cli.png" alt="macOS Terminal real CLI screenshot"><figcaption>真实 macOS Terminal：本地执行 V10 Mission TUI CLI 后的窗口截图，包含实际命令运行结果。</figcaption></figure>
+        <figure><img src="screenshots/terminal-80x24.png" alt="80x24 CLI screenshot"><figcaption>80x24：窄屏下仍显示 HarnessOS 状态线、WorkflowDiff proposal、底部 composer。</figcaption></figure>
+        <figure><img src="screenshots/terminal-120x40.png" alt="120x40 CLI screenshot"><figcaption>120x40：宽屏下展示本地 Markdown、罗马广场、视频分镜、编码提案等 Agent blocks。</figcaption></figure>
+      </div>
+    </section>
+    <section>
+      <h2>命令验证结果</h2>
+      <table><thead><tr><th>命令</th><th>实际返回码</th><th>期望返回码</th><th>状态</th></tr></thead><tbody><tr><td><code>node apps/mission-tui/src/cli.js --fixture apps/mission-tui/fixtures/mission_tui_state_80x24.json --columns 80 --rows 24</code></td><td>0</td><td>0</td><td><span class='pass'>PASS</span></td></tr>
+<tr><td><code>node apps/mission-tui/src/cli.js --fixture apps/mission-tui/fixtures/mission_tui_state_120x40.json --columns 120 --rows 40</code></td><td>0</td><td>0</td><td><span class='pass'>PASS</span></td></tr>
+<tr><td><code>node apps/mission-tui/src/cli.js --fixture apps/mission-tui/fixtures/workflowdiff_auto_apply_action.json --validate</code></td><td>2</td><td>2</td><td><span class='pass'>PASS</span></td></tr>
+<tr><td><code>npm --prefix apps/mission-tui test</code></td><td>0</td><td>0</td><td><span class='pass'>PASS</span></td></tr>
+<tr><td><code>./.venv/bin/python -m pytest tests/test_v10_mission_tui_runtime.py tests/test_v10_tui_experience_planning.py -q</code></td><td>0</td><td>0</td><td><span class='pass'>PASS</span></td></tr>
+<tr><td><code>xmllint --noout docs/design/V10.x/v10_current_gap_analysis.drawio</code></td><td>0</td><td>0</td><td><span class='pass'>PASS</span></td></tr></tbody></table>
+    </section>
+    <section>
+      <h2>用户场景覆盖</h2>
+      <table><thead><tr><th>场景</th><th>名称</th><th>证据范围</th><th>状态</th></tr></thead><tbody><tr><td>US-V10-01</td><td>Local Markdown workflow</td><td>real_tui_render_fixture</td><td><span class='pass'>PASS</span></td></tr>
+<tr><td>US-V10-02</td><td>Roman Forum parallel Agent discussion</td><td>real_tui_render_fixture</td><td><span class='pass'>PASS</span></td></tr>
+<tr><td>US-V10-03</td><td>Video storyboard workflow</td><td>real_tui_render_fixture</td><td><span class='pass'>PASS</span></td></tr>
+<tr><td>US-V10-04</td><td>Coding proposal workflow</td><td>real_tui_render_fixture</td><td><span class='pass'>PASS</span></td></tr>
+<tr><td>US-V10-05</td><td>Natural-language workflow revision</td><td>real_tui_render_fixture</td><td><span class='pass'>PASS</span></td></tr></tbody></table>
+    </section>
+    <section>
+      <h2>审计边界</h2>
+      <p class="note">允许声明：<code>V10-1..V10-7 complete: CLI-native read-model TUI experience baseline ready for review.</code></p>
+      <p class="warn">最终 V10 complete 仍需要 V10-8 Agent-backed Gateway turn 证据；本页的 fixture/read-model/local-parser 证据不能满足 Agent-backed PASS。</p>
+      <p>仍禁止解释为 production ready、complete Workflow Studio ready、Agent executor ready、full multi-Agent orchestration ready 或 unrestricted terminal worker ready。</p>
+      <p>Raw 命令输出保存在 <code>raw/</code>，终端截图源页面保存在 <code>terminal-80x24.html</code> 和 <code>terminal-120x40.html</code>。</p>
+    </section>
+  </main>
+</body>
+</html>

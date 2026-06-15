@@ -1,0 +1,33 @@
+V12-0A Redaction Scan
+
+Status: PASS
+Scope: docs/design/V12-V15.x/evidence/v12-component-prototype/
+Created at: 2026-06-14T08:40:00+08:00
+
+Forbidden raw content checked:
+- raw secret
+- raw token
+- API key
+- Bearer token
+- signed URL
+- raw prompt
+- raw provider payload
+- raw connector payload
+- raw artifact content
+- raw credential material
+
+Result:
+- No raw secret, token, provider payload, connector payload or raw artifact
+  content is intentionally included in the V12-0A prototype package.
+- Provider and evidence references are represented as redacted refs or sample
+  evidence paths only.
+- The Xpert-inspired concept board contains no real credential, token, signed
+  URL, raw provider payload, raw connector payload or raw artifact content.
+- The Light Studio component detail board contains no real credential, token,
+  signed URL, raw provider payload, raw connector payload or raw artifact
+  content.
+- The Light Studio annotated component sketch board and imag2 target-experience
+  pack contain no real credential, token, signed URL, raw provider payload,
+  raw connector payload or raw artifact content.
+- Scan finding: raw-content terms appear only in boundary/review explanation
+  contexts.

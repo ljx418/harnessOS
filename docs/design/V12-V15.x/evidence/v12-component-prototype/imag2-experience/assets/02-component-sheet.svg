@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+  <defs>
+    <filter id="shadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#0f172a" flood-opacity=".10"/>
+    </filter>
+    <style>
+      .bg{fill:#f5f7fb}.panel{fill:#fff;stroke:#dbe3ee}.soft{fill:#f8fafc}.blue{fill:#2563eb}.blueSoft{fill:#eff6ff}
+      .ink{fill:#111827}.muted{fill:#64748b}.green{fill:#16a34a}.amber{fill:#b45309}.red{fill:#dc2626}
+      .t{font:500 14px Inter,Arial,"PingFang SC",sans-serif}.s{font:650 12px Inter,Arial,"PingFang SC",sans-serif}
+      .h{font:760 20px Inter,Arial,"PingFang SC",sans-serif}.title{font:800 30px Inter,Arial,"PingFang SC",sans-serif}
+      .line{stroke:#cbd5e1;stroke-width:2;fill:none}.edge{stroke:#94a3b8;stroke-width:4;fill:none;stroke-linecap:round}
+    </style>
+  </defs>
+  <rect class="bg" width="1440" height="900"/>
+  <text x="56" y="70" class="title ink">HarnessOS V12 Light Studio · 六组件设计图</text>
+  <text x="56" y="104" class="t muted">同一设计语言：浅色工作台、蓝色主操作、灰色只读/禁用、绿色完成、琥珀等待、红色失败。</text>
+
+  <g transform="translate(56 138)">
+    <rect width="408" height="212" rx="18" class="panel" filter="url(#shadow)"/>
+    <text x="24" y="38" class="h ink">1 全局标题栏</text>
+    <rect x="24" y="62" width="360" height="48" rx="12" class="soft" stroke="#dbe3ee"/>
+    <text x="40" y="92" class="t ink">工作空间 / V12 · DeepSeek · API 在线</text>
+    <rect x="24" y="128" width="80" height="34" rx="9" class="blueSoft" stroke="#bfdbfe"/><text x="48" y="150" class="s blue">预览</text>
+    <rect x="112" y="128" width="90" height="34" rx="9" fill="#f1f5f9" stroke="#dbe3ee"/><text x="136" y="150" class="s muted">只读</text>
+    <rect x="212" y="128" width="110" height="34" rx="9" fill="#2563eb"/><text x="238" y="150" class="s" fill="#fff">提交审批</text>
+    <text x="24" y="190" class="s muted">要求：状态芯片不压缩，危险操作显式降级。</text>
+  </g>
+
+  <g transform="translate(516 138)">
+    <rect width="408" height="212" rx="18" class="panel" filter="url(#shadow)"/>
+    <text x="24" y="38" class="h ink">2 左侧产品导航</text>
+    <rect x="24" y="62" width="46" height="120" rx="14" class="soft" stroke="#dbe3ee"/>
+    <circle cx="47" cy="88" r="12" fill="#eff6ff" stroke="#bfdbfe"/><circle cx="47" cy="124" r="10" fill="#e2e8f0"/><circle cx="47" cy="158" r="10" fill="#e2e8f0"/>
+    <rect x="86" y="62" width="286" height="32" rx="9" fill="#eff6ff"/><text x="106" y="83" class="s blue">工作台总览</text>
+    <rect x="86" y="104" width="286" height="32" rx="9" class="soft"/><text x="106" y="125" class="s ink">智能体 · 工作流 · 技能 · MCP</text>
+    <rect x="86" y="146" width="286" height="32" rx="9" class="soft"/><text x="106" y="167" class="s ink">证据链 · 运行审计 · 设置</text>
+    <text x="24" y="198" class="s muted">要求：一级 rail 选领域，二级菜单列对象。</text>
+  </g>
+
+  <g transform="translate(976 138)">
+    <rect width="408" height="212" rx="18" class="panel" filter="url(#shadow)"/>
+    <text x="24" y="38" class="h ink">3 画布工作台</text>
+    <rect x="24" y="60" width="360" height="116" rx="14" fill="#fbfdff" stroke="#dbe3ee"/>
+    <path d="M96 118 C145 92 172 94 218 118 C252 138 286 132 320 94" class="edge"/>
+    <rect x="52" y="88" width="80" height="48" rx="10" class="panel"/><text x="70" y="117" class="s ink">触发</text>
+    <rect x="176" y="88" width="82" height="48" rx="10" class="panel"/><text x="194" y="117" class="s ink">Agent</text>
+    <rect x="296" y="66" width="72" height="48" rx="10" class="panel"/><text x="314" y="95" class="s ink">证据</text>
+    <rect x="42" y="150" width="94" height="18" rx="6" fill="#fff7ed"/><text x="54" y="164" class="s amber">只读基础</text>
+    <text x="24" y="198" class="s muted">要求：曲线连线、端口、小地图、禁用原因。</text>
+  </g>
+
+  <g transform="translate(56 404)">
+    <rect width="408" height="250" rx="18" class="panel" filter="url(#shadow)"/>
+    <text x="24" y="38" class="h ink">4 Agent / Station 节点卡</text>
+    <rect x="72" y="64" width="260" height="126" rx="16" fill="#fff" stroke="#2563eb" stroke-width="2"/>
+    <circle cx="72" cy="112" r="6" class="blue"/><circle cx="332" cy="96" r="6" class="blue"/><circle cx="332" cy="142" r="6" class="blue"/>
+    <text x="96" y="96" class="h ink">总结Agent</text>
+    <text x="96" y="122" class="s muted">目标：归纳共识与分歧</text>
+    <rect x="96" y="140" width="78" height="22" rx="7" fill="#ecfdf5"/><text x="110" y="155" class="s green">completed</text>
+    <rect x="184" y="140" width="102" height="22" rx="7" fill="#eff6ff"/><text x="198" y="155" class="s blue">evidence ref</text>
+    <rect x="112" y="202" width="156" height="32" rx="9" fill="#f8fafc" stroke="#dbe3ee"/><text x="132" y="223" class="s ink">hover: 工具/技能/MCP</text>
+  </g>
+
+  <g transform="translate(516 404)">
+    <rect width="408" height="250" rx="18" class="panel" filter="url(#shadow)"/>
+    <text x="24" y="38" class="h ink">5 右侧检查器</text>
+    <rect x="24" y="62" width="360" height="42" rx="12" class="soft" stroke="#dbe3ee"/>
+    <text x="42" y="88" class="s ink">概览  配置  工具  质量  证据</text>
+    <text x="24" y="136" class="s muted">角色</text><text x="88" y="136" class="t ink">Summary Agent</text>
+    <text x="24" y="168" class="s muted">策略</text><text x="88" y="168" class="t ink">需要确认后执行</text>
+    <rect x="24" y="188" width="360" height="40" rx="10" fill="#fff7ed" stroke="#fed7aa"/>
+    <text x="42" y="213" class="s amber">阻断原因：缺少 WorkflowDiff 确认</text>
+  </g>
+
+  <g transform="translate(976 404)">
+    <rect width="408" height="250" rx="18" class="panel" filter="url(#shadow)"/>
+    <text x="24" y="38" class="h ink">6 Chat 工作台</text>
+    <rect x="24" y="62" width="360" height="74" rx="14" class="soft" stroke="#dbe3ee"/>
+    <text x="42" y="92" class="t ink">用户：创建多 Agent 讨论工作流</text>
+    <text x="42" y="118" class="s muted">独立历史 · 关联当前工作空间</text>
+    <rect x="24" y="152" width="220" height="42" rx="12" fill="#fff" stroke="#dbe3ee"/>
+    <text x="42" y="178" class="s ink">输入自然语言目标...</text>
+    <rect x="254" y="152" width="74" height="42" rx="12" class="blue"/><text x="278" y="178" class="s" fill="#fff">发送</text>
+    <rect x="24" y="208" width="132" height="24" rx="7" fill="#eff6ff"/><text x="38" y="225" class="s blue">等待提案确认</text>
+  </g>
+
+  <rect x="56" y="724" width="1328" height="98" rx="18" fill="#0f172a"/>
+  <text x="84" y="762" class="h" fill="#fff">设计边界</text>
+  <text x="84" y="794" class="t" fill="#cbd5e1">这些图用于 V12-0A 组件原型审查。它们固定目标体验、组件职责和状态样式，但不作为浏览器实现、BFF、DTO 或运行证据。</text>
+</svg>
+

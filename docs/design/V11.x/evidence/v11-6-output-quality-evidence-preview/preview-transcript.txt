@@ -1,0 +1,67 @@
+HarnessOS  harnessOS  phase:waiting_input  mode:interactive  model:local-interactive-no-provider  provider:local  sandbox:workspace-write  evidence:preview
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+当前选中: WorkflowDiff proposal · 确认前不会 apply / publish / run · actions:confirm_proposal/revise_proposal/reject_proposal
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+▣ 用户  completed  user-1
+  请展示 V10 的五个关键用户场景
+
+▣ 助手  completed  assistant-1
+  已加载 V9 runtime evidence，并以 V10 Mission TUI read-model 呈现。
+
+▣ 工位 / Agent  completed  station-markdown
+  Agent: Document Scanner Agent  目标: 读取本地 Markdown 技术文档并生成风险摘要
+  Tools: workspace.read, markdown.summary
+  Skills: technical-writing
+  证据: docs/design/V9.x/evidence/v9-prd-ux-runtime-review/v7-3-local-markdown-run/local-document-workflow-result.json
+
+▣ 工位 / Agent  completed  station-roman-1
+  Agent: Stoic Persona Agent  目标: 从斯多葛主义视角讨论问题
+  Tools: persona.reason
+  Skills: philosophy-dialogue
+  证据: docs/design/V9.x/evidence/v9-3-orchestration-runtime/roman-forum-discussion.json
+
+▣ 工位 / Agent  completed  station-roman-2
+  Agent: Socratic Persona Agent  目标: 用追问方式澄清概念
+  Tools: persona.question
+  Skills: dialogue-synthesis
+  证据: docs/design/V9.x/evidence/v9-3-orchestration-runtime/roman-forum-discussion.json
+
+▣ 工位 / Agent  completed  station-storyboard
+  Agent: Storyboard Agent  目标: 把创意点子转成统一画风分镜
+  Tools: storyboard.plan, artifact.preview
+  Skills: visual-storytelling
+  MCP: provider:minimax-image
+  证据: docs/design/V9.x/evidence/v9-3-orchestration-runtime/storyboard-provider-evidence.json
+
+▣ 工位 / Agent  completed  station-coding
+  Agent: Coding Proposal Agent  目标: 生成 diff proposal、sandboxed test 和 review handoff
+  Tools: diff.propose, test.sandbox
+  Skills: code-review
+  证据: docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/coding-workflow-result.json
+
+▣ 工具  completed  tool-test
+  工具: sandboxed.test  风险:medium  sandbox:workspace-write
+  命令预览: pytest selected tests (redacted refs only)
+  证据: docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/sandboxed-test-result.json
+
+▣ 审批  waiting_confirmation  permission-1
+  操作: git.commit  风险:high
+  选择: [确认] [拒绝]
+  禁止原因: no-auto-commit
+  证据: docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/git-operation-deny-report.json
+
+▣ 产物预览  completed  output-1
+  摘要: 分镜图、质检报告、Diff 提案和文档总结均以 evidence refs 呈现。
+  Artifacts: docs/design/V9.x/evidence/v9-3-orchestration-runtime/storyboard-images/storyboard-shot-1.jpg, docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/artifacts/diff-pr…
+  Quality: docs/design/V9.x/evidence/v9-user-scenario-video-workflow-e2e/raw/quality-agent-report.json
+  Evidence scope: artifact_quality_evidence_refs_only
+  证据: docs/design/V9.x/evidence/v9-user-scenario-coverage-review/coverage-data.json
+
+▣ WorkflowDiff  waiting_confirmation  diff-1
+  变更: station-storyboard, station-coding
+  动作: confirm_proposal / revise_proposal / reject_proposal
+  确认前不会 apply / publish / run
+  证据: docs/design/V9.x/evidence/v9-6-workflow-studio/workflow_diff_proposal.json
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+› 输入自然语言目标，或使用 /help /stations /evidence /diff /exit

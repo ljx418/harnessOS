@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>Mission TUI Evidence Explainer</title>
+  <style>
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#0b1020;color:#e5e7eb;margin:0;padding:28px}
+    .wrap{max-width:1100px;margin:0 auto}.badge{display:inline-block;background:#164e63;color:#a5f3fc;padding:4px 8px;border-radius:6px}
+    .warn{background:#431407;border:1px solid #f97316;padding:12px;border-radius:8px}.block{background:#111827;border:1px solid #374151;border-radius:8px;padding:14px;margin:12px 0}
+    code{background:#020617;color:#93c5fd;padding:2px 5px;border-radius:4px}
+  </style>
+</head>
+<body><main class="wrap">
+  <p class="badge">supporting explainer only</p>
+  <h1>Mission TUI 证据解释页</h1>
+  <p class="warn">本页面是辅助审计导出，不是主 TUI，不是 runtime truth，也不能替代真实 TUI 截图。</p>
+  <h2>目标</h2><p>用罗马广场多 Agent 讨论、文档总结、视频分镜和编码提案验证 V10 TUI</p>
+  <h2>状态</h2><p>{&quot;workspace&quot;:&quot;harnessOS&quot;,&quot;model&quot;:&quot;local-interactive-no-provider&quot;,&quot;mode&quot;:&quot;interactive&quot;,&quot;sandbox&quot;:&quot;workspace-write&quot;,&quot;evidence_status&quot;:&quot;html-explainer&quot;}</p>
+  <h2>Blocks</h2><article class="block"><h3>user_message · completed</h3><p>请展示 V10 的五个关键用户场景</p><p></p></article>
+<article class="block"><h3>assistant_message · completed</h3><p>已加载 V9 runtime evidence，并以 V10 Mission TUI read-model 呈现。</p><p></p></article>
+<article class="block"><h3>station_block · completed</h3><p>读取本地 Markdown 技术文档并生成风险摘要</p><p><code>docs/design/V9.x/evidence/v9-prd-ux-runtime-review/v7-3-local-markdown-run/local-document-workflow-result.json</code></p></article>
+<article class="block"><h3>station_block · completed</h3><p>从斯多葛主义视角讨论问题</p><p><code>docs/design/V9.x/evidence/v9-3-orchestration-runtime/roman-forum-discussion.json</code></p></article>
+<article class="block"><h3>station_block · completed</h3><p>用追问方式澄清概念</p><p><code>docs/design/V9.x/evidence/v9-3-orchestration-runtime/roman-forum-discussion.json</code></p></article>
+<article class="block"><h3>station_block · completed</h3><p>把创意点子转成统一画风分镜</p><p><code>docs/design/V9.x/evidence/v9-3-orchestration-runtime/storyboard-provider-evidence.json</code></p></article>
+<article class="block"><h3>station_block · completed</h3><p>生成 diff proposal、sandboxed test 和 review handoff</p><p><code>docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/coding-workflow-result.json</code></p></article>
+<article class="block"><h3>tool_block · completed</h3><p>tool-test</p><p><code>docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/sandboxed-test-result.json</code></p></article>
+<article class="block"><h3>permission_block · waiting_confirmation</h3><p>git.commit</p><p><code>docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/git-operation-deny-report.json</code></p></article>
+<article class="block"><h3>output_preview_block · completed</h3><p>分镜图、质检报告、Diff 提案和文档总结均以 evidence refs 呈现。</p><p><code>docs/design/V9.x/evidence/v9-user-scenario-coverage-review/coverage-data.json</code></p></article>
+<article class="block"><h3>workflowdiff_block · waiting_confirmation</h3><p>diff-1</p><p><code>docs/design/V9.x/evidence/v9-6-workflow-studio/workflow_diff_proposal.json</code></p></article>
+</main></body></html>

@@ -1,0 +1,21 @@
+{
+  "stage_id": "V11-6",
+  "status": "PASS",
+  "allowed_claim": "V11-6 complete: output quality and evidence preview slice ready for review.",
+  "evidence_scope": "artifact_quality_evidence_refs_only",
+  "runtime_backed": true,
+  "artifact_refs_visible": true,
+  "quality_refs_visible": true,
+  "evidence_refs_visible": true,
+  "evidence_scope_visible": true,
+  "raw_content_leak_hits": [],
+  "html_or_concept_image_used_as_runtime_evidence": false,
+  "evidence_refs": [
+    "docs/design/V11.x/evidence/v11-6-output-quality-evidence-preview/acceptance-data.json",
+    "docs/design/V11.x/evidence/v11-6-output-quality-evidence-preview/preview-transcript.txt",
+    "docs/design/V11.x/evidence/v11-6-output-quality-evidence-preview/preview-state.json"
+  ],
+  "errors": [],
+  "claim_scan": "PASS",
+  "redaction_scan": "PASS"
+}

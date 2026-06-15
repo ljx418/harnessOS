@@ -1,0 +1,16 @@
+{
+  "stage_id": "V10-2",
+  "status": "PASS",
+  "evidence_scope": "fixture_render",
+  "required_blocks": [
+    "tool_block",
+    "permission_block",
+    "plan_block"
+  ],
+  "negative_fixtures": [
+    "permission_denial_without_reason",
+    "tool_block_without_evidence_ref"
+  ],
+  "forbidden_reasons_visible": true,
+  "runtime_truth_boundary": "tui_read_model_not_runtime_truth"
+}

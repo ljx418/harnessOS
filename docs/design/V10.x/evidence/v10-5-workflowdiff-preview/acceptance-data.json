@@ -1,0 +1,12 @@
+{
+  "stage_id": "V10-5",
+  "status": "PASS",
+  "evidence_scope": "fixture_render",
+  "required_blocks": [
+    "workflowdiff_block"
+  ],
+  "proposal_first": true,
+  "auto_apply_exposed": false,
+  "source_agent_direct_mutation_allowed": false,
+  "runtime_truth_boundary": "tui_read_model_not_runtime_truth"
+}

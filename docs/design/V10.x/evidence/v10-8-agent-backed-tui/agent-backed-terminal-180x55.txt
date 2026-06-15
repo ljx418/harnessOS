@@ -1,0 +1,55 @@
+HarnessOS  harnessOS  phase:completed  gateway:sess_63a3d64f2fcc  turn:turn_b5864c2417e7  mode:agent-backed  model:deepseek-chat  provider_mode:provider-backed  sandbox:workspace-…
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+当前选中: WorkflowDiff proposal · 确认前不会 apply / publish / run · actions:confirm_proposal/revise_proposal/reject_proposal
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+… 已折叠历史内容 63 行，可用 /history 查看
+  证据: docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json
+
+▣ Gateway 事件  warning  gateway-warning-13
+  事件: gateway.stderr  session:-  turn:-
+  from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer
+  证据: docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json
+
+▣ Gateway 事件  completed  gateway-session-started
+  事件: gateway.session.started  session:sess_63a3d64f2fcc  turn:-
+  Backend: simple
+  Gateway session started: sess_63a3d64f2fcc
+  证据: docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json
+
+▣ 用户  completed  gateway-user-15
+  V10-8 验收：请用一句话说明你是通过 Gateway session/turn 返回的助手。
+
+▣ Gateway 事件  completed  v11-input-received-16
+  事件: input.received  session:sess_63a3d64f2fcc  turn:-
+  用户输入已收到，TUI 已进入运行状态。
+  证据: docs/design/V11.x/evidence/v11-1-real-time-event-stream/acceptance-data.json
+
+▣ Gateway 事件  running  v11-agent-running-17
+  事件: agent.running  session:sess_63a3d64f2fcc  turn:-
+  Gateway turn 请求已提交，等待运行时返回事件。
+  证据: docs/design/V11.x/evidence/v11-1-real-time-event-stream/acceptance-data.json
+
+▣ Gateway 事件  completed  item_691d18570f56
+  事件: turn.started  session:sess_63a3d64f2fcc  turn:turn_b5864c2417e7
+  Trace: trace_3678a4956bf2
+  Gateway turn started
+  证据: docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json
+
+▣ Gateway 事件  completed  item_32eda813b894
+  事件: item.delta  session:sess_63a3d64f2fcc  turn:turn_b5864c2417e7
+  Trace: trace_3678a4956bf2
+  我是通过 Gateway session/turn 返回的助手，V10-8 验收通过。
+  证据: docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json
+
+▣ Gateway 事件  completed  item_8ed77edbc7f6
+  事件: turn.completed  session:sess_63a3d64f2fcc  turn:turn_b5864c2417e7
+  Trace: trace_3678a4956bf2
+  Gateway turn completed
+  证据: docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json
+
+▣ 助手  completed  gateway-assistant-21
+  我是通过 Gateway session/turn 返回的助手，V10-8 验收通过。
+  证据: docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+› 输入自然语言目标，或使用 /trace /session /exit

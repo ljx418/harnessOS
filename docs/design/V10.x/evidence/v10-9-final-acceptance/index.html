@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HarnessOS V10 最终验收汇报</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #111827;
+      --muted: #4b5563;
+      --line: #d7dce5;
+      --bg: #f7f8fb;
+      --panel: #ffffff;
+      --blue: #1d4ed8;
+      --green: #047857;
+      --amber: #b45309;
+      --red: #b91c1c;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    header {
+      padding: 28px 36px 22px;
+      background: #101827;
+      color: #fff;
+      border-bottom: 1px solid #0b1220;
+    }
+    header h1 { margin: 0 0 8px; font-size: 28px; }
+    header p { margin: 0; color: #d1d5db; max-width: 1100px; }
+    main { padding: 24px 36px 48px; max-width: 1440px; margin: 0 auto; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    }
+    .span-4 { grid-column: span 4; }
+    .span-6 { grid-column: span 6; }
+    .span-8 { grid-column: span 8; }
+    .span-12 { grid-column: span 12; }
+    h2 { margin: 0 0 12px; font-size: 18px; }
+    h3 { margin: 14px 0 8px; font-size: 15px; }
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid;
+    }
+    .pass { color: var(--green); background: #ecfdf5; border-color: #a7f3d0; }
+    .warn { color: var(--amber); background: #fffbeb; border-color: #fde68a; }
+    .deny { color: var(--red); background: #fef2f2; border-color: #fecaca; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; vertical-align: top; padding: 9px 8px; border-bottom: 1px solid #edf0f5; }
+    th { color: #374151; font-size: 13px; background: #f9fafb; }
+    code { background: #f3f4f6; padding: 1px 4px; border-radius: 4px; }
+    pre {
+      margin: 0;
+      padding: 14px;
+      border-radius: 8px;
+      background: #0f172a;
+      color: #d1e7ff;
+      overflow: auto;
+      max-height: 520px;
+      font: 13px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul { margin: 8px 0 0 18px; padding: 0; }
+    li { margin: 5px 0; }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      align-items: stretch;
+    }
+    .step {
+      border: 1px solid #c7d2fe;
+      background: #eef2ff;
+      border-radius: 8px;
+      padding: 12px;
+      min-height: 98px;
+    }
+    .step strong { display: block; margin-bottom: 6px; }
+    @media (max-width: 900px) {
+      .span-4, .span-6, .span-8 { grid-column: span 12; }
+      .flow { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>HarnessOS V10 最终验收汇报</h1>
+    <p>本页汇总 V10 CLI-native Agent-backed Mission TUI 的真实 Gateway turn 证据、PRD 规格检视、验收门槛和不可误读边界。</p>
+  </header>
+  <main>
+    <section class="grid">
+      <article class="card span-4">
+        <h2>最终结论</h2>
+        <p><span class="badge pass">PASS</span></p>
+        <p><strong>允许声明：</strong><br>V10 complete: CLI-native Agent-backed TUI experience and explainability baseline ready for review.</p>
+      </article>
+      <article class="card span-4">
+        <h2>关键边界</h2>
+        <p><span class="badge warn">bounded</span></p>
+        <p>当前 Gateway turn 使用 <code>provider_mode=provider-backed</code>。这证明 TUI 已通过 dotenv provider key 接入真实 LLM，并保留 Gateway session/turn 状态可观测。</p>
+      </article>
+      <article class="card span-4">
+        <h2>仍禁止声明</h2>
+        <p><span class="badge deny">No False Green</span></p>
+        <ul>
+          <li>production ready</li>
+          <li>Agent executor ready</li>
+          <li>complete Workflow Studio ready</li>
+          <li>full multi-Agent orchestration ready</li>
+        </ul>
+      </article>
+      <article class="card span-12">
+        <h2>真实运行路径</h2>
+        <div class="flow">
+          <div class="step"><strong>1. 用户输入</strong>Mission TUI 底部 composer 接收自然语言。</div>
+          <div class="step"><strong>2. Gateway Bridge</strong>Node CLI spawn Python stdio server。</div>
+          <div class="step"><strong>3. Runtime Turn</strong><code>initialize</code> / <code>session.start</code> / <code>turn.start</code>。</div>
+          <div class="step"><strong>4. Event Reducer</strong>Gateway events 转为 TUI blocks。</div>
+          <div class="step"><strong>5. Evidence</strong>保存 terminal capture、raw transcript、acceptance JSON。</div>
+        </div>
+      </article>
+      <article class="card span-6">
+        <h2>验收数据</h2>
+        <table>
+          <tr><th>项目</th><th>结果</th></tr>
+          <tr><td>V10-8 evidence_scope</td><td><code>agent_backed_gateway_turn</code></td></tr>
+          <tr><td>Gateway session</td><td>PASS</td></tr>
+          <tr><td>Gateway turn.started</td><td>PASS</td></tr>
+          <tr><td>Gateway turn.completed</td><td>PASS</td></tr>
+          <tr><td>assistant output from Gateway</td><td>PASS</td></tr>
+          <tr><td>fixture_only / local_parser_only</td><td>false / false</td></tr>
+          <tr><td>No False Green / Redaction</td><td>PASS / PASS</td></tr>
+        </table>
+      </article>
+      <article class="card span-6">
+        <h2>审计入口</h2>
+        <ul>
+          <li><a href="../v10-8-agent-backed-tui/acceptance-data.json">V10-8 acceptance-data.json</a></li>
+          <li><a href="../v10-8-agent-backed-tui/agent-backed-terminal-180x55.txt">V10-8 terminal capture</a></li>
+          <li><a href="../v10-8-agent-backed-tui/agent-backed-raw-result.json">V10-8 raw result</a></li>
+          <li><a href="./v10-final-acceptance-data.json">V10-9 final acceptance data</a></li>
+          <li><a href="./prd-spec-review.md">PRD spec review</a></li>
+          <li><a href="../../v10_current_gap_analysis.drawio">V10 drawio</a></li>
+        </ul>
+      </article>
+      <article class="card span-12">
+        <h2>真实 TUI 运行证据摘录</h2>
+        <pre>HarnessOS  harnessOS  phase:completed  gateway:sess_66c2e4762fbc  turn:turn_0645d88d1ce9  mode:agent-backed  model:deepseek-chat  provider_mode:provider-backed
+
+▣ Gateway 事件  completed
+  事件: turn.started  session:sess_66c2e4762fbc  turn:turn_0645d88d1ce9
+  Trace: trace_22f8c4f65454
+  Gateway turn started
+
+▣ Gateway 事件  completed
+  事件: turn.completed  session:sess_66c2e4762fbc  turn:turn_0645d88d1ce9
+  Trace: trace_22f8c4f65454
+  Gateway turn completed
+
+▣ 助手  completed
+  我是通过 Gateway session/turn 机制返回的助手，当前响应在此会话轮次中完成。</pre>
+      </article>
+      <article class="card span-12">
+        <h2>后续方向，不属于 V10 完成声明</h2>
+        <ul>
+          <li>多轮 provider-backed 用户场景验收：用真实模型跑更复杂的罗马广场、视频创作和编码提案场景。</li>
+          <li>React/Ink 迁移：在保留当前 CLI 行为的基础上提升交互细节。</li>
+          <li>真正的多 Agent 实时讨论前台：需要 V11/V12 另设阶段和证据。</li>
+          <li>完整 Workflow Studio：需要独立 PRD、BFF/browser 测试和 No False Green gate。</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

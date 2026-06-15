@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>V12-0P imag2 与 HTML 原型对比</title>
+    <style>
+      :root {
+        --bg: #f5f7fb;
+        --panel: #ffffff;
+        --line: #dbe3ee;
+        --text: #0f172a;
+        --muted: #64748b;
+        --blue: #2563eb;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: linear-gradient(180deg, #fbfdff, var(--bg));
+        color: var(--text);
+      }
+
+      main {
+        max-width: 1540px;
+        margin: 0 auto;
+        padding: 22px;
+      }
+
+      .bar,
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.94);
+        box-shadow: 0 16px 45px rgba(15, 23, 42, 0.08);
+      }
+
+      .bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 14px 18px;
+        margin-bottom: 16px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 22px;
+      }
+
+      p {
+        margin: 6px 0 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      .card {
+        overflow: hidden;
+      }
+
+      .head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--line);
+        background: #fbfdff;
+      }
+
+      .tag {
+        padding: 4px 9px;
+        border-radius: 999px;
+        background: #eff6ff;
+        color: #1d4ed8;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: #fff;
+      }
+
+      .notes {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-top: 16px;
+      }
+
+      .asset-grid {
+        display: grid;
+        grid-template-columns: 0.72fr 1.28fr;
+        gap: 16px;
+        margin-top: 16px;
+      }
+
+      .section-title {
+        margin-top: 20px;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.94);
+        box-shadow: 0 16px 45px rgba(15, 23, 42, 0.06);
+      }
+
+      .section-title h2 {
+        margin: 0;
+        font-size: 20px;
+      }
+
+      .nav-spec {
+        display: grid;
+        grid-template-columns: 0.95fr 1.05fr;
+        gap: 16px;
+        margin-top: 16px;
+      }
+
+      .nav-mock {
+        min-height: 430px;
+        display: grid;
+        grid-template-columns: 54px 210px 1fr;
+        overflow: hidden;
+      }
+
+      .mock-rail {
+        padding: 14px 8px;
+        border-right: 1px solid var(--line);
+        background: #ffffff;
+      }
+
+      .mock-rail span,
+      .mock-icon {
+        width: 34px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        margin-bottom: 10px;
+        border-radius: 11px;
+        background: #f8fafc;
+        color: #64748b;
+        font-size: 13px;
+        font-weight: 900;
+      }
+
+      .mock-rail span.active {
+        background: #eaf1ff;
+        color: var(--blue);
+        box-shadow: inset 3px 0 0 var(--blue);
+      }
+
+      .mock-side {
+        padding: 16px 12px;
+        border-right: 1px solid var(--line);
+        background: linear-gradient(180deg, #fbfdff, #f8fafc);
+      }
+
+      .mock-title {
+        margin: 0 0 12px;
+        color: var(--blue);
+        font-size: 16px;
+        font-weight: 900;
+      }
+
+      .mock-group {
+        margin: 14px 0 7px;
+        color: #94a3b8;
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.06em;
+      }
+
+      .mock-row {
+        min-height: 36px;
+        display: grid;
+        grid-template-columns: 28px 1fr auto;
+        align-items: center;
+        gap: 7px;
+        padding: 0 8px;
+        margin-bottom: 6px;
+        border: 1px solid transparent;
+        border-radius: 11px;
+        color: #334155;
+        font-size: 13px;
+        font-weight: 760;
+      }
+
+      .mock-row.active {
+        border-color: #c9ddff;
+        background: #eaf1ff;
+        color: #1d4ed8;
+      }
+
+      .mock-count {
+        color: #94a3b8;
+        font-size: 11px;
+      }
+
+      .mock-workspace {
+        position: relative;
+        padding: 16px;
+        background:
+          radial-gradient(circle, rgba(148, 163, 184, 0.35) 1px, transparent 1.5px) 0 0 / 22px 22px,
+          linear-gradient(180deg, #fbfdff, #f6f9fd);
+      }
+
+      .resource-panel {
+        width: 184px;
+        padding: 12px;
+        border: 1px solid #dbeafe;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.94);
+        box-shadow: 0 18px 38px rgba(15, 23, 42, 0.08);
+      }
+
+      .resource-panel h3 {
+        margin: 0 0 10px;
+        font-size: 14px;
+      }
+
+      .resource-chip {
+        display: grid;
+        grid-template-columns: 26px 1fr auto;
+        align-items: center;
+        gap: 8px;
+        padding: 8px;
+        margin-bottom: 8px;
+        border: 1px solid #e3ebf6;
+        border-radius: 12px;
+        background: #f8fbff;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .resource-chip small {
+        color: #94a3b8;
+      }
+
+      .ghost-node {
+        position: absolute;
+        left: 244px;
+        top: 96px;
+        width: 180px;
+        padding: 12px;
+        border: 1px solid #dbeafe;
+        border-radius: 16px;
+        background: #fff;
+        box-shadow: 0 18px 34px rgba(15, 23, 42, 0.08);
+      }
+
+      .ghost-node strong {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .ghost-node p {
+        margin: 0;
+        font-size: 12px;
+      }
+
+      .spec-table {
+        display: grid;
+        gap: 10px;
+      }
+
+      .spec-row {
+        display: grid;
+        grid-template-columns: 150px 1fr;
+        gap: 12px;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+      }
+
+      .spec-row strong {
+        color: #0f172a;
+      }
+
+      .spec-row p {
+        margin: 0;
+        font-size: 14px;
+      }
+
+      .component-library {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        margin-top: 16px;
+      }
+
+      .component-card {
+        min-height: 178px;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: #fff;
+        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.05);
+      }
+
+      .component-card h3 {
+        margin: 0 0 8px;
+        font-size: 15px;
+      }
+
+      .component-card ul {
+        margin: 8px 0 0;
+        padding-left: 18px;
+        color: #64748b;
+        line-height: 1.7;
+        font-size: 13px;
+      }
+
+      .visual-board-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        margin-top: 16px;
+      }
+
+      .visual-board-grid img {
+        border-top: 1px solid var(--line);
+      }
+
+      .component-deep-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        margin-top: 16px;
+      }
+
+      .deep-card {
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: #fff;
+        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.05);
+      }
+
+      .deep-card h3 {
+        margin: 0 0 8px;
+        font-size: 16px;
+      }
+
+      .deep-card p {
+        margin: 4px 0;
+        font-size: 13px;
+      }
+
+      .detail-table {
+        display: grid;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .detail-line {
+        display: grid;
+        grid-template-columns: 90px 1fr;
+        gap: 10px;
+        padding: 8px 10px;
+        border: 1px solid #e8eef7;
+        border-radius: 11px;
+        background: #fbfdff;
+        color: #64748b;
+        font-size: 12px;
+        line-height: 1.55;
+      }
+
+      .detail-line strong {
+        color: #0f172a;
+      }
+
+      .scenario-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 12px;
+        margin-top: 16px;
+      }
+
+      .scenario-card {
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: linear-gradient(180deg, #fff, #fbfdff);
+        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.05);
+      }
+
+      .scenario-card h3 {
+        margin: 0 0 8px;
+        font-size: 15px;
+      }
+
+      .scenario-card ol {
+        margin: 8px 0 0;
+        padding-left: 18px;
+        color: #64748b;
+        line-height: 1.7;
+        font-size: 12px;
+      }
+
+      .target-experience {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 16px;
+        margin-top: 16px;
+      }
+
+      .experience-list {
+        display: grid;
+        gap: 10px;
+        padding: 16px;
+      }
+
+      .experience-item {
+        display: grid;
+        grid-template-columns: 34px 1fr;
+        gap: 10px;
+        align-items: start;
+        padding: 12px;
+        border: 1px solid #e4ecf7;
+        border-radius: 14px;
+        background: #fff;
+      }
+
+      .experience-num {
+        width: 28px;
+        height: 28px;
+        display: grid;
+        place-items: center;
+        border-radius: 10px;
+        background: #eff6ff;
+        color: #1d4ed8;
+        font-weight: 900;
+      }
+
+      .audit-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-top: 16px;
+      }
+
+      .audit-card {
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+      }
+
+      .audit-card strong {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .states {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .state-pill {
+        padding: 5px 9px;
+        border-radius: 999px;
+        border: 1px solid #dbe3ee;
+        background: #f8fafc;
+        color: #334155;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .state-pill.green {
+        border-color: #bbf7d0;
+        background: #ecfdf5;
+        color: #15803d;
+      }
+
+      .state-pill.blue {
+        border-color: #bfdbfe;
+        background: #eff6ff;
+        color: #1d4ed8;
+      }
+
+      .state-pill.amber {
+        border-color: #fde68a;
+        background: #fffbeb;
+        color: #b45309;
+      }
+
+      .state-pill.red {
+        border-color: #fecaca;
+        background: #fef2f2;
+        color: #dc2626;
+      }
+
+      .note {
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+      }
+
+      .note strong {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      @media (max-width: 1100px) {
+        .grid,
+        .notes,
+        .asset-grid,
+        .nav-spec,
+        .component-library,
+        .visual-board-grid,
+        .component-deep-grid,
+        .scenario-grid,
+        .target-experience,
+        .audit-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="bar">
+        <div>
+          <h1>V12-0P 原型质感对比</h1>
+          <p>左侧是 imag2 生成的整体体验概念图，右侧是当前 HTML 原型静态渲染。该对比只用于设计审查，不作为浏览器实现或 runtime 证据。</p>
+        </div>
+        <span class="tag">design_only comparison</span>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <div class="head">
+            <strong>imag2 目标体验</strong>
+            <span class="tag">visual target</span>
+          </div>
+          <img src="../v12-component-prototype/imag2-experience/assets/01-overall-workbench-imag2.png" alt="imag2 overall workbench target" />
+        </article>
+        <article class="card">
+          <div class="head">
+            <strong>当前 HTML 原型 v3</strong>
+            <span class="tag">browser render</span>
+          </div>
+          <img src="xpert-aligned-workbench-v3.playwright.png" alt="current V12-0P xpert-aligned HTML prototype browser render" />
+        </article>
+      </section>
+
+      <section class="notes">
+        <div class="note"><strong>已拉近</strong><p>首屏已从报告页转为工作台产品屏，顶部状态、左侧双层导航、画布、Inspector 和底部工作台同步出现。</p></div>
+        <div class="note"><strong>已拉近</strong><p>节点卡、输入输出端口、曲线连线、选中态、阻断态和运行时间线已经接近低代码画布目标结构。</p></div>
+        <div class="note"><strong>仍有差距</strong><p>节点排布、微交互、真实拖拽、弹层、图标体系和响应式细节仍需在 V12 browser implementation 中落地。</p></div>
+        <div class="note"><strong>后续实现</strong><p>真实实现需要 shadcn/lucide/XyFlow 组件、BFF/DTO 边界、Playwright action log、network log 和 DTO snapshot 证据。</p></div>
+      </section>
+
+      <section class="section-title">
+        <h2>导航组件详细设计：工作流平台作为一级业务路由</h2>
+        <p>修订后的 IA 不再把“智能体 / 技能 / MCP / 证据 / 运行”全部放在二级导航同一层。一级 rail 表示产品域；二级导航只展示当前产品域的工作流上下文；节点、模板、工具、MCP 进入画布资源抽屉或 Inspector。</p>
+      </section>
+
+      <section class="nav-spec">
+        <article class="card nav-mock">
+          <div class="mock-rail">
+            <span>H</span>
+            <span class="active">W</span>
+            <span>A</span>
+            <span>T</span>
+            <span>E</span>
+            <span style="margin-top: 138px">S</span>
+          </div>
+          <div class="mock-side">
+            <div class="mock-title">工作流平台</div>
+            <div class="mock-group">当前空间</div>
+            <div class="mock-row active"><span class="mock-icon">W</span><span>当前项目</span><span class="mock-count">V12</span></div>
+            <div class="mock-row"><span class="mock-icon">R</span><span>运行中</span><span class="mock-count">1</span></div>
+            <div class="mock-row"><span class="mock-icon">Q</span><span>证据待审</span><span class="mock-count">18</span></div>
+            <div class="mock-group">工作流</div>
+            <div class="mock-row"><span class="mock-icon">L</span><span>全部工作流</span><span class="mock-count">3</span></div>
+            <div class="mock-row"><span class="mock-icon">D</span><span>草稿</span><span class="mock-count">2</span></div>
+            <div class="mock-row"><span class="mock-icon">P</span><span>已发布</span><span class="mock-count">1</span></div>
+            <div class="mock-row"><span class="mock-icon">B</span><span>失败 / 阻断</span><span class="mock-count">0</span></div>
+          </div>
+          <div class="mock-workspace">
+            <div class="resource-panel">
+              <h3>节点资源抽屉</h3>
+              <div class="resource-chip"><span class="mock-icon">T</span><span>触发器</span><small>3</small></div>
+              <div class="resource-chip"><span class="mock-icon">A</span><span>Agent</span><small>6</small></div>
+              <div class="resource-chip"><span class="mock-icon">S</span><span>技能</span><small>12</small></div>
+              <div class="resource-chip"><span class="mock-icon">M</span><span>MCP</span><small>4</small></div>
+            </div>
+            <div class="ghost-node">
+              <strong>拖拽 Agent 到画布</strong>
+              <p>只生成 WorkflowDiff proposal；不会自动 publish / run。</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" style="padding: 16px">
+          <div class="spec-table">
+            <div class="spec-row"><strong>一级 Rail</strong><p>只放产品域：工作台、工作流平台、智能体资产、工具与 MCP、证据与运行、模板中心、设置。点击切换产品域，不直接修改工作流。</p></div>
+            <div class="spec-row"><strong>二级导航</strong><p>随一级域变化。当前在“工作流平台”下，只展示项目、运行中、证据待审、全部工作流、草稿、已发布、失败/阻断等上下文。</p></div>
+            <div class="spec-row"><strong>资源抽屉</strong><p>触发器、Agent、技能、MCP、质检、审批、模板片段属于画布创建资源。拖拽后进入 WorkflowDiff proposal，等待用户确认。</p></div>
+            <div class="spec-row"><strong>交互状态</strong><p>必须覆盖 hover、active、selected、disabled、loading、empty、blocked、evidence-ready，并给出清晰视觉反馈。</p></div>
+            <div class="spec-row"><strong>证据边界</strong><p>该设计只证明 product IA 和 component direction；不证明 browser implementation、BFF/DTO、runtime execution 或完整工作流工作台完成。</p></div>
+          </div>
+          <div class="states">
+            <span class="state-pill blue">active</span>
+            <span class="state-pill">hover</span>
+            <span class="state-pill green">evidence-ready</span>
+            <span class="state-pill amber">waiting-confirmation</span>
+            <span class="state-pill red">blocked</span>
+            <span class="state-pill">disabled</span>
+            <span class="state-pill">empty</span>
+          </div>
+        </article>
+      </section>
+
+      <section class="section-title">
+        <h2>组件库合并审查清单</h2>
+        <p>以下组件来自前序组件原型与本轮高保真原型，统一放入 V12-0P 审查页。后续实现应优先使用 shadcn / lucide / XyFlow 等成熟组件，减少重复造轮子。</p>
+      </section>
+
+      <section class="component-library">
+        <article class="component-card"><h3>01 全局顶栏 / 状态栏</h3><p>承载空间、项目、环境、模型、API、运行、证据、等待确认状态。</p><ul><li>状态 chip 不截断</li><li>保存草稿 / 提交审批区分主次</li><li>移动端可收纳</li></ul></article>
+        <article class="component-card"><h3>02 一级 Rail</h3><p>产品域导航，不承载资源类型。</p><ul><li>工作流平台为当前主路由</li><li>图标使用统一线性风格</li><li>active 左侧强调条</li></ul></article>
+        <article class="component-card"><h3>03 二级上下文导航</h3><p>显示当前产品域的列表、状态和过滤器。</p><ul><li>当前项目 / 运行中 / 证据待审</li><li>草稿 / 已发布 / 失败阻断</li><li>不直接执行 mutation</li></ul></article>
+        <article class="component-card"><h3>04 节点资源抽屉</h3><p>收纳候选节点、模板片段、工具和 MCP。</p><ul><li>拖拽生成 proposal</li><li>按风险和权限标记</li><li>支持搜索和分组</li></ul></article>
+        <article class="component-card"><h3>05 画布工作区</h3><p>基于节点、端口、连线、缩放和平移构成低代码画布。</p><ul><li>曲线连线完整连接端口</li><li>选中态和阻断态清晰</li><li>未来用 XyFlow 落地</li></ul></article>
+        <article class="component-card"><h3>06 Agent / Station 节点卡</h3><p>展示角色、目标、输入输出、工具、证据和质量状态。</p><ul><li>支持多输入 / 多输出端口</li><li>hover 预览详情</li><li>click 打开 Inspector</li></ul></article>
+        <article class="component-card"><h3>07 右侧 Inspector</h3><p>展示选中节点详情、最新输出、质量报告和证据引用。</p><ul><li>长文本换行不截断</li><li>证据只读</li><li>高风险动作需确认</li></ul></article>
+        <article class="component-card"><h3>08 底部工作台</h3><p>Chat、提案时间线、Trace、质量、证据标签页。</p><ul><li>Chat 作为独立 workspace chat</li><li>Timeline 显示方案状态</li><li>Trace/Quality/Evidence 可审计</li></ul></article>
+        <article class="component-card"><h3>09 图标与状态系统</h3><p>统一图标、状态色、风险色和禁止态。</p><ul><li>蓝=当前 / 运行</li><li>绿=通过 / 就绪</li><li>琥珀=等待 / 需要确认</li><li>红=阻断 / 拒绝</li></ul></article>
+      </section>
+
+      <section class="section-title">
+        <h2>组件库深度规格：每个组件必须能被开发和验收</h2>
+        <p>本区把组件从“看起来像”推进到“能实现、能测试、能审计”。每个组件都描述用户目标、可见数据、允许动作、禁止动作和验收重点。</p>
+      </section>
+
+      <section class="component-deep-grid">
+        <article class="deep-card">
+          <h3>全局顶栏 / 状态栏</h3>
+          <p>目标：用户一眼知道当前工作空间、项目、环境、模型、API、运行与证据状态。</p>
+          <div class="detail-table">
+            <div class="detail-line"><strong>可见数据</strong><span>空间、项目、沙箱、模型、提供商、API 状态、运行状态、证据状态、等待确认。</span></div>
+            <div class="detail-line"><strong>允许动作</strong><span>预览、调试、只读、版本历史、保存草稿、提交审批。</span></div>
+            <div class="detail-line"><strong>禁用动作</strong><span>未确认前不得 publish / run；禁用按钮必须显示原因。</span></div>
+            <div class="detail-line"><strong>验收点</strong><span>1440px 宽度下 chip 不挤压；状态有颜色和文字双重提示。</span></div>
+          </div>
+        </article>
+
+        <article class="deep-card">
+          <h3>左侧 Rail + 二级上下文导航</h3>
+          <p>目标：用户理解“当前在哪个产品域”以及“这个域里有哪些对象”。</p>
+          <div class="detail-table">
+            <div class="detail-line"><strong>可见数据</strong><span>一级产品域、当前项目、运行中、证据待审、全部工作流、草稿、已发布、失败/阻断。</span></div>
+            <div class="detail-line"><strong>允许动作</strong><span>切换产品域、过滤工作流、打开项目、查看运行或证据列表。</span></div>
+            <div class="detail-line"><strong>禁用动作</strong><span>导航点击不得直接修改 WorkflowDraft、WorkflowVersion 或 StationRun。</span></div>
+            <div class="detail-line"><strong>验收点</strong><span>Agent / 技能 / MCP 不再与工作流上下文混在同一层；它们进入资源抽屉。</span></div>
+          </div>
+        </article>
+
+        <article class="deep-card">
+          <h3>画布工作区 / 节点资源抽屉</h3>
+          <p>目标：用户能从资源抽屉拖拽触发器、Agent、技能、MCP、质检、审批节点，但只产生提案。</p>
+          <div class="detail-table">
+            <div class="detail-line"><strong>可见数据</strong><span>资源类型、数量、风险标记、权限状态、可拖拽提示、画布缩放和锁定状态。</span></div>
+            <div class="detail-line"><strong>允许动作</strong><span>拖拽资源、选择节点、连线、缩放、平移、查看小地图。</span></div>
+            <div class="detail-line"><strong>禁用动作</strong><span>拖拽不得自动 apply / publish / run；必须进入 WorkflowDiff proposal。</span></div>
+            <div class="detail-line"><strong>验收点</strong><span>节点不重叠；连线完整连接端口；阻断边用红/琥珀态展示。</span></div>
+          </div>
+        </article>
+
+        <article class="deep-card">
+          <h3>Agent / Station 节点卡</h3>
+          <p>目标：用户能看懂每个工位的角色、目标、输入输出、工具、证据和质量状态。</p>
+          <div class="detail-table">
+            <div class="detail-line"><strong>可见数据</strong><span>编号、名称、角色、状态、输入端口、输出端口、工具、证据 ref、质量状态。</span></div>
+            <div class="detail-line"><strong>允许动作</strong><span>hover 预览摘要；click 打开 Inspector；端口 hover 高亮可连线目标。</span></div>
+            <div class="detail-line"><strong>禁用动作</strong><span>source=agent 不得直接 durable mutation；节点运行必须走受控路径。</span></div>
+            <div class="detail-line"><strong>验收点</strong><span>至少展示多输入 / 多输出设计；selected、ready、running、blocked、waiting 状态清楚。</span></div>
+          </div>
+        </article>
+
+        <article class="deep-card">
+          <h3>右侧 Inspector</h3>
+          <p>目标：用户在一个面板里完成节点审查、配置理解、质量判断和证据追踪。</p>
+          <div class="detail-table">
+            <div class="detail-line"><strong>可见数据</strong><span>角色、目标、记忆摘要、工具、技能、MCP、质量门槛、证据、最新输出。</span></div>
+            <div class="detail-line"><strong>允许动作</strong><span>查看报告、打开证据引用、查看禁用原因、复制 redacted ref。</span></div>
+            <div class="detail-line"><strong>禁用动作</strong><span>Inspector 不直接执行 Apply / Publish / Run / Approve。</span></div>
+            <div class="detail-line"><strong>验收点</strong><span>长文本换行；证据只读；阻断原因必须可见。</span></div>
+          </div>
+        </article>
+
+        <article class="deep-card">
+          <h3>底部工作台</h3>
+          <p>目标：用户通过 Chat 发起目标、通过时间线看方案状态、通过 Trace/质量/证据审计结果。</p>
+          <div class="detail-table">
+            <div class="detail-line"><strong>可见数据</strong><span>Chat 输入、提案时间线、Trace 事件、质量项、证据 ref、当前 tab。</span></div>
+            <div class="detail-line"><strong>允许动作</strong><span>输入自然语言、查看 proposal、切换 tab、定位到画布节点。</span></div>
+            <div class="detail-line"><strong>禁用动作</strong><span>Chat 不能伪装成已执行；未确认 WorkflowDiff 前不得运行。</span></div>
+            <div class="detail-line"><strong>验收点</strong><span>每个 tab 都有独立目的；空态、加载态、失败态不静默。</span></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="section-title">
+        <h2>目标体验：用户完成 V12 后应当能看懂什么</h2>
+        <p>目标不是“更漂亮的静态图”，而是让用户能快速创建、观察、审查和修改工作流，并理解每个工位的产出与质量。</p>
+      </section>
+
+      <section class="target-experience">
+        <article class="card experience-list">
+          <div class="experience-item"><span class="experience-num">1</span><div><strong>从自然语言进入工作流</strong><p>用户在底部 Chat 输入目标，系统展示提案时间线和画布草案，而不是静默等待。</p></div></div>
+          <div class="experience-item"><span class="experience-num">2</span><div><strong>从画布理解编排结构</strong><p>用户看到触发器、规划 Agent、并行 Agent、总结 Agent、质检 Agent 的关系与状态。</p></div></div>
+          <div class="experience-item"><span class="experience-num">3</span><div><strong>从 Inspector 审查单个工位</strong><p>用户点击节点后看到角色、目标、工具、MCP、质量门槛、证据和最新输出。</p></div></div>
+          <div class="experience-item"><span class="experience-num">4</span><div><strong>从 Trace / Evidence 判断可信度</strong><p>用户能区分设计参考、fixture、浏览器截图、运行证据和 redacted evidence ref。</p></div></div>
+          <div class="experience-item"><span class="experience-num">5</span><div><strong>从确认门槛避免误操作</strong><p>所有会改变工作流或运行结果的动作都先进入 WorkflowDiff proposal，等待用户确认。</p></div></div>
+        </article>
+        <article class="card">
+          <div class="head"><strong>目标体验视觉参考</strong><span class="tag">imag2 design reference</span></div>
+          <img src="assets/imag2-component-library-board.png" alt="imag2 component library board for HarnessOS V12" />
+        </article>
+      </section>
+
+      <section class="section-title">
+        <h2>典型使用场景：组件如何协同完成任务</h2>
+        <p>以下场景用于后续 V12 浏览器实现和 UX 自动化验收。当前页面只证明设计规格，不证明真实运行。</p>
+      </section>
+
+      <section class="scenario-grid">
+        <article class="scenario-card"><h3>多 Agent 讨论</h3><ol><li>用户输入讨论主题。</li><li>画布生成多个观点 Agent。</li><li>总结 Agent 汇总共识和分歧。</li><li>质检 Agent 检查覆盖度。</li><li>Evidence tab 显示讨论证据。</li></ol></article>
+        <article class="scenario-card"><h3>视频分镜创作</h3><ol><li>用户输入创意点子。</li><li>规划 Agent 生成镜头结构。</li><li>风格节点固定人物和画风。</li><li>图像节点输出分镜 ref。</li><li>质检节点标记一致性问题。</li></ol></article>
+        <article class="scenario-card"><h3>自然语言修订</h3><ol><li>用户要求增加质检或调整顺序。</li><li>Chat 生成 WorkflowDiff proposal。</li><li>画布高亮变更节点和边。</li><li>Inspector 展示影响范围。</li><li>用户确认前不执行。</li></ol></article>
+        <article class="scenario-card"><h3>失败阻断审查</h3><ol><li>节点进入 blocked。</li><li>边和节点显示阻断色。</li><li>Inspector 展示原因。</li><li>Trace 定位失败事件。</li><li>Chat 给出可选修复动作。</li></ol></article>
+        <article class="scenario-card"><h3>证据审计</h3><ol><li>用户打开 Evidence tab。</li><li>按节点查看 artifact ref。</li><li>查看质量报告和 runtime report。</li><li>确认 redaction 状态。</li><li>导出审查摘要。</li></ol></article>
+      </section>
+
+      <section class="visual-board-grid">
+        <article class="card"><div class="head"><strong>典型场景流参考</strong><span class="tag">imag2 scenario board</span></div><img src="assets/imag2-user-scenario-flow-board.png" alt="imag2 user scenario flow board" /></article>
+        <article class="card"><div class="head"><strong>状态机与反馈参考</strong><span class="tag">imag2 state board</span></div><img src="assets/imag2-state-machine-feedback-board.png" alt="imag2 state machine and feedback board" /></article>
+        <article class="card"><div class="head"><strong>组件细节规格参考</strong><span class="tag">imag2 component detail</span></div><img src="assets/imag2-component-detail-spec-board.png" alt="imag2 component detail specification board" /></article>
+        <article class="card"><div class="head"><strong>图标切图参考</strong><span class="tag">imag2 icon sprite</span></div><img src="assets/imag2-icon-sprite-reference.png" alt="imag2 icon sprite reference for HarnessOS V12" /></article>
+      </section>
+
+      <section class="section-title">
+        <h2>自审结论：当前可进入人工审查，但仍不是实现证据</h2>
+        <p>本轮自审聚焦组件完整性、场景清晰度、设计一致性、证据边界和可实现性。所有视觉图均为 design reference。</p>
+      </section>
+
+      <section class="audit-grid">
+        <div class="audit-card"><strong>UI 一致性：PASS</strong><p>颜色、圆角、状态 chip、节点卡、Inspector 和底部工作台已统一到 Light Studio 方向。</p></div>
+        <div class="audit-card"><strong>UX 可解释性：PASS</strong><p>典型场景说明了用户如何创建、观察、审查、修改工作流，以及如何判断证据可信度。</p></div>
+        <div class="audit-card"><strong>可实现性：PASS</strong><p>后续可用 shadcn / lucide / XyFlow / BFF DTO 落地；组件边界没有要求自研底层画布引擎。</p></div>
+        <div class="audit-card"><strong>False Green：受控</strong><p>页面明确 design-only，不证明浏览器实现、BFF/DTO、runtime execution 或完整工作流工作台完成。</p></div>
+      </section>
+
+      <section class="asset-grid">
+        <article class="card">
+          <div class="head">
+            <strong>imag2 图标切图参考</strong>
+            <span class="tag">visual reference</span>
+          </div>
+          <img src="assets/imag2-icon-sprite-reference.png" alt="imag2 icon sprite reference for HarnessOS V12" />
+        </article>
+        <article class="card">
+          <div class="head">
+            <strong>图标系统落地决策</strong>
+            <span class="tag">SVG applied</span>
+          </div>
+          <div style="padding: 18px; color: var(--muted); line-height: 1.8; font-size: 15px">
+            <p><strong style="color: var(--text)">设计方向：</strong>采用蓝 / 绿 / 琥珀状态色、圆角线性图标、轻阴影和克制的 active accent，避免原型继续使用字母占位。</p>
+            <p><strong style="color: var(--text)">实现策略：</strong>imag2 图片仅作为视觉参考；当前 HTML 原型使用内联 SVG symbols 替换 rail、二级导航和画布工具栏图标，后续浏览器实现可迁移到 lucide/shadcn。</p>
+            <p><strong style="color: var(--text)">证据边界：</strong>该图标参考不证明 browser implementation、BFF/DTO、runtime execution、Xpert parity 或完整工作流工作台完成。</p>
+          </div>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

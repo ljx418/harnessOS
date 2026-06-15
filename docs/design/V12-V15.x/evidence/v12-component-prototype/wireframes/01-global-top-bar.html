@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>V12-0A Global Top Bar Wireframe</title>
+    <style>
+      :root {
+        font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif;
+        --bg: #f8fafc;
+        --panel: #ffffff;
+        --line: #d8dee8;
+        --ink: #172033;
+        --muted: #667085;
+        --blue: #2563eb;
+        --green: #15803d;
+        --amber: #b45309;
+        --red: #dc2626;
+        --purple: #7c3aed;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+      }
+      .wrap {
+        padding: 24px;
+      }
+      .topbar {
+        display: grid;
+        grid-template-columns: minmax(320px, 1.1fr) minmax(460px, 1.5fr) auto;
+        gap: 16px;
+        align-items: center;
+        min-height: 72px;
+        padding: 12px 16px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--panel);
+        box-shadow: 0 16px 34px rgba(15, 23, 42, 0.1);
+      }
+      .context {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        min-width: 0;
+      }
+      .logo {
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        background: #eff6ff;
+        color: var(--blue);
+      }
+      .logo svg,
+      .icon svg {
+        width: 19px;
+        height: 19px;
+      }
+      .title {
+        min-width: 0;
+      }
+      .title strong {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 15px;
+      }
+      .title span {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .status-row {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 8px;
+      }
+      .state {
+        min-width: 0;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 8px 9px;
+        background: #fbfdff;
+      }
+      .state label {
+        display: block;
+        margin-bottom: 3px;
+        color: var(--muted);
+        font-size: 10px;
+        font-weight: 750;
+      }
+      .state strong {
+        display: block;
+        overflow: hidden;
+        color: var(--ink);
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 12px;
+      }
+      .state.ok {
+        border-color: #bbf7d0;
+        background: #f0fdf4;
+      }
+      .state.warn {
+        border-color: #fde68a;
+        background: #fffbeb;
+      }
+      .state.fail {
+        border-color: #fecaca;
+        background: #fef2f2;
+      }
+      .actions {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        justify-content: flex-end;
+      }
+      button {
+        height: 38px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: white;
+        color: var(--ink);
+        padding: 0 12px;
+        font-size: 13px;
+        white-space: nowrap;
+      }
+      button.primary {
+        border-color: var(--blue);
+        background: var(--blue);
+        color: white;
+      }
+      button.disabled {
+        color: #94a3b8;
+        background: #f1f5f9;
+        cursor: not-allowed;
+      }
+      .state-catalog {
+        margin-top: 16px;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .catalog-card {
+        border: 1px dashed var(--line);
+        border-radius: 12px;
+        background: white;
+        padding: 12px;
+        font-size: 12px;
+        line-height: 1.55;
+      }
+      .catalog-card strong {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--ink);
+        font-size: 13px;
+      }
+      .catalog-card span {
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <section class="topbar" aria-label="全局顶栏组件草图">
+        <div class="context">
+          <div class="logo" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 7h16M7 4v6M17 4v6M6 14h5M13 14h5M6 18h12" />
+            </svg>
+          </div>
+          <div class="title">
+            <strong>视频创作工作室 / 分镜工作流草案</strong>
+            <span>workspace: studio-video · project: storyboard-v1 · proposal-only</span>
+          </div>
+        </div>
+        <div class="status-row" aria-label="用户可见状态">
+          <div class="state ok"><label>API</label><strong>healthy</strong></div>
+          <div class="state warn"><label>运行</label><strong>awaiting_confirmation</strong></div>
+          <div class="state"><label>模型</label><strong>DeepSeek · chat</strong></div>
+          <div class="state"><label>证据</label><strong>design_only</strong></div>
+        </div>
+        <div class="actions">
+          <button>预览</button>
+          <button class="disabled" title="需要 WorkflowDiff 确认后才能发布">发布</button>
+          <button class="primary">打开审计</button>
+        </div>
+      </section>
+
+      <section class="state-catalog" aria-label="状态样式枚举">
+        <div class="catalog-card"><strong>API 状态</strong><span>healthy / degraded / offline / misconfigured</span></div>
+        <div class="catalog-card"><strong>运行状态</strong><span>idle / queued / running / failed / awaiting_confirmation</span></div>
+        <div class="catalog-card"><strong>证据状态</strong><span>none / collecting / ready / redacted / failed</span></div>
+        <div class="catalog-card"><strong>权限状态</strong><span>allowed / disabled / denied / needs_review</span></div>
+      </section>
+    </main>
+  </body>
+</html>

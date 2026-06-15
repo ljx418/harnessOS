@@ -1,0 +1,16 @@
+{
+  "audit_ref": "audit://v9-7/evidence-hardening/75ff8f7bcf4d",
+  "claim_scan_status": "PASS",
+  "correlation_id": "correlation_v9_7",
+  "created_at": "2026-06-10T06:30:37.507918+00:00",
+  "forbidden_claim_hits": [],
+  "forbidden_raw_hits": [],
+  "policy_decision": "allow",
+  "redaction_status": "PASS",
+  "report_id": "evidence-hardening-v9-7-5bef5be0265e",
+  "request_id": "request_v9_7",
+  "scanned_refs": [
+    "audit://v9-7/audit-export/0fd32beee038",
+    "audit://v9-7/terminal-automation-policy/67b9775911e4"
+  ]
+}

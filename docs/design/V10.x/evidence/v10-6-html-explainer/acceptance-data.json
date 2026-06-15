@@ -1,0 +1,9 @@
+{
+  "stage_id": "V10-6",
+  "status": "PASS",
+  "evidence_scope": "supporting_html_export",
+  "html_ref": "docs/design/V10.x/evidence/v10-1-mission-tui-shell/supporting-html-explainer.html",
+  "html_explainer_is_primary_tui": false,
+  "html_explainer_is_runtime_truth": false,
+  "runtime_truth_boundary": "tui_read_model_not_runtime_truth"
+}

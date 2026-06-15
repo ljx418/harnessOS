@@ -1,0 +1,19 @@
+{
+  "stage_id": "V11-5",
+  "status": "PASS",
+  "allowed_claim": "V11-5 complete: transparent tool and permission block slice ready for review.",
+  "evidence_scope": "v9_controlled_executor_projection",
+  "runtime_backed": false,
+  "tool_lifecycle_visible": true,
+  "permission_denial_visible": true,
+  "risk_and_sandbox_visible": true,
+  "unrestricted_actions_introduced": false,
+  "evidence_refs": [
+    "docs/design/V11.x/evidence/v11-5-tool-permission-blocks/acceptance-data.json",
+    "docs/design/V11.x/evidence/v11-5-tool-permission-blocks/tool-permission-transcript.txt",
+    "docs/design/V11.x/evidence/v11-5-tool-permission-blocks/tool-permission-state.json"
+  ],
+  "errors": [],
+  "claim_scan": "PASS",
+  "redaction_scan": "PASS"
+}

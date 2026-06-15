@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>V10 Terminal Evidence</title>
+<style>body{margin:0;background:#0f172a;color:#d1e7ff;font:14px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace}pre{white-space:pre-wrap;padding:24px}</style></head>
+<body><pre>$ npm --prefix apps/mission-tui run start -- --agent-backed-once 请回复：V10 TUI provider-backed smoke PASS --model deepseek-chat
+
+&gt; @harnessos/mission-tui@0.1.0 start
+&gt; node src/cli.js --agent-backed-once 请回复：V10 TUI provider-backed smoke PASS --model deepseek-chat
+
+HarnessOS  harnessOS  phase:completed  gateway:sess_b44765dda994  turn:turn_ebc…
+────────────────────────────────────────────────────────────────────────────────
+当前选中: WorkflowDiff proposal · 确认前不会 apply / publish / run · actions:confirm_pro…
+────────────────────────────────────────────────────────────────────────────────
+… 已折叠历史内容 52 行，可用 /history 查看
+
+▣ Gateway 事件  completed  item_2e9180ce6e61
+  事件: item.delta  session:sess_b44765dda994  turn:turn_ebc7921e5741
+  Trace: trace_8db032946371
+  V10 TUI provider-backed smoke PASS
+  证据: docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json
+
+▣ Gateway 事件  completed  item_efb3a3703186
+  事件: turn.completed  session:sess_b44765dda994  turn:turn_ebc7921e5741
+  Trace: trace_8db032946371
+  Gateway turn completed
+  证据: docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json
+
+▣ 助手  completed  gateway-assistant-13
+  V10 TUI provider-backed smoke PASS
+  证据: docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json
+
+────────────────────────────────────────────────────────────────────────────────
+› 输入自然语言目标，或使用 /trace /session /exit
+
+
+$ npm --prefix apps/mission-tui run acceptance:v10-8
+
+&gt; @harnessos/mission-tui@0.1.0 acceptance:v10-8
+&gt; node src/agent-backed-acceptance.js
+
+{
+  &quot;stage_id&quot;: &quot;V10-8&quot;,
+  &quot;status&quot;: &quot;PASS&quot;,
+  &quot;allowed_claim&quot;: &quot;V10-8 complete: Agent-backed Mission TUI chatbot bridge ready for review.&quot;,
+  &quot;evidence_scope&quot;: &quot;agent_backed_gateway_turn&quot;,
+  &quot;runtime_backed&quot;: true,
+  &quot;fixture_only&quot;: false,
+  &quot;local_parser_only&quot;: false,
+  &quot;provider_mode&quot;: &quot;provider-backed&quot;,
+  &quot;provider_backed&quot;: true,
+  &quot;gateway_session_started&quot;: true,
+  &quot;gateway_turn_started&quot;: true,
+  &quot;gateway_turn_completed&quot;: true,
+  &quot;gateway_turn_failed&quot;: false,
+  &quot;assistant_output_from_gateway&quot;: true,
+  &quot;session_id&quot;: &quot;sess_c06939bbf360&quot;,
+  &quot;turn_id&quot;: &quot;turn_5702fe58de01&quot;,
+  &quot;trace_id&quot;: &quot;trace_6ea0f4304fdc&quot;,
+  &quot;event_types&quot;: [
+    &quot;turn.started&quot;,
+    &quot;item.delta&quot;,
+    &quot;turn.completed&quot;
+  ],
+  &quot;terminal_screenshots&quot;: [
+    &quot;docs/design/V10.x/evidence/v10-8-agent-backed-tui/agent-backed-terminal-180x55.txt&quot;
+  ],
+  &quot;raw_transcript_ref&quot;: &quot;docs/design/V10.x/evidence/v10-8-agent-backed-tui/agent-backed-raw-result.json&quot;,
+  &quot;negative_local_parser_result&quot;: {
+    &quot;local_parser_can_satisfy_v10_8&quot;: false,
+    &quot;required_mode&quot;: &quot;--agent-backed&quot;
+  },
+  &quot;stderr_lines_recorded_as_warnings&quot;: 2,
+  &quot;errors&quot;: [],
+  &quot;claim_scan&quot;: &quot;PASS&quot;,
+  &quot;redaction_scan&quot;: &quot;PASS&quot;,
+  &quot;forbidden_claim_violations&quot;: []
+}
+
+
+$ npm --prefix apps/mission-tui run acceptance:v10-final
+
+&gt; @harnessos/mission-tui@0.1.0 acceptance:v10-final
+&gt; node src/final-acceptance.js
+
+{
+  &quot;stage_id&quot;: &quot;V10-9&quot;,
+  &quot;status&quot;: &quot;PASS&quot;,
+  &quot;allowed_claim&quot;: &quot;V10 complete: CLI-native Agent-backed TUI experience and explainability baseline ready for review.&quot;,
+  &quot;evidence_scope&quot;: &quot;v10_1_to_v10_8_aggregated_evidence&quot;,
+  &quot;final_claim_allowed&quot;: true,
+  &quot;v10_1_to_7_baseline&quot;: {
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;allowed_claim&quot;: &quot;V10-1..V10-7 complete: CLI-native read-model TUI experience baseline ready for review.&quot;,
+    &quot;read_model_baseline_claim_allowed&quot;: true,
+    &quot;evidence_ref&quot;: &quot;docs/design/V10.x/evidence/v10-7-final-acceptance/v10-final-acceptance-data.json&quot;
+  },
+  &quot;v10_8_agent_backed_bridge&quot;: {
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;evidence_scope&quot;: &quot;agent_backed_gateway_turn&quot;,
+    &quot;runtime_backed&quot;: true,
+    &quot;provider_mode&quot;: &quot;provider-backed&quot;,
+    &quot;provider_backed&quot;: true,
+    &quot;gateway_session_started&quot;: true,
+    &quot;gateway_turn_started&quot;: true,
+    &quot;gateway_turn_completed&quot;: true,
+    &quot;gateway_turn_failed&quot;: false,
+    &quot;assistant_output_from_gateway&quot;: true,
+    &quot;session_id&quot;: &quot;sess_c06939bbf360&quot;,
+    &quot;turn_id&quot;: &quot;turn_5702fe58de01&quot;,
+    &quot;trace_id&quot;: &quot;trace_6ea0f4304fdc&quot;,
+    &quot;evidence_ref&quot;: &quot;docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json&quot;
+  },
+  &quot;bounded_interpretation&quot;: {
+    &quot;production_ready&quot;: false,
+    &quot;full_production_ga&quot;: false,
+    &quot;agent_executor_ready&quot;: false,
+    &quot;complete_workflow_studio_ready&quot;: false,
+    &quot;full_multi_agent_orchestration_ready&quot;: false,
+    &quot;autonomous_workflow_editing_ready&quot;: false,
+    &quot;codex_claude_experience_fully_matched&quot;: false
+  },
+  &quot;provider_backed_required_for_v10_final&quot;: false,
+  &quot;provider_backed_claim_allowed&quot;: true,
+  &quot;claim_scan&quot;: &quot;PASS&quot;,
+  &quot;redaction_scan&quot;: &quot;PASS&quot;,
+  &quot;drawio_xml&quot;: &quot;PASS&quot;,
+  &quot;blockers&quot;: []
+}
+
+</pre></body></html>

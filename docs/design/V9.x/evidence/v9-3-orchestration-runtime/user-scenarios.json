@@ -1,0 +1,76 @@
+[
+  {
+    "acceptance_checks": {
+      "at_least_two_discussion_turns": "PASS",
+      "attribution_preserving_synthesis": "PASS",
+      "message_refs_between_agents": "PASS",
+      "role_specific_agents_visible": "PASS",
+      "source_agent_direct_mutation_denied": "PASS"
+    },
+    "attribution_refs": [
+      "roman-msg-01-philosopher-opening",
+      "roman-msg-02-engineer-response",
+      "roman-msg-03-historian-context",
+      "roman-msg-04-ethicist-challenge"
+    ],
+    "discussion_turn_count": 5,
+    "evidence_chain_ref": "evidence-chain://v9-3/roman-forum",
+    "evidence_scope": "real_runtime_fixture",
+    "message_graph_ref": "roman-forum-discussion.json",
+    "message_refs": [
+      "roman-msg-01-philosopher-opening",
+      "roman-msg-02-engineer-response",
+      "roman-msg-03-historian-context",
+      "roman-msg-04-ethicist-challenge",
+      "roman-msg-05-moderator-synthesis"
+    ],
+    "orchestration_run_id": "orch-v9-3-290585a635d8",
+    "role_specific_agents": [
+      "philosopher_agent",
+      "engineer_agent",
+      "historian_agent",
+      "ethicist_agent",
+      "moderator_agent"
+    ],
+    "runtime_backed": true,
+    "scenario_id": "US-V9-07",
+    "status": "PASS",
+    "synthesis_ref": "artifact-ref://v9-3/roman-forum/attributed-synthesis"
+  },
+  {
+    "blocked_reason": "provider_image_generation_not_available_in_local_fixture",
+    "creative_brief_ref": "artifact-ref://v9-3/video/creative-brief",
+    "evidence_scope": "blocked_provider_unavailable",
+    "provider_invocation_ref": null,
+    "provider_model_ref": null,
+    "runtime_backed": false,
+    "scenario_id": "US-V9-08",
+    "script_ref": "artifact-ref://v9-3/video/script",
+    "shot_list_ref": "artifact-ref://v9-3/video/shot-list",
+    "status": "BLOCKED",
+    "storyboard_image_artifact_refs": [],
+    "storyboard_prompt_refs": [
+      "artifact-ref://v9-3/video/storyboard-prompt-1",
+      "artifact-ref://v9-3/video/storyboard-prompt-2",
+      "artifact-ref://v9-3/video/storyboard-prompt-3",
+      "artifact-ref://v9-3/video/storyboard-prompt-4"
+    ],
+    "visual_consistency_report_ref": "artifact-ref://v9-3/video/visual-consistency-report"
+  },
+  {
+    "evidence_scope": "real_runtime_fixture",
+    "lineage_refs": [
+      "lineage-v9-3-research",
+      "lineage-v9-3-implementation",
+      "lineage-v9-3-review",
+      "lineage-v9-3-synthesis"
+    ],
+    "mutation_applied_before_confirmation": false,
+    "runtime_backed": true,
+    "scenario_id": "US-V9-09",
+    "source_agent_direct_mutation_denied": true,
+    "status": "PASS",
+    "user_confirmation_required": true,
+    "workflow_diff_ref": "workflow-diff://v9-3/optimization/video-workflow"
+  }
+]

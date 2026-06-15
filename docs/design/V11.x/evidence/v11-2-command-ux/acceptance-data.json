@@ -1,0 +1,34 @@
+{
+  "stage_id": "V11-2",
+  "status": "PASS",
+  "allowed_claim": "V11-2 complete: composer and slash-command UX slice ready for review.",
+  "evidence_scope": "tui_command_transcript",
+  "runtime_backed": false,
+  "durable_mutation_performed": false,
+  "commands_covered": [
+    "/help",
+    "/status",
+    "/stations",
+    "/station station-storyboard",
+    "/evidence",
+    "/diff",
+    "/trace",
+    "/quality",
+    "/artifacts",
+    "/explain",
+    "/retry",
+    "/revise",
+    "/session"
+  ],
+  "invalid_command_feedback_visible": true,
+  "slash_commands_cannot_apply_publish_run": true,
+  "evidence_refs": [
+    "docs/design/V11.x/evidence/v11-2-command-ux/acceptance-data.json",
+    "docs/design/V11.x/evidence/v11-2-command-ux/slash-command-transcript.txt",
+    "docs/design/V11.x/evidence/v11-2-command-ux/invalid-command-transcript.txt",
+    "docs/design/V11.x/evidence/v11-2-command-ux/terminal-render.txt"
+  ],
+  "errors": [],
+  "claim_scan": "PASS",
+  "redaction_scan": "PASS"
+}

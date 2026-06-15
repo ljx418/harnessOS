@@ -1,0 +1,21 @@
+{
+  "schema_version": "v12.product_entity_projection.v1",
+  "workspace": {
+    "workspace_id": "ws-v12-technical-content",
+    "name": "技术内容工作室"
+  },
+  "project": {
+    "project_id": "proj-v12-local-knowledge",
+    "workspace_id": "ws-v12-technical-content",
+    "name": "本地知识总结项目"
+  },
+  "app": {
+    "app_id": "app-v12-markdown-workflow",
+    "project_id": "proj-v12-local-knowledge",
+    "name": "Markdown 工作流应用",
+    "app_kind": "workflow_app"
+  },
+  "service_account_ref": "svc-v12-readonly-ref",
+  "evidence_scope": "read_only_canvas_fixture",
+  "created_at": "2026-06-11T00:00:00Z"
+}

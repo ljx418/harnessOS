@@ -1,0 +1,50 @@
+{
+  "concept_images_are_runtime_evidence": false,
+  "concept_prompts_written": true,
+  "forbidden_claims": {
+    "agent_executor_ready": false,
+    "complete_workflow_studio_ready": false,
+    "full_multi_agent_orchestration_ready": false,
+    "production_ready": false
+  },
+  "host_generated_image_ref": null,
+  "html_explainer_is_primary_tui": false,
+  "html_report_written": true,
+  "local_concept_svgs_written": true,
+  "milestone_roadmap": [
+    "M0 planning correction",
+    "M1 CLI-native shell screenshots",
+    "M2 tool permission plan blocks",
+    "M3 workflow station explainability blocks",
+    "M4 output quality preview",
+    "M5 WorkflowDiff proposal preview",
+    "M6 HTML explainer export",
+    "M7 final UX acceptance"
+  ],
+  "runtime_implementation_started": false,
+  "schema_version": "v10_0.cli_native_tui_planning.v2",
+  "selected_route": "React/Ink CLI-native Mission TUI",
+  "stage_id": "V10-0R",
+  "status": "PASS",
+  "superseded_host_generated_image_ref": "docs/history/design/V10.x/superseded/v10-0-cockpit-first/host-generated-cockpit.png",
+  "supersedes": "V10-0 cockpit-first concept package",
+  "terminal_native_acceptance": {
+    "bottom_composer_required": true,
+    "command_palette_required": true,
+    "evidence_links_inline": true,
+    "interaction_design_board_required": true,
+    "permission_prompt_required": true,
+    "real_tui_screenshots_required_for_v10_1": true,
+    "single_column_stream_first": true,
+    "tool_blocks_required": true,
+    "workflowdiff_preview_required": true
+  },
+  "user_scenario_matrix": [
+    "US-V10-01 local Markdown workflow",
+    "US-V10-02 Roman Forum parallel Agent discussion",
+    "US-V10-03 video storyboard workflow",
+    "US-V10-04 coding proposal workflow",
+    "US-V10-05 natural-language workflow revision"
+  ],
+  "visual_direction": "Codex/ClaudeCode-like terminal-native baseline"
+}

@@ -1,0 +1,16 @@
+V12-0P Redaction Scan
+
+Scope:
+- docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype
+- docs/design/V12-V15.x/v12_0p_high_fidelity_prototype_plan.md
+
+Command:
+rg -n "raw secret|raw token|raw provider payload|raw artifact content|Bearer |API key|signed URL|credential raw secret" docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype docs/design/V12-V15.x/v12_0p_high_fidelity_prototype_plan.md
+
+Result:
+PASS_WITH_SAFE_CONTEXT_ONLY
+
+Audit note:
+Matches are limited to this redaction scan file, where forbidden raw-content
+terms are listed as scanner inputs and audit explanation. No forbidden raw
+content term appears in the prototype HTML as leaked content or positive data.

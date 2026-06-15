@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>V12-0A Left Navigation Wireframe</title>
+    <style>
+      body {
+        margin: 0;
+        background: #f8fafc;
+        font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif;
+        color: #172033;
+      }
+      .shell {
+        display: grid;
+        grid-template-columns: 72px 320px 1fr;
+        min-height: 620px;
+      }
+      .rail {
+        background: #ffffff;
+        border-right: 1px solid #d8dee8;
+        padding: 16px 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .rail button {
+        width: 50px;
+        height: 48px;
+        border: 1px solid transparent;
+        border-radius: 14px;
+        background: transparent;
+        color: #667085;
+        display: grid;
+        place-items: center;
+      }
+      .rail button.active {
+        background: #eff6ff;
+        color: #2563eb;
+        border-color: #bfdbfe;
+        box-shadow: inset 3px 0 #2563eb;
+      }
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+      .panel {
+        background: #fbfdff;
+        border-right: 1px solid #d8dee8;
+        padding: 18px;
+      }
+      .crumb {
+        margin-bottom: 14px;
+        color: #667085;
+        font-size: 12px;
+      }
+      .title {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+      .title strong {
+        font-size: 18px;
+      }
+      .section-label {
+        margin: 18px 0 8px;
+        color: #667085;
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+      .nav-item {
+        display: grid;
+        grid-template-columns: 24px 1fr auto;
+        gap: 10px;
+        align-items: center;
+        padding: 11px 10px;
+        border-radius: 11px;
+        color: #475467;
+        font-size: 14px;
+      }
+      .nav-item.active {
+        background: #eaf2ff;
+        color: #1d4ed8;
+        font-weight: 750;
+      }
+      .nav-item small {
+        display: block;
+        margin-top: 2px;
+        color: #94a3b8;
+        font-size: 11px;
+        font-weight: 500;
+      }
+      .badge {
+        padding: 3px 8px;
+        border-radius: 999px;
+        background: #eef2ff;
+        color: #3730a3;
+        font-size: 12px;
+      }
+      .content {
+        padding: 26px;
+      }
+      .map {
+        max-width: 760px;
+        display: grid;
+        gap: 12px;
+      }
+      .map-card {
+        border: 1px dashed #cbd5e1;
+        border-radius: 14px;
+        padding: 15px;
+        background: white;
+        line-height: 1.65;
+      }
+      .map-card strong {
+        display: block;
+        margin-bottom: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <aside class="rail" aria-label="一级 rail">
+        <button class="active" title="工作台">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="3" /><path d="M8 4v16M3 10h18" /></svg>
+        </button>
+        <button title="智能体">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="8" width="12" height="10" rx="3" /><path d="M12 4v4M9 13h.01M15 13h.01M8 20h8" /></svg>
+        </button>
+        <button title="工作流">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="7" r="3" /><circle cx="18" cy="7" r="3" /><circle cx="12" cy="18" r="3" /><path d="M8.5 9.5l2 5M15.5 9.5l-2 5" /></svg>
+        </button>
+        <button title="扩展">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3h8v6H8zM4 15h6v6H4zM14 15h6v6h-6zM12 9v3M7 15v-3h10v3" /></svg>
+        </button>
+        <button title="证据">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h9l3 3v15H6z" /><path d="M14 3v4h4M8 12h8M8 16h6" /></svg>
+        </button>
+      </aside>
+      <aside class="panel" aria-label="二级导航">
+        <div class="crumb">一级 rail: 工作台 / 二级导航: 当前项目</div>
+        <div class="title"><strong>视频创作工作室</strong><span class="badge">草案</span></div>
+
+        <div class="section-label">当前工作台</div>
+        <div class="nav-item active">
+          <span>▣</span><span>画布工作台<small>只读 CanvasReadModel</small></span><span class="badge">3 节点</span>
+        </div>
+        <div class="nav-item">
+          <span>◇</span><span>Chat Workbench<small>目标、历史、提案时间线</small></span><span class="badge">2 会话</span>
+        </div>
+
+        <div class="section-label">项目对象</div>
+        <div class="nav-item"><span>AG</span><span>智能体<small>角色、目标、模型、工具、MCP</small></span><span class="badge">6</span></div>
+        <div class="nav-item"><span>WF</span><span>工作流<small>WorkflowSpec / WorkflowDiff</small></span><span class="badge">3</span></div>
+        <div class="nav-item"><span>SK</span><span>技能 / MCP<small>Skill package 与能力绑定</small></span><span class="badge">12</span></div>
+
+        <div class="section-label">审计与治理</div>
+        <div class="nav-item"><span>EV</span><span>证据链<small>trace、quality、artifact refs</small></span><span class="badge">ready</span></div>
+        <div class="nav-item"><span>OP</span><span>监控<small>只读状态与故障原因</small></span><span class="badge">只读</span></div>
+      </aside>
+      <section class="content">
+        <div class="map">
+          <div class="map-card"><strong>交互逻辑</strong>一级 rail 切换产品域：工作台、智能体、工作流、扩展、证据。二级导航显示该域内的项目对象和可进入页面。</div>
+          <div class="map-card"><strong>示例内容</strong>在“工作台”域下，用户看到画布工作台和 Chat Workbench；在“项目对象”里看到智能体、工作流、技能/MCP。</div>
+          <div class="map-card"><strong>验收重点</strong>导航必须让用户理解“当前域”和“域内对象”的关系，不能只罗列智能体。</div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

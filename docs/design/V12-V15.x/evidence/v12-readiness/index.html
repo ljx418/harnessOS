@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HarnessOS V12 只读画布基础验收报告</title>
+    <style>
+      :root {
+        color: #172033;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      body {
+        background: #f6f8fb;
+        margin: 0;
+      }
+      main {
+        margin: 0 auto;
+        max-width: 1180px;
+        padding: 32px;
+      }
+      h1 {
+        margin: 0 0 8px;
+      }
+      .grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .card {
+        background: white;
+        border: 1px solid #d9e2ef;
+        border-radius: 8px;
+        box-shadow: 0 8px 24px rgba(20, 31, 51, 0.06);
+        padding: 18px;
+      }
+      .wide {
+        grid-column: 1 / -1;
+      }
+      .pass {
+        color: #047857;
+        font-weight: 800;
+      }
+      .warn {
+        color: #b45309;
+        font-weight: 700;
+      }
+      img {
+        border: 1px solid #d9e2ef;
+        border-radius: 8px;
+        display: block;
+        max-width: 100%;
+      }
+      code {
+        background: #eef3fb;
+        border-radius: 4px;
+        padding: 2px 5px;
+      }
+      li {
+        margin: 6px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="pass">V12 browser E2E evidence package</p>
+      <h1>V12 产品壳与只读画布基础验收报告</h1>
+      <p>
+        本报告只证明 V12 的产品实体、BFF 边界、只读画布、节点 Inspector、禁用动作原因、API health 和
+        WorkflowDiff proposal handoff 基础能力。它不证明 V13 可编辑 Studio、完整追平 Xpert、生产就绪或 Agent
+        executor readiness。
+      </p>
+
+      <section class="grid">
+        <article class="card">
+          <h2>结论</h2>
+          <p class="pass">PASS</p>
+          <p>V12 只读浏览器工作台基础可进入下一轮审计。</p>
+        </article>
+        <article class="card">
+          <h2>运行证据</h2>
+          <ul>
+            <li><code>npm --prefix apps/workflow-console run build</code></li>
+            <li><code>npx playwright test e2e/workflow-v12-readonly-canvas-foundation.spec.ts</code></li>
+          </ul>
+        </article>
+        <article class="card">
+          <h2>边界</h2>
+          <p class="warn">V12 不是可编辑 Studio。</p>
+          <p>发布、运行、添加节点均保持禁用或留给后续阶段。</p>
+        </article>
+
+        <article class="card wide">
+          <h2>真实浏览器截图</h2>
+          <img src="v12-readonly-canvas-foundation.png" alt="V12 只读画布基础浏览器验收截图" />
+        </article>
+
+        <article class="card">
+          <h2>核心能力</h2>
+          <ul>
+            <li>产品实体侧栏：工作空间 / 项目 / 应用 / 服务账号。</li>
+            <li>只读画布：展示 station-agent 工作流投影。</li>
+            <li>节点 Inspector：展示选中节点状态、输入、输出、质量状态。</li>
+            <li>Chat Workbench 提案：展示 WorkflowDiff handoff，未发布、未运行。</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h2>证据文件</h2>
+          <ul>
+            <li><code>v12-acceptance-data.json</code></li>
+            <li><code>browser-network-log.json</code></li>
+            <li><code>product-entity-projection.json</code></li>
+            <li><code>canvas-read-model.json</code></li>
+            <li><code>prd-spec-review.md</code></li>
+          </ul>
+        </article>
+        <article class="card">
+          <h2>禁止解释</h2>
+          <ul>
+            <li>不能解释为完整追平 Xpert。</li>
+            <li>不能解释为完整工作流工作台已完成。</li>
+            <li>不能解释为生产可用。</li>
+            <li>不能解释为 Agent 执行器已完成。</li>
+          </ul>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

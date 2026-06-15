@@ -1,0 +1,40 @@
+{
+  "stage_id": "V11-1",
+  "status": "PASS",
+  "allowed_claim": "V11-1 complete: real-time TUI event stream slice ready for review.",
+  "evidence_scope": "provider_backed_cli_turn_or_gateway_runtime",
+  "runtime_backed": true,
+  "provider_backed": true,
+  "provider_mode": "provider-backed",
+  "runtime_backend": "simple",
+  "provider_evidence_mode": "simple_runtime_openai_compatible_llm_call",
+  "dotenv_loaded_count": 1,
+  "session_id": "sess_94759420edde",
+  "turn_id": "turn_e02dc7bd6db6",
+  "trace_id": "trace_787ceea8507f",
+  "event_types": [
+    "gateway.session.started",
+    "input.received",
+    "agent.running",
+    "turn.started",
+    "assistant.delta",
+    "turn.completed"
+  ],
+  "input_received_visible": true,
+  "agent_running_visible": true,
+  "gateway_turn_started": true,
+  "gateway_turn_completed": true,
+  "gateway_turn_failed": false,
+  "event_ordering_errors": [],
+  "failed_turn_can_satisfy_completion": false,
+  "runtime_truth_boundary": "tui_read_model_not_runtime_truth",
+  "evidence_refs": [
+    "docs/design/V11.x/evidence/v11-1-real-time-event-stream/cli-transcript.txt",
+    "docs/design/V11.x/evidence/v11-1-real-time-event-stream/events.jsonl",
+    "docs/design/V11.x/evidence/v11-1-real-time-event-stream/tui-state-snapshots.json",
+    "docs/design/V11.x/evidence/v11-1-real-time-event-stream/raw-result.json"
+  ],
+  "errors": [],
+  "claim_scan": "PASS",
+  "redaction_scan": "PASS"
+}

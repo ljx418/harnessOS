@@ -1,0 +1,1091 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HarnessOS V12-0P Xpert-Aligned Workbench V3</title>
+    <style>
+      :root {
+        --bg: #f4f7fb;
+        --panel: #ffffff;
+        --line: #dbe4ef;
+        --line2: #c7d4e6;
+        --text: #101828;
+        --sub: #526176;
+        --muted: #8492a6;
+        --blue: #2563eb;
+        --green: #16a34a;
+        --amber: #b45309;
+        --red: #dc2626;
+        --purple: #7c3aed;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at 10% 0%, rgba(37, 99, 235, 0.12), transparent 24rem),
+          linear-gradient(180deg, #fbfdff 0%, var(--bg) 100%);
+        color: var(--text);
+      }
+
+      .strip {
+        width: 1360px;
+        height: 34px;
+        margin: 12px auto 8px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 16px;
+        border: 1px solid var(--line2);
+        border-radius: 17px;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+        color: #334155;
+        font-size: 12px;
+        font-weight: 760;
+      }
+
+      .strip code {
+        padding: 3px 8px;
+        border-radius: 9px;
+        background: #eff6ff;
+        color: #1d4ed8;
+        font: inherit;
+        font-weight: 900;
+      }
+
+      .app {
+        position: relative;
+        width: 1360px;
+        height: 820px;
+        margin: 0 auto 30px;
+        overflow: hidden;
+        border: 1px solid #bfd0e5;
+        border-radius: 24px;
+        background: #fff;
+        box-shadow: 0 30px 90px rgba(15, 23, 42, 0.16);
+      }
+
+      .bar1 {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        height: 54px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 0 16px;
+        border-bottom: 1px solid var(--line);
+        background: #fff;
+      }
+
+      .logo-grid {
+        width: 28px;
+        height: 28px;
+        display: grid;
+        grid-template-columns: repeat(2, 7px);
+        grid-template-rows: repeat(2, 7px);
+        gap: 4px;
+        place-content: center;
+        border: 1px solid var(--line);
+        border-radius: 9px;
+      }
+
+      .logo-grid span {
+        border-radius: 3px;
+        background: #64748b;
+      }
+
+      .brand {
+        margin-right: 18px;
+        font-weight: 860;
+        font-size: 16px;
+      }
+
+      .pill {
+        min-height: 31px;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 0 10px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #fff;
+        color: #334155;
+        font-size: 12px;
+        font-weight: 730;
+        white-space: nowrap;
+      }
+
+      .pill.blue {
+        background: #eff6ff;
+        border-color: #bfdbfe;
+        color: #1d4ed8;
+      }
+
+      .pill.green {
+        background: #ecfdf5;
+        border-color: #bbf7d0;
+        color: #15803d;
+      }
+
+      .pill.amber {
+        background: #fffbeb;
+        border-color: #fde68a;
+        color: #92400e;
+      }
+
+      .spacer {
+        flex: 1;
+      }
+
+      .circle {
+        width: 30px;
+        height: 30px;
+        display: grid;
+        place-items: center;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: #fff;
+        color: #64748b;
+        font-size: 11px;
+        font-weight: 900;
+      }
+
+      .circle.user {
+        background: #4f6df5;
+        border-color: #4f6df5;
+        color: #fff;
+      }
+
+      .svg-sprite {
+        position: absolute;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+      }
+
+      .icon {
+        width: 16px;
+        height: 16px;
+        display: block;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        fill: none;
+      }
+
+      .icon.fill-soft {
+        fill: currentColor;
+        stroke: none;
+      }
+
+      .bar2 {
+        position: absolute;
+        left: 230px;
+        top: 54px;
+        right: 0;
+        height: 54px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 14px;
+        border-bottom: 1px solid var(--line);
+        background: #fff;
+      }
+
+      .tool {
+        min-height: 34px;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 0 12px;
+        margin-right: 6px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #fff;
+        color: #334155;
+        font-size: 12px;
+        font-weight: 760;
+        box-shadow: 0 5px 14px rgba(15, 23, 42, 0.04);
+      }
+
+      .tool.primary {
+        background: var(--blue);
+        border-color: var(--blue);
+        color: #fff;
+        box-shadow: 0 12px 30px rgba(37, 99, 235, 0.22);
+      }
+
+      .tool.disabled {
+        color: #94a3b8;
+        background: #f8fafc;
+      }
+
+      .rail {
+        position: absolute;
+        left: 0;
+        top: 54px;
+        bottom: 0;
+        width: 50px;
+        padding: 12px 8px;
+        border-right: 1px solid var(--line);
+        background: #fff;
+      }
+
+      .rail-item {
+        width: 34px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        margin-bottom: 10px;
+        border-radius: 11px;
+        color: #526176;
+      }
+
+      .rail-item.active {
+        background: #eff6ff;
+        color: var(--blue);
+        box-shadow: inset 3px 0 0 var(--blue);
+      }
+
+      .nav {
+        position: absolute;
+        left: 50px;
+        top: 54px;
+        bottom: 0;
+        width: 180px;
+        padding: 14px 10px;
+        border-right: 1px solid var(--line);
+        background: linear-gradient(180deg, #fbfdff 0%, #f8fafc 100%);
+      }
+
+      .nav-title {
+        margin: 0 6px 14px;
+        color: var(--blue);
+        font-size: 15px;
+        font-weight: 860;
+      }
+
+      .nav-row {
+        height: 38px;
+        display: grid;
+        grid-template-columns: 30px 1fr auto;
+        align-items: center;
+        gap: 7px;
+        padding: 0 9px;
+        margin-bottom: 5px;
+        border: 1px solid transparent;
+        border-radius: 10px;
+        color: #334155;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .nav-row.active {
+        background: #eaf1ff;
+        border-color: #c9ddff;
+        color: #1d4ed8;
+      }
+
+      .nav-ico {
+        width: 24px;
+        height: 24px;
+        display: grid;
+        place-items: center;
+        border-radius: 8px;
+        background: #f1f5f9;
+        color: #64748b;
+      }
+
+      .nav-ico .icon {
+        width: 14px;
+        height: 14px;
+      }
+
+      .nav-row.active .nav-ico {
+        background: #dbeafe;
+        color: #1d4ed8;
+      }
+
+      .count {
+        color: #94a3b8;
+        font-size: 11px;
+      }
+
+      .nav-section {
+        margin: 13px 7px 8px;
+        color: #94a3b8;
+        font-size: 10px;
+        font-weight: 860;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .resource-dock {
+        position: absolute;
+        left: 230px;
+        top: 14px;
+        height: 34px;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        padding: 4px 8px;
+        border: 1px solid #dce7f5;
+        border-radius: 13px;
+        background: rgba(255, 255, 255, 0.94);
+        box-shadow: 0 16px 34px rgba(15, 23, 42, 0.08);
+        z-index: 35;
+      }
+
+      .dock-title {
+        display: inline-flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 6px;
+        margin: 0 3px 0 0;
+        color: #0f172a;
+        font-size: 11px;
+        font-weight: 860;
+      }
+
+      .dock-chip {
+        display: grid;
+        grid-template-columns: 22px 1fr auto;
+        align-items: center;
+        gap: 6px;
+        min-height: 24px;
+        padding: 3px 7px 3px 4px;
+        margin-bottom: 0;
+        border: 1px solid #e3ebf6;
+        border-radius: 999px;
+        background: #f8fbff;
+        color: #334155;
+        font-size: 10px;
+        font-weight: 760;
+      }
+
+      .dock-chip .mini-icon {
+        width: 20px;
+        height: 20px;
+        display: grid;
+        place-items: center;
+        border-radius: 7px;
+        background: #eff6ff;
+        color: #2563eb;
+      }
+
+      .dock-chip strong {
+        color: #0f172a;
+        font-size: 10px;
+        white-space: nowrap;
+      }
+
+      .dock-chip small {
+        color: #94a3b8;
+        font-size: 9px;
+      }
+
+      .canvas {
+        position: absolute;
+        left: 230px;
+        top: 108px;
+        right: 300px;
+        bottom: 276px;
+        z-index: 10;
+        overflow: hidden;
+        background:
+          radial-gradient(circle, rgba(148, 163, 184, 0.36) 1px, transparent 1.5px) 0 0 / 22px 22px,
+          linear-gradient(180deg, #fbfdff 0%, #f6f9fd 100%);
+      }
+
+      .canvas::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 52% 35%, rgba(37, 99, 235, 0.08), transparent 20rem);
+        pointer-events: none;
+      }
+
+      .canvas-toolbar {
+        position: absolute;
+        left: 14px;
+        top: 14px;
+        z-index: 40;
+        display: flex;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 13px;
+        background: rgba(255, 255, 255, 0.94);
+        box-shadow: 0 10px 26px rgba(15, 23, 42, 0.09);
+      }
+
+      .canvas-tool {
+        width: 36px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        border-right: 1px solid #edf2f7;
+        color: #526176;
+      }
+
+      .canvas-tool .icon,
+      .tool .icon {
+        width: 15px;
+        height: 15px;
+      }
+
+      .canvas-tool.active {
+        background: #eff6ff;
+        color: var(--blue);
+      }
+
+      .canvas-tool.disabled {
+        color: #cbd5e1;
+        background: #f8fafc;
+      }
+
+      .canvas-zoom {
+        position: absolute;
+        left: 14px;
+        bottom: 12px;
+        z-index: 40;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 10px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.94);
+        color: #526176;
+        font-size: 12px;
+        font-weight: 820;
+        box-shadow: 0 10px 26px rgba(15, 23, 42, 0.09);
+      }
+
+      .edges {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 3;
+        pointer-events: none;
+      }
+
+      .edge {
+        fill: none;
+        stroke: #9aa8bc;
+        stroke-width: 2.1;
+      }
+
+      .edge.active {
+        stroke: var(--blue);
+        stroke-width: 2.8;
+      }
+
+      .edge.blocked {
+        stroke: #d97706;
+        stroke-dasharray: 7 6;
+      }
+
+      .node {
+        position: absolute;
+        z-index: 10;
+        width: 150px;
+        min-height: 92px;
+        padding: 10px;
+        border: 1px solid #d9e2ef;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.97);
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+      }
+
+      .node.large {
+        width: 178px;
+        min-height: 116px;
+      }
+
+      .node.selected {
+        border: 2px solid var(--blue);
+        box-shadow: 0 15px 34px rgba(37, 99, 235, 0.2);
+      }
+
+      .node.blocked {
+        border-color: #f59e0b;
+      }
+
+      .node-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6px;
+        margin-bottom: 8px;
+      }
+
+      .node-name {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 13px;
+        font-weight: 850;
+      }
+
+      .badge {
+        width: 24px;
+        height: 24px;
+        display: grid;
+        place-items: center;
+        border-radius: 8px;
+        background: #eff6ff;
+        color: var(--blue);
+        font-size: 11px;
+        font-weight: 900;
+      }
+
+      .badge.green {
+        background: #ecfdf5;
+        color: #059669;
+      }
+
+      .badge.orange {
+        background: #fff7ed;
+        color: #ea580c;
+      }
+
+      .badge.purple {
+        background: #f3e8ff;
+        color: var(--purple);
+      }
+
+      .state {
+        padding: 2px 6px;
+        border-radius: 7px;
+        background: #ecfdf5;
+        color: #15803d;
+        font-size: 10px;
+        font-weight: 850;
+      }
+
+      .state.warn {
+        background: #fffbeb;
+        color: #92400e;
+      }
+
+      .node-row {
+        min-height: 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        padding: 4px 7px;
+        margin-top: 5px;
+        border: 1px solid #edf2f7;
+        border-radius: 8px;
+        background: #f8fafc;
+        color: #526176;
+        font-size: 10px;
+        font-weight: 730;
+      }
+
+      .port {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        border: 2px solid #fff;
+        background: var(--blue);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.13);
+      }
+
+      .port.left {
+        left: -5px;
+      }
+
+      .port.right {
+        right: -5px;
+      }
+
+      .port.top {
+        top: -5px;
+        left: calc(50% - 5px);
+      }
+
+      .port.port-btm {
+        bottom: -5px;
+        left: calc(50% - 5px);
+      }
+
+      .inspector {
+        position: absolute;
+        top: 108px;
+        right: 0;
+        bottom: 26px;
+        width: 300px;
+        z-index: 60;
+        padding: 16px;
+        overflow: auto;
+        border-left: 1px solid var(--line);
+        background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+        box-shadow: -16px 0 36px rgba(15, 23, 42, 0.04);
+      }
+
+      .inspector-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 14px;
+      }
+
+      .inspector-title {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        font-weight: 860;
+      }
+
+      .form-row {
+        margin-bottom: 9px;
+      }
+
+      .form-row label {
+        display: block;
+        margin-bottom: 5px;
+        color: #64748b;
+        font-size: 11px;
+        font-weight: 850;
+      }
+
+      .form-value {
+        min-height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 8px 10px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #fbfdff;
+        color: #334155;
+        font-size: 12px;
+        font-weight: 680;
+      }
+
+      .inspector-card {
+        margin-top: 12px;
+        padding: 12px;
+        border: 1px solid #dbe4ef;
+        border-radius: 13px;
+        background: #ffffff;
+        color: #334155;
+        font-size: 12px;
+        line-height: 1.55;
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+      }
+
+      .inspector-card h4 {
+        margin: 0 0 8px;
+        color: var(--text);
+        font-size: 13px;
+      }
+
+      .inspector-card ul {
+        margin: 0;
+        padding-left: 16px;
+      }
+
+      .quality-pass {
+        color: #15803d;
+        font-weight: 850;
+      }
+
+      .bottom {
+        position: absolute;
+        left: 230px;
+        right: 300px;
+        bottom: 26px;
+        z-index: 30;
+        height: 250px;
+        display: grid;
+        grid-template-columns: 1.28fr 0.92fr;
+        border-top: 1px solid var(--line);
+        background: #fff;
+      }
+
+      .bottom-panel {
+        padding: 12px;
+        border-right: 1px solid var(--line);
+      }
+
+      .bottom-panel:last-child {
+        border-right: 0;
+      }
+
+      .tabs {
+        height: 32px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: -12px -12px 12px;
+        padding: 0 12px;
+        border-bottom: 1px solid #edf2f7;
+      }
+
+      .tab {
+        height: 26px;
+        display: inline-flex;
+        align-items: center;
+        padding: 0 10px;
+        border-radius: 8px;
+        color: #64748b;
+        font-size: 12px;
+        font-weight: 850;
+      }
+
+      .tab.active {
+        background: #eff6ff;
+        color: var(--blue);
+      }
+
+      .chatbox {
+        height: 114px;
+        padding: 12px;
+        border: 1px solid #bfd0e5;
+        border-radius: 14px;
+        color: #334155;
+        font-size: 12px;
+        line-height: 1.6;
+      }
+
+      .chat-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 8px;
+      }
+
+      .tiny {
+        padding: 4px 8px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: #f8fafc;
+        color: #64748b;
+        font-size: 11px;
+        font-weight: 760;
+      }
+
+      .send {
+        margin-left: auto;
+        width: 30px;
+        height: 30px;
+        display: grid;
+        place-items: center;
+        border-radius: 10px;
+        background: var(--blue);
+        color: #fff;
+        font-size: 11px;
+        font-weight: 900;
+      }
+
+      .timeline-row {
+        display: grid;
+        grid-template-columns: 58px 18px 1fr auto;
+        gap: 8px;
+        align-items: start;
+        padding: 7px 0;
+        color: #475569;
+        font-size: 11px;
+        border-bottom: 1px solid #f1f5f9;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        margin-top: 4px;
+        border-radius: 999px;
+        background: var(--green);
+      }
+
+      .dot.blue {
+        background: var(--blue);
+      }
+
+      .dot.amber {
+        background: #f59e0b;
+      }
+
+      .output {
+        height: 170px;
+        overflow: hidden;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 13px;
+        color: #334155;
+        font-size: 12px;
+        line-height: 1.62;
+      }
+
+      .output h4 {
+        margin: 0 0 8px;
+        color: var(--text);
+      }
+
+      .output ul {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      .footer {
+        position: absolute;
+        left: 230px;
+        right: 300px;
+        bottom: 0;
+        z-index: 40;
+        height: 26px;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        padding: 0 14px;
+        border-top: 1px solid var(--line);
+        background: #fbfdff;
+        color: #64748b;
+        font-size: 11px;
+        font-weight: 680;
+      }
+    </style>
+  </head>
+  <body>
+    <svg class="svg-sprite" aria-hidden="true">
+      <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10.5V20h13v-9.5"/><path d="M9.5 20v-5h5v5"/></symbol>
+      <symbol id="i-agent" viewBox="0 0 24 24"><path d="M8 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/><path d="M2.5 21a6 6 0 0 1 11 0"/><path d="M16 10h2.5A3.5 3.5 0 0 1 22 13.5v2A3.5 3.5 0 0 1 18.5 19H16a3.5 3.5 0 0 1-3.5-3.5v-2A3.5 3.5 0 0 1 16 10Z"/><path d="M16.5 14.5h.01M19.5 14.5h.01"/></symbol>
+      <symbol id="i-workflow" viewBox="0 0 24 24"><path d="M5 8h4v4H5z"/><path d="M15 4h4v4h-4z"/><path d="M15 16h4v4h-4z"/><path d="M9 10h3.5c2.2 0 2.5-4 2.5-4"/><path d="M9 10h3.5c2.2 0 2.5 8 2.5 8"/></symbol>
+      <symbol id="i-tool" viewBox="0 0 24 24"><path d="M14.5 5.5a4 4 0 0 0 4 4L10 18l-4 1 1-4 8.5-8.5Z"/><path d="M16 4l4 4"/></symbol>
+      <symbol id="i-plug" viewBox="0 0 24 24"><path d="M8 7V3M16 7V3"/><path d="M6 7h12v5a6 6 0 0 1-12 0V7Z"/><path d="M12 18v3"/></symbol>
+      <symbol id="i-evidence" viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v5h5"/><path d="M9.5 13h5M9.5 16h4"/><path d="m15 18 1.5 1.5L20 16"/></symbol>
+      <symbol id="i-runtime" viewBox="0 0 24 24"><path d="M4 5h16v12H4z"/><path d="M8 21h8"/><path d="M10 17v4M14 17v4"/><path d="m7 12 3-3 3 4 4-6"/></symbol>
+      <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.8 5.8 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.7l6.2-.9L12 3Z"/></symbol>
+      <symbol id="i-template" viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4z"/><path d="M16 15v5M13.5 17.5h5"/></symbol>
+      <symbol id="i-settings" viewBox="0 0 24 24"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="M19 12a7.7 7.7 0 0 0-.1-1l2-1.5-2-3.5-2.4 1a7.3 7.3 0 0 0-1.8-1L14.4 3h-4.8l-.3 3a7.3 7.3 0 0 0-1.8 1L5.1 6l-2 3.5 2 1.5a7.7 7.7 0 0 0 0 2l-2 1.5 2 3.5 2.4-1a7.3 7.3 0 0 0 1.8 1l.3 3h4.8l.3-3a7.3 7.3 0 0 0 1.8-1l2.4 1 2-3.5-2-1.5c.1-.3.1-.7.1-1Z"/></symbol>
+      <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5.5h16v10H9l-5 4v-14Z"/><path d="M8 10.5h8M8 13.5h5"/></symbol>
+      <symbol id="i-timeline" viewBox="0 0 24 24"><path d="M5 6h14M5 12h14M5 18h14"/><path d="M8 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0ZM14 12a2 2 0 1 0-4 0 2 2 0 0 0 4 0ZM20 18a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z"/></symbol>
+      <symbol id="i-quality" viewBox="0 0 24 24"><path d="M12 3 20 6v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"/><path d="m8.5 12 2.3 2.3 4.7-5"/></symbol>
+      <symbol id="i-panel" viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M8 5v14M12 9h5M12 13h4"/></symbol>
+      <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V5"/><path d="m8 9 4-4 4 4"/><path d="M5 15v4h14v-4"/></symbol>
+      <symbol id="i-pointer" viewBox="0 0 24 24"><path d="M6 3l11 9-5 1.1 3.2 5.7-3.1 1.7-3.1-5.6L6 19V3Z"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><path d="M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z"/><path d="m16 16 4 4"/></symbol>
+      <symbol id="i-fit" viewBox="0 0 24 24"><path d="M5 9V5h4M15 5h4v4M19 15v4h-4M9 19H5v-4"/><path d="M9 5 5 9M15 5l4 4M19 15l-4 4M5 15l4 4"/></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24"><path d="M7 10h10v10H7z"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></symbol>
+    </svg>
+
+    <div class="strip">
+      <span><code>V12-0P v3</code> 按 imag2 目标体验强化的高保真工作台原型</span>
+      <span>design_only · 非 browser / BFF / runtime 证据</span>
+    </div>
+
+    <div class="app">
+      <div class="bar1">
+        <div class="logo-grid"><span></span><span></span><span></span><span></span></div>
+        <div class="brand">HarnessOS V12</div>
+        <span class="pill blue">Light Studio</span>
+        <span class="pill">工作空间 <strong>演示空间</strong></span>
+        <span class="pill">项目 <strong>V12 关键用户场景</strong></span>
+        <span class="pill">环境 <strong>沙箱 Sandbox</strong></span>
+        <span class="pill">模型 <strong>MiniMax-M2.7</strong></span>
+        <span class="pill">提供商 <strong>MiniMax</strong></span>
+        <div class="spacer"></div>
+        <span class="pill green">API 在线</span>
+        <span class="pill blue">运行中</span>
+        <span class="pill green">证据就绪</span>
+        <span class="pill amber">等待确认</span>
+        <span class="circle">?</span>
+        <span class="circle user">U</span>
+      </div>
+
+      <div class="bar2">
+        <div>
+          <span class="tool">↶</span>
+          <span class="tool">↷</span>
+        </div>
+        <div>
+          <span class="tool">智能体设置</span>
+          <span class="tool">运行</span>
+          <span class="tool">预览</span>
+          <span class="tool">调试</span>
+          <span class="tool">只读</span>
+          <span class="tool">版本历史</span>
+          <span class="tool">更多</span>
+        </div>
+        <div>
+          <span class="tool disabled">保存草稿</span>
+          <span class="tool primary">提交审批</span>
+        </div>
+      </div>
+
+      <aside class="rail">
+        <span class="rail-item active"><svg class="icon"><use href="#i-home"></use></svg></span>
+        <span class="rail-item"><svg class="icon"><use href="#i-agent"></use></svg></span>
+        <span class="rail-item"><svg class="icon"><use href="#i-workflow"></use></svg></span>
+        <span class="rail-item"><svg class="icon"><use href="#i-tool"></use></svg></span>
+        <span class="rail-item"><svg class="icon"><use href="#i-plug"></use></svg></span>
+        <span class="rail-item"><svg class="icon"><use href="#i-evidence"></use></svg></span>
+        <span class="rail-item"><svg class="icon"><use href="#i-runtime"></use></svg></span>
+        <span class="rail-item" style="margin-top: 260px"><svg class="icon"><use href="#i-settings"></use></svg></span>
+      </aside>
+
+      <aside class="nav">
+        <div class="nav-title">工作流平台</div>
+        <div class="nav-section">当前空间</div>
+        <div class="nav-row active"><span class="nav-ico"><svg class="icon"><use href="#i-workflow"></use></svg></span><span>当前项目</span><span class="count">V12</span></div>
+        <div class="nav-row"><span class="nav-ico"><svg class="icon"><use href="#i-runtime"></use></svg></span><span>运行中</span><span class="count">1</span></div>
+        <div class="nav-row"><span class="nav-ico"><svg class="icon"><use href="#i-evidence"></use></svg></span><span>证据待审</span><span class="count">18</span></div>
+        <div class="nav-section">工作流</div>
+        <div class="nav-row"><span class="nav-ico"><svg class="icon"><use href="#i-workflow"></use></svg></span><span>全部工作流</span><span class="count">3</span></div>
+        <div class="nav-row"><span class="nav-ico"><svg class="icon"><use href="#i-tool"></use></svg></span><span>草稿</span><span class="count">2</span></div>
+        <div class="nav-row"><span class="nav-ico"><svg class="icon"><use href="#i-agent"></use></svg></span><span>已发布</span><span class="count">1</span></div>
+        <div class="nav-row"><span class="nav-ico"><svg class="icon"><use href="#i-plug"></use></svg></span><span>失败 / 阻断</span><span class="count">0</span></div>
+        <div style="height: 82px"></div>
+        <div class="nav-row"><span class="nav-ico"><svg class="icon"><use href="#i-star"></use></svg></span><span>收藏</span><span></span></div>
+        <div class="nav-row"><span class="nav-ico"><svg class="icon"><use href="#i-template"></use></svg></span><span>模板库</span><span></span></div>
+        <div class="nav-row"><span class="nav-ico"><svg class="icon"><use href="#i-settings"></use></svg></span><span>设置</span><span></span></div>
+      </aside>
+
+      <section class="canvas">
+        <div class="canvas-toolbar">
+          <span class="canvas-tool active"><svg class="icon"><use href="#i-pointer"></use></svg></span>
+          <span class="canvas-tool"><svg class="icon"><use href="#i-workflow"></use></svg></span>
+          <span class="canvas-tool"><svg class="icon"><use href="#i-search"></use></svg></span>
+          <span class="canvas-tool disabled">+</span>
+          <span class="canvas-tool"><svg class="icon"><use href="#i-fit"></use></svg></span>
+          <span class="canvas-tool"><svg class="icon"><use href="#i-lock"></use></svg></span>
+        </div>
+
+        <div class="resource-dock">
+          <div class="dock-title"><span>节点资源</span><span class="count">拖入</span></div>
+          <div class="dock-chip"><span class="mini-icon"><svg class="icon"><use href="#i-workflow"></use></svg></span><strong>触发器</strong><small>3</small></div>
+          <div class="dock-chip"><span class="mini-icon"><svg class="icon"><use href="#i-agent"></use></svg></span><strong>Agent</strong><small>6</small></div>
+          <div class="dock-chip"><span class="mini-icon"><svg class="icon"><use href="#i-tool"></use></svg></span><strong>技能</strong><small>12</small></div>
+          <div class="dock-chip"><span class="mini-icon"><svg class="icon"><use href="#i-plug"></use></svg></span><strong>MCP</strong><small>4</small></div>
+        </div>
+
+        <svg class="edges" viewBox="0 0 830 430" preserveAspectRatio="none">
+          <path class="edge active" d="M 210 202 C 224 202 226 187 240 187" />
+          <path class="edge" d="M 418 187 C 432 187 430 112 450 112" />
+          <path class="edge" d="M 418 187 C 432 187 430 292 450 292" />
+          <path class="edge" d="M 600 112 C 630 112 622 206 650 206" />
+          <path class="edge active" d="M 600 292 C 630 292 622 206 650 206" />
+          <path class="edge blocked" d="M 739 270 C 739 284 725 286 725 300" />
+        </svg>
+
+        <article class="node" style="left: 60px; top: 150px">
+          <div class="node-head"><div class="node-name"><span class="badge purple">1</span>触发器</div><span class="state">就绪</span></div>
+          <div class="node-row"><span>事件触发</span><strong>对话</strong></div>
+          <div class="node-row"><span>输出</span><strong>goal</strong></div>
+          <span class="port right" style="top: 52px"></span>
+        </article>
+
+        <article class="node large" style="left: 240px; top: 135px">
+          <div class="node-head"><div class="node-name"><span class="badge">2</span>规划Agent</div><span class="state">就绪</span></div>
+          <div class="node-row"><span>角色</span><strong>规划师</strong></div>
+          <div class="node-row"><span>证据</span><strong>v12-0p-plan</strong></div>
+          <span class="port left" style="top: 52px"></span><span class="port right" style="top: 52px"></span>
+        </article>
+
+        <article class="node" style="left: 450px; top: 60px">
+          <div class="node-head"><div class="node-name"><span class="badge green">3</span>讨论Agent A</div><span class="state">就绪</span></div>
+          <div class="node-row"><span>角色</span><strong>斯多葛</strong></div>
+          <div class="node-row"><span>输出</span><strong>观点</strong></div>
+          <span class="port left" style="top: 52px"></span><span class="port right" style="top: 52px"></span>
+        </article>
+
+        <article class="node" style="left: 450px; top: 240px">
+          <div class="node-head"><div class="node-name"><span class="badge green">4</span>讨论Agent B</div><span class="state">就绪</span></div>
+          <div class="node-row"><span>角色</span><strong>苏格拉底</strong></div>
+          <div class="node-row"><span>输出</span><strong>追问</strong></div>
+          <span class="port left" style="top: 52px"></span><span class="port right" style="top: 52px"></span>
+        </article>
+
+        <article class="node large selected" style="left: 650px; top: 154px">
+          <div class="node-head"><div class="node-name"><span class="badge orange">5</span>总结Agent</div><span class="state">就绪</span></div>
+          <div class="node-row"><span>角色</span><strong>总结者</strong></div>
+          <div class="node-row"><span>工具</span><strong>summary</strong></div>
+          <span class="port left" style="top: 52px"></span><span class="port right" style="top: 52px"></span><span class="port port-btm"></span>
+        </article>
+
+        <article class="node blocked" style="left: 650px; top: 300px">
+          <div class="node-head"><div class="node-name"><span class="badge purple">6</span>质检Agent</div><span class="state warn">等待</span></div>
+          <div class="node-row"><span>质量</span><strong>待检查</strong></div>
+          <div class="node-row"><span>证据</span><strong>review-ref</strong></div>
+          <span class="port top"></span><span class="port left" style="top: 52px"></span>
+        </article>
+
+        <div class="canvas-zoom"><span>画布缩放</span><strong>100%</strong><span>−</span><span>＋</span><span>锁定</span></div>
+      </section>
+
+      <aside class="inspector">
+        <div class="inspector-top">
+          <div style="display: flex; align-items: center; gap: 9px; font-weight: 860"><span class="badge orange">5</span>总结Agent</div>
+          <strong style="color: #64748b">×</strong>
+        </div>
+        <div class="form-row"><label>角色</label><div class="form-value">总结者</div></div>
+        <div class="form-row"><label>目标</label><div class="form-value">基于多视角讨论输出统一结论与行动建议</div></div>
+        <div class="form-row"><label>记忆摘要</label><div class="form-value">整合多轮观点，提炼共识与分歧。</div></div>
+        <div class="form-row"><label>工具</label><div class="form-value">workspace.read, markdown.summary <span>›</span></div></div>
+        <div class="form-row"><label>技能</label><div class="form-value">dialogue-synthesis, insight-extraction <span>›</span></div></div>
+        <div class="form-row"><label>MCP</label><div class="form-value">minimax-image, artifact.preview <span>›</span></div></div>
+        <div class="form-row"><label>质量</label><div class="form-value"><span class="quality-pass">质量门槛：已通过</span><span>查看报告</span></div></div>
+        <div class="form-row"><label>证据</label><div class="form-value">storyboard-evidence.json <span>↗</span></div></div>
+        <div class="inspector-card">
+          <h4>最新输出</h4>
+          <ul>
+            <li>共识：多 Agent 讨论能覆盖多个视角。</li>
+            <li>分歧：优先视频创作还是哲学讨论。</li>
+            <li>建议：保留质检 Agent 作为每轮输出验收节点。</li>
+          </ul>
+        </div>
+        <div class="inspector-card">
+          <h4>下一步行动项</h4>
+          <ul>
+            <li>确认 V12-0P 原型方向。</li>
+            <li>进入 V12 implementation-readiness audit。</li>
+          </ul>
+        </div>
+      </aside>
+
+      <section class="bottom">
+        <div class="bottom-panel">
+          <div class="tabs"><span class="tab active">对话</span><span class="tab">运行日志</span><span class="tab">证据库</span><span class="tab">建议 3</span></div>
+          <div class="chatbox">
+            请基于已收集的证据，生成 V12 关键用户场景的方案总结与风险建议，并输出下一步行动项。
+            <div class="chat-actions"><span class="tiny">/help</span><span class="tiny">/stations</span><span class="tiny">/evidence</span><span class="tiny">/diff</span><span class="send">↗</span></div>
+          </div>
+        </div>
+
+        <div class="bottom-panel">
+          <div class="tabs"><span class="tab active">方案生成时间线</span></div>
+          <div class="timeline-row"><span>15:38:12</span><span class="dot"></span><span>触发器 接收目标</span><strong>完成</strong></div>
+          <div class="timeline-row"><span>15:38:15</span><span class="dot"></span><span>规划Agent 制定讨论计划</span><strong>完成</strong></div>
+          <div class="timeline-row"><span>15:38:36</span><span class="dot blue"></span><span>讨论Agent A 产出观点</span><strong>完成</strong></div>
+          <div class="timeline-row"><span>15:38:41</span><span class="dot blue"></span><span>讨论Agent B 产出追问</span><strong>完成</strong></div>
+          <div class="timeline-row"><span>15:39:02</span><span class="dot amber"></span><span>总结Agent 生成总结与建议</span><strong>运行中</strong></div>
+        </div>
+
+      </section>
+
+      <footer class="footer">
+        <span>共 6 个节点</span>
+        <span>已连接 6 条边</span>
+        <span>最近保存：15:39:37</span>
+        <span>自动保存：开启</span>
+      </footer>
+    </div>
+  </body>
+</html>

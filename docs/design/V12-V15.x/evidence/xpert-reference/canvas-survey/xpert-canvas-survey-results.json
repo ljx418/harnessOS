@@ -1,0 +1,232 @@
+{
+  "generated_at": "2026-06-11T08:05:53.788Z",
+  "base_url": "http://127.0.0.1:18080",
+  "fatal_error": null,
+  "screenshots": [
+    {
+      "id": "xpert-login-after-direct-canvas",
+      "note": "登录后页面：direct-canvas",
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V12-V15.x/evidence/xpert-reference/canvas-survey/xpert-login-after-direct-canvas.png",
+      "url": "http://127.0.0.1:18080/auth/login?returnUrl=%2Fxpert%2Fx%2Fc5b092e7-1c96-4a37-b23b-84b9b283d8e4%2Fagents",
+      "title": "Xpert AI",
+      "body_text_excerpt": "Xpert AI Cloud\nSign-in\nAccount\nPassword\nRemember\nForgot Password\nSubmit\nSignup\nEnglish\n Copyright \n©\n 2026 \nXpertAI\n Inc. ",
+      "body_text_length": 122
+    },
+    {
+      "id": "xpert-canvas-loaded",
+      "note": "Xpert 画布页加载结果",
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V12-V15.x/evidence/xpert-reference/canvas-survey/xpert-canvas-loaded.png",
+      "url": "http://127.0.0.1:18080/xpert/x/c5b092e7-1c96-4a37-b23b-84b9b283d8e4/agents",
+      "title": "Xpert AI",
+      "body_text_excerpt": "H\nWorkspace\n/\nHarnessOS Canvas Benchmark\n🤖\nHarnessOS Canvas Benchmark\nAGENT\nAgents\nAuthorization\nMemory\nLogs\nMonitoring\nCANVAS BENCHMARK AGENT\n\nLocal UI benchmark fixture for Xpert canvas review.\n\nPlease choose right copilot llm/ui-benchmark-placeholder-model\n100%\nAuto save 4:03:56 PM\nAgent Settings\nPreview\nFeatures\nPublish",
+      "body_text_length": 326
+    },
+    {
+      "id": "xpert-canvas-agent-settings",
+      "note": "顶部智能体设置入口",
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V12-V15.x/evidence/xpert-reference/canvas-survey/xpert-canvas-agent-settings.png",
+      "url": "http://127.0.0.1:18080/xpert/x/c5b092e7-1c96-4a37-b23b-84b9b283d8e4/agents",
+      "title": "Xpert AI",
+      "body_text_excerpt": "H\nWorkspace\n/\nHarnessOS Canvas Benchmark\n🤖\nHarnessOS Canvas Benchmark\nAGENT\nAgents\nAuthorization\nMemory\nLogs\nMonitoring\nCANVAS BENCHMARK AGENT\n\nLocal UI benchmark fixture for Xpert canvas review.\n\nPlease choose right copilot llm/ui-benchmark-placeholder-model\n100%\nAuto save 4:03:56 PM\nAgent Settings\nPreview\nFeatures\nPublish\nAgent Settings\nMax Concurrency\nRecursion Limit",
+      "body_text_length": 373
+    },
+    {
+      "id": "xpert-canvas-node-selected",
+      "note": "选择画布节点后的状态",
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V12-V15.x/evidence/xpert-reference/canvas-survey/xpert-canvas-node-selected.png",
+      "url": "http://127.0.0.1:18080/xpert/x/c5b092e7-1c96-4a37-b23b-84b9b283d8e4/agents",
+      "title": "Xpert AI",
+      "body_text_excerpt": "H\nWorkspace\n/\nHarnessOS Canvas Benchmark\n🤖\nHarnessOS Canvas Benchmark\nAGENT\nAgents\nAuthorization\nMemory\nLogs\nMonitoring\nCANVAS BENCHMARK AGENT\n\nLocal UI benchmark fixture for Xpert canvas review.\n\nPlease choose right copilot llm/ui-benchmark-placeholder-model\n100%\nAuto save 4:03:56 PM\nAgent Settings\nPreview\nFeatures\nPublish\nModels\nPlease choose right copilot llm/ui-benchmark-placeholder-model\nPrompt\nGenerate\nMESSAGE HISTORY\ntoggle switch\nState variable\nAdd Message\nATTACHMENTS\ntoggle switch\nNode\nSensitive\ntoggle switch\nEnd\ntoggle switch\nDisable Output\ntoggle switch\nFile Understanding\ntoggle switch\nParallel tool calls\ntoggle switch\nParameters\nAdd\nNAME\tOPTIONAL\tACTIONS\nMiddleware\nNo middlewares added yet\nKnowledgebases\nRecall Settings\nNo knowledge bases added yet\nTools\nNo toolsets added yet\nRETRY ON FAILURE\ntoggle switch\nFALLBACK MODEL\ntoggle switch\nERROR HANDLING\nNone\nOUTPUT STRUCTURE\nDefault\ncontent\nstring\nGenerate content\nWrite to memory\nAgent Settings\nMax Concurrency\nRecursion Limit",
+      "body_text_length": 999
+    },
+    {
+      "id": "xpert-canvas-add-menu",
+      "note": "底部添加节点菜单",
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V12-V15.x/evidence/xpert-reference/canvas-survey/xpert-canvas-add-menu.png",
+      "url": "http://127.0.0.1:18080/xpert/x/c5b092e7-1c96-4a37-b23b-84b9b283d8e4/agents",
+      "title": "Xpert AI",
+      "body_text_excerpt": "H\nWorkspace\n/\nHarnessOS Canvas Benchmark\n🤖\nHarnessOS Canvas Benchmark\nAGENT\nAgents\nAuthorization\nMemory\nLogs\nMonitoring\nCANVAS BENCHMARK AGENT\n\nLocal UI benchmark fixture for Xpert canvas review.\n\nPlease choose right copilot llm/ui-benchmark-placeholder-model\n100%\nAuto save 4:03:56 PM\nAgent Settings\nPreview\nFeatures\nPublish\nModels\nPlease choose right copilot llm/ui-benchmark-placeholder-model\nPrompt\nGenerate\nMESSAGE HISTORY\ntoggle switch\nState variable\nAdd Message\nATTACHMENTS\ntoggle switch\nNode\nSensitive\ntoggle switch\nEnd\ntoggle switch\nDisable Output\ntoggle switch\nFile Understanding\ntoggle switch\nParallel tool calls\ntoggle switch\nParameters\nAdd\nNAME\tOPTIONAL\tACTIONS\nMiddleware\nNo middlewares added yet\nKnowledgebases\nRecall Settings\nNo knowledge bases added yet\nTools\nNo toolsets added yet\nRETRY ON FAILURE\ntoggle switch\nFALLBACK MODEL\ntoggle switch\nERROR HANDLING\nNone\nOUTPUT STRUCTURE\nDefault\ncontent\nstring\nGenerate content\nWrite to memory\nNew Agent\nAdd External Expert\nAdd Knowledgebase\nAdd Toolset\nAdd Middleware\nAdd Workflow\nRemove\nPaste Here",
+      "body_text_length": 1058
+    },
+    {
+      "id": "xpert-canvas-auto-layout",
+      "note": "自动布局后画布",
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V12-V15.x/evidence/xpert-reference/canvas-survey/xpert-canvas-auto-layout.png",
+      "url": "http://127.0.0.1:18080/xpert/x/c5b092e7-1c96-4a37-b23b-84b9b283d8e4/agents",
+      "title": "Xpert AI",
+      "body_text_excerpt": "H\nWorkspace\n/\nHarnessOS Canvas Benchmark\n🤖\nHarnessOS Canvas Benchmark\nAGENT\nAgents\nAuthorization\nMemory\nLogs\nMonitoring\nCANVAS BENCHMARK AGENT\n\nLocal UI benchmark fixture for Xpert canvas review.\n\nPlease choose right copilot llm/ui-benchmark-placeholder-model\n100%\nAuto save 4:03:56 PM\nAgent Settings\nPreview\nFeatures\nPublish\nModels\nPlease choose right copilot llm/ui-benchmark-placeholder-model\nPrompt\nGenerate\nMESSAGE HISTORY\ntoggle switch\nState variable\nAdd Message\nATTACHMENTS\ntoggle switch\nNode\nSensitive\ntoggle switch\nEnd\ntoggle switch\nDisable Output\ntoggle switch\nFile Understanding\ntoggle switch\nParallel tool calls\ntoggle switch\nParameters\nAdd\nNAME\tOPTIONAL\tACTIONS\nMiddleware\nNo middlewares added yet\nKnowledgebases\nRecall Settings\nNo knowledge bases added yet\nTools\nNo toolsets added yet\nRETRY ON FAILURE\ntoggle switch\nFALLBACK MODEL\ntoggle switch\nERROR HANDLING\nNone\nOUTPUT STRUCTURE\nDefault\ncontent\nstring\nGenerate content\nWrite to memory\nData & Ontology",
+      "body_text_length": 968
+    }
+  ],
+  "events": [
+    {
+      "type": "console",
+      "at": "2026-06-11T08:05:19.895Z",
+      "level": "log",
+      "text": "\n██╗  ██╗██████╗ ███████╗██████╗ ████████╗     █████╗ ██╗\n╚██╗██╔╝██╔══██╗██╔════╝██╔══██╗╚══██╔══╝    ██╔══██╗██║\n ╚███╔╝ ██████╔╝█████╗  ██████╔╝   ██║       ███████║██║\n ██╔██╗ ██╔═══╝ ██╔══╝  ██╔══██╗   ██║       ██╔══██║██║\n██╔╝ ██╗██║     ███████╗██║  ██║   ██║       ██║  ██║██║\n╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝       ╚═╝  ╚═╝╚═╝"
+    },
+    {
+      "type": "console",
+      "at": "2026-06-11T08:05:19.898Z",
+      "level": "log",
+      "text": "VERSION: 3.10.1"
+    },
+    {
+      "type": "console",
+      "at": "2026-06-11T08:05:19.898Z",
+      "level": "log",
+      "text": "We're hiring! https://xpertai.cn/jobs"
+    },
+    {
+      "type": "login-skip",
+      "at": "2026-06-11T08:05:22.973Z",
+      "reason": "no-login-copy-detected",
+      "url": "http://127.0.0.1:18080/auth/login"
+    },
+    {
+      "type": "create-skip",
+      "at": "2026-06-11T08:05:22.973Z",
+      "reason": "using-local-canvas-benchmark-fixture",
+      "xpert_id": "c5b092e7-1c96-4a37-b23b-84b9b283d8e4"
+    },
+    {
+      "type": "console",
+      "at": "2026-06-11T08:05:23.152Z",
+      "level": "log",
+      "text": "\n██╗  ██╗██████╗ ███████╗██████╗ ████████╗     █████╗ ██╗\n╚██╗██╔╝██╔══██╗██╔════╝██╔══██╗╚══██╔══╝    ██╔══██╗██║\n ╚███╔╝ ██████╔╝█████╗  ██████╔╝   ██║       ███████║██║\n ██╔██╗ ██╔═══╝ ██╔══╝  ██╔══██╗   ██║       ██╔══██║██║\n██╔╝ ██╗██║     ███████╗██║  ██║   ██║       ██║  ██║██║\n╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝       ╚═╝  ╚═╝╚═╝"
+    },
+    {
+      "type": "console",
+      "at": "2026-06-11T08:05:23.152Z",
+      "level": "log",
+      "text": "VERSION: 3.10.1"
+    },
+    {
+      "type": "console",
+      "at": "2026-06-11T08:05:23.152Z",
+      "level": "log",
+      "text": "We're hiring! https://xpertai.cn/jobs"
+    },
+    {
+      "type": "ensure-auth",
+      "at": "2026-06-11T08:05:31.161Z",
+      "label": "direct-canvas",
+      "url": "http://127.0.0.1:18080/auth/login?returnUrl=%2Fxpert%2Fx%2Fc5b092e7-1c96-4a37-b23b-84b9b283d8e4%2Fagents"
+    },
+    {
+      "type": "fill-input",
+      "at": "2026-06-11T08:05:31.237Z",
+      "index": 0,
+      "value_label": "value-0"
+    },
+    {
+      "type": "fill-input",
+      "at": "2026-06-11T08:05:31.303Z",
+      "index": 1,
+      "value_label": "value-1"
+    },
+    {
+      "type": "click",
+      "at": "2026-06-11T08:05:31.392Z",
+      "label": "login-submit-direct-canvas"
+    },
+    {
+      "type": "screenshot",
+      "at": "2026-06-11T08:05:37.552Z",
+      "id": "xpert-login-after-direct-canvas",
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V12-V15.x/evidence/xpert-reference/canvas-survey/xpert-login-after-direct-canvas.png",
+      "url": "http://127.0.0.1:18080/auth/login?returnUrl=%2Fxpert%2Fx%2Fc5b092e7-1c96-4a37-b23b-84b9b283d8e4%2Fagents",
+      "note": "登录后页面：direct-canvas"
+    },
+    {
+      "type": "console",
+      "at": "2026-06-11T08:05:38.120Z",
+      "level": "log",
+      "text": "\n██╗  ██╗██████╗ ███████╗██████╗ ████████╗     █████╗ ██╗\n╚██╗██╔╝██╔══██╗██╔════╝██╔══██╗╚══██╔══╝    ██╔══██╗██║\n ╚███╔╝ ██████╔╝█████╗  ██████╔╝   ██║       ███████║██║\n ██╔██╗ ██╔═══╝ ██╔══╝  ██╔══██╗   ██║       ██╔══██║██║\n██╔╝ ██╗██║     ███████╗██║  ██║   ██║       ██║  ██║██║\n╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝       ╚═╝  ╚═╝╚═╝"
+    },
+    {
+      "type": "console",
+      "at": "2026-06-11T08:05:38.121Z",
+      "level": "log",
+      "text": "VERSION: 3.10.1"
+    },
+    {
+      "type": "console",
+      "at": "2026-06-11T08:05:38.121Z",
+      "level": "log",
+      "text": "We're hiring! https://xpertai.cn/jobs"
+    },
+    {
+      "type": "console",
+      "at": "2026-06-11T08:05:42.432Z",
+      "level": "log",
+      "text": "null"
+    },
+    {
+      "type": "console",
+      "at": "2026-06-11T08:05:42.587Z",
+      "level": "log",
+      "text": "{skills: Array(0), plugins: Array(0), subAgents: Array(0), commands: Array(0)}"
+    },
+    {
+      "type": "screenshot",
+      "at": "2026-06-11T08:05:46.413Z",
+      "id": "xpert-canvas-loaded",
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V12-V15.x/evidence/xpert-reference/canvas-survey/xpert-canvas-loaded.png",
+      "url": "http://127.0.0.1:18080/xpert/x/c5b092e7-1c96-4a37-b23b-84b9b283d8e4/agents",
+      "note": "Xpert 画布页加载结果"
+    },
+    {
+      "type": "click",
+      "at": "2026-06-11T08:05:46.509Z",
+      "label": "open-agent-settings"
+    },
+    {
+      "type": "screenshot",
+      "at": "2026-06-11T08:05:48.181Z",
+      "id": "xpert-canvas-agent-settings",
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V12-V15.x/evidence/xpert-reference/canvas-survey/xpert-canvas-agent-settings.png",
+      "url": "http://127.0.0.1:18080/xpert/x/c5b092e7-1c96-4a37-b23b-84b9b283d8e4/agents",
+      "note": "顶部智能体设置入口"
+    },
+    {
+      "type": "click",
+      "at": "2026-06-11T08:05:48.285Z",
+      "label": "select-first-node"
+    },
+    {
+      "type": "screenshot",
+      "at": "2026-06-11T08:05:50.189Z",
+      "id": "xpert-canvas-node-selected",
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V12-V15.x/evidence/xpert-reference/canvas-survey/xpert-canvas-node-selected.png",
+      "url": "http://127.0.0.1:18080/xpert/x/c5b092e7-1c96-4a37-b23b-84b9b283d8e4/agents",
+      "note": "选择画布节点后的状态"
+    },
+    {
+      "type": "click",
+      "at": "2026-06-11T08:05:50.258Z",
+      "label": "open-add-menu"
+    },
+    {
+      "type": "screenshot",
+      "at": "2026-06-11T08:05:51.917Z",
+      "id": "xpert-canvas-add-menu",
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V12-V15.x/evidence/xpert-reference/canvas-survey/xpert-canvas-add-menu.png",
+      "url": "http://127.0.0.1:18080/xpert/x/c5b092e7-1c96-4a37-b23b-84b9b283d8e4/agents",
+      "note": "底部添加节点菜单"
+    },
+    {
+      "type": "click",
+      "at": "2026-06-11T08:05:51.983Z",
+      "label": "auto-layout"
+    },
+    {
+      "type": "screenshot",
+      "at": "2026-06-11T08:05:53.667Z",
+      "id": "xpert-canvas-auto-layout",
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V12-V15.x/evidence/xpert-reference/canvas-survey/xpert-canvas-auto-layout.png",
+      "url": "http://127.0.0.1:18080/xpert/x/c5b092e7-1c96-4a37-b23b-84b9b283d8e4/agents",
+      "note": "自动布局后画布"
+    }
+  ]
+}

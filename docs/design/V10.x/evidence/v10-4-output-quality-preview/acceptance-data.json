@@ -1,0 +1,11 @@
+{
+  "stage_id": "V10-4",
+  "status": "PASS",
+  "evidence_scope": "v9_evidence_backed_fixture_render",
+  "required_blocks": [
+    "output_preview_block"
+  ],
+  "raw_artifact_content_present": false,
+  "quality_refs_visible": true,
+  "runtime_truth_boundary": "tui_read_model_not_runtime_truth"
+}

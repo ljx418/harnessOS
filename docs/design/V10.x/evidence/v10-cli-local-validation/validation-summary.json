@@ -1,0 +1,93 @@
+{
+  "status": "PASS",
+  "commands": [
+    {
+      "key": "terminal_80x24",
+      "command": [
+        "node",
+        "apps/mission-tui/src/cli.js",
+        "--fixture",
+        "apps/mission-tui/fixtures/mission_tui_state_80x24.json",
+        "--columns",
+        "80",
+        "--rows",
+        "24"
+      ],
+      "returncode": 0,
+      "expected_returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "key": "terminal_120x40",
+      "command": [
+        "node",
+        "apps/mission-tui/src/cli.js",
+        "--fixture",
+        "apps/mission-tui/fixtures/mission_tui_state_120x40.json",
+        "--columns",
+        "120",
+        "--rows",
+        "40"
+      ],
+      "returncode": 0,
+      "expected_returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "key": "negative_workflowdiff",
+      "command": [
+        "node",
+        "apps/mission-tui/src/cli.js",
+        "--fixture",
+        "apps/mission-tui/fixtures/workflowdiff_auto_apply_action.json",
+        "--validate"
+      ],
+      "returncode": 2,
+      "expected_returncode": 2,
+      "status": "PASS"
+    },
+    {
+      "key": "mission_tui_tests",
+      "command": [
+        "npm",
+        "--prefix",
+        "apps/mission-tui",
+        "test"
+      ],
+      "returncode": 0,
+      "expected_returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "key": "v10_pytest",
+      "command": [
+        "./.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_v10_mission_tui_runtime.py",
+        "tests/test_v10_tui_experience_planning.py",
+        "-q"
+      ],
+      "returncode": 0,
+      "expected_returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "key": "drawio_xml",
+      "command": [
+        "xmllint",
+        "--noout",
+        "docs/design/V10.x/v10_current_gap_analysis.drawio"
+      ],
+      "returncode": 0,
+      "expected_returncode": 0,
+      "status": "PASS"
+    }
+  ],
+  "report": "docs/design/V10.x/evidence/v10-cli-local-validation/index.html",
+  "screenshots": [
+    "docs/design/V10.x/evidence/v10-cli-local-validation/screenshots/macos-terminal-v10-cli.png",
+    "docs/design/V10.x/evidence/v10-cli-local-validation/screenshots/terminal-80x24.png",
+    "docs/design/V10.x/evidence/v10-cli-local-validation/screenshots/terminal-120x40.png"
+  ]
+}

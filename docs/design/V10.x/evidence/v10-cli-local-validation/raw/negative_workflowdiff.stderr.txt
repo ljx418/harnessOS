@@ -1,0 +1,7 @@
+{
+  "status": "FAIL",
+  "errors": [
+    "diff-bad exposes forbidden WorkflowDiff action auto_apply_workflowdiff",
+    "diff-bad lets source=agent directly perform durable mutation"
+  ]
+}

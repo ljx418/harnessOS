@@ -1,0 +1,956 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HarnessOS V12-0A 组件原型审查看板</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC",
+          "Microsoft YaHei", sans-serif;
+        --bg: #f5f7fb;
+        --panel: #ffffff;
+        --panel-soft: #f8fafc;
+        --ink: #111827;
+        --text: #27364a;
+        --muted: #667085;
+        --line: #d8dee8;
+        --blue: #2563eb;
+        --blue-soft: #eff6ff;
+        --green: #15803d;
+        --green-soft: #ecfdf5;
+        --amber: #b45309;
+        --amber-soft: #fffbeb;
+        --red: #dc2626;
+        --red-soft: #fef2f2;
+        --shadow: 0 18px 48px rgba(15, 23, 42, 0.08);
+        --radius: 16px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at 18% -10%, rgba(37, 99, 235, 0.12), transparent 34%),
+          linear-gradient(180deg, #f8fbff 0%, var(--bg) 38%, #eef2f7 100%);
+        color: var(--text);
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .hero {
+        padding: 36px 44px 28px;
+        background: #0f172a;
+        color: white;
+      }
+
+      .hero-inner {
+        max-width: 1240px;
+        margin: 0 auto;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+        margin-bottom: 14px;
+        padding: 7px 10px;
+        border: 1px solid rgba(191, 219, 254, 0.35);
+        border-radius: 999px;
+        background: rgba(37, 99, 235, 0.16);
+        color: #bfdbfe;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0;
+      }
+
+      .hero h1 {
+        max-width: 920px;
+        margin: 0;
+        color: white;
+        font-size: clamp(30px, 4vw, 48px);
+        line-height: 1.08;
+        letter-spacing: 0;
+      }
+
+      .hero p {
+        max-width: 980px;
+        margin: 16px 0 0;
+        color: #cbd5e1;
+        font-size: 16px;
+        line-height: 1.75;
+      }
+
+      .layout {
+        max-width: 1240px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 260px minmax(0, 1fr);
+        gap: 22px;
+        padding: 24px 28px 54px;
+      }
+
+      .toc {
+        position: sticky;
+        top: 18px;
+        align-self: start;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.92);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .toc-title {
+        padding: 15px 16px;
+        border-bottom: 1px solid var(--line);
+        color: var(--ink);
+        font-weight: 800;
+      }
+
+      .toc a {
+        display: block;
+        padding: 11px 16px;
+        border-bottom: 1px solid #edf1f7;
+        color: var(--muted);
+        font-size: 14px;
+        text-decoration: none;
+      }
+
+      .toc a:hover {
+        background: var(--blue-soft);
+        color: var(--blue);
+      }
+
+      .main {
+        display: grid;
+        gap: 22px;
+      }
+
+      .section {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.94);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        align-items: flex-start;
+        padding: 20px 22px;
+        border-bottom: 1px solid var(--line);
+        background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+      }
+
+      .section-head h2 {
+        margin: 0 0 7px;
+        color: var(--ink);
+        font-size: 22px;
+      }
+
+      .section-head p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .section-body {
+        padding: 20px 22px 22px;
+      }
+
+      .status-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .metric {
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--panel);
+      }
+
+      .metric .label {
+        margin-bottom: 8px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .metric .value {
+        color: var(--ink);
+        font-size: 20px;
+        font-weight: 840;
+        line-height: 1.25;
+      }
+
+      .value.green {
+        color: var(--green);
+      }
+
+      .value.amber {
+        color: var(--amber);
+      }
+
+      .callout {
+        margin-top: 16px;
+        padding: 15px 16px;
+        border-radius: 14px;
+        border: 1px solid #fed7aa;
+        background: var(--amber-soft);
+        color: #92400e;
+        line-height: 1.7;
+      }
+
+      .decision-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+
+      .decision {
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--panel-soft);
+      }
+
+      .decision strong {
+        display: block;
+        margin-bottom: 9px;
+        color: var(--ink);
+      }
+
+      .decision ul {
+        margin: 0;
+        padding-left: 18px;
+        line-height: 1.75;
+      }
+
+      .decision.allowed {
+        border-color: #bbf7d0;
+        background: var(--green-soft);
+      }
+
+      .decision.blocked {
+        border-color: #fecaca;
+        background: var(--red-soft);
+      }
+
+      .flow {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .step {
+        position: relative;
+        min-height: 118px;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #ffffff;
+      }
+
+      .step-num {
+        display: inline-grid;
+        place-items: center;
+        width: 28px;
+        height: 28px;
+        margin-bottom: 10px;
+        border-radius: 999px;
+        background: var(--blue);
+        color: white;
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .step strong {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--ink);
+      }
+
+      .step span {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      .component-list {
+        display: grid;
+        gap: 18px;
+      }
+
+      .component-card {
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--panel);
+        overflow: hidden;
+      }
+
+      .component-meta {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 16px;
+        align-items: start;
+        padding: 18px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .component-meta h3 {
+        margin: 0 0 7px;
+        color: var(--ink);
+        font-size: 18px;
+      }
+
+      .component-meta p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 10px;
+        border: 1px solid #bbf7d0;
+        border-radius: 999px;
+        background: var(--green-soft);
+        color: #047857;
+        font-size: 12px;
+        font-weight: 800;
+        white-space: nowrap;
+      }
+
+      .pill.neutral {
+        border-color: #dbe4f0;
+        background: #f8fafc;
+        color: #475467;
+      }
+
+      .preview-frame {
+        width: 100%;
+        height: 430px;
+        border: 0;
+        background: #ffffff;
+      }
+
+      .component-facts {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        padding: 14px 18px 18px;
+        background: #fbfdff;
+      }
+
+      .fact {
+        padding: 11px;
+        border: 1px dashed #d8dee8;
+        border-radius: 12px;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .fact strong {
+        display: block;
+        margin-bottom: 4px;
+        color: var(--ink);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        overflow: hidden;
+        background: white;
+      }
+
+      th,
+      td {
+        padding: 13px;
+        border-bottom: 1px solid #edf1f7;
+        text-align: left;
+        vertical-align: top;
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      th {
+        background: #f8fafc;
+        color: #475467;
+        font-weight: 800;
+      }
+
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        color: #1e3a8a;
+        font-size: 12px;
+      }
+
+      .evidence-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .evidence {
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #ffffff;
+      }
+
+      .evidence strong {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--ink);
+      }
+
+      .evidence p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      .footer-note {
+        padding: 18px 22px;
+        border: 1px solid #bfdbfe;
+        border-radius: var(--radius);
+        background: var(--blue-soft);
+        color: #1e3a8a;
+        line-height: 1.7;
+      }
+
+      @media (max-width: 1100px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+
+        .toc {
+          position: static;
+        }
+
+        .status-grid,
+        .flow,
+        .evidence-grid,
+        .component-facts {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .hero {
+          padding: 26px 20px;
+        }
+
+        .layout {
+          padding: 18px;
+        }
+
+        .status-grid,
+        .decision-grid,
+        .flow,
+        .evidence-grid,
+        .component-facts {
+          grid-template-columns: 1fr;
+        }
+
+        .preview-frame {
+          height: 360px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero-inner">
+        <div class="eyebrow">V12-0A · 组件原型审查 · design-only</div>
+        <h1>先审组件方向，再进入高保真；不把草图包装成真实实现。</h1>
+        <p>
+          这份看板用于快速审查 HarnessOS 浏览器工作台的第一批核心组件：它回答“用户看到什么、能做什么、为什么不能做某些动作、
+          如何进入下一步”。当前材料只证明组件级设计方向，不证明浏览器实现、BFF 边界、运行时能力或 Xpert 追平。
+        </p>
+      </div>
+    </header>
+
+    <div class="layout">
+      <nav class="toc" aria-label="审查导航">
+        <div class="toc-title">审查目录</div>
+        <a href="#summary">1. 一眼结论</a>
+        <a href="#boundary">2. 允许与禁止</a>
+        <a href="#style-directions">3. 多方案视觉方向</a>
+        <a href="#issue-closure">4. 人工问题闭环</a>
+        <a href="#imag2">5. imag2 目标体验图</a>
+        <a href="#interaction-detail">6. 交互体验细化</a>
+        <a href="#state-machine">7. 用户态状态机</a>
+        <a href="#user-path">8. 用户交互路径</a>
+        <a href="#components">9. 六个核心组件</a>
+        <a href="#acceptance">10. 验收门槛</a>
+        <a href="#evidence">11. 证据与限制</a>
+        <a href="#next">12. 下一步</a>
+      </nav>
+
+      <main class="main">
+        <section id="summary" class="section">
+          <div class="section-head">
+            <div>
+              <h2>一眼结论</h2>
+              <p>V12-0A 的目标是把低代码工作台拆成可审查组件，并确定是否值得进入 V12-0P 高保真原型。</p>
+            </div>
+            <span class="pill">PASS_WITH_MINOR_ISSUES</span>
+          </div>
+          <div class="section-body">
+            <div class="status-grid">
+              <article class="metric">
+                <div class="label">阶段</div>
+                <div class="value">V12-0A</div>
+              </article>
+              <article class="metric">
+                <div class="label">证据范围</div>
+                <div class="value">design_only</div>
+              </article>
+              <article class="metric">
+                <div class="label">组件数量</div>
+                <div class="value green">6 / 6</div>
+              </article>
+              <article class="metric">
+                <div class="label">下一阶段</div>
+                <div class="value amber">V12-0P</div>
+              </article>
+            </div>
+            <div class="callout">
+              <strong>你现在需要判断：</strong>这 6 个组件的结构、信息密度、禁用态、证据解释和 Chat-to-Proposal 路径，
+              是否已经足以作为后续 Figma/高保真原型的方向。如果方向不对，应回到组件原型阶段修正，而不是进入浏览器开发。
+            </div>
+          </div>
+        </section>
+
+        <section id="boundary" class="section">
+          <div class="section-head">
+            <div>
+              <h2>允许与禁止</h2>
+              <p>本阶段最重要的是防止 false green：好看的原型不能被当作真实实现证据。</p>
+            </div>
+          </div>
+          <div class="section-body decision-grid">
+            <article class="decision allowed">
+              <strong>本阶段允许</strong>
+              <ul>
+                <li>组件拆分和 HTML/CSS wireframe 审查</li>
+                <li>讨论工作台布局、信息架构、视觉层级</li>
+                <li>记录逐组件 bounded acceptance 和 open questions</li>
+                <li>进入 V12-0P 高保真原型规划</li>
+              </ul>
+            </article>
+            <article class="decision blocked">
+              <strong>本阶段禁止</strong>
+              <ul>
+                <li>直接进入真实浏览器实现</li>
+                <li>把 wireframe 当作 BFF、runtime 或 Figma 证据</li>
+                <li>声称已经完成 Xpert 级体验或完整 Studio</li>
+                <li>跳过 V12-0P 和 readiness audit</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section id="style-directions" class="section">
+          <div class="section-head">
+            <div>
+              <h2>多方案视觉方向</h2>
+              <p>
+                针对“当前设计缺乏质感”的反馈，本轮补充三套 Xpert-inspired 设计方向，用于 V12-0P 高保真原型选型。
+              </p>
+            </div>
+            <span class="pill neutral">design-only concept board</span>
+          </div>
+          <div class="section-body">
+            <div class="decision-grid">
+              <article class="decision allowed">
+                <strong>新增审查入口</strong>
+                <ul>
+                  <li><a href="xpert-style-concept-board.html">打开 Xpert-inspired 多方案概念板</a></li>
+                  <li><a href="light-studio-component-detail-board.html">打开 Light Studio 组件细节设计板</a></li>
+                  <li><a href="light-studio-annotated-component-sketches.html">打开 Light Studio 总图与组件草图板</a></li>
+                  <li>包含 Light Studio Workbench、Dense Operator Console、Creative Workflow Studio 三套方向。</li>
+                  <li>建议以 Light Studio Workbench 作为 V12-0P 主线，并使用总图/组件草图/细节板冻结位置、样式、状态、交互和验收点。</li>
+                </ul>
+              </article>
+              <article class="decision blocked">
+                <strong>仍然不是实现证据</strong>
+                <ul>
+                  <li>概念板不证明真实浏览器 UI、BFF、DTO 或 runtime evidence。</li>
+                  <li>不能据此声明 Xpert 级体验完成、产品级前端完成或完整 Studio。</li>
+                  <li>V12-0P 仍需高保真冻结后才能进入 readiness audit。</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="issue-closure" class="section">
+          <div class="section-head">
+            <div>
+              <h2>人工问题闭环</h2>
+              <p>本轮先确认问题是否真实存在，再在原型层修复；没有把原型修复包装成真实浏览器实现。</p>
+            </div>
+            <span class="pill">9 / 9 closed in prototype</span>
+          </div>
+          <div class="section-body">
+            <table>
+              <thead>
+                <tr><th>问题</th><th>核查结果</th><th>本轮处理</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>标题栏压缩、按钮显示问题</td><td>成立</td><td>重做三段布局：上下文、状态网格、稳定按钮区。</td></tr>
+                <tr><td>API / 运行状态枚举缺失</td><td>成立</td><td>新增 API、运行、证据、权限状态枚举和状态机 drawio。</td></tr>
+                <tr><td>侧边栏内容不足</td><td>成立</td><td>补工作台、Chat、智能体、工作流、技能/MCP、证据、监控示例。</td></tr>
+                <tr><td>导航图标质感差</td><td>成立</td><td>替换 emoji 为统一 inline SVG 图标和缩写标签。</td></tr>
+                <tr><td>一级 rail 与二级导航逻辑不清</td><td>成立</td><td>明确 rail 是产品域，二级导航是域内对象。</td></tr>
+                <tr><td>画布连线不完整、不是曲线</td><td>成立</td><td>改成 SVG 曲线路径，连接具体输入/输出端口。</td></tr>
+                <tr><td>节点缺 hover/click 详情</td><td>成立</td><td>增加 selected/hovered、详情浮层和节点菜单语义。</td></tr>
+                <tr><td>节点缺多输入/多输出</td><td>成立</td><td>节点卡增加 2 input / 2 output 端口和 IO 面板。</td></tr>
+                <tr><td>Chatbox 不应是单一修订按钮</td><td>成立</td><td>改成独立 workspace chatbox、聊天历史和 proposal timeline。</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="imag2" class="section">
+          <div class="section-head">
+            <div>
+              <h2>imag2 目标体验图</h2>
+              <p>基于当前草图方向，使用宿主图像模型生成三张同风格目标体验图，并用本地 SVG 镜像固化组件、状态与边界。</p>
+            </div>
+            <span class="pill neutral">design-only image pack</span>
+          </div>
+          <div class="section-body">
+            <div class="decision-grid">
+              <article class="decision">
+                <strong>已生成的目标图</strong>
+                <ul>
+                  <li>整体图：Light Studio 工作台。</li>
+                  <li>组件图：六个核心组件基础样式。</li>
+                  <li>流程图：自然语言目标到提案审查路径。</li>
+                </ul>
+              </article>
+              <article class="decision">
+                <strong>审查入口</strong>
+                <ul>
+                  <li><a href="imag2-experience/index.html"><code>imag2-experience/index.html</code></a></li>
+                  <li>包含生成步骤、提示词、事实镜像图和一致性检查。</li>
+                  <li>该材料不作为浏览器、BFF、DTO 或运行证据。</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="interaction-detail" class="section">
+          <div class="section-head">
+            <div>
+              <h2>交互体验细化</h2>
+              <p>补齐左侧一二级导航、画布动作、Z 轴层级、设计语言一致性和下方工作台 tab 规格。</p>
+            </div>
+            <span class="pill neutral">V12-0P input</span>
+          </div>
+          <div class="section-body">
+            <div class="decision-grid">
+              <article class="decision">
+                <strong>已补文档</strong>
+                <ul>
+                  <li><code>../../v12_0p_interaction_experience_spec.md</code></li>
+                  <li><code>v12-0a-deep-ux-design-audit.md</code></li>
+                  <li><code>interaction-experience-detail.html</code></li>
+                </ul>
+              </article>
+              <article class="decision">
+                <strong>审查入口</strong>
+                <ul>
+                  <li><a href="interaction-experience-detail.html">打开交互体验细化审查页</a></li>
+                  <li>该页面用于 V12-0P 高保真原型输入，不作为真实浏览器实现证据。</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="state-machine" class="section">
+          <div class="section-head">
+            <div>
+              <h2>用户态状态机</h2>
+              <p>用户在工作台能看到的状态不应只是一句“API 健康”，而要覆盖环境、会话、画布、证据、运行和权限。</p>
+            </div>
+            <span class="pill neutral">drawio evidence</span>
+          </div>
+          <div class="section-body">
+            <div class="decision-grid">
+              <article class="decision">
+                <strong>状态域</strong>
+                <ul>
+                  <li>API：healthy / degraded / offline / misconfigured</li>
+                  <li>会话：idle / thinking / proposal_ready / awaiting_confirmation / blocked</li>
+                  <li>画布：empty / read_only / node_hover / node_selected / inspecting</li>
+                  <li>证据：none / collecting / ready / redacted / failed</li>
+                  <li>运行：not_started / queued / running / completed / failed / cancelled</li>
+                </ul>
+              </article>
+              <article class="decision">
+                <strong>状态机文件</strong>
+                <ul>
+                  <li><code>v12-user-state-machine.drawio</code></li>
+                  <li>用于 V12-0P 继续细化状态色、禁用原因、错误恢复和证据可见性。</li>
+                  <li>该 drawio 是设计说明，不是 runtime evidence。</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="user-path" class="section">
+          <div class="section-head">
+            <div>
+              <h2>用户交互路径</h2>
+              <p>从“打开工作室”到“自然语言产生提案”，用户应该始终知道系统状态和安全下一步。</p>
+            </div>
+          </div>
+          <div class="section-body">
+            <div class="flow">
+              <div class="step"><span class="step-num">1</span><strong>进入工作室</strong><span>顶栏显示 workspace、项目、API、模型、证据状态。</span></div>
+              <div class="step"><span class="step-num">2</span><strong>定位产品区</strong><span>左导航进入智能体、工作流、技能/MCP、证据、监控。</span></div>
+              <div class="step"><span class="step-num">3</span><strong>查看画布</strong><span>只读画布展示节点、边、小地图和禁用原因。</span></div>
+              <div class="step"><span class="step-num">4</span><strong>检查工位</strong><span>节点卡与 Inspector 解释角色、目标、工具、MCP、质量、证据。</span></div>
+              <div class="step"><span class="step-num">5</span><strong>提出目标</strong><span>Chat Workbench 生成 proposal timeline，确认前不发布、不运行。</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="components" class="section">
+          <div class="section-head">
+            <div>
+              <h2>六个核心组件</h2>
+              <p>每个组件都包含用户目标、状态、边界和 wireframe。请按组件逐个审查，而不是只看整页观感。</p>
+            </div>
+          </div>
+          <div class="section-body component-list">
+            <article class="component-card">
+              <div class="component-meta">
+                <div>
+                  <h3>1. 全局顶栏</h3>
+                  <p>解决“我在哪、系统是否健康、下一步能不能安全执行”的问题。</p>
+                </div>
+                <span class="pill">bounded accepted</span>
+              </div>
+              <iframe class="preview-frame" src="wireframes/01-global-top-bar.html" title="全局顶栏 wireframe"></iframe>
+              <div class="component-facts">
+                <div class="fact"><strong>用户目标</strong>10 秒内识别当前上下文和安全下一步。</div>
+                <div class="fact"><strong>禁用态</strong>发布/运行必须解释需要 proposal 或确认。</div>
+                <div class="fact"><strong>状态枚举</strong>API、运行、证据、权限四类状态都在顶栏可见。</div>
+              </div>
+            </article>
+
+            <article class="component-card">
+              <div class="component-meta">
+                <div>
+                  <h3>2. 左侧产品导航</h3>
+                  <p>把工作室入口从零散按钮整理为可理解的产品区域。</p>
+                </div>
+                <span class="pill">bounded accepted</span>
+              </div>
+              <iframe class="preview-frame" src="wireframes/02-left-product-navigation.html" title="左侧产品导航 wireframe"></iframe>
+              <div class="component-facts">
+                <div class="fact"><strong>用户目标</strong>快速定位智能体、工作流、技能/MCP、证据和监控。</div>
+                <div class="fact"><strong>状态</strong>选中、数量徽标、折叠、禁用态。</div>
+                <div class="fact"><strong>逻辑</strong>一级 rail 是产品域，二级导航是域内对象。</div>
+              </div>
+            </article>
+
+            <article class="component-card">
+              <div class="component-meta">
+                <div>
+                  <h3>3. 画布工作台</h3>
+                  <p>建立接近 Xpert 工作台密度的只读画布基础，同时保留 V12 边界。</p>
+                </div>
+                <span class="pill">bounded accepted</span>
+              </div>
+              <iframe class="preview-frame" src="wireframes/03-canvas-workbench.html" title="画布工作台 wireframe"></iframe>
+              <div class="component-facts">
+                <div class="fact"><strong>用户目标</strong>理解当前工作流结构、曲线连接和节点选择。</div>
+                <div class="fact"><strong>边界</strong>V12 只读，新增/发布/运行禁用并说明原因。</div>
+                <div class="fact"><strong>交互</strong>hover/click 节点显示详情浮层和检查器入口。</div>
+              </div>
+            </article>
+
+            <article class="component-card">
+              <div class="component-meta">
+                <div>
+                  <h3>4. Agent / Station 节点卡</h3>
+                  <p>让每个工位 Agent 的职责、模型、工具、技能、MCP 和证据一眼可审查。</p>
+                </div>
+                <span class="pill">bounded accepted</span>
+              </div>
+              <iframe class="preview-frame" src="wireframes/04-agent-station-node-card.html" title="Agent 工位节点卡 wireframe"></iframe>
+              <div class="component-facts">
+                <div class="fact"><strong>用户目标</strong>看懂 Agent 在这个工位负责什么。</div>
+                <div class="fact"><strong>IO</strong>展示多输入、多输出、端口和下拉详情。</div>
+                <div class="fact"><strong>边界</strong>仅展示 redacted refs，不声明 Agent executor ready。</div>
+              </div>
+            </article>
+
+            <article class="component-card">
+              <div class="component-meta">
+                <div>
+                  <h3>5. 右侧检查器</h3>
+                  <p>选中节点后解释配置、策略、质量、证据和 blocked/disabled 原因。</p>
+                </div>
+                <span class="pill">bounded accepted</span>
+              </div>
+              <iframe class="preview-frame" src="wireframes/05-right-inspector.html" title="右侧检查器 wireframe"></iframe>
+              <div class="component-facts">
+                <div class="fact"><strong>用户目标</strong>知道这个节点为什么能做或不能做某事。</div>
+                <div class="fact"><strong>边界</strong>Inspector 是 read-model，不构造 runtime truth。</div>
+                <div class="fact"><strong>下一轮细化</strong>tab、证据 drawer 和质量信息层级。</div>
+              </div>
+            </article>
+
+            <article class="component-card">
+              <div class="component-meta">
+                <div>
+                  <h3>6. Chat Workbench + Proposal Timeline</h3>
+                  <p>让自然语言目标进入 proposal，而不是被误解为已经执行工作流。</p>
+                </div>
+                <span class="pill">bounded accepted</span>
+              </div>
+              <iframe class="preview-frame" src="wireframes/06-chat-workbench-proposal-timeline.html" title="Chat Workbench wireframe"></iframe>
+              <div class="component-facts">
+                <div class="fact"><strong>用户目标</strong>用独立 chatbox 管理目标、上下文和历史。</div>
+                <div class="fact"><strong>边界</strong>确认前不会 publish/run。</div>
+                <div class="fact"><strong>联动</strong>聊天历史、proposal timeline 和画布高亮需要 V12-0P 细化。</div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section id="acceptance" class="section">
+          <div class="section-head">
+            <div>
+              <h2>验收门槛</h2>
+              <p>这不是“看起来不错就过”，而是逐组件、逐边界、逐证据检查。</p>
+            </div>
+          </div>
+          <div class="section-body">
+            <table>
+              <thead>
+                <tr><th>验收项</th><th>当前结果</th><th>说明</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>6 个首批组件存在</td><td>PASS</td><td>全部已有本地 HTML/CSS wireframe。</td></tr>
+                <tr><td>组件 review 数据</td><td>PASS</td><td><code>component-prototype-review-data.json</code> 可解析。</td></tr>
+                <tr><td>Artifact manifest</td><td>PASS</td><td>记录 6 个 wireframe 的 SHA256。</td></tr>
+                <tr><td>PRD 规格检视</td><td>PASS_WITH_MINOR_ISSUES</td><td>支持进入 V12-0P；视觉细节仍需高保真阶段闭环。</td></tr>
+                <tr><td>No False Green</td><td>PASS</td><td>禁止词只出现在安全上下文。</td></tr>
+                <tr><td>Redaction</td><td>PASS</td><td>未放入真实 token、secret、provider payload 或 raw artifact。</td></tr>
+                <tr><td>真实浏览器实现</td><td>BLOCKED</td><td>必须等 V12-0P 和 readiness audit 通过。</td></tr>
+                <tr><td>人工 UX 问题闭环</td><td>PASS</td><td>9 个问题均已在 prototype 层处理并记录。</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="evidence" class="section">
+          <div class="section-head">
+            <div>
+              <h2>证据与限制</h2>
+              <p>这里列出你可以拿去审计的文件，以及每个文件能证明什么、不能证明什么。</p>
+            </div>
+          </div>
+          <div class="section-body evidence-grid">
+            <article class="evidence">
+              <strong>审查数据</strong>
+              <p><code>component-prototype-review-data.json</code><br />证明逐组件 decision、scope、边界和 open questions。</p>
+            </article>
+            <article class="evidence">
+              <strong>工件清单</strong>
+              <p><code>artifact-manifest.json</code><br />证明 6 个 wireframe 的路径、hash 和 design-only 标签。</p>
+            </article>
+            <article class="evidence">
+              <strong>静态渲染</strong>
+              <p><code>index.html.png</code><br />证明本地 HTML 报告可渲染；不证明真实浏览器产品实现。</p>
+            </article>
+            <article class="evidence">
+              <strong>状态机</strong>
+              <p><code>v12-user-state-machine.drawio</code><br />解释 API、会话、画布、证据、运行和治理状态。</p>
+            </article>
+            <article class="evidence">
+              <strong>PRD 检视</strong>
+              <p><code>prd-spec-review.md</code><br />证明原型与 V12 PRD 目标和边界一致。</p>
+            </article>
+            <article class="evidence">
+              <strong>验收审计</strong>
+              <p><code>v12-0a-acceptance-audit.md</code><br />证明当前只能进入 V12-0P，不可跳到浏览器实现。</p>
+            </article>
+            <article class="evidence">
+              <strong>验证摘要</strong>
+              <p><code>validation-run-summary.json</code><br />记录 JSON/XML/QuickLook 校验和 Playwright 不可用限制。</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="next" class="section">
+          <div class="section-head">
+            <div>
+              <h2>下一步</h2>
+              <p>如果你认可这批组件方向，下一阶段不是直接开发，而是 V12-0P 高保真原型冻结。</p>
+            </div>
+            <span class="pill neutral">Next: V12-0P</span>
+          </div>
+          <div class="section-body">
+            <div class="decision-grid">
+              <article class="decision allowed">
+                <strong>可以继续</strong>
+                <ul>
+                  <li>把 6 个组件转成 Figma / 高保真原型</li>
+                  <li>细化真实交互、响应式、状态色、焦点态</li>
+                  <li>补齐画布工具栏、add menu、Inspector drawer</li>
+                </ul>
+              </article>
+              <article class="decision blocked">
+                <strong>仍然不能做</strong>
+                <ul>
+                  <li>直接真实浏览器开发</li>
+                  <li>把 wireframe 计为 Xpert 级体验完成</li>
+                  <li>把 Chat proposal 当作工作流已运行</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <div class="footer-note">
+          <strong>审查建议：</strong>请重点看画布工作台、节点卡、右侧检查器和 Chat Workbench 四块。
+          如果它们的信息层级、禁用态和证据解释不符合预期，应先回到 V12-0A 修正组件原型，再进入高保真阶段。
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

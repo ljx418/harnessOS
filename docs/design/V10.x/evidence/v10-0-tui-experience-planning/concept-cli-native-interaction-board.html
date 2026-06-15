@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>V10 CLI-native Interaction Board</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #080c16; color: #e5edf7; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+    .board { width: 1600px; min-height: 1180px; padding: 38px; background: radial-gradient(circle at 20% 0%, #13233b 0, #080c16 42%, #050816 100%); }
+    .title { display: flex; justify-content: space-between; align-items: end; margin-bottom: 24px; }
+    h1 { margin: 0; font-size: 34px; letter-spacing: 0; }
+    .subtitle { color: #9fb0c4; font-size: 16px; }
+    .grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 22px; }
+    .stack { display: grid; gap: 22px; }
+    .terminal { border: 1px solid #334155; border-radius: 14px; background: #0b1020; overflow: hidden; box-shadow: 0 24px 80px rgba(0,0,0,.45); }
+    .terminal.large { min-height: 560px; }
+    .bar { height: 42px; display: flex; align-items: center; gap: 8px; padding: 0 16px; background: #111827; border-bottom: 1px solid #263244; color: #94a3b8; font-size: 13px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: #ef4444; }
+    .dot:nth-child(2) { background: #f59e0b; }
+    .dot:nth-child(3) { background: #22c55e; }
+    .status { margin-left: auto; color: #8bdaff; }
+    .content { padding: 18px; font-size: 17px; line-height: 1.55; }
+    .line { margin: 8px 0; white-space: pre-wrap; }
+    .user { color: #f8fafc; }
+    .assistant { color: #bfdbfe; }
+    .muted { color: #94a3b8; }
+    .ok { color: #bbf7d0; }
+    .warn { color: #fde68a; }
+    .danger { color: #fecaca; }
+    .block { margin: 14px 0; padding: 14px; border: 1px solid #334155; border-radius: 10px; background: #111827; }
+    .block h3 { margin: 0 0 8px; font-size: 18px; color: #f8fafc; }
+    .composer { margin-top: 18px; padding: 12px 14px; border: 1px solid #475569; border-radius: 10px; color: #dbeafe; background: #020617; }
+    .palette { display: grid; gap: 8px; }
+    .cmd { display: grid; grid-template-columns: 110px 1fr; gap: 12px; padding: 8px 10px; border-radius: 8px; background: #0f172a; }
+    .cmd b { color: #bbf7d0; }
+    .actions { margin-top: 12px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .key { border: 1px solid #475569; background: #020617; color: #e5edf7; border-radius: 7px; padding: 6px 10px; }
+    .callout { margin-top: 22px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .card { border: 1px solid #263244; background: #0f172a; border-radius: 12px; padding: 14px; min-height: 128px; }
+    .card h3 { margin: 0 0 10px; font-size: 17px; color: #f8fafc; }
+    .card p { margin: 0; color: #a8b6c8; font-size: 14px; line-height: 1.45; }
+  </style>
+</head>
+<body>
+  <main class="board">
+    <div class="title">
+      <div>
+        <h1>HarnessOS V10 CLI-native TUI 交互概念</h1>
+        <div class="subtitle">目标：先做扎实的 Codex/ClaudeCode 类终端基础体验，再接入工作流解释与产物审查。</div>
+      </div>
+      <div class="subtitle">V10-0R planning concept · not runtime screenshot</div>
+    </div>
+    <section class="grid">
+      <div class="terminal large">
+        <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span>harnessOS mission</span><span class="status">workspace-write · mode: plan · evidence: ready</span></div>
+        <div class="content">
+          <div class="line user">你 > 我有一个视频点子：雨夜里的小型 AI 工作室。请创建工作流，但先给我看计划。</div>
+          <div class="block">
+            <h3>assistant ▸ 计划</h3>
+            <div class="line ok">✓ 捕获目标与约束</div>
+            <div class="line">1. 起草 WorkflowSpec</div>
+            <div class="line">2. 建立分镜、图像提示词、质检三个工位</div>
+            <div class="line">3. 展示产物预览与证据链</div>
+            <div class="line warn">等待用户确认前不会写入 runtime truth</div>
+          </div>
+          <div class="block">
+            <h3>tool ▸ workflow.spec.draft</h3>
+            <div class="line">risk: low · mutation: false · evidence: evd_v10_001</div>
+            <div class="line ok">status: completed</div>
+          </div>
+          <div class="block">
+            <h3>station ▣ 分镜设计师</h3>
+            <div class="line">role: Storyboard Agent · goal: 产出 6 个镜头草图提示词</div>
+            <div class="line">quality: pending · artifact: artifact-ref://storyboard-draft</div>
+          </div>
+          <div class="composer">› 输入自然语言目标或 /command</div>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="terminal">
+          <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span>slash commands</span></div>
+          <div class="content palette">
+            <div class="cmd"><b>/new</b><span>从自然语言目标创建工作流草案</span></div>
+            <div class="cmd"><b>/plan</b><span>展开当前计划和 todo</span></div>
+            <div class="cmd"><b>/stations</b><span>查看工位与 Agent 状态</span></div>
+            <div class="cmd"><b>/evidence</b><span>打开证据链与 runtime report</span></div>
+            <div class="cmd"><b>/diff</b><span>查看待确认 WorkflowDiff</span></div>
+            <div class="cmd"><b>/help</b><span>显示快捷键与安全边界</span></div>
+          </div>
+        </div>
+        <div class="terminal">
+          <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span>permission prompt</span></div>
+          <div class="content">
+            <div class="block">
+              <h3 class="danger">permission ▸ 需要确认</h3>
+              <div class="line">tool: terminal.readonly_shell</div>
+              <div class="line">command: ls docs/design/V9.x/evidence</div>
+              <div class="line">risk: low · sandbox: workspace-readonly</div>
+              <div class="line">evidence: evd_tool_019</div>
+              <div class="actions"><span class="key">y allow</span><span class="key">n deny</span><span class="key">? details</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="callout">
+      <div class="card"><h3>工位产物预览</h3><p>每个 station 块展示 Agent role、goal、产物摘要、quality_ref、evidence_ref，用户可展开审查。</p></div>
+      <div class="card"><h3>WorkflowDiff 审查</h3><p>自然语言修改只生成 proposal，显示 affected stations、risk、confirm/revise/reject。</p></div>
+      <div class="card"><h3>安全边界可见</h3><p>source=agent durable mutation denied until user confirmation，不能隐藏在日志里。</p></div>
+      <div class="card"><h3>HTML 只做导出</h3><p>富媒体解释页用于审计和上手，不替代真实 TUI，也不能冒充运行截图。</p></div>
+    </section>
+  </main>
+</body>
+</html>

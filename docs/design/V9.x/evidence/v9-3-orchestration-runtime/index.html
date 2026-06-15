@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>V9-3 Orchestration Runtime</title>
+    <style>
+      body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 32px; color: #111827; background: #f8fafc; }
+      section, table, pre { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; margin: 16px 0; }
+      table { border-collapse: collapse; width: 100%; }
+      td, th { border-bottom: 1px solid #e5e7eb; padding: 8px; text-align: left; vertical-align: top; }
+      pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+      a { color: #2563eb; }
+    </style>
+  </head>
+  <body>
+    <h1>V9-3 多 Agent 编排运行切片</h1>
+    <section><h2>验收状态</h2><pre>{
+  &quot;schema_version&quot;: &quot;v9_3.runtime_acceptance.v1&quot;,
+  &quot;stage_id&quot;: &quot;V9-3&quot;,
+  &quot;status&quot;: &quot;PASS&quot;,
+  &quot;evidence_scope&quot;: &quot;real_runtime_fixture&quot;,
+  &quot;runtime_backed&quot;: true,
+  &quot;fallback_demo_only&quot;: false,
+  &quot;transcript_only&quot;: false,
+  &quot;report_only&quot;: false,
+  &quot;allowed_claim&quot;: &quot;V9-3 complete: multi-Agent orchestration runtime slice ready for review.&quot;,
+  &quot;agent_executor_ready&quot;: false,
+  &quot;controlled_executor_ready&quot;: false,
+  &quot;production_controlled_executor_ready&quot;: false,
+  &quot;full_multi_agent_orchestration_ready&quot;: false,
+  &quot;distributed_multi_agent_runtime_ready&quot;: false,
+  &quot;runtime_executor_route_created&quot;: false,
+  &quot;runtime_worker_created&quot;: false,
+  &quot;source_agent_durable_mutation_allowed&quot;: false,
+  &quot;station_agent_binding&quot;: &quot;PASS&quot;,
+  &quot;serial_parallel_fan_in_fan_out&quot;: &quot;PASS&quot;,
+  &quot;attempt_history&quot;: &quot;PASS&quot;,
+  &quot;artifact_lineage&quot;: &quot;PASS&quot;,
+  &quot;failure_recovery&quot;: &quot;PASS&quot;,
+  &quot;lost_worker_recovery&quot;: &quot;PASS&quot;,
+  &quot;source_agent_direct_mutation_denied&quot;: &quot;PASS&quot;,
+  &quot;roman_forum_debate_fixture&quot;: &quot;PASS&quot;,
+  &quot;video_storyboard_fixture&quot;: &quot;BLOCKED&quot;,
+  &quot;video_storyboard_provider_boundary&quot;: &quot;BLOCKED_PROVIDER_UNAVAILABLE&quot;,
+  &quot;natural_language_optimization_diff_only&quot;: &quot;PASS&quot;,
+  &quot;claim_scan&quot;: &quot;PASS&quot;,
+  &quot;redaction_scan&quot;: &quot;PASS&quot;,
+  &quot;remaining_blockers&quot;: [
+    &quot;V9-4 autonomous coding workflow remains blocked until V9-3 evidence is externally accepted.&quot;,
+    &quot;Video storyboard provider-backed image generation remains blocked in this local fixture.&quot;
+  ]
+}</pre></section>
+    <section><h2>Agent 工位</h2><table><thead><tr><th>Agent</th><th>Role</th><th>Goal</th></tr></thead><tbody><tr><td>agent-research</td><td>research_agent</td><td>Collect source-grounded technical evidence.</td></tr><tr><td>agent-implementation</td><td>implementation_agent</td><td>Produce implementation proposal artifacts.</td></tr><tr><td>agent-review</td><td>review_agent</td><td>Review outputs and risk boundaries.</td></tr><tr><td>agent-synthesis</td><td>synthesis_agent</td><td>Join branch findings with attribution.</td></tr></tbody></table></section>
+    <section><h2>Branch 状态</h2><table><thead><tr><th>Branch</th><th>Station</th><th>State</th><th>Upstream</th></tr></thead><tbody><tr><td>branch-serial-research</td><td>station-research</td><td>succeeded</td><td></td></tr><tr><td>branch-parallel-implementation</td><td>station-implementation</td><td>recovered</td><td>branch-serial-research</td></tr><tr><td>branch-parallel-review</td><td>station-review</td><td>succeeded</td><td>branch-serial-research</td></tr><tr><td>branch-fan-in</td><td>station-synthesis</td><td>succeeded</td><td>branch-parallel-implementation, branch-parallel-review</td></tr></tbody></table></section>
+    <section><h2>并行 Agent 工作流证据</h2>
+      <p>Fan-out dispatch <code>dispatch-research-to-parallel</code> 将 <code>branch-serial-research</code> 分发到 <code>branch-parallel-implementation, branch-parallel-review</code>。</p>
+      <p>Fan-in join <code>join-v9-3-synthesis</code> 将 <code>branch-parallel-implementation, branch-parallel-review</code> 合成为 <code>artifact-ref://v9-3/synthesis</code>，并保留 attribution refs: <code>lineage-v9-3-implementation, lineage-v9-3-review</code>。</p>
+    </section>
+    <section><h2>US-V9-07 罗马广场多 Agent 讨论</h2>
+      <p>罗马广场：让哲学家、工程师、历史学家、伦理学家讨论“技术进步是否会削弱人的自由”，互相质询并总结共识和分歧。</p>
+      <h3>角色 Agent</h3>
+      <table><thead><tr><th>Agent</th><th>Role</th><th>Identity</th><th>Skills</th></tr></thead><tbody><tr><td>philosopher_agent</td><td>哲学家 Agent</td><td>斯多葛主义与自由意志视角</td><td>skill://v9-3/philosophical-argument</td></tr><tr><td>engineer_agent</td><td>工程师 Agent</td><td>系统工程与工具增强视角</td><td>skill://v9-3/system-tradeoff-analysis</td></tr><tr><td>historian_agent</td><td>历史学家 Agent</td><td>历史类比与制度演化视角</td><td>skill://v9-3/historical-comparison</td></tr><tr><td>ethicist_agent</td><td>伦理学家 Agent</td><td>责任、选择架构与权力边界视角</td><td>skill://v9-3/ethics-risk-review</td></tr><tr><td>moderator_agent</td><td>主持与综合 Agent</td><td>归纳共识、分歧和可审计引用</td><td>skill://v9-3/attributed-synthesis</td></tr></tbody></table>
+      <h3>多轮消息与互相引用</h3>
+      <table><thead><tr><th>Turn</th><th>Sender</th><th>Kind</th><th>Summary</th><th>References</th><th>Artifact</th></tr></thead><tbody><tr><td>1</td><td>philosopher_agent</td><td>argument</td><td>技术进步本身不必然削弱自由；真正的风险是人把判断权交给不可审计的系统。</td><td></td><td>artifact-ref://v9-3/roman-forum/philosopher-opening</td></tr><tr><td>1</td><td>engineer_agent</td><td>counterpoint</td><td>工具会扩大行动范围，但如果没有权限、日志和人工确认，系统便利会变成事实上的路径锁定。</td><td>roman-msg-01-philosopher-opening</td><td>artifact-ref://v9-3/roman-forum/engineer-response</td></tr><tr><td>2</td><td>historian_agent</td><td>historical_context</td><td>历史上新工具常同时扩展表达和制造新依赖；关键差异在于制度是否提供可迁移性和纠错渠道。</td><td>roman-msg-02-engineer-response</td><td>artifact-ref://v9-3/roman-forum/historian-context</td></tr><tr><td>2</td><td>ethicist_agent</td><td>challenge</td><td>如果用户不能理解、拒绝或撤销自动化建议，所谓增强能力会转化为责任不对等。</td><td>roman-msg-01-philosopher-opening, roman-msg-02-engineer-response</td><td>artifact-ref://v9-3/roman-forum/ethicist-challenge</td></tr><tr><td>3</td><td>moderator_agent</td><td>synthesis</td><td>共识：技术扩展自由必须以可解释、可拒绝、可审计为条件。分歧：技术依赖是自由的新形式还是自由的折损。</td><td>roman-msg-01-philosopher-opening, roman-msg-02-engineer-response, roman-msg-03-historian-context, roman-msg-04-ethicist-challenge</td><td>artifact-ref://v9-3/roman-forum/attributed-synthesis</td></tr></tbody></table>
+      <h3>Message Graph</h3>
+      <table><thead><tr><th>From</th><th>To</th><th>Relationship</th></tr></thead><tbody><tr><td>roman-msg-01-philosopher-opening</td><td>roman-msg-02-engineer-response</td><td>counterpoint</td></tr><tr><td>roman-msg-02-engineer-response</td><td>roman-msg-03-historian-context</td><td>historical_context</td></tr><tr><td>roman-msg-01-philosopher-opening</td><td>roman-msg-04-ethicist-challenge</td><td>ethical_challenge</td></tr><tr><td>roman-msg-02-engineer-response</td><td>roman-msg-04-ethicist-challenge</td><td>ethical_challenge</td></tr><tr><td>roman-msg-01-philosopher-opening</td><td>roman-msg-05-moderator-synthesis</td><td>synthesis_input</td></tr><tr><td>roman-msg-02-engineer-response</td><td>roman-msg-05-moderator-synthesis</td><td>synthesis_input</td></tr><tr><td>roman-msg-03-historian-context</td><td>roman-msg-05-moderator-synthesis</td><td>synthesis_input</td></tr><tr><td>roman-msg-04-ethicist-challenge</td><td>roman-msg-05-moderator-synthesis</td><td>synthesis_input</td></tr></tbody></table>
+      <h3>综合结论</h3>
+      <pre>{
+  &quot;artifact_ref&quot;: &quot;artifact-ref://v9-3/roman-forum/attributed-synthesis&quot;,
+  &quot;producer_agent_id&quot;: &quot;moderator_agent&quot;,
+  &quot;producer_attempt_id&quot;: &quot;attempt-roman-moderator-1&quot;,
+  &quot;attribution_refs&quot;: [
+    &quot;roman-msg-01-philosopher-opening&quot;,
+    &quot;roman-msg-02-engineer-response&quot;,
+    &quot;roman-msg-03-historian-context&quot;,
+    &quot;roman-msg-04-ethicist-challenge&quot;
+  ]
+}</pre>
+      <h3>验收检查</h3>
+      <pre>{
+  &quot;role_specific_agents_visible&quot;: &quot;PASS&quot;,
+  &quot;at_least_two_discussion_turns&quot;: &quot;PASS&quot;,
+  &quot;message_refs_between_agents&quot;: &quot;PASS&quot;,
+  &quot;attribution_preserving_synthesis&quot;: &quot;PASS&quot;,
+  &quot;source_agent_direct_mutation_denied&quot;: &quot;PASS&quot;
+}</pre>
+    </section>
+    <section><h2>用户场景</h2><pre>[
+  {
+    &quot;scenario_id&quot;: &quot;US-V9-07&quot;,
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;evidence_scope&quot;: &quot;real_runtime_fixture&quot;,
+    &quot;runtime_backed&quot;: true,
+    &quot;orchestration_run_id&quot;: &quot;orch-v9-3-290585a635d8&quot;,
+    &quot;role_specific_agents&quot;: [
+      &quot;philosopher_agent&quot;,
+      &quot;engineer_agent&quot;,
+      &quot;historian_agent&quot;,
+      &quot;ethicist_agent&quot;,
+      &quot;moderator_agent&quot;
+    ],
+    &quot;discussion_turn_count&quot;: 5,
+    &quot;message_graph_ref&quot;: &quot;roman-forum-discussion.json&quot;,
+    &quot;message_refs&quot;: [
+      &quot;roman-msg-01-philosopher-opening&quot;,
+      &quot;roman-msg-02-engineer-response&quot;,
+      &quot;roman-msg-03-historian-context&quot;,
+      &quot;roman-msg-04-ethicist-challenge&quot;,
+      &quot;roman-msg-05-moderator-synthesis&quot;
+    ],
+    &quot;attribution_refs&quot;: [
+      &quot;roman-msg-01-philosopher-opening&quot;,
+      &quot;roman-msg-02-engineer-response&quot;,
+      &quot;roman-msg-03-historian-context&quot;,
+      &quot;roman-msg-04-ethicist-challenge&quot;
+    ],
+    &quot;synthesis_ref&quot;: &quot;artifact-ref://v9-3/roman-forum/attributed-synthesis&quot;,
+    &quot;evidence_chain_ref&quot;: &quot;evidence-chain://v9-3/roman-forum&quot;,
+    &quot;acceptance_checks&quot;: {
+      &quot;role_specific_agents_visible&quot;: &quot;PASS&quot;,
+      &quot;at_least_two_discussion_turns&quot;: &quot;PASS&quot;,
+      &quot;message_refs_between_agents&quot;: &quot;PASS&quot;,
+      &quot;attribution_preserving_synthesis&quot;: &quot;PASS&quot;,
+      &quot;source_agent_direct_mutation_denied&quot;: &quot;PASS&quot;
+    }
+  },
+  {
+    &quot;scenario_id&quot;: &quot;US-V9-08&quot;,
+    &quot;status&quot;: &quot;BLOCKED&quot;,
+    &quot;evidence_scope&quot;: &quot;blocked_provider_unavailable&quot;,
+    &quot;runtime_backed&quot;: false,
+    &quot;creative_brief_ref&quot;: &quot;artifact-ref://v9-3/video/creative-brief&quot;,
+    &quot;script_ref&quot;: &quot;artifact-ref://v9-3/video/script&quot;,
+    &quot;shot_list_ref&quot;: &quot;artifact-ref://v9-3/video/shot-list&quot;,
+    &quot;storyboard_prompt_refs&quot;: [
+      &quot;artifact-ref://v9-3/video/storyboard-prompt-1&quot;,
+      &quot;artifact-ref://v9-3/video/storyboard-prompt-2&quot;,
+      &quot;artifact-ref://v9-3/video/storyboard-prompt-3&quot;,
+      &quot;artifact-ref://v9-3/video/storyboard-prompt-4&quot;
+    ],
+    &quot;storyboard_image_artifact_refs&quot;: [],
+    &quot;provider_model_ref&quot;: null,
+    &quot;provider_invocation_ref&quot;: null,
+    &quot;blocked_reason&quot;: &quot;provider_image_generation_not_available_in_local_fixture&quot;,
+    &quot;visual_consistency_report_ref&quot;: &quot;artifact-ref://v9-3/video/visual-consistency-report&quot;
+  },
+  {
+    &quot;scenario_id&quot;: &quot;US-V9-09&quot;,
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;evidence_scope&quot;: &quot;real_runtime_fixture&quot;,
+    &quot;runtime_backed&quot;: true,
+    &quot;workflow_diff_ref&quot;: &quot;workflow-diff://v9-3/optimization/video-workflow&quot;,
+    &quot;mutation_applied_before_confirmation&quot;: false,
+    &quot;source_agent_direct_mutation_denied&quot;: true,
+    &quot;user_confirmation_required&quot;: true,
+    &quot;lineage_refs&quot;: [
+      &quot;lineage-v9-3-research&quot;,
+      &quot;lineage-v9-3-implementation&quot;,
+      &quot;lineage-v9-3-review&quot;,
+      &quot;lineage-v9-3-synthesis&quot;
+    ]
+  }
+]</pre></section>
+    <section><h2>证据链接</h2><ul><li><a href="acceptance-data.json">acceptance-data.json</a></li><li><a href="orchestration-run.json">orchestration-run.json</a></li><li><a href="agent-descriptors.json">agent-descriptors.json</a></li><li><a href="station-agent-bindings.json">station-agent-bindings.json</a></li><li><a href="branch-states.json">branch-states.json</a></li><li><a href="fan-out-dispatches.json">fan-out-dispatches.json</a></li><li><a href="fan-in-join-decisions.json">fan-in-join-decisions.json</a></li><li><a href="attempt-history.json">attempt-history.json</a></li><li><a href="lost-worker-recovery-decisions.json">lost-worker-recovery-decisions.json</a></li><li><a href="artifact-lineage.json">artifact-lineage.json</a></li><li><a href="orchestration-messages.json">orchestration-messages.json</a></li><li><a href="roman-forum-discussion.json">roman-forum-discussion.json</a></li><li><a href="user-scenarios.json">user-scenarios.json</a></li><li><a href="claims-scan.md">claims-scan.md</a></li><li><a href="redaction-scan.md">redaction-scan.md</a></li></ul></section>
+    <section><h2>边界</h2><p>本页只证明 V9-3 bounded orchestration runtime slice ready for review。它不开放生产 route、不启动生产 worker、不授予 agent source 直接写入权限。</p></section>
+    </body>
+</html>

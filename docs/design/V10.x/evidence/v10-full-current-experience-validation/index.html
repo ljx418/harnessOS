@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HarnessOS 当前实现全量验收</title>
+  <style>
+    body { margin:0; background:#f6f7fb; color:#172033; font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    header { background:#101827; color:white; padding:28px 36px; }
+    main { max-width:1440px; margin:0 auto; padding:24px 36px 56px; }
+    .grid { display:grid; grid-template-columns:repeat(12,1fr); gap:16px; }
+    .card { grid-column:span 12; background:white; border:1px solid #d9dee8; border-radius:8px; padding:18px; }
+    .third { grid-column:span 4; } .half { grid-column:span 6; }
+    .pass { color:#047857; font-weight:700; } .fail { color:#b91c1c; font-weight:700; } .warn { color:#b45309; font-weight:700; }
+    table { width:100%; border-collapse:collapse; } th,td { text-align:left; vertical-align:top; padding:8px; border-bottom:1px solid #edf0f5; }
+    th { background:#f9fafb; } code { background:#f3f4f6; padding:1px 4px; border-radius:4px; }
+    pre { background:#0f172a; color:#d1e7ff; padding:14px; border-radius:8px; overflow:auto; max-height:520px; }
+    a { color:#1d4ed8; text-decoration:none; }
+    @media (max-width:900px) { .third,.half { grid-column:span 12; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>HarnessOS 当前实现全量验收</h1>
+    <p>目标：用 CLI 与 Playwright 可审计证据展示当前已经实现的 V9/V10 体验、应用场景和边界，不把 fixture 或规划材料冒充真实 runtime。</p>
+  </header>
+  <main class="grid">
+    <section class="card third"><h2>总状态</h2><p class="pass">PASS</p><p>V10 complete: CLI-native Agent-backed TUI experience and explainability baseline ready for review.</p></section>
+    <section class="card third"><h2>真实 LLM 接入</h2><p>provider_mode=<code>provider-backed</code></p><p>provider_backed=<code>True</code></p></section>
+    <section class="card third"><h2>证据可信度</h2><p>accepted=13 rejected=4</p><p>redaction=<code>PASS</code></p></section>
+    <section class="card"><h2>自动化命令结果</h2><table><thead><tr><th>命令</th><th>状态</th><th>执行内容</th><th>证据</th></tr></thead><tbody><tr><td>mission_tui_test</td><td><span class='pass'>PASS</span></td><td><code>npm --prefix apps/mission-tui test</code></td><td><a href='raw/mission_tui_test.stdout.txt'>stdout</a> / <a href='raw/mission_tui_test.stderr.txt'>stderr</a></td></tr>
+<tr><td>agent_backed_once</td><td><span class='pass'>PASS</span></td><td><code>npm --prefix apps/mission-tui run start -- --agent-backed-once 请回复：V10 TUI provider-backed smoke PASS --model deepseek-chat</code></td><td><a href='raw/agent_backed_once.stdout.txt'>stdout</a> / <a href='raw/agent_backed_once.stderr.txt'>stderr</a></td></tr>
+<tr><td>v10_8_acceptance</td><td><span class='pass'>PASS</span></td><td><code>npm --prefix apps/mission-tui run acceptance:v10-8</code></td><td><a href='raw/v10_8_acceptance.stdout.txt'>stdout</a> / <a href='raw/v10_8_acceptance.stderr.txt'>stderr</a></td></tr>
+<tr><td>v10_final_acceptance</td><td><span class='pass'>PASS</span></td><td><code>npm --prefix apps/mission-tui run acceptance:v10-final</code></td><td><a href='raw/v10_final_acceptance.stdout.txt'>stdout</a> / <a href='raw/v10_final_acceptance.stderr.txt'>stderr</a></td></tr>
+<tr><td>v10_pytest</td><td><span class='pass'>PASS</span></td><td><code>./.venv/bin/python -m pytest tests/test_v10_mission_tui_runtime.py tests/test_v10_tui_experience_planning.py -q</code></td><td><a href='raw/v10_pytest.stdout.txt'>stdout</a> / <a href='raw/v10_pytest.stderr.txt'>stderr</a></td></tr>
+<tr><td>v9_pytest</td><td><span class='pass'>PASS</span></td><td><code>./.venv/bin/python -m pytest tests/test_v9_1_agent_executor_safety_gate.py tests/test_v9_1_internal_audit_closure.py tests/test_v9_1_readiness_tooling.py tests/test_v9_1_safety_gate_evidence.py tests/test_v9_2_controlled_executor_runtime.py tests/test_v9_2_pre_implementation_closure.py tests/test_v9_2_runtime_evidence.py tests/test_v9_3_multi_agent_orchestration_runtime.py tests/test_v9_4_coding_workflow_pilot.py tests/test_v9_4_readiness_closure.py tests/test_v9_5_governed_terminal_worker.py tests/test_v9_6_workflow_studio.py tests/test_v9_7_production_governance.py tests/test_v9_8_final_acceptance.py tests/test_v9_video_workflow_user_scenario_e2e.py -q</code></td><td><a href='raw/v9_pytest.stdout.txt'>stdout</a> / <a href='raw/v9_pytest.stderr.txt'>stderr</a></td></tr>
+<tr><td>v10_drawio_xml</td><td><span class='pass'>PASS</span></td><td><code>xmllint --noout docs/design/V10.x/v10_current_gap_analysis.drawio</code></td><td><a href='raw/v10_drawio_xml.stdout.txt'>stdout</a> / <a href='raw/v10_drawio_xml.stderr.txt'>stderr</a></td></tr>
+<tr><td>v9_drawio_xml</td><td><span class='pass'>PASS</span></td><td><code>xmllint --noout docs/design/V9.x/v9_current_gap_analysis.drawio</code></td><td><a href='raw/v9_drawio_xml.stdout.txt'>stdout</a> / <a href='raw/v9_drawio_xml.stderr.txt'>stderr</a></td></tr></tbody></table></section>
+    <section class="card half"><h2>真实 Agent-backed CLI 输出摘录</h2><pre>
+&gt; @harnessos/mission-tui@0.1.0 start
+&gt; node src/cli.js --agent-backed-once 请回复：V10 TUI provider-backed smoke PASS --model deepseek-chat
+
+HarnessOS  harnessOS  phase:completed  gateway:sess_b44765dda994  turn:turn_ebc…
+────────────────────────────────────────────────────────────────────────────────
+当前选中: WorkflowDiff proposal · 确认前不会 apply / publish / run · actions:confirm_pro…
+────────────────────────────────────────────────────────────────────────────────
+… 已折叠历史内容 52 行，可用 /history 查看
+
+▣ Gateway 事件  completed  item_2e9180ce6e61
+  事件: item.delta  session:sess_b44765dda994  turn:turn_ebc7921e5741
+  Trace: trace_8db032946371
+  V10 TUI provider-backed smoke PASS
+  证据: docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json
+
+▣ Gateway 事件  completed  item_efb3a3703186
+  事件: turn.completed  session:sess_b44765dda994  turn:turn_ebc7921e5741
+  Trace: trace_8db032946371
+  Gateway turn completed
+  证据: docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json
+
+▣ 助手  completed  gateway-assistant-13
+  V10 TUI provider-backed smoke PASS
+  证据: docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json
+
+────────────────────────────────────────────────────────────────────────────────
+› 输入自然语言目标，或使用 /trace /session /exit
+</pre></section>
+    <section class="card half"><h2>当前禁止误读</h2><ul><li>不是 production ready</li><li>不是 Agent executor ready</li><li>不是 complete Workflow Studio ready</li><li>不是 full multi-Agent orchestration ready</li><li>不是 unrestricted terminal worker ready</li></ul></section>
+    <section class="card"><h2>V9 Runtime-backed 用户场景</h2><table><thead><tr><th>场景</th><th>状态</th><th>证据范围</th><th>证据引用</th></tr></thead><tbody><tr><td>US-V9-01</td><td>PASS</td><td>runtime_backed</td><td>/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-2-controlled-executor-runtime/acceptance-data.json</td></tr>
+<tr><td>US-V9-02</td><td>PASS</td><td>runtime_backed</td><td>/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-3-orchestration-runtime/acceptance-data.json</td></tr>
+<tr><td>US-V9-03</td><td>PASS</td><td>runtime_backed</td><td>/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/acceptance-data.json</td></tr>
+<tr><td>US-V9-04</td><td>PASS</td><td>runtime_backed</td><td>/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-5-terminal-worker/acceptance-data.json</td></tr>
+<tr><td>US-V9-05</td><td>PASS</td><td>runtime_backed</td><td>/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-6-workflow-studio/acceptance-data.json</td></tr>
+<tr><td>US-V9-07</td><td>PASS</td><td>real_runtime_fixture</td><td>roman-forum-discussion.json</td></tr>
+<tr><td>US-V9-08</td><td>PASS</td><td>real_provider_backed_runtime_fixture</td><td>/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-3-orchestration-runtime/storyboard-provider-evidence.json</td></tr>
+<tr><td>US-V9-09</td><td>PASS</td><td>real_runtime_fixture</td><td></td></tr></tbody></table></section>
+    <section class="card"><h2>V10 Read-model / Fixture 展示场景</h2><table><thead><tr><th>场景</th><th>状态</th><th>证据范围</th></tr></thead><tbody></tbody></table></section>
+    <section class="card"><h2>被拒绝证据</h2><table><thead><tr><th>路径</th><th>决定</th><th>原因</th></tr></thead><tbody><tr><td>docs/design/V10.x/evidence/v10-real-cli-revalidation/tui-after-input.png</td><td>REJECTED</td><td>Previous screenshot capture was not window-scoped and may include non-project sensitive desktop content.</td></tr>
+<tr><td>docs/design/V10.x/evidence/v10-real-cli-revalidation/tui-session.png</td><td>REJECTED</td><td>Previous screenshot capture was not window-scoped and may include non-project sensitive desktop content.</td></tr>
+<tr><td>docs/design/V10.x/evidence/v10-real-cli-revalidation/tui-start.png</td><td>REJECTED</td><td>Previous screenshot capture was not window-scoped and may include non-project sensitive desktop content.</td></tr>
+<tr><td>docs/design/V10.x/evidence/v10-real-cli-revalidation/tui-trace.png</td><td>REJECTED</td><td>Previous screenshot capture was not window-scoped and may include non-project sensitive desktop content.</td></tr></tbody></table></section>
+    <section class="card"><h2>审计文件</h2><ul><li><a href="validation-data.json">validation-data.json</a></li><li><a href="evidence-credibility-review.md">evidence-credibility-review.md</a></li><li><a href="terminal-render.html">terminal-render.html</a></li><li><a href="report-page.png">Playwright report-page.png</a></li></ul></section>
+  </main>
+</body>
+</html>

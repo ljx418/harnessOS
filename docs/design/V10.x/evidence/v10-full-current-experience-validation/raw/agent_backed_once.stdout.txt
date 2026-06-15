@@ -1,0 +1,28 @@
+
+> @harnessos/mission-tui@0.1.0 start
+> node src/cli.js --agent-backed-once 请回复：V10 TUI provider-backed smoke PASS --model deepseek-chat
+
+HarnessOS  harnessOS  phase:completed  gateway:sess_b44765dda994  turn:turn_ebc…
+────────────────────────────────────────────────────────────────────────────────
+当前选中: WorkflowDiff proposal · 确认前不会 apply / publish / run · actions:confirm_pro…
+────────────────────────────────────────────────────────────────────────────────
+… 已折叠历史内容 52 行，可用 /history 查看
+
+▣ Gateway 事件  completed  item_2e9180ce6e61
+  事件: item.delta  session:sess_b44765dda994  turn:turn_ebc7921e5741
+  Trace: trace_8db032946371
+  V10 TUI provider-backed smoke PASS
+  证据: docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json
+
+▣ Gateway 事件  completed  item_efb3a3703186
+  事件: turn.completed  session:sess_b44765dda994  turn:turn_ebc7921e5741
+  Trace: trace_8db032946371
+  Gateway turn completed
+  证据: docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json
+
+▣ 助手  completed  gateway-assistant-13
+  V10 TUI provider-backed smoke PASS
+  证据: docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json
+
+────────────────────────────────────────────────────────────────────────────────
+› 输入自然语言目标，或使用 /trace /session /exit

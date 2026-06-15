@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>V12-0A Chat Workbench Proposal Timeline Wireframe</title>
+    <style>
+      body {
+        margin: 0;
+        background: #f8fafc;
+        font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif;
+        color: #172033;
+      }
+      .workbench {
+        max-width: 1120px;
+        margin: 24px auto;
+        display: grid;
+        grid-template-columns: 270px minmax(0, 1fr) 320px;
+        gap: 16px;
+      }
+      .panel {
+        border: 1px solid #d8dee8;
+        border-radius: 16px;
+        background: #fff;
+        box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+        overflow: hidden;
+      }
+      .panel h1 {
+        margin: 0;
+        padding: 15px 16px;
+        font-size: 16px;
+        border-bottom: 1px solid #e5e7eb;
+      }
+      .history {
+        padding: 12px;
+      }
+      .thread {
+        padding: 10px;
+        border-radius: 11px;
+        font-size: 13px;
+        color: #475467;
+      }
+      .thread.active {
+        background: #eff6ff;
+        color: #1d4ed8;
+        font-weight: 700;
+      }
+      .thread small {
+        display: block;
+        margin-top: 4px;
+        color: #94a3b8;
+        font-weight: 500;
+      }
+      .messages {
+        min-height: 360px;
+        padding: 16px;
+        display: grid;
+        gap: 12px;
+        align-content: start;
+      }
+      .msg {
+        max-width: 82%;
+        padding: 12px;
+        border-radius: 13px;
+        background: #f8fafc;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      .msg.user {
+        justify-self: end;
+        background: #eff6ff;
+      }
+      .msg.assistant {
+        justify-self: start;
+      }
+      .composer {
+        border-top: 1px solid #e5e7eb;
+        padding: 12px;
+      }
+      .composer-box {
+        min-height: 78px;
+        border: 1px solid #d8dee8;
+        border-radius: 13px;
+        padding: 11px;
+        color: #667085;
+        font-size: 13px;
+        line-height: 1.55;
+        background: #fbfdff;
+      }
+      .composer-actions {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        align-items: center;
+      }
+      .scope {
+        color: #667085;
+        font-size: 12px;
+      }
+      button {
+        height: 36px;
+        border-radius: 10px;
+        border: 1px solid #2563eb;
+        background: #2563eb;
+        color: #fff;
+        padding: 0 13px;
+      }
+      .secondary {
+        background: #fff;
+        color: #172033;
+        border-color: #d8dee8;
+      }
+      .disabled {
+        background: #f1f5f9;
+        color: #94a3b8;
+        border-color: #d8dee8;
+      }
+      .timeline {
+        padding: 16px;
+      }
+      .step {
+        display: grid;
+        grid-template-columns: 26px 1fr;
+        gap: 10px;
+        margin-bottom: 14px;
+        font-size: 13px;
+      }
+      .dot {
+        width: 20px;
+        height: 20px;
+        border-radius: 999px;
+        background: #22c55e;
+        margin-top: 2px;
+      }
+      .dot.wait {
+        background: #f59e0b;
+      }
+      .dot.blocked {
+        background: #94a3b8;
+      }
+      .step strong {
+        display: block;
+        margin-bottom: 4px;
+      }
+      .step span {
+        color: #667085;
+      }
+      .timeline-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 0 16px 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="workbench">
+      <aside class="panel" aria-label="用户空间聊天历史">
+        <h1>用户空间聊天历史</h1>
+        <div class="history">
+          <div class="thread active">视频分镜工作流<small>当前会话 · 12 条消息</small></div>
+          <div class="thread">罗马广场讨论<small>并行 Agent · 8 条消息</small></div>
+          <div class="thread">文档总结工作流<small>本地 Markdown · 已归档</small></div>
+        </div>
+      </aside>
+
+      <section class="panel" aria-label="独立 Chatbox">
+        <h1>自然语言工作台</h1>
+        <div class="messages">
+          <div class="msg user">我想做一个视频创作工作流，输入点子后产出统一风格分镜，并有质检 Agent。</div>
+          <div class="msg assistant">我会先生成工作流提案：创意拆解、分镜、图像产物、质检。确认前不会发布或运行。</div>
+          <div class="msg user">把质检规则加上人物一致性检查。</div>
+          <div class="msg assistant">已追加到 proposal timeline，等待你在右侧审查 WorkflowDiff。</div>
+        </div>
+        <div class="composer">
+          <div class="composer-box">继续输入目标、约束或修改意见。这个 Chatbox 会关联当前 workspace 的聊天历史和 proposal refs。</div>
+          <div class="composer-actions">
+            <span class="scope">scope: workspace/studio-video · proposal-only</span>
+            <button>发送</button>
+          </div>
+        </div>
+      </section>
+
+      <aside class="panel" aria-label="Proposal Timeline 组件草图">
+        <h1>Proposal Timeline</h1>
+        <div class="timeline">
+          <div class="step"><span class="dot"></span><div><strong>Goal intake</strong><span>用户目标已结构化。</span></div></div>
+          <div class="step"><span class="dot"></span><div><strong>WorkflowDiff proposal</strong><span>新增 4 个 station 与质量门槛。</span></div></div>
+          <div class="step"><span class="dot wait"></span><div><strong>Graph review</strong><span>画布高亮待确认变更。</span></div></div>
+          <div class="step"><span class="dot blocked"></span><div><strong>Run</strong><span>确认前保持禁用。</span></div></div>
+        </div>
+        <div class="timeline-actions">
+          <button class="secondary">查看图</button>
+          <button class="secondary">要求修改</button>
+          <button class="secondary">确认提案</button>
+          <button class="disabled" title="确认提案前不会运行">运行</button>
+        </div>
+      </aside>
+    </main>
+  </body>
+</html>

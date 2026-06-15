@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>V10-0R CLI-native TUI 体验修订</title>
+  <style>
+    body { margin: 0; background: #0b1020; color: #d7dee8; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif; }
+    header { padding: 34px 44px; background: #080c16; border-bottom: 1px solid #263244; }
+    main { max-width: 1380px; margin: 0 auto; padding: 24px; }
+    section, article { background: #111827; border: 1px solid #263244; border-radius: 8px; padding: 18px; margin: 16px 0; box-shadow: 0 14px 36px rgba(0,0,0,.22); }
+    h1 { margin: 0 0 10px; font-size: 32px; color: #f8fafc; }
+    h2, h3 { color: #f8fafc; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .badge { display: inline-block; border-radius: 999px; padding: 3px 10px; font-weight: 700; font-size: 12px; background: #bbf7d0; color: #14532d; }
+    .muted { color: #9aa8ba; }
+    .warning { color: #fde68a; }
+    img { width: 100%; border: 1px solid #334155; border-radius: 8px; background: #020617; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    td, th { border-bottom: 1px solid #263244; padding: 9px; text-align: left; vertical-align: top; }
+    code { background: #020617; color: #bfdbfe; padding: 1px 5px; border-radius: 4px; }
+    @media (max-width: 960px) { .grid, .two { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>V10-0R CLI-native TUI 体验修订</h1>
+    <p>目标：先把 HarnessOS 的基础 TUI 做成接近 Codex CLI / Claude Code 的稳固终端工作台，再逐步接入工作流解释、产物预览和审计导出。</p>
+  </header>
+  <main>
+    <section>
+      <h2>修订结论</h2>
+      <p><span class="badge">PASS</span> V10 主方向从“工作流 cockpit”修正为“终端原生 Mission TUI”。</p>
+      <p class="muted">V10-0R 只证明规划修订 ready for review，不证明 runtime TUI 已完成。V10-1 才能开始真实 TUI shell 实现。</p>
+    </section>
+    <section>
+      <h2>基础体验基线</h2>
+      <table><thead><tr><th>区域</th><th>目标体验</th><th>验收重点</th></tr></thead><tbody>
+        <tr><td>顶部状态线</td><td>显示 workspace / model / mode / sandbox / evidence status。</td><td>一行内可读，80 列终端不溢出。</td></tr>
+        <tr><td>主消息流</td><td>用户、助手、计划、工具、产物、错误都以块状消息出现。</td><td>单列优先，不默认大 dashboard。</td></tr>
+        <tr><td>底部输入框</td><td>自然语言目标、slash command、快捷键提示。</td><td>始终可见，执行中有明确 busy 状态。</td></tr>
+        <tr><td>工具/审批块</td><td>命令预览、allow/deny、forbidden reason、evidence ref。</td><td>用户确认前不发生 durable mutation。</td></tr>
+        <tr><td>工作流解释块</td><td>station role / goal / tools / quality / evidence 可展开。</td><td>来自 read model，不构造 runtime truth。</td></tr>
+      </tbody></table>
+    </section>
+    <section>
+      <h2>交互概念设计</h2>
+      <table><thead><tr><th>交互对象</th><th>用户动作</th><th>TUI 反馈</th><th>安全边界</th></tr></thead><tbody>
+        <tr><td>Composer</td><td>输入自然语言或 slash command</td><td>创建消息块，显示 plan/todo 或 command palette</td><td>只提交 intent，不直接执行 durable mutation</td></tr>
+        <tr><td>Tool Block</td><td>展开工具详情或批准/拒绝</td><td>显示命令预览、sandbox、risk、evidence ref</td><td>高风险动作必须 human confirmation</td></tr>
+        <tr><td>Station Block</td><td>展开工位产物</td><td>显示 Agent role/goal/tools、产物摘要、质量结果</td><td>产物必须带 artifact/evidence refs</td></tr>
+        <tr><td>WorkflowDiff Block</td><td>确认、修改或拒绝变更</td><td>显示 affected stations、risk、forbidden reasons</td><td>确认前不得 apply / publish / run</td></tr>
+      </tbody></table>
+    </section>
+    <section>
+      <h2>方案对比</h2>
+      <div class="grid"><article><h3>React/Ink 终端原生 TUI</h3><p><span class="badge">selected</span></p><p>新建 HarnessOS-native Mission TUI，但首屏保持 Codex CLI / Claude Code 类似的单列消息流、底部输入框、工具块和审批提示。</p><p><strong>优势</strong></p><ul><li>最贴近目标基础体验</li><li>键盘优先</li><li>易做快照测试</li><li>可逐步接入工作流解释块</li></ul><p><strong>代价</strong></p><ul><li>需要 Node/Ink 包</li><li>需要 runtime bridge</li><li>媒体展示能力有限</li></ul></article><article><h3>Python Textual 兼容修补</h3><p><span class="badge">fallback</span></p><p>保留现有 OpenHarness-compatible Textual TUI，作为兼容入口和回退，不作为 V10 主品牌体验。</p><p><strong>优势</strong></p><ul><li>复用当前 runtime</li><li>风险较低</li><li>可快速修复文案</li></ul><p><strong>代价</strong></p><ul><li>OpenHarness 痕迹深</li><li>交互质感难追平 Codex/Claude</li><li>组件测试颗粒度较弱</li></ul></article><article><h3>HTML 解释页辅助</h3><p><span class="badge">supporting</span></p><p>动态 HTML 用于上手、审计和多媒体结果汇报；它不是主交互界面，也不能冒充真实 TUI 截图。</p><p><strong>优势</strong></p><ul><li>审计清晰</li><li>适合图片/报告展示</li><li>复用 V9 证据链</li></ul><p><strong>代价</strong></p><ul><li>不是实时 TUI</li><li>不能替代创建/修改入口</li><li>必须标明 runtime evidence 边界</li></ul></article></div>
+    </section>
+    <section>
+      <h2>修订后的概念图</h2>
+      <div class="grid">
+        <article><h3>单列消息流 + Composer</h3><img src="concept-terminal-message-stream.svg" alt="Terminal message stream concept" /></article>
+        <article><h3>Slash Command 面板</h3><img src="concept-command-palette-onboarding.svg" alt="Command palette onboarding concept" /></article>
+        <article><h3>工具块 + 审批提示</h3><img src="concept-tool-permission-blocks.svg" alt="Tool permission block concept" /></article>
+        <article><h3>工位产物 + 质量预览</h3><img src="concept-station-output-preview.svg" alt="Station output preview concept" /></article>
+        <article><h3>WorkflowDiff 修改审查</h3><img src="concept-workflowdiff-review.svg" alt="WorkflowDiff review concept" /></article>
+      </div>
+    </section>
+    
+    <section>
+      <h2>交互概念总览图</h2>
+      <p class="muted">该 PNG 由本地 HTML/CSS 设计板截图生成，是 V10-0R 的交互概念图，不是 runtime TUI 截图。</p>
+      <img src="concept-cli-native-interaction-board.png" alt="V10 CLI-native interaction concept board" />
+      <p><a href="concept-cli-native-interaction-board.html">打开可复现 HTML 设计板</a></p>
+    </section>
+        
+    
+    <section>
+      <h2>已废弃的旧概念图</h2>
+      <p class="warning">旧的 cockpit 图保留为历史证据，但它不是新的 V10 方向，也不能冒充真实 TUI 运行截图。</p>
+      <p class="muted">文件：docs/history/design/V10.x/superseded/v10-0-cockpit-first/host-generated-cockpit.png</p>
+    </section>
+        
+    <section>
+      <h2>V10 用户场景验收</h2>
+      <table><thead><tr><th>场景</th><th>用户看到什么</th><th>必须证明</th></tr></thead><tbody>
+        <tr><td>第一次创建工作流</td><td>输入自然语言目标后，TUI 显示计划块、WorkflowSpec 草案和“等待确认”。</td><td>未确认前无 durable mutation。</td></tr>
+        <tr><td>观察多 Agent 工作流</td><td>消息流中出现每个 station 的 Agent 角色、状态、产物摘要和证据链接。</td><td>每个状态来自 read model / evidence refs。</td></tr>
+        <tr><td>审查产物质量</td><td>展开 station 块后看到质量 Agent 检查、失败原因、建议修复。</td><td>产物预览必须带 quality_ref 和 evidence_ref。</td></tr>
+        <tr><td>自然语言修改工作流</td><td>系统先输出 WorkflowDiff proposal，并提示 confirm / revise / reject。</td><td>proposal-first，不自动 apply。</td></tr>
+      </tbody></table>
+    </section>
+    <section>
+      <h2>gpt-image-2 / imag2 Prompt</h2>
+      <p class="muted">这些 prompt 是后续生成真实风格概念图的输入；当前 SVG 是本地可复现规划证据，不是 runtime evidence。</p>
+      <ul><li><a href="prompt-terminal_message_stream.md">terminal_message_stream</a></li><li><a href="prompt-command_palette_onboarding.md">command_palette_onboarding</a></li><li><a href="prompt-tool_permission_blocks.md">tool_permission_blocks</a></li><li><a href="prompt-station_output_preview.md">station_output_preview</a></li><li><a href="prompt-workflowdiff_review.md">workflowdiff_review</a></li></ul>
+    </section>
+    <section>
+      <h2>Forbidden Claims / 边界</h2>
+      <p>本报告不得解释为 production ready、Agent executor ready、complete Workflow Studio ready、unrestricted terminal worker ready 或 full multi-Agent orchestration ready。</p>
+    </section>
+  </main>
+</body>
+</html>

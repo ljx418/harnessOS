@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>V12-0A Canvas Workbench Wireframe</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif;
+        background: #f8fafc;
+        color: #172033;
+      }
+      .workbench {
+        padding: 22px;
+      }
+      .toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 56px;
+        padding: 9px 14px;
+        border: 1px solid #d8dee8;
+        border-radius: 16px 16px 0 0;
+        background: #fff;
+      }
+      .toolbar-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .pill {
+        padding: 7px 10px;
+        border-radius: 999px;
+        background: #f1f5f9;
+        color: #475467;
+        font-size: 12px;
+        white-space: nowrap;
+      }
+      .pill.readonly {
+        background: #fff7ed;
+        color: #c2410c;
+      }
+      button {
+        height: 34px;
+        border: 1px solid #d8dee8;
+        border-radius: 9px;
+        background: #fff;
+        color: #172033;
+        padding: 0 10px;
+      }
+      button.disabled {
+        color: #94a3b8;
+        background: #f1f5f9;
+      }
+      .canvas {
+        position: relative;
+        height: 560px;
+        border: 1px solid #d8dee8;
+        border-top: 0;
+        border-radius: 0 0 16px 16px;
+        background-image: radial-gradient(#d1d5db 1px, transparent 1px);
+        background-size: 22px 22px;
+        overflow: hidden;
+      }
+      .edges {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+      .edge-path {
+        fill: none;
+        stroke: #94a3b8;
+        stroke-width: 2.5;
+      }
+      .edge-path.active {
+        stroke: #2563eb;
+      }
+      .node {
+        position: absolute;
+        width: 250px;
+        border: 1px solid #d7ddec;
+        border-radius: 16px;
+        background: #fff;
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+      }
+      .node.selected {
+        outline: 3px solid #2563eb;
+        border-color: #93c5fd;
+      }
+      .node.hovered {
+        transform: translateY(-2px);
+        box-shadow: 0 24px 54px rgba(37, 99, 235, 0.16);
+      }
+      .node-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 13px 14px;
+        border-bottom: 1px solid #eef2f7;
+      }
+      .node h3 {
+        margin: 0 0 5px;
+        font-size: 15px;
+      }
+      .node p {
+        margin: 0;
+        color: #667085;
+        font-size: 12px;
+        line-height: 1.45;
+      }
+      .node-body {
+        padding: 11px 14px 14px;
+      }
+      .io {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 10px;
+      }
+      .io-box {
+        border: 1px dashed #cbd5e1;
+        border-radius: 9px;
+        padding: 7px;
+        font-size: 11px;
+        color: #475467;
+        background: #fbfdff;
+      }
+      .port {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border: 2px solid #fff;
+        border-radius: 999px;
+        background: #2563eb;
+        box-shadow: 0 0 0 1px #93c5fd;
+      }
+      .port.in {
+        left: -6px;
+      }
+      .port.out {
+        right: -6px;
+      }
+      .p1 {
+        top: 64px;
+      }
+      .p2 {
+        top: 104px;
+      }
+      .a {
+        left: 100px;
+        top: 190px;
+      }
+      .b {
+        left: 440px;
+        top: 92px;
+      }
+      .c {
+        left: 450px;
+        top: 330px;
+      }
+      .d {
+        left: 820px;
+        top: 210px;
+      }
+      .detail {
+        position: absolute;
+        left: 715px;
+        top: 42px;
+        width: 300px;
+        border: 1px solid #bfdbfe;
+        border-radius: 14px;
+        background: #ffffff;
+        box-shadow: 0 22px 48px rgba(15, 23, 42, 0.16);
+        padding: 13px;
+        font-size: 12px;
+        line-height: 1.55;
+      }
+      .detail strong {
+        display: block;
+        margin-bottom: 6px;
+        color: #172033;
+      }
+      .reason {
+        position: absolute;
+        right: 18px;
+        bottom: 18px;
+        width: 300px;
+        padding: 12px;
+        border-radius: 12px;
+        border: 1px dashed #f59e0b;
+        background: #fffbeb;
+        color: #92400e;
+        font-size: 13px;
+        line-height: 1.55;
+      }
+      .minimap {
+        position: absolute;
+        left: 18px;
+        bottom: 18px;
+        width: 142px;
+        height: 96px;
+        border-radius: 12px;
+        background: #eef2ff;
+        border: 1px solid #c7d2fe;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="workbench">
+      <header class="toolbar">
+        <div class="toolbar-group">
+          <span class="pill readonly">V12 只读画布基础</span>
+          <span class="pill">node_hover / node_selected / inspecting</span>
+          <span class="pill">BFF-only CanvasReadModel</span>
+        </div>
+        <div class="toolbar-group">
+          <button>适配视图</button>
+          <button>查看状态机</button>
+          <button class="disabled" title="V13 才开放可编辑 add menu">新增节点</button>
+          <button class="disabled" title="需要 WorkflowDiff 确认">发布/运行</button>
+        </div>
+      </header>
+
+      <section class="canvas" aria-label="画布工作台组件草图">
+        <svg class="edges" viewBox="0 0 1100 560" preserveAspectRatio="none" aria-hidden="true">
+          <path class="edge-path active" d="M350 252 C405 252 380 154 440 154" />
+          <path class="edge-path" d="M350 296 C420 296 380 392 450 392" />
+          <path class="edge-path active" d="M690 176 C760 176 750 270 820 270" />
+          <path class="edge-path" d="M700 404 C770 404 760 312 820 312" />
+        </svg>
+
+        <article class="node a">
+          <span class="port out p1"></span><span class="port out p2"></span>
+          <div class="node-head"><div><h3>创意拆解 Agent</h3><p>brief → 主题 / 角色 / 风格</p></div><span>idle</span></div>
+          <div class="node-body">
+            <div class="io">
+              <div class="io-box">输入：创意 brief</div>
+              <div class="io-box">输出：主题、角色、镜头约束</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="node b selected hovered">
+          <span class="port in p1"></span><span class="port out p1"></span>
+          <div class="node-head"><div><h3>分镜 Agent</h3><p>生成统一画风镜头计划</p></div><span>selected</span></div>
+          <div class="node-body">
+            <div class="io">
+              <div class="io-box">输入：主题、角色、风格</div>
+              <div class="io-box">输出：镜头表、图像提示词</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="node c">
+          <span class="port in p1"></span><span class="port out p1"></span>
+          <div class="node-head"><div><h3>图像产物 Agent</h3><p>调用受控图像能力生成预览</p></div><span>ready</span></div>
+          <div class="node-body">
+            <div class="io">
+              <div class="io-box">输入：图像提示词</div>
+              <div class="io-box">输出：storyboard refs</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="node d">
+          <span class="port in p1"></span><span class="port in p2"></span>
+          <div class="node-head"><div><h3>质检 Agent</h3><p>检查风格、人物和证据完整性</p></div><span>blocked?</span></div>
+          <div class="node-body">
+            <div class="io">
+              <div class="io-box">多输入：镜头表 + 图像 refs</div>
+              <div class="io-box">输出：质量报告 + 修订建议</div>
+            </div>
+          </div>
+        </article>
+
+        <aside class="detail" aria-label="悬停或点击节点详情">
+          <strong>节点详情浮层：分镜 Agent</strong>
+          触发方式：hover 或 click。显示 role、goal、memory summary、model ref、tools、skills、MCP refs、输入/输出端口、证据 refs。下拉菜单可进入“检查器 / 证据 / 质量报告”，但不能直接运行。
+        </aside>
+        <div class="reason">禁用原因：V12 只验证画布投影、曲线连接、端口和检查器联动；编辑、发布、运行留到后续门禁。</div>
+        <div class="minimap"></div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,374 @@
+{
+  "boundary_flags": {
+    "agent_executor_claim_allowed": false,
+    "autonomous_coding_claim_allowed": false,
+    "complete_studio_claim_allowed": false,
+    "full_orchestration_claim_allowed": false,
+    "production_claim_allowed": false
+  },
+  "coverage_gaps": [],
+  "covered_runtime_scenarios": 8,
+  "rows": [
+    {
+      "blocker": null,
+      "capability_visible_to_user": "四个 allowlisted operation、source=agent deny、evidence chain",
+      "evidence_refs": [
+        "../v9-2-controlled-executor-runtime/acceptance-data.json",
+        "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-2-controlled-executor-runtime/acceptance-data.json"
+      ],
+      "evidence_scope": null,
+      "owner_stage": "V9-2",
+      "runtime_backed": true,
+      "scenario_detail": {
+        "acceptance_criteria": [
+          "status=PASS 且 runtime_backed=true。",
+          "source=agent direct durable mutation denied。",
+          "evidence chain 可追溯到 policy / capability / authorization decision。"
+        ],
+        "audit_focus": "重点核查受控执行器没有扩大为通用 Agent executor，也没有开放 connector.call 或 external_llm.call。",
+        "boundary": "该场景不证明完整 Agent executor 或 production controlled executor。",
+        "expected_outputs": [
+          "workflow.instance.start、station.rerun、artifact.write、quality.evaluation.create 均有受控证据。",
+          "越界动作没有被执行。",
+          "审计证据中只出现 redacted refs，不出现原始密钥或原始 payload。"
+        ],
+        "persona": "工作流管理员或产品负责人",
+        "user_goal": "确认系统只能执行受控白名单动作，并且任何 Agent 来源的直接写入都被拒绝。",
+        "user_steps": [
+          "打开 V9-2 controlled executor runtime 验收页。",
+          "检查四个 allowlisted operation 的 runtime evidence。",
+          "检查 source=agent durable mutation denied、kill switch、idempotency、rollback 和 evidence chain 字段。"
+        ],
+        "when_to_use": "当用户要启动、重跑、写入产物或创建质量评价时，用这个场景审查 V9-2 受控执行器是否仍在权限边界内。"
+      },
+      "scenario_id": "US-V9-01",
+      "status": "PASS",
+      "title": "受控执行器动作审查",
+      "visible_checks": []
+    },
+    {
+      "blocker": null,
+      "capability_visible_to_user": "serial / parallel / fan-out / fan-in / recovery / lineage",
+      "evidence_refs": [
+        "../v9-3-orchestration-runtime/index.html",
+        "../v9-3-orchestration-runtime/fan-out-dispatches.json",
+        "../v9-3-orchestration-runtime/fan-in-join-decisions.json",
+        "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-3-orchestration-runtime/acceptance-data.json"
+      ],
+      "evidence_scope": null,
+      "owner_stage": "V9-3",
+      "runtime_backed": true,
+      "scenario_detail": {
+        "acceptance_criteria": [
+          "serial_parallel_fan_in_fan_out=PASS。",
+          "attempt_history=PASS。",
+          "artifact_lineage=PASS。",
+          "failure_recovery=PASS 且 lost_worker_recovery=PASS。"
+        ],
+        "audit_focus": "重点看 fan-out/fan-in 是否有真实 JSON 证据，而不是只在图里画了并行。",
+        "boundary": "该场景证明 bounded orchestration runtime slice，不证明 full multi-Agent orchestration ready。",
+        "expected_outputs": [
+          "并行分支各自拥有独立 branch state。",
+          "fan-in 汇总保留 attribution refs。",
+          "失败或丢失 worker 的恢复不覆盖旧 attempt。"
+        ],
+        "persona": "需要审查多 Agent 协作可靠性的项目负责人",
+        "user_goal": "看到一个工作流如何拆成串行、并行、fan-out、fan-in，并在失败恢复后保留 attempt 和 artifact lineage。",
+        "user_steps": [
+          "打开 V9-3 orchestration runtime 验收页。",
+          "查看 fan-out dispatch、fan-in join、attempt history、artifact lineage 和 lost worker recovery 证据。",
+          "确认每个产物保留 producer_agent_id / producer_attempt_id。"
+        ],
+        "when_to_use": "当用户关心多个 Agent/工位是否真的被编排，而不是单一脚本顺序跑完时，用这个场景验收。"
+      },
+      "scenario_id": "US-V9-02",
+      "status": "PASS",
+      "title": "并行 Agent 编排审查",
+      "visible_checks": [
+        "serial_parallel_fan_in_fan_out=PASS",
+        "attempt_history=PASS",
+        "artifact_lineage=PASS"
+      ]
+    },
+    {
+      "blocker": null,
+      "capability_visible_to_user": "plan / diff proposal / sandboxed test / review / no auto commit",
+      "evidence_refs": [
+        "../v9-4-coding-workflow-runtime/index.html",
+        "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/acceptance-data.json"
+      ],
+      "evidence_scope": null,
+      "owner_stage": "V9-4",
+      "runtime_backed": true,
+      "scenario_detail": {
+        "acceptance_criteria": [
+          "runtime_backed=true。",
+          "auto commit / auto push / auto deploy 均被拒绝或未发生。",
+          "human review handoff 存在。"
+        ],
+        "audit_focus": "重点检查 AI 只生成 proposal，不把 proposal 伪装成已经被批准的代码变更。",
+        "boundary": "该场景不证明 autonomous coding workflow ready。",
+        "expected_outputs": [
+          "系统生成可审查的 diff proposal 和测试结果。",
+          "没有自动 commit、push、deploy。",
+          "失败修复以新 proposal 形式出现，不静默修改。"
+        ],
+        "persona": "希望用 AI 辅助开发但不想让系统自动提交代码的工程负责人",
+        "user_goal": "让系统生成计划、diff proposal、测试建议和 review handoff，但不自动 commit、push 或 deploy。",
+        "user_steps": [
+          "打开 V9-4 coding workflow runtime 验收页。",
+          "查看 intent、plan、diff proposal、sandboxed test result、review summary 和 fix-loop proposal。",
+          "检查 git operation deny report。"
+        ],
+        "when_to_use": "当用户想把自然语言开发目标交给工作流处理，但仍要求人类审核最终改动时使用。"
+      },
+      "scenario_id": "US-V9-03",
+      "status": "PASS",
+      "title": "代码工作流 proposal-only 审查",
+      "visible_checks": []
+    },
+    {
+      "blocker": null,
+      "capability_visible_to_user": "workspace boundary / command tier / transcript / denial evidence",
+      "evidence_refs": [
+        "../v9-5-terminal-worker/index.html",
+        "../v9-5-terminal-worker/terminal-transcript.txt",
+        "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-5-terminal-worker/acceptance-data.json"
+      ],
+      "evidence_scope": null,
+      "owner_stage": "V9-5",
+      "runtime_backed": true,
+      "scenario_detail": {
+        "acceptance_criteria": [
+          "terminal session evidence=PASS。",
+          "workspace boundary checks=PASS。",
+          "secret-read / escape / push / deploy denial evidence 存在。"
+        ],
+        "audit_focus": "重点检查 terminal worker 没有变成 unrestricted shell。",
+        "boundary": "该场景不证明 unrestricted terminal worker 或 production terminal automation。",
+        "expected_outputs": [
+          "命令有 tier / policy decision。",
+          "终端 transcript 可审计。",
+          "危险命令被拒绝并有 evidence。"
+        ],
+        "persona": "安全负责人或需要审查终端自动化边界的工程负责人",
+        "user_goal": "确认 terminal worker 只能在 workspace sandbox 内执行受控命令，并捕获 transcript 和 diff。",
+        "user_steps": [
+          "打开 V9-5 terminal worker 验收页。",
+          "查看 command decisions、terminal transcript、diff capture 和 denial evidence。",
+          "确认 workspace escape、secret read、git push、production deploy 没有被允许。"
+        ],
+        "when_to_use": "当用户想让工作流调用终端做只读检查、测试或受限产物提案时使用。"
+      },
+      "scenario_id": "US-V9-04",
+      "status": "PASS",
+      "title": "终端 worker sandbox 审查",
+      "visible_checks": []
+    },
+    {
+      "blocker": null,
+      "capability_visible_to_user": "BFF/DTO / read-only panels / manual confirmation",
+      "evidence_refs": [
+        "../v9-6-workflow-studio/index.html",
+        "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-6-workflow-studio/acceptance-data.json"
+      ],
+      "evidence_scope": null,
+      "owner_stage": "V9-6",
+      "runtime_backed": true,
+      "scenario_detail": {
+        "acceptance_criteria": [
+          "BFF route allowlist=PASS。",
+          "browser denylist=PASS。",
+          "manual confirmation evidence exists。"
+        ],
+        "audit_focus": "重点检查 UI 没有隐藏执行按钮，也没有绕过 BFF/DTO 写 runtime。",
+        "boundary": "该场景不证明 complete Workflow Studio ready。",
+        "expected_outputs": [
+          "Runtime Report 和 Evidence Review 只读。",
+          "manual confirmation 生成 human_authorization_ref。",
+          "浏览器不直连内部 runtime route。"
+        ],
+        "persona": "需要在网页控制台审查工作流状态的运营用户",
+        "user_goal": "通过 Product Console / Thin Web Console 查看 runtime report、evidence review 和手动确认入口。",
+        "user_steps": [
+          "打开 V9-6 Workflow Studio 验收页。",
+          "查看 read-only panels、BFF/DTO 边界和 manual confirmation evidence。",
+          "检查 browser denylist 和 hidden mutation form scan。"
+        ],
+        "when_to_use": "当用户需要可视化审查工作流结果，而不是直接改 runtime truth 时使用。"
+      },
+      "scenario_id": "US-V9-05",
+      "status": "PASS",
+      "title": "Workflow Studio 证据审查",
+      "visible_checks": []
+    },
+    {
+      "blocker": null,
+      "capability_visible_to_user": "stage evidence / claim scan / redaction scan / drawio XML",
+      "evidence_refs": [
+        "../v9-8-final-acceptance/v9-final-acceptance-dashboard.html",
+        "self://v9-8-final-dashboard"
+      ],
+      "evidence_scope": null,
+      "owner_stage": "V9-8",
+      "runtime_backed": false,
+      "scenario_detail": {
+        "acceptance_criteria": [
+          "status=PASS。",
+          "无 FAIL / BLOCKED。",
+          "planning docs 没有被算作 runtime evidence。"
+        ],
+        "audit_focus": "重点检查最终看板只是证据聚合，不替代每个 runtime 场景证据。",
+        "boundary": "该场景本身是 dashboard aggregation，因此不要求 runtime_backed=true。",
+        "expected_outputs": [
+          "V9-0 到 V9-8 evidence package 被聚合。",
+          "blockers=[]。",
+          "claim_scan=PASS 且 redaction_scan=PASS。"
+        ],
+        "persona": "最终验收审计员",
+        "user_goal": "从一个看板确认 V9 各阶段证据、用户场景、claim scan、redaction scan 和 drawio XML 是否通过。",
+        "user_steps": [
+          "打开 V9-8 final acceptance dashboard。",
+          "检查 stage evidence、user scenario matrix、No False Green、redaction 和 blocker 列表。",
+          "确认 final claim 仍是 ready for review，不被摘要为 ready。"
+        ],
+        "when_to_use": "当用户要做最终验收或外部审计前复核时使用。"
+      },
+      "scenario_id": "US-V9-06",
+      "status": "PASS",
+      "title": "最终验收看板审查",
+      "visible_checks": []
+    },
+    {
+      "blocker": null,
+      "capability_visible_to_user": "role-specific agents / multi-turn messages / attribution synthesis",
+      "evidence_refs": [
+        "../v9-3-orchestration-runtime/index.html",
+        "../v9-3-orchestration-runtime/roman-forum-discussion.json"
+      ],
+      "evidence_scope": "real_runtime_fixture",
+      "owner_stage": "V9-3",
+      "runtime_backed": true,
+      "scenario_detail": {
+        "acceptance_criteria": [
+          "role_specific_agents_visible=PASS。",
+          "message_refs_between_agents=PASS。",
+          "attribution_preserving_synthesis=PASS。",
+          "source_agent_direct_mutation_denied=PASS。"
+        ],
+        "audit_focus": "重点检查讨论不是一段单模型文本，而是多 Agent 角色、消息引用和综合产物的结构化证据。",
+        "boundary": "该场景不证明通用多人聊天产品，也不证明 full multi-Agent orchestration ready。",
+        "expected_outputs": [
+          "至少 5 个角色 Agent 可见。",
+          "至少 2 轮讨论，且每条发言有 sender、message kind 和 references。",
+          "主持 Agent 输出带 attribution_refs 的综合结论。"
+        ],
+        "persona": "想用多 Agent 做观点讨论、研究辩论或创意评审的用户",
+        "user_goal": "创建一个罗马广场式讨论，让哲学家、工程师、历史学家、伦理学家和主持 Agent 围绕同一问题发言、互相引用并输出综合结论。",
+        "user_steps": [
+          "打开 V9-UA 报告中的罗马广场章节。",
+          "查看每个 Agent 的 role / goal / skill / MCP refs。",
+          "检查多轮发言、message references、message graph edges 和 moderator synthesis。"
+        ],
+        "when_to_use": "当用户需要不同身份的 Agent 互相质询、保留观点出处、输出共识和分歧时使用。"
+      },
+      "scenario_id": "US-V9-07",
+      "status": "PASS",
+      "title": "罗马广场多 Agent 讨论",
+      "visible_checks": [
+        "role_agents=5",
+        "messages=5",
+        "message_graph_edges=8",
+        "acceptance_checks={'at_least_two_discussion_turns': 'PASS', 'attribution_preserving_synthesis': 'PASS', 'message_refs_between_agents': 'PASS', 'role_specific_agents_visible': 'PASS', 'source_agent_direct_mutation_denied': 'PASS'}"
+      ]
+    },
+    {
+      "blocker": null,
+      "capability_visible_to_user": "provider-backed storyboard images / quality Agent / TUI evidence refs",
+      "evidence_refs": [
+        "../v9-user-scenario-video-workflow-e2e/index.html",
+        "../v9-3-orchestration-runtime/storyboard-provider-evidence.json",
+        "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-3-orchestration-runtime/storyboard-provider-evidence.json"
+      ],
+      "evidence_scope": "real_provider_backed_runtime_fixture",
+      "owner_stage": "V9-3/V9-6",
+      "runtime_backed": true,
+      "scenario_detail": {
+        "acceptance_criteria": [
+          "evidence_scope=real_provider_backed_runtime_fixture。",
+          "storyboard_shot_count_is_four=PASS。",
+          "quality_agent_report.status=PASS。",
+          "provider raw request/response body not stored。"
+        ],
+        "audit_focus": "重点检查图像文件、质检报告和真实 TUI 截图是否一起出现，避免只展示静态概念图。",
+        "boundary": "该场景不证明生产级视频制作平台或无限制外部 provider 调用。",
+        "expected_outputs": [
+          "4 张分镜图文件存在且非空。",
+          "分镜使用一致的 style_bible_id 和 character_bible_id。",
+          "质检 Agent 对风格、角色、TUI 截图、provider payload redaction 给出 PASS。"
+        ],
+        "persona": "短视频创作者或小工作室制片人",
+        "user_goal": "输入一个短视频点子，让系统生成创作工作流、统一风格分镜图、质检报告和证据链。",
+        "user_steps": [
+          "打开视频创作工作流验收页或 V9-UA 图 4。",
+          "查看 4 张 storyboard image、style_bible_id、character_bible_id 和 provider invocation refs。",
+          "查看质检 Agent 报告、TUI 截图和 workflow-agent-state 图。"
+        ],
+        "when_to_use": "当用户想快速验证视频创意、看分镜视觉方向、并确认输出经过质量 Agent 审查时使用。"
+      },
+      "scenario_id": "US-V9-08",
+      "status": "PASS",
+      "title": "视频创作分镜工作流",
+      "visible_checks": []
+    },
+    {
+      "blocker": null,
+      "capability_visible_to_user": "WorkflowDiff proposal / no mutation before confirmation",
+      "evidence_refs": [
+        "../v9-6-workflow-studio/workflow_diff_proposal.json"
+      ],
+      "evidence_scope": "real_runtime_fixture",
+      "owner_stage": "V9-6",
+      "runtime_backed": true,
+      "scenario_detail": {
+        "acceptance_criteria": [
+          "WorkflowDiff proposal exists。",
+          "manual confirmation required before mutation。",
+          "source_agent_direct_mutation_denied。"
+        ],
+        "audit_focus": "重点检查自然语言优化仍是 proposal-first，而不是自动编辑工作流。",
+        "boundary": "该场景不证明 autonomous workflow editing ready。",
+        "expected_outputs": [
+          "生成可审查 WorkflowDiff。",
+          "用户确认前不写 WorkflowStore / StationRun / Artifact。",
+          "证据链保留 proposal 和 confirmation refs。"
+        ],
+        "persona": "希望通过自然语言迭代工作流的产品/运营用户",
+        "user_goal": "用自然语言提出优化要求，让系统生成 WorkflowDiff proposal，而不是直接修改已运行工作流。",
+        "user_steps": [
+          "打开 workflow_diff_proposal.json。",
+          "检查 diff proposal 的 target refs、change summary 和 manual confirmation 边界。",
+          "确认 source=agent 没有直接 durable mutation。"
+        ],
+        "when_to_use": "当用户想调整流程、角色、工位或输出格式，但仍要求人工确认后才应用时使用。"
+      },
+      "scenario_id": "US-V9-09",
+      "status": "PASS",
+      "title": "自然语言优化工作流",
+      "visible_checks": []
+    }
+  ],
+  "scenario_count": 9,
+  "schema_version": "v9.user_scenario_coverage_review.v1",
+  "special_stage_audit": {
+    "acceptance_plan_complete": "PASS",
+    "purpose": "Close the human-visible acceptance gap for Roman Forum debate, parallel Agent orchestration, video storyboard workflow, and natural-language optimization scenarios.",
+    "runtime_evidence_required": true,
+    "spec_clarity": "PASS",
+    "stage_id": "V9-UA",
+    "stage_name": "V9 User Scenario Acceptance Special Audit",
+    "status": "PASS",
+    "user_scenarios_explicit": "PASS"
+  },
+  "status": "PASS"
+}

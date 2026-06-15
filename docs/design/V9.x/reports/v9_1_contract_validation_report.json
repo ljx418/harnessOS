@@ -1,0 +1,406 @@
+{
+  "created_at": "2026-06-10T06:30:10Z",
+  "fixture_parse_results": [
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/coding/auto_commit_without_human_approval.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/coding/auto_deploy_without_production_gate.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/coding/auto_push_without_release_gate.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/coding/review_summary_as_approval_attempt.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/coding/unreviewed_patch_apply_attempt.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/evidence/v9_1_contract_freeze_sample.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/evidence/v9_8_reject_planning_only_sample.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/schema-negative/artifact_lineage_missing_producer_attempt.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/schema-negative/expired_human_authorization_ref.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/schema-negative/raw_secret_in_evidence.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/schema-negative/source_agent_durable_mutation.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/terminal/terminal_git_push_attempt.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/terminal/terminal_network_without_policy.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/terminal/terminal_production_deploy_attempt.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/terminal/terminal_sensitive_read_attempt.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/terminal/terminal_symlink_escape.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/terminal/terminal_workspace_escape.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/terminal/workspace_scoped_test_and_diff_capture.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/user-scenarios/us_v9_01_controlled_runtime_review.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/user-scenarios/us_v9_02_orchestration_review.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/user-scenarios/us_v9_03_coding_workflow_review.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/user-scenarios/us_v9_04_terminal_worker_review.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/user-scenarios/us_v9_05_studio_review.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/user-scenarios/us_v9_06_final_dashboard_review.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/user-scenarios/us_v9_07_roman_forum_debate.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/user-scenarios/us_v9_08_video_storyboard_workflow.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/user-scenarios/us_v9_09_nl_workflow_optimization.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/v9-2-controlled-executor/artifact_write_append_only_with_approval_gate.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/v9-2-controlled-executor/expired_human_authorization_ref_denied.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/v9-2-controlled-executor/idempotency_duplicate_returns_prior_ref.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/v9-2-controlled-executor/kill_switch_denied_blocks_action.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/v9-2-controlled-executor/quality_evaluation_append_only_with_approval_gate.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/v9-2-controlled-executor/source_agent_durable_mutation_denied.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/v9-2-controlled-executor/station_rerun_with_user_confirmed.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/v9-2-controlled-executor/workflow_instance_start_with_human_authorization_ref.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/v9-3-orchestration/fan_in_missing_attribution.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/v9-3-orchestration/retry_overwrites_old_attempt.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/v9-3-orchestration/serial_parallel_fan_in_out_recovery.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/v9-3-orchestration/source_agent_direct_mutation_attempt.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/fixtures/v9-4-coding-workflow/small_code_change_proposal.json",
+      "status": "PASS"
+    }
+  ],
+  "invariant_results": [
+    {
+      "check_id": "durable_mutation_authorization_required_for_artifact.write",
+      "details": "operation appears in AgentExecutionEnvelope authorization invariant",
+      "status": "PASS"
+    },
+    {
+      "check_id": "durable_mutation_authorization_required_for_quality.evaluation.create",
+      "details": "operation appears in AgentExecutionEnvelope authorization invariant",
+      "status": "PASS"
+    },
+    {
+      "check_id": "durable_mutation_authorization_required_for_station.rerun",
+      "details": "operation appears in AgentExecutionEnvelope authorization invariant",
+      "status": "PASS"
+    },
+    {
+      "check_id": "durable_mutation_authorization_required_for_workflow.instance.start",
+      "details": "operation appears in AgentExecutionEnvelope authorization invariant",
+      "status": "PASS"
+    },
+    {
+      "check_id": "source_agent_durable_mutation_denied",
+      "details": "AgentExecutionEnvelope contains source=agent denial branch",
+      "status": "PASS"
+    },
+    {
+      "check_id": "agent_execution_envelope.schema.json_additional_properties_false",
+      "details": "schema must be strict",
+      "status": "PASS"
+    },
+    {
+      "check_id": "agent_execution_policy.schema.json_additional_properties_false",
+      "details": "schema must be strict",
+      "status": "PASS"
+    },
+    {
+      "check_id": "approval_gate_decision.schema.json_additional_properties_false",
+      "details": "schema must be strict",
+      "status": "PASS"
+    },
+    {
+      "check_id": "artifact_lineage_record.schema.json_additional_properties_false",
+      "details": "schema must be strict",
+      "status": "PASS"
+    },
+    {
+      "check_id": "capability_resolver_decision.schema.json_additional_properties_false",
+      "details": "schema must be strict",
+      "status": "PASS"
+    },
+    {
+      "check_id": "evidence_package.schema.json_additional_properties_false",
+      "details": "schema must be strict",
+      "status": "PASS"
+    },
+    {
+      "check_id": "execution_evidence.schema.json_additional_properties_false",
+      "details": "schema must be strict",
+      "status": "PASS"
+    },
+    {
+      "check_id": "final_acceptance_dashboard.schema.json_additional_properties_false",
+      "details": "schema must be strict",
+      "status": "PASS"
+    },
+    {
+      "check_id": "high_risk_human_decision.schema.json_additional_properties_false",
+      "details": "schema must be strict",
+      "status": "PASS"
+    },
+    {
+      "check_id": "human_authorization_ref.schema.json_additional_properties_false",
+      "details": "schema must be strict",
+      "status": "PASS"
+    },
+    {
+      "check_id": "kill_switch_decision.schema.json_additional_properties_false",
+      "details": "schema must be strict",
+      "status": "PASS"
+    },
+    {
+      "check_id": "orchestration_message.schema.json_additional_properties_false",
+      "details": "schema must be strict",
+      "status": "PASS"
+    },
+    {
+      "check_id": "rollback_descriptor.schema.json_additional_properties_false",
+      "details": "schema must be strict",
+      "status": "PASS"
+    },
+    {
+      "check_id": "timeout_policy.schema.json_additional_properties_false",
+      "details": "schema must be strict",
+      "status": "PASS"
+    },
+    {
+      "check_id": "v9_3_agent_descriptor.schema.json_additional_properties_false",
+      "details": "schema must be strict",
+      "status": "PASS"
+    },
+    {
+      "check_id": "v9_3_attempt_history_record.schema.json_additional_properties_false",
+      "details": "schema must be strict",
+      "status": "PASS"
+    },
+    {
+      "check_id": "v9_3_branch_state.schema.json_additional_properties_false",
+      "details": "schema must be strict",
+      "status": "PASS"
+    },
+    {
+      "check_id": "v9_3_conflict_review_record.schema.json_additional_properties_false",
+      "details": "schema must be strict",
+      "status": "PASS"
+    },
+    {
+      "check_id": "v9_3_fan_in_join_decision.schema.json_additional_properties_false",
+      "details": "schema must be strict",
+      "status": "PASS"
+    },
+    {
+      "check_id": "v9_3_fan_out_dispatch.schema.json_additional_properties_false",
+      "details": "schema must be strict",
+      "status": "PASS"
+    },
+    {
+      "check_id": "v9_3_lost_worker_recovery_decision.schema.json_additional_properties_false",
+      "details": "schema must be strict",
+      "status": "PASS"
+    },
+    {
+      "check_id": "v9_3_orchestration_run.schema.json_additional_properties_false",
+      "details": "schema must be strict",
+      "status": "PASS"
+    },
+    {
+      "check_id": "v9_3_station_agent_binding.schema.json_additional_properties_false",
+      "details": "schema must be strict",
+      "status": "PASS"
+    }
+  ],
+  "notes": "Readiness validation only. This report does not approve runtime implementation.",
+  "runtime_evidence": false,
+  "schema_parse_results": [
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/schemas/agent_execution_envelope.schema.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/schemas/agent_execution_policy.schema.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/schemas/approval_gate_decision.schema.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/schemas/artifact_lineage_record.schema.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/schemas/capability_resolver_decision.schema.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/schemas/evidence_package.schema.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/schemas/execution_evidence.schema.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/schemas/final_acceptance_dashboard.schema.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/schemas/high_risk_human_decision.schema.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/schemas/human_authorization_ref.schema.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/schemas/kill_switch_decision.schema.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/schemas/orchestration_message.schema.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/schemas/rollback_descriptor.schema.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/schemas/timeout_policy.schema.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/schemas/v9_3_agent_descriptor.schema.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/schemas/v9_3_attempt_history_record.schema.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/schemas/v9_3_branch_state.schema.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/schemas/v9_3_conflict_review_record.schema.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/schemas/v9_3_fan_in_join_decision.schema.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/schemas/v9_3_fan_out_dispatch.schema.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/schemas/v9_3_lost_worker_recovery_decision.schema.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/schemas/v9_3_orchestration_run.schema.json",
+      "status": "PASS"
+    },
+    {
+      "path": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/schemas/v9_3_station_agent_binding.schema.json",
+      "status": "PASS"
+    }
+  ],
+  "schema_version": "v9_1.contract_validation_report.v1",
+  "stage_id": "V9-1",
+  "status": "PASS"
+}

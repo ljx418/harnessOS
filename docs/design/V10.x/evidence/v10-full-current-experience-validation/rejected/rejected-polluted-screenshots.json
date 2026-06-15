@@ -1,0 +1,38 @@
+[
+  {
+    "path": "docs/design/V10.x/evidence/v10-real-cli-revalidation/tui-after-input.png",
+    "decision": "REJECTED",
+    "reason": "Previous screenshot capture was not window-scoped and may include non-project sensitive desktop content.",
+    "original_sha256_before_sanitization": "af43838cf8058cac858f0976b3beca3d93b01fae9c88fd34ae72e2776c7e9ecb",
+    "original_byte_size_before_sanitization": 208,
+    "sanitized_sha256": "af43838cf8058cac858f0976b3beca3d93b01fae9c88fd34ae72e2776c7e9ecb",
+    "sanitized_byte_size": 208
+  },
+  {
+    "path": "docs/design/V10.x/evidence/v10-real-cli-revalidation/tui-session.png",
+    "decision": "REJECTED",
+    "reason": "Previous screenshot capture was not window-scoped and may include non-project sensitive desktop content.",
+    "original_sha256_before_sanitization": "af43838cf8058cac858f0976b3beca3d93b01fae9c88fd34ae72e2776c7e9ecb",
+    "original_byte_size_before_sanitization": 208,
+    "sanitized_sha256": "af43838cf8058cac858f0976b3beca3d93b01fae9c88fd34ae72e2776c7e9ecb",
+    "sanitized_byte_size": 208
+  },
+  {
+    "path": "docs/design/V10.x/evidence/v10-real-cli-revalidation/tui-start.png",
+    "decision": "REJECTED",
+    "reason": "Previous screenshot capture was not window-scoped and may include non-project sensitive desktop content.",
+    "original_sha256_before_sanitization": "af43838cf8058cac858f0976b3beca3d93b01fae9c88fd34ae72e2776c7e9ecb",
+    "original_byte_size_before_sanitization": 208,
+    "sanitized_sha256": "af43838cf8058cac858f0976b3beca3d93b01fae9c88fd34ae72e2776c7e9ecb",
+    "sanitized_byte_size": 208
+  },
+  {
+    "path": "docs/design/V10.x/evidence/v10-real-cli-revalidation/tui-trace.png",
+    "decision": "REJECTED",
+    "reason": "Previous screenshot capture was not window-scoped and may include non-project sensitive desktop content.",
+    "original_sha256_before_sanitization": "af43838cf8058cac858f0976b3beca3d93b01fae9c88fd34ae72e2776c7e9ecb",
+    "original_byte_size_before_sanitization": 208,
+    "sanitized_sha256": "af43838cf8058cac858f0976b3beca3d93b01fae9c88fd34ae72e2776c7e9ecb",
+    "sanitized_byte_size": 208
+  }
+]

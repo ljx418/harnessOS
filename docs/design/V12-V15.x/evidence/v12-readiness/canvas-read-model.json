@@ -1,0 +1,43 @@
+{
+  "schema_version": "v12.canvas_read_model.v1",
+  "canvas_read_model_id": "canvas-v12-local-markdown-summary",
+  "workspace_id": "ws-v12-technical-content",
+  "project_id": "proj-v12-local-knowledge",
+  "app_id": "app-v12-markdown-workflow",
+  "read_only": true,
+  "nodes": [
+    {
+      "node_id": "folder_input",
+      "label": "文件夹输入",
+      "node_kind": "input",
+      "status": "completed",
+      "position": {
+        "x": 0,
+        "y": 80
+      },
+      "inspector_ref": "inspector-folder-input"
+    },
+    {
+      "node_id": "quality_check",
+      "label": "质量检查 Agent",
+      "node_kind": "reviewer",
+      "status": "waiting_approval",
+      "position": {
+        "x": 840,
+        "y": 300
+      },
+      "inspector_ref": "inspector-quality-check"
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "folder_input-quality_check",
+      "source_node_id": "folder_input",
+      "target_node_id": "quality_check"
+    }
+  ],
+  "evidence_refs": [
+    "docs/design/V12-V15.x/evidence/v12-readiness/v12-readonly-canvas-foundation.png"
+  ],
+  "created_at": "2026-06-11T00:00:00Z"
+}

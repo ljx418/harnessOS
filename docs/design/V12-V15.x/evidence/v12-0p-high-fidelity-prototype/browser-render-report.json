@@ -1,0 +1,31 @@
+{
+  "schema_version": "v12_0p_browser_render_report.v1",
+  "stage_id": "V12-0P",
+  "status": "PASS_FOR_DESIGN_REVIEW",
+  "created_at": "2026-06-15T00:00:00+08:00",
+  "renderer": "playwright_chromium",
+  "render_command": "apps/workflow-console/node_modules/.bin/playwright screenshot --viewport-size=1440,920 file:///Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/xpert-aligned-workbench-v3.html docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/xpert-aligned-workbench-v3.playwright.png",
+  "source": {
+    "path": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/xpert-aligned-workbench-v3.html",
+    "sha256": "43639afb45e0e24a241a03d98bd967a5ab019bd2450d91eb97a786cdc7a3a6bc"
+  },
+  "output": {
+    "path": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/xpert-aligned-workbench-v3.playwright.png",
+    "sha256": "393eb8adfd5166508d13f455dc50ce78df775007636f4750bde8ece72557ed6b",
+    "exists": true
+  },
+  "viewport": {
+    "width": 1440,
+    "height": 920
+  },
+  "evidence_scope": "browser_rendered_design_prototype",
+  "prototype_focus": "workflow-platform primary route, contextual secondary navigation, canvas resource drawer and component-library review",
+  "runtime_backed": false,
+  "browser_implementation_backed": false,
+  "bff_route_backed": false,
+  "limitations": [
+    "This report proves the design-only HTML prototype can be rendered by a local Chromium browser.",
+    "It does not prove HarnessOS browser implementation, BFF routing, DTO correctness or runtime execution.",
+    "It cannot be used as Xpert parity, product-grade frontend completion, complete Workflow Studio, production readiness or Agent executor readiness evidence."
+  ]
+}

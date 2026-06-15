@@ -1,0 +1,59 @@
+{
+  "schema_version": "v12.acceptance_data.v1",
+  "stage_id": "V12",
+  "status": "PASS",
+  "evidence_scope": "browser_e2e",
+  "screenshots": [
+    "docs/design/V12-V15.x/evidence/v12-readiness/v12-readonly-canvas-foundation.png"
+  ],
+  "schema_parse_result": "PASS",
+  "browser_network_result": "PASS",
+  "component_foundation": {
+    "status": "PASS",
+    "style": "shadcn-style",
+    "dependencies": [
+      "@radix-ui/react-slot",
+      "@radix-ui/react-tabs",
+      "@radix-ui/react-tooltip",
+      "@radix-ui/react-scroll-area",
+      "@radix-ui/react-separator",
+      "class-variance-authority",
+      "clsx",
+      "tailwind-merge",
+      "lucide-react",
+      "tailwindcss"
+    ],
+    "build_log_ref": "docs/design/V12-V15.x/evidence/v12-readiness/component-foundation-build.log",
+    "component_inventory_ref": "docs/design/V12-V15.x/evidence/v12-readiness/component-inventory-review.md"
+  },
+  "ux_checks": [
+    {
+      "check_id": "ux_v12_product_entry_visible",
+      "status": "PASS",
+      "evidence_ref": "apps/workflow-console/e2e/workflow-v12-readonly-canvas-foundation.spec.ts"
+    },
+    {
+      "check_id": "ux_v12_canvas_shell_visible",
+      "status": "PASS",
+      "evidence_ref": "apps/workflow-console/e2e/workflow-v12-readonly-canvas-foundation.spec.ts"
+    },
+    {
+      "check_id": "ux_v12_disabled_canvas_action_has_reason",
+      "status": "PASS",
+      "evidence_ref": "apps/workflow-console/e2e/workflow-v12-readonly-canvas-foundation.spec.ts"
+    },
+    {
+      "check_id": "ux_v12_workflowdiff_handoff_visible",
+      "status": "PASS",
+      "evidence_ref": "apps/workflow-console/e2e/workflow-v12-readonly-canvas-foundation.spec.ts"
+    },
+    {
+      "check_id": "ux_v12_agent_profile_visible",
+      "status": "PASS",
+      "evidence_ref": "apps/workflow-console/e2e/workflow-v12-readonly-canvas-foundation.spec.ts"
+    }
+  ],
+  "claim_scan": "PASS",
+  "redaction_scan": "PASS",
+  "created_at": "2026-06-11T00:00:00Z"
+}

@@ -1,0 +1,248 @@
+{
+  "schema_version": "v10.full_current_experience_validation.v1",
+  "created_at": "2026-06-10T00:00:00Z",
+  "overall_status": "PASS",
+  "accepted_evidence_count": 13,
+  "rejected_evidence_count": 4,
+  "command_results": [
+    {
+      "id": "mission_tui_test",
+      "cmd": "npm --prefix apps/mission-tui test",
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_ms": 1372,
+      "stdout_ref": "docs/design/V10.x/evidence/v10-full-current-experience-validation/raw/mission_tui_test.stdout.txt",
+      "stderr_ref": "docs/design/V10.x/evidence/v10-full-current-experience-validation/raw/mission_tui_test.stderr.txt",
+      "stdout_sha256": "b7254c5004899be0722533114ed2b3c2b05b44385d3e0e8ed57fe2eb25dad8fc",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_preview": "\n> @harnessos/mission-tui@0.1.0 test\n> node --test __tests__/*.test.js\n\n✔ renders CLI-native shell with status line and bottom composer (4.055305ms)\n✔ CLI default fixture resolves when launched from package cwd (122.756794ms)\n✔ renders all required V10 user scenarios in wide fixture (1.252218ms)\n✔ rejects negative fixtures that would create false green (2.205251ms)\n✔ generates V10 shell and final acceptance evidence (6.418616ms)\n✔ interactive mode appends live user input without durable mutation (2.072502ms)\n✔ parses gateway stdio response shape and rejects invalid lines (0.634806ms)\n✔ gateway reducer renders session, turn, trace, and assistant output (2.580253ms)\n✔ agent-backed turn uses a gateway client and is not local-parser evidence (2.003343ms)\n✔ agent-backed failed gateway turn is visible but cannot satisfy acceptance (2.129456ms)\n✔ dotenv parser supports local V10 provider configuration without exposing secret values (0.582883ms)\n✔ dotenv loader skips empty and placeholder provider keys (4.352845ms)\n✔ interactive multi-agent discussion input is visible in current viewport (1.714843ms)\nℹ tests 13\nℹ suites 0\nℹ pass 13\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 660.860924\n",
+      "stderr_preview": ""
+    },
+    {
+      "id": "agent_backed_once",
+      "cmd": "npm --prefix apps/mission-tui run start -- --agent-backed-once 请回复：V10 TUI provider-backed smoke PASS --model deepseek-chat",
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_ms": 8528,
+      "stdout_ref": "docs/design/V10.x/evidence/v10-full-current-experience-validation/raw/agent_backed_once.stdout.txt",
+      "stderr_ref": "docs/design/V10.x/evidence/v10-full-current-experience-validation/raw/agent_backed_once.stderr.txt",
+      "stdout_sha256": "17b993dfad0004a2d41a842ce98756b04aedf345cc50d0953ed7c733dd66fa59",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_preview": "\n> @harnessos/mission-tui@0.1.0 start\n> node src/cli.js --agent-backed-once 请回复：V10 TUI provider-backed smoke PASS --model deepseek-chat\n\nHarnessOS  harnessOS  phase:completed  gateway:sess_b44765dda994  turn:turn_ebc…\n────────────────────────────────────────────────────────────────────────────────\n当前选中: WorkflowDiff proposal · 确认前不会 apply / publish / run · actions:confirm_pro…\n────────────────────────────────────────────────────────────────────────────────\n… 已折叠历史内容 52 行，可用 /history 查看\n\n▣ Gateway 事件  completed  item_2e9180ce6e61\n  事件: item.delta  session:sess_b44765dda994  turn:turn_ebc7921e5741\n  Trace: trace_8db032946371\n  V10 TUI provider-backed smoke PASS\n  证据: docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json\n\n▣ Gateway 事件  completed  item_efb3a3703186\n  事件: turn.completed  session:sess_b44765dda994  turn:turn_ebc7921e5741\n  Trace: trace_8db032946371\n  Gateway turn completed\n  证据: docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json\n\n▣ 助手  completed  gateway-assistant-13\n  V10 TUI provider-backed smoke PASS\n  证据: docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json\n\n────────────────────────────────────────────────────────────────────────────────\n› 输入自然语言目标，或使用 /trace /session /exit\n",
+      "stderr_preview": ""
+    },
+    {
+      "id": "v10_8_acceptance",
+      "cmd": "npm --prefix apps/mission-tui run acceptance:v10-8",
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_ms": 5099,
+      "stdout_ref": "docs/design/V10.x/evidence/v10-full-current-experience-validation/raw/v10_8_acceptance.stdout.txt",
+      "stderr_ref": "docs/design/V10.x/evidence/v10-full-current-experience-validation/raw/v10_8_acceptance.stderr.txt",
+      "stdout_sha256": "64a0dce1efe0341b14ff0b15d116f6a8d451b1c7893193139f5d577798f6f7ae",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_preview": "\n> @harnessos/mission-tui@0.1.0 acceptance:v10-8\n> node src/agent-backed-acceptance.js\n\n{\n  \"stage_id\": \"V10-8\",\n  \"status\": \"PASS\",\n  \"allowed_claim\": \"V10-8 complete: Agent-backed Mission TUI chatbot bridge ready for review.\",\n  \"evidence_scope\": \"agent_backed_gateway_turn\",\n  \"runtime_backed\": true,\n  \"fixture_only\": false,\n  \"local_parser_only\": false,\n  \"provider_mode\": \"provider-backed\",\n  \"provider_backed\": true,\n  \"gateway_session_started\": true,\n  \"gateway_turn_started\": true,\n  \"gateway_turn_completed\": true,\n  \"gateway_turn_failed\": false,\n  \"assistant_output_from_gateway\": true,\n  \"session_id\": \"sess_c06939bbf360\",\n  \"turn_id\": \"turn_5702fe58de01\",\n  \"trace_id\": \"trace_6ea0f4304fdc\",\n  \"event_types\": [\n    \"turn.started\",\n    \"item.delta\",\n    \"turn.completed\"\n  ],\n  \"terminal_screenshots\": [\n    \"docs/design/V10.x/evidence/v10-8-agent-backed-tui/agent-backed-terminal-180x55.txt\"\n  ],\n  \"raw_transcript_ref\": \"docs/design/V10.x/evidence/v10-8-agent-backed-tui/agent-backed-raw-result.json\",\n  \"negative_local_parser_result\": {\n    \"local_parser_can_satisfy_v10_8\": false,\n    \"required_mode\": \"--agent-backed\"\n  },\n  \"stderr_lines_recorded_as_warnings\": 2,\n  \"errors\": [],\n  \"claim_scan\": \"PASS\",\n  \"redaction_scan\": \"PASS\",\n  \"forbidden_claim_violations\": []\n}\n",
+      "stderr_preview": ""
+    },
+    {
+      "id": "v10_final_acceptance",
+      "cmd": "npm --prefix apps/mission-tui run acceptance:v10-final",
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_ms": 393,
+      "stdout_ref": "docs/design/V10.x/evidence/v10-full-current-experience-validation/raw/v10_final_acceptance.stdout.txt",
+      "stderr_ref": "docs/design/V10.x/evidence/v10-full-current-experience-validation/raw/v10_final_acceptance.stderr.txt",
+      "stdout_sha256": "8b449a30e05ac6795ac9d6a5025a0c01c1c3ea3c878563e7f2d2e116caa5b75d",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_preview": "\n> @harnessos/mission-tui@0.1.0 acceptance:v10-final\n> node src/final-acceptance.js\n\n{\n  \"stage_id\": \"V10-9\",\n  \"status\": \"PASS\",\n  \"allowed_claim\": \"V10 complete: CLI-native Agent-backed TUI experience and explainability baseline ready for review.\",\n  \"evidence_scope\": \"v10_1_to_v10_8_aggregated_evidence\",\n  \"final_claim_allowed\": true,\n  \"v10_1_to_7_baseline\": {\n    \"status\": \"PASS\",\n    \"allowed_claim\": \"V10-1..V10-7 complete: CLI-native read-model TUI experience baseline ready for review.\",\n    \"read_model_baseline_claim_allowed\": true,\n    \"evidence_ref\": \"docs/design/V10.x/evidence/v10-7-final-acceptance/v10-final-acceptance-data.json\"\n  },\n  \"v10_8_agent_backed_bridge\": {\n    \"status\": \"PASS\",\n    \"evidence_scope\": \"agent_backed_gateway_turn\",\n    \"runtime_backed\": true,\n    \"provider_mode\": \"provider-backed\",\n    \"provider_backed\": true,\n    \"gateway_session_started\": true,\n    \"gateway_turn_started\": true,\n    \"gateway_turn_completed\": true,\n    \"gateway_turn_failed\": false,\n    \"assistant_output_from_gateway\": true,\n    \"session_id\": \"sess_c06939bbf360\",\n    \"turn_id\": \"turn_5702fe58de01\",\n    \"trace_id\": \"trace_6ea0f4304fdc\",\n    \"evidence_ref\": \"docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json\"\n  },\n  \"bounded_interpretation\": {\n    \"production_ready\": false,\n    \"full_production_ga\": false,\n    \"agent_executor_ready\": false,\n    \"complete_workflow_studio_ready\": false,\n    \"full_multi_agent_orchestration_ready\": false,\n    \"autonomous_workflow_editing_ready\": false,\n    \"codex_claude_experience_fully_matched\": false\n  },\n  \"provider_backed_required_for_v10_final\": false,\n  \"provider_backed_claim_allowed\": true,\n  \"claim_scan\": \"PASS\",\n  \"redaction_scan\": \"PASS\",\n  \"drawio_xml\": \"PASS\",\n  \"blockers\": []\n}\n",
+      "stderr_preview": ""
+    },
+    {
+      "id": "v10_pytest",
+      "cmd": "./.venv/bin/python -m pytest tests/test_v10_mission_tui_runtime.py tests/test_v10_tui_experience_planning.py -q",
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_ms": 9159,
+      "stdout_ref": "docs/design/V10.x/evidence/v10-full-current-experience-validation/raw/v10_pytest.stdout.txt",
+      "stderr_ref": "docs/design/V10.x/evidence/v10-full-current-experience-validation/raw/v10_pytest.stderr.txt",
+      "stdout_sha256": "ccf5d237781fcde90bf15bb1bba5131d364854eeefaabebbac139bed0b5c9398",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_preview": ".....                                                                    [100%]\n5 passed in 7.78s\n",
+      "stderr_preview": ""
+    },
+    {
+      "id": "v9_pytest",
+      "cmd": "./.venv/bin/python -m pytest tests/test_v9_1_agent_executor_safety_gate.py tests/test_v9_1_internal_audit_closure.py tests/test_v9_1_readiness_tooling.py tests/test_v9_1_safety_gate_evidence.py tests/test_v9_2_controlled_executor_runtime.py tests/test_v9_2_pre_implementation_closure.py tests/test_v9_2_runtime_evidence.py tests/test_v9_3_multi_agent_orchestration_runtime.py tests/test_v9_4_coding_workflow_pilot.py tests/test_v9_4_readiness_closure.py tests/test_v9_5_governed_terminal_worker.py tests/test_v9_6_workflow_studio.py tests/test_v9_7_production_governance.py tests/test_v9_8_final_acceptance.py tests/test_v9_video_workflow_user_scenario_e2e.py -q",
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_ms": 58623,
+      "stdout_ref": "docs/design/V10.x/evidence/v10-full-current-experience-validation/raw/v9_pytest.stdout.txt",
+      "stderr_ref": "docs/design/V10.x/evidence/v10-full-current-experience-validation/raw/v9_pytest.stderr.txt",
+      "stdout_sha256": "b4417fe461c85fb6fa06fd775b510fd76e2fd96746635b2a8d3ea5b4e8ba08e0",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_preview": "........................................................................ [ 88%]\n.........                                                                [100%]\n=============================== warnings summary ===============================\ncore/schemas/__init__.py:54\n  /Users/Zhuanz/Desktop/workspace/harnessOS/core/schemas/__init__.py:54: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n    class Message(BaseModel):\n\n.venv/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py:325\n.venv/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py:325\n.venv/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py:325\n  /Users/Zhuanz/Desktop/workspace/harnessOS/.venv/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py:325: PydanticDeprecatedSince20: `json_encoders` is deprecated. See https://docs.pydantic.dev/2.13/concepts/serialization/#custom-serializers for alternatives. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n    warnings.warn(\n\ncore/schemas/__init__.py:100\n  /Users/Zhuanz/Desktop/workspace/harnessOS/core/schemas/__init__.py:100: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n    class WorkflowTask(BaseModel):\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n81 passed, 5 warnings in 53.69s\n",
+      "stderr_preview": ""
+    },
+    {
+      "id": "v10_drawio_xml",
+      "cmd": "xmllint --noout docs/design/V10.x/v10_current_gap_analysis.drawio",
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_ms": 7,
+      "stdout_ref": "docs/design/V10.x/evidence/v10-full-current-experience-validation/raw/v10_drawio_xml.stdout.txt",
+      "stderr_ref": "docs/design/V10.x/evidence/v10-full-current-experience-validation/raw/v10_drawio_xml.stderr.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_preview": "",
+      "stderr_preview": ""
+    },
+    {
+      "id": "v9_drawio_xml",
+      "cmd": "xmllint --noout docs/design/V9.x/v9_current_gap_analysis.drawio",
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_ms": 7,
+      "stdout_ref": "docs/design/V10.x/evidence/v10-full-current-experience-validation/raw/v9_drawio_xml.stdout.txt",
+      "stderr_ref": "docs/design/V10.x/evidence/v10-full-current-experience-validation/raw/v9_drawio_xml.stderr.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_preview": "",
+      "stderr_preview": ""
+    }
+  ],
+  "evidence_refs": {
+    "v9_final": {
+      "path": "docs/design/V9.x/evidence/v9-8-final-acceptance/v9-final-acceptance-data.json",
+      "sha256": "18dd458df902693df219cc86d4030afc25fd7ac976c667a62e290ce2aa4cecb5"
+    },
+    "v9_user_scenarios": {
+      "path": "docs/design/V9.x/evidence/v9-8-final-acceptance/v9-final-user-scenario-matrix.json",
+      "sha256": "2102f830c9401e277bafb164d3004a0e0b4f2f14fcb6e82a48185df7b4309820"
+    },
+    "v10_8": {
+      "path": "docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json",
+      "sha256": "0f13841a0fb7a19e99ca990f5f5aab59f49432f584cd34cedef5f58511da4fdd"
+    },
+    "v10_final": {
+      "path": "docs/design/V10.x/evidence/v10-9-final-acceptance/v10-final-acceptance-data.json",
+      "sha256": "9535bcc3a87837c5fcc1d6c908e2cd868e38837a5c733e0cf03402475ca10664"
+    },
+    "v10_local": {
+      "path": "docs/design/V10.x/evidence/v10-cli-local-validation/validation-summary.json",
+      "sha256": "d6ceb93214c67c110e4d0555b6738ee78171fc711c5a9b96a6cdc7380e8581be"
+    }
+  },
+  "provider_backed": true,
+  "gateway_turn_completed": true,
+  "runtime_backed_scenarios": [
+    {
+      "scenario_id": "US-V9-01",
+      "status": "PASS",
+      "evidence_scope": "runtime_backed",
+      "evidence_ref": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-2-controlled-executor-runtime/acceptance-data.json"
+    },
+    {
+      "scenario_id": "US-V9-02",
+      "status": "PASS",
+      "evidence_scope": "runtime_backed",
+      "evidence_ref": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-3-orchestration-runtime/acceptance-data.json"
+    },
+    {
+      "scenario_id": "US-V9-03",
+      "status": "PASS",
+      "evidence_scope": "runtime_backed",
+      "evidence_ref": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/acceptance-data.json"
+    },
+    {
+      "scenario_id": "US-V9-04",
+      "status": "PASS",
+      "evidence_scope": "runtime_backed",
+      "evidence_ref": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-5-terminal-worker/acceptance-data.json"
+    },
+    {
+      "scenario_id": "US-V9-05",
+      "status": "PASS",
+      "evidence_scope": "runtime_backed",
+      "evidence_ref": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-6-workflow-studio/acceptance-data.json"
+    },
+    {
+      "scenario_id": "US-V9-07",
+      "status": "PASS",
+      "evidence_scope": "real_runtime_fixture",
+      "evidence_ref": "roman-forum-discussion.json"
+    },
+    {
+      "scenario_id": "US-V9-08",
+      "status": "PASS",
+      "evidence_scope": "real_provider_backed_runtime_fixture",
+      "evidence_ref": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-3-orchestration-runtime/storyboard-provider-evidence.json"
+    },
+    {
+      "scenario_id": "US-V9-09",
+      "status": "PASS",
+      "evidence_scope": "real_runtime_fixture",
+      "evidence_ref": null
+    }
+  ],
+  "fixture_or_read_model_scenarios": [],
+  "bounded_interpretation": {
+    "production_ready": false,
+    "agent_executor_ready": false,
+    "complete_workflow_studio_ready": false,
+    "full_multi_agent_orchestration_ready": false,
+    "unrestricted_terminal_worker_ready": false,
+    "production_terminal_automation_ready": false
+  },
+  "rejected_evidence": [
+    {
+      "path": "docs/design/V10.x/evidence/v10-real-cli-revalidation/tui-after-input.png",
+      "decision": "REJECTED",
+      "reason": "Previous screenshot capture was not window-scoped and may include non-project sensitive desktop content.",
+      "original_sha256_before_sanitization": "af43838cf8058cac858f0976b3beca3d93b01fae9c88fd34ae72e2776c7e9ecb",
+      "original_byte_size_before_sanitization": 208,
+      "sanitized_sha256": "af43838cf8058cac858f0976b3beca3d93b01fae9c88fd34ae72e2776c7e9ecb",
+      "sanitized_byte_size": 208
+    },
+    {
+      "path": "docs/design/V10.x/evidence/v10-real-cli-revalidation/tui-session.png",
+      "decision": "REJECTED",
+      "reason": "Previous screenshot capture was not window-scoped and may include non-project sensitive desktop content.",
+      "original_sha256_before_sanitization": "af43838cf8058cac858f0976b3beca3d93b01fae9c88fd34ae72e2776c7e9ecb",
+      "original_byte_size_before_sanitization": 208,
+      "sanitized_sha256": "af43838cf8058cac858f0976b3beca3d93b01fae9c88fd34ae72e2776c7e9ecb",
+      "sanitized_byte_size": 208
+    },
+    {
+      "path": "docs/design/V10.x/evidence/v10-real-cli-revalidation/tui-start.png",
+      "decision": "REJECTED",
+      "reason": "Previous screenshot capture was not window-scoped and may include non-project sensitive desktop content.",
+      "original_sha256_before_sanitization": "af43838cf8058cac858f0976b3beca3d93b01fae9c88fd34ae72e2776c7e9ecb",
+      "original_byte_size_before_sanitization": 208,
+      "sanitized_sha256": "af43838cf8058cac858f0976b3beca3d93b01fae9c88fd34ae72e2776c7e9ecb",
+      "sanitized_byte_size": 208
+    },
+    {
+      "path": "docs/design/V10.x/evidence/v10-real-cli-revalidation/tui-trace.png",
+      "decision": "REJECTED",
+      "reason": "Previous screenshot capture was not window-scoped and may include non-project sensitive desktop content.",
+      "original_sha256_before_sanitization": "af43838cf8058cac858f0976b3beca3d93b01fae9c88fd34ae72e2776c7e9ecb",
+      "original_byte_size_before_sanitization": 208,
+      "sanitized_sha256": "af43838cf8058cac858f0976b3beca3d93b01fae9c88fd34ae72e2776c7e9ecb",
+      "sanitized_byte_size": 208
+    }
+  ],
+  "redaction_scan": "PASS",
+  "redaction_violations": [],
+  "false_green_scan": "PASS",
+  "claim_guard": {
+    "allowed_final_claim": "V10 complete: CLI-native Agent-backed TUI experience and explainability baseline ready for review.",
+    "forbidden_positive_claims": [
+      "production ready",
+      "Agent executor ready",
+      "complete Workflow Studio ready",
+      "full multi-Agent orchestration ready",
+      "unrestricted terminal worker ready",
+      "production terminal automation ready"
+    ]
+  }
+}

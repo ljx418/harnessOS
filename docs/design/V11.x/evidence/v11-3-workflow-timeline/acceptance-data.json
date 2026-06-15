@@ -1,0 +1,23 @@
+{
+  "stage_id": "V11-3",
+  "status": "PASS",
+  "allowed_claim": "V11-3 complete: workflow state timeline slice ready for review.",
+  "evidence_scope": "tui_read_model_fixture",
+  "runtime_backed": false,
+  "workflow_timeline_rendered": true,
+  "required_states_present": true,
+  "confirmation_required": true,
+  "confirmation_state_visible": true,
+  "run_blocked_before_confirmation": true,
+  "durable_mutation_before_confirmation": false,
+  "planning_docs_as_runtime_evidence": false,
+  "evidence_refs": [
+    "docs/design/V11.x/evidence/v11-3-workflow-timeline/acceptance-data.json",
+    "docs/design/V11.x/evidence/v11-3-workflow-timeline/timeline-transcript.txt",
+    "docs/design/V11.x/evidence/v11-3-workflow-timeline/terminal-render.txt",
+    "docs/design/V11.x/evidence/v11-3-workflow-timeline/timeline-state.json"
+  ],
+  "errors": [],
+  "claim_scan": "PASS",
+  "redaction_scan": "PASS"
+}

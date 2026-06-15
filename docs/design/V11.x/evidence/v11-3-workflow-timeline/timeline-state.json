@@ -1,0 +1,63 @@
+{
+  "id": "v11-workflow-state-timeline",
+  "type": "workflow_timeline_block",
+  "status": "awaiting_confirmation",
+  "created_at": "2026-06-11T00:00:00.000Z",
+  "redacted": true,
+  "scenario_id": "US-V11-03",
+  "goal_ref": "goal-ref://v11/current-user-goal",
+  "workflow_spec_ref": "workflow-spec-ref://v11/proposed-spec",
+  "workflow_diff_ref": "workflow-diff-ref://v11/proposed-diff",
+  "runtime_report_ref": "runtime-report-ref://v11/pending-until-confirmed",
+  "evidence_refs": [
+    "docs/design/V11.x/evidence/v11-3-workflow-timeline/acceptance-data.json"
+  ],
+  "evidence_scope": "tui_read_model_fixture",
+  "confirmation_required": true,
+  "durable_mutation_before_confirmation": false,
+  "source": "user",
+  "timeline": [
+    {
+      "state": "goal",
+      "label": "目标已捕获：我想做一个多Agent的工作流，期望可以实现对同一个话题的不同角度讨论，最后有一个Agent能对讨论做出总结，要求至少执行三四轮讨论",
+      "status": "done",
+      "evidence_ref": "docs/design/V11.x/evidence/v11-3-workflow-timeline/acceptance-data.json"
+    },
+    {
+      "state": "spec",
+      "label": "WorkflowSpec 草案已生成",
+      "status": "done",
+      "evidence_ref": "workflow-spec-ref://v11/proposed-spec"
+    },
+    {
+      "state": "diff",
+      "label": "WorkflowDiff proposal 已生成",
+      "status": "done",
+      "evidence_ref": "workflow-diff-ref://v11/proposed-diff"
+    },
+    {
+      "state": "confirmation",
+      "label": "等待用户 confirm / revise / reject",
+      "status": "awaiting_confirmation",
+      "blocked_reason": "durable mutation requires explicit user confirmation"
+    },
+    {
+      "state": "run",
+      "label": "工作流运行",
+      "status": "blocked",
+      "blocked_reason": "blocked until WorkflowDiff is confirmed"
+    },
+    {
+      "state": "runtime_report",
+      "label": "Runtime Report",
+      "status": "pending",
+      "blocked_reason": "no runtime report before run"
+    },
+    {
+      "state": "evidence",
+      "label": "Evidence Chain",
+      "status": "pending",
+      "blocked_reason": "evidence is recorded only after governed runtime action"
+    }
+  ]
+}

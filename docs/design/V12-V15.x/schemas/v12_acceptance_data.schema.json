@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://harnessos.local/schemas/v12_acceptance_data.schema.json",
+  "title": "V12AcceptanceData",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "stage_id",
+    "status",
+    "evidence_scope",
+    "screenshots",
+    "schema_parse_result",
+    "browser_network_result",
+    "component_foundation",
+    "ux_checks",
+    "claim_scan",
+    "redaction_scan",
+    "created_at"
+  ],
+  "properties": {
+    "schema_version": { "const": "v12.acceptance_data.v1" },
+    "stage_id": { "const": "V12" },
+    "status": { "enum": ["PASS", "PARTIAL", "FAIL", "BLOCKED"] },
+    "evidence_scope": { "enum": ["browser_e2e", "read_only_canvas_fixture", "mixed"] },
+    "screenshots": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "schema_parse_result": { "enum": ["PASS", "FAIL"] },
+    "browser_network_result": { "enum": ["PASS", "FAIL"] },
+    "component_foundation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "style", "dependencies", "build_log_ref", "component_inventory_ref"],
+      "properties": {
+        "status": { "enum": ["PASS", "FAIL", "BLOCKED"] },
+        "style": { "const": "shadcn-style" },
+        "dependencies": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "build_log_ref": { "type": "string", "minLength": 1 },
+        "component_inventory_ref": { "type": "string", "minLength": 1 }
+      }
+    },
+    "ux_checks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["check_id", "status", "evidence_ref"],
+        "properties": {
+          "check_id": { "type": "string", "minLength": 1 },
+          "status": { "enum": ["PASS", "FAIL", "BLOCKED"] },
+          "evidence_ref": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "claim_scan": { "enum": ["PASS", "FAIL"] },
+    "redaction_scan": { "enum": ["PASS", "FAIL"] },
+    "created_at": { "type": "string", "format": "date-time" }
+  }
+}

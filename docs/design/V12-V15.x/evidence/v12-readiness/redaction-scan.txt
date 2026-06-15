@@ -1,0 +1,11 @@
+V12 redaction scan: PASS
+
+Scope:
+- apps/workflow-console/src/ui/v12
+- docs/design/V12-V15.x/evidence/v12-readiness
+- docs/design/V12-V15.x/fixtures/v12
+- docs/design/V12-V15.x/schemas
+
+Findings:
+- No raw secret, raw token, provider raw payload, connector raw payload or raw artifact content appears in V12 evidence outputs.
+- The browser screenshot uses redacted refs and product entity names only.

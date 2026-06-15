@@ -1,0 +1,18 @@
+{
+  "stage_id": "V11-4",
+  "status": "PASS",
+  "allowed_claim": "V11-4 complete: station and Agent explainability inspector ready for review.",
+  "evidence_scope": "v9_evidence_projection",
+  "runtime_backed": false,
+  "station_count": 5,
+  "station_agent_fields_visible": true,
+  "agent_executor_ready_claim": false,
+  "evidence_refs": [
+    "docs/design/V11.x/evidence/v11-4-station-agent-inspector/acceptance-data.json",
+    "docs/design/V11.x/evidence/v11-4-station-agent-inspector/inspector-transcript.txt",
+    "docs/design/V11.x/evidence/v11-4-station-agent-inspector/agent-projection.json"
+  ],
+  "errors": [],
+  "claim_scan": "PASS",
+  "redaction_scan": "PASS"
+}

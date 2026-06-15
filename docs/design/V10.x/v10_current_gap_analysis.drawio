@@ -1,0 +1,105 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.6 Chrome/144.0.7559.236 Electron/40.8.4 Safari/537.36" version="29.6.6" pages="2">
+  <diagram id="v10-overview" name="V10 架构规格验收总览">
+    <mxGraphModel dx="2963" dy="1558" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1500" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0b1020;fontColor=#ffffff;fontStyle=1;fontSize=30;strokeColor=#0b1020;" value="HarnessOS V10：Agent-backed CLI Mission TUI 阶段目标 / 架构 / 验收" vertex="1">
+          <mxGeometry height="70" width="2120" x="40" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="current" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fee2e2;strokeColor=#dc2626;fontSize=16;" value="当前架构 / 差异&#xa;OpenHarness-compatible 历史路径仍存在&#xa;V10 已有 CLI read-model TUI + Gateway-backed bridge&#xa;本地 parser 仍只是 proposal 模式，不算 Agent-backed&#xa;V10-8 证据来自 Gateway session/turn，当前 provider_mode=demo-fallback&#xa;剩余差异：provider-backed LLM 质量、React/Ink 迁移、生产级 Studio 均不是 V10 完成声明" vertex="1">
+          <mxGeometry height="230" width="410" x="60" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="target" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#16a34a;fontSize=16;fontStyle=1;" value="V10 目标体验&#xa;Codex / Claude Code 类 Agent Chatbot TUI&#xa;单列消息流 + 底部 composer&#xa;顶部状态线 + slash commands&#xa;实时 phase：idle / submitting / agent_running / streaming / completed / failed&#xa;工具块 / 审批块 / 计划块&#xa;工位产物 / 质量 / evidence 内联预览&#xa;WorkflowDiff proposal-first 修改" vertex="1">
+          <mxGeometry height="230" width="410" x="520" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="arch" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontSize=15;" value="目标架构组件&#xa;Mission TUI Chatbot Frontend&#xa;↓&#xa;Composer / Command Palette / Keyboard Model&#xa;↓&#xa;Gateway Session + Turn Adapter&#xa;↓&#xa;GatewayService session.start / turn.start&#xa;↓&#xa;Agent Runtime Events&#xa;↓&#xa;TUI Event Reducer + Live State Machine&#xa;↓&#xa;Transcript Blocks + Workflow/Evidence projections" vertex="1">
+          <mxGeometry height="230" width="500" x="980" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="boundary" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fae8ff;strokeColor=#9333ea;fontSize=15;" value="运行真相边界&#xa;TUI 可提交 user turn 到 Gateway，但不能绕过 GatewayService&#xa;TUI 只能读 projections / evidence refs&#xa;可生成 proposal / confirmation request&#xa;不得直接写 WorkflowStore / StationRun / Artifact&#xa;source=agent 不得直接 durable mutation&#xa;fixture/local-parser 不得冒充 Agent-backed evidence&#xa;HTML explainer 只是辅助审计导出" vertex="1">
+          <mxGeometry height="230" width="590" x="1530" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" edge="1" parent="1" source="current" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#64748b;" target="target">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" edge="1" parent="1" source="target" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#64748b;" target="arch">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" edge="1" parent="1" source="arch" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#64748b;" target="boundary">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="plan" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#ca8a04;fontSize=15;" value="开发及验收计划&#xa;V10-0R：规划纠偏与概念证据&#xa;V10-1：Shell / status line / composer / transcript&#xa;V10-2：tool / permission / plan blocks&#xa;V10-3：workflow / station / Agent 解释块&#xa;V10-4：产物 / artifact / quality 预览&#xa;V10-5：自然语言修改 → WorkflowDiff proposal&#xa;V10-6：HTML explainer 辅助导出&#xa;V10-7：read-model UX 基线验收&#xa;V10-8：Agent-backed Gateway Chatbot Bridge&#xa;V10-9：最终 V10 UX 验收" vertex="1">
+          <mxGeometry height="310" width="660" x="60" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="milestones" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#64748b;fontSize=15;" value="项目里程碑 M0-M9&#xa;M0：V10-0R planning correction PASS&#xa;M1：真实 TUI shell 截图 80x24 / 120x40&#xa;M2：工具/审批/计划块 fixture 与负例&#xa;M3：加载 V9 场景，展示 station/Agent 解释&#xa;M4：产物、质量、artifact/evidence refs 可审查&#xa;M5：WorkflowDiff proposal-first 修改闭环&#xa;M6：HTML explainer 从证据状态生成&#xa;M7：read-model UX 基线验收 PASS&#xa;M8：Gateway session/turn Agent-backed 证据 PASS&#xa;M9：最终场景矩阵 + claim/redaction/drawio PASS" vertex="1">
+          <mxGeometry height="310" width="660" x="770" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="scenarios" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ecfeff;strokeColor=#0891b2;fontSize=15;" value="用户场景验收门槛&#xa;US-V10-01 本地 Markdown：目标输入 → 计划 → 文档读取状态 → summary / quality / evidence&#xa;US-V10-02 罗马广场：并行 persona Agent blocks → synthesis evidence&#xa;US-V10-03 视频分镜：storyboard station output → image/artifact refs → quality Agent checks&#xa;US-V10-04 编码提案：diff proposal → sandbox test → no auto commit/push/deploy&#xa;US-V10-05 工作流修订：自然语言优化 → WorkflowDiff proposal → confirm/revise/reject&#xa;US-V10-06 Agent-backed Chat：输入 → Gateway session/turn → assistant response → trace/evidence" vertex="1">
+          <mxGeometry height="310" width="640" x="1480" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="acceptance" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eef2ff;strokeColor=#4f46e5;fontSize=15;" value="验收门槛&#xa;1. 80x24 可读，composer 始终可见&#xa;2. tool / permission / station / output / WorkflowDiff blocks 可审查&#xa;3. WorkflowDiff 在确认前不可 apply / publish / run&#xa;4. V10-1 以后必须使用真实 TUI 截图，概念图不算 runtime evidence&#xa;5. V10-8 必须显示 phase / session_id / turn_id / provider mode&#xa;6. V10-8 必须有 Gateway turn.started + turn.completed 或 turn.failed 证据&#xa;7. local-parser / fixture-only 不得满足 Agent-backed PASS" vertex="1">
+          <mxGeometry height="300" width="1010" x="60" y="810" as="geometry" />
+        </mxCell>
+        <mxCell id="exit" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff7ed;strokeColor=#ea580c;fontSize=15;" value="出门条件 / No False Green&#xa;允许最终声明：V10 complete: CLI-native Agent-backed TUI experience and explainability baseline ready for review.&#xa;&#xa;仍禁止：production ready / full production GA / Agent executor ready / complete Workflow Studio ready / full multi-Agent orchestration ready / unrestricted terminal worker ready / autonomous workflow editing ready&#xa;&#xa;停止条件：OpenHarness 主品牌文案残留、UI 隐藏 forbidden reason、source=agent 可直接 durable mutation、HTML 或概念图冒充真实 TUI、fixture/local-parser 冒充 Agent-backed、缺少 Gateway turn 证据" vertex="1">
+          <mxGeometry height="300" width="1000" x="1120" y="810" as="geometry" />
+        </mxCell>
+        <mxCell id="docs" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#475569;fontSize=14;" value="Canonical Docs&#xa;00_README.md&#xa;v10_target_prd.md&#xa;v10_target_architecture.md&#xa;v10_agent_backed_tui_bridge_plan.md&#xa;v10_cli_native_interaction_concepts.md&#xa;v10_tui_state_contract.md&#xa;v10_runtime_bridge_contract.md&#xa;v10_test_fixture_matrix.md&#xa;v10_schema_and_fixture_package.md&#xa;v10_stage_implementation_specs.md&#xa;v10_user_scenario_acceptance_gate.md&#xa;v10_final_acceptance_framework.md&#xa;v10_implementation_readiness_audit.md&#xa;v10_milestone_roadmap.md&#xa;v10_development_and_acceptance_plan.md&#xa;v10_current_gap_analysis.md / drawio&#xa;v10_no_false_green_claim_guard.md" vertex="1">
+          <mxGeometry height="210" width="1010" x="60" y="1170" as="geometry" />
+        </mxCell>
+        <mxCell id="evidence" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0fdf4;strokeColor=#16a34a;fontSize=14;" value="Evidence / Implementation Gates&#xa;V10-0R：planning HTML + SVG/PNG concept board + acceptance-data.json&#xa;V10-1..V10-7：MissionTuiState / read-model / local parser UX baseline evidence&#xa;V10-8：Gateway session/turn transcript + terminal capture + trace + negative local-parser-only evidence PASS&#xa;V10-9：US-V10-01..06 scenario matrix + No False Green PASS + Redaction PASS + drawio XML PASS&#xa;&#xa;当前结论：V10 complete for review；不得把 demo-fallback 证据声明为 provider-backed LLM 输出或生产可用产品" vertex="1">
+          <mxGeometry height="210" width="1000" x="1120" y="1170" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="v10-agent-backed-bridge" name="V10-8 Agent-backed TUI 状态机">
+    <mxGraphModel dx="1800" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1500" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="v108-title" value="V10-8：Agent-backed Chatbot TUI Bridge / 实时状态机 / 验收证据" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0f172a;fontColor=#ffffff;fontStyle=1;fontSize=30;strokeColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="40" y="30" width="2120" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="v108-input" value="用户输入&#xa;底部 composer&#xa;自然语言目标 / slash command&#xa;按 Enter 后必须立刻可见" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#2563eb;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="80" y="160" width="300" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="v108-adapter" value="Mission TUI Gateway Adapter&#xa;Node 子进程桥&#xa;spawn ./.venv/bin/python -m apps.gateway.stdio_server&#xa;JSONL RPC：initialize / session.start / turn.start&#xa;记录 session_id / turn_id / provider mode&#xa;stderr 进入 warning/error block，失败不得静默" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="470" y="160" width="360" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="v108-gateway" value="GatewayService / Agent Runtime&#xa;session.start&#xa;turn.start&#xa;turn.started / item.delta / tool / approval / turn.completed / turn.failed" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#16a34a;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="920" y="160" width="430" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="v108-reducer" value="TUI Event Reducer&#xa;Gateway events → blocks&#xa;assistant_message / tool_block / permission_block / error_block / output_preview&#xa;保留 trace refs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#ca8a04;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="160" width="420" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="v108-ui" value="用户可见结果&#xa;顶部 phase / session / turn&#xa;单列 transcript streaming&#xa;/trace /session /evidence&#xa;completed 或 failed 都必须可见" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f3ff;strokeColor=#7c3aed;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="80" y="420" width="430" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="v108-state" value="Live State Machine&#xa;idle → submitting → agent_running → streaming → completed&#xa;                         ↘ tool_running / awaiting_approval&#xa;                         ↘ failed / retry guidance&#xa;&#xa;任何阶段不得无 UI 反馈" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff7ed;strokeColor=#ea580c;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="610" y="420" width="600" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="v108-boundary" value="安全边界&#xa;TUI 不直接写 WorkflowStore / StationRun / Artifact&#xa;source=agent 不得直接 durable mutation&#xa;fixture/local-parser 不得冒充 Agent-backed&#xa;provider-backed 必须有 provider/runtime 证据&#xa;HTML explainer 不构造 runtime truth" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fee2e2;strokeColor=#dc2626;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="1310" y="420" width="550" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="v108-accept" value="V10-8 验收门槛&#xa;1. 真实 Terminal 输入前/后截图&#xa;2. Gateway session_id / turn_id 可见&#xa;3. raw event transcript 含 turn.started 和 turn.completed 或 turn.failed&#xa;4. assistant 输出来自 Gateway runtime，不是本地模板&#xa;5. /trace 展示事件顺序&#xa;6. local-parser-only 负例 FAIL&#xa;7. stderr / invalid JSON 有可见 error/warning block&#xa;8. No False Green / Redaction PASS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ecfeff;strokeColor=#0891b2;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="80" y="720" width="850" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="v108-exit" value="V10-8 允许声明&#xa;V10-8 complete: Agent-backed Mission TUI chatbot bridge ready for review.&#xa;&#xa;仍禁止&#xa;Agent executor ready&#xa;full multi-Agent orchestration ready&#xa;complete Workflow Studio ready&#xa;production ready&#xa;autonomous workflow editing ready" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0fdf4;strokeColor=#16a34a;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="720" width="830" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="v108-a1" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#64748b;" edge="1" parent="1" source="v108-input" target="v108-adapter">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v108-a2" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#64748b;" edge="1" parent="1" source="v108-adapter" target="v108-gateway">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v108-a3" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#64748b;" edge="1" parent="1" source="v108-gateway" target="v108-reducer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v108-a4" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#64748b;" edge="1" parent="1" source="v108-reducer" target="v108-ui">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

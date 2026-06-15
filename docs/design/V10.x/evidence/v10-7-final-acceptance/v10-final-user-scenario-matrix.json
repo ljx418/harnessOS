@@ -1,0 +1,52 @@
+[
+  {
+    "id": "US-V10-01",
+    "name": "Local Markdown workflow",
+    "status": "PASS",
+    "evidence_scope": "real_tui_render_fixture",
+    "evidence_refs": [
+      "docs/design/V9.x/evidence/v9-8-final-acceptance/v9-final-acceptance-data.json",
+      "docs/design/V9.x/evidence/v9-user-scenario-coverage-review/coverage-data.json"
+    ]
+  },
+  {
+    "id": "US-V10-02",
+    "name": "Roman Forum parallel Agent discussion",
+    "status": "PASS",
+    "evidence_scope": "real_tui_render_fixture",
+    "evidence_refs": [
+      "docs/design/V9.x/evidence/v9-8-final-acceptance/v9-final-acceptance-data.json",
+      "docs/design/V9.x/evidence/v9-user-scenario-coverage-review/coverage-data.json"
+    ]
+  },
+  {
+    "id": "US-V10-03",
+    "name": "Video storyboard workflow",
+    "status": "PASS",
+    "evidence_scope": "real_tui_render_fixture",
+    "evidence_refs": [
+      "docs/design/V9.x/evidence/v9-8-final-acceptance/v9-final-acceptance-data.json",
+      "docs/design/V9.x/evidence/v9-user-scenario-coverage-review/coverage-data.json"
+    ]
+  },
+  {
+    "id": "US-V10-04",
+    "name": "Coding proposal workflow",
+    "status": "PASS",
+    "evidence_scope": "real_tui_render_fixture",
+    "evidence_refs": [
+      "docs/design/V9.x/evidence/v9-8-final-acceptance/v9-final-acceptance-data.json",
+      "docs/design/V9.x/evidence/v9-user-scenario-coverage-review/coverage-data.json"
+    ]
+  },
+  {
+    "id": "US-V10-05",
+    "name": "Natural-language workflow revision",
+    "status": "PASS",
+    "evidence_scope": "real_tui_render_fixture",
+    "evidence_refs": [
+      "docs/design/V9.x/evidence/v9-8-final-acceptance/v9-final-acceptance-data.json",
+      "docs/design/V9.x/evidence/v9-user-scenario-coverage-review/coverage-data.json"
+    ]
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "stage_id": "V10-3",
+  "status": "PASS",
+  "evidence_scope": "v9_evidence_backed_fixture_render",
+  "required_blocks": [
+    "station_block"
+  ],
+  "scenario_refs": [
+    "US-V10-01",
+    "US-V10-02",
+    "US-V10-03",
+    "US-V10-04"
+  ],
+  "every_station_has_evidence_refs": true,
+  "runtime_truth_boundary": "tui_read_model_not_runtime_truth"
+}

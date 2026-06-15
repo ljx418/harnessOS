@@ -1,0 +1,92 @@
+[
+  {
+    "scenario_id": "US-V11-01",
+    "name": "多 Agent 讨论",
+    "status": "PASS",
+    "evidence_scope": "real_runtime_fixture",
+    "runtime_backed": true,
+    "description": "用户可看到多个不同视角 Agent 的讨论证据，并通过 V11 inspector 查看角色、工具、技能和证据 refs。",
+    "evidence_refs": [
+      "docs/design/V9.x/evidence/v9-3-orchestration-runtime/roman-forum-discussion.json",
+      "docs/design/V11.x/evidence/v11-4-station-agent-inspector/agent-projection.json"
+    ],
+    "missing_refs": [],
+    "planning_docs_as_runtime_evidence": false,
+    "overclaim_guard_pass": true
+  },
+  {
+    "scenario_id": "US-V11-02",
+    "name": "视频分镜工作流",
+    "status": "PASS",
+    "evidence_scope": "real_runtime_fixture",
+    "runtime_backed": true,
+    "description": "用户可预览 Storyboard Agent 的产物 refs、质量 refs 和 provider evidence。",
+    "evidence_refs": [
+      "docs/design/V9.x/evidence/v9-3-orchestration-runtime/storyboard-provider-evidence.json",
+      "docs/design/V11.x/evidence/v11-6-output-quality-evidence-preview/acceptance-data.json"
+    ],
+    "missing_refs": [],
+    "planning_docs_as_runtime_evidence": false,
+    "overclaim_guard_pass": true
+  },
+  {
+    "scenario_id": "US-V11-03",
+    "name": "Coding proposal 工作流",
+    "status": "PASS",
+    "evidence_scope": "real_runtime_fixture",
+    "runtime_backed": true,
+    "description": "用户可看到 coding proposal、sandboxed test、review handoff 和 no-auto-push/commit/deploy 边界。",
+    "evidence_refs": [
+      "docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/coding-workflow-result.json",
+      "docs/design/V11.x/evidence/v11-5-tool-permission-blocks/acceptance-data.json"
+    ],
+    "missing_refs": [],
+    "planning_docs_as_runtime_evidence": false,
+    "overclaim_guard_pass": true
+  },
+  {
+    "scenario_id": "US-V11-04",
+    "name": "本地文档总结",
+    "status": "PASS",
+    "evidence_scope": "real_runtime_fixture",
+    "runtime_backed": true,
+    "description": "用户可审查 Document Scanner Agent 的本地 Markdown 读取、摘要和 evidence refs。",
+    "evidence_refs": [
+      "docs/design/V9.x/evidence/v9-prd-ux-runtime-review/v7-3-local-markdown-run/local-document-workflow-result.json",
+      "docs/design/V11.x/evidence/v11-4-station-agent-inspector/agent-projection.json"
+    ],
+    "missing_refs": [],
+    "planning_docs_as_runtime_evidence": false,
+    "overclaim_guard_pass": true
+  },
+  {
+    "scenario_id": "US-V11-05",
+    "name": "自然语言修改工作流",
+    "status": "PASS",
+    "evidence_scope": "tui_read_model_fixture",
+    "runtime_backed": false,
+    "description": "用户输入目标后看到 WorkflowDiff proposal、状态线和确认门；确认前不会 apply/publish/run。",
+    "evidence_refs": [
+      "docs/design/V11.x/evidence/v11-3-workflow-timeline/acceptance-data.json",
+      "docs/design/V11.x/evidence/v11-3-workflow-timeline/timeline-transcript.txt"
+    ],
+    "missing_refs": [],
+    "planning_docs_as_runtime_evidence": false,
+    "overclaim_guard_pass": true
+  },
+  {
+    "scenario_id": "US-V11-06",
+    "name": "失败与阻断可见",
+    "status": "PASS",
+    "evidence_scope": "tui_policy_projection",
+    "runtime_backed": false,
+    "description": "用户可看到高风险 git.push 被拒绝、禁止原因和 evidence refs；阻断状态不会被隐藏成成功。",
+    "evidence_refs": [
+      "docs/design/V11.x/evidence/v11-5-tool-permission-blocks/tool-permission-transcript.txt",
+      "docs/design/V11.x/evidence/v11-5-tool-permission-blocks/acceptance-data.json"
+    ],
+    "missing_refs": [],
+    "planning_docs_as_runtime_evidence": false,
+    "overclaim_guard_pass": true
+  }
+]

@@ -1,0 +1,24 @@
+HarnessOS  harnessOS  model:minimax-provider-backed  mode:review  sandbox:works…
+────────────────────────────────────────────────────────────────────────────────
+当前选中: WorkflowDiff proposal · 确认前不会 apply / publish / run · actions:confirm_pro…
+────────────────────────────────────────────────────────────────────────────────
+▣ 用户  completed  user-1
+  帮我把这个视频点子做成分镜工作流，并展示质检结果
+
+▣ 计划  completed  plan-1
+  当前步骤: quality-review
+  ✓ capture-goal: 捕获目标并生成 WorkflowSpec 草案
+  ✓ storyboard: 生成分镜工位和图像产物引用
+  ✓ quality-review: 质检 Agent 检查风格和证据
+
+▣ 工位 / Agent  completed  station-storyboard
+  Agent: Storyboard Agent  目标: 把用户点子拆成统一画风的四个分镜
+  Tools: storyboard.plan, artifact.preview
+  Skills: visual-storytelling
+  MCP: provider:minimax-image
+  证据: docs/design/V9.x/evidence/v9-3-orchestration-runtime/storyboard-provider-…
+
+▣ 产物预览  completed  output-storyboard
+…
+────────────────────────────────────────────────────────────────────────────────
+› 输入消息或 /command

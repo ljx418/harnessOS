@@ -1,0 +1,1292 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HarnessOS V12-0A Xpert-inspired 多方案概念板</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC",
+          "Microsoft YaHei", sans-serif;
+        --bg: #f4f6fa;
+        --paper: #ffffff;
+        --paper-2: #f8fafc;
+        --ink: #111827;
+        --text: #2f3b4d;
+        --muted: #667085;
+        --line: #dbe2ec;
+        --line-strong: #c8d1df;
+        --blue: #2563eb;
+        --blue-2: #1d4ed8;
+        --cyan: #0891b2;
+        --violet: #7c3aed;
+        --green: #15803d;
+        --amber: #b45309;
+        --red: #dc2626;
+        --shadow-soft: 0 18px 46px rgba(15, 23, 42, 0.09);
+        --shadow-node: 0 16px 34px rgba(37, 99, 235, 0.14);
+        --r-lg: 18px;
+        --r-md: 12px;
+        --r-sm: 8px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at 8% -4%, rgba(37, 99, 235, 0.12), transparent 28%),
+          radial-gradient(circle at 82% 2%, rgba(124, 58, 237, 0.1), transparent 24%),
+          linear-gradient(180deg, #fbfdff 0%, var(--bg) 44%, #eef2f7 100%);
+        color: var(--text);
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .page {
+        max-width: 1500px;
+        margin: 0 auto;
+        padding: 30px 32px 58px;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) 440px;
+        gap: 22px;
+        align-items: stretch;
+        margin-bottom: 24px;
+      }
+
+      .hero-copy,
+      .decision-card,
+      .section {
+        border: 1px solid var(--line);
+        border-radius: var(--r-lg);
+        background: rgba(255, 255, 255, 0.92);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .hero-copy {
+        padding: 28px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 16px;
+        padding: 7px 11px;
+        border-radius: 999px;
+        border: 1px solid #bfdbfe;
+        background: #eff6ff;
+        color: #1d4ed8;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      h1 {
+        max-width: 880px;
+        margin: 0;
+        color: var(--ink);
+        font-size: clamp(32px, 4.4vw, 58px);
+        line-height: 1.02;
+        letter-spacing: 0;
+      }
+
+      .hero-copy p {
+        max-width: 920px;
+        margin: 16px 0 0;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.75;
+      }
+
+      .decision-card {
+        padding: 22px;
+        background:
+          linear-gradient(180deg, rgba(15, 23, 42, 0.96), rgba(30, 41, 59, 0.98)),
+          #0f172a;
+        color: #e5eefb;
+      }
+
+      .decision-card h2 {
+        margin: 0 0 13px;
+        color: white;
+        font-size: 20px;
+      }
+
+      .decision-list {
+        display: grid;
+        gap: 10px;
+      }
+
+      .decision-row {
+        display: grid;
+        grid-template-columns: 96px minmax(0, 1fr);
+        gap: 12px;
+        padding: 11px;
+        border: 1px solid rgba(226, 232, 240, 0.16);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .decision-row strong {
+        color: #bfdbfe;
+        font-size: 12px;
+      }
+
+      .decision-row span {
+        color: #dbeafe;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      .section {
+        margin-top: 22px;
+        overflow: hidden;
+      }
+
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 22px 24px;
+        border-bottom: 1px solid var(--line);
+        background: linear-gradient(180deg, #fff 0%, #fbfdff 100%);
+      }
+
+      .section-head h2 {
+        margin: 0 0 7px;
+        color: var(--ink);
+        font-size: 22px;
+      }
+
+      .section-head p {
+        max-width: 860px;
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        height: 30px;
+        padding: 0 10px;
+        border: 1px solid #dbeafe;
+        border-radius: 999px;
+        background: #eff6ff;
+        color: #1d4ed8;
+        font-size: 12px;
+        font-weight: 800;
+        white-space: nowrap;
+      }
+
+      .section-body {
+        padding: 22px 24px 24px;
+      }
+
+      .variant-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .variant {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: #fff;
+        overflow: hidden;
+      }
+
+      .variant-head {
+        min-height: 150px;
+        padding: 18px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .variant-a .variant-head {
+        background: linear-gradient(135deg, #eff6ff 0%, #ffffff 58%, #eef2ff 100%);
+      }
+
+      .variant-b .variant-head {
+        background: linear-gradient(135deg, #111827 0%, #1f2937 72%, #0f172a 100%);
+        color: white;
+      }
+
+      .variant-c .variant-head {
+        background: linear-gradient(135deg, #fff7ed 0%, #fff 48%, #ecfeff 100%);
+      }
+
+      .variant-kicker {
+        display: inline-flex;
+        align-items: center;
+        margin-bottom: 12px;
+        padding: 5px 9px;
+        border-radius: 999px;
+        background: rgba(37, 99, 235, 0.1);
+        color: #1d4ed8;
+        font-size: 11px;
+        font-weight: 850;
+      }
+
+      .variant-b .variant-kicker {
+        background: rgba(59, 130, 246, 0.2);
+        color: #bfdbfe;
+      }
+
+      .variant-head h3 {
+        margin: 0 0 8px;
+        color: var(--ink);
+        font-size: 23px;
+        line-height: 1.16;
+      }
+
+      .variant-b .variant-head h3 {
+        color: white;
+      }
+
+      .variant-head p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.62;
+      }
+
+      .variant-b .variant-head p {
+        color: #cbd5e1;
+      }
+
+      .mock {
+        padding: 14px;
+        background:
+          radial-gradient(circle, rgba(148, 163, 184, 0.32) 1px, transparent 1.2px) 0 0 / 18px
+            18px,
+          #f8fafc;
+      }
+
+      .variant-b .mock {
+        background:
+          radial-gradient(circle, rgba(148, 163, 184, 0.22) 1px, transparent 1.2px) 0 0 / 18px
+            18px,
+          #111827;
+      }
+
+      .mock-shell {
+        height: 420px;
+        display: grid;
+        grid-template-columns: 44px 126px minmax(0, 1fr) 132px;
+        grid-template-rows: 46px minmax(0, 1fr) 78px;
+        gap: 8px;
+        border: 1px solid rgba(148, 163, 184, 0.38);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.8);
+        overflow: hidden;
+        box-shadow: 0 15px 36px rgba(15, 23, 42, 0.08);
+      }
+
+      .variant-b .mock-shell {
+        border-color: rgba(148, 163, 184, 0.24);
+        background: rgba(15, 23, 42, 0.86);
+      }
+
+      .topbar {
+        grid-column: 1 / -1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 8px 10px;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+        background: rgba(255, 255, 255, 0.88);
+      }
+
+      .variant-b .topbar {
+        background: rgba(17, 24, 39, 0.94);
+        border-color: rgba(148, 163, 184, 0.2);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-width: 0;
+        color: var(--ink);
+        font-size: 12px;
+        font-weight: 850;
+      }
+
+      .variant-b .brand {
+        color: #f8fafc;
+      }
+
+      .mark {
+        display: grid;
+        place-items: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 9px;
+        background: #2563eb;
+        color: white;
+      }
+
+      .top-actions {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .chip,
+      .tiny-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        height: 28px;
+        padding: 0 9px;
+        border: 1px solid rgba(148, 163, 184, 0.38);
+        border-radius: 9px;
+        background: rgba(255, 255, 255, 0.72);
+        color: #475467;
+        font-size: 11px;
+        font-weight: 760;
+        white-space: nowrap;
+      }
+
+      .variant-b .chip,
+      .variant-b .tiny-btn {
+        border-color: rgba(148, 163, 184, 0.25);
+        background: rgba(255, 255, 255, 0.08);
+        color: #dbeafe;
+      }
+
+      .tiny-btn.primary {
+        border-color: #2563eb;
+        background: #2563eb;
+        color: white;
+      }
+
+      .rail {
+        display: grid;
+        align-content: start;
+        gap: 8px;
+        padding: 9px 6px;
+        border-right: 1px solid rgba(148, 163, 184, 0.3);
+        background: rgba(255, 255, 255, 0.82);
+      }
+
+      .variant-b .rail {
+        background: rgba(15, 23, 42, 0.72);
+        border-color: rgba(148, 163, 184, 0.18);
+      }
+
+      .rail-icon {
+        display: grid;
+        place-items: center;
+        width: 31px;
+        height: 31px;
+        border: 1px solid rgba(148, 163, 184, 0.32);
+        border-radius: 10px;
+        color: #475467;
+        background: #fff;
+      }
+
+      .variant-b .rail-icon {
+        background: rgba(255, 255, 255, 0.06);
+        color: #cbd5e1;
+        border-color: rgba(148, 163, 184, 0.2);
+      }
+
+      .rail-icon.active {
+        border-color: #bfdbfe;
+        background: #eff6ff;
+        color: #2563eb;
+      }
+
+      .variant-b .rail-icon.active {
+        background: rgba(37, 99, 235, 0.24);
+        color: #bfdbfe;
+      }
+
+      .sidebar {
+        padding: 10px;
+        border-right: 1px solid rgba(148, 163, 184, 0.3);
+        background: rgba(255, 255, 255, 0.72);
+      }
+
+      .variant-b .sidebar {
+        background: rgba(17, 24, 39, 0.7);
+        border-color: rgba(148, 163, 184, 0.18);
+      }
+
+      .side-title {
+        margin: 0 0 10px;
+        color: var(--ink);
+        font-size: 12px;
+        font-weight: 850;
+      }
+
+      .variant-b .side-title {
+        color: #f8fafc;
+      }
+
+      .side-item {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 7px;
+        padding: 7px;
+        border-radius: 9px;
+        color: #526071;
+        font-size: 11px;
+        font-weight: 730;
+      }
+
+      .side-item.active {
+        background: #eff6ff;
+        color: #1d4ed8;
+      }
+
+      .variant-b .side-item {
+        color: #cbd5e1;
+      }
+
+      .variant-b .side-item.active {
+        background: rgba(37, 99, 235, 0.2);
+        color: #bfdbfe;
+      }
+
+      .canvas {
+        position: relative;
+        overflow: hidden;
+        background:
+          radial-gradient(circle, rgba(148, 163, 184, 0.28) 1px, transparent 1.2px) 0 0 / 20px
+            20px,
+          rgba(248, 250, 252, 0.74);
+      }
+
+      .variant-b .canvas {
+        background:
+          radial-gradient(circle, rgba(148, 163, 184, 0.2) 1px, transparent 1.2px) 0 0 / 20px
+            20px,
+          rgba(15, 23, 42, 0.64);
+      }
+
+      .canvas-toolbar {
+        position: absolute;
+        top: 9px;
+        left: 10px;
+        right: 10px;
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        z-index: 2;
+      }
+
+      .tool-group {
+        display: inline-flex;
+        gap: 5px;
+        padding: 4px;
+        border: 1px solid rgba(148, 163, 184, 0.32);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.86);
+        box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+      }
+
+      .variant-b .tool-group {
+        background: rgba(15, 23, 42, 0.8);
+        border-color: rgba(148, 163, 184, 0.22);
+      }
+
+      .tool-dot {
+        width: 25px;
+        height: 25px;
+        border-radius: 8px;
+        border: 1px solid rgba(148, 163, 184, 0.28);
+        background: #fff;
+      }
+
+      .variant-b .tool-dot {
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .node {
+        position: absolute;
+        min-width: 132px;
+        padding: 11px;
+        border: 1px solid rgba(148, 163, 184, 0.42);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.94);
+        box-shadow: var(--shadow-node);
+      }
+
+      .variant-b .node {
+        border-color: rgba(148, 163, 184, 0.24);
+        background: rgba(30, 41, 59, 0.94);
+        box-shadow: 0 18px 38px rgba(0, 0, 0, 0.28);
+      }
+
+      .node.selected {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.14), var(--shadow-node);
+      }
+
+      .node-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--ink);
+        font-size: 12px;
+        font-weight: 850;
+      }
+
+      .variant-b .node-title {
+        color: #f8fafc;
+      }
+
+      .node-avatar {
+        display: grid;
+        place-items: center;
+        width: 26px;
+        height: 26px;
+        border-radius: 9px;
+        color: white;
+        background: linear-gradient(135deg, #2563eb, #06b6d4);
+      }
+
+      .node-sub {
+        margin-top: 8px;
+        padding: 7px;
+        border-radius: 9px;
+        background: #f1f5f9;
+        color: #526071;
+        font-size: 10px;
+        font-weight: 700;
+      }
+
+      .variant-b .node-sub {
+        background: rgba(255, 255, 255, 0.08);
+        color: #cbd5e1;
+      }
+
+      .ports {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 8px;
+        color: #64748b;
+        font-size: 9px;
+        font-weight: 850;
+      }
+
+      .node-a {
+        left: 30px;
+        top: 118px;
+      }
+
+      .node-b {
+        left: 204px;
+        top: 80px;
+      }
+
+      .node-c {
+        left: 210px;
+        top: 218px;
+      }
+
+      .edge-svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .inspector {
+        padding: 10px;
+        border-left: 1px solid rgba(148, 163, 184, 0.3);
+        background: rgba(255, 255, 255, 0.82);
+      }
+
+      .variant-b .inspector {
+        background: rgba(17, 24, 39, 0.72);
+        border-color: rgba(148, 163, 184, 0.18);
+      }
+
+      .panel-title {
+        margin: 0 0 9px;
+        color: var(--ink);
+        font-size: 12px;
+        font-weight: 850;
+      }
+
+      .variant-b .panel-title {
+        color: #f8fafc;
+      }
+
+      .field {
+        margin-bottom: 8px;
+        padding: 8px;
+        border: 1px solid rgba(148, 163, 184, 0.25);
+        border-radius: 10px;
+        background: rgba(248, 250, 252, 0.76);
+      }
+
+      .variant-b .field {
+        border-color: rgba(148, 163, 184, 0.18);
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .field span {
+        display: block;
+        margin-bottom: 4px;
+        color: #64748b;
+        font-size: 9px;
+        font-weight: 850;
+      }
+
+      .field strong {
+        color: var(--ink);
+        font-size: 11px;
+      }
+
+      .variant-b .field strong {
+        color: #e5e7eb;
+      }
+
+      .chat {
+        grid-column: 3 / 5;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 130px;
+        gap: 8px;
+        padding: 10px;
+        border-top: 1px solid rgba(148, 163, 184, 0.3);
+        background: rgba(255, 255, 255, 0.86);
+      }
+
+      .variant-b .chat {
+        background: rgba(15, 23, 42, 0.84);
+        border-color: rgba(148, 163, 184, 0.18);
+      }
+
+      .prompt {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-width: 0;
+        padding: 10px 12px;
+        border: 1px solid rgba(148, 163, 184, 0.3);
+        border-radius: 13px;
+        background: #fff;
+        color: #475467;
+        font-size: 12px;
+      }
+
+      .variant-b .prompt {
+        background: rgba(255, 255, 255, 0.06);
+        color: #dbeafe;
+        border-color: rgba(148, 163, 184, 0.22);
+      }
+
+      .timeline {
+        display: grid;
+        gap: 5px;
+        align-content: center;
+      }
+
+      .timeline span {
+        height: 8px;
+        border-radius: 999px;
+        background: #bfdbfe;
+      }
+
+      .variant-b .timeline span {
+        background: rgba(96, 165, 250, 0.46);
+      }
+
+      .variant-copy {
+        padding: 16px 18px 18px;
+      }
+
+      .score-row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 10px;
+        color: #344054;
+        font-size: 13px;
+      }
+
+      .score {
+        display: inline-flex;
+        align-items: center;
+        min-width: 58px;
+        justify-content: center;
+        height: 26px;
+        border-radius: 999px;
+        background: #eff6ff;
+        color: #1d4ed8;
+        font-size: 12px;
+        font-weight: 850;
+      }
+
+      .variant-copy ul {
+        margin: 13px 0 0;
+        padding-left: 18px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.65;
+      }
+
+      .matrix {
+        width: 100%;
+        border-collapse: collapse;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: white;
+      }
+
+      .matrix th,
+      .matrix td {
+        padding: 13px 14px;
+        border-bottom: 1px solid #edf1f7;
+        text-align: left;
+        vertical-align: top;
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      .matrix th {
+        background: #f8fafc;
+        color: #475467;
+        font-weight: 850;
+      }
+
+      .recommendation {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 18px;
+      }
+
+      .rec-panel {
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: #fff;
+      }
+
+      .rec-panel.primary {
+        border-color: #bfdbfe;
+        background: #eff6ff;
+      }
+
+      .rec-panel h3 {
+        margin: 0 0 10px;
+        color: var(--ink);
+      }
+
+      .rec-panel p,
+      .rec-panel li {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.65;
+      }
+
+      .rec-panel ul {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      .boundary {
+        margin-top: 14px;
+        padding: 14px 16px;
+        border: 1px solid #fed7aa;
+        border-radius: 14px;
+        background: #fffbeb;
+        color: #92400e;
+        font-size: 13px;
+        line-height: 1.65;
+      }
+
+      svg {
+        display: block;
+      }
+
+      @media (max-width: 1260px) {
+        .hero,
+        .variant-grid,
+        .recommendation {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 820px) {
+        .page {
+          padding: 18px;
+        }
+
+        .section-head {
+          flex-direction: column;
+        }
+
+        .mock-shell {
+          height: 520px;
+          grid-template-columns: 42px minmax(0, 1fr);
+          grid-template-rows: 46px 120px minmax(0, 1fr) 120px;
+        }
+
+        .sidebar {
+          grid-column: 2;
+          grid-row: 2;
+          border-right: 0;
+          border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+        }
+
+        .canvas {
+          grid-column: 2;
+          grid-row: 3;
+        }
+
+        .inspector {
+          grid-column: 2;
+          grid-row: 4;
+          border-left: 0;
+          border-top: 1px solid rgba(148, 163, 184, 0.3);
+        }
+
+        .chat {
+          grid-column: 1 / -1;
+          grid-row: 5;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <div class="eyebrow">V12-0A · Xpert-inspired concept board · design_only</div>
+          <h1 id="page-title">三套更接近产品级工作台的视觉方向。</h1>
+          <p>
+            这份概念板用于解决“当前原型质感不足”的问题。它基于 Xpert 的工作台特征重新推导 HarnessOS 的视觉方向：
+            顶栏、产品导航、画布、节点、右侧检查器和 Chat Workbench 必须形成一个完整产品界面，而不是孤立组件拼贴。
+          </p>
+          <p>
+            当前材料仍是设计原型证据，不证明真实浏览器实现、BFF 调用、运行时执行、完整 Workflow Studio 或 Xpert 追平。
+          </p>
+        </div>
+        <aside class="decision-card" aria-label="审查结论">
+          <h2>本页用于做什么决定</h2>
+          <div class="decision-list">
+            <div class="decision-row">
+              <strong>选择方向</strong>
+              <span>从三套视觉密度与产品性不同的方案中，选择 V12-0P 高保真原型主方向。</span>
+            </div>
+            <div class="decision-row">
+              <strong>冻结组件</strong>
+              <span>确认哪些布局、状态、节点、Inspector 和 Chat 关系必须进入后续 Figma 或高保真。</span>
+            </div>
+            <div class="decision-row">
+              <strong>保留边界</strong>
+              <span>本页不能替代浏览器截图、BFF 日志、DTO 快照或 runtime evidence。</span>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2>三个方向</h2>
+            <p>
+              三套方案都保留 Xpert-like 的核心工作台骨架：左侧 rail、实体二级导航、中心画布、节点卡、右侧 Inspector、
+              底部或侧边 Chat Workbench。差异在视觉密度、使用人群和最先要打磨的交互细节。
+            </p>
+          </div>
+          <span class="tag">not browser implementation</span>
+        </div>
+        <div class="section-body">
+          <div class="variant-grid">
+            <article class="variant variant-a">
+              <div class="variant-head">
+                <div class="variant-kicker">方案 A · 推荐主线</div>
+                <h3>Light Studio Workbench</h3>
+                <p>最接近 Xpert 截图的轻量工作台：白底、点阵画布、清晰节点、蓝色主操作，适合 V12 先追求上手成本低和产品可读性。</p>
+              </div>
+              <div class="mock" aria-label="Light Studio Workbench mockup">
+                <div class="mock-shell">
+                  <div class="topbar">
+                    <div class="brand">
+                      <span class="mark">
+                        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                          <path fill="currentColor" d="M4 7h7v7H4V7Zm9 0h7v7h-7V7ZM4 16h7v2H4v-2Zm9 0h7v2h-7v-2Z" />
+                        </svg>
+                      </span>
+                      工作空间 / 视频创作流
+                    </div>
+                    <div class="top-actions">
+                      <span class="chip">API healthy</span>
+                      <span class="chip">read-only canvas</span>
+                      <span class="tiny-btn">预览</span>
+                      <span class="tiny-btn primary">提交提案</span>
+                    </div>
+                  </div>
+                  <div class="rail">
+                    <span class="rail-icon active">
+                      <svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M5 4h14v4H5V4Zm0 6h6v10H5V10Zm8 0h6v10h-6V10Z" /></svg>
+                    </span>
+                    <span class="rail-icon">
+                      <svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3a4 4 0 0 1 4 4v1h2a2 2 0 0 1 2 2v8H4v-8a2 2 0 0 1 2-2h2V7a4 4 0 0 1 4-4Zm-2 5h4V7a2 2 0 0 0-4 0v1Z" /></svg>
+                    </span>
+                    <span class="rail-icon">
+                      <svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M4 5h16v3H4V5Zm0 5h10v3H4v-3Zm0 5h16v3H4v-3Z" /></svg>
+                    </span>
+                  </div>
+                  <div class="sidebar">
+                    <p class="side-title">工作台对象</p>
+                    <div class="side-item active"><span>智能体</span><b>6</b></div>
+                    <div class="side-item"><span>工作流</span><b>4</b></div>
+                    <div class="side-item"><span>技能 / MCP</span><b>12</b></div>
+                    <div class="side-item"><span>证据链</span><b>9</b></div>
+                  </div>
+                  <div class="canvas">
+                    <div class="canvas-toolbar">
+                      <div class="tool-group"><span class="tool-dot"></span><span class="tool-dot"></span><span class="tool-dot"></span></div>
+                      <div class="tool-group"><span class="tool-dot"></span><span class="tool-dot"></span></div>
+                    </div>
+                    <svg class="edge-svg" viewBox="0 0 460 310" preserveAspectRatio="none">
+                      <path d="M145 154 C190 154 178 120 218 118" stroke="#94a3b8" stroke-width="3" fill="none" />
+                      <path d="M146 168 C196 184 178 238 224 244" stroke="#94a3b8" stroke-width="3" fill="none" />
+                      <path d="M336 146 C378 155 382 180 418 182" stroke="#2563eb" stroke-width="3" fill="none" stroke-dasharray="7 6" />
+                    </svg>
+                    <div class="node node-a">
+                      <div class="node-title"><span class="node-avatar">T</span>Trigger</div>
+                      <div class="node-sub">自然语言输入</div>
+                      <div class="ports"><span>out: goal</span><span>1</span></div>
+                    </div>
+                    <div class="node node-b selected">
+                      <div class="node-title"><span class="node-avatar">A</span>Storyboard Agent</div>
+                      <div class="node-sub">分镜草案 · 证据 ready</div>
+                      <div class="ports"><span>in: goal</span><span>out: frames</span></div>
+                    </div>
+                    <div class="node node-c">
+                      <div class="node-title"><span class="node-avatar">Q</span>Quality Agent</div>
+                      <div class="node-sub">检查风格一致性</div>
+                      <div class="ports"><span>in: frames</span><span>out: report</span></div>
+                    </div>
+                  </div>
+                  <div class="inspector">
+                    <p class="panel-title">节点检查器</p>
+                    <div class="field"><span>角色</span><strong>分镜 Agent</strong></div>
+                    <div class="field"><span>工具</span><strong>image.plan · artifact.preview</strong></div>
+                    <div class="field"><span>证据</span><strong>redacted refs only</strong></div>
+                    <div class="field"><span>禁用原因</span><strong>运行前需确认</strong></div>
+                  </div>
+                  <div class="chat">
+                    <div class="prompt">让三个 Agent 围绕同一主题讨论四轮，并由总结 Agent 归纳。</div>
+                    <div class="timeline"><span></span><span></span><span></span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="variant-copy">
+                <div class="score-row"><span>适合 V12-0P 冻结概率</span><b class="score">高</b></div>
+                <div class="score-row"><span>与 Xpert 画布感接近度</span><b class="score">高</b></div>
+                <div class="score-row"><span>实现风险</span><b class="score">中</b></div>
+                <ul>
+                  <li>优点：清晰、可读、低学习成本，最适合先建立产品级基线。</li>
+                  <li>缺点：如果后续缺少动效和状态反馈，仍会显得普通。</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="variant variant-b">
+              <div class="variant-head">
+                <div class="variant-kicker">方案 B · 专家模式</div>
+                <h3>Dense Operator Console</h3>
+                <p>面向审计、运行观察和多 Agent 调度的高密度控制台：更强的状态、证据、风险、权限可见性，适合高级用户。</p>
+              </div>
+              <div class="mock" aria-label="Dense Operator Console mockup">
+                <div class="mock-shell">
+                  <div class="topbar">
+                    <div class="brand">
+                      <span class="mark">
+                        <svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M4 4h16v4H4V4Zm0 6h7v10H4V10Zm9 0h7v10h-7V10Z" /></svg>
+                      </span>
+                      Runtime Control / orchestration
+                    </div>
+                    <div class="top-actions">
+                      <span class="chip">trace:on</span>
+                      <span class="chip">policy:strict</span>
+                      <span class="tiny-btn primary">Review</span>
+                    </div>
+                  </div>
+                  <div class="rail">
+                    <span class="rail-icon active"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M5 12h14v2H5v-2Zm0-6h14v2H5V6Zm0 12h14v2H5v-2Z" /></svg></span>
+                    <span class="rail-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2 3 7v10l9 5 9-5V7l-9-5Zm0 2.4 6.5 3.6-6.5 3.6L5.5 8 12 4.4Z" /></svg></span>
+                    <span class="rail-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M6 3h12v18H6V3Zm2 4h8V5H8v2Zm0 4h8V9H8v2Zm0 4h5v-2H8v2Z" /></svg></span>
+                  </div>
+                  <div class="sidebar">
+                    <p class="side-title">运行队列</p>
+                    <div class="side-item active"><span>讨论流</span><b>live</b></div>
+                    <div class="side-item"><span>分镜流</span><b>qa</b></div>
+                    <div class="side-item"><span>编码流</span><b>safe</b></div>
+                    <div class="side-item"><span>失败恢复</span><b>2</b></div>
+                  </div>
+                  <div class="canvas">
+                    <div class="canvas-toolbar">
+                      <div class="tool-group"><span class="tool-dot"></span><span class="tool-dot"></span><span class="tool-dot"></span></div>
+                      <div class="tool-group"><span class="tool-dot"></span></div>
+                    </div>
+                    <svg class="edge-svg" viewBox="0 0 460 310" preserveAspectRatio="none">
+                      <path d="M145 152 C188 130 177 108 218 105" stroke="#60a5fa" stroke-width="3" fill="none" />
+                      <path d="M146 169 C194 196 178 244 224 250" stroke="#22c55e" stroke-width="3" fill="none" />
+                      <path d="M336 135 C375 146 379 170 418 176" stroke="#f59e0b" stroke-width="3" fill="none" stroke-dasharray="6 5" />
+                    </svg>
+                    <div class="node node-a">
+                      <div class="node-title"><span class="node-avatar">G</span>Goal Router</div>
+                      <div class="node-sub">route · policy checked</div>
+                      <div class="ports"><span>out</span><span>2</span></div>
+                    </div>
+                    <div class="node node-b selected">
+                      <div class="node-title"><span class="node-avatar">S</span>Stoic Agent</div>
+                      <div class="node-sub">round 2 / 4 · streaming</div>
+                      <div class="ports"><span>in</span><span>out</span></div>
+                    </div>
+                    <div class="node node-c">
+                      <div class="node-title"><span class="node-avatar">R</span>Reviewer Agent</div>
+                      <div class="node-sub">blocked: needs evidence</div>
+                      <div class="ports"><span>in</span><span>report</span></div>
+                    </div>
+                  </div>
+                  <div class="inspector">
+                    <p class="panel-title">运行证据</p>
+                    <div class="field"><span>trace</span><strong>turn-27 / live</strong></div>
+                    <div class="field"><span>policy</span><strong>deny-by-default</strong></div>
+                    <div class="field"><span>risk</span><strong>medium · approval needed</strong></div>
+                    <div class="field"><span>timeline</span><strong>4 events</strong></div>
+                  </div>
+                  <div class="chat">
+                    <div class="prompt">显示当前 round、哪个 Agent 在输出、为什么等待确认。</div>
+                    <div class="timeline"><span></span><span></span><span></span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="variant-copy">
+                <div class="score-row"><span>适合 V12-0P 冻结概率</span><b class="score">中</b></div>
+                <div class="score-row"><span>可解释与审计能力</span><b class="score">高</b></div>
+                <div class="score-row"><span>上手成本</span><b class="score">中高</b></div>
+                <ul>
+                  <li>优点：状态密度高，适合展示 HarnessOS 的治理、证据和多 Agent 运行优势。</li>
+                  <li>缺点：新用户可能感觉压迫，需要新手模式或渐进披露。</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="variant variant-c">
+              <div class="variant-head">
+                <div class="variant-kicker">方案 C · 创作场景</div>
+                <h3>Creative Workflow Studio</h3>
+                <p>以视频、分镜和内容生产为核心：节点自带产物预览，画布更强调素材、质量 Agent 和 Chat-to-Storyboard 的工作流。</p>
+              </div>
+              <div class="mock" aria-label="Creative Workflow Studio mockup">
+                <div class="mock-shell">
+                  <div class="topbar">
+                    <div class="brand">
+                      <span class="mark" style="background: linear-gradient(135deg, #f97316, #06b6d4)">
+                        <svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M4 5h16v14H4V5Zm3 3v8l6-4-6-4Zm8 1h3V7h-3v2Zm0 4h3v-2h-3v2Zm0 4h3v-2h-3v2Z" /></svg>
+                      </span>
+                      视频工作流 / 分镜企划
+                    </div>
+                    <div class="top-actions">
+                      <span class="chip">MiniMax image</span>
+                      <span class="chip">QA pending</span>
+                      <span class="tiny-btn primary">预览分镜</span>
+                    </div>
+                  </div>
+                  <div class="rail">
+                    <span class="rail-icon active"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M4 6h16v12H4V6Zm2 2v8h12V8H6Z" /></svg></span>
+                    <span class="rail-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M5 4h14v3H5V4Zm0 5h14v11H5V9Zm3 2v7h8v-7H8Z" /></svg></span>
+                    <span class="rail-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M12 4 4 8v8l8 4 8-4V8l-8-4Zm0 2.2 4.5 2.3-4.5 2.3-4.5-2.3L12 6.2Z" /></svg></span>
+                  </div>
+                  <div class="sidebar">
+                    <p class="side-title">创作对象</p>
+                    <div class="side-item active"><span>分镜板</span><b>8</b></div>
+                    <div class="side-item"><span>角色设定</span><b>3</b></div>
+                    <div class="side-item"><span>风格参考</span><b>2</b></div>
+                    <div class="side-item"><span>质检报告</span><b>1</b></div>
+                  </div>
+                  <div class="canvas">
+                    <div class="canvas-toolbar">
+                      <div class="tool-group"><span class="tool-dot"></span><span class="tool-dot"></span><span class="tool-dot"></span></div>
+                      <div class="tool-group"><span class="tool-dot"></span><span class="tool-dot"></span></div>
+                    </div>
+                    <svg class="edge-svg" viewBox="0 0 460 310" preserveAspectRatio="none">
+                      <path d="M145 154 C190 154 178 120 218 118" stroke="#f97316" stroke-width="3" fill="none" />
+                      <path d="M146 169 C194 188 178 236 224 244" stroke="#06b6d4" stroke-width="3" fill="none" />
+                      <path d="M336 146 C378 155 382 180 418 182" stroke="#a855f7" stroke-width="3" fill="none" stroke-dasharray="7 6" />
+                    </svg>
+                    <div class="node node-a">
+                      <div class="node-title"><span class="node-avatar" style="background:#f97316">I</span>Idea Agent</div>
+                      <div class="node-sub">点子拆解</div>
+                      <div class="ports"><span>brief</span><span>beats</span></div>
+                    </div>
+                    <div class="node node-b selected">
+                      <div class="node-title"><span class="node-avatar" style="background:#06b6d4">F</span>Frame Agent</div>
+                      <div class="node-sub">8 张分镜 · 风格锁定</div>
+                      <div class="ports"><span>beats</span><span>frames</span></div>
+                    </div>
+                    <div class="node node-c">
+                      <div class="node-title"><span class="node-avatar" style="background:#a855f7">Q</span>QA Agent</div>
+                      <div class="node-sub">人物一致性检查</div>
+                      <div class="ports"><span>frames</span><span>report</span></div>
+                    </div>
+                  </div>
+                  <div class="inspector">
+                    <p class="panel-title">分镜预览</p>
+                    <div class="field"><span>风格</span><strong>统一角色设定</strong></div>
+                    <div class="field"><span>产物</span><strong>8 frame refs</strong></div>
+                    <div class="field"><span>质检</span><strong>一致性 82%</strong></div>
+                    <div class="field"><span>下一步</span><strong>修订提案</strong></div>
+                  </div>
+                  <div class="chat">
+                    <div class="prompt">把这个点子转成统一画风分镜，并让 QA Agent 检查结果。</div>
+                    <div class="timeline"><span></span><span></span><span></span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="variant-copy">
+                <div class="score-row"><span>适合创作场景展示</span><b class="score">高</b></div>
+                <div class="score-row"><span>通用工作台覆盖</span><b class="score">中</b></div>
+                <div class="score-row"><span>实现风险</span><b class="score">中高</b></div>
+                <ul>
+                  <li>优点：更能展示本项目“自然语言到多 Agent 创作工作流”的想象力。</li>
+                  <li>缺点：如果作为默认 UI，可能弱化通用企业工作台和治理审计感。</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2>方案对比</h2>
+            <p>这张表用于决定 V12-0P 高保真原型的主方向。建议不要混合所有风格，先冻结一个主线，再把其他方向作为模式或插件化场景。</p>
+          </div>
+        </div>
+        <div class="section-body">
+          <table class="matrix">
+            <thead>
+              <tr>
+                <th>维度</th>
+                <th>方案 A：Light Studio</th>
+                <th>方案 B：Operator Console</th>
+                <th>方案 C：Creative Studio</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>首屏观感</td>
+                <td>最接近 Xpert，轻、清晰、产品化。</td>
+                <td>更像运维/审计控制台，专业但偏重。</td>
+                <td>更有创作感，适合视频/分镜演示。</td>
+              </tr>
+              <tr>
+                <td>用户上手</td>
+                <td>低门槛，适合默认入口。</td>
+                <td>适合高级用户和内部审计。</td>
+                <td>适合创作者和演示场景。</td>
+              </tr>
+              <tr>
+                <td>画布重点</td>
+                <td>结构、连接、选择、Inspector 联动。</td>
+                <td>运行状态、trace、policy、风险。</td>
+                <td>产物预览、素材流、QA Agent。</td>
+              </tr>
+              <tr>
+                <td>Chat Workbench</td>
+                <td>自然语言到 proposal，确认前不运行。</td>
+                <td>强调运行状态解释和 blocked reason。</td>
+                <td>强调创作目标、素材修改和质量反馈。</td>
+              </tr>
+              <tr>
+                <td>推荐用途</td>
+                <td>V12-0P 默认方向。</td>
+                <td>作为“审计/运行模式”保留。</td>
+                <td>作为“创作模板模式”保留。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2>建议冻结策略</h2>
+            <p>当前最稳妥的路径不是继续堆视觉效果，而是先冻结主线信息架构，再把不同风格作为模式化扩展。</p>
+          </div>
+          <span class="tag">recommended decision</span>
+        </div>
+        <div class="section-body recommendation">
+          <article class="rec-panel primary">
+            <h3>推荐：以方案 A 作为 V12-0P 主线</h3>
+            <p>
+              方案 A 的默认工作台最接近 Xpert 的产品密度，同时不会牺牲 HarnessOS 的治理边界。
+              它应冻结为 V12 浏览器工作台的默认信息架构：左 rail、二级对象导航、只读画布、节点卡、右 Inspector、Chat Workbench。
+            </p>
+          </article>
+          <article class="rec-panel">
+            <h3>保留：B/C 作为模式和场景</h3>
+            <ul>
+              <li>方案 B 进入“运行审计模式”：用于 trace、policy、权限、证据链和失败恢复。</li>
+              <li>方案 C 进入“创作工作流模板”：用于视频分镜、素材预览、QA Agent 和自然语言优化。</li>
+              <li>三者共享同一底层组件 token、节点结构、Inspector 数据模型和 Chat proposal 语义。</li>
+            </ul>
+          </article>
+        </div>
+        <div class="section-body" style="padding-top: 0">
+          <div class="boundary">
+            <strong>边界：</strong>本页只支持 V12-0A 设计审查和 V12-0P 高保真方向选择。
+            它不支持跳过 V12-0P、readiness audit、真实浏览器截图、BFF 日志或 DTO 快照。
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2>进入组件细化</h2>
+            <p>如果选择方案 A 作为主线，下一步应审查 Light Studio 的组件尺度、状态、交互、数据和验收规则。</p>
+          </div>
+          <span class="tag">detail board</span>
+        </div>
+        <div class="section-body recommendation">
+          <article class="rec-panel primary">
+            <h3>推荐下一页</h3>
+            <p>
+              <a href="light-studio-component-detail-board.html">打开 Light Studio 组件细节设计板</a>。
+              该页面把推荐方向拆成可交付组件，用于 V12-0P 高保真冻结前审查。
+            </p>
+          </article>
+          <article class="rec-panel">
+            <h3>审查重点</h3>
+            <ul>
+              <li>顶栏、导航、画布、节点卡、Inspector、Chat Workbench 是否足够细。</li>
+              <li>状态、禁用原因、证据、质量和自然语言提案路径是否可理解。</li>
+              <li>是否仍然严格保持 design-only 边界。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

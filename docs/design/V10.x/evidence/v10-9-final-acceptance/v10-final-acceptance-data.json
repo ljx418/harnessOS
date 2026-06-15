@@ -1,0 +1,44 @@
+{
+  "stage_id": "V10-9",
+  "status": "PASS",
+  "allowed_claim": "V10 complete: CLI-native Agent-backed TUI experience and explainability baseline ready for review.",
+  "evidence_scope": "v10_1_to_v10_8_aggregated_evidence",
+  "final_claim_allowed": true,
+  "v10_1_to_7_baseline": {
+    "status": "PASS",
+    "allowed_claim": "V10-1..V10-7 complete: CLI-native read-model TUI experience baseline ready for review.",
+    "read_model_baseline_claim_allowed": true,
+    "evidence_ref": "docs/design/V10.x/evidence/v10-7-final-acceptance/v10-final-acceptance-data.json"
+  },
+  "v10_8_agent_backed_bridge": {
+    "status": "PASS",
+    "evidence_scope": "agent_backed_gateway_turn",
+    "runtime_backed": true,
+    "provider_mode": "provider-backed",
+    "provider_backed": true,
+    "gateway_session_started": true,
+    "gateway_turn_started": true,
+    "gateway_turn_completed": true,
+    "gateway_turn_failed": false,
+    "assistant_output_from_gateway": true,
+    "session_id": "sess_63a3d64f2fcc",
+    "turn_id": "turn_b5864c2417e7",
+    "trace_id": "trace_3678a4956bf2",
+    "evidence_ref": "docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json"
+  },
+  "bounded_interpretation": {
+    "production_ready": false,
+    "full_production_ga": false,
+    "agent_executor_ready": false,
+    "complete_workflow_studio_ready": false,
+    "full_multi_agent_orchestration_ready": false,
+    "autonomous_workflow_editing_ready": false,
+    "codex_claude_experience_fully_matched": false
+  },
+  "provider_backed_required_for_v10_final": false,
+  "provider_backed_claim_allowed": true,
+  "claim_scan": "PASS",
+  "redaction_scan": "PASS",
+  "drawio_xml": "PASS",
+  "blockers": []
+}

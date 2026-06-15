@@ -1,0 +1,11 @@
+# V11-1 Real-Time Event Stream Summary
+
+status=PASS
+evidence_scope=provider_backed_cli_turn_or_gateway_runtime
+provider_mode=provider-backed
+session_id=sess_94759420edde
+turn_id=turn_e02dc7bd6db6
+trace_id=trace_787ceea8507f
+input_received_visible=true
+agent_running_visible=true
+event_ordering_errors=0

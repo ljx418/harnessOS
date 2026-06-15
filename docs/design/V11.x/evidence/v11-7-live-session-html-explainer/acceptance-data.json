@@ -1,0 +1,20 @@
+{
+  "stage_id": "V11-7",
+  "status": "PASS",
+  "allowed_claim": "V11-7 complete: live-session explainer export ready for review.",
+  "evidence_scope": "supporting_html_from_tui_read_model",
+  "runtime_backed": false,
+  "html_supporting_only": true,
+  "evidence_refs_present": true,
+  "screenshot_captured": true,
+  "screenshot_error": null,
+  "html_replaces_runtime_evidence": false,
+  "evidence_refs": [
+    "docs/design/V11.x/evidence/v11-7-live-session-html-explainer/acceptance-data.json",
+    "docs/design/V11.x/evidence/v11-7-live-session-html-explainer/index.html",
+    "docs/design/V11.x/evidence/v11-7-live-session-html-explainer/explainer-screenshot.png"
+  ],
+  "errors": [],
+  "claim_scan": "PASS",
+  "redaction_scan": "PASS"
+}

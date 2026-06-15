@@ -1,0 +1,101 @@
+[
+  {
+    "stage_id": "V11-0",
+    "path": "docs/design/V11.x/evidence/v11-0-architecture-contract/architecture-contract-acceptance.json",
+    "missing": false,
+    "status": "PASS",
+    "allowed_claim": "V11-0 complete: V11 architecture contract and boundary freeze ready for review.",
+    "evidence_scope": "planning_audit_and_architecture_contract",
+    "runtime_backed": false,
+    "redaction_scan": "PASS",
+    "claim_scan": "PASS"
+  },
+  {
+    "stage_id": "V11-1",
+    "path": "docs/design/V11.x/evidence/v11-1-real-time-event-stream/acceptance-data.json",
+    "missing": false,
+    "status": "PASS",
+    "allowed_claim": "V11-1 complete: real-time TUI event stream slice ready for review.",
+    "evidence_scope": "provider_backed_cli_turn_or_gateway_runtime",
+    "runtime_backed": true,
+    "redaction_scan": "PASS",
+    "claim_scan": "PASS"
+  },
+  {
+    "stage_id": "V11-2",
+    "path": "docs/design/V11.x/evidence/v11-2-command-ux/acceptance-data.json",
+    "missing": false,
+    "status": "PASS",
+    "allowed_claim": "V11-2 complete: composer and slash-command UX slice ready for review.",
+    "evidence_scope": "tui_command_transcript",
+    "runtime_backed": false,
+    "redaction_scan": "PASS",
+    "claim_scan": "PASS"
+  },
+  {
+    "stage_id": "V11-3",
+    "path": "docs/design/V11.x/evidence/v11-3-workflow-timeline/acceptance-data.json",
+    "missing": false,
+    "status": "PASS",
+    "allowed_claim": "V11-3 complete: workflow state timeline slice ready for review.",
+    "evidence_scope": "tui_read_model_fixture",
+    "runtime_backed": false,
+    "redaction_scan": "PASS",
+    "claim_scan": "PASS"
+  },
+  {
+    "stage_id": "V11-4",
+    "path": "docs/design/V11.x/evidence/v11-4-station-agent-inspector/acceptance-data.json",
+    "missing": false,
+    "status": "PASS",
+    "allowed_claim": "V11-4 complete: station and Agent explainability inspector ready for review.",
+    "evidence_scope": "v9_evidence_projection",
+    "runtime_backed": false,
+    "redaction_scan": "PASS",
+    "claim_scan": "PASS"
+  },
+  {
+    "stage_id": "V11-5",
+    "path": "docs/design/V11.x/evidence/v11-5-tool-permission-blocks/acceptance-data.json",
+    "missing": false,
+    "status": "PASS",
+    "allowed_claim": "V11-5 complete: transparent tool and permission block slice ready for review.",
+    "evidence_scope": "v9_controlled_executor_projection",
+    "runtime_backed": false,
+    "redaction_scan": "PASS",
+    "claim_scan": "PASS"
+  },
+  {
+    "stage_id": "V11-6",
+    "path": "docs/design/V11.x/evidence/v11-6-output-quality-evidence-preview/acceptance-data.json",
+    "missing": false,
+    "status": "PASS",
+    "allowed_claim": "V11-6 complete: output quality and evidence preview slice ready for review.",
+    "evidence_scope": "artifact_quality_evidence_refs_only",
+    "runtime_backed": true,
+    "redaction_scan": "PASS",
+    "claim_scan": "PASS"
+  },
+  {
+    "stage_id": "V11-7",
+    "path": "docs/design/V11.x/evidence/v11-7-live-session-html-explainer/acceptance-data.json",
+    "missing": false,
+    "status": "PASS",
+    "allowed_claim": "V11-7 complete: live-session explainer export ready for review.",
+    "evidence_scope": "supporting_html_from_tui_read_model",
+    "runtime_backed": false,
+    "redaction_scan": "PASS",
+    "claim_scan": "PASS"
+  },
+  {
+    "stage_id": "V11-8",
+    "path": "docs/design/V11.x/evidence/v11-8-user-scenarios/acceptance-data.json",
+    "missing": false,
+    "status": "PASS",
+    "allowed_claim": "V11-8 complete: V11 user scenario validation package ready for review.",
+    "evidence_scope": null,
+    "runtime_backed": null,
+    "redaction_scan": "PASS",
+    "claim_scan": "PASS"
+  }
+]

@@ -1,0 +1,16 @@
+
+> @harnessos/mission-tui@0.1.0 test
+> node --test __tests__/*.test.js
+
+✔ renders CLI-native shell with status line and bottom composer (3.238274ms)
+✔ renders all required V10 user scenarios in wide fixture (1.537658ms)
+✔ rejects negative fixtures that would create false green (2.01566ms)
+✔ generates V10 shell and final acceptance evidence (4.664728ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 147.597014

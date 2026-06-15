@@ -1,0 +1,66 @@
+HarnessOS  harnessOS  phase:ready  gateway:v11-command-session  turn:v11-command-turn  mode:agent-backed  model:deepseek-chat  provider:local  provider_mode:provider-backed  sandb…
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+当前选中: WorkflowDiff proposal · 确认前不会 apply / publish / run · actions:confirm_proposal/revise_proposal/reject_proposal
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+… 已折叠历史内容 91 行，可用 /history 查看
+  /diff
+
+▣ 助手  completed  slash-output-23
+  diff-1: waiting_confirmation · actions=confirm_proposal/revise_proposal/reject_proposal · 确认前不会 apply/publish/run
+
+▣ 用户  completed  slash-user-24
+  /trace
+
+▣ 助手  completed  slash-output-25
+  1. turn.started: V11-2 command acceptance fixture started
+
+▣ 用户  completed  slash-user-26
+  /quality
+
+▣ 助手  completed  slash-output-27
+  docs/design/V9.x/evidence/v9-user-scenario-video-workflow-e2e/raw/quality-agent-report.json
+
+▣ 用户  completed  slash-user-28
+  /artifacts
+
+▣ 助手  completed  slash-output-29
+  docs/design/V9.x/evidence/v9-3-orchestration-runtime/storyboard-images/storyboard-shot-1.jpg
+docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/artifacts/diff-proposal.patch
+
+▣ 用户  completed  slash-user-30
+  /explain
+
+▣ 助手  completed  slash-output-31
+  Mission TUI 只呈现 display/read-model truth。
+Gateway Session/Turn 是 provider/runtime 入口。
+WorkflowDiff 在确认前不会 apply / publish / run。
+Evidence/Runtime Report/HTML explainer 都不能构造 run…
+
+▣ 用户  completed  slash-user-32
+  /retry
+
+▣ 助手  completed  slash-output-33
+  已生成 retry proposal 说明：需要用户确认后才可进入受控 runtime。
+当前命令不会直接重新运行 station，也不会创建 durable mutation。
+
+▣ 用户  completed  slash-user-34
+  /revise
+
+▣ 助手  completed  slash-output-35
+  已进入 revise proposal 说明：请继续输入修改目标。
+当前命令只修改前台意图，不会 apply / publish / run。
+
+▣ 用户  completed  slash-user-36
+  /session
+
+▣ 助手  completed  slash-output-37
+  session_id=v11-command-session turn_id=v11-command-turn trace_id=v11-command-trace
+
+▣ 用户  completed  slash-user-38
+  /unknown_command
+
+▣ 错误  failed  slash-output-39
+  未知命令：/unknown_command。输入 /help 查看可用命令。
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+› 输入自然语言目标，或使用 /help /stations /evidence /diff /exit

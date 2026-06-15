@@ -1,0 +1,55 @@
+HarnessOS  harnessOS  phase:completed  gateway:sess_94759420edde  turn:turn_e02dc7bd6db6  mode:agent-backed  model:deepseek-chat  provider_mode:provider-backed  sandbox:workspace-…
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+当前选中: WorkflowDiff proposal · 确认前不会 apply / publish / run · actions:confirm_proposal/revise_proposal/reject_proposal
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+… 已折叠历史内容 63 行，可用 /history 查看
+  证据: docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json
+
+▣ Gateway 事件  warning  gateway-warning-13
+  事件: gateway.stderr  session:-  turn:-
+  from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer
+  证据: docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json
+
+▣ Gateway 事件  completed  gateway-session-started
+  事件: gateway.session.started  session:sess_94759420edde  turn:-
+  Backend: simple
+  Gateway session started: sess_94759420edde
+  证据: docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json
+
+▣ 用户  completed  gateway-user-15
+  V11-1 验收：请用一句话说明你已经收到输入，并返回一个可见的运行状态摘要。
+
+▣ Gateway 事件  completed  v11-input-received-16
+  事件: input.received  session:sess_94759420edde  turn:-
+  用户输入已收到，TUI 已进入运行状态。
+  证据: docs/design/V11.x/evidence/v11-1-real-time-event-stream/acceptance-data.json
+
+▣ Gateway 事件  running  v11-agent-running-17
+  事件: agent.running  session:sess_94759420edde  turn:-
+  Gateway turn 请求已提交，等待运行时返回事件。
+  证据: docs/design/V11.x/evidence/v11-1-real-time-event-stream/acceptance-data.json
+
+▣ Gateway 事件  completed  item_9a87f989a350
+  事件: turn.started  session:sess_94759420edde  turn:turn_e02dc7bd6db6
+  Trace: trace_787ceea8507f
+  Gateway turn started
+  证据: docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json
+
+▣ Gateway 事件  completed  item_276c0a94a624
+  事件: item.delta  session:sess_94759420edde  turn:turn_e02dc7bd6db6
+  Trace: trace_787ceea8507f
+  已收到输入。运行状态摘要：工具集就绪，知识库在线，文件系统可访问，等待具体任务指令。
+  证据: docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json
+
+▣ Gateway 事件  completed  item_0a37aed74b4e
+  事件: turn.completed  session:sess_94759420edde  turn:turn_e02dc7bd6db6
+  Trace: trace_787ceea8507f
+  Gateway turn completed
+  证据: docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json
+
+▣ 助手  completed  gateway-assistant-21
+  已收到输入。运行状态摘要：工具集就绪，知识库在线，文件系统可访问，等待具体任务指令。
+  证据: docs/design/V10.x/evidence/v10-8-agent-backed-tui/acceptance-data.json
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+› 输入自然语言目标，或使用 /trace /session /exit

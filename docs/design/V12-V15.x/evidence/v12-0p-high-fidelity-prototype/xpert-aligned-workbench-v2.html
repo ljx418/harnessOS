@@ -1,0 +1,1059 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HarnessOS V12-0P Xpert-Aligned Workbench V2</title>
+    <style>
+      :root {
+        --bg: #f4f7fb;
+        --paper: #ffffff;
+        --panel: #fbfdff;
+        --line: #dbe4ef;
+        --line-2: #cbd7e8;
+        --text: #101828;
+        --sub: #526176;
+        --muted: #7b8aa0;
+        --blue: #2563eb;
+        --blue-2: #1d4ed8;
+        --green: #16a34a;
+        --amber: #b45309;
+        --red: #dc2626;
+        --purple: #7c3aed;
+        --shadow-1: 0 8px 22px rgba(15, 23, 42, 0.08);
+        --shadow-2: 0 18px 44px rgba(15, 23, 42, 0.12);
+        --shadow-blue: 0 14px 36px rgba(37, 99, 235, 0.18);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at 10% 0%, rgba(37, 99, 235, 0.1), transparent 24rem),
+          linear-gradient(180deg, #fbfdff 0%, var(--bg) 100%);
+        color: var(--text);
+      }
+
+      .review-strip {
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 18px;
+        margin: 12px auto 10px;
+        max-width: 1580px;
+        border: 1px solid var(--line-2);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: var(--shadow-1);
+        color: #334155;
+        font-size: 12px;
+        font-weight: 760;
+      }
+
+      .review-strip code {
+        padding: 3px 8px;
+        border-radius: 9px;
+        background: #eff6ff;
+        color: var(--blue-2);
+        font: inherit;
+        font-weight: 900;
+      }
+
+      .app-frame {
+        max-width: 1580px;
+        height: 880px;
+        margin: 0 auto 28px;
+        overflow: hidden;
+        border: 1px solid #bfd0e5;
+        border-radius: 26px;
+        background: var(--paper);
+        box-shadow: 0 30px 90px rgba(15, 23, 42, 0.16);
+      }
+
+      .global-bar {
+        height: 56px;
+        display: grid;
+        grid-template-columns: 220px 1fr auto;
+        align-items: center;
+        gap: 14px;
+        padding: 0 16px;
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.98);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 860;
+        letter-spacing: 0;
+      }
+
+      .app-grid-icon {
+        width: 28px;
+        height: 28px;
+        display: grid;
+        grid-template-columns: repeat(2, 7px);
+        grid-template-rows: repeat(2, 7px);
+        gap: 4px;
+        place-content: center;
+        border-radius: 9px;
+        border: 1px solid var(--line);
+        background: #fff;
+      }
+
+      .app-grid-icon span {
+        border-radius: 3px;
+        background: #64748b;
+      }
+
+      .workspace-selectors,
+      .global-status,
+      .top-tools,
+      .bottom-tabs,
+      .toolbar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .select-pill,
+      .status-pill,
+      .tool-button {
+        min-height: 32px;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 0 11px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #fff;
+        color: #334155;
+        font-size: 12px;
+        font-weight: 720;
+        white-space: nowrap;
+      }
+
+      .select-pill strong {
+        color: var(--text);
+      }
+
+      .status-pill.green {
+        background: #ecfdf5;
+        border-color: #bbf7d0;
+        color: #15803d;
+      }
+
+      .status-pill.blue {
+        background: #eff6ff;
+        border-color: #bfdbfe;
+        color: #1d4ed8;
+      }
+
+      .status-pill.amber {
+        background: #fffbeb;
+        border-color: #fde68a;
+        color: #92400e;
+      }
+
+      .round-button {
+        width: 32px;
+        height: 32px;
+        display: grid;
+        place-items: center;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: #fff;
+        color: #64748b;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .user-avatar {
+        background: #4f6df5;
+        color: #fff;
+        border-color: #4f6df5;
+      }
+
+      .secondary-bar {
+        height: 58px;
+        display: grid;
+        grid-template-columns: 220px 1fr auto;
+        align-items: center;
+        gap: 12px;
+        padding: 0 16px;
+        border-bottom: 1px solid var(--line);
+        background: #fff;
+      }
+
+      .mini-actions {
+        display: flex;
+        gap: 8px;
+      }
+
+      .tool-button.primary {
+        background: var(--blue);
+        border-color: var(--blue);
+        color: #fff;
+        box-shadow: var(--shadow-blue);
+      }
+
+      .tool-button.disabled {
+        color: #9aa8bb;
+        background: #f8fafc;
+      }
+
+      .readonly-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        font-weight: 760;
+        color: #475569;
+      }
+
+      .switch {
+        width: 42px;
+        height: 24px;
+        border-radius: 999px;
+        background: #e2e8f0;
+        padding: 3px;
+      }
+
+      .switch span {
+        display: block;
+        width: 18px;
+        height: 18px;
+        border-radius: 999px;
+        background: #fff;
+        box-shadow: 0 3px 8px rgba(15, 23, 42, 0.18);
+      }
+
+      .main {
+        height: calc(100% - 114px);
+        display: grid;
+        grid-template-columns: 50px 196px 1fr 326px;
+      }
+
+      .rail {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 8px;
+        border-right: 1px solid var(--line);
+        background: #fff;
+      }
+
+      .rail-item {
+        width: 34px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        border-radius: 11px;
+        color: #475569;
+        font-size: 12px;
+        font-weight: 900;
+        border: 1px solid transparent;
+      }
+
+      .rail-item.active {
+        background: #eff6ff;
+        border-color: #bfdbfe;
+        color: var(--blue);
+        box-shadow: 0 8px 18px rgba(37, 99, 235, 0.16);
+      }
+
+      .domain-nav {
+        border-right: 1px solid var(--line);
+        background: linear-gradient(180deg, #fbfdff 0%, #f8fafc 100%);
+        padding: 14px 10px;
+      }
+
+      .domain-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0 4px 14px;
+        color: var(--blue);
+        font-size: 15px;
+        font-weight: 850;
+      }
+
+      .domain-row {
+        min-height: 38px;
+        display: grid;
+        grid-template-columns: 30px 1fr auto;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 9px;
+        margin-bottom: 4px;
+        border: 1px solid transparent;
+        border-radius: 10px;
+        color: #334155;
+        font-size: 13px;
+        font-weight: 690;
+      }
+
+      .domain-row.active {
+        background: #eaf1ff;
+        border-color: #c9ddff;
+        color: var(--blue-2);
+      }
+
+      .domain-icon {
+        width: 24px;
+        height: 24px;
+        display: grid;
+        place-items: center;
+        border-radius: 8px;
+        background: #f1f5f9;
+        color: #64748b;
+        font-size: 10px;
+        font-weight: 900;
+      }
+
+      .domain-row.active .domain-icon {
+        background: #dbeafe;
+        color: var(--blue-2);
+      }
+
+      .domain-footer {
+        margin-top: 160px;
+        display: grid;
+        gap: 4px;
+      }
+
+      .domain-count {
+        color: #94a3b8;
+        font-size: 11px;
+      }
+
+      .work-area {
+        display: grid;
+        grid-template-rows: 1fr 278px;
+        min-width: 0;
+        background: #fff;
+      }
+
+      .canvas {
+        position: relative;
+        overflow: hidden;
+        background:
+          radial-gradient(circle, rgba(148, 163, 184, 0.34) 1px, transparent 1.5px) 0 0 / 22px 22px,
+          linear-gradient(180deg, #fbfdff 0%, #f6f9fd 100%);
+      }
+
+      .canvas::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at 54% 34%, rgba(37, 99, 235, 0.08), transparent 22rem),
+          linear-gradient(90deg, rgba(37, 99, 235, 0.035), transparent 20%, transparent 78%, rgba(124, 58, 237, 0.035));
+        pointer-events: none;
+      }
+
+      .canvas-toolbar {
+        position: absolute;
+        left: 18px;
+        top: 16px;
+        z-index: 30;
+        display: flex;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 13px;
+        background: rgba(255, 255, 255, 0.94);
+        box-shadow: var(--shadow-1);
+      }
+
+      .canvas-tool {
+        width: 38px;
+        height: 36px;
+        display: grid;
+        place-items: center;
+        color: #475569;
+        border-right: 1px solid #edf2f7;
+        font-size: 12px;
+        font-weight: 900;
+      }
+
+      .canvas-tool:last-child {
+        border-right: 0;
+      }
+
+      .canvas-tool.active {
+        background: #eff6ff;
+        color: var(--blue);
+      }
+
+      .canvas-tool.disabled {
+        color: #c4cfdd;
+        background: #f8fafc;
+      }
+
+      .canvas-zoom {
+        position: absolute;
+        left: 18px;
+        bottom: 14px;
+        z-index: 35;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 10px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.94);
+        box-shadow: var(--shadow-1);
+        color: #475569;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .canvas-svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 3;
+        pointer-events: none;
+      }
+
+      .edge {
+        fill: none;
+        stroke: #9aa8bc;
+        stroke-width: 2.2;
+      }
+
+      .edge.active {
+        stroke: var(--blue);
+        stroke-width: 2.8;
+      }
+
+      .edge.blocked {
+        stroke: #d97706;
+        stroke-width: 2.5;
+        stroke-dasharray: 7 6;
+      }
+
+      .node {
+        position: absolute;
+        z-index: 10;
+        width: 150px;
+        min-height: 92px;
+        border: 1px solid #d9e2ef;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.97);
+        box-shadow: var(--shadow-1);
+        padding: 10px;
+      }
+
+      .node.large {
+        width: 178px;
+        min-height: 118px;
+      }
+
+      .node.selected {
+        border: 2px solid var(--blue);
+        box-shadow: var(--shadow-blue);
+      }
+
+      .node.blocked {
+        border-color: #f59e0b;
+      }
+
+      .node-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+
+      .node-name {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 13px;
+        font-weight: 850;
+      }
+
+      .node-badge {
+        width: 24px;
+        height: 24px;
+        display: grid;
+        place-items: center;
+        border-radius: 8px;
+        background: #eff6ff;
+        color: var(--blue);
+        font-size: 11px;
+        font-weight: 900;
+      }
+
+      .node-badge.orange {
+        background: #fff7ed;
+        color: #ea580c;
+      }
+
+      .node-badge.green {
+        background: #ecfdf5;
+        color: #059669;
+      }
+
+      .node-badge.purple {
+        background: #f3e8ff;
+        color: #7c3aed;
+      }
+
+      .state {
+        padding: 2px 6px;
+        border-radius: 7px;
+        background: #ecfdf5;
+        color: #15803d;
+        font-size: 10px;
+        font-weight: 850;
+      }
+
+      .state.warn {
+        background: #fffbeb;
+        color: #92400e;
+      }
+
+      .state.red {
+        background: #fef2f2;
+        color: #b91c1c;
+      }
+
+      .node-row {
+        min-height: 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        padding: 5px 7px;
+        margin-top: 5px;
+        border: 1px solid #edf2f7;
+        border-radius: 8px;
+        background: #f8fafc;
+        color: #526176;
+        font-size: 10px;
+        font-weight: 720;
+      }
+
+      .port {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        border: 2px solid #fff;
+        background: var(--blue);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+      }
+
+      .port.left {
+        left: -5px;
+      }
+
+      .port.right {
+        right: -5px;
+      }
+
+      .bottom-workbench {
+        display: grid;
+        grid-template-columns: 1.25fr 0.86fr 0.95fr;
+        border-top: 1px solid var(--line);
+        background: #fff;
+      }
+
+      .bottom-panel {
+        min-width: 0;
+        padding: 12px;
+        border-right: 1px solid var(--line);
+      }
+
+      .bottom-panel:last-child {
+        border-right: 0;
+      }
+
+      .bottom-tabs {
+        height: 34px;
+        border-bottom: 1px solid #edf2f7;
+        margin: -12px -12px 12px;
+        padding: 0 12px;
+      }
+
+      .tab {
+        height: 28px;
+        display: inline-flex;
+        align-items: center;
+        padding: 0 10px;
+        border-radius: 8px;
+        color: #64748b;
+        font-size: 12px;
+        font-weight: 850;
+      }
+
+      .tab.active {
+        background: #eff6ff;
+        color: var(--blue);
+      }
+
+      .chatbox {
+        height: 118px;
+        border: 1px solid #bfd0e5;
+        border-radius: 14px;
+        background: #fff;
+        padding: 12px;
+        color: #334155;
+        font-size: 12px;
+        line-height: 1.6;
+      }
+
+      .chat-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 8px;
+      }
+
+      .tiny-pill {
+        padding: 4px 8px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: #f8fafc;
+        color: #64748b;
+        font-size: 11px;
+        font-weight: 760;
+      }
+
+      .send {
+        margin-left: auto;
+        width: 30px;
+        height: 30px;
+        display: grid;
+        place-items: center;
+        border-radius: 10px;
+        background: var(--blue);
+        color: #fff;
+        font-size: 11px;
+        font-weight: 900;
+      }
+
+      .timeline-row {
+        display: grid;
+        grid-template-columns: 58px 18px 1fr auto;
+        gap: 8px;
+        align-items: start;
+        padding: 7px 0;
+        color: #475569;
+        font-size: 11px;
+        border-bottom: 1px solid #f1f5f9;
+      }
+
+      .timeline-dot {
+        width: 10px;
+        height: 10px;
+        margin-top: 4px;
+        border-radius: 999px;
+        background: var(--green);
+      }
+
+      .timeline-dot.blue {
+        background: var(--blue);
+      }
+
+      .timeline-dot.amber {
+        background: #f59e0b;
+      }
+
+      .output-box {
+        height: 176px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 13px;
+        padding: 12px;
+        background: #fff;
+        color: #334155;
+        font-size: 12px;
+        line-height: 1.65;
+      }
+
+      .output-box h4 {
+        margin: 0 0 8px;
+        color: var(--text);
+      }
+
+      .output-box ul {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      .inspector {
+        border-left: 1px solid var(--line);
+        background: #fff;
+        padding: 16px;
+      }
+
+      .inspector-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+
+      .inspector-title {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        font-weight: 860;
+      }
+
+      .close {
+        color: #64748b;
+        font-weight: 900;
+      }
+
+      .form-row {
+        margin-bottom: 11px;
+      }
+
+      .form-row label {
+        display: block;
+        margin-bottom: 5px;
+        color: #64748b;
+        font-size: 11px;
+        font-weight: 850;
+      }
+
+      .form-value {
+        min-height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 8px 10px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #fbfdff;
+        color: #334155;
+        font-size: 12px;
+        font-weight: 680;
+      }
+
+      .quality-pass {
+        color: #15803d;
+        font-weight: 850;
+      }
+
+      .footer-status {
+        height: 26px;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        padding: 0 14px;
+        border-top: 1px solid var(--line);
+        background: #fbfdff;
+        color: #64748b;
+        font-size: 11px;
+        font-weight: 680;
+      }
+
+      @media (max-width: 1100px) {
+        .app-frame {
+          height: auto;
+        }
+
+        .global-bar,
+        .secondary-bar,
+        .main,
+        .bottom-workbench {
+          grid-template-columns: 1fr;
+        }
+
+        .rail,
+        .domain-nav,
+        .inspector {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="review-strip">
+      <span><code>V12-0P v2</code> 按 imag2 目标体验强化的高保真工作台原型</span>
+      <span>design_only · 非 browser / BFF / runtime 证据</span>
+    </div>
+
+    <div class="app-frame">
+      <header class="global-bar">
+        <div class="brand">
+          <div class="app-grid-icon"><span></span><span></span><span></span><span></span></div>
+          <span>HarnessOS V12</span>
+          <span class="status-pill blue">Light Studio</span>
+        </div>
+        <div class="workspace-selectors">
+          <span class="select-pill">工作空间 <strong>演示空间</strong></span>
+          <span class="select-pill">项目 <strong>V12 关键用户场景</strong></span>
+          <span class="select-pill">环境 <strong>沙箱 Sandbox</strong></span>
+          <span class="select-pill">模型 <strong>MiniMax-M2.7</strong></span>
+          <span class="select-pill">提供商 <strong>MiniMax</strong></span>
+        </div>
+        <div class="global-status">
+          <span class="status-pill green">API 在线</span>
+          <span class="status-pill blue">运行中</span>
+          <span class="status-pill green">证据就绪</span>
+          <span class="status-pill amber">等待确认</span>
+          <span class="round-button">?</span>
+          <span class="round-button">N</span>
+          <span class="round-button user-avatar">U</span>
+        </div>
+      </header>
+
+      <div class="secondary-bar">
+        <div class="mini-actions">
+          <span class="tool-button">↶</span>
+          <span class="tool-button">↷</span>
+        </div>
+        <div class="top-tools">
+          <span class="tool-button">智能体设置</span>
+          <span class="tool-button">运行</span>
+          <span class="tool-button">预览</span>
+          <span class="tool-button">调试</span>
+          <span class="readonly-toggle"><span class="switch"><span></span></span>只读</span>
+          <span class="tool-button">版本历史</span>
+          <span class="tool-button">更多</span>
+        </div>
+        <div class="top-tools">
+          <span class="tool-button disabled">保存草稿</span>
+          <span class="tool-button primary">提交审批</span>
+        </div>
+      </div>
+
+      <div class="main">
+        <aside class="rail" aria-label="一级导航">
+          <span class="rail-item active">H</span>
+          <span class="rail-item">A</span>
+          <span class="rail-item">W</span>
+          <span class="rail-item">S</span>
+          <span class="rail-item">M</span>
+          <span class="rail-item">E</span>
+          <span class="rail-item">R</span>
+          <span class="rail-item" style="margin-top: auto">U</span>
+        </aside>
+
+        <aside class="domain-nav" aria-label="二级导航">
+          <div class="domain-title"><span class="domain-icon">H</span> 工作台</div>
+          <div class="domain-row"><span class="domain-icon">A</span><span>智能体</span><span class="domain-count">6</span></div>
+          <div class="domain-row active"><span class="domain-icon">W</span><span>工作流</span><span class="domain-count">3</span></div>
+          <div class="domain-row"><span class="domain-icon">S</span><span>技能</span><span class="domain-count">12</span></div>
+          <div class="domain-row"><span class="domain-icon">M</span><span>MCP</span><span class="domain-count">4</span></div>
+          <div class="domain-row"><span class="domain-icon">E</span><span>证据</span><span class="domain-count">18</span></div>
+          <div class="domain-row"><span class="domain-icon">R</span><span>运行</span><span class="domain-count">2</span></div>
+          <div class="domain-footer">
+            <div class="domain-row"><span class="domain-icon">F</span><span>收藏</span><span></span></div>
+            <div class="domain-row"><span class="domain-icon">T</span><span>模板中心</span><span></span></div>
+            <div class="domain-row"><span class="domain-icon">G</span><span>设置</span><span></span></div>
+          </div>
+        </aside>
+
+        <main class="work-area" aria-label="画布工作区">
+          <section class="canvas" aria-label="只读画布">
+            <div class="canvas-toolbar">
+              <span class="canvas-tool active">P</span>
+              <span class="canvas-tool">↔</span>
+              <span class="canvas-tool">⌕</span>
+              <span class="canvas-tool disabled">+</span>
+              <span class="canvas-tool">⤢</span>
+              <span class="canvas-tool">L</span>
+            </div>
+
+            <svg class="canvas-svg" viewBox="0 0 900 430" preserveAspectRatio="none">
+              <path class="edge" d="M 118 178 C 190 178 190 204 258 204" />
+              <path class="edge" d="M 398 204 C 462 204 462 120 526 120" />
+              <path class="edge" d="M 398 204 C 462 204 462 248 526 248" />
+              <path class="edge" d="M 676 120 C 746 120 746 185 806 185" />
+              <path class="edge" d="M 676 248 C 746 248 746 185 806 185" />
+              <path class="edge blocked" d="M 806 240 C 838 288 828 320 760 330" />
+            </svg>
+
+            <article class="node" style="left: 44px; top: 150px">
+              <div class="node-head">
+                <div class="node-name"><span class="node-badge purple">1</span>触发器</div>
+                <span class="state">就绪</span>
+              </div>
+              <div class="node-row"><span>事件触发</span><strong>对话</strong></div>
+              <div class="node-row"><span>输出</span><strong>goal</strong></div>
+              <span class="port right" style="top: 52px"></span>
+            </article>
+
+            <article class="node large" style="left: 250px; top: 135px">
+              <div class="node-head">
+                <div class="node-name"><span class="node-badge">2</span>规划Agent</div>
+                <span class="state">就绪</span>
+              </div>
+              <div class="node-row"><span>角色</span><strong>规划师</strong></div>
+              <div class="node-row"><span>证据</span><strong>v12-0p-plan</strong></div>
+              <span class="port left" style="top: 52px"></span>
+              <span class="port right" style="top: 52px"></span>
+            </article>
+
+            <article class="node" style="left: 520px; top: 66px">
+              <div class="node-head">
+                <div class="node-name"><span class="node-badge green">3</span>讨论Agent A</div>
+                <span class="state">就绪</span>
+              </div>
+              <div class="node-row"><span>角色</span><strong>斯多葛</strong></div>
+              <div class="node-row"><span>输出</span><strong>观点</strong></div>
+              <span class="port left" style="top: 52px"></span>
+              <span class="port right" style="top: 52px"></span>
+            </article>
+
+            <article class="node" style="left: 520px; top: 214px">
+              <div class="node-head">
+                <div class="node-name"><span class="node-badge green">4</span>讨论Agent B</div>
+                <span class="state">就绪</span>
+              </div>
+              <div class="node-row"><span>角色</span><strong>苏格拉底</strong></div>
+              <div class="node-row"><span>输出</span><strong>追问</strong></div>
+              <span class="port left" style="top: 52px"></span>
+              <span class="port right" style="top: 52px"></span>
+            </article>
+
+            <article class="node large selected" style="right: 48px; top: 150px">
+              <div class="node-head">
+                <div class="node-name"><span class="node-badge orange">5</span>总结Agent</div>
+                <span class="state">就绪</span>
+              </div>
+              <div class="node-row"><span>角色</span><strong>总结者</strong></div>
+              <div class="node-row"><span>工具</span><strong>summary</strong></div>
+              <span class="port left" style="top: 52px"></span>
+              <span class="port right" style="top: 52px"></span>
+            </article>
+
+            <article class="node blocked" style="right: 68px; bottom: 50px">
+              <div class="node-head">
+                <div class="node-name"><span class="node-badge purple">6</span>质检Agent</div>
+                <span class="state warn">等待</span>
+              </div>
+              <div class="node-row"><span>质量</span><strong>待检查</strong></div>
+              <div class="node-row"><span>证据</span><strong>review-ref</strong></div>
+              <span class="port left" style="top: 52px"></span>
+            </article>
+
+            <div class="canvas-zoom">
+              <span>画布缩放</span>
+              <strong>100%</strong>
+              <span>−</span>
+              <span>＋</span>
+              <span>锁定</span>
+            </div>
+          </section>
+
+          <section class="bottom-workbench" aria-label="底部工作台">
+            <div class="bottom-panel">
+              <div class="bottom-tabs">
+                <span class="tab active">对话</span>
+                <span class="tab">运行日志</span>
+                <span class="tab">证据库</span>
+                <span class="tab">建议 3</span>
+              </div>
+              <div class="chatbox">
+                请基于已收集的证据，生成 V12 关键用户场景的方案总结与风险建议，并输出下一步行动项。
+                <div class="chat-actions">
+                  <span class="tiny-pill">/help</span>
+                  <span class="tiny-pill">/stations</span>
+                  <span class="tiny-pill">/evidence</span>
+                  <span class="tiny-pill">/diff</span>
+                  <span class="send">↗</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bottom-panel">
+              <div class="bottom-tabs">
+                <span class="tab active">方案生成时间线</span>
+              </div>
+              <div class="timeline-row"><span>15:38:12</span><span class="timeline-dot"></span><span>触发器 接收目标</span><strong>完成</strong></div>
+              <div class="timeline-row"><span>15:38:15</span><span class="timeline-dot"></span><span>规划Agent 制定讨论计划</span><strong>完成</strong></div>
+              <div class="timeline-row"><span>15:38:36</span><span class="timeline-dot blue"></span><span>讨论Agent A 产出观点</span><strong>完成</strong></div>
+              <div class="timeline-row"><span>15:38:41</span><span class="timeline-dot blue"></span><span>讨论Agent B 产出追问</span><strong>完成</strong></div>
+              <div class="timeline-row"><span>15:39:02</span><span class="timeline-dot amber"></span><span>总结Agent 生成总结与建议</span><strong>运行中</strong></div>
+            </div>
+
+            <div class="bottom-panel">
+              <div class="bottom-tabs">
+                <span class="tab active">最新输出</span>
+              </div>
+              <div class="output-box">
+                <h4>方案总结草案</h4>
+                <ul>
+                  <li>共识：多 Agent 讨论能覆盖多个视角。</li>
+                  <li>分歧：优先视频创作还是哲学讨论。</li>
+                  <li>建议：保留质检 Agent 作为每轮输出的验收节点。</li>
+                </ul>
+                <h4 style="margin-top: 10px">下一步行动项</h4>
+                <ul>
+                  <li>确认 V12-0P 原型方向。</li>
+                  <li>进入 V12 implementation-readiness audit。</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <aside class="inspector" aria-label="右侧属性面板">
+          <div class="inspector-top">
+            <div class="inspector-title"><span class="node-badge orange">5</span>总结Agent</div>
+            <span class="close">×</span>
+          </div>
+          <div class="form-row">
+            <label>角色</label>
+            <div class="form-value">总结者</div>
+          </div>
+          <div class="form-row">
+            <label>目标</label>
+            <div class="form-value">基于多视角讨论输出统一结论与行动建议</div>
+          </div>
+          <div class="form-row">
+            <label>记忆摘要</label>
+            <div class="form-value">整合多轮观点，提炼共识与分歧，形成结构化总结。</div>
+          </div>
+          <div class="form-row">
+            <label>工具</label>
+            <div class="form-value">workspace.read, markdown.summary <span>›</span></div>
+          </div>
+          <div class="form-row">
+            <label>技能</label>
+            <div class="form-value">dialogue-synthesis, insight-extraction <span>›</span></div>
+          </div>
+          <div class="form-row">
+            <label>MCP</label>
+            <div class="form-value">minimax-image, artifact.preview <span>›</span></div>
+          </div>
+          <div class="form-row">
+            <label>质量</label>
+            <div class="form-value"><span class="quality-pass">质量门槛：已通过</span><span>查看报告</span></div>
+          </div>
+          <div class="form-row">
+            <label>证据</label>
+            <div class="form-value">storyboard-evidence.json <span>↗</span></div>
+          </div>
+        </aside>
+      </div>
+      <footer class="footer-status">
+        <span>共 6 个节点</span>
+        <span>已连接 6 条边</span>
+        <span>最近保存：15:39:37</span>
+        <span>自动保存：开启</span>
+      </footer>
+    </div>
+  </body>
+</html>

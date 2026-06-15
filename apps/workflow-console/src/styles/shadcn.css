@@ -1,0 +1,33 @@
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 218 45% 97%;
+  --foreground: 222 34% 15%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 34% 15%;
+  --primary: 221 83% 53%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 214 32% 91%;
+  --secondary-foreground: 222 34% 20%;
+  --muted: 215 25% 94%;
+  --muted-foreground: 215 16% 42%;
+  --accent: 214 95% 93%;
+  --accent-foreground: 221 83% 42%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 214 28% 86%;
+  --input: 214 28% 86%;
+  --ring: 221 83% 53%;
+  --radius: 8px;
+}
+
+.hos-workbench-focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.hos-workbench-focus:focus-visible {
+  box-shadow: 0 0 0 3px hsl(var(--ring) / 0.2);
+  outline: none;
+}

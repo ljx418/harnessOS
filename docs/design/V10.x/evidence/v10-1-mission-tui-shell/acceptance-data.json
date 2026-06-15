@@ -1,0 +1,14 @@
+{
+  "stage_id": "V10-1",
+  "status": "PASS",
+  "evidence_scope": "real_tui_render_fixture",
+  "real_tui_screenshots": [
+    "docs/design/V10.x/evidence/v10-1-mission-tui-shell/real-tui-80x24.txt",
+    "docs/design/V10.x/evidence/v10-1-mission-tui-shell/real-tui-120x40.txt"
+  ],
+  "component_model": "dependency-free CLI-native block renderer; React/Ink package boundary pending external dependency approval",
+  "openharness_primary_copy_present": false,
+  "concept_images_are_runtime_evidence": false,
+  "runtime_truth_boundary": "tui_read_model_not_runtime_truth",
+  "errors": []
+}

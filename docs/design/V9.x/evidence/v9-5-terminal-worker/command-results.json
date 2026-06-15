@@ -1,0 +1,76 @@
+[
+  {
+    "argv": [
+      "pwd"
+    ],
+    "audit_ref": "audit://v9-5/command-result/tier0_readonly",
+    "command_result_id": "terminal-command-result-v9-5-6b0134aaa9f7",
+    "command_tier": "tier0_readonly",
+    "completed_at": "2026-06-10T06:30:32Z",
+    "cwd_ref": "workspace://harnessOS",
+    "returncode": 0,
+    "started_at": "2026-06-10T06:30:32Z",
+    "stderr_preview": "",
+    "stdout_preview": "/Users/Zhuanz/Desktop/workspace/harnessOS\n",
+    "transcript_ref": "terminal-transcript.txt"
+  },
+  {
+    "argv": [
+      "git",
+      "status",
+      "--short",
+      "--",
+      "core",
+      "tools/v9",
+      "tests",
+      "docs/design/V9.x"
+    ],
+    "audit_ref": "audit://v9-5/command-result/tier0_readonly",
+    "command_result_id": "terminal-command-result-v9-5-c4d47913c7cf",
+    "command_tier": "tier0_readonly",
+    "completed_at": "2026-06-10T06:30:32Z",
+    "cwd_ref": "workspace://harnessOS",
+    "returncode": 0,
+    "started_at": "2026-06-10T06:30:32Z",
+    "stderr_preview": "",
+    "stdout_preview": " M core/runtime_adapter/simple_runtime.py\n M core/workflows/v9_3_multi_agent_orchestration_runtime.py\n M docs/design/V9.x/evidence/v9-1-internal-independent-audit/internal-audit-data.json\n M docs/design/V9.x/evidence/v9-1-safety-gate-implementation/acceptance-data.json\n M docs/design/V9.x/evidence/v9-1-safety-gate-implementation/index.html\n M docs/design/V9.x/evidence/v9-2-controlled-executor-pre-implementation/pre-implementation-data.json\n M docs/design/V9.x/evidence/v9-2-controlled-executor-runtime/acceptance-data.json\n M docs/design/V9.x/evidence/v9-3-orchestration-runtime/agent-descriptors.json\n M docs/design/V9.x/evidence/v9-3-orchestration-runtime/artifact-lineage.json\n M docs/design/V9.x/evidence/v9-3-orchestration-runtime/attempt-history.json\n M docs/design/V9.x/evidence/v9-3-orchestration-runtime/branch-states.json\n M docs/design/V9.x/evidence/v9-3-orchestration-runtime/fan-in-join-decisions.json\n M docs/design/V9.x/evidence/v9-3-orchestration-runtime/fan-out-dispatches.json\n M docs/design/V9.x/evidence/v9-3-orchestration-runtime/index.html\n M docs/design/V9.x/evidence/v9-3-orchestration-runtime/lost-worker-recovery-decisions.json\n M docs/design/V9.x/evidence/v9-3-orchestration-runtime/orchestration-messages.json\n M docs/design/V9.x/evidence/v9-3-orchestration-runtime/orchestration-run.json\n M docs/design/V9.x/evidence/v9-3-orchestration-runtime/orchestration-runtime-result.json\n M docs/design/V9.x/evidence/v9-3-orchestration-runtime/station-agent-bindings.json\n M docs/design/V9.x/evidence/v9-3-orchestration-runtime/user-scenarios.json\n M docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/artifacts.json\n M docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/artifacts/intent.md\n M docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/coding-workflow-result.json\n M docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/coding-workflow-run.json\n M docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/fix-loop-proposal.json\n M docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/git-operation-deny-report.json\n M docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/human-review-handoff.json\n M docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/index.html\n M docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/review-summary.json\n M docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/sandboxed-test-result.json\n M docs/design/V9.x/evidence/v9-4-readiness-closure/pre-implementation-data.json\n M docs/design/V9.x/evidence/v9-5-terminal-worker/command-decisions.json\n M docs/design/V9.x/evidence/v9-5-terminal-worker/command-results.json\n M docs/design/V9.x/evidence/v9-5-terminal-worker/diff-capture.json\n M docs/design/V9.x/evidence/v9-5-terminal-worker/terminal-session.json\n M docs/design/V9.x/evidence/v9-5-terminal-worker/terminal-transcript.txt\n M docs/design/V9.x/evidence/v9-5-terminal-worker/terminal-worker-result.json\n M docs/design/V9.x/evidence/v9-6-workflow-studio/acceptance-data.json\n M docs/design/V9.x/evidence/v9-6-workflow-studio/index.html\n M docs/design/V9.x/evidence/v9-6-workflow-studio/manual_confirmation_evidence.json\n M docs/design/V9.x/evidence/v9-6-workflow-studio/studio-state.json\n M docs/design/V9.x/evidence/v9-6-workflow-studio/studio_network_log.json\n M docs/design/V9.x/evidence/v9-6-workflow-studio/workflow_diff_proposal.json\n M docs/design/V9.x/evidence/v9-7-production-governance/audit-export-package.json\n M docs/design/V9.x/evidence/v9-7-production-governance/browser-automation-policy.json\n M docs/design/V9.x/evidence/v9-7-production-governance/credential-lease-decisions.json\n M docs/design/V9.x/evidence/v9-7-production-governance/evidence-hardening-report.json\n M docs/design/V9.x/evidence/v9-7-production-governance/governance-fixture.json\n M docs/design/V9.x/evidence/v9-7-production-governance/incident-timeline.json\n M docs/design/V9.x/evidence/v9-7-production-governance/index.html\n M docs/design/V9.x/evidence/v9-7-production-governance/service-account-binding-decisions.json\n M do",
+    "transcript_ref": "terminal-transcript.txt"
+  },
+  {
+    "argv": [
+      "rg",
+      "-n",
+      "V9-5",
+      "docs/design/V9.x/v9_5_development_and_acceptance_plan.md"
+    ],
+    "audit_ref": "audit://v9-5/command-result/tier0_readonly",
+    "command_result_id": "terminal-command-result-v9-5-47f5bdd7b434",
+    "command_tier": "tier0_readonly",
+    "completed_at": "2026-06-10T06:30:32Z",
+    "cwd_ref": "workspace://harnessOS",
+    "returncode": 0,
+    "started_at": "2026-06-10T06:30:32Z",
+    "stderr_preview": "",
+    "stdout_preview": "1:# V9-5 Development And Acceptance Plan\n3:文档状态：V9-5 detailed development and acceptance plan / implementation complete for review.\n5:This document records the V9-5 stage plan and completed governed terminal worker evidence package. It does not authorize unrestricted shell, production terminal automation or browser account automation.\n9:V9-5 entered implementation after:\n12:V9-4 evidence PASS or a documented proceed decision scopes V9-5 independently as a narrow sandbox readiness slice only.\n21:V9-5 completion evidence:\n39:V9-5 expands terminal worker behavior inside a governed workspace sandbox:\n51:V9-5 must not:\n65:| V9-5A Workspace boundary guard | path decision records | canonical path, symlink target and denied prefixes recorded |\n66:| V9-5B Command tier resolver | terminal_command_decision records | tier, policy decision and human authorization requirement visible |\n67:| V9-5C Transcript capture | transcript_ref records | command, status and redacted output refs visible |\n68:| V9-5D Diff capture | diff_capture records | write attempts create proposal / diff refs |\n69:| V9-5E Denial evidence | denied action records | escape, sensitive access, git push and deployment attempts denied |\n70:| V9-5F Dashboard | HTML and acceptance data | auditor can inspect command tiers and denial evidence |\n110:V9-5 completion evidence must include:\n136:V9-5 evidence is reused to claim unrestricted terminal worker ready.\n137:V9-5 evidence is reused to authorize V9-7 production automation.\n",
+    "transcript_ref": "terminal-transcript.txt"
+  },
+  {
+    "argv": [
+      "./.venv/bin/python",
+      "-m",
+      "pytest",
+      "tests/test_v9_4_readiness_closure.py",
+      "-q"
+    ],
+    "audit_ref": "audit://v9-5/command-result/tier1_build_test",
+    "command_result_id": "terminal-command-result-v9-5-4b0bc25c5b53",
+    "command_tier": "tier1_build_test",
+    "completed_at": "2026-06-10T06:30:35Z",
+    "cwd_ref": "workspace://harnessOS",
+    "returncode": 0,
+    "started_at": "2026-06-10T06:30:32Z",
+    "stderr_preview": "",
+    "stdout_preview": "...                                                                      [100%]\n3 passed in 1.26s\n",
+    "transcript_ref": "terminal-transcript.txt"
+  }
+]

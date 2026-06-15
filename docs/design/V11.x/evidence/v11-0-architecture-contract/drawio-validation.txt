@@ -1,0 +1,4 @@
+command: xmllint --noout docs/design/V11.x/v11_current_gap_analysis.drawio
+result: PASS
+validated_at: 2026-06-10
+notes: drawio XML is syntactically valid and uses the V11 gray/yellow/orange-red architecture classification.

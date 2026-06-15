@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Xpert 前端体验考察报告</title>
+    <style>
+      body {
+        margin: 0;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+          "Microsoft YaHei", sans-serif;
+        color: #111827;
+        background: #f8fafc;
+      }
+      header {
+        padding: 40px 56px;
+        color: white;
+        background: linear-gradient(135deg, #111827, #1d4ed8);
+      }
+      h1 {
+        margin: 0 0 12px;
+        font-size: 34px;
+      }
+      h2 {
+        margin-top: 0;
+      }
+      .subtitle {
+        max-width: 960px;
+        color: #dbeafe;
+        font-size: 16px;
+        line-height: 1.7;
+      }
+      main {
+        padding: 32px 56px 56px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+      .card {
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        background: white;
+        padding: 18px;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+      }
+      .wide {
+        grid-column: 1 / -1;
+      }
+      .metric {
+        font-size: 28px;
+        font-weight: 700;
+        color: #1d4ed8;
+      }
+      .muted {
+        color: #64748b;
+      }
+      .pass {
+        color: #047857;
+        font-weight: 700;
+      }
+      .warn {
+        color: #b45309;
+        font-weight: 700;
+      }
+      .fail {
+        color: #b91c1c;
+        font-weight: 700;
+      }
+      img {
+        width: 100%;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        background: white;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      th,
+      td {
+        border-bottom: 1px solid #e5e7eb;
+        padding: 10px 8px;
+        text-align: left;
+        vertical-align: top;
+      }
+      th {
+        color: #475569;
+        background: #f8fafc;
+      }
+      code {
+        padding: 2px 5px;
+        border-radius: 4px;
+        background: #eef2ff;
+      }
+      .section {
+        margin-top: 24px;
+      }
+      .caption {
+        margin: 8px 0 0;
+        color: #64748b;
+        font-size: 13px;
+      }
+      @media (max-width: 1000px) {
+        header,
+        main {
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Xpert 前端体验考察报告</h1>
+      <div class="subtitle">
+        本报告基于本机 Docker 部署的 Xpert：<code>http://127.0.0.1:18080</code>。
+        目标是为 HarnessOS V12-V15 方案 C 提供体验参考：不复制 Xpert 代码，
+        但对齐产品壳、Workbench、Agent/插件市场、可观测和自托管体验。
+      </div>
+    </header>
+
+    <main>
+      <section class="grid">
+        <div class="card">
+          <div class="metric pass">运行中</div>
+          <p>Docker 服务与 API health 已通过，API 返回 database/storage/cache 均 up。</p>
+        </div>
+        <div class="card">
+          <div class="metric pass">已初始化</div>
+          <p>自动化完成本地租户初始化的第一段流程，核心页面已可进入。</p>
+        </div>
+        <div class="card">
+          <div class="metric warn">参考证据</div>
+          <p>Xpert 截图只能作为体验参考，不能作为 HarnessOS runtime evidence。</p>
+        </div>
+      </section>
+
+      <section class="section card">
+        <h2>自动化巡检结果</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>入口</th>
+              <th>最终 URL</th>
+              <th>可见状态</th>
+              <th>证据</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Onboarding</td>
+              <td><code>/onboarding</code></td>
+              <td class="pass">欢迎页可见，API onboard 200</td>
+              <td><code>xpert-onboarding-20s.png</code></td>
+            </tr>
+            <tr>
+              <td>Onboarding Started</td>
+              <td><code>/onboarding/tenant</code></td>
+              <td class="pass">管理员/组织创建表单可见</td>
+              <td><code>xpert-onboarding-started-20s.png</code></td>
+            </tr>
+            <tr>
+              <td>Root / Chat</td>
+              <td><code>/chat/clawxpert</code></td>
+              <td class="pass">ClawXpert setup wizard 可见</td>
+              <td><code>xpert-root-20s.png</code></td>
+            </tr>
+            <tr>
+              <td>Chat Common</td>
+              <td><code>/chat/x/common</code></td>
+              <td class="warn">Assistant 未配置，给出设置入口</td>
+              <td><code>xpert-chat-common-20s.png</code></td>
+            </tr>
+            <tr>
+              <td>Explore</td>
+              <td><code>/explore</code></td>
+              <td class="pass">Agent/Skill 市场卡片网格可见</td>
+              <td><code>xpert-explore-20s.png</code></td>
+            </tr>
+            <tr>
+              <td>Plugins</td>
+              <td><code>/settings/plugins</code></td>
+              <td class="pass">插件管理页可见，内置插件列表可见</td>
+              <td><code>xpert-plugins-20s.png</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section grid">
+        <div class="card wide">
+          <h2>1. Onboarding 与初始化</h2>
+          <img src="xpert-onboarding-started-20s.png" alt="Xpert onboarding tenant setup" />
+          <p class="caption">
+            参考点：清晰的三/四步初始化、中心化表单、轻量品牌露出、明确下一步按钮。
+            HarnessOS V12 应至少提供 product shell onboarding、API health、环境配置状态和项目入口。
+          </p>
+        </div>
+        <div class="card wide">
+          <h2>2. Chat / ClawXpert 工作台</h2>
+          <img src="xpert-root-20s.png" alt="Xpert ClawXpert setup wizard" />
+          <p class="caption">
+            参考点：左侧全局导航 + 工作台侧栏 + 主内容设置向导。HarnessOS 可以借鉴这种布局，
+            但必须用 WorkbenchConversation、WorkflowDiffProposal 和 Evidence refs 承载语义。
+          </p>
+        </div>
+        <div class="card wide">
+          <h2>3. Agent / Skill 市场</h2>
+          <img src="xpert-explore-20s.png" alt="Xpert explore agents" />
+          <p class="caption">
+            参考点：Square/Mine/Skills/Agents 分层、卡片网格、分类标签、安装入口。
+            HarnessOS V14 应映射为 Plugin/Skill/Tool/MCP manifests、compatibility decisions 和 scoped activation。
+          </p>
+        </div>
+        <div class="card wide">
+          <h2>4. 插件管理</h2>
+          <img src="xpert-plugins-20s.png" alt="Xpert plugin settings" />
+          <p class="caption">
+            参考点：Installed / Explore Marketplace / Install Plugin、分类过滤、版本、scope、作者、标签。
+            HarnessOS 不能直接执行未审插件，需要兼容性、scope、policy、redaction 和 unsafe denial 证据。
+          </p>
+        </div>
+      </section>
+
+      <section class="section card">
+        <h2>对 HarnessOS V12-V15 的可迁移设计点</h2>
+        <ul>
+          <li>V12：产品壳、onboarding、Workspace/Project/App、Workbench 入口。</li>
+          <li>V13：Studio 画布、Agent/节点 inspector、WorkflowDiff 可视化确认。</li>
+          <li>V14：Agent/Skill/Plugin/MCP 市场式浏览、安装、scope 绑定、拒绝原因。</li>
+          <li>V15：运行状态、插件/模型配置、健康检查、可观测仪表盘、自托管 smoke。</li>
+        </ul>
+        <p class="muted">
+          结论：采用方案 C。Xpert 作为交互和信息架构 benchmark；HarnessOS 原生实现，
+          保留 BFF/DTO、runtime truth boundary、Evidence Chain 和 No False Green。
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

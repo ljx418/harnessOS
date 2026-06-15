@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>V9-UA 用户场景特殊验收审计</title>
+  <style>
+    :root {
+      --ink: #102033;
+      --muted: #5b6b7b;
+      --line: #d8e1ea;
+      --panel: #ffffff;
+      --bg: #f5f7fb;
+      --accent: #1864ab;
+      --accent-2: #0f766e;
+      --warn: #a16207;
+      --good: #15803d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.55;
+    }
+    header {
+      background: linear-gradient(135deg, #0b253f 0%, #155e75 58%, #0f766e 100%);
+      color: #fff;
+      padding: 34px 42px 28px;
+    }
+    h1 { margin: 0 0 10px; font-size: 32px; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 21px; }
+    h3 { margin: 0 0 10px; font-size: 16px; }
+    main { max-width: 1440px; margin: 0 auto; padding: 24px; }
+    section, .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin: 18px 0;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    }
+    .hero-grid, .kpi-grid, .scenario-grid, .media-grid, .diagram-grid {
+      display: grid;
+      gap: 14px;
+    }
+    .hero-grid { grid-template-columns: 1.15fr 0.85fr; align-items: stretch; }
+    .kpi-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); margin-top: 18px; }
+    .scenario-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .scenario-detail-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 14px; }
+    .media-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .diagram-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .kpi, .scenario-card {
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .kpi strong { display: block; font-size: 26px; color: var(--accent); }
+    .kpi span, .muted { color: var(--muted); }
+    .badge {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 2px 9px;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+    .pass { background: #dcfce7; color: #14532d; border-color: #86efac; }
+    .blocked { background: #fef3c7; color: #713f12; border-color: #facc15; }
+    .scope { background: #e0f2fe; color: #075985; border-color: #7dd3fc; }
+    table { border-collapse: collapse; width: 100%; font-size: 13px; }
+    th, td { border-bottom: 1px solid var(--line); padding: 9px; text-align: left; vertical-align: top; }
+    th { background: #f8fafc; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #0f172a; color: #dbeafe; border-radius: 8px; padding: 12px; font-size: 12px; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img { max-width: 100%; display: block; border-radius: 7px; border: 1px solid var(--line); }
+    .media-card { margin: 0; background: #f8fafc; border: 1px solid var(--line); border-radius: 8px; padding: 10px; }
+    figcaption { margin-top: 8px; color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
+    .svg-panel svg { width: 100%; height: auto; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+    .callout { border-left: 5px solid var(--accent-2); }
+    .warning { border-left: 5px solid var(--warn); }
+    .small { font-size: 12px; }
+    .detail-section { scroll-margin-top: 16px; }
+    .detail-section ul { margin: 8px 0 0; padding-left: 20px; }
+    .detail-section li { margin: 4px 0; }
+    .detail-label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0; font-weight: 700; }
+    @media (max-width: 1040px) {
+      .hero-grid, .diagram-grid, .scenario-detail-grid { grid-template-columns: 1fr; }
+      .kpi-grid, .scenario-grid, .media-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 680px) {
+      header { padding: 24px 18px; }
+      main { padding: 12px; }
+      .kpi-grid, .scenario-grid, .media-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hero-grid">
+      <div>
+        <h1>V9-UA 用户场景特殊验收审计</h1>
+        <p>本报告把“罗马广场多 Agent 讨论”“并行 Agent 编排”“视频分镜工作流”“自然语言优化”等用户可见能力，从隐藏 runtime 数据提升为可审、可点开、可复核的验收入口。</p>
+      </div>
+      <div class="card" style="background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.26); color: #fff;">
+        <h2>当前结论</h2>
+        <p><span class="badge pass">PASS</span> V9 用户场景覆盖审查通过，coverage_gaps=[]。</p>
+        <p class="small">这是特殊验收阶段，不是新增生产能力声明。</p>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="callout">
+      <h2>特殊阶段定义</h2>
+      <div class="kpi-grid">
+        <div class="kpi"><strong>V9-UA</strong><span>特殊验收阶段</span></div>
+        <div class="kpi"><strong>PASS</strong><span>总体状态</span></div>
+        <div class="kpi"><strong>9</strong><span>用户场景</span></div>
+        <div class="kpi"><strong>8</strong><span>runtime-backed 场景</span></div>
+        <div class="kpi"><strong>0</strong><span>coverage gaps</span></div>
+      </div>
+      <pre>{
+  &quot;status&quot;: &quot;PASS&quot;,
+  &quot;scenario_count&quot;: 9,
+  &quot;covered_runtime_scenarios&quot;: 8,
+  &quot;coverage_gaps&quot;: [],
+  &quot;boundary_flags&quot;: {
+    &quot;agent_executor_claim_allowed&quot;: false,
+    &quot;full_orchestration_claim_allowed&quot;: false,
+    &quot;autonomous_coding_claim_allowed&quot;: false,
+    &quot;complete_studio_claim_allowed&quot;: false,
+    &quot;production_claim_allowed&quot;: false
+  }
+}</pre>
+    </section>
+
+    <section>
+      <h2>用户能拿项目做什么</h2>
+      <div class="scenario-grid"><article class="scenario-card"><h3><a href="#US-V9-01">US-V9-01 · 受控执行器动作审查</a></h3><p><span class="badge pass">PASS</span> <span class="badge scope">runtime-backed</span></p><p>四个 allowlisted operation、source=agent deny、evidence chain</p><p class="muted">Owner stage: V9-2</p></article><article class="scenario-card"><h3><a href="#US-V9-02">US-V9-02 · 并行 Agent 编排审查</a></h3><p><span class="badge pass">PASS</span> <span class="badge scope">runtime-backed</span></p><p>serial / parallel / fan-out / fan-in / recovery / lineage</p><p class="muted">Owner stage: V9-3</p></article><article class="scenario-card"><h3><a href="#US-V9-03">US-V9-03 · 代码工作流 proposal-only 审查</a></h3><p><span class="badge pass">PASS</span> <span class="badge scope">runtime-backed</span></p><p>plan / diff proposal / sandboxed test / review / no auto commit</p><p class="muted">Owner stage: V9-4</p></article><article class="scenario-card"><h3><a href="#US-V9-04">US-V9-04 · 终端 worker sandbox 审查</a></h3><p><span class="badge pass">PASS</span> <span class="badge scope">runtime-backed</span></p><p>workspace boundary / command tier / transcript / denial evidence</p><p class="muted">Owner stage: V9-5</p></article><article class="scenario-card"><h3><a href="#US-V9-05">US-V9-05 · Workflow Studio 证据审查</a></h3><p><span class="badge pass">PASS</span> <span class="badge scope">runtime-backed</span></p><p>BFF/DTO / read-only panels / manual confirmation</p><p class="muted">Owner stage: V9-6</p></article><article class="scenario-card"><h3><a href="#US-V9-06">US-V9-06 · 最终验收看板审查</a></h3><p><span class="badge pass">PASS</span> <span class="badge scope">dashboard aggregation</span></p><p>stage evidence / claim scan / redaction scan / drawio XML</p><p class="muted">Owner stage: V9-8</p></article><article class="scenario-card"><h3><a href="#US-V9-07">US-V9-07 · 罗马广场多 Agent 讨论</a></h3><p><span class="badge pass">PASS</span> <span class="badge scope">runtime-backed</span></p><p>role-specific agents / multi-turn messages / attribution synthesis</p><p class="muted">Owner stage: V9-3</p></article><article class="scenario-card"><h3><a href="#US-V9-08">US-V9-08 · 视频创作分镜工作流</a></h3><p><span class="badge pass">PASS</span> <span class="badge scope">runtime-backed</span></p><p>provider-backed storyboard images / quality Agent / TUI evidence refs</p><p class="muted">Owner stage: V9-3/V9-6</p></article><article class="scenario-card"><h3><a href="#US-V9-09">US-V9-09 · 自然语言优化工作流</a></h3><p><span class="badge pass">PASS</span> <span class="badge scope">runtime-backed</span></p><p>WorkflowDiff proposal / no mutation before confirmation</p><p class="muted">Owner stage: V9-6</p></article></div>
+    </section>
+
+    <section>
+      <h2>不同用户场景详细验收说明</h2>
+      <p class="muted">每个场景都按“用户是谁、想完成什么、怎么体验、应该看到什么、如何审计、边界是什么”组织，避免验收只停留在状态表。</p>
+      
+    <article class="detail-section card" id="US-V9-01">
+      <h3>US-V9-01 · 受控执行器动作审查</h3>
+      <p><span class="badge pass">PASS</span> <span class="badge scope">runtime-backed</span> <span class="badge scope">V9-2</span></p>
+      <div class="scenario-detail-grid">
+        <div>
+          <p><span class="detail-label">用户画像</span><br />工作流管理员或产品负责人</p>
+          <p><span class="detail-label">用户目标</span><br />确认系统只能执行受控白名单动作，并且任何 Agent 来源的直接写入都被拒绝。</p>
+          <p><span class="detail-label">什么时候用</span><br />当用户要启动、重跑、写入产物或创建质量评价时，用这个场景审查 V9-2 受控执行器是否仍在权限边界内。</p>
+          <p><span class="detail-label">审计重点</span><br />重点核查受控执行器没有扩大为通用 Agent executor，也没有开放 connector.call 或 external_llm.call。</p>
+          <p><span class="detail-label">边界</span><br />该场景不证明完整 Agent executor 或 production controlled executor。</p>
+        </div>
+        <div>
+          <p><span class="detail-label">用户最小操作步骤</span></p>
+          <ol><li>打开 V9-2 controlled executor runtime 验收页。</li><li>检查四个 allowlisted operation 的 runtime evidence。</li><li>检查 source=agent durable mutation denied、kill switch、idempotency、rollback 和 evidence chain 字段。</li></ol>
+          <p><span class="detail-label">预期产出</span></p>
+          <ul><li>workflow.instance.start、station.rerun、artifact.write、quality.evaluation.create 均有受控证据。</li><li>越界动作没有被执行。</li><li>审计证据中只出现 redacted refs，不出现原始密钥或原始 payload。</li></ul>
+          <p><span class="detail-label">验收标准</span></p>
+          <ul><li>status=PASS 且 runtime_backed=true。</li><li>source=agent direct durable mutation denied。</li><li>evidence chain 可追溯到 policy / capability / authorization decision。</li></ul>
+          <p><span class="detail-label">证据入口</span></p>
+          <ul><li><a href="../v9-2-controlled-executor-runtime/acceptance-data.json">../v9-2-controlled-executor-runtime/acceptance-data.json</a></li><li><a href="/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-2-controlled-executor-runtime/acceptance-data.json">/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-2-controlled-executor-runtime/acceptance-data.json</a></li></ul>
+        </div>
+      </div>
+    </article>
+    
+    <article class="detail-section card" id="US-V9-02">
+      <h3>US-V9-02 · 并行 Agent 编排审查</h3>
+      <p><span class="badge pass">PASS</span> <span class="badge scope">runtime-backed</span> <span class="badge scope">V9-3</span></p>
+      <div class="scenario-detail-grid">
+        <div>
+          <p><span class="detail-label">用户画像</span><br />需要审查多 Agent 协作可靠性的项目负责人</p>
+          <p><span class="detail-label">用户目标</span><br />看到一个工作流如何拆成串行、并行、fan-out、fan-in，并在失败恢复后保留 attempt 和 artifact lineage。</p>
+          <p><span class="detail-label">什么时候用</span><br />当用户关心多个 Agent/工位是否真的被编排，而不是单一脚本顺序跑完时，用这个场景验收。</p>
+          <p><span class="detail-label">审计重点</span><br />重点看 fan-out/fan-in 是否有真实 JSON 证据，而不是只在图里画了并行。</p>
+          <p><span class="detail-label">边界</span><br />该场景证明 bounded orchestration runtime slice，不证明 full multi-Agent orchestration ready。</p>
+        </div>
+        <div>
+          <p><span class="detail-label">用户最小操作步骤</span></p>
+          <ol><li>打开 V9-3 orchestration runtime 验收页。</li><li>查看 fan-out dispatch、fan-in join、attempt history、artifact lineage 和 lost worker recovery 证据。</li><li>确认每个产物保留 producer_agent_id / producer_attempt_id。</li></ol>
+          <p><span class="detail-label">预期产出</span></p>
+          <ul><li>并行分支各自拥有独立 branch state。</li><li>fan-in 汇总保留 attribution refs。</li><li>失败或丢失 worker 的恢复不覆盖旧 attempt。</li></ul>
+          <p><span class="detail-label">验收标准</span></p>
+          <ul><li>serial_parallel_fan_in_fan_out=PASS。</li><li>attempt_history=PASS。</li><li>artifact_lineage=PASS。</li><li>failure_recovery=PASS 且 lost_worker_recovery=PASS。</li></ul>
+          <p><span class="detail-label">证据入口</span></p>
+          <ul><li><a href="../v9-3-orchestration-runtime/index.html">../v9-3-orchestration-runtime/index.html</a></li><li><a href="../v9-3-orchestration-runtime/fan-out-dispatches.json">../v9-3-orchestration-runtime/fan-out-dispatches.json</a></li><li><a href="../v9-3-orchestration-runtime/fan-in-join-decisions.json">../v9-3-orchestration-runtime/fan-in-join-decisions.json</a></li><li><a href="/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-3-orchestration-runtime/acceptance-data.json">/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-3-orchestration-runtime/acceptance-data.json</a></li></ul>
+        </div>
+      </div>
+    </article>
+    
+    <article class="detail-section card" id="US-V9-03">
+      <h3>US-V9-03 · 代码工作流 proposal-only 审查</h3>
+      <p><span class="badge pass">PASS</span> <span class="badge scope">runtime-backed</span> <span class="badge scope">V9-4</span></p>
+      <div class="scenario-detail-grid">
+        <div>
+          <p><span class="detail-label">用户画像</span><br />希望用 AI 辅助开发但不想让系统自动提交代码的工程负责人</p>
+          <p><span class="detail-label">用户目标</span><br />让系统生成计划、diff proposal、测试建议和 review handoff，但不自动 commit、push 或 deploy。</p>
+          <p><span class="detail-label">什么时候用</span><br />当用户想把自然语言开发目标交给工作流处理，但仍要求人类审核最终改动时使用。</p>
+          <p><span class="detail-label">审计重点</span><br />重点检查 AI 只生成 proposal，不把 proposal 伪装成已经被批准的代码变更。</p>
+          <p><span class="detail-label">边界</span><br />该场景不证明 autonomous coding workflow ready。</p>
+        </div>
+        <div>
+          <p><span class="detail-label">用户最小操作步骤</span></p>
+          <ol><li>打开 V9-4 coding workflow runtime 验收页。</li><li>查看 intent、plan、diff proposal、sandboxed test result、review summary 和 fix-loop proposal。</li><li>检查 git operation deny report。</li></ol>
+          <p><span class="detail-label">预期产出</span></p>
+          <ul><li>系统生成可审查的 diff proposal 和测试结果。</li><li>没有自动 commit、push、deploy。</li><li>失败修复以新 proposal 形式出现，不静默修改。</li></ul>
+          <p><span class="detail-label">验收标准</span></p>
+          <ul><li>runtime_backed=true。</li><li>auto commit / auto push / auto deploy 均被拒绝或未发生。</li><li>human review handoff 存在。</li></ul>
+          <p><span class="detail-label">证据入口</span></p>
+          <ul><li><a href="../v9-4-coding-workflow-runtime/index.html">../v9-4-coding-workflow-runtime/index.html</a></li><li><a href="/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/acceptance-data.json">/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/acceptance-data.json</a></li></ul>
+        </div>
+      </div>
+    </article>
+    
+    <article class="detail-section card" id="US-V9-04">
+      <h3>US-V9-04 · 终端 worker sandbox 审查</h3>
+      <p><span class="badge pass">PASS</span> <span class="badge scope">runtime-backed</span> <span class="badge scope">V9-5</span></p>
+      <div class="scenario-detail-grid">
+        <div>
+          <p><span class="detail-label">用户画像</span><br />安全负责人或需要审查终端自动化边界的工程负责人</p>
+          <p><span class="detail-label">用户目标</span><br />确认 terminal worker 只能在 workspace sandbox 内执行受控命令，并捕获 transcript 和 diff。</p>
+          <p><span class="detail-label">什么时候用</span><br />当用户想让工作流调用终端做只读检查、测试或受限产物提案时使用。</p>
+          <p><span class="detail-label">审计重点</span><br />重点检查 terminal worker 没有变成 unrestricted shell。</p>
+          <p><span class="detail-label">边界</span><br />该场景不证明 unrestricted terminal worker 或 production terminal automation。</p>
+        </div>
+        <div>
+          <p><span class="detail-label">用户最小操作步骤</span></p>
+          <ol><li>打开 V9-5 terminal worker 验收页。</li><li>查看 command decisions、terminal transcript、diff capture 和 denial evidence。</li><li>确认 workspace escape、secret read、git push、production deploy 没有被允许。</li></ol>
+          <p><span class="detail-label">预期产出</span></p>
+          <ul><li>命令有 tier / policy decision。</li><li>终端 transcript 可审计。</li><li>危险命令被拒绝并有 evidence。</li></ul>
+          <p><span class="detail-label">验收标准</span></p>
+          <ul><li>terminal session evidence=PASS。</li><li>workspace boundary checks=PASS。</li><li>secret-read / escape / push / deploy denial evidence 存在。</li></ul>
+          <p><span class="detail-label">证据入口</span></p>
+          <ul><li><a href="../v9-5-terminal-worker/index.html">../v9-5-terminal-worker/index.html</a></li><li><a href="../v9-5-terminal-worker/terminal-transcript.txt">../v9-5-terminal-worker/terminal-transcript.txt</a></li><li><a href="/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-5-terminal-worker/acceptance-data.json">/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-5-terminal-worker/acceptance-data.json</a></li></ul>
+        </div>
+      </div>
+    </article>
+    
+    <article class="detail-section card" id="US-V9-05">
+      <h3>US-V9-05 · Workflow Studio 证据审查</h3>
+      <p><span class="badge pass">PASS</span> <span class="badge scope">runtime-backed</span> <span class="badge scope">V9-6</span></p>
+      <div class="scenario-detail-grid">
+        <div>
+          <p><span class="detail-label">用户画像</span><br />需要在网页控制台审查工作流状态的运营用户</p>
+          <p><span class="detail-label">用户目标</span><br />通过 Product Console / Thin Web Console 查看 runtime report、evidence review 和手动确认入口。</p>
+          <p><span class="detail-label">什么时候用</span><br />当用户需要可视化审查工作流结果，而不是直接改 runtime truth 时使用。</p>
+          <p><span class="detail-label">审计重点</span><br />重点检查 UI 没有隐藏执行按钮，也没有绕过 BFF/DTO 写 runtime。</p>
+          <p><span class="detail-label">边界</span><br />该场景不证明 complete Workflow Studio ready。</p>
+        </div>
+        <div>
+          <p><span class="detail-label">用户最小操作步骤</span></p>
+          <ol><li>打开 V9-6 Workflow Studio 验收页。</li><li>查看 read-only panels、BFF/DTO 边界和 manual confirmation evidence。</li><li>检查 browser denylist 和 hidden mutation form scan。</li></ol>
+          <p><span class="detail-label">预期产出</span></p>
+          <ul><li>Runtime Report 和 Evidence Review 只读。</li><li>manual confirmation 生成 human_authorization_ref。</li><li>浏览器不直连内部 runtime route。</li></ul>
+          <p><span class="detail-label">验收标准</span></p>
+          <ul><li>BFF route allowlist=PASS。</li><li>browser denylist=PASS。</li><li>manual confirmation evidence exists。</li></ul>
+          <p><span class="detail-label">证据入口</span></p>
+          <ul><li><a href="../v9-6-workflow-studio/index.html">../v9-6-workflow-studio/index.html</a></li><li><a href="/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-6-workflow-studio/acceptance-data.json">/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-6-workflow-studio/acceptance-data.json</a></li></ul>
+        </div>
+      </div>
+    </article>
+    
+    <article class="detail-section card" id="US-V9-06">
+      <h3>US-V9-06 · 最终验收看板审查</h3>
+      <p><span class="badge pass">PASS</span> <span class="badge scope">dashboard aggregation</span> <span class="badge scope">V9-8</span></p>
+      <div class="scenario-detail-grid">
+        <div>
+          <p><span class="detail-label">用户画像</span><br />最终验收审计员</p>
+          <p><span class="detail-label">用户目标</span><br />从一个看板确认 V9 各阶段证据、用户场景、claim scan、redaction scan 和 drawio XML 是否通过。</p>
+          <p><span class="detail-label">什么时候用</span><br />当用户要做最终验收或外部审计前复核时使用。</p>
+          <p><span class="detail-label">审计重点</span><br />重点检查最终看板只是证据聚合，不替代每个 runtime 场景证据。</p>
+          <p><span class="detail-label">边界</span><br />该场景本身是 dashboard aggregation，因此不要求 runtime_backed=true。</p>
+        </div>
+        <div>
+          <p><span class="detail-label">用户最小操作步骤</span></p>
+          <ol><li>打开 V9-8 final acceptance dashboard。</li><li>检查 stage evidence、user scenario matrix、No False Green、redaction 和 blocker 列表。</li><li>确认 final claim 仍是 ready for review，不被摘要为 ready。</li></ol>
+          <p><span class="detail-label">预期产出</span></p>
+          <ul><li>V9-0 到 V9-8 evidence package 被聚合。</li><li>blockers=[]。</li><li>claim_scan=PASS 且 redaction_scan=PASS。</li></ul>
+          <p><span class="detail-label">验收标准</span></p>
+          <ul><li>status=PASS。</li><li>无 FAIL / BLOCKED。</li><li>planning docs 没有被算作 runtime evidence。</li></ul>
+          <p><span class="detail-label">证据入口</span></p>
+          <ul><li><a href="../v9-8-final-acceptance/v9-final-acceptance-dashboard.html">../v9-8-final-acceptance/v9-final-acceptance-dashboard.html</a></li><li><a href="self://v9-8-final-dashboard">self://v9-8-final-dashboard</a></li></ul>
+        </div>
+      </div>
+    </article>
+    
+    <article class="detail-section card" id="US-V9-07">
+      <h3>US-V9-07 · 罗马广场多 Agent 讨论</h3>
+      <p><span class="badge pass">PASS</span> <span class="badge scope">runtime-backed</span> <span class="badge scope">V9-3</span></p>
+      <div class="scenario-detail-grid">
+        <div>
+          <p><span class="detail-label">用户画像</span><br />想用多 Agent 做观点讨论、研究辩论或创意评审的用户</p>
+          <p><span class="detail-label">用户目标</span><br />创建一个罗马广场式讨论，让哲学家、工程师、历史学家、伦理学家和主持 Agent 围绕同一问题发言、互相引用并输出综合结论。</p>
+          <p><span class="detail-label">什么时候用</span><br />当用户需要不同身份的 Agent 互相质询、保留观点出处、输出共识和分歧时使用。</p>
+          <p><span class="detail-label">审计重点</span><br />重点检查讨论不是一段单模型文本，而是多 Agent 角色、消息引用和综合产物的结构化证据。</p>
+          <p><span class="detail-label">边界</span><br />该场景不证明通用多人聊天产品，也不证明 full multi-Agent orchestration ready。</p>
+        </div>
+        <div>
+          <p><span class="detail-label">用户最小操作步骤</span></p>
+          <ol><li>打开 V9-UA 报告中的罗马广场章节。</li><li>查看每个 Agent 的 role / goal / skill / MCP refs。</li><li>检查多轮发言、message references、message graph edges 和 moderator synthesis。</li></ol>
+          <p><span class="detail-label">预期产出</span></p>
+          <ul><li>至少 5 个角色 Agent 可见。</li><li>至少 2 轮讨论，且每条发言有 sender、message kind 和 references。</li><li>主持 Agent 输出带 attribution_refs 的综合结论。</li></ul>
+          <p><span class="detail-label">验收标准</span></p>
+          <ul><li>role_specific_agents_visible=PASS。</li><li>message_refs_between_agents=PASS。</li><li>attribution_preserving_synthesis=PASS。</li><li>source_agent_direct_mutation_denied=PASS。</li></ul>
+          <p><span class="detail-label">证据入口</span></p>
+          <ul><li><a href="../v9-3-orchestration-runtime/index.html">../v9-3-orchestration-runtime/index.html</a></li><li><a href="../v9-3-orchestration-runtime/roman-forum-discussion.json">../v9-3-orchestration-runtime/roman-forum-discussion.json</a></li></ul>
+        </div>
+      </div>
+    </article>
+    
+    <article class="detail-section card" id="US-V9-08">
+      <h3>US-V9-08 · 视频创作分镜工作流</h3>
+      <p><span class="badge pass">PASS</span> <span class="badge scope">runtime-backed</span> <span class="badge scope">V9-3/V9-6</span></p>
+      <div class="scenario-detail-grid">
+        <div>
+          <p><span class="detail-label">用户画像</span><br />短视频创作者或小工作室制片人</p>
+          <p><span class="detail-label">用户目标</span><br />输入一个短视频点子，让系统生成创作工作流、统一风格分镜图、质检报告和证据链。</p>
+          <p><span class="detail-label">什么时候用</span><br />当用户想快速验证视频创意、看分镜视觉方向、并确认输出经过质量 Agent 审查时使用。</p>
+          <p><span class="detail-label">审计重点</span><br />重点检查图像文件、质检报告和真实 TUI 截图是否一起出现，避免只展示静态概念图。</p>
+          <p><span class="detail-label">边界</span><br />该场景不证明生产级视频制作平台或无限制外部 provider 调用。</p>
+        </div>
+        <div>
+          <p><span class="detail-label">用户最小操作步骤</span></p>
+          <ol><li>打开视频创作工作流验收页或 V9-UA 图 4。</li><li>查看 4 张 storyboard image、style_bible_id、character_bible_id 和 provider invocation refs。</li><li>查看质检 Agent 报告、TUI 截图和 workflow-agent-state 图。</li></ol>
+          <p><span class="detail-label">预期产出</span></p>
+          <ul><li>4 张分镜图文件存在且非空。</li><li>分镜使用一致的 style_bible_id 和 character_bible_id。</li><li>质检 Agent 对风格、角色、TUI 截图、provider payload redaction 给出 PASS。</li></ul>
+          <p><span class="detail-label">验收标准</span></p>
+          <ul><li>evidence_scope=real_provider_backed_runtime_fixture。</li><li>storyboard_shot_count_is_four=PASS。</li><li>quality_agent_report.status=PASS。</li><li>provider raw request/response body not stored。</li></ul>
+          <p><span class="detail-label">证据入口</span></p>
+          <ul><li><a href="../v9-user-scenario-video-workflow-e2e/index.html">../v9-user-scenario-video-workflow-e2e/index.html</a></li><li><a href="../v9-3-orchestration-runtime/storyboard-provider-evidence.json">../v9-3-orchestration-runtime/storyboard-provider-evidence.json</a></li><li><a href="/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-3-orchestration-runtime/storyboard-provider-evidence.json">/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-3-orchestration-runtime/storyboard-provider-evidence.json</a></li></ul>
+        </div>
+      </div>
+    </article>
+    
+    <article class="detail-section card" id="US-V9-09">
+      <h3>US-V9-09 · 自然语言优化工作流</h3>
+      <p><span class="badge pass">PASS</span> <span class="badge scope">runtime-backed</span> <span class="badge scope">V9-6</span></p>
+      <div class="scenario-detail-grid">
+        <div>
+          <p><span class="detail-label">用户画像</span><br />希望通过自然语言迭代工作流的产品/运营用户</p>
+          <p><span class="detail-label">用户目标</span><br />用自然语言提出优化要求，让系统生成 WorkflowDiff proposal，而不是直接修改已运行工作流。</p>
+          <p><span class="detail-label">什么时候用</span><br />当用户想调整流程、角色、工位或输出格式，但仍要求人工确认后才应用时使用。</p>
+          <p><span class="detail-label">审计重点</span><br />重点检查自然语言优化仍是 proposal-first，而不是自动编辑工作流。</p>
+          <p><span class="detail-label">边界</span><br />该场景不证明 autonomous workflow editing ready。</p>
+        </div>
+        <div>
+          <p><span class="detail-label">用户最小操作步骤</span></p>
+          <ol><li>打开 workflow_diff_proposal.json。</li><li>检查 diff proposal 的 target refs、change summary 和 manual confirmation 边界。</li><li>确认 source=agent 没有直接 durable mutation。</li></ol>
+          <p><span class="detail-label">预期产出</span></p>
+          <ul><li>生成可审查 WorkflowDiff。</li><li>用户确认前不写 WorkflowStore / StationRun / Artifact。</li><li>证据链保留 proposal 和 confirmation refs。</li></ul>
+          <p><span class="detail-label">验收标准</span></p>
+          <ul><li>WorkflowDiff proposal exists。</li><li>manual confirmation required before mutation。</li><li>source_agent_direct_mutation_denied。</li></ul>
+          <p><span class="detail-label">证据入口</span></p>
+          <ul><li><a href="../v9-6-workflow-studio/workflow_diff_proposal.json">../v9-6-workflow-studio/workflow_diff_proposal.json</a></li></ul>
+        </div>
+      </div>
+    </article>
+    
+    </section>
+
+    <section>
+      <h2>图 1：V9 用户体验到证据链的总路径</h2>
+      <div class="svg-panel"><svg viewBox="0 0 1120 172" role="img" aria-label="用户体验到证据链的总路径"><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#0f766e" /></marker></defs><text x="24" y="28" font-size="16" font-weight="700" fill="#102033">从自然语言目标到可审计结果</text><rect x="24" y="48" width="142" height="76" rx="8" fill="#f8fafc" stroke="#94a3b8" /><text x="95" y="78" text-anchor="middle" font-size="15" font-weight="700" fill="#102033">用户目标</text><text x="95" y="102" text-anchor="middle" font-size="12" fill="#5b6b7b">自然语言输入</text><rect x="209" y="48" width="142" height="76" rx="8" fill="#f8fafc" stroke="#94a3b8" /><text x="280" y="78" text-anchor="middle" font-size="15" font-weight="700" fill="#102033">WorkflowSpec</text><text x="280" y="102" text-anchor="middle" font-size="12" fill="#5b6b7b">受控草案/差异</text><rect x="394" y="48" width="142" height="76" rx="8" fill="#f8fafc" stroke="#94a3b8" /><text x="465" y="78" text-anchor="middle" font-size="15" font-weight="700" fill="#102033">Agent 编排</text><text x="465" y="102" text-anchor="middle" font-size="12" fill="#5b6b7b">serial + parallel</text><rect x="579" y="48" width="142" height="76" rx="8" fill="#f8fafc" stroke="#94a3b8" /><text x="650" y="78" text-anchor="middle" font-size="15" font-weight="700" fill="#102033">产物</text><text x="650" y="102" text-anchor="middle" font-size="12" fill="#5b6b7b">报告/分镜/讨论综合</text><rect x="764" y="48" width="142" height="76" rx="8" fill="#f8fafc" stroke="#94a3b8" /><text x="835" y="78" text-anchor="middle" font-size="15" font-weight="700" fill="#102033">Evidence</text><text x="835" y="102" text-anchor="middle" font-size="12" fill="#5b6b7b">可审计链路</text><rect x="949" y="48" width="142" height="76" rx="8" fill="#f8fafc" stroke="#94a3b8" /><text x="1020" y="78" text-anchor="middle" font-size="15" font-weight="700" fill="#102033">人工确认</text><text x="1020" y="102" text-anchor="middle" font-size="12" fill="#5b6b7b">不绕过权限</text><line x1="172" y1="86" x2="204" y2="86" stroke="#0f766e" stroke-width="2" marker-end="url(#arrow)" /><line x1="357" y1="86" x2="389" y2="86" stroke="#0f766e" stroke-width="2" marker-end="url(#arrow)" /><line x1="542" y1="86" x2="574" y2="86" stroke="#0f766e" stroke-width="2" marker-end="url(#arrow)" /><line x1="727" y1="86" x2="759" y2="86" stroke="#0f766e" stroke-width="2" marker-end="url(#arrow)" /><line x1="912" y1="86" x2="944" y2="86" stroke="#0f766e" stroke-width="2" marker-end="url(#arrow)" /></svg></div>
+    </section>
+
+    <section>
+      <h2>图 2：并行 Agent 编排证据</h2>
+      <div class="diagram-grid">
+        <div class="svg-panel">
+<svg viewBox="0 0 760 430" role="img" aria-label="并行 Agent 编排 runtime 证据图">
+  <defs>
+    <marker id="p-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#1864ab" /></marker>
+  </defs>
+  <text x="28" y="34" font-size="17" font-weight="700" fill="#102033">V9-3 serial / parallel / fan-out / fan-in / recovery / lineage</text>
+  <rect x="40" y="74" width="150" height="64" rx="8" fill="#e0f2fe" stroke="#38bdf8" />
+  <text x="115" y="104" text-anchor="middle" font-size="14" font-weight="700">Orchestration Run</text>
+  <text x="115" y="124" text-anchor="middle" font-size="12">run + request refs</text>
+  <rect x="300" y="44" width="170" height="64" rx="8" fill="#f0fdf4" stroke="#86efac" />
+  <text x="385" y="75" text-anchor="middle" font-size="14" font-weight="700">Branch A</text>
+  <text x="385" y="94" text-anchor="middle" font-size="12">implementation agent</text>
+  <rect x="300" y="142" width="170" height="64" rx="8" fill="#f0fdf4" stroke="#86efac" />
+  <text x="385" y="173" text-anchor="middle" font-size="14" font-weight="700">Branch B</text>
+  <text x="385" y="192" text-anchor="middle" font-size="12">review agent</text>
+  <rect x="570" y="92" width="150" height="64" rx="8" fill="#fefce8" stroke="#fde047" />
+  <text x="645" y="123" text-anchor="middle" font-size="14" font-weight="700">Fan-in Join</text>
+  <text x="645" y="142" text-anchor="middle" font-size="12">attribution kept</text>
+  <rect x="62" y="286" width="150" height="56" rx="8" fill="#fff7ed" stroke="#fdba74" />
+  <text x="137" y="318" text-anchor="middle" font-size="13" font-weight="700">Attempt History</text>
+  <rect x="304" y="286" width="150" height="56" rx="8" fill="#fff7ed" stroke="#fdba74" />
+  <text x="379" y="318" text-anchor="middle" font-size="13" font-weight="700">Recovery</text>
+  <rect x="546" y="286" width="150" height="56" rx="8" fill="#fff7ed" stroke="#fdba74" />
+  <text x="621" y="318" text-anchor="middle" font-size="13" font-weight="700">Artifact Lineage</text>
+  <line x1="190" y1="106" x2="294" y2="76" stroke="#1864ab" stroke-width="2" marker-end="url(#p-arrow)" />
+  <line x1="190" y1="110" x2="294" y2="174" stroke="#1864ab" stroke-width="2" marker-end="url(#p-arrow)" />
+  <line x1="470" y1="76" x2="564" y2="118" stroke="#1864ab" stroke-width="2" marker-end="url(#p-arrow)" />
+  <line x1="470" y1="174" x2="564" y2="132" stroke="#1864ab" stroke-width="2" marker-end="url(#p-arrow)" />
+  <line x1="137" y1="138" x2="137" y2="278" stroke="#64748b" stroke-width="2" marker-end="url(#p-arrow)" />
+  <line x1="385" y1="206" x2="379" y2="278" stroke="#64748b" stroke-width="2" marker-end="url(#p-arrow)" />
+  <line x1="645" y1="156" x2="621" y2="278" stroke="#64748b" stroke-width="2" marker-end="url(#p-arrow)" />
+  <text x="40" y="394" font-size="12" fill="#5b6b7b">验收要求：fan-out 与 fan-in 都必须有 JSON 证据；重试不得覆盖旧 attempt；产物必须保留 producer agent / attempt。</text>
+</svg>
+</div>
+        <div>
+          <h3>验收检查</h3>
+          <pre>{
+  &quot;serial_parallel_fan_in_fan_out&quot;: &quot;PASS&quot;,
+  &quot;attempt_history&quot;: &quot;PASS&quot;,
+  &quot;artifact_lineage&quot;: &quot;PASS&quot;,
+  &quot;failure_recovery&quot;: &quot;PASS&quot;,
+  &quot;lost_worker_recovery&quot;: &quot;PASS&quot;
+}</pre>
+          <p class="muted">证据文件：fan-out-dispatches.json、fan-in-join-decisions.json、attempt-history.json、artifact-lineage.json、lost-worker-recovery-decisions.json。</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>图 3：US-V9-07 罗马广场 Agent 讨论图</h2>
+      <div class="diagram-grid">
+        <div class="svg-panel"><svg viewBox="0 0 520 430" role="img" aria-label="罗马广场多 Agent 讨论消息图"><defs><marker id="r-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#0f766e" /></marker></defs><text x="24" y="32" font-size="16" font-weight="700" fill="#102033">US-V9-07 Roman Forum Message Graph</text><line x1="168" y1="85" x2="312" y2="85" stroke="#0f766e" stroke-width="2" marker-end="url(#r-arrow)" /><line x1="360" y1="133" x2="145" y2="184" stroke="#0f766e" stroke-width="2" marker-end="url(#r-arrow)" /><line x1="168" y1="220" x2="312" y2="220" stroke="#0f766e" stroke-width="2" marker-end="url(#r-arrow)" /><line x1="360" y1="268" x2="270" y2="315" stroke="#0f766e" stroke-width="2" marker-end="url(#r-arrow)" /><line x1="120" y1="268" x2="212" y2="315" stroke="#0f766e" stroke-width="2" marker-end="url(#r-arrow)" /><circle cx="120" cy="85" r="48" fill="#dbeafe" stroke="#64748b" /><text x="120" y="81" text-anchor="middle" font-size="12" font-weight="700" fill="#102033">philosopher_agent</text><text x="120" y="100" text-anchor="middle" font-size="10" fill="#5b6b7b">哲学家</text><circle cx="360" cy="85" r="48" fill="#dcfce7" stroke="#64748b" /><text x="360" y="81" text-anchor="middle" font-size="12" font-weight="700" fill="#102033">engineer_agent</text><text x="360" y="100" text-anchor="middle" font-size="10" fill="#5b6b7b">工程师</text><circle cx="120" cy="220" r="48" fill="#fef3c7" stroke="#64748b" /><text x="120" y="216" text-anchor="middle" font-size="12" font-weight="700" fill="#102033">historian_agent</text><text x="120" y="235" text-anchor="middle" font-size="10" fill="#5b6b7b">历史学家</text><circle cx="360" cy="220" r="48" fill="#fae8ff" stroke="#64748b" /><text x="360" y="216" text-anchor="middle" font-size="12" font-weight="700" fill="#102033">ethicist_agent</text><text x="360" y="235" text-anchor="middle" font-size="10" fill="#5b6b7b">伦理学家</text><circle cx="240" cy="345" r="48" fill="#e0f2fe" stroke="#64748b" /><text x="240" y="341" text-anchor="middle" font-size="12" font-weight="700" fill="#102033">moderator_agent</text><text x="240" y="360" text-anchor="middle" font-size="10" fill="#5b6b7b">主持综合</text><text x="24" y="405" font-size="12" fill="#5b6b7b">role_agents=5; messages=5; edges=8; synthesis attribution_refs preserved.</text></svg></div>
+        <div>
+          <h3>角色与能力</h3>
+          <table><thead><tr><th>Agent</th><th>Role</th><th>Goal</th><th>Skill / MCP</th></tr></thead><tbody><tr><td>philosopher_agent</td><td>哲学家 Agent</td><td>界定自由、欲望和技术依赖之间的张力。</td><td>skill://v9-3/philosophical-argument<br /><span class="muted">mcp://v9-3/evidence-readonly</span></td></tr><tr><td>engineer_agent</td><td>工程师 Agent</td><td>说明技术如何扩展行动空间，同时指出系统依赖风险。</td><td>skill://v9-3/system-tradeoff-analysis<br /><span class="muted">mcp://v9-3/evidence-readonly</span></td></tr><tr><td>historian_agent</td><td>历史学家 Agent</td><td>用印刷术、工业化和互联网的历史类比约束讨论。</td><td>skill://v9-3/historical-comparison<br /><span class="muted">mcp://v9-3/evidence-readonly</span></td></tr><tr><td>ethicist_agent</td><td>伦理学家 Agent</td><td>审查自动化是否削弱人的责任、选择和退出权。</td><td>skill://v9-3/ethics-risk-review<br /><span class="muted">mcp://v9-3/evidence-readonly</span></td></tr><tr><td>moderator_agent</td><td>主持与综合 Agent</td><td>组织多轮讨论，保留 attribution_refs，并输出综合结论。</td><td>skill://v9-3/attributed-synthesis<br /><span class="muted"></span></td></tr></tbody></table>
+        </div>
+      </div>
+      <h3>发言与引用</h3>
+      <table><thead><tr><th>Turn</th><th>Agent</th><th>Kind</th><th>Argument summary</th><th>References</th></tr></thead><tbody><tr><td>1</td><td>philosopher_agent</td><td>argument</td><td>技术进步本身不必然削弱自由；真正的风险是人把判断权交给不可审计的系统。</td><td></td></tr><tr><td>1</td><td>engineer_agent</td><td>counterpoint</td><td>工具会扩大行动范围，但如果没有权限、日志和人工确认，系统便利会变成事实上的路径锁定。</td><td>roman-msg-01-philosopher-opening</td></tr><tr><td>2</td><td>historian_agent</td><td>historical_context</td><td>历史上新工具常同时扩展表达和制造新依赖；关键差异在于制度是否提供可迁移性和纠错渠道。</td><td>roman-msg-02-engineer-response</td></tr><tr><td>2</td><td>ethicist_agent</td><td>challenge</td><td>如果用户不能理解、拒绝或撤销自动化建议，所谓增强能力会转化为责任不对等。</td><td>roman-msg-01-philosopher-opening, roman-msg-02-engineer-response</td></tr><tr><td>3</td><td>moderator_agent</td><td>synthesis</td><td>共识：技术扩展自由必须以可解释、可拒绝、可审计为条件。分歧：技术依赖是自由的新形式还是自由的折损。</td><td>roman-msg-01-philosopher-opening, roman-msg-02-engineer-response, roman-msg-03-historian-context, roman-msg-04-ethicist-challenge</td></tr></tbody></table>
+    </section>
+
+    <section>
+      <h2>图 4：视频创作工作流真实产物</h2>
+      <p class="muted">该场景包含文生图 provider-backed 分镜、质检 Agent、真实 TUI 截图和 drawio 工作流状态图。</p>
+      <div class="media-grid">
+        <figure class="media-card">
+          <img src="../v9-user-scenario-video-workflow-e2e/storyboard-images/shot-1.jpg" alt="分镜 1" />
+          <figcaption>Shot 1 · style-bible://v9-video-e2e/neo-shanghai-soft-cinematic<br />artifact-ref://v9/video-e2e/storyboard-shot-1</figcaption>
+        </figure>
+        
+        <figure class="media-card">
+          <img src="../v9-user-scenario-video-workflow-e2e/storyboard-images/shot-2.jpg" alt="分镜 2" />
+          <figcaption>Shot 2 · style-bible://v9-video-e2e/neo-shanghai-soft-cinematic<br />artifact-ref://v9/video-e2e/storyboard-shot-2</figcaption>
+        </figure>
+        
+        <figure class="media-card">
+          <img src="../v9-user-scenario-video-workflow-e2e/storyboard-images/shot-3.jpg" alt="分镜 3" />
+          <figcaption>Shot 3 · style-bible://v9-video-e2e/neo-shanghai-soft-cinematic<br />artifact-ref://v9/video-e2e/storyboard-shot-3</figcaption>
+        </figure>
+        
+        <figure class="media-card">
+          <img src="../v9-user-scenario-video-workflow-e2e/storyboard-images/shot-4.jpg" alt="分镜 4" />
+          <figcaption>Shot 4 · style-bible://v9-video-e2e/neo-shanghai-soft-cinematic<br />artifact-ref://v9/video-e2e/storyboard-shot-4</figcaption>
+        </figure>
+        </div>
+      <h3>真实 TUI / 审查截图</h3>
+      <div class="media-grid">
+        <figure class="media-card">
+          <img src="../v9-user-scenario-video-workflow-e2e/screenshots/real-openharness-textual-tui-window.png" alt="real_mac_terminal_tui_screenshot" />
+          <figcaption>real_mac_terminal_tui_screenshot<br />sha256=0b60c918435b76e2...</figcaption>
+        </figure>
+        
+        <figure class="media-card">
+          <img src="../v9-user-scenario-video-workflow-e2e/screenshots/real-openharness-textual-tui-after-user-input.png" alt="real_mac_terminal_tui_screenshot" />
+          <figcaption>real_mac_terminal_tui_screenshot<br />sha256=ad2748250776b111...</figcaption>
+        </figure>
+        <figure class="media-card"><img src="../v9-user-scenario-video-workflow-e2e/workflow-agent-state.png" alt="视频工作流 Agent 状态图" /><figcaption>workflow-agent-state.png · Agent 状态与关联图</figcaption></figure></div>
+      <h3>质检 Agent 检查结果</h3>
+      <table><thead><tr><th>Check</th><th>Status</th></tr></thead><tbody><tr><td>character_bible_consistent</td><td><span class="badge pass">PASS</span></td></tr><tr><td>forbidden_completion_claims_absent</td><td><span class="badge pass">PASS</span></td></tr><tr><td>image_files_exist_and_nonempty</td><td><span class="badge pass">PASS</span></td></tr><tr><td>provider_payload_not_stored</td><td><span class="badge pass">PASS</span></td></tr><tr><td>real_tui_screenshots_present</td><td><span class="badge pass">PASS</span></td></tr><tr><td>source_agent_direct_mutation_denied</td><td><span class="badge pass">PASS</span></td></tr><tr><td>storyboard_shot_count_is_four</td><td><span class="badge pass">PASS</span></td></tr><tr><td>style_bible_consistent</td><td><span class="badge pass">PASS</span></td></tr></tbody></table>
+    </section>
+
+    <section>
+      <h2>完整场景覆盖矩阵</h2>
+      <table><thead><tr><th>Scenario</th><th>Title</th><th>Stage</th><th>User-visible capability</th><th>Status</th><th>Runtime backed</th><th>Evidence refs</th><th>Visible checks</th></tr></thead><tbody><tr><td>US-V9-01</td><td>受控执行器动作审查</td><td>V9-2</td><td>四个 allowlisted operation、source=agent deny、evidence chain</td><td>PASS</td><td>True</td><td><div><a href="../v9-2-controlled-executor-runtime/acceptance-data.json">../v9-2-controlled-executor-runtime/acceptance-data.json</a></div><div><a href="/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-2-controlled-executor-runtime/acceptance-data.json">/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-2-controlled-executor-runtime/acceptance-data.json</a></div></td><td><pre>[]</pre></td></tr><tr><td>US-V9-02</td><td>并行 Agent 编排审查</td><td>V9-3</td><td>serial / parallel / fan-out / fan-in / recovery / lineage</td><td>PASS</td><td>True</td><td><div><a href="../v9-3-orchestration-runtime/index.html">../v9-3-orchestration-runtime/index.html</a></div><div><a href="../v9-3-orchestration-runtime/fan-out-dispatches.json">../v9-3-orchestration-runtime/fan-out-dispatches.json</a></div><div><a href="../v9-3-orchestration-runtime/fan-in-join-decisions.json">../v9-3-orchestration-runtime/fan-in-join-decisions.json</a></div><div><a href="/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-3-orchestration-runtime/acceptance-data.json">/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-3-orchestration-runtime/acceptance-data.json</a></div></td><td><pre>[
+  &quot;serial_parallel_fan_in_fan_out=PASS&quot;,
+  &quot;attempt_history=PASS&quot;,
+  &quot;artifact_lineage=PASS&quot;
+]</pre></td></tr><tr><td>US-V9-03</td><td>代码工作流 proposal-only 审查</td><td>V9-4</td><td>plan / diff proposal / sandboxed test / review / no auto commit</td><td>PASS</td><td>True</td><td><div><a href="../v9-4-coding-workflow-runtime/index.html">../v9-4-coding-workflow-runtime/index.html</a></div><div><a href="/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/acceptance-data.json">/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/acceptance-data.json</a></div></td><td><pre>[]</pre></td></tr><tr><td>US-V9-04</td><td>终端 worker sandbox 审查</td><td>V9-5</td><td>workspace boundary / command tier / transcript / denial evidence</td><td>PASS</td><td>True</td><td><div><a href="../v9-5-terminal-worker/index.html">../v9-5-terminal-worker/index.html</a></div><div><a href="../v9-5-terminal-worker/terminal-transcript.txt">../v9-5-terminal-worker/terminal-transcript.txt</a></div><div><a href="/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-5-terminal-worker/acceptance-data.json">/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-5-terminal-worker/acceptance-data.json</a></div></td><td><pre>[]</pre></td></tr><tr><td>US-V9-05</td><td>Workflow Studio 证据审查</td><td>V9-6</td><td>BFF/DTO / read-only panels / manual confirmation</td><td>PASS</td><td>True</td><td><div><a href="../v9-6-workflow-studio/index.html">../v9-6-workflow-studio/index.html</a></div><div><a href="/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-6-workflow-studio/acceptance-data.json">/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-6-workflow-studio/acceptance-data.json</a></div></td><td><pre>[]</pre></td></tr><tr><td>US-V9-06</td><td>最终验收看板审查</td><td>V9-8</td><td>stage evidence / claim scan / redaction scan / drawio XML</td><td>PASS</td><td>False</td><td><div><a href="../v9-8-final-acceptance/v9-final-acceptance-dashboard.html">../v9-8-final-acceptance/v9-final-acceptance-dashboard.html</a></div><div><a href="self://v9-8-final-dashboard">self://v9-8-final-dashboard</a></div></td><td><pre>[]</pre></td></tr><tr><td>US-V9-07</td><td>罗马广场多 Agent 讨论</td><td>V9-3</td><td>role-specific agents / multi-turn messages / attribution synthesis</td><td>PASS</td><td>True</td><td><div><a href="../v9-3-orchestration-runtime/index.html">../v9-3-orchestration-runtime/index.html</a></div><div><a href="../v9-3-orchestration-runtime/roman-forum-discussion.json">../v9-3-orchestration-runtime/roman-forum-discussion.json</a></div></td><td><pre>[
+  &quot;role_agents=5&quot;,
+  &quot;messages=5&quot;,
+  &quot;message_graph_edges=8&quot;,
+  &quot;acceptance_checks={&#x27;at_least_two_discussion_turns&#x27;: &#x27;PASS&#x27;, &#x27;attribution_preserving_synthesis&#x27;: &#x27;PASS&#x27;, &#x27;message_refs_between_agents&#x27;: &#x27;PASS&#x27;, &#x27;role_specific_agents_visible&#x27;: &#x27;PASS&#x27;, &#x27;source_agent_direct_mutation_denied&#x27;: &#x27;PASS&#x27;}&quot;
+]</pre></td></tr><tr><td>US-V9-08</td><td>视频创作分镜工作流</td><td>V9-3/V9-6</td><td>provider-backed storyboard images / quality Agent / TUI evidence refs</td><td>PASS</td><td>True</td><td><div><a href="../v9-user-scenario-video-workflow-e2e/index.html">../v9-user-scenario-video-workflow-e2e/index.html</a></div><div><a href="../v9-3-orchestration-runtime/storyboard-provider-evidence.json">../v9-3-orchestration-runtime/storyboard-provider-evidence.json</a></div><div><a href="/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-3-orchestration-runtime/storyboard-provider-evidence.json">/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V9.x/evidence/v9-3-orchestration-runtime/storyboard-provider-evidence.json</a></div></td><td><pre>[]</pre></td></tr><tr><td>US-V9-09</td><td>自然语言优化工作流</td><td>V9-6</td><td>WorkflowDiff proposal / no mutation before confirmation</td><td>PASS</td><td>True</td><td><div><a href="../v9-6-workflow-studio/workflow_diff_proposal.json">../v9-6-workflow-studio/workflow_diff_proposal.json</a></div></td><td><pre>[]</pre></td></tr></tbody></table>
+    </section>
+
+    <section>
+      <h2>验收计划与停止条件</h2>
+      <div class="diagram-grid">
+        <div>
+          <h3>通过条件</h3>
+          <ul>
+            <li>US-V9-01 到 US-V9-09 均有 status 和 evidence_refs。</li>
+            <li>除最终看板聚合场景外，用户能力场景必须 runtime_backed=true。</li>
+            <li>罗马广场必须展示具体 Agent、发言、引用关系、综合结论和 source=agent direct mutation deny。</li>
+            <li>并行编排必须展示 fan-out、fan-in、attempt history、artifact lineage 和 recovery 证据。</li>
+            <li>视频工作流必须展示分镜图、质检 Agent、TUI 截图和 drawio 工作流状态图。</li>
+          </ul>
+        </div>
+        <div>
+          <h3>打回条件</h3>
+          <ul>
+            <li>任一用户场景缺证据链接或状态不是 PASS。</li>
+            <li>把 planning docs、transcript-only 或 report-only 当成 runtime-backed 证据。</li>
+            <li>缺少罗马广场多 Agent 发言图或缺少并行编排 fan-in/fan-out 证据。</li>
+            <li>No False Green 或 redaction scan 失败。</li>
+            <li>页面出现正向越界能力声明。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="warning">
+      <h2>Forbidden Claims / 边界说明</h2>
+      <p>本页只证明 V9 用户场景 ready for review 的覆盖情况；不得解释为 Agent executor ready、full multi-Agent orchestration ready、autonomous coding workflow ready、complete Workflow Studio ready 或 production ready。</p>
+    </section>
+  </main>
+</body>
+</html>

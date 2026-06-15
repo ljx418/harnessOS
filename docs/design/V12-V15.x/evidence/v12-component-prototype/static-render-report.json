@@ -1,0 +1,15 @@
+{
+  "schema_version": "v12.component_prototype_static_render_report.v1",
+  "stage_id": "V12-0A",
+  "status": "PASS",
+  "created_at": "2026-06-14T00:00:00+08:00",
+  "render_command": "qlmanage -t -s 1440 -o docs/design/V12-V15.x/evidence/v12-component-prototype docs/design/V12-V15.x/evidence/v12-component-prototype/index.html",
+  "html_path": "docs/design/V12-V15.x/evidence/v12-component-prototype/index.html",
+  "html_sha256": "b7e8aefe155eecb2b4ba471843a5f0585466542a32c1ac7d713613efdc3814b4",
+  "thumbnail_path": "docs/design/V12-V15.x/evidence/v12-component-prototype/index.html.png",
+  "thumbnail_sha256": "6f5de9e3f9d37882ab5b26cbf2219a5ad43ba6fc90997a8c41d9466632b93500",
+  "evidence_scope": "design_only_static_render",
+  "browser_implementation_backed": false,
+  "runtime_backed": false,
+  "not_runtime_evidence": true
+}

@@ -1,0 +1,122 @@
+[
+  {
+    "station_id": "station-markdown",
+    "status": "completed",
+    "agent_role": "Document Scanner Agent",
+    "agent_goal": "读取本地 Markdown 技术文档并生成风险摘要",
+    "memory_summary": "station-memory-summary-ref-1",
+    "tools": [
+      "workspace.read",
+      "markdown.summary"
+    ],
+    "skills": [
+      "technical-writing"
+    ],
+    "mcp_refs": [],
+    "attempt_ref": "attempt-ref://v11/station-markdown",
+    "output_ref": "output-ref://v11/station-markdown",
+    "quality_refs": [
+      "quality-ref://v11/station-markdown"
+    ],
+    "evidence_scope": "v9_evidence_projection",
+    "evidence_refs": [
+      "docs/design/V9.x/evidence/v9-prd-ux-runtime-review/v7-3-local-markdown-run/local-document-workflow-result.json"
+    ]
+  },
+  {
+    "station_id": "station-roman-1",
+    "status": "completed",
+    "agent_role": "Stoic Persona Agent",
+    "agent_goal": "从斯多葛主义视角讨论问题",
+    "memory_summary": "station-memory-summary-ref-2",
+    "tools": [
+      "persona.reason"
+    ],
+    "skills": [
+      "philosophy-dialogue"
+    ],
+    "mcp_refs": [],
+    "attempt_ref": "attempt-ref://v11/station-roman-1",
+    "output_ref": "output-ref://v11/station-roman-1",
+    "quality_refs": [
+      "quality-ref://v11/station-roman-1"
+    ],
+    "evidence_scope": "v9_evidence_projection",
+    "evidence_refs": [
+      "docs/design/V9.x/evidence/v9-3-orchestration-runtime/roman-forum-discussion.json"
+    ]
+  },
+  {
+    "station_id": "station-roman-2",
+    "status": "completed",
+    "agent_role": "Socratic Persona Agent",
+    "agent_goal": "用追问方式澄清概念",
+    "memory_summary": "station-memory-summary-ref-3",
+    "tools": [
+      "persona.question"
+    ],
+    "skills": [
+      "dialogue-synthesis"
+    ],
+    "mcp_refs": [],
+    "attempt_ref": "attempt-ref://v11/station-roman-2",
+    "output_ref": "output-ref://v11/station-roman-2",
+    "quality_refs": [
+      "quality-ref://v11/station-roman-2"
+    ],
+    "evidence_scope": "v9_evidence_projection",
+    "evidence_refs": [
+      "docs/design/V9.x/evidence/v9-3-orchestration-runtime/roman-forum-discussion.json"
+    ]
+  },
+  {
+    "station_id": "station-storyboard",
+    "status": "completed",
+    "agent_role": "Storyboard Agent",
+    "agent_goal": "把创意点子转成统一画风分镜",
+    "memory_summary": "station-memory-summary-ref-4",
+    "tools": [
+      "storyboard.plan",
+      "artifact.preview"
+    ],
+    "skills": [
+      "visual-storytelling"
+    ],
+    "mcp_refs": [
+      "provider:minimax-image"
+    ],
+    "attempt_ref": "attempt-ref://v11/station-storyboard",
+    "output_ref": "output-ref://v11/station-storyboard",
+    "quality_refs": [
+      "quality-ref://v11/station-storyboard"
+    ],
+    "evidence_scope": "v9_evidence_projection",
+    "evidence_refs": [
+      "docs/design/V9.x/evidence/v9-3-orchestration-runtime/storyboard-provider-evidence.json"
+    ]
+  },
+  {
+    "station_id": "station-coding",
+    "status": "completed",
+    "agent_role": "Coding Proposal Agent",
+    "agent_goal": "生成 diff proposal、sandboxed test 和 review handoff",
+    "memory_summary": "station-memory-summary-ref-5",
+    "tools": [
+      "diff.propose",
+      "test.sandbox"
+    ],
+    "skills": [
+      "code-review"
+    ],
+    "mcp_refs": [],
+    "attempt_ref": "attempt-ref://v11/station-coding",
+    "output_ref": "output-ref://v11/station-coding",
+    "quality_refs": [
+      "quality-ref://v11/station-coding"
+    ],
+    "evidence_scope": "v9_evidence_projection",
+    "evidence_refs": [
+      "docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/coding-workflow-result.json"
+    ]
+  }
+]

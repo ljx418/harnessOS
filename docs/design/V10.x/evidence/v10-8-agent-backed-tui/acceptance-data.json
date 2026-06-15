@@ -1,0 +1,37 @@
+{
+  "stage_id": "V10-8",
+  "status": "PASS",
+  "allowed_claim": "V10-8 complete: Agent-backed Mission TUI chatbot bridge ready for review.",
+  "evidence_scope": "agent_backed_gateway_turn",
+  "runtime_backed": true,
+  "fixture_only": false,
+  "local_parser_only": false,
+  "provider_mode": "provider-backed",
+  "provider_backed": true,
+  "gateway_session_started": true,
+  "gateway_turn_started": true,
+  "gateway_turn_completed": true,
+  "gateway_turn_failed": false,
+  "assistant_output_from_gateway": true,
+  "session_id": "sess_63a3d64f2fcc",
+  "turn_id": "turn_b5864c2417e7",
+  "trace_id": "trace_3678a4956bf2",
+  "event_types": [
+    "turn.started",
+    "item.delta",
+    "turn.completed"
+  ],
+  "terminal_screenshots": [
+    "docs/design/V10.x/evidence/v10-8-agent-backed-tui/agent-backed-terminal-180x55.txt"
+  ],
+  "raw_transcript_ref": "docs/design/V10.x/evidence/v10-8-agent-backed-tui/agent-backed-raw-result.json",
+  "negative_local_parser_result": {
+    "local_parser_can_satisfy_v10_8": false,
+    "required_mode": "--agent-backed"
+  },
+  "stderr_lines_recorded_as_warnings": 2,
+  "errors": [],
+  "claim_scan": "PASS",
+  "redaction_scan": "PASS",
+  "forbidden_claim_violations": []
+}

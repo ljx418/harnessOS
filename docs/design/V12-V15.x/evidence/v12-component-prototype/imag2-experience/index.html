@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HarnessOS V12-0A imag2 目标体验图审查</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC",
+          "Microsoft YaHei", sans-serif;
+        --bg: #f5f7fb;
+        --panel: #fff;
+        --soft: #f8fafc;
+        --ink: #111827;
+        --text: #27364a;
+        --muted: #667085;
+        --line: #d8dee8;
+        --blue: #2563eb;
+        --blue-soft: #eff6ff;
+        --green: #15803d;
+        --green-soft: #ecfdf5;
+        --amber: #b45309;
+        --amber-soft: #fffbeb;
+        --red: #dc2626;
+        --red-soft: #fef2f2;
+        --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at 18% -10%, rgba(37,99,235,.16), transparent 34%),
+          linear-gradient(180deg, #f8fbff 0%, var(--bg) 42%, #eef2f7 100%);
+        color: var(--text);
+      }
+      a { color: inherit; }
+      .hero { background: #0f172a; color: #fff; padding: 34px 44px 30px; }
+      .hero-inner, .wrap { max-width: 1260px; margin: 0 auto; }
+      .eyebrow {
+        display: inline-flex; align-items: center; gap: 8px; padding: 7px 11px;
+        border: 1px solid rgba(191,219,254,.35); border-radius: 999px;
+        background: rgba(37,99,235,.16); color: #bfdbfe; font-size: 12px; font-weight: 800;
+      }
+      h1 { margin: 14px 0 0; max-width: 980px; color: #fff; font-size: clamp(30px,4vw,48px); line-height: 1.08; letter-spacing: 0; }
+      .hero p { max-width: 1020px; margin: 16px 0 0; color: #cbd5e1; font-size: 16px; line-height: 1.75; }
+      .wrap { padding: 24px 28px 58px; display: grid; gap: 22px; }
+      .section { border: 1px solid var(--line); border-radius: 18px; background: rgba(255,255,255,.94); box-shadow: var(--shadow); overflow: hidden; }
+      .section-head { display: flex; justify-content: space-between; gap: 18px; padding: 20px 22px; border-bottom: 1px solid var(--line); background: linear-gradient(180deg,#fff 0%,#fbfdff 100%); }
+      .section-head h2 { margin: 0 0 7px; color: var(--ink); font-size: 22px; }
+      .section-head p { margin: 0; color: var(--muted); line-height: 1.65; }
+      .section-body { padding: 20px 22px 22px; }
+      .grid-4, .grid-3, .grid-2 { display: grid; gap: 14px; }
+      .grid-4 { grid-template-columns: repeat(4,minmax(0,1fr)); }
+      .grid-3 { grid-template-columns: repeat(3,minmax(0,1fr)); }
+      .grid-2 { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .metric, .card { border: 1px solid var(--line); border-radius: 14px; background: var(--panel); padding: 16px; }
+      .metric .label, .card .label { margin-bottom: 8px; color: var(--muted); font-size: 12px; font-weight: 800; }
+      .metric .value { color: var(--ink); font-size: 20px; font-weight: 860; line-height: 1.25; }
+      .pill { display: inline-flex; align-items: center; padding: 6px 9px; border-radius: 999px; background: var(--blue-soft); color: var(--blue); font-size: 12px; font-weight: 800; white-space: nowrap; }
+      .pill.green { background: var(--green-soft); color: var(--green); }
+      .pill.amber { background: var(--amber-soft); color: var(--amber); }
+      .pill.red { background: var(--red-soft); color: var(--red); }
+      .visual { display: block; width: 100%; border: 1px solid var(--line); border-radius: 16px; background: #fff; box-shadow: 0 12px 34px rgba(15,23,42,.07); }
+      .image-stack { display: grid; gap: 18px; }
+      .caption { margin: 10px 0 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+      table { width: 100%; border-collapse: collapse; overflow: hidden; border: 1px solid var(--line); border-radius: 14px; }
+      th, td { padding: 12px 13px; border-bottom: 1px solid #edf1f7; text-align: left; vertical-align: top; font-size: 14px; line-height: 1.55; }
+      th { background: #f8fafc; color: var(--ink); font-weight: 820; }
+      td { color: var(--text); }
+      tr:last-child td { border-bottom: 0; }
+      code { padding: 2px 5px; border-radius: 6px; background: #eef2f7; color: #0f172a; font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size: 12px; }
+      .callout { padding: 15px 16px; border: 1px solid #fed7aa; border-radius: 14px; background: var(--amber-soft); color: #92400e; line-height: 1.75; }
+      .link-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+      .link-list a { display: block; padding: 13px 14px; border: 1px solid var(--line); border-radius: 13px; background: var(--soft); color: var(--ink); font-size: 14px; font-weight: 750; text-decoration: none; }
+      @media (max-width: 980px) {
+        .grid-4, .grid-3, .grid-2, .link-list { grid-template-columns: 1fr; }
+        .hero, .wrap { padding-left: 18px; padding-right: 18px; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero-inner">
+        <div class="eyebrow">V12-0A · imag2 目标体验图 · 设计审查证据</div>
+        <h1>把目标体验从“表格说明”推进到“同风格、同事实、可审计”的视觉设计包</h1>
+        <p>
+          本页汇总三张宿主 imag2 目标体验图的生成步骤、提示词、事实镜像图和一致性检查。
+          它用于确认 V12-0A 的产品体验方向，不作为浏览器实现、BFF、DTO 或运行证据。
+        </p>
+      </div>
+    </header>
+    <main class="wrap">
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2>当前结论</h2>
+            <p>可以用于 V12-0A 人工体验审查；下一步仍是 V12-0P 高保真原型冻结，不直接进入浏览器实现。</p>
+          </div>
+          <span class="pill amber">design_only</span>
+        </div>
+        <div class="section-body">
+          <div class="grid-4">
+            <div class="metric"><div class="label">生图模式</div><div class="value">Mode B</div></div>
+            <div class="metric"><div class="label">概念图数量</div><div class="value">3 张</div></div>
+            <div class="metric"><div class="label">事实镜像</div><div class="value">3 份 SVG</div></div>
+            <div class="metric"><div class="label">一致性检查</div><div class="value">PASS</div></div>
+          </div>
+          <div class="callout" style="margin-top:16px">
+            宿主 imag2 输出用于视觉方向判断；本仓库中的 SVG 镜像用于固化准确文字、组件位置、状态枚举与边界说明。
+            如果图片模型输出与 SVG/PRD 不一致，以 SVG 镜像和 PRD 为准。
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div><h2>1. 整体图：Light Studio 工作台</h2><p>完整页面骨架：标题栏、双层导航、只读画布、节点图、检查器和 Chat 工作台。</p></div>
+          <span class="pill">整体体验</span>
+        </div>
+        <div class="section-body image-stack">
+          <img class="visual" src="assets/01-overall-workbench-imag2.png" alt="宿主 imag2 生成的 HarnessOS V12 Light Studio 整体工作台目标图" />
+          <p class="caption">
+            宿主 imag2 生成图：用于判断整体视觉质感、布局密度和工作台方向。
+          </p>
+          <img class="visual" src="assets/01-overall-workbench.svg" alt="HarnessOS V12 Light Studio 整体工作台事实镜像图" />
+          <p class="caption">关键约束：中央画布仍是只读基础；Chat 只生成提案；右侧检查器展示角色、目标、工具、技能、MCP、质量和证据引用。</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div><h2>2. 各组件设计图</h2><p>六个核心组件拆成可以进入 V12-0P 高保真阶段的基础样式。</p></div>
+          <span class="pill">组件库草图</span>
+        </div>
+        <div class="section-body image-stack">
+          <img class="visual" src="assets/02-component-sheet-imag2.png" alt="宿主 imag2 生成的 HarnessOS V12 六组件设计图" />
+          <p class="caption">
+            宿主 imag2 生成图：用于判断组件视觉质感、分组密度和样式方向。
+          </p>
+          <img class="visual" src="assets/02-component-sheet.svg" alt="HarnessOS V12 六组件事实镜像图" />
+          <table>
+            <thead><tr><th>组件</th><th>用户要看懂什么</th><th>V12-0P 继续冻结</th></tr></thead>
+            <tbody>
+              <tr><td>全局标题栏</td><td>工作空间、项目、环境、模型、API、运行和证据状态。</td><td>状态芯片、只读/审批/提案按钮的尺寸与禁用态。</td></tr>
+              <tr><td>左侧产品导航</td><td>一级 rail 控制领域，二级导航展示对象列表。</td><td>折叠态、焦点态、badge、图标体系。</td></tr>
+              <tr><td>画布工作台</td><td>节点、端口、曲线连线、小地图、禁用原因。</td><td>曲线动效、缩放、选择、拖拽占位和 tooltip。</td></tr>
+              <tr><td>Agent / Station 节点卡</td><td>角色、目标、模型、状态、多输入多输出、证据引用。</td><td>hover popover、点击菜单、状态色和端口标签。</td></tr>
+              <tr><td>右侧检查器</td><td>选中节点的配置、工具、质量、证据和阻断原因。</td><td>tab 层级、证据抽屉、redacted ref 展示。</td></tr>
+              <tr><td>Chat 工作台</td><td>独立对话历史、自然语言目标、提案时间线和确认路径。</td><td>与画布高亮同步、命令 chip、历史检索。</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div><h2>3. 用户交互体验流程</h2><p>从自然语言输入到工作流提案、画布预览、节点审查、确认和输出预览。</p></div>
+          <span class="pill">交互流程</span>
+        </div>
+        <div class="section-body image-stack">
+          <img class="visual" src="assets/03-interaction-flow-imag2.png" alt="宿主 imag2 生成的 HarnessOS V12 用户交互体验流程图" />
+          <p class="caption">
+            宿主 imag2 生成图：用于判断用户旅程表达、状态可见性和流程讲解方式。
+          </p>
+          <img class="visual" src="assets/03-interaction-flow.svg" alt="HarnessOS V12 用户交互体验流程事实镜像图" />
+          <div class="grid-3">
+            <div class="card"><div class="label">阶段 1-2</div>输入目标后立即显示接收、解析和提案生成状态。</div>
+            <div class="card"><div class="label">阶段 3-4</div>在只读画布查看节点与连线，点击 Agent 后审查职责和证据。</div>
+            <div class="card"><div class="label">阶段 5-6</div>确认、修订或拒绝控制后续动作；输出预览必须带质量与证据引用。</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div><h2>操作步骤与审计材料</h2><p>复查本轮图像生成是否可追溯、是否一致、是否越过 V12-0A 边界。</p></div>
+          <span class="pill green">reviewable</span>
+        </div>
+        <div class="section-body">
+          <div class="grid-2">
+            <table>
+              <thead><tr><th>步骤</th><th>结果</th></tr></thead>
+              <tbody>
+                <tr><td>检测 gpt-image-2 模式</td><td><code>Mode B host-native</code>，本地无 Garden 图像 key。</td></tr>
+                <tr><td>生成三份 prompt</td><td>整体图、组件图、交互流程图。</td></tr>
+                <tr><td>调用宿主图像工具</td><td>生成三张概念图，用于当前对话中的视觉审查。</td></tr>
+                <tr><td>落盘事实镜像</td><td>三份 SVG 固化准确组件、状态和边界。</td></tr>
+                <tr><td>一致性检查</td><td>同主题、同组件、同状态、同边界，结论 PASS。</td></tr>
+              </tbody>
+            </table>
+            <div class="link-list">
+              <a href="generation-procedure.md">生成步骤说明</a>
+              <a href="consistency-check.md">一致性检查</a>
+              <a href="prompts/01-overall-workbench.md">Prompt 1：整体图</a>
+              <a href="prompts/02-component-sheet.md">Prompt 2：组件图</a>
+              <a href="prompts/03-interaction-flow.md">Prompt 3：交互流程</a>
+              <a href="../index.html">返回 V12-0A 主审查页</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div><h2>边界声明</h2><p>这组图只解决“目标体验是否可理解、组件是否可进入高保真”的问题。</p></div>
+          <span class="pill red">not runtime evidence</span>
+        </div>
+        <div class="section-body">
+          <table>
+            <thead><tr><th>可以证明</th><th>不能证明</th></tr></thead>
+            <tbody>
+              <tr><td>V12-0A 组件原型方向可审查。</td><td>不能证明真实浏览器实现已完成。</td></tr>
+              <tr><td>六组件 taxonomy、状态样式和交互路径一致。</td><td>不能证明 BFF、DTO、运行时或模型调用链路。</td></tr>
+              <tr><td>可以作为 V12-0P 高保真原型输入。</td><td>不能替代 V12-0P 高保真冻结和后续 Playwright 验收。</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

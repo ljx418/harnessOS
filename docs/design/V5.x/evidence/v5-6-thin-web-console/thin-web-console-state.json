@@ -1,0 +1,233 @@
+{
+  "console_id": "thin_console_c4855f9d2ef44b82b67ee71a6ad48e70",
+  "tenant_context": {
+    "tenant_id": "tenant_v5",
+    "workspace_id": "workspace_v5",
+    "project_id": "project_v5",
+    "app_id": "app_v5",
+    "actor_type": "human_user",
+    "actor_id": "user_v5_6"
+  },
+  "navigation_items": [
+    "Mission Console",
+    "Runtime Report",
+    "Evidence Chain",
+    "Audit Export",
+    "External Apps"
+  ],
+  "panels": [
+    {
+      "panel_id": "runtime_report",
+      "title": "运行报告",
+      "readonly": true,
+      "allowed_actions": [
+        "view",
+        "open_report"
+      ],
+      "source_refs": {
+        "runtime_result_ref": "docs/design/V5.x/evidence/v5-4c-existing-v4-runtime-trial/runtime-start-result.json"
+      },
+      "data": {
+        "workflow_instance_id": "v41_folder_instance_5867af5245e3",
+        "status": "completed",
+        "station_count": null,
+        "artifact_count": 5,
+        "source": "v5_4c_existing_v4_runtime_trial"
+      },
+      "redaction_status": "redacted"
+    },
+    {
+      "panel_id": "evidence_review",
+      "title": "证据链审查",
+      "readonly": true,
+      "allowed_actions": [
+        "view",
+        "open_evidence"
+      ],
+      "source_refs": {
+        "evidence_ref": "docs/design/V5.x/evidence/v5-4c-existing-v4-runtime-trial/existing-runtime-evidence.json"
+      },
+      "data": {
+        "proposal_id": "v42_controlled_proposal_19b73e398853",
+        "handoff_id": null,
+        "operation_type": "workflow.instance.start",
+        "policy_decision": "user_confirmed_only",
+        "runtime_result_ref": {
+          "type": "workflow_instance",
+          "resource_id": "v41_folder_instance_479bdd5af320",
+          "operation": "workflow.instance.start",
+          "status": "failed",
+          "workflow_instance_id": "v41_folder_instance_479bdd5af320",
+          "trace_id": "trace_c864915e"
+        },
+        "redaction_status": "redacted",
+        "readonly": true
+      },
+      "redaction_status": "redacted"
+    },
+    {
+      "panel_id": "audit_export",
+      "title": "审计导出",
+      "readonly": true,
+      "allowed_actions": [
+        "view",
+        "export_request_handoff"
+      ],
+      "source_refs": {
+        "audit_export_ref": "generated:v5-6-thin-web-console/audit-export.json"
+      },
+      "data": {
+        "export_id": "audit_export_a7d6a9806d45439584b396004e4da5c4",
+        "tenant_id": "tenant_v5",
+        "workspace_id": "workspace_v5",
+        "requested_by": "user_v5_6",
+        "request_id": "request_v5_6",
+        "correlation_id": "correlation_v5_6",
+        "time_range": {
+          "from": "2026-06-01T00:00:00Z",
+          "to": "2026-06-01T23:59:59Z"
+        },
+        "retention_policy_id": "retention_v5_6",
+        "included_event_refs": [
+          "obs_event_82db8084a79b464698ec22007e3bb129"
+        ],
+        "included_evidence_refs": [
+          "evidence://correlation_v5_6/obs_event_82db8084a79b464698ec22007e3bb129"
+        ],
+        "event_count": 1,
+        "redaction_status": "redacted",
+        "checksum": "b184f7f718ede4e2e7ba6ba40c5a019d95122862bb0e814a08698e2b6baa318b",
+        "created_at": "2026-06-08T08:17:18.786589+00:00",
+        "readonly": true,
+        "allowed_actions": [
+          "view",
+          "export",
+          "open_evidence"
+        ]
+      },
+      "redaction_status": "redacted"
+    },
+    {
+      "panel_id": "external_app_admin",
+      "title": "外部应用",
+      "readonly": true,
+      "allowed_actions": [
+        "view",
+        "open_evidence"
+      ],
+      "source_refs": {
+        "external_app_ref": "generated:v5-6-thin-web-console/external-apps.json"
+      },
+      "data": {
+        "apps": [
+          {
+            "registration": {
+              "app_registration_id": "app_registration_v5_6_console",
+              "tenant_id": "tenant_v5",
+              "workspace_id": "workspace_v5",
+              "app_id": "app_v5",
+              "owner_actor_id": "user_v5_6",
+              "display_name": "技术文档总结控制台",
+              "allowed_capabilities": [
+                "workflow.report.view",
+                "evidence.view"
+              ],
+              "status": "active",
+              "created_at": "2026-06-08T08:17:18.785926+00:00",
+              "redaction_status": "redacted"
+            },
+            "domain_verification": {
+              "domain_verification_id": "domain_verification_8e304e571ead43b1b86e22c6c4caa3be",
+              "tenant_id": "tenant_v5",
+              "app_registration_id": "app_registration_v5_6_console",
+              "domain": "console.example.test",
+              "verification_method": "dns_txt",
+              "verification_status": "verified",
+              "evidence_ref": "evidence://v5-6/domain-verification",
+              "verified_at": "2026-06-08T08:17:18.786030+00:00",
+              "created_at": "2026-06-08T08:17:18.786017+00:00",
+              "redaction_status": "redacted"
+            },
+            "origin": {
+              "origin_entry_id": "origin_entry_0e40e92abb93460bb8c2821716e56173",
+              "tenant_id": "tenant_v5",
+              "app_registration_id": "app_registration_v5_6_console",
+              "origin": "https://console.example.test",
+              "verified_domain_ref": "domain_verification_8e304e571ead43b1b86e22c6c4caa3be",
+              "status": "allowed",
+              "policy_decision": "allow",
+              "created_at": "2026-06-08T08:17:18.786082+00:00",
+              "redaction_status": "redacted"
+            },
+            "quota_decision": {
+              "quota_decision_id": "quota_decision_dff396353b3948b7b3598c42464962c1",
+              "tenant_id": "tenant_v5",
+              "app_registration_id": "app_registration_v5_6_console",
+              "quota_policy_id": "quota_policy_62f4dd90b2c3420f9904bdce1c65a614",
+              "usage_count": 10,
+              "allowed": true,
+              "policy_decision": "allow",
+              "evidence_ref": "evidence://correlation_v5_6/quota/3aa33b5c490e40918d096aee6391f9df",
+              "request_id": "request_v5_6",
+              "correlation_id": "correlation_v5_6",
+              "redaction_status": "redacted",
+              "created_at": "2026-06-08T08:17:18.786114+00:00"
+            },
+            "sdk": {
+              "sdk_name": "harnessos-web",
+              "sdk_version": "5.6.0",
+              "api_version": "v5",
+              "compatibility_status": "supported",
+              "deprecated_at": null,
+              "sunset_at": null,
+              "migration_guide_ref": null,
+              "browser_allowed_paths": [
+                "/bff/v5/console",
+                "/assets/"
+              ],
+              "redaction_status": "redacted"
+            }
+          }
+        ]
+      },
+      "redaction_status": "redacted"
+    }
+  ],
+  "manual_confirmation": {
+    "confirmation_id": "console_confirmation_9beac95ad27140e5b571344d3746ea01",
+    "operation": "context.update",
+    "source": "user",
+    "actor_type": "human_user",
+    "actor_id": "user_v5_6",
+    "user_confirmed": true,
+    "policy_decision": "allow",
+    "target_refs": {
+      "tenant_id": "tenant_v5",
+      "workspace_id": "workspace_v5",
+      "project_id": "project_v5",
+      "app_id": "app_v5",
+      "resource_type": "audit_export",
+      "resource_id": "audit_export_a7d6a9806d45439584b396004e4da5c4",
+      "workflow_instance_id": "v41_folder_instance_5867af5245e3"
+    },
+    "evidence_ref": "evidence://correlation_v5_6/audit_export/audit_export_a7d6a9806d45439584b396004e4da5c4",
+    "created_at": "2026-06-08T08:17:18.786719+00:00",
+    "redaction_status": "redacted"
+  },
+  "global_assertions": {
+    "browser_internal_routes_absent": true,
+    "read_only_panels": true,
+    "manual_confirmation_required": true,
+    "redaction_passed": true,
+    "full_studio_not_claimed": true
+  },
+  "source_refs": {
+    "runtime_result": "docs/design/V5.x/evidence/v5-4c-existing-v4-runtime-trial/runtime-start-result.json",
+    "evidence_chain": "docs/design/V5.x/evidence/v5-4c-existing-v4-runtime-trial/existing-runtime-evidence.json",
+    "bridge_evidence": "docs/design/V5.x/evidence/v5-4c-existing-v4-runtime-trial/v5-4c-bridge-evidence.json",
+    "audit_export": "generated:v5-6-thin-web-console/audit-export.json",
+    "external_app": "generated:v5-6-thin-web-console/external-apps.json"
+  },
+  "generated_at": "2026-06-08T08:17:18.787007+00:00",
+  "readonly": true
+}

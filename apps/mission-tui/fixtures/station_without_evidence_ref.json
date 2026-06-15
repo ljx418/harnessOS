@@ -1,0 +1,15 @@
+{
+  "schema_version": "v10.cli_native_mission_tui_state.v1",
+  "session_id": "negative-station",
+  "workspace_root": "/tmp",
+  "goal": "negative",
+  "status_line": {"workspace": "harnessOS", "model": "fixture", "mode": "review", "sandbox": "workspace-write", "evidence_status": "failed"},
+  "transcript_items": [
+    {"id": "station-bad", "type": "station_block", "status": "completed", "created_at": "2026-06-09T00:00:00+08:00", "redacted": true, "agent_role": "Bad Agent", "agent_goal": "Missing evidence"}
+  ],
+  "available_actions": [],
+  "forbidden_reasons": [],
+  "evidence_refs": ["docs/design/V10.x/v10_user_scenario_acceptance_gate.md"],
+  "runtime_truth_boundary": "tui_read_model_not_runtime_truth"
+}
+

@@ -1,0 +1,15 @@
+{
+  "schema_version": "v10.cli_native_mission_tui_state.v1",
+  "session_id": "negative-diff",
+  "workspace_root": "/tmp",
+  "goal": "negative",
+  "status_line": {"workspace": "harnessOS", "model": "fixture", "mode": "review", "sandbox": "workspace-write", "evidence_status": "failed"},
+  "transcript_items": [
+    {"id": "diff-bad", "type": "workflowdiff_block", "status": "waiting_confirmation", "created_at": "2026-06-09T00:00:00+08:00", "redacted": true, "source": "agent", "durable_mutation": true, "affected_station_ids": ["s1"], "actions": ["auto_apply_workflowdiff"], "evidence_refs": ["docs/design/V9.x/evidence/v9-6-workflow-studio/workflow_diff_proposal.json"]}
+  ],
+  "available_actions": [],
+  "forbidden_reasons": [],
+  "evidence_refs": ["docs/design/V10.x/v10_user_scenario_acceptance_gate.md"],
+  "runtime_truth_boundary": "tui_read_model_not_runtime_truth"
+}
+

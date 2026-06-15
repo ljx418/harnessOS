@@ -1,0 +1,593 @@
+{
+  "schema_version": "v10.cli_native_mission_tui_state.v1",
+  "session_id": "v10-wide-session",
+  "workspace_root": "/Users/Zhuanz/Desktop/workspace/harnessOS",
+  "goal": "用罗马广场多 Agent 讨论、文档总结、视频分镜和编码提案验证 V10 TUI",
+  "status_line": {
+    "workspace": "harnessOS",
+    "model": "local-interactive-no-provider",
+    "mode": "interactive",
+    "sandbox": "workspace-write",
+    "evidence_status": "workflow-timeline"
+  },
+  "composer_hint": "输入自然语言目标，或使用 /help /stations /evidence /diff /exit",
+  "transcript_items": [
+    {
+      "id": "user-1",
+      "type": "user_message",
+      "status": "completed",
+      "created_at": "2026-06-09T00:00:00+08:00",
+      "redacted": true,
+      "text": "请展示 V10 的五个关键用户场景"
+    },
+    {
+      "id": "assistant-1",
+      "type": "assistant_message",
+      "status": "completed",
+      "created_at": "2026-06-09T00:00:01+08:00",
+      "redacted": true,
+      "text": "已加载 V9 runtime evidence，并以 V10 Mission TUI read-model 呈现。"
+    },
+    {
+      "id": "station-markdown",
+      "type": "station_block",
+      "status": "completed",
+      "created_at": "2026-06-09T00:00:02+08:00",
+      "redacted": true,
+      "scenario_id": "US-V10-01",
+      "agent_role": "Document Scanner Agent",
+      "agent_goal": "读取本地 Markdown 技术文档并生成风险摘要",
+      "tools": [
+        "workspace.read",
+        "markdown.summary"
+      ],
+      "skills": [
+        "technical-writing"
+      ],
+      "mcp_refs": [],
+      "evidence_refs": [
+        "docs/design/V9.x/evidence/v9-prd-ux-runtime-review/v7-3-local-markdown-run/local-document-workflow-result.json"
+      ]
+    },
+    {
+      "id": "station-roman-1",
+      "type": "station_block",
+      "status": "completed",
+      "created_at": "2026-06-09T00:00:03+08:00",
+      "redacted": true,
+      "scenario_id": "US-V10-02",
+      "agent_role": "Stoic Persona Agent",
+      "agent_goal": "从斯多葛主义视角讨论问题",
+      "tools": [
+        "persona.reason"
+      ],
+      "skills": [
+        "philosophy-dialogue"
+      ],
+      "mcp_refs": [],
+      "evidence_refs": [
+        "docs/design/V9.x/evidence/v9-3-orchestration-runtime/roman-forum-discussion.json"
+      ]
+    },
+    {
+      "id": "station-roman-2",
+      "type": "station_block",
+      "status": "completed",
+      "created_at": "2026-06-09T00:00:04+08:00",
+      "redacted": true,
+      "scenario_id": "US-V10-02",
+      "agent_role": "Socratic Persona Agent",
+      "agent_goal": "用追问方式澄清概念",
+      "tools": [
+        "persona.question"
+      ],
+      "skills": [
+        "dialogue-synthesis"
+      ],
+      "mcp_refs": [],
+      "evidence_refs": [
+        "docs/design/V9.x/evidence/v9-3-orchestration-runtime/roman-forum-discussion.json"
+      ]
+    },
+    {
+      "id": "station-storyboard",
+      "type": "station_block",
+      "status": "completed",
+      "created_at": "2026-06-09T00:00:05+08:00",
+      "redacted": true,
+      "scenario_id": "US-V10-03",
+      "agent_role": "Storyboard Agent",
+      "agent_goal": "把创意点子转成统一画风分镜",
+      "tools": [
+        "storyboard.plan",
+        "artifact.preview"
+      ],
+      "skills": [
+        "visual-storytelling"
+      ],
+      "mcp_refs": [
+        "provider:minimax-image"
+      ],
+      "evidence_refs": [
+        "docs/design/V9.x/evidence/v9-3-orchestration-runtime/storyboard-provider-evidence.json"
+      ]
+    },
+    {
+      "id": "station-coding",
+      "type": "station_block",
+      "status": "completed",
+      "created_at": "2026-06-09T00:00:06+08:00",
+      "redacted": true,
+      "scenario_id": "US-V10-04",
+      "agent_role": "Coding Proposal Agent",
+      "agent_goal": "生成 diff proposal、sandboxed test 和 review handoff",
+      "tools": [
+        "diff.propose",
+        "test.sandbox"
+      ],
+      "skills": [
+        "code-review"
+      ],
+      "mcp_refs": [],
+      "evidence_refs": [
+        "docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/coding-workflow-result.json"
+      ]
+    },
+    {
+      "id": "tool-test",
+      "type": "tool_block",
+      "status": "completed",
+      "created_at": "2026-06-09T00:00:07+08:00",
+      "redacted": true,
+      "tool_name": "sandboxed.test",
+      "risk_level": "medium",
+      "sandbox": "workspace-write",
+      "command_preview": "pytest selected tests (redacted refs only)",
+      "evidence_refs": [
+        "docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/sandboxed-test-result.json"
+      ]
+    },
+    {
+      "id": "permission-1",
+      "type": "permission_block",
+      "status": "waiting_confirmation",
+      "created_at": "2026-06-09T00:00:08+08:00",
+      "redacted": true,
+      "decision": "denied",
+      "operation": "git.commit",
+      "risk_level": "high",
+      "allow_label": "确认",
+      "deny_label": "拒绝",
+      "forbidden_reason_refs": [
+        "no-auto-commit"
+      ],
+      "evidence_refs": [
+        "docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/git-operation-deny-report.json"
+      ]
+    },
+    {
+      "id": "output-1",
+      "type": "output_preview_block",
+      "status": "completed",
+      "created_at": "2026-06-09T00:00:09+08:00",
+      "redacted": true,
+      "scenario_id": "US-V10-03",
+      "preview_text": "分镜图、质检报告、Diff 提案和文档总结均以 evidence refs 呈现。",
+      "artifact_refs": [
+        "docs/design/V9.x/evidence/v9-3-orchestration-runtime/storyboard-images/storyboard-shot-1.jpg",
+        "docs/design/V9.x/evidence/v9-4-coding-workflow-runtime/artifacts/diff-proposal.patch"
+      ],
+      "quality_refs": [
+        "docs/design/V9.x/evidence/v9-user-scenario-video-workflow-e2e/raw/quality-agent-report.json"
+      ],
+      "evidence_refs": [
+        "docs/design/V9.x/evidence/v9-user-scenario-coverage-review/coverage-data.json"
+      ]
+    },
+    {
+      "id": "diff-1",
+      "type": "workflowdiff_block",
+      "status": "waiting_confirmation",
+      "created_at": "2026-06-09T00:00:10+08:00",
+      "redacted": true,
+      "scenario_id": "US-V10-05",
+      "source": "user",
+      "durable_mutation": false,
+      "affected_station_ids": [
+        "station-storyboard",
+        "station-coding"
+      ],
+      "actions": [
+        "confirm_proposal",
+        "revise_proposal",
+        "reject_proposal"
+      ],
+      "evidence_refs": [
+        "docs/design/V9.x/evidence/v9-6-workflow-studio/workflow_diff_proposal.json"
+      ]
+    },
+    {
+      "id": "interactive-user-12",
+      "type": "user_message",
+      "status": "completed",
+      "created_at": "2026-06-11T00:00:00.000Z",
+      "redacted": true,
+      "text": "我想做一个多Agent的工作流，期望可以实现对同一个话题的不同角度讨论，最后有一个Agent能对讨论做出总结，要求至少执行三四轮讨论",
+      "scenario_id": "US-V10-live"
+    },
+    {
+      "id": "interactive-assistant-13",
+      "type": "assistant_message",
+      "status": "completed",
+      "created_at": "2026-06-11T00:00:00.000Z",
+      "redacted": true,
+      "text": "已捕获目标：我想做一个多Agent的工作流，期望可以实现对同一个话题的不同角度讨论，最后有一个Agent能对讨论做出总结，要求至少执行三四轮讨论。正在生成本地 WorkflowDiff proposal；当前不会 apply / publish / run。",
+      "scenario_id": "US-V10-live"
+    },
+    {
+      "id": "interactive-plan-14",
+      "type": "plan_block",
+      "status": "proposal_ready",
+      "created_at": "2026-06-11T00:00:00.000Z",
+      "redacted": true,
+      "current_step_id": "await-confirmation",
+      "steps": [
+        {
+          "id": "capture-topic",
+          "text": "捕获讨论主题和目标",
+          "status": "done"
+        },
+        {
+          "id": "create-personas",
+          "text": "创建 3 个不同视角的讨论 Agent",
+          "status": "done"
+        },
+        {
+          "id": "set-rounds",
+          "text": "设置 4 轮讨论：开场、反驳、澄清、综合",
+          "status": "done"
+        },
+        {
+          "id": "summarizer",
+          "text": "增加总结 Agent 输出共识、分歧和后续问题",
+          "status": "done"
+        },
+        {
+          "id": "await-confirmation",
+          "text": "等待用户确认后才可进入运行",
+          "status": "pending"
+        }
+      ],
+      "scenario_id": "US-V10-live"
+    },
+    {
+      "id": "station-stoic",
+      "type": "station_block",
+      "agent_role": "Stoic Perspective Agent",
+      "agent_goal": "从斯多葛主义视角讨论：我想做一个多Agent的工作流，期望可以实现对同一个话题的不同角度讨论，最后有一个Agent能对讨论做出总结，要求至少执行三四轮讨论",
+      "tools": [
+        "persona.reason",
+        "discussion.round"
+      ],
+      "skills": [
+        "philosophy-dialogue",
+        "counterargument"
+      ],
+      "created_at": "2026-06-11T00:00:00.000Z",
+      "status": "proposed",
+      "redacted": true,
+      "scenario_id": "US-V10-live",
+      "evidence_refs": [
+        "docs/design/V10.x/evidence/v10-cli-local-validation/validation-summary.json"
+      ]
+    },
+    {
+      "id": "station-socratic",
+      "type": "station_block",
+      "agent_role": "Socratic Question Agent",
+      "agent_goal": "通过追问澄清概念、前提和论证漏洞",
+      "tools": [
+        "persona.question",
+        "discussion.challenge"
+      ],
+      "skills": [
+        "questioning",
+        "dialogue-synthesis"
+      ],
+      "created_at": "2026-06-11T00:00:00.000Z",
+      "status": "proposed",
+      "redacted": true,
+      "scenario_id": "US-V10-live",
+      "evidence_refs": [
+        "docs/design/V10.x/evidence/v10-cli-local-validation/validation-summary.json"
+      ]
+    },
+    {
+      "id": "station-pragmatist",
+      "type": "station_block",
+      "agent_role": "Pragmatist Agent",
+      "agent_goal": "从可执行方案、影响和权衡角度提出现实判断",
+      "tools": [
+        "impact.analysis",
+        "tradeoff.map"
+      ],
+      "skills": [
+        "practical-reasoning"
+      ],
+      "created_at": "2026-06-11T00:00:00.000Z",
+      "status": "proposed",
+      "redacted": true,
+      "scenario_id": "US-V10-live",
+      "evidence_refs": [
+        "docs/design/V10.x/evidence/v10-cli-local-validation/validation-summary.json"
+      ]
+    },
+    {
+      "id": "station-summarizer",
+      "type": "station_block",
+      "agent_role": "Summary And Quality Agent",
+      "agent_goal": "汇总三四轮讨论，输出共识、分歧、证据缺口和可行动建议",
+      "tools": [
+        "discussion.summarize",
+        "quality.check"
+      ],
+      "skills": [
+        "synthesis",
+        "quality-review"
+      ],
+      "created_at": "2026-06-11T00:00:00.000Z",
+      "status": "proposed",
+      "redacted": true,
+      "scenario_id": "US-V10-live",
+      "evidence_refs": [
+        "docs/design/V10.x/evidence/v10-cli-local-validation/validation-summary.json"
+      ]
+    },
+    {
+      "id": "interactive-output-19",
+      "type": "output_preview_block",
+      "status": "proposal_ready",
+      "created_at": "2026-06-11T00:00:00.000Z",
+      "redacted": true,
+      "preview_text": "预计产出：4 轮多 Agent 对话记录、每轮观点差异表、总结 Agent 的共识/分歧/下一步建议。当前只是 proposal，未运行真实 Agent。",
+      "artifact_refs": [
+        "artifact-ref://v10/proposed-roman-forum-discussion"
+      ],
+      "quality_refs": [
+        "quality-ref://v10/discussion-round-count-and-summary-agent"
+      ],
+      "evidence_refs": [
+        "docs/design/V10.x/evidence/v10-cli-local-validation/validation-summary.json"
+      ],
+      "scenario_id": "US-V10-live"
+    },
+    {
+      "id": "interactive-diff-20",
+      "type": "workflowdiff_block",
+      "status": "pending_confirmation",
+      "created_at": "2026-06-11T00:00:00.000Z",
+      "redacted": true,
+      "source": "user",
+      "durable_mutation": false,
+      "proposal_goal": "我想做一个多Agent的工作流，期望可以实现对同一个话题的不同角度讨论，最后有一个Agent能对讨论做出总结，要求至少执行三四轮讨论",
+      "affected_station_ids": [
+        "station-stoic",
+        "station-socratic",
+        "station-pragmatist",
+        "station-summarizer"
+      ],
+      "actions": [
+        "confirm_proposal",
+        "revise_proposal",
+        "reject_proposal"
+      ],
+      "evidence_refs": [
+        "docs/design/V10.x/evidence/v10-cli-local-validation/validation-summary.json"
+      ],
+      "scenario_id": "US-V10-live"
+    },
+    {
+      "id": "interactive-assistant-21",
+      "type": "assistant_message",
+      "status": "completed",
+      "created_at": "2026-06-11T00:00:00.000Z",
+      "redacted": true,
+      "text": "等待确认：已生成 Stoic Perspective Agent / Socratic Question Agent / Pragmatist Agent / Summary And Quality Agent。输入 confirm_proposal 确认，revise_proposal 修改，reject_proposal 放弃；当前 proposal 不会自动运行。",
+      "scenario_id": "US-V10-live"
+    },
+    {
+      "id": "v11-workflow-state-timeline",
+      "type": "workflow_timeline_block",
+      "status": "awaiting_confirmation",
+      "created_at": "2026-06-11T00:00:00.000Z",
+      "redacted": true,
+      "scenario_id": "US-V11-03",
+      "goal_ref": "goal-ref://v11/current-user-goal",
+      "workflow_spec_ref": "workflow-spec-ref://v11/proposed-spec",
+      "workflow_diff_ref": "workflow-diff-ref://v11/proposed-diff",
+      "runtime_report_ref": "runtime-report-ref://v11/pending-until-confirmed",
+      "evidence_refs": [
+        "docs/design/V11.x/evidence/v11-3-workflow-timeline/acceptance-data.json"
+      ],
+      "evidence_scope": "tui_read_model_fixture",
+      "confirmation_required": true,
+      "durable_mutation_before_confirmation": false,
+      "source": "user",
+      "timeline": [
+        {
+          "state": "goal",
+          "label": "目标已捕获：我想做一个多Agent的工作流，期望可以实现对同一个话题的不同角度讨论，最后有一个Agent能对讨论做出总结，要求至少执行三四轮讨论",
+          "status": "done",
+          "evidence_ref": "docs/design/V11.x/evidence/v11-3-workflow-timeline/acceptance-data.json"
+        },
+        {
+          "state": "spec",
+          "label": "WorkflowSpec 草案已生成",
+          "status": "done",
+          "evidence_ref": "workflow-spec-ref://v11/proposed-spec"
+        },
+        {
+          "state": "diff",
+          "label": "WorkflowDiff proposal 已生成",
+          "status": "done",
+          "evidence_ref": "workflow-diff-ref://v11/proposed-diff"
+        },
+        {
+          "state": "confirmation",
+          "label": "等待用户 confirm / revise / reject",
+          "status": "awaiting_confirmation",
+          "blocked_reason": "durable mutation requires explicit user confirmation"
+        },
+        {
+          "state": "run",
+          "label": "工作流运行",
+          "status": "blocked",
+          "blocked_reason": "blocked until WorkflowDiff is confirmed"
+        },
+        {
+          "state": "runtime_report",
+          "label": "Runtime Report",
+          "status": "pending",
+          "blocked_reason": "no runtime report before run"
+        },
+        {
+          "state": "evidence",
+          "label": "Evidence Chain",
+          "status": "pending",
+          "blocked_reason": "evidence is recorded only after governed runtime action"
+        }
+      ]
+    }
+  ],
+  "selected_item_id": "interactive-diff-20",
+  "available_actions": [
+    {
+      "id": "open_command_palette",
+      "label": "命令面板",
+      "risk_level": "low"
+    },
+    {
+      "id": "open_evidence",
+      "label": "打开证据",
+      "risk_level": "low"
+    },
+    {
+      "id": "confirm_proposal",
+      "label": "确认提案",
+      "risk_level": "medium"
+    },
+    {
+      "id": "revise_proposal",
+      "label": "继续修改",
+      "risk_level": "low"
+    },
+    {
+      "id": "export_html_explainer",
+      "label": "导出解释页",
+      "risk_level": "low"
+    }
+  ],
+  "forbidden_reasons": [
+    {
+      "id": "no-auto-commit",
+      "message": "编码工作流不得自动 commit / push / deploy"
+    },
+    {
+      "id": "no-source-agent-mutation",
+      "message": "source=agent 不得直接 durable mutation"
+    }
+  ],
+  "evidence_refs": [
+    "docs/design/V9.x/evidence/v9-8-final-acceptance/v9-final-acceptance-data.json",
+    "docs/design/V9.x/evidence/v9-user-scenario-coverage-review/coverage-data.json"
+  ],
+  "runtime_truth_boundary": "tui_read_model_not_runtime_truth",
+  "interactive_session": {
+    "session_id": "v10-local-interactive-session",
+    "provider_backed": false,
+    "persisted": false,
+    "runtime_backed": false,
+    "focus_latest": true,
+    "phase": "awaiting_confirmation",
+    "trace": [
+      {
+        "event": "input_received",
+        "message": "已收到键盘输入",
+        "created_at": "2026-06-11T00:00:00.000Z"
+      },
+      {
+        "event": "goal_captured",
+        "message": "自然语言目标已进入本地 intent/proposal 管线",
+        "created_at": "2026-06-11T00:00:00.000Z"
+      },
+      {
+        "event": "proposal_ready",
+        "message": "WorkflowDiff proposal 已生成，等待用户确认或修改",
+        "created_at": "2026-06-11T00:00:00.000Z"
+      }
+    ]
+  },
+  "workflow_state_timeline": {
+    "id": "v11-workflow-state-timeline",
+    "type": "workflow_timeline_block",
+    "status": "awaiting_confirmation",
+    "created_at": "2026-06-11T00:00:00.000Z",
+    "redacted": true,
+    "scenario_id": "US-V11-03",
+    "goal_ref": "goal-ref://v11/current-user-goal",
+    "workflow_spec_ref": "workflow-spec-ref://v11/proposed-spec",
+    "workflow_diff_ref": "workflow-diff-ref://v11/proposed-diff",
+    "runtime_report_ref": "runtime-report-ref://v11/pending-until-confirmed",
+    "evidence_refs": [
+      "docs/design/V11.x/evidence/v11-3-workflow-timeline/acceptance-data.json"
+    ],
+    "evidence_scope": "tui_read_model_fixture",
+    "confirmation_required": true,
+    "durable_mutation_before_confirmation": false,
+    "source": "user",
+    "timeline": [
+      {
+        "state": "goal",
+        "label": "目标已捕获：我想做一个多Agent的工作流，期望可以实现对同一个话题的不同角度讨论，最后有一个Agent能对讨论做出总结，要求至少执行三四轮讨论",
+        "status": "done",
+        "evidence_ref": "docs/design/V11.x/evidence/v11-3-workflow-timeline/acceptance-data.json"
+      },
+      {
+        "state": "spec",
+        "label": "WorkflowSpec 草案已生成",
+        "status": "done",
+        "evidence_ref": "workflow-spec-ref://v11/proposed-spec"
+      },
+      {
+        "state": "diff",
+        "label": "WorkflowDiff proposal 已生成",
+        "status": "done",
+        "evidence_ref": "workflow-diff-ref://v11/proposed-diff"
+      },
+      {
+        "state": "confirmation",
+        "label": "等待用户 confirm / revise / reject",
+        "status": "awaiting_confirmation",
+        "blocked_reason": "durable mutation requires explicit user confirmation"
+      },
+      {
+        "state": "run",
+        "label": "工作流运行",
+        "status": "blocked",
+        "blocked_reason": "blocked until WorkflowDiff is confirmed"
+      },
+      {
+        "state": "runtime_report",
+        "label": "Runtime Report",
+        "status": "pending",
+        "blocked_reason": "no runtime report before run"
+      },
+      {
+        "state": "evidence",
+        "label": "Evidence Chain",
+        "status": "pending",
+        "blocked_reason": "evidence is recorded only after governed runtime action"
+      }
+    ]
+  }
+}

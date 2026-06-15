@@ -1,0 +1,25 @@
+{
+  "schema_version": "v12_0p_static_render_report.v1",
+  "stage_id": "V12-0P",
+  "status": "PASS",
+  "created_at": "2026-06-15T00:00:00+08:00",
+  "renderer": "qlmanage",
+  "render_command": "qlmanage -t -s 1440 -o docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/index.html",
+  "source": {
+    "path": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/index.html",
+    "sha256": "df3cd179957c867a4695b921d3b80d726e707c6b23f872387ae853421272a529",
+    "bytes": 36352
+  },
+  "output": {
+    "path": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/index.html.png",
+    "sha256": "809b58dbab2514da499256dda81fcb0d6d13b40b81ef8228c9acda05299bc280",
+    "exists": true
+  },
+  "evidence_scope": "static_high_fidelity_prototype_render",
+  "runtime_backed": false,
+  "browser_implementation_backed": false,
+  "limitations": [
+    "QuickLook render proves the HTML page can be rendered locally as a design review artifact.",
+    "This render does not prove HarnessOS browser implementation, BFF routing, DTO correctness or runtime execution."
+  ]
+}

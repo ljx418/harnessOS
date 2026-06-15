@@ -1,0 +1,42 @@
+{
+  "name": "meeting",
+  "version": "0.1.0",
+  "manifest_schema_version": "1",
+  "domain": "meeting",
+  "description": "Meeting audio analysis, transcription, minutes generation, and artifact registration.",
+  "status": "active",
+  "workflows": ["meeting.workflow"],
+  "workflow_dsl": {
+    "meeting.workflow": {
+      "entrypoint": "packs.meeting.workflow:MeetingWorkflow",
+      "steps": [
+        {"id": "transcribe", "kind": "connector", "uses": "funasr_mcp", "outputs": ["transcript"]},
+        {"id": "analyze", "kind": "connector", "uses": "meeting_voice_mcp", "inputs": ["transcript"], "outputs": ["analysis", "result"]},
+        {"id": "minutes", "kind": "skill", "uses": "meeting-minutes", "inputs": ["analysis", "result"], "outputs": ["minutes"]}
+      ]
+    }
+  },
+  "subagents": [],
+  "skills": ["meeting-minutes", "action-items"],
+  "policy_bundles": ["meeting.default"],
+  "connectors": ["meeting_voice_mcp", "funasr_mcp"],
+  "connector_capabilities": {
+    "funasr_mcp": {
+      "capabilities": ["audio.transcribe"],
+      "tools": ["funasr_recognize_file"]
+    },
+    "meeting_voice_mcp": {
+      "capabilities": ["meeting.analyze", "minutes.generate"],
+      "tools": ["meeting_analyze_text", "meeting_process_file", "meeting_build_minutes"]
+    }
+  },
+  "artifact_kinds": ["analysis", "minutes", "result", "transcript"],
+  "artifact_schemas": {
+    "transcript": {"lineage": "root"},
+    "analysis": {"parents": ["transcript"]},
+    "result": {"parents": ["analysis"]},
+    "minutes": {"parents": ["result"]}
+  },
+  "risk_profile": "standard",
+  "metadata": {}
+}

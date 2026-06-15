@@ -1,0 +1,1221 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HarnessOS V12-0P 高保真原型冻结审查</title>
+    <style>
+      :root {
+        --bg: #f5f7fb;
+        --panel: #ffffff;
+        --panel-2: #f8fafc;
+        --line: #dbe3ee;
+        --line-strong: #cbd5e1;
+        --text: #0f172a;
+        --muted: #64748b;
+        --soft: #eef4ff;
+        --blue: #2563eb;
+        --blue-2: #1d4ed8;
+        --green: #16a34a;
+        --amber: #b45309;
+        --red: #dc2626;
+        --violet: #7c3aed;
+        --shadow: 0 18px 45px rgba(15, 23, 42, 0.1);
+        --shadow-soft: 0 10px 28px rgba(15, 23, 42, 0.08);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at 12% 4%, rgba(37, 99, 235, 0.13), transparent 22rem),
+          radial-gradient(circle at 88% 14%, rgba(124, 58, 237, 0.09), transparent 24rem),
+          linear-gradient(180deg, #fbfdff 0%, #f3f6fb 46%, #eef2f7 100%);
+        color: var(--text);
+      }
+
+      main {
+        max-width: 1480px;
+        margin: 0 auto;
+        padding: 14px 24px 64px;
+      }
+
+      .hero {
+        display: none;
+        grid-template-columns: 1fr;
+        gap: 8px;
+        align-items: stretch;
+        margin-bottom: 8px;
+      }
+
+      .hero-card,
+      .audit-card,
+      .section {
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid rgba(203, 213, 225, 0.82);
+        border-radius: 18px;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .hero-card {
+        padding: 12px 18px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 24px;
+        padding: 3px 9px;
+        border-radius: 999px;
+        background: #eaf1ff;
+        color: var(--blue-2);
+        font-weight: 700;
+        font-size: 12px;
+      }
+
+      h1 {
+        margin: 8px 0 4px;
+        font-size: 22px;
+        line-height: 1.18;
+        letter-spacing: 0;
+      }
+
+      h2 {
+        margin: 0 0 14px;
+        font-size: 22px;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin: 0 0 10px;
+        font-size: 16px;
+      }
+
+      p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .audit-card {
+        padding: 0;
+        display: none;
+        gap: 4px;
+      }
+
+      .audit-row {
+        display: grid;
+        grid-template-columns: 132px 1fr;
+        gap: 12px;
+        padding: 7px 0;
+        border-bottom: 1px solid #edf2f7;
+      }
+
+      .audit-row:last-child {
+        border-bottom: 0;
+      }
+
+      .label {
+        color: #475569;
+        font-weight: 700;
+        font-size: 13px;
+      }
+
+      .value {
+        color: var(--text);
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      .section {
+        padding: 16px 18px 18px;
+        margin-top: 10px;
+      }
+
+      .prototype-section {
+        margin-top: 0;
+        padding: 0;
+        border-radius: 30px;
+        border: 0;
+        background: transparent;
+        box-shadow: none;
+      }
+
+      .prototype-section > h2,
+      .prototype-section > p {
+        display: none;
+      }
+
+      .review-ribbon {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        min-height: 40px;
+        margin-bottom: 10px;
+        padding: 8px 12px;
+        border: 1px solid #cbd5e1;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.86);
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+        backdrop-filter: blur(10px);
+        color: #334155;
+        font-size: 12px;
+        font-weight: 720;
+      }
+
+      .review-ribbon span {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .review-ribbon code {
+        padding: 3px 7px;
+        border-radius: 8px;
+        background: #eff6ff;
+        color: #1d4ed8;
+        font-family: inherit;
+        font-weight: 850;
+      }
+
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+
+      .mini-card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 16px;
+      }
+
+      .mini-card strong {
+        display: block;
+        margin-bottom: 7px;
+        font-size: 14px;
+      }
+
+      .prototype-shell {
+        margin-top: 0;
+        overflow: hidden;
+        border: 1px solid #bfcbe0;
+        border-radius: 28px;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        box-shadow:
+          0 28px 80px rgba(15, 23, 42, 0.15),
+          inset 0 1px 0 rgba(255, 255, 255, 0.75);
+        position: relative;
+      }
+
+      .prototype-shell::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 28px;
+        pointer-events: none;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.65);
+        z-index: 120;
+      }
+
+      .topbar {
+        height: 70px;
+        display: grid;
+        grid-template-columns: 285px 1fr auto;
+        gap: 14px;
+        align-items: center;
+        padding: 0 20px;
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.98);
+        position: relative;
+        z-index: 100;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+        color: #172033;
+      }
+
+      .brand-mark {
+        width: 34px;
+        height: 34px;
+        border-radius: 11px;
+        display: grid;
+        place-items: center;
+        color: #fff;
+        background: linear-gradient(135deg, #2563eb, #7c3aed);
+        box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+      }
+
+      .crumbs {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        color: #475569;
+        font-size: 13px;
+      }
+
+      .top-actions,
+      .toolbar,
+      .tabs,
+      .node-meta,
+      .chip-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        min-height: 28px;
+        padding: 4px 9px;
+        border-radius: 9px;
+        border: 1px solid var(--line);
+        background: #fff;
+        color: #334155;
+        font-size: 12px;
+        font-weight: 650;
+        white-space: nowrap;
+      }
+
+      .chip.blue {
+        background: #eff6ff;
+        border-color: #bfdbfe;
+        color: #1d4ed8;
+      }
+
+      .chip.green {
+        background: #ecfdf5;
+        border-color: #bbf7d0;
+        color: #15803d;
+      }
+
+      .chip.amber {
+        background: #fffbeb;
+        border-color: #fde68a;
+        color: #92400e;
+      }
+
+      .chip.red {
+        background: #fef2f2;
+        border-color: #fecaca;
+        color: #b91c1c;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-height: 36px;
+        padding: 0 12px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #fff;
+        color: #172033;
+        font-weight: 720;
+        font-size: 13px;
+        box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+      }
+
+      .button.primary {
+        background: var(--blue);
+        border-color: var(--blue);
+        color: #fff;
+      }
+
+      .button.disabled {
+        color: #94a3b8;
+        background: #f8fafc;
+      }
+
+      .workbench {
+        display: grid;
+        grid-template-columns: 58px 250px 1fr 372px;
+        min-height: 790px;
+      }
+
+      .rail {
+        z-index: 80;
+        background: #ffffff;
+        border-right: 1px solid var(--line);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 14px 8px;
+        gap: 10px;
+      }
+
+      .rail-item {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        color: #64748b;
+        font-size: 14px;
+        font-weight: 850;
+        position: relative;
+        border: 1px solid transparent;
+      }
+
+      .rail-item.active {
+        background: #eff6ff;
+        border-color: #bfdbfe;
+        color: var(--blue);
+      }
+
+      .rail-item:not(.active) {
+        background: #fff;
+      }
+
+      .rail-item.active::before {
+        content: "";
+        position: absolute;
+        left: -8px;
+        width: 3px;
+        height: 22px;
+        border-radius: 999px;
+        background: var(--blue);
+      }
+
+      .domain {
+        z-index: 70;
+        background: #fbfdff;
+        border-right: 1px solid var(--line);
+        padding: 16px 12px;
+      }
+
+      .switcher {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+        padding: 12px;
+        box-shadow: 0 8px 22px rgba(15, 23, 42, 0.05);
+      }
+
+      .domain-search {
+        margin: 14px 0;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 10px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #fff;
+        color: #94a3b8;
+        font-size: 13px;
+      }
+
+      .nav-group {
+        margin-top: 16px;
+      }
+
+      .nav-title {
+        color: #94a3b8;
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        margin: 0 8px 8px;
+      }
+
+      .nav-row {
+        display: grid;
+        grid-template-columns: 34px 1fr auto;
+        gap: 8px;
+        align-items: center;
+        min-height: 38px;
+        padding: 7px 9px;
+        border-radius: 10px;
+        color: #475569;
+        font-size: 13px;
+        border: 1px solid transparent;
+      }
+
+      .nav-row.active {
+        background: #eaf1ff;
+        border-color: #c7dcff;
+        color: #1d4ed8;
+        font-weight: 750;
+      }
+
+      .nav-row .count {
+        color: #94a3b8;
+        font-size: 11px;
+      }
+
+      .nav-row > span:first-child {
+        height: 24px;
+        min-width: 24px;
+        display: inline-grid;
+        place-items: center;
+        border-radius: 8px;
+        background: #f1f5f9;
+        color: #64748b;
+        font-size: 10px;
+        font-weight: 850;
+      }
+
+      .nav-row.active > span:first-child {
+        background: #dbeafe;
+        color: #1d4ed8;
+      }
+
+      .canvas-region {
+        position: relative;
+        z-index: 10;
+        background:
+          radial-gradient(circle, rgba(148, 163, 184, 0.45) 1px, transparent 1.5px) 0 0 / 24px 24px,
+          linear-gradient(180deg, #f9fbff 0%, #f3f7fd 100%);
+        overflow: hidden;
+      }
+
+      .canvas-region::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(90deg, rgba(37, 99, 235, 0.04), transparent 20%, transparent 80%, rgba(124, 58, 237, 0.035)),
+          radial-gradient(circle at 45% 38%, rgba(37, 99, 235, 0.09), transparent 24rem);
+        pointer-events: none;
+      }
+
+      .canvas-header {
+        position: absolute;
+        top: 12px;
+        left: 16px;
+        right: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 32;
+      }
+
+      .toolbar {
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid var(--line);
+        border-radius: 13px;
+        padding: 6px;
+        box-shadow: 0 14px 36px rgba(15, 23, 42, 0.12);
+        backdrop-filter: blur(10px);
+      }
+
+      .tool {
+        width: 32px;
+        height: 32px;
+        display: grid;
+        place-items: center;
+        border-radius: 9px;
+        color: #475569;
+      }
+
+      .tool.active {
+        background: #eff6ff;
+        color: var(--blue);
+      }
+
+      .tool.disabled {
+        color: #cbd5e1;
+        background: #f8fafc;
+      }
+
+      .canvas-svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .edge {
+        fill: none;
+        stroke: #9aa8bc;
+        stroke-width: 2.6;
+        filter: drop-shadow(0 4px 4px rgba(15, 23, 42, 0.05));
+      }
+
+      .edge.active {
+        stroke: var(--blue);
+        stroke-width: 3;
+      }
+
+      .edge.blocked {
+        stroke: #d97706;
+        stroke-dasharray: 8 7;
+      }
+
+      .node {
+        position: absolute;
+        width: 252px;
+        min-height: 126px;
+        border: 1px solid #d4deec;
+        border-radius: 20px;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.98) 100%);
+        box-shadow:
+          0 20px 44px rgba(15, 23, 42, 0.12),
+          inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        padding: 14px;
+        overflow: visible;
+      }
+
+      .node::before {
+        content: "";
+        position: absolute;
+        left: 14px;
+        right: 14px;
+        top: 52px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+      }
+
+      .node.selected {
+        border: 2px solid var(--blue);
+        box-shadow:
+          0 24px 60px rgba(37, 99, 235, 0.23),
+          0 0 0 5px rgba(37, 99, 235, 0.08);
+      }
+
+      .node.hover {
+        transform: translateY(-2px);
+      }
+
+      .node.warn {
+        border-color: #f59e0b;
+      }
+
+      .node-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+
+      .node-title strong {
+        font-size: 15px;
+      }
+
+      .node-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 900;
+        background: linear-gradient(135deg, #60a5fa, #7c3aed);
+      }
+
+      .node-line {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 8px 9px;
+        border-radius: 10px;
+        background: rgba(241, 245, 249, 0.86);
+        border: 1px solid rgba(226, 232, 240, 0.9);
+        color: #475569;
+        font-size: 12px;
+        margin-top: 7px;
+      }
+
+      .ports {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      .port {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        border: 2px solid #fff;
+        background: #3b82f6;
+        box-shadow:
+          0 0 0 3px rgba(37, 99, 235, 0.16),
+          0 6px 14px rgba(37, 99, 235, 0.24);
+      }
+
+      .port.in {
+        left: -5px;
+      }
+
+      .port.out {
+        right: -5px;
+      }
+
+      .minimap {
+        position: absolute;
+        right: 20px;
+        bottom: 188px;
+        width: 160px;
+        height: 110px;
+        border: 1px solid #dbe3ee;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: var(--shadow-soft);
+        padding: 14px;
+        backdrop-filter: blur(8px);
+      }
+
+      .mini-block {
+        position: absolute;
+        border-radius: 4px;
+        background: #94a3b8;
+      }
+
+      .bottom-workbench {
+        position: absolute;
+        left: 16px;
+        right: 16px;
+        bottom: 12px;
+        z-index: 50;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.97);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        backdrop-filter: blur(12px);
+      }
+
+      .tabs {
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--line);
+        background: #fbfdff;
+      }
+
+      .tab {
+        padding: 7px 11px;
+        border-radius: 10px;
+        color: #64748b;
+        font-size: 13px;
+        font-weight: 750;
+      }
+
+      .tab.active {
+        color: #1d4ed8;
+        background: #eff6ff;
+      }
+
+      .chat-body {
+        display: grid;
+        grid-template-columns: 1.3fr 1fr;
+        gap: 14px;
+        padding: 12px;
+      }
+
+      .message {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 12px;
+        background: #fff;
+      }
+
+      .proposal-step {
+        display: grid;
+        grid-template-columns: 18px 1fr auto;
+        gap: 8px;
+        align-items: start;
+        padding: 8px 0;
+        font-size: 12px;
+        color: #475569;
+        border-bottom: 1px solid #eef2f7;
+      }
+
+      .proposal-step:last-child {
+        border-bottom: 0;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        margin-top: 4px;
+        border-radius: 999px;
+        background: var(--green);
+      }
+
+      .dot.amber {
+        background: var(--amber);
+      }
+
+      .dot.blue {
+        background: var(--blue);
+      }
+
+      .inspector {
+        z-index: 60;
+        background: #ffffff;
+        border-left: 1px solid var(--line);
+        padding: 18px;
+        overflow: hidden;
+      }
+
+      .inspector-head {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 14px;
+      }
+
+      .inspector-tabs {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+        padding: 5px;
+        border-radius: 12px;
+        background: #f1f5f9;
+        margin-bottom: 14px;
+      }
+
+      .inspector-tabs span {
+        text-align: center;
+        border-radius: 9px;
+        padding: 7px 4px;
+        font-size: 12px;
+        color: #64748b;
+        font-weight: 750;
+      }
+
+      .inspector-tabs .active {
+        background: #fff;
+        color: #1d4ed8;
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      }
+
+      .field {
+        padding: 10px 0;
+        border-bottom: 1px solid #eef2f7;
+      }
+
+      .field small {
+        display: block;
+        color: #94a3b8;
+        font-weight: 800;
+        margin-bottom: 5px;
+      }
+
+      .field div {
+        color: #334155;
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      .status-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+      }
+
+      .status-card {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+        padding: 14px;
+      }
+
+      .status-card code {
+        display: block;
+        margin-bottom: 7px;
+        color: #1d4ed8;
+        font-weight: 800;
+      }
+
+      .flow {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+      }
+
+      .flow-step {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+        padding: 14px;
+        min-height: 130px;
+        position: relative;
+      }
+
+      .flow-step::after {
+        content: "→";
+        position: absolute;
+        right: -12px;
+        top: 44px;
+        color: #94a3b8;
+        font-weight: 900;
+      }
+
+      .flow-step:last-child::after {
+        content: "";
+      }
+
+      .artifact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+
+      .thumb {
+        display: block;
+        width: 100%;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: #fff;
+      }
+
+      .footer-note {
+        margin-top: 24px;
+        padding: 16px;
+        border: 1px solid #fde68a;
+        background: #fffbeb;
+        border-radius: 14px;
+        color: #92400e;
+        line-height: 1.65;
+        font-size: 13px;
+      }
+
+      .quality-note {
+        display: none;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .quality-note div {
+        min-height: 72px;
+        padding: 12px;
+        border: 1px solid #dbe3ee;
+        border-radius: 14px;
+        background: #fff;
+        color: #475569;
+        font-size: 12px;
+        line-height: 1.55;
+      }
+
+      .quality-note strong {
+        display: block;
+        color: #0f172a;
+        margin-bottom: 4px;
+      }
+
+      @media (max-width: 1180px) {
+        .hero,
+        .grid-3,
+        .status-grid,
+        .artifact-grid,
+        .flow {
+          grid-template-columns: 1fr;
+        }
+
+        .workbench {
+          grid-template-columns: 58px 228px 1fr;
+        }
+
+        .inspector {
+          display: none;
+        }
+
+        .topbar {
+          grid-template-columns: 1fr;
+          height: auto;
+          padding: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="review-ribbon">
+        <span><code>V12-0P</code> 高保真原型冻结 · 对齐 imag2 整体体验概念图</span>
+        <span>design_only · 非 browser / BFF / runtime 证据</span>
+      </div>
+      <section class="hero">
+        <div class="hero-card">
+          <span class="eyebrow">V12-0P · 高保真原型冻结审查</span>
+          <h1>Light Studio 浏览器工作台目标体验</h1>
+          <p>
+            本页把 V12-0A 组件草图、imag2 概念图和 V12-0P 交互规格合并成一个可审查的高保真原型。
+            它用于冻结产品体验方向：用户如何进入工作台、理解画布、查看 Agent / Station、审计证据、以及通过自然语言生成提案。
+          </p>
+        </div>
+        <div class="audit-card">
+          <div class="audit-row">
+            <div class="label">证据范围</div>
+            <div class="value">design_only / high_fidelity_prototype。不是浏览器实现、BFF、DTO 或 runtime 证据。</div>
+          </div>
+          <div class="audit-row">
+            <div class="label">当前目标</div>
+            <div class="value">冻结 V12 产品壳、只读画布、节点详情、底部工作台和状态可解释性的体验方向。</div>
+          </div>
+          <div class="audit-row">
+            <div class="label">下一门禁</div>
+            <div class="value">通过本原型审查后，进入 V12 implementation-readiness audit；仍不得跳过 BFF / browser boundary 验收。</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section prototype-section">
+        <h2>一屏目标原型</h2>
+        <p>这个屏幕展示 V12 结束后用户应能理解的产品结构：左侧是产品域和对象目录，中间是只读画布，右侧是节点详情，下方是 Chat / 提案 / Trace / 质量 / 证据工作台。</p>
+        <div class="quality-note">
+          <div><strong>上一版问题</strong>报告内容压在产品屏幕前面，第一眼不像应用原型。</div>
+          <div><strong>本版修复</strong>压缩说明区，强化一屏工作台、节点、连线和 Inspector。</div>
+          <div><strong>视觉策略</strong>统一浅色 SaaS、蓝色焦点、细边框、柔和阴影和一致状态色。</div>
+          <div><strong>仍是边界</strong>这是高保真设计证据，不是 browser / BFF / runtime 证据。</div>
+        </div>
+        <div class="prototype-shell">
+          <div class="topbar">
+            <div class="brand">
+              <div class="brand-mark">H</div>
+              <div>HarnessOS Light Studio</div>
+              <span class="chip green">API 在线</span>
+            </div>
+            <div class="crumbs">
+              <span>工作空间</span><strong>/</strong><span>AI 视频工作室</span><strong>/</strong><span>分镜生成工作流</span>
+              <span class="chip blue">只读画布</span>
+              <span class="chip amber">等待确认</span>
+              <span class="chip green">证据可审计</span>
+            </div>
+            <div class="top-actions">
+              <button class="button">预览</button>
+              <button class="button disabled">发布 · 需提案</button>
+              <button class="button primary">打开证据</button>
+            </div>
+          </div>
+
+          <div class="workbench">
+            <aside class="rail" aria-label="一级产品导航">
+              <div class="rail-item active">H</div>
+              <div class="rail-item">A</div>
+              <div class="rail-item">W</div>
+              <div class="rail-item">S</div>
+              <div class="rail-item">E</div>
+              <div class="rail-item">R</div>
+              <div class="rail-item" style="margin-top: auto">G</div>
+            </aside>
+
+            <aside class="domain" aria-label="二级对象导航">
+              <div class="switcher">
+                <div class="label">当前项目</div>
+                <strong>短片创作工作室</strong>
+                <div class="chip-row" style="margin-top: 10px">
+                  <span class="chip blue">3 工作流</span>
+                  <span class="chip green">6 Agents</span>
+                </div>
+              </div>
+              <div class="domain-search">⌕ 搜索工作流、Agent、证据</div>
+              <div class="nav-group">
+                <div class="nav-title">工作台</div>
+                <div class="nav-row active"><span>W1</span><span>分镜生成工作流</span><span class="count">选中</span></div>
+                <div class="nav-row"><span>W2</span><span>罗马广场讨论</span><span class="count">4</span></div>
+                <div class="nav-row"><span>W3</span><span>代码审查提案</span><span class="count">2</span></div>
+              </div>
+              <div class="nav-group">
+                <div class="nav-title">智能体</div>
+                <div class="nav-row"><span>A1</span><span>导演 Agent</span><span class="count">ready</span></div>
+                <div class="nav-row"><span>A2</span><span>分镜 Agent</span><span class="count">run</span></div>
+                <div class="nav-row"><span>A3</span><span>质检 Agent</span><span class="count">qa</span></div>
+              </div>
+              <div class="nav-group">
+                <div class="nav-title">治理与证据</div>
+                <div class="nav-row"><span>Q</span><span>质量报告</span><span class="count">5</span></div>
+                <div class="nav-row"><span>EV</span><span>证据链</span><span class="count">12</span></div>
+              </div>
+            </aside>
+
+            <section class="canvas-region" aria-label="只读画布">
+              <div class="canvas-header">
+                <div class="toolbar">
+                  <span class="tool active">↖</span>
+                  <span class="tool">P</span>
+                  <span class="tool">⌕</span>
+                  <span class="tool disabled" title="V13 启用">＋</span>
+                  <span class="tool disabled" title="只读画布">↔</span>
+                  <span class="tool">⤢</span>
+                </div>
+                <div class="chip-row">
+                  <span class="chip blue">缩放 94%</span>
+                  <span class="chip amber">Add / Layout 为只读预览</span>
+                </div>
+              </div>
+
+              <svg class="canvas-svg" viewBox="0 0 820 720" preserveAspectRatio="none">
+                <path class="edge active" d="M 140 222 C 240 222 240 276 346 276" />
+                <path class="edge" d="M 540 274 C 650 274 650 170 745 170" />
+                <path class="edge blocked" d="M 540 334 C 650 334 650 492 740 492" />
+              </svg>
+
+              <div class="node hover" style="left: 78px; top: 176px">
+                <div class="node-title">
+                  <div class="node-meta"><span class="node-icon">T</span><strong>TRIGGER</strong></div>
+                  <span class="chip green">ready</span>
+                </div>
+                <div class="node-line"><span>输入</span><strong>自然语言创意</strong></div>
+                <div class="node-line"><span>输出</span><strong>workflow.goal</strong></div>
+                <div class="ports"><span class="port out" style="top: 82px"></span></div>
+              </div>
+
+              <div class="node selected" style="left: 346px; top: 232px">
+                <div class="node-title">
+                  <div class="node-meta"><span class="node-icon">A</span><strong>Storyboard Agent</strong></div>
+                  <span class="chip amber">awaiting</span>
+                </div>
+                <div class="node-line"><span>Role</span><strong>分镜规划</strong></div>
+                <div class="node-line"><span>Tools</span><strong>storyboard.plan · image.ref</strong></div>
+                <div class="node-line"><span>MCP</span><strong>minimax-image ref</strong></div>
+                <div class="ports">
+                  <span class="port in" style="top: 70px"></span>
+                  <span class="port in" style="top: 104px"></span>
+                  <span class="port out" style="top: 74px"></span>
+                  <span class="port out" style="top: 112px"></span>
+                </div>
+              </div>
+
+              <div class="node" style="right: 80px; top: 130px">
+                <div class="node-title">
+                  <div class="node-meta"><span class="node-icon">S</span><strong>Style Tool</strong></div>
+                  <span class="chip blue">bound</span>
+                </div>
+                <div class="node-line"><span>输入</span><strong>style_ref</strong></div>
+                <div class="node-line"><span>输出</span><strong>consistent_style</strong></div>
+                <div class="ports"><span class="port in" style="top: 82px"></span></div>
+              </div>
+
+              <div class="node warn" style="right: 100px; bottom: 250px">
+                <div class="node-title">
+                  <div class="node-meta"><span class="node-icon">Q</span><strong>Quality Agent</strong></div>
+                  <span class="chip red">blocked</span>
+                </div>
+                <div class="node-line"><span>原因</span><strong>缺少 human review</strong></div>
+                <div class="node-line"><span>证据</span><strong>quality.ref / trace.ref</strong></div>
+                <div class="ports"><span class="port in" style="top: 82px"></span></div>
+              </div>
+
+              <div class="minimap">
+                <span class="mini-block" style="left: 24px; top: 24px; width: 34px; height: 16px"></span>
+                <span class="mini-block" style="left: 64px; top: 44px; width: 42px; height: 28px; background: #2563eb"></span>
+                <span class="mini-block" style="left: 112px; top: 22px; width: 30px; height: 18px"></span>
+                <span class="mini-block" style="left: 106px; top: 70px; width: 36px; height: 18px"></span>
+              </div>
+
+              <div class="bottom-workbench">
+                <div class="tabs">
+                  <span class="tab active">Chat</span>
+                  <span class="tab">提案时间线</span>
+                  <span class="tab">Trace</span>
+                  <span class="tab">质量</span>
+                  <span class="tab">证据</span>
+                </div>
+                <div class="chat-body">
+                  <div class="message">
+                    <strong>用户目标</strong>
+                    <p style="margin-top: 8px">我想做一个多 Agent 视频创作工作流，要求统一人物和画风，最后由质检 Agent 检查结果。</p>
+                    <div class="chip-row" style="margin-top: 10px">
+                      <span class="chip blue">workspace chat</span>
+                      <span class="chip amber">不会自动发布/运行</span>
+                    </div>
+                  </div>
+                  <div class="message">
+                    <strong>提案状态</strong>
+                    <div class="proposal-step"><span class="dot green"></span><span>解析目标并生成 WorkflowSpec 草案</span><span>done</span></div>
+                    <div class="proposal-step"><span class="dot blue"></span><span>绑定 Storyboard / Style / Quality Agents</span><span>ready</span></div>
+                    <div class="proposal-step"><span class="dot amber"></span><span>等待用户确认 WorkflowDiff</span><span>confirm</span></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <aside class="inspector" aria-label="节点详情面板">
+              <div class="inspector-head">
+                <span class="node-icon">A</span>
+                <div>
+                  <strong>Storyboard Agent</strong>
+                  <p>station.storyboard · selected</p>
+                </div>
+              </div>
+              <div class="inspector-tabs">
+                <span class="active">概览</span>
+                <span>策略</span>
+                <span>证据</span>
+              </div>
+              <div class="field"><small>目标</small><div>把创意点子转成统一画风的分镜计划，并输出图像生成引用。</div></div>
+              <div class="field"><small>输入 / 输出</small><div>输入：goal, style_ref。输出：shot_list, image_prompt_refs, evidence_refs。</div></div>
+              <div class="field"><small>能力</small><div>Tools: storyboard.plan, artifact.preview。Skills: visual-storytelling。MCP: provider:minimax-image。</div></div>
+              <div class="field"><small>策略与限制</small><div>V12 只读投影；Add / Publish / Run 需要后续 WorkflowDiff + 用户确认路径。</div></div>
+              <div class="field"><small>质量与证据</small><div>quality_ref: q-204。evidence_ref: ev-storyboard-071。redaction: PASS。</div></div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>用户可能看到的状态枚举</h2>
+        <div class="status-grid">
+          <div class="status-card"><code>api_online</code><p>顶部显示绿色 API 在线，用户可继续浏览工作台和读取 BFF DTO。</p></div>
+          <div class="status-card"><code>api_offline</code><p>顶部转为红色离线，L2 显示缓存只读，Chat 输入显示不可提交原因。</p></div>
+          <div class="status-card"><code>node_hover</code><p>节点抬升、端口发光、相邻连线高亮，并展示角色和证据数量提示。</p></div>
+          <div class="status-card"><code>node_selected</code><p>节点出现蓝色描边，右侧 Inspector 打开并绑定同一节点 DTO。</p></div>
+          <div class="status-card"><code>invalid_edge</code><p>连线变红并回弹，出现策略/能力拒绝原因，不发生任何持久变更。</p></div>
+          <div class="status-card"><code>awaiting_confirmation</code><p>底部提案时间线停在确认节点，发布/运行按钮保持禁用或 proposal-only。</p></div>
+          <div class="status-card"><code>evidence_missing</code><p>证据入口为 amber，Inspector 展示缺失字段和下一步补证据动作。</p></div>
+          <div class="status-card"><code>blocked</code><p>节点或边显示警告徽标，底部 Trace 展示阻断事件和可审计 ref。</p></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>关键用户路径</h2>
+        <div class="flow">
+          <div class="flow-step"><h3>1. 进入项目</h3><p>用户从 L1 工作台进入项目，在 L2 看到工作流、Agent 和证据对象。</p></div>
+          <div class="flow-step"><h3>2. 输入目标</h3><p>用户在底部 Chat 输入自然语言目标，系统生成提案时间线。</p></div>
+          <div class="flow-step"><h3>3. 观察画布</h3><p>画布展示 trigger、station Agent、tool/MCP、quality/evidence 节点关系。</p></div>
+          <div class="flow-step"><h3>4. 审查节点</h3><p>点击节点打开 Inspector，检查 role、goal、tools、MCP、policy 和证据。</p></div>
+          <div class="flow-step"><h3>5. 确认或修订</h3><p>用户在提案时间线中确认、修订或拒绝 WorkflowDiff，不静默发布/运行。</p></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>组件与原型输入证据</h2>
+        <div class="artifact-grid">
+          <div class="mini-card">
+            <h3>整体体验概念图</h3>
+            <img class="thumb" src="../v12-component-prototype/imag2-experience/assets/01-overall-workbench-imag2.png" alt="V12 Light Studio overall workbench concept" />
+          </div>
+          <div class="mini-card">
+            <h3>组件系统概念图</h3>
+            <img class="thumb" src="../v12-component-prototype/imag2-experience/assets/02-component-sheet-imag2.png" alt="V12 component sheet concept" />
+          </div>
+        </div>
+        <div class="footer-note">
+          边界说明：这些图和本页均为 V12-0P 设计审查证据。它们不能替代 HarnessOS 浏览器截图、BFF 日志、DTO snapshot、Playwright trace 或 runtime 证据。
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>审查结论</h2>
+        <div class="grid-3">
+          <div class="mini-card"><strong>已覆盖</strong><p>一二级导航、画布连线、节点详情、多输入/输出、底部工作台、状态枚举和用户路径。</p></div>
+          <div class="mini-card"><strong>仍需后续证明</strong><p>真实浏览器实现、BFF-only 网络证据、DTO 数据一致性、真实交互截图和自动化 UX 测试。</p></div>
+          <div class="mini-card"><strong>下一步</strong><p>人工接受 V12-0P 后进入 implementation-readiness audit，再讨论真实 V12 browser implementation。</p></div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

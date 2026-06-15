@@ -1,0 +1,40 @@
+HarnessOS  harnessOS  model:provider-backed-fixtures  mode:review  sandbox:workspace-write  evidence:ready
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+当前选中: WorkflowDiff proposal · 确认前不会 apply / publish / run · actions:confirm_proposal/revise_proposal/reject_proposal
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+▣ 用户  completed  user-1
+  请展示 V10 的五个关键用户场景
+
+▣ 助手  completed  assistant-1
+  已加载 V9 runtime evidence，并以 V10 Mission TUI read-model 呈现。
+
+▣ 工位 / Agent  completed  station-markdown
+  Agent: Document Scanner Agent  目标: 读取本地 Markdown 技术文档并生成风险摘要
+  Tools: workspace.read, markdown.summary
+  Skills: technical-writing
+  证据: docs/design/V9.x/evidence/v9-prd-ux-runtime-review/v7-3-local-markdown-run/local-document-workflow-result.json
+
+▣ 工位 / Agent  completed  station-roman-1
+  Agent: Stoic Persona Agent  目标: 从斯多葛主义视角讨论问题
+  Tools: persona.reason
+  Skills: philosophy-dialogue
+  证据: docs/design/V9.x/evidence/v9-3-orchestration-runtime/roman-forum-discussion.json
+
+▣ 工位 / Agent  completed  station-roman-2
+  Agent: Socratic Persona Agent  目标: 用追问方式澄清概念
+  Tools: persona.question
+  Skills: dialogue-synthesis
+  证据: docs/design/V9.x/evidence/v9-3-orchestration-runtime/roman-forum-discussion.json
+
+▣ 工位 / Agent  completed  station-storyboard
+  Agent: Storyboard Agent  目标: 把创意点子转成统一画风分镜
+  Tools: storyboard.plan, artifact.preview
+  Skills: visual-storytelling
+  MCP: provider:minimax-image
+  证据: docs/design/V9.x/evidence/v9-3-orchestration-runtime/storyboard-provider-evidence.json
+
+▣ 工位 / Agent  completed  station-coding
+  Agent: Coding Proposal Agent  目标: 生成 diff proposal、sandboxed test 和 review handoff
+…
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+› 输入自然语言目标，或使用 /new /plan /stations /evidence /diff

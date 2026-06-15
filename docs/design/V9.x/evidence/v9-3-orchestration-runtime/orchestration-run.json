@@ -1,0 +1,30 @@
+{
+  "agent_ids": [
+    "agent-research",
+    "agent-implementation",
+    "agent-review",
+    "agent-synthesis"
+  ],
+  "audit_ref": "audit://v9-3/run/orch-v9-3-290585a635d8",
+  "branch_ids": [
+    "branch-serial-research",
+    "branch-parallel-implementation",
+    "branch-parallel-review",
+    "branch-fan-in"
+  ],
+  "correlation_id": "corr-v9-3-90a558b392",
+  "created_at": "2026-06-10T06:30:16Z",
+  "evidence_scope": "real_runtime_fixture",
+  "orchestration_run_id": "orch-v9-3-290585a635d8",
+  "request_id": "req-v9-3-d5bda90a21",
+  "runtime_backed": true,
+  "schema_version": "v9_3.orchestration_run.v1",
+  "station_ids": [
+    "station-research",
+    "station-implementation",
+    "station-review",
+    "station-synthesis"
+  ],
+  "status": "succeeded",
+  "workflow_instance_id": "workflow-v9-3-9c26815f5172"
+}

@@ -1,0 +1,24 @@
+{
+  "name": "@harnessos/mission-tui",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node src/cli.js",
+    "test": "node --test __tests__/*.test.js",
+    "build": "node src/acceptance.js --check-only",
+    "acceptance": "node src/acceptance.js",
+    "acceptance:v10-8": "node src/agent-backed-acceptance.js",
+    "acceptance:v10-final": "node src/final-acceptance.js",
+    "acceptance:v11": "node src/v11-acceptance.js",
+    "acceptance:v11-2": "node src/v11-command-acceptance.js",
+    "acceptance:v11-3": "node src/v11-timeline-acceptance.js",
+    "acceptance:v11-4": "node src/v11-inspector-acceptance.js",
+    "acceptance:v11-5": "node src/v11-tool-permission-acceptance.js",
+    "acceptance:v11-6": "node src/v11-preview-acceptance.js",
+    "acceptance:v11-7": "node src/v11-html-explainer-acceptance.js",
+    "acceptance:v11-8": "node src/v11-scenario-acceptance.js",
+    "acceptance:v11-final": "node src/v11-final-acceptance.js",
+    "render": "node src/cli.js"
+  }
+}

@@ -1,0 +1,608 @@
+{
+  "agent_executor_ready": false,
+  "allowed_claim": "V9-2 complete: limited controlled Agent executor runtime slice ready for review.",
+  "allowed_operations": [
+    "artifact.write",
+    "quality.evaluation.create",
+    "station.rerun",
+    "workflow.instance.start"
+  ],
+  "checks": [
+    {
+      "check_id": "all_scenarios_pass",
+      "details": "All V9-2 runtime scenarios pass.",
+      "status": "PASS"
+    },
+    {
+      "check_id": "only_allowlisted_operations_applied",
+      "details": "Only the four allowlisted operations apply.",
+      "status": "PASS"
+    },
+    {
+      "check_id": "source_agent_direct_mutation_denied",
+      "details": "source=agent direct durable mutation remains denied.",
+      "status": "PASS"
+    },
+    {
+      "check_id": "excluded_operations_denied",
+      "details": "Excluded operations are denied.",
+      "status": "PASS"
+    },
+    {
+      "check_id": "runtime_route_absent",
+      "details": "No runtime route is created by the V9-2 module.",
+      "status": "PASS"
+    },
+    {
+      "check_id": "runtime_worker_absent",
+      "details": "No runtime worker is created by the V9-2 module.",
+      "status": "PASS"
+    }
+  ],
+  "controlled_executor_ready": false,
+  "created_at": "2026-06-10T06:30:15Z",
+  "evidence_scope": "real_runtime_fixture",
+  "excluded_operations": [
+    "approval.respond",
+    "business.event.emit",
+    "connector.call",
+    "context.update",
+    "external_llm.call",
+    "git.commit",
+    "git.push",
+    "production.deploy",
+    "workflow.template.publish"
+  ],
+  "fallback_demo_only": false,
+  "production_controlled_executor_ready": false,
+  "remaining_blockers": [
+    "V9-3 orchestration runtime requires separate gate and runtime evidence.",
+    "V9-4 autonomous coding workflow requires separate gate and runtime evidence.",
+    "V9-8 final acceptance remains blocked until V9-0 through V9-7 evidence packages exist."
+  ],
+  "report_only": false,
+  "runtime_backed": true,
+  "runtime_executor_route_created": false,
+  "runtime_worker_created": false,
+  "scenarios": [
+    {
+      "notes": "workflow.instance.start applies only after valid human authorization evidence.",
+      "result": {
+        "agent_executor_ready": false,
+        "blocked_reason": null,
+        "capability_decision": "allow_v9_2_limited_runtime_slice",
+        "controlled_executor_ready": false,
+        "created_at": "2026-06-10T06:30:15Z",
+        "execution_evidence": {
+          "actor_type": "human_user",
+          "agent_executor_ready": false,
+          "agent_id": "agent-v9-2",
+          "approval_gate_ref": null,
+          "audit_ref": "audit://v9-2/envelope",
+          "capability_decision_ref": "capability-decision://v9-1/3242ed2f897e4a20a268854cc922f75c",
+          "controlled_executor_ready": false,
+          "correlation_id": "corr-v9-2",
+          "created_at": "2026-06-10T06:30:15Z",
+          "decision_chain_refs": {
+            "capability_decision_ref": "capability-decision://v9-1/3242ed2f897e4a20a268854cc922f75c",
+            "incident_timeline_ref": "incident-timeline://v9-2/81fdd191a3cb4ec7944f6107cb288db3",
+            "kill_switch_policy_ref": "kill-switch://v9-2/default",
+            "policy_ref": "policy://v9-1/agent-executor-safety/workflow.instance.start",
+            "rollback_descriptor_ref": "rollback://v9-2/default",
+            "timeout_policy_ref": "timeout://v9-2/default"
+          },
+          "execution_envelope_id": "env-v9-2-workflow.instance.start-idem-v9-2",
+          "execution_evidence_ref": "execution-evidence://v9-2/4b8f8864b6b542c4b6ff72014a455391",
+          "human_authorization_ref": "har-v9-2-start",
+          "operation": "workflow.instance.start",
+          "production_controlled_executor_ready": false,
+          "redaction_status": "PASS",
+          "request_id": "req-v9-2",
+          "rollback_descriptor_ref": "rollback://v9-2/default",
+          "runtime_result_ref": "runtime-result://v9-2/workflow-v9-2/start",
+          "schema_version": "v9.0",
+          "source": "product_console",
+          "station_id": "station-v9-2",
+          "target_refs": {
+            "workflow_instance_id": "workflow-v9-2"
+          }
+        },
+        "idempotent_replay": false,
+        "incident_timeline_ref": "incident-timeline://v9-2/81fdd191a3cb4ec7944f6107cb288db3",
+        "operation": "workflow.instance.start",
+        "policy_decision": "allow",
+        "production_controlled_executor_ready": false,
+        "result_id": "v9_2_result_795427783350",
+        "runtime_result_ref": "runtime-result://v9-2/workflow-v9-2/start",
+        "status": "applied_v9_2_limited_runtime_slice"
+      },
+      "scenario_id": "workflow_instance_start_with_valid_human_authorization",
+      "status": "PASS"
+    },
+    {
+      "notes": "station.rerun appends a new attempt, retains the old failed attempt, and marks downstream stale.",
+      "result": {
+        "agent_executor_ready": false,
+        "blocked_reason": null,
+        "capability_decision": "allow_v9_2_limited_runtime_slice",
+        "controlled_executor_ready": false,
+        "created_at": "2026-06-10T06:30:15Z",
+        "execution_evidence": {
+          "actor_type": "human_user",
+          "agent_executor_ready": false,
+          "agent_id": "agent-v9-2",
+          "approval_gate_ref": null,
+          "audit_ref": "audit://v9-2/envelope",
+          "capability_decision_ref": "capability-decision://v9-1/3ff4db1d53ce4f69a495a8ca4e6b0484",
+          "controlled_executor_ready": false,
+          "correlation_id": "corr-v9-2",
+          "created_at": "2026-06-10T06:30:15Z",
+          "decision_chain_refs": {
+            "capability_decision_ref": "capability-decision://v9-1/3ff4db1d53ce4f69a495a8ca4e6b0484",
+            "incident_timeline_ref": "incident-timeline://v9-2/4e1247f2d6844e7baed3ce8f3a89e513",
+            "kill_switch_policy_ref": "kill-switch://v9-2/default",
+            "policy_ref": "policy://v9-1/agent-executor-safety/station.rerun",
+            "rollback_descriptor_ref": "rollback://v9-2/default",
+            "timeout_policy_ref": "timeout://v9-2/default"
+          },
+          "execution_envelope_id": "env-v9-2-station.rerun-idem-v9-2-rerun",
+          "execution_evidence_ref": "execution-evidence://v9-2/2a22699c3ef148f8870fc00921c5bc2c",
+          "human_authorization_ref": null,
+          "operation": "station.rerun",
+          "production_controlled_executor_ready": false,
+          "redaction_status": "PASS",
+          "request_id": "req-v9-2",
+          "rollback_descriptor_ref": "rollback://v9-2/default",
+          "runtime_result_ref": "runtime-result://v9-2/workflow-v9-2/rerun/station-v9-2/2",
+          "schema_version": "v9.0",
+          "source": "product_console",
+          "station_id": "station-v9-2",
+          "target_refs": {
+            "station_id": "station-v9-2",
+            "station_run_id": "station-run-v9-2-old",
+            "workflow_instance_id": "workflow-v9-2"
+          }
+        },
+        "idempotent_replay": false,
+        "incident_timeline_ref": "incident-timeline://v9-2/4e1247f2d6844e7baed3ce8f3a89e513",
+        "operation": "station.rerun",
+        "policy_decision": "allow",
+        "production_controlled_executor_ready": false,
+        "result_id": "v9_2_result_c98ddd1cb80b",
+        "runtime_result_ref": "runtime-result://v9-2/workflow-v9-2/rerun/station-v9-2/2",
+        "status": "applied_v9_2_limited_runtime_slice"
+      },
+      "scenario_id": "station_rerun_retains_old_attempt_and_marks_downstream_stale",
+      "status": "PASS"
+    },
+    {
+      "notes": "artifact.write is approval-gated and append-only.",
+      "result": {
+        "applied": {
+          "agent_executor_ready": false,
+          "blocked_reason": null,
+          "capability_decision": "allow_v9_2_limited_runtime_slice",
+          "controlled_executor_ready": false,
+          "created_at": "2026-06-10T06:30:15Z",
+          "execution_evidence": {
+            "actor_type": "human_user",
+            "agent_executor_ready": false,
+            "agent_id": "agent-v9-2",
+            "approval_gate_ref": "approval://v9-2/default",
+            "audit_ref": "audit://v9-2/envelope",
+            "capability_decision_ref": "capability-decision://v9-1/e9950057b6f94124990d302398782f2f",
+            "controlled_executor_ready": false,
+            "correlation_id": "corr-v9-2",
+            "created_at": "2026-06-10T06:30:15Z",
+            "decision_chain_refs": {
+              "capability_decision_ref": "capability-decision://v9-1/e9950057b6f94124990d302398782f2f",
+              "incident_timeline_ref": "incident-timeline://v9-2/56e9468505f94ee08f76ad56c927e5bc",
+              "kill_switch_policy_ref": "kill-switch://v9-2/default",
+              "policy_ref": "policy://v9-1/agent-executor-safety/artifact.write",
+              "rollback_descriptor_ref": "rollback://v9-2/default",
+              "timeout_policy_ref": "timeout://v9-2/default"
+            },
+            "execution_envelope_id": "env-v9-2-artifact.write-idem-v9-2-artifact",
+            "execution_evidence_ref": "execution-evidence://v9-2/a0a930354ac64ab088f1ef2d397a70e1",
+            "human_authorization_ref": null,
+            "operation": "artifact.write",
+            "production_controlled_executor_ready": false,
+            "redaction_status": "PASS",
+            "request_id": "req-v9-2",
+            "rollback_descriptor_ref": "rollback://v9-2/default",
+            "runtime_result_ref": "runtime-result://v9-2/workflow-v9-2/artifact/artifact-v9-2/1",
+            "schema_version": "v9.0",
+            "source": "product_console",
+            "station_id": "station-v9-2",
+            "target_refs": {
+              "artifact_id": "artifact-v9-2"
+            }
+          },
+          "idempotent_replay": false,
+          "incident_timeline_ref": "incident-timeline://v9-2/56e9468505f94ee08f76ad56c927e5bc",
+          "operation": "artifact.write",
+          "policy_decision": "allow",
+          "production_controlled_executor_ready": false,
+          "result_id": "v9_2_result_eaf074f221da",
+          "runtime_result_ref": "runtime-result://v9-2/workflow-v9-2/artifact/artifact-v9-2/1",
+          "status": "applied_v9_2_limited_runtime_slice"
+        },
+        "artifact_versions": [
+          {
+            "artifact_id": "artifact-v9-2",
+            "artifact_version_id": "artifact-version-v9-2-1",
+            "content_ref": "artifact-content-ref://v9-2/artifact-v9-2/1",
+            "created_at": "2026-06-10T06:30:15Z",
+            "operation": "append_version",
+            "producer_attempt_id": null,
+            "producer_runtime_result_ref": "runtime-result://v9-2/workflow-v9-2/artifact/artifact-v9-2/1",
+            "producer_station_id": "station-v9-2",
+            "redaction_status": "PASS"
+          }
+        ],
+        "missing_approval": {
+          "agent_executor_ready": false,
+          "blocked_reason": "approval_gate_required",
+          "capability_decision": "deny",
+          "controlled_executor_ready": false,
+          "created_at": "2026-06-10T06:30:15Z",
+          "execution_evidence": null,
+          "idempotent_replay": false,
+          "incident_timeline_ref": "incident-timeline://v9-2/dce54c44c978416190bc4a3b6a865bbc",
+          "operation": "artifact.write",
+          "policy_decision": "deny",
+          "production_controlled_executor_ready": false,
+          "result_id": "v9_2_result_f077cafe7413",
+          "runtime_result_ref": null,
+          "status": "blocked"
+        }
+      },
+      "scenario_id": "artifact_write_requires_approval_and_appends_version",
+      "status": "PASS"
+    },
+    {
+      "notes": "quality.evaluation.create is approval-gated and append-only.",
+      "result": {
+        "applied": {
+          "agent_executor_ready": false,
+          "blocked_reason": null,
+          "capability_decision": "allow_v9_2_limited_runtime_slice",
+          "controlled_executor_ready": false,
+          "created_at": "2026-06-10T06:30:15Z",
+          "execution_evidence": {
+            "actor_type": "human_user",
+            "agent_executor_ready": false,
+            "agent_id": "agent-v9-2",
+            "approval_gate_ref": "approval://v9-2/default",
+            "audit_ref": "audit://v9-2/envelope",
+            "capability_decision_ref": "capability-decision://v9-1/1038d799ccc1462e8db498a093f2a6f3",
+            "controlled_executor_ready": false,
+            "correlation_id": "corr-v9-2",
+            "created_at": "2026-06-10T06:30:15Z",
+            "decision_chain_refs": {
+              "capability_decision_ref": "capability-decision://v9-1/1038d799ccc1462e8db498a093f2a6f3",
+              "incident_timeline_ref": "incident-timeline://v9-2/ee70c1585f73412aa18481e3d2ca42d4",
+              "kill_switch_policy_ref": "kill-switch://v9-2/default",
+              "policy_ref": "policy://v9-1/agent-executor-safety/quality.evaluation.create",
+              "rollback_descriptor_ref": "rollback://v9-2/default",
+              "timeout_policy_ref": "timeout://v9-2/default"
+            },
+            "execution_envelope_id": "env-v9-2-quality.evaluation.create-idem-v9-2-quality",
+            "execution_evidence_ref": "execution-evidence://v9-2/1964e7e8b85e4ea5ba622747e998f23a",
+            "human_authorization_ref": null,
+            "operation": "quality.evaluation.create",
+            "production_controlled_executor_ready": false,
+            "redaction_status": "PASS",
+            "request_id": "req-v9-2",
+            "rollback_descriptor_ref": "rollback://v9-2/default",
+            "runtime_result_ref": "runtime-result://v9-2/workflow-v9-2/quality/quality-v9-2/1",
+            "schema_version": "v9.0",
+            "source": "product_console",
+            "station_id": "station-v9-2",
+            "target_refs": {
+              "quality_evaluation_id": "quality-v9-2"
+            }
+          },
+          "idempotent_replay": false,
+          "incident_timeline_ref": "incident-timeline://v9-2/ee70c1585f73412aa18481e3d2ca42d4",
+          "operation": "quality.evaluation.create",
+          "policy_decision": "allow",
+          "production_controlled_executor_ready": false,
+          "result_id": "v9_2_result_2f48d7da85ff",
+          "runtime_result_ref": "runtime-result://v9-2/workflow-v9-2/quality/quality-v9-2/1",
+          "status": "applied_v9_2_limited_runtime_slice"
+        },
+        "missing_approval": {
+          "agent_executor_ready": false,
+          "blocked_reason": "approval_gate_required",
+          "capability_decision": "deny",
+          "controlled_executor_ready": false,
+          "created_at": "2026-06-10T06:30:15Z",
+          "execution_evidence": null,
+          "idempotent_replay": false,
+          "incident_timeline_ref": "incident-timeline://v9-2/a8b563a491dd4016919ce2fb64bf5a2e",
+          "operation": "quality.evaluation.create",
+          "policy_decision": "deny",
+          "production_controlled_executor_ready": false,
+          "result_id": "v9_2_result_68b5952c2166",
+          "runtime_result_ref": null,
+          "status": "blocked"
+        },
+        "quality_evaluations": [
+          {
+            "created_at": "2026-06-10T06:30:15Z",
+            "operation": "append_evaluation",
+            "producer_runtime_result_ref": "runtime-result://v9-2/workflow-v9-2/quality/quality-v9-2/1",
+            "quality_evaluation_id": "quality-v9-2",
+            "quality_rule_ref": "quality-rule-ref://v9-2/default",
+            "redaction_status": "PASS",
+            "score_ref": "quality-score-ref://v9-2/quality-v9-2/1",
+            "target_ref": "quality-v9-2"
+          }
+        ]
+      },
+      "scenario_id": "quality_evaluation_requires_approval_and_appends_record",
+      "status": "PASS"
+    },
+    {
+      "notes": "source=agent remains denied for durable mutation.",
+      "result": {
+        "agent_executor_ready": false,
+        "blocked_reason": "source_agent_durable_mutation_denied",
+        "capability_decision": "deny",
+        "controlled_executor_ready": false,
+        "created_at": "2026-06-10T06:30:15Z",
+        "execution_evidence": null,
+        "idempotent_replay": false,
+        "incident_timeline_ref": "incident-timeline://v9-2/33e9ecd4224041149223814cf3dc8441",
+        "operation": "workflow.instance.start",
+        "policy_decision": "deny",
+        "production_controlled_executor_ready": false,
+        "result_id": "v9_2_result_55c78f3566f1",
+        "runtime_result_ref": null,
+        "status": "blocked"
+      },
+      "scenario_id": "source_agent_durable_mutation_denied",
+      "status": "PASS"
+    },
+    {
+      "notes": "Excluded operations are hard-denied by preflight.",
+      "result": {
+        "excluded_operation_results": [
+          {
+            "blocked_reason": "operation_not_allowed",
+            "operation": "approval.respond",
+            "status": "blocked"
+          },
+          {
+            "blocked_reason": "operation_not_allowed",
+            "operation": "business.event.emit",
+            "status": "blocked"
+          },
+          {
+            "blocked_reason": "operation_not_allowed",
+            "operation": "connector.call",
+            "status": "blocked"
+          },
+          {
+            "blocked_reason": "operation_not_allowed",
+            "operation": "context.update",
+            "status": "blocked"
+          },
+          {
+            "blocked_reason": "operation_not_allowed",
+            "operation": "external_llm.call",
+            "status": "blocked"
+          },
+          {
+            "blocked_reason": "operation_not_allowed",
+            "operation": "git.commit",
+            "status": "blocked"
+          },
+          {
+            "blocked_reason": "operation_not_allowed",
+            "operation": "git.push",
+            "status": "blocked"
+          },
+          {
+            "blocked_reason": "operation_not_allowed",
+            "operation": "production.deploy",
+            "status": "blocked"
+          },
+          {
+            "blocked_reason": "operation_not_allowed",
+            "operation": "workflow.template.publish",
+            "status": "blocked"
+          }
+        ]
+      },
+      "scenario_id": "excluded_operations_hard_denied",
+      "status": "PASS"
+    },
+    {
+      "notes": "Expired HumanAuthorizationRef cannot authorize durable mutation.",
+      "result": {
+        "agent_executor_ready": false,
+        "blocked_reason": "missing_user_confirmation_or_valid_human_authorization_ref",
+        "capability_decision": "deny",
+        "controlled_executor_ready": false,
+        "created_at": "2026-06-10T06:30:15Z",
+        "execution_evidence": null,
+        "idempotent_replay": false,
+        "incident_timeline_ref": "incident-timeline://v9-2/0aafdf594c704814ad9c66f75152423f",
+        "operation": "workflow.instance.start",
+        "policy_decision": "deny",
+        "production_controlled_executor_ready": false,
+        "result_id": "v9_2_result_02e3d3b5d1c0",
+        "runtime_result_ref": null,
+        "status": "blocked"
+      },
+      "scenario_id": "expired_human_authorization_ref_denied",
+      "status": "PASS"
+    },
+    {
+      "notes": "Kill switch denial blocks the runtime action before mutation.",
+      "result": {
+        "agent_executor_ready": false,
+        "blocked_reason": "kill_switch_denied",
+        "capability_decision": "deny",
+        "controlled_executor_ready": false,
+        "created_at": "2026-06-10T06:30:15Z",
+        "execution_evidence": null,
+        "idempotent_replay": false,
+        "incident_timeline_ref": "incident-timeline://v9-2/3c299cb3c75744deacc8bdd67945391e",
+        "operation": "workflow.instance.start",
+        "policy_decision": "deny",
+        "production_controlled_executor_ready": false,
+        "result_id": "v9_2_result_ab4c9cfd5cd5",
+        "runtime_result_ref": null,
+        "status": "blocked"
+      },
+      "scenario_id": "kill_switch_denied_blocks_action",
+      "status": "PASS"
+    },
+    {
+      "notes": "Duplicate idempotency returns prior runtime_result_ref; conflicting target refs are denied.",
+      "result": {
+        "conflict": {
+          "agent_executor_ready": false,
+          "blocked_reason": "idempotency_key_conflict",
+          "capability_decision": "deny",
+          "controlled_executor_ready": false,
+          "created_at": "2026-06-10T06:30:15Z",
+          "execution_evidence": null,
+          "idempotent_replay": false,
+          "incident_timeline_ref": "incident-timeline://v9-2/a7bfa25016584788b43ab4b59462eb30",
+          "operation": "workflow.instance.start",
+          "policy_decision": "deny",
+          "production_controlled_executor_ready": false,
+          "result_id": "v9_2_result_68770d12fa6a",
+          "runtime_result_ref": null,
+          "status": "blocked"
+        },
+        "duplicate": {
+          "agent_executor_ready": false,
+          "blocked_reason": null,
+          "capability_decision": "allow_v9_2_limited_runtime_slice",
+          "controlled_executor_ready": false,
+          "created_at": "2026-06-10T06:30:15Z",
+          "execution_evidence": {
+            "actor_type": "human_user",
+            "agent_executor_ready": false,
+            "agent_id": "agent-v9-2",
+            "approval_gate_ref": null,
+            "audit_ref": "audit://v9-2/envelope",
+            "capability_decision_ref": "capability-decision://v9-1/86e997be93a94f6cac782838665e0afb",
+            "controlled_executor_ready": false,
+            "correlation_id": "corr-v9-2",
+            "created_at": "2026-06-10T06:30:15Z",
+            "decision_chain_refs": {
+              "capability_decision_ref": "capability-decision://v9-1/86e997be93a94f6cac782838665e0afb",
+              "incident_timeline_ref": "incident-timeline://v9-2/3b6f40687169437a86b6139445d09627",
+              "kill_switch_policy_ref": "kill-switch://v9-2/default",
+              "policy_ref": "policy://v9-1/agent-executor-safety/workflow.instance.start",
+              "rollback_descriptor_ref": "rollback://v9-2/default",
+              "timeout_policy_ref": "timeout://v9-2/default"
+            },
+            "execution_envelope_id": "env-v9-2-workflow.instance.start-idem-v9-2-duplicate",
+            "execution_evidence_ref": "execution-evidence://v9-2/5bc5745fb7d24d2a919de87fbd6a7279",
+            "human_authorization_ref": null,
+            "operation": "workflow.instance.start",
+            "production_controlled_executor_ready": false,
+            "redaction_status": "PASS",
+            "request_id": "req-v9-2",
+            "rollback_descriptor_ref": "rollback://v9-2/default",
+            "runtime_result_ref": "runtime-result://v9-2/workflow-v9-2/start",
+            "schema_version": "v9.0",
+            "source": "product_console",
+            "station_id": "station-v9-2",
+            "target_refs": {
+              "workflow_instance_id": "workflow-v9-2"
+            }
+          },
+          "idempotent_replay": true,
+          "incident_timeline_ref": "incident-timeline://v9-2/3b6f40687169437a86b6139445d09627",
+          "operation": "workflow.instance.start",
+          "policy_decision": "allow",
+          "production_controlled_executor_ready": false,
+          "result_id": "v9_2_result_513908c2511f",
+          "runtime_result_ref": "runtime-result://v9-2/workflow-v9-2/start",
+          "status": "idempotent_replay"
+        },
+        "first": {
+          "agent_executor_ready": false,
+          "blocked_reason": null,
+          "capability_decision": "allow_v9_2_limited_runtime_slice",
+          "controlled_executor_ready": false,
+          "created_at": "2026-06-10T06:30:15Z",
+          "execution_evidence": {
+            "actor_type": "human_user",
+            "agent_executor_ready": false,
+            "agent_id": "agent-v9-2",
+            "approval_gate_ref": null,
+            "audit_ref": "audit://v9-2/envelope",
+            "capability_decision_ref": "capability-decision://v9-1/86e997be93a94f6cac782838665e0afb",
+            "controlled_executor_ready": false,
+            "correlation_id": "corr-v9-2",
+            "created_at": "2026-06-10T06:30:15Z",
+            "decision_chain_refs": {
+              "capability_decision_ref": "capability-decision://v9-1/86e997be93a94f6cac782838665e0afb",
+              "incident_timeline_ref": "incident-timeline://v9-2/3b6f40687169437a86b6139445d09627",
+              "kill_switch_policy_ref": "kill-switch://v9-2/default",
+              "policy_ref": "policy://v9-1/agent-executor-safety/workflow.instance.start",
+              "rollback_descriptor_ref": "rollback://v9-2/default",
+              "timeout_policy_ref": "timeout://v9-2/default"
+            },
+            "execution_envelope_id": "env-v9-2-workflow.instance.start-idem-v9-2-duplicate",
+            "execution_evidence_ref": "execution-evidence://v9-2/5bc5745fb7d24d2a919de87fbd6a7279",
+            "human_authorization_ref": null,
+            "operation": "workflow.instance.start",
+            "production_controlled_executor_ready": false,
+            "redaction_status": "PASS",
+            "request_id": "req-v9-2",
+            "rollback_descriptor_ref": "rollback://v9-2/default",
+            "runtime_result_ref": "runtime-result://v9-2/workflow-v9-2/start",
+            "schema_version": "v9.0",
+            "source": "product_console",
+            "station_id": "station-v9-2",
+            "target_refs": {
+              "workflow_instance_id": "workflow-v9-2"
+            }
+          },
+          "idempotent_replay": false,
+          "incident_timeline_ref": "incident-timeline://v9-2/3b6f40687169437a86b6139445d09627",
+          "operation": "workflow.instance.start",
+          "policy_decision": "allow",
+          "production_controlled_executor_ready": false,
+          "result_id": "v9_2_result_e52808587774",
+          "runtime_result_ref": "runtime-result://v9-2/workflow-v9-2/start",
+          "status": "applied_v9_2_limited_runtime_slice"
+        }
+      },
+      "scenario_id": "idempotency_duplicate_returns_prior_ref_and_conflict_denied",
+      "status": "PASS"
+    },
+    {
+      "notes": "Runtime DTO preflight blocks forbidden sensitive payload markers without storing the payload value.",
+      "result": {
+        "blocked_reason": "forbidden_raw_content",
+        "incident_timeline_ref": "incident-timeline://v9-2/9ef785950b07496897261ef5081d83fd",
+        "status": "blocked"
+      },
+      "scenario_id": "redaction_forbidden_content_denied",
+      "status": "PASS"
+    }
+  ],
+  "schema_version": "v9_2.runtime_acceptance.v1",
+  "source_agent_durable_mutation_allowed": false,
+  "source_refs": [
+    "core/policies/v9_controlled_executor_runtime.py",
+    "core/policies/v9_agent_executor_safety.py",
+    "tests/test_v9_2_controlled_executor_runtime.py",
+    "docs/design/V9.x/decisions/v9_2_high_risk_human_decision.json"
+  ],
+  "stage_id": "V9-2",
+  "status": "PASS",
+  "transcript_only": false,
+  "v9_2_runtime_implementation_allowed": true
+}

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>V10 Mission TUI 120x40</title>
+  <style>
+    body {
+      margin: 0;
+      background: #020617;
+      color: #e5e7eb;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    .window {
+      width: 1244px;
+      padding: 18px 22px 24px;
+      background: #020617;
+    }
+    .bar {
+      height: 34px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid #334155;
+      border-bottom: 0;
+      border-radius: 10px 10px 0 0;
+      padding: 0 12px;
+      background: #0f172a;
+      color: #94a3b8;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .dot { width: 11px; height: 11px; border-radius: 999px; display: inline-block; }
+    .r { background: #ef4444; } .y { background: #f59e0b; } .g { background: #22c55e; }
+    pre {
+      margin: 0;
+      padding: 18px;
+      border: 1px solid #334155;
+      border-radius: 0 0 10px 10px;
+      background: #0b1020;
+      white-space: pre-wrap;
+      font-size: 15px;
+      line-height: 1.38;
+    }
+  </style>
+</head>
+<body><div class="window">
+  <div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><strong>V10 Mission TUI 120x40</strong></div>
+  <pre>HarnessOS  harnessOS  model:provider-backed-fixtures  mode:review  sandbox:workspace-write  evidence:ready
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+当前选中: WorkflowDiff proposal · 确认前不会 apply / publish / run · actions:confirm_proposal/revise_proposal/reject_proposal
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+▣ 用户  completed  user-1
+  请展示 V10 的五个关键用户场景
+
+▣ 助手  completed  assistant-1
+  已加载 V9 runtime evidence，并以 V10 Mission TUI read-model 呈现。
+
+▣ 工位 / Agent  completed  station-markdown
+  Agent: Document Scanner Agent  目标: 读取本地 Markdown 技术文档并生成风险摘要
+  Tools: workspace.read, markdown.summary
+  Skills: technical-writing
+  证据: docs/design/V9.x/evidence/v9-prd-ux-runtime-review/v7-3-local-markdown-run/local-document-workflow-result.json
+
+▣ 工位 / Agent  completed  station-roman-1
+  Agent: Stoic Persona Agent  目标: 从斯多葛主义视角讨论问题
+  Tools: persona.reason
+  Skills: philosophy-dialogue
+  证据: docs/design/V9.x/evidence/v9-3-orchestration-runtime/roman-forum-discussion.json
+
+▣ 工位 / Agent  completed  station-roman-2
+  Agent: Socratic Persona Agent  目标: 用追问方式澄清概念
+  Tools: persona.question
+  Skills: dialogue-synthesis
+  证据: docs/design/V9.x/evidence/v9-3-orchestration-runtime/roman-forum-discussion.json
+
+▣ 工位 / Agent  completed  station-storyboard
+  Agent: Storyboard Agent  目标: 把创意点子转成统一画风分镜
+  Tools: storyboard.plan, artifact.preview
+  Skills: visual-storytelling
+  MCP: provider:minimax-image
+  证据: docs/design/V9.x/evidence/v9-3-orchestration-runtime/storyboard-provider-evidence.json
+
+▣ 工位 / Agent  completed  station-coding
+  Agent: Coding Proposal Agent  目标: 生成 diff proposal、sandboxed test 和 review handoff
+…
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+› 输入自然语言目标，或使用 /new /plan /stations /evidence /diff
+</pre>
+</div></body>
+</html>

@@ -1,0 +1,480 @@
+{
+  "generated_at": "2026-06-11T07:28:29.813Z",
+  "results": [
+    {
+      "id": "onboarding",
+      "url": "http://127.0.0.1:18080/onboarding",
+      "final_url": "http://127.0.0.1:18080/onboarding",
+      "title": "Xpert AI",
+      "started_at": "2026-06-11T07:25:22.360Z",
+      "screenshot": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V12-V15.x/evidence/xpert-reference/frontend-survey/xpert-onboarding-20s.png",
+      "navigation_error": null,
+      "body_text_excerpt": "Welcome to Xpert AI Platform\nLooks like everything is working. Now let's get to know you, connect to your data, and start finding you some answers!\nLet's get started\nIf you feel stuck , our getting started guide is just a click away.\nEnglish",
+      "body_text_length": 241,
+      "html_length": 52402,
+      "loading_indicator_count": 0,
+      "console_messages": [
+        {
+          "type": "log",
+          "text": "\n██╗  ██╗██████╗ ███████╗██████╗ ████████╗     █████╗ ██╗\n╚██╗██╔╝██╔══██╗██╔════╝██╔══██╗╚══██╔══╝    ██╔══██╗██║\n ╚███╔╝ ██████╔╝█████╗  ██████╔╝   ██║       ███████║██║\n ██╔██╗ ██╔═══╝ ██╔══╝  ██╔══██╗   ██║       ██╔══██║██║\n██╔╝ ██╗██║     ███████╗██║  ██║   ██║       ██║  ██║██║\n╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝       ╚═╝  ╚═╝╚═╝"
+        },
+        {
+          "type": "log",
+          "text": "VERSION: 3.10.1"
+        },
+        {
+          "type": "log",
+          "text": "We're hiring! https://xpertai.cn/jobs"
+        }
+      ],
+      "page_errors": [],
+      "failed_requests": [],
+      "response_errors": [],
+      "api_responses_seen": [
+        {
+          "url": "http://127.0.0.1:18080/api/tenant/onboard",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "id": "onboarding-started",
+      "url": "http://127.0.0.1:18080/onboarding",
+      "final_url": "http://127.0.0.1:18080/onboarding/tenant",
+      "title": "Xpert AI",
+      "started_at": "2026-06-11T07:25:43.563Z",
+      "screenshot": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V12-V15.x/evidence/xpert-reference/frontend-survey/xpert-onboarding-started-20s.png",
+      "navigation_error": null,
+      "body_text_excerpt": "1\nWhat should we call you?\n2\nEnable Features\n3\nDone\nCreate your super admin account and default organization.\nFirst name\nLast name\nEmail\nCompany or team name\nCreate a password\nConfirm your password\nNext\nIf you feel stuck , our getting started guide is just a click away.\nEnglish",
+      "body_text_length": 278,
+      "html_length": 65175,
+      "loading_indicator_count": 0,
+      "console_messages": [
+        {
+          "type": "log",
+          "text": "\n██╗  ██╗██████╗ ███████╗██████╗ ████████╗     █████╗ ██╗\n╚██╗██╔╝██╔══██╗██╔════╝██╔══██╗╚══██╔══╝    ██╔══██╗██║\n ╚███╔╝ ██████╔╝█████╗  ██████╔╝   ██║       ███████║██║\n ██╔██╗ ██╔═══╝ ██╔══╝  ██╔══██╗   ██║       ██╔══██║██║\n██╔╝ ██╗██║     ███████╗██║  ██║   ██║       ██║  ██║██║\n╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝       ╚═╝  ╚═╝╚═╝"
+        },
+        {
+          "type": "log",
+          "text": "VERSION: 3.10.1"
+        },
+        {
+          "type": "log",
+          "text": "We're hiring! https://xpertai.cn/jobs"
+        }
+      ],
+      "page_errors": [],
+      "failed_requests": [],
+      "response_errors": [],
+      "api_responses_seen": [
+        {
+          "url": "http://127.0.0.1:18080/api/tenant/onboard",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "id": "onboarding-complete-attempt",
+      "url": "http://127.0.0.1:18080/onboarding",
+      "final_url": "http://127.0.0.1:18080/onboarding/tenant",
+      "title": "Xpert AI",
+      "started_at": "2026-06-11T07:26:14.644Z",
+      "screenshot": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V12-V15.x/evidence/xpert-reference/frontend-survey/xpert-onboarding-complete-attempt-20s.png",
+      "navigation_error": null,
+      "body_text_excerpt": "What should we call you?\n2\nEnable Features\n3\nConfigure AI Model\n4\nDone\nSelect the feature modules you want to enable, which can also be configured later in the system settings.\nAI Platform Features\n\nFeatures related to AI, including workflows, digital expert agents, knowledge bases, project spaces, etc.\n\nBI Platform Features\n\nFeatures related to BI data analysis, including semantic models, indicators, story dashboards, etc.\n\nSave and Next\nIf you feel stuck , our getting started guide is just a click away.\nEnglish",
+      "body_text_length": 518,
+      "html_length": 67844,
+      "loading_indicator_count": 0,
+      "console_messages": [
+        {
+          "type": "log",
+          "text": "\n██╗  ██╗██████╗ ███████╗██████╗ ████████╗     █████╗ ██╗\n╚██╗██╔╝██╔══██╗██╔════╝██╔══██╗╚══██╔══╝    ██╔══██╗██║\n ╚███╔╝ ██████╔╝█████╗  ██████╔╝   ██║       ███████║██║\n ██╔██╗ ██╔═══╝ ██╔══╝  ██╔══██╗   ██║       ██╔══██║██║\n██╔╝ ██╗██║     ███████╗██║  ██║   ██║       ██║  ██║██║\n╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝       ╚═╝  ╚═╝╚═╝"
+        },
+        {
+          "type": "log",
+          "text": "VERSION: 3.10.1"
+        },
+        {
+          "type": "log",
+          "text": "We're hiring! https://xpertai.cn/jobs"
+        }
+      ],
+      "page_errors": [],
+      "failed_requests": [
+        {
+          "url": "http://127.0.0.1:18080/api/copilot",
+          "method": "GET",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/copilot/models?type=null",
+          "method": "GET",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "response_errors": [],
+      "api_responses_seen": [
+        {
+          "url": "http://127.0.0.1:18080/api/tenant/onboard",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/tenant/onboard",
+          "status": 201
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/auth/login",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/feature/toggle/parent?relations%5B0%5D=children",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/copilot",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/data-source-type",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/copilot/models?type=null",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/copilot",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "id": "root",
+      "url": "http://127.0.0.1:18080/",
+      "final_url": "http://127.0.0.1:18080/chat/clawxpert",
+      "title": "Xpert AI",
+      "started_at": "2026-06-11T07:26:42.036Z",
+      "screenshot": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V12-V15.x/evidence/xpert-reference/frontend-survey/xpert-root-20s.png",
+      "navigation_error": null,
+      "body_text_excerpt": "H\nC\nClawXpert\nGo to setup\nNew Chat\n⌘J\nTasks\nToggle Sidebar\nSETUP WIZARD\nChoose the published Xpert to use as the agent for your ClawXpert.\n\nThis page only needs one binding. You can change it later at any time.\n\nNo published assistants are available yet\nCreate a new ClawXpert here, or publish an existing Xpert and bind it here later.\nNew ClawXpert\nGo to Workspace",
+      "body_text_length": 365,
+      "html_length": 108373,
+      "loading_indicator_count": 0,
+      "console_messages": [
+        {
+          "type": "log",
+          "text": "\n██╗  ██╗██████╗ ███████╗██████╗ ████████╗     █████╗ ██╗\n╚██╗██╔╝██╔══██╗██╔════╝██╔══██╗╚══██╔══╝    ██╔══██╗██║\n ╚███╔╝ ██████╔╝█████╗  ██████╔╝   ██║       ███████║██║\n ██╔██╗ ██╔═══╝ ██╔══╝  ██╔══██╗   ██║       ██╔══██║██║\n██╔╝ ██╗██║     ███████╗██║  ██║   ██║       ██║  ██║██║\n╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝       ╚═╝  ╚═╝╚═╝"
+        },
+        {
+          "type": "log",
+          "text": "VERSION: 3.10.1"
+        },
+        {
+          "type": "log",
+          "text": "We're hiring! https://xpertai.cn/jobs"
+        }
+      ],
+      "page_errors": [],
+      "failed_requests": [],
+      "response_errors": [],
+      "api_responses_seen": [
+        {
+          "url": "http://127.0.0.1:18080/api/user/me?data=%7B%22relations%22:%5B%22organizations%22,%22organizations.organization%22%5D,%22select%22:%7B%22id%22:true,%22email%22:true,%22username%22:true,%22firstName%22:true,%22lastName%22:true,%22mobile%22:true,%22imageUrl%22:true,%22timeZone%22:true,%22tenantId%22:true,%22preferredLanguage%22:true,%22role%22:%7B%22id%22:true,%22name%22:true,%22rolePermissions%22:%7B%22id%22:true,%22permission%22:true,%22enabled%22:true%7D%7D,%22tenant%22:%7B%22id%22:true,%22name%22:true%7D,%22employee%22:%7B%22id%22:true,%22userId%22:true,%22organizationId%22:true,%22isActive%22:true%7D,%22organizations%22:%7B%22id%22:true,%22userId%22:true,%22tenantId%22:true,%22organizationId%22:true,%22isDefault%22:true,%22isActive%22:true,%22organization%22:%7B%22id%22:true,%22name%22:true,%22imageUrl%22:true,%22isDefault%22:true,%22isActive%22:true,%22defaultValueDateType%22:true,%22allowManualTime%22:true,%22allowModifyTime%22:true,%22allowDeleteTime%22:true,%22futureDateAllowed%22:true%7D%7D%7D,%22currentOrganizationId%22:%2251709ee5-91c1-4abc-93ea-293d85cae4ae%22,%22limitOrganizations%22:true%7D",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/user/me?data=%7B%22relations%22:%5B%22tenant.featureOrganizations%22,%22tenant.featureOrganizations.feature%22,%22organizations.organization.featureOrganizations%22,%22organizations.organization.featureOrganizations.feature%22%5D%7D",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/assistant-binding/clawxpert?scope=user",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/xpert/triggers/providers",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/assistant-binding/clawxpert?scope=user",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/xpert/my?$where=%7B%22type%22:%22agent%22,%22latest%22:true%7D&$relations=%5B%22createdBy%22%5D&$order=%7B%22createdAt%22:%22DESC%22%7D&data=%7B%22relations%22:%5B%22createdBy%22%5D,%22where%22:%7B%22type%22:%22agent%22,%22latest%22:true%7D,%22order%22:%7B%22createdAt%22:%22DESC%22%7D%7D",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/xpert-project/my?$order=%7B%22updatedAt%22:%22DESC%22%7D&$take=10&data=%7B%22order%22:%7B%22updatedAt%22:%22DESC%22%7D,%22take%22:10%7D",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/employee/user/99804f49-704d-408d-ac00-09fea3636f4d?data=%7B%22relations%22:%5B%5D,%22findInput%22:%7B%22tenantId%22:%22304fb342-9156-479a-ab96-bb6cac9517c3%22%7D%7D",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/chat-conversation/my?$select=%5B%22id%22,%22threadId%22,%22title%22,%22options%22,%22updatedAt%22,%22from%22,%22projectId%22,%22taskId%22%5D&$where=%7B%22from%22:%7B%22$in%22:%5B%22platform%22,%22job%22%5D%7D,%22projectId%22:%7B%22$isNull%22:true%7D%7D&$relations=%5B%22xpert%22,%22project%22%5D&$order=%7B%22updatedAt%22:%22DESC%22%7D&$take=20&data=%7B%22select%22:%5B%22id%22,%22threadId%22,%22title%22,%22options%22,%22updatedAt%22,%22from%22,%22projectId%22,%22taskId%22%5D,%22order%22:%7B%22updatedAt%22:%22DESC%22%7D,%22take%22:20,%22where%22:%7B%22from%22:%7B%22$in%22:%5B%22platform%22,%22job%22%5D%7D,%22projectId%22:%7B%22$isNull%22:true%7D%7D,%22relations%22:%5B%22xpert%22,%22project%22%5D%7D",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/assistant-binding/xperts?scope=user&code=clawxpert",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "id": "chat",
+      "url": "http://127.0.0.1:18080/chat",
+      "final_url": "http://127.0.0.1:18080/chat/clawxpert",
+      "title": "Xpert AI",
+      "started_at": "2026-06-11T07:27:03.350Z",
+      "screenshot": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V12-V15.x/evidence/xpert-reference/frontend-survey/xpert-chat-20s.png",
+      "navigation_error": null,
+      "body_text_excerpt": "H\nC\nClawXpert\nGo to setup\nNew Chat\n⌘J\nTasks\nToggle Sidebar\nSETUP WIZARD\nChoose the published Xpert to use as the agent for your ClawXpert.\n\nThis page only needs one binding. You can change it later at any time.\n\nNo published assistants are available yet\nCreate a new ClawXpert here, or publish an existing Xpert and bind it here later.\nNew ClawXpert\nGo to Workspace",
+      "body_text_length": 365,
+      "html_length": 108373,
+      "loading_indicator_count": 0,
+      "console_messages": [
+        {
+          "type": "log",
+          "text": "\n██╗  ██╗██████╗ ███████╗██████╗ ████████╗     █████╗ ██╗\n╚██╗██╔╝██╔══██╗██╔════╝██╔══██╗╚══██╔══╝    ██╔══██╗██║\n ╚███╔╝ ██████╔╝█████╗  ██████╔╝   ██║       ███████║██║\n ██╔██╗ ██╔═══╝ ██╔══╝  ██╔══██╗   ██║       ██╔══██║██║\n██╔╝ ██╗██║     ███████╗██║  ██║   ██║       ██║  ██║██║\n╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝       ╚═╝  ╚═╝╚═╝"
+        },
+        {
+          "type": "log",
+          "text": "VERSION: 3.10.1"
+        },
+        {
+          "type": "log",
+          "text": "We're hiring! https://xpertai.cn/jobs"
+        }
+      ],
+      "page_errors": [],
+      "failed_requests": [],
+      "response_errors": [],
+      "api_responses_seen": [
+        {
+          "url": "http://127.0.0.1:18080/api/user/me?data=%7B%22relations%22:%5B%22organizations%22,%22organizations.organization%22%5D,%22select%22:%7B%22id%22:true,%22email%22:true,%22username%22:true,%22firstName%22:true,%22lastName%22:true,%22mobile%22:true,%22imageUrl%22:true,%22timeZone%22:true,%22tenantId%22:true,%22preferredLanguage%22:true,%22role%22:%7B%22id%22:true,%22name%22:true,%22rolePermissions%22:%7B%22id%22:true,%22permission%22:true,%22enabled%22:true%7D%7D,%22tenant%22:%7B%22id%22:true,%22name%22:true%7D,%22employee%22:%7B%22id%22:true,%22userId%22:true,%22organizationId%22:true,%22isActive%22:true%7D,%22organizations%22:%7B%22id%22:true,%22userId%22:true,%22tenantId%22:true,%22organizationId%22:true,%22isDefault%22:true,%22isActive%22:true,%22organization%22:%7B%22id%22:true,%22name%22:true,%22imageUrl%22:true,%22isDefault%22:true,%22isActive%22:true,%22defaultValueDateType%22:true,%22allowManualTime%22:true,%22allowModifyTime%22:true,%22allowDeleteTime%22:true,%22futureDateAllowed%22:true%7D%7D%7D,%22currentOrganizationId%22:%2251709ee5-91c1-4abc-93ea-293d85cae4ae%22,%22limitOrganizations%22:true%7D",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/user/me?data=%7B%22relations%22:%5B%22tenant.featureOrganizations%22,%22tenant.featureOrganizations.feature%22,%22organizations.organization.featureOrganizations%22,%22organizations.organization.featureOrganizations.feature%22%5D%7D",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/assistant-binding/clawxpert?scope=user",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/assistant-binding/clawxpert?scope=user",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/assistant-binding/xperts?scope=user&code=clawxpert",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/xpert/my?$where=%7B%22type%22:%22agent%22,%22latest%22:true%7D&$relations=%5B%22createdBy%22%5D&$order=%7B%22createdAt%22:%22DESC%22%7D&data=%7B%22relations%22:%5B%22createdBy%22%5D,%22where%22:%7B%22type%22:%22agent%22,%22latest%22:true%7D,%22order%22:%7B%22createdAt%22:%22DESC%22%7D%7D",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/xpert/triggers/providers",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/xpert-project/my?$order=%7B%22updatedAt%22:%22DESC%22%7D&$take=10&data=%7B%22order%22:%7B%22updatedAt%22:%22DESC%22%7D,%22take%22:10%7D",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/chat-conversation/my?$select=%5B%22id%22,%22threadId%22,%22title%22,%22options%22,%22updatedAt%22,%22from%22,%22projectId%22,%22taskId%22%5D&$where=%7B%22from%22:%7B%22$in%22:%5B%22platform%22,%22job%22%5D%7D,%22projectId%22:%7B%22$isNull%22:true%7D%7D&$relations=%5B%22xpert%22,%22project%22%5D&$order=%7B%22updatedAt%22:%22DESC%22%7D&$take=20&data=%7B%22select%22:%5B%22id%22,%22threadId%22,%22title%22,%22options%22,%22updatedAt%22,%22from%22,%22projectId%22,%22taskId%22%5D,%22order%22:%7B%22updatedAt%22:%22DESC%22%7D,%22take%22:20,%22where%22:%7B%22from%22:%7B%22$in%22:%5B%22platform%22,%22job%22%5D%7D,%22projectId%22:%7B%22$isNull%22:true%7D%7D,%22relations%22:%5B%22xpert%22,%22project%22%5D%7D",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/employee/user/99804f49-704d-408d-ac00-09fea3636f4d?data=%7B%22relations%22:%5B%5D,%22findInput%22:%7B%22tenantId%22:%22304fb342-9156-479a-ab96-bb6cac9517c3%22%7D%7D",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "id": "chat-common",
+      "url": "http://127.0.0.1:18080/chat/x/common",
+      "final_url": "http://127.0.0.1:18080/chat/x/common",
+      "title": "Xpert AI",
+      "started_at": "2026-06-11T07:27:26.588Z",
+      "screenshot": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V12-V15.x/evidence/xpert-reference/frontend-survey/xpert-chat-common-20s.png",
+      "navigation_error": null,
+      "body_text_excerpt": "H\nC\nClawXpert\nGo to setup\nNew Chat\n⌘J\nSearch\n⌘K\nTasks\nHistory\nShow more\nToggle Sidebar\nAssistant not configured\nConfigure this assistant in Settings / Assistants before starting a conversation here.\nOpen Assistant Settings",
+      "body_text_length": 222,
+      "html_length": 102321,
+      "loading_indicator_count": 0,
+      "console_messages": [
+        {
+          "type": "log",
+          "text": "\n██╗  ██╗██████╗ ███████╗██████╗ ████████╗     █████╗ ██╗\n╚██╗██╔╝██╔══██╗██╔════╝██╔══██╗╚══██╔══╝    ██╔══██╗██║\n ╚███╔╝ ██████╔╝█████╗  ██████╔╝   ██║       ███████║██║\n ██╔██╗ ██╔═══╝ ██╔══╝  ██╔══██╗   ██║       ██╔══██║██║\n██╔╝ ██╗██║     ███████╗██║  ██║   ██║       ██║  ██║██║\n╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝       ╚═╝  ╚═╝╚═╝"
+        },
+        {
+          "type": "log",
+          "text": "VERSION: 3.10.1"
+        },
+        {
+          "type": "log",
+          "text": "We're hiring! https://xpertai.cn/jobs"
+        }
+      ],
+      "page_errors": [],
+      "failed_requests": [],
+      "response_errors": [],
+      "api_responses_seen": [
+        {
+          "url": "http://127.0.0.1:18080/api/user/me?data=%7B%22relations%22:%5B%22organizations%22,%22organizations.organization%22%5D,%22select%22:%7B%22id%22:true,%22email%22:true,%22username%22:true,%22firstName%22:true,%22lastName%22:true,%22mobile%22:true,%22imageUrl%22:true,%22timeZone%22:true,%22tenantId%22:true,%22preferredLanguage%22:true,%22role%22:%7B%22id%22:true,%22name%22:true,%22rolePermissions%22:%7B%22id%22:true,%22permission%22:true,%22enabled%22:true%7D%7D,%22tenant%22:%7B%22id%22:true,%22name%22:true%7D,%22employee%22:%7B%22id%22:true,%22userId%22:true,%22organizationId%22:true,%22isActive%22:true%7D,%22organizations%22:%7B%22id%22:true,%22userId%22:true,%22tenantId%22:true,%22organizationId%22:true,%22isDefault%22:true,%22isActive%22:true,%22organization%22:%7B%22id%22:true,%22name%22:true,%22imageUrl%22:true,%22isDefault%22:true,%22isActive%22:true,%22defaultValueDateType%22:true,%22allowManualTime%22:true,%22allowModifyTime%22:true,%22allowDeleteTime%22:true,%22futureDateAllowed%22:true%7D%7D%7D,%22currentOrganizationId%22:%2251709ee5-91c1-4abc-93ea-293d85cae4ae%22,%22limitOrganizations%22:true%7D",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/user/me?data=%7B%22relations%22:%5B%22tenant.featureOrganizations%22,%22tenant.featureOrganizations.feature%22,%22organizations.organization.featureOrganizations%22,%22organizations.organization.featureOrganizations.feature%22%5D%7D",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/xpert/my?$where=%7B%22type%22:%22agent%22,%22latest%22:true%7D&$relations=%5B%22createdBy%22%5D&$order=%7B%22createdAt%22:%22DESC%22%7D&data=%7B%22relations%22:%5B%22createdBy%22%5D,%22where%22:%7B%22type%22:%22agent%22,%22latest%22:true%7D,%22order%22:%7B%22createdAt%22:%22DESC%22%7D%7D",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/assistant-binding/effective/chat_common",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/xpert/triggers/providers",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/assistant-binding/xperts?scope=user&code=clawxpert",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/xpert-project/my?$order=%7B%22updatedAt%22:%22DESC%22%7D&$take=10&data=%7B%22order%22:%7B%22updatedAt%22:%22DESC%22%7D,%22take%22:10%7D",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/assistant-binding/clawxpert?scope=user",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/chat-conversation/my?$select=%5B%22id%22,%22threadId%22,%22title%22,%22options%22,%22updatedAt%22,%22from%22,%22projectId%22,%22taskId%22%5D&$where=%7B%22from%22:%7B%22$in%22:%5B%22platform%22,%22job%22%5D%7D,%22projectId%22:%7B%22$isNull%22:true%7D%7D&$relations=%5B%22xpert%22,%22project%22%5D&$order=%7B%22updatedAt%22:%22DESC%22%7D&$take=20&data=%7B%22select%22:%5B%22id%22,%22threadId%22,%22title%22,%22options%22,%22updatedAt%22,%22from%22,%22projectId%22,%22taskId%22%5D,%22order%22:%7B%22updatedAt%22:%22DESC%22%7D,%22take%22:20,%22where%22:%7B%22from%22:%7B%22$in%22:%5B%22platform%22,%22job%22%5D%7D,%22projectId%22:%7B%22$isNull%22:true%7D%7D,%22relations%22:%5B%22xpert%22,%22project%22%5D%7D",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/employee/user/99804f49-704d-408d-ac00-09fea3636f4d?data=%7B%22relations%22:%5B%5D,%22findInput%22:%7B%22tenantId%22:%22304fb342-9156-479a-ab96-bb6cac9517c3%22%7D%7D",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/employee/user/99804f49-704d-408d-ac00-09fea3636f4d?data=%7B%22relations%22:%5B%5D,%22findInput%22:%7B%22tenantId%22:%22304fb342-9156-479a-ab96-bb6cac9517c3%22%7D%7D",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "id": "explore",
+      "url": "http://127.0.0.1:18080/explore",
+      "final_url": "http://127.0.0.1:18080/explore",
+      "title": "Xpert AI",
+      "started_at": "2026-06-11T07:27:47.688Z",
+      "screenshot": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V12-V15.x/evidence/xpert-reference/frontend-survey/xpert-explore-20s.png",
+      "navigation_error": null,
+      "body_text_excerpt": "H\nSquare\nMine\nSkills\nAgents\n🕊️\nChatBI via Feishu Bot\nAnalysis\nI am a conversational data analysis robot agent of Feishu, good at optimizing company strategies and driving business growth through data insights.\nReady to Install in a Workspace\nInstall to workspace\n💽\nChatDB (Text2SQL)\nAnalysis\nAn agent that directly chat with a relational database using the Text2SQL method.\nReady to Install in a Workspace\nInstall to workspace\n😊\nSales Analysis Expert\nAnalysis\nI am an experienced sales data analysis expert who is good at optimizing sales strategies and driving business growth through data insights. I am familiar with a variety of data analysis tools and methods, can quickly identify market trends and customer needs, and provide companies with efficient and accurate sales solutions.\nReady to Install in a Workspace\nInstall to workspace\n🐳\nDeep Research with Deepseek r1\nWriting\nAn agent that uses reasoning to synthesize large amounts of online information and complete multi-step research tasks for you.\nReady to Install in a Workspace\nInstall to workspace\n✅\nEvaluator-optimizer\nWorkflow\nEvaluator-optimizer: In the evaluator-optimizer workflow, one LLM call generates a response while another provides evaluation and feedback in a loop.\nReady to Install in a Workspace\nInstall to workspace\n🤹\nPrompt Chaining\nWorkflow\nIn prompt chaining, each LLM call processes the output of the previous one.\nReady to Install in a Workspace\nInstall to workspace\n⛓️\nParallelization\nWorkflow\nLLMs can sometimes work simultaneously on a task and have their outputs aggregated programmatically.\nReady to Install in a Workspace\nInstall to workspace\n🗺️\nRouting\nWorkflow\nRouting classifies an input and directs it to a followup task.\nReady to Install in a Workspace\nInstall to workspace\n👷‍♂️\nOrchestrator-Worker\nWorkflow\nWith orchestrator-worker, an orchestrator breaks down a task and delegates each sub-task to workers.\nReady to Install in a Workspace\nInstall to workspace\n📝\nPlanning and Execution\nAgent\nThe",
+      "body_text_length": 3372,
+      "html_length": 142975,
+      "loading_indicator_count": 0,
+      "console_messages": [
+        {
+          "type": "log",
+          "text": "\n██╗  ██╗██████╗ ███████╗██████╗ ████████╗     █████╗ ██╗\n╚██╗██╔╝██╔══██╗██╔════╝██╔══██╗╚══██╔══╝    ██╔══██╗██║\n ╚███╔╝ ██████╔╝█████╗  ██████╔╝   ██║       ███████║██║\n ██╔██╗ ██╔═══╝ ██╔══╝  ██╔══██╗   ██║       ██╔══██║██║\n██╔╝ ██╗██║     ███████╗██║  ██║   ██║       ██║  ██║██║\n╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝       ╚═╝  ╚═╝╚═╝"
+        },
+        {
+          "type": "log",
+          "text": "VERSION: 3.10.1"
+        },
+        {
+          "type": "log",
+          "text": "We're hiring! https://xpertai.cn/jobs"
+        }
+      ],
+      "page_errors": [],
+      "failed_requests": [],
+      "response_errors": [],
+      "api_responses_seen": [
+        {
+          "url": "http://127.0.0.1:18080/api/user/me?data=%7B%22relations%22:%5B%22organizations%22,%22organizations.organization%22%5D,%22select%22:%7B%22id%22:true,%22email%22:true,%22username%22:true,%22firstName%22:true,%22lastName%22:true,%22mobile%22:true,%22imageUrl%22:true,%22timeZone%22:true,%22tenantId%22:true,%22preferredLanguage%22:true,%22role%22:%7B%22id%22:true,%22name%22:true,%22rolePermissions%22:%7B%22id%22:true,%22permission%22:true,%22enabled%22:true%7D%7D,%22tenant%22:%7B%22id%22:true,%22name%22:true%7D,%22employee%22:%7B%22id%22:true,%22userId%22:true,%22organizationId%22:true,%22isActive%22:true%7D,%22organizations%22:%7B%22id%22:true,%22userId%22:true,%22tenantId%22:true,%22organizationId%22:true,%22isDefault%22:true,%22isActive%22:true,%22organization%22:%7B%22id%22:true,%22name%22:true,%22imageUrl%22:true,%22isDefault%22:true,%22isActive%22:true,%22defaultValueDateType%22:true,%22allowManualTime%22:true,%22allowModifyTime%22:true,%22allowDeleteTime%22:true,%22futureDateAllowed%22:true%7D%7D%7D,%22currentOrganizationId%22:%2251709ee5-91c1-4abc-93ea-293d85cae4ae%22,%22limitOrganizations%22:true%7D",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/user/me?data=%7B%22relations%22:%5B%22tenant.featureOrganizations%22,%22tenant.featureOrganizations.feature%22,%22organizations.organization.featureOrganizations%22,%22organizations.organization.featureOrganizations.feature%22%5D%7D",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/xpert-workspace/my/default",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/employee/user/99804f49-704d-408d-ac00-09fea3636f4d?data=%7B%22relations%22:%5B%5D,%22findInput%22:%7B%22tenantId%22:%22304fb342-9156-479a-ab96-bb6cac9517c3%22%7D%7D",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/xpert-template",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/employee/user/99804f49-704d-408d-ac00-09fea3636f4d?data=%7B%22relations%22:%5B%5D,%22findInput%22:%7B%22tenantId%22:%22304fb342-9156-479a-ab96-bb6cac9517c3%22%7D%7D",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "id": "plugins",
+      "url": "http://127.0.0.1:18080/settings/plugins",
+      "final_url": "http://127.0.0.1:18080/settings/plugins",
+      "title": "Xpert AI",
+      "started_at": "2026-06-11T07:28:08.712Z",
+      "screenshot": "/Users/Zhuanz/Desktop/workspace/harnessOS/docs/design/V12-V15.x/evidence/xpert-reference/frontend-survey/xpert-plugins-20s.png",
+      "navigation_error": null,
+      "body_text_excerpt": "H\nCURRENT SCOPE\nOrganization Scope\nHarnessOS Local Review\nAccount\nAI Copilot\nData Sources\nAssistants\nChat BI\nBusiness Area\nCertification\nSystem Integration\nUser\nGroups\nEmail Template\nCustom SMTP\nFeature\nOrganization\nPlugins\nPlugins\nInstalled\n40\nExplore Marketplace\nInstall Plugin\nAll Categories\nAll Keywords\nSET\nDraft File Storage Providers\n0.0.1\nGLOBAL\nProvide plugin-backed file storage providers for MinIO, RustFS, S3, Wasabi and OSS\nXpertAI Team\n/\n@xpert-ai/plugin-draft\n# PLUGINS\n# FILE-STORAGE\n# MINIO\n# RUSTFS\n# S3\n# WASABI\n# OSS\nMIDDLEWARE\nBuilt-in Agent Middlewares\n0.0.1\nGLOBAL\nProvide Built-in Agent Middlewares for XpertAI Agents\nXpertAI Team\n/\n@xpert-ai/plugin-agent-middlewares\n# MIDDLEWARE\n# AGENT\nINTEGRATION\nSlack Integration\n1.0.0\nGLOBAL\nProvide Slack integration strategy and declarative view extensions\nXpertAI Team\n/\n@xpert-ai/plugin-integration-slack\n# INTEGRATION\n# SLACK\n# VIEW-EXTENSION\n# STRATEGY\nSET\nTrigger Schedule\n1.0.0\nGLOBAL\nProvide Trigger Schedule functionality\nXpertAI Team\n/\n@xpert-ai/plugin-trigger-schedule\n# TRIGGER\n# SCHEDULE\nTOOLS\nCommon Text Splitter\n1.0.0\nGLOBAL\nProvide Text Splitting common functionality\nXpertAI Team\n/\n@xpert-ai/plugin-textsplitter-common\n# TEXT\n# SPLITTER\nTOOLS\nCommon Retriever\n1.0.0\nGLOBAL\nProvide common retrieval functionality\nXpertAI Team\n/\n@xpert-ai/plugin-retriever-common\n# RETRIEVER\n# RAG\nTOOLS\nCommon Transformer\n1.0.0\nGLOBAL\nProvide common transformation functionality\nXpertAI Team\n/\n@xpert-ai/plugin-transformer-common\n# PDF\n# MARKDOWN\n# JSON\n# TRANSFORMER\nVLM\nVLM Default\n1.0.0\nGLOBAL\nProvide VLM functionality using default settings\nXpertAI Team\n/\n@xpert-ai/plugin-vlm-default\n# PDF\n# MARKDOWN\n# JSON\n# VLM\n# DEFAULT\nMODEL\nTongyi\n0.0.7\nGLOBAL\nProvide Tongyi (通义千问) AI Models powered by Alibaba Cloud DashScope\nXpertAI Team\n/\n@xpert-ai/plugin-tongyi\n# TONGYI\n# QWEN\n# DASHSCOPE\n# MODEL\n# LLM\nINTEGRATION\nDingTalk Plugin\n0.0.4\nGLOBAL\nBidirectional messaging integration with DingTalk platform\nXpertAI team\n/\n@xpert-ai/plugin",
+      "body_text_length": 8061,
+      "html_length": 472444,
+      "loading_indicator_count": 1,
+      "console_messages": [
+        {
+          "type": "log",
+          "text": "\n██╗  ██╗██████╗ ███████╗██████╗ ████████╗     █████╗ ██╗\n╚██╗██╔╝██╔══██╗██╔════╝██╔══██╗╚══██╔══╝    ██╔══██╗██║\n ╚███╔╝ ██████╔╝█████╗  ██████╔╝   ██║       ███████║██║\n ██╔██╗ ██╔═══╝ ██╔══╝  ██╔══██╗   ██║       ██╔══██║██║\n██╔╝ ██╗██║     ███████╗██║  ██║   ██║       ██║  ██║██║\n╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝       ╚═╝  ╚═╝╚═╝"
+        },
+        {
+          "type": "log",
+          "text": "VERSION: 3.10.1"
+        },
+        {
+          "type": "log",
+          "text": "We're hiring! https://xpertai.cn/jobs"
+        }
+      ],
+      "page_errors": [],
+      "failed_requests": [],
+      "response_errors": [],
+      "api_responses_seen": [
+        {
+          "url": "http://127.0.0.1:18080/api/user/me?data=%7B%22relations%22:%5B%22organizations%22,%22organizations.organization%22%5D,%22select%22:%7B%22id%22:true,%22email%22:true,%22username%22:true,%22firstName%22:true,%22lastName%22:true,%22mobile%22:true,%22imageUrl%22:true,%22timeZone%22:true,%22tenantId%22:true,%22preferredLanguage%22:true,%22role%22:%7B%22id%22:true,%22name%22:true,%22rolePermissions%22:%7B%22id%22:true,%22permission%22:true,%22enabled%22:true%7D%7D,%22tenant%22:%7B%22id%22:true,%22name%22:true%7D,%22employee%22:%7B%22id%22:true,%22userId%22:true,%22organizationId%22:true,%22isActive%22:true%7D,%22organizations%22:%7B%22id%22:true,%22userId%22:true,%22tenantId%22:true,%22organizationId%22:true,%22isDefault%22:true,%22isActive%22:true,%22organization%22:%7B%22id%22:true,%22name%22:true,%22imageUrl%22:true,%22isDefault%22:true,%22isActive%22:true,%22defaultValueDateType%22:true,%22allowManualTime%22:true,%22allowModifyTime%22:true,%22allowDeleteTime%22:true,%22futureDateAllowed%22:true%7D%7D%7D,%22currentOrganizationId%22:%2251709ee5-91c1-4abc-93ea-293d85cae4ae%22,%22limitOrganizations%22:true%7D",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/user/me?data=%7B%22relations%22:%5B%22tenant.featureOrganizations%22,%22tenant.featureOrganizations.feature%22,%22organizations.organization.featureOrganizations%22,%22organizations.organization.featureOrganizations.feature%22%5D%7D",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/plugin",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/employee/user/99804f49-704d-408d-ac00-09fea3636f4d?data=%7B%22relations%22:%5B%5D,%22findInput%22:%7B%22tenantId%22:%22304fb342-9156-479a-ab96-bb6cac9517c3%22%7D%7D",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18080/api/employee/user/99804f49-704d-408d-ac00-09fea3636f4d?data=%7B%22relations%22:%5B%5D,%22findInput%22:%7B%22tenantId%22:%22304fb342-9156-479a-ab96-bb6cac9517c3%22%7D%7D",
+          "status": 200
+        }
+      ]
+    }
+  ]
+}

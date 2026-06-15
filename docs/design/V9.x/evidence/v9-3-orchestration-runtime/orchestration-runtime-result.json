@@ -1,0 +1,973 @@
+{
+  "acceptance": {
+    "agent_executor_ready": false,
+    "allowed_claim": "V9-3 complete: multi-Agent orchestration runtime slice ready for review.",
+    "artifact_lineage": "PASS",
+    "attempt_history": "PASS",
+    "claim_scan": "PASS",
+    "controlled_executor_ready": false,
+    "distributed_multi_agent_runtime_ready": false,
+    "evidence_scope": "real_runtime_fixture",
+    "failure_recovery": "PASS",
+    "fallback_demo_only": false,
+    "full_multi_agent_orchestration_ready": false,
+    "lost_worker_recovery": "PASS",
+    "natural_language_optimization_diff_only": "PASS",
+    "production_controlled_executor_ready": false,
+    "redaction_scan": "PASS",
+    "remaining_blockers": [
+      "V9-4 autonomous coding workflow remains blocked until V9-3 evidence is externally accepted.",
+      "Video storyboard provider-backed image generation remains blocked in this local fixture."
+    ],
+    "report_only": false,
+    "roman_forum_debate_fixture": "PASS",
+    "runtime_backed": true,
+    "runtime_executor_route_created": false,
+    "runtime_worker_created": false,
+    "schema_version": "v9_3.runtime_acceptance.v1",
+    "serial_parallel_fan_in_fan_out": "PASS",
+    "source_agent_direct_mutation_denied": "PASS",
+    "source_agent_durable_mutation_allowed": false,
+    "stage_id": "V9-3",
+    "station_agent_binding": "PASS",
+    "status": "PASS",
+    "transcript_only": false,
+    "video_storyboard_fixture": "BLOCKED",
+    "video_storyboard_provider_boundary": "BLOCKED_PROVIDER_UNAVAILABLE"
+  },
+  "agent_descriptors": [
+    {
+      "agent_id": "agent-research",
+      "created_at": "2026-06-10T06:30:16Z",
+      "credential_decision_ref": "credential-decision://v9-3/agent-research/redacted",
+      "goal": "Collect source-grounded technical evidence.",
+      "mcp_refs": [
+        "mcp://v9-3/read-docs"
+      ],
+      "memory_refs": [
+        "memory-ref://v9-3/agent-research/station-scoped"
+      ],
+      "model_ref": "provider-model-ref://v9-3/research_agent/configured-provider",
+      "policy_ref": "policy://v9-3/agent-research/station-bound",
+      "role": "research_agent",
+      "schema_version": "v9_3.agent_descriptor.v1",
+      "skill_refs": [
+        "skill://v9-3/research-review"
+      ],
+      "tool_refs": [
+        "tool-ref://v9-3/evidence.read",
+        "tool-ref://v9-3/artifact.propose"
+      ]
+    },
+    {
+      "agent_id": "agent-implementation",
+      "created_at": "2026-06-10T06:30:16Z",
+      "credential_decision_ref": "credential-decision://v9-3/agent-implementation/redacted",
+      "goal": "Produce implementation proposal artifacts.",
+      "mcp_refs": [
+        "mcp://v9-3/evidence-readonly"
+      ],
+      "memory_refs": [
+        "memory-ref://v9-3/agent-implementation/station-scoped"
+      ],
+      "model_ref": "provider-model-ref://v9-3/implementation_agent/configured-provider",
+      "policy_ref": "policy://v9-3/agent-implementation/station-bound",
+      "role": "implementation_agent",
+      "schema_version": "v9_3.agent_descriptor.v1",
+      "skill_refs": [
+        "skill://v9-3/implementation-plan"
+      ],
+      "tool_refs": [
+        "tool-ref://v9-3/evidence.read",
+        "tool-ref://v9-3/artifact.propose"
+      ]
+    },
+    {
+      "agent_id": "agent-review",
+      "created_at": "2026-06-10T06:30:16Z",
+      "credential_decision_ref": "credential-decision://v9-3/agent-review/redacted",
+      "goal": "Review outputs and risk boundaries.",
+      "mcp_refs": [
+        "mcp://v9-3/evidence-readonly"
+      ],
+      "memory_refs": [
+        "memory-ref://v9-3/agent-review/station-scoped"
+      ],
+      "model_ref": "provider-model-ref://v9-3/review_agent/configured-provider",
+      "policy_ref": "policy://v9-3/agent-review/station-bound",
+      "role": "review_agent",
+      "schema_version": "v9_3.agent_descriptor.v1",
+      "skill_refs": [
+        "skill://v9-3/risk-review"
+      ],
+      "tool_refs": [
+        "tool-ref://v9-3/evidence.read",
+        "tool-ref://v9-3/artifact.propose"
+      ]
+    },
+    {
+      "agent_id": "agent-synthesis",
+      "created_at": "2026-06-10T06:30:16Z",
+      "credential_decision_ref": "credential-decision://v9-3/agent-synthesis/redacted",
+      "goal": "Join branch findings with attribution.",
+      "mcp_refs": [],
+      "memory_refs": [
+        "memory-ref://v9-3/agent-synthesis/station-scoped"
+      ],
+      "model_ref": "provider-model-ref://v9-3/synthesis_agent/configured-provider",
+      "policy_ref": "policy://v9-3/agent-synthesis/station-bound",
+      "role": "synthesis_agent",
+      "schema_version": "v9_3.agent_descriptor.v1",
+      "skill_refs": [
+        "skill://v9-3/attributed-synthesis"
+      ],
+      "tool_refs": [
+        "tool-ref://v9-3/evidence.read",
+        "tool-ref://v9-3/artifact.propose"
+      ]
+    }
+  ],
+  "artifact_lineage": [
+    {
+      "artifact_id": "artifact-v9-3-research-brief",
+      "audit_ref": "audit://v9-3/lineage/research",
+      "correlation_id": "corr-v9-3-90a558b392",
+      "created_at": "2026-06-10T06:30:16Z",
+      "input_artifact_refs": [],
+      "lineage_record_id": "lineage-v9-3-research",
+      "orchestration_run_id": "orch-v9-3-290585a635d8",
+      "output_artifact_ref": "artifact-ref://v9-3/research-brief",
+      "producer_agent_id": "agent-research",
+      "producer_attempt_id": "attempt-research-1",
+      "producer_station_id": "station-research",
+      "producer_station_run_id": "station-run-research",
+      "request_id": "req-v9-3-d5bda90a21",
+      "schema_version": "v9.0"
+    },
+    {
+      "artifact_id": "artifact-v9-3-implementation-proposal",
+      "audit_ref": "audit://v9-3/lineage/implementation",
+      "correlation_id": "corr-v9-3-90a558b392",
+      "created_at": "2026-06-10T06:30:16Z",
+      "input_artifact_refs": [
+        "artifact-ref://v9-3/research-brief"
+      ],
+      "lineage_record_id": "lineage-v9-3-implementation",
+      "orchestration_run_id": "orch-v9-3-290585a635d8",
+      "output_artifact_ref": "artifact-ref://v9-3/implementation-proposal",
+      "producer_agent_id": "agent-implementation",
+      "producer_attempt_id": "attempt-implementation-2",
+      "producer_station_id": "station-implementation",
+      "producer_station_run_id": "station-run-implementation-retry",
+      "request_id": "req-v9-3-d5bda90a21",
+      "schema_version": "v9.0"
+    },
+    {
+      "artifact_id": "artifact-v9-3-review-notes",
+      "audit_ref": "audit://v9-3/lineage/review",
+      "correlation_id": "corr-v9-3-90a558b392",
+      "created_at": "2026-06-10T06:30:16Z",
+      "input_artifact_refs": [
+        "artifact-ref://v9-3/research-brief"
+      ],
+      "lineage_record_id": "lineage-v9-3-review",
+      "orchestration_run_id": "orch-v9-3-290585a635d8",
+      "output_artifact_ref": "artifact-ref://v9-3/review-notes",
+      "producer_agent_id": "agent-review",
+      "producer_attempt_id": "attempt-review-1",
+      "producer_station_id": "station-review",
+      "producer_station_run_id": "station-run-review",
+      "request_id": "req-v9-3-d5bda90a21",
+      "schema_version": "v9.0"
+    },
+    {
+      "artifact_id": "artifact-v9-3-synthesis",
+      "audit_ref": "audit://v9-3/lineage/synthesis",
+      "correlation_id": "corr-v9-3-90a558b392",
+      "created_at": "2026-06-10T06:30:16Z",
+      "input_artifact_refs": [
+        "artifact-ref://v9-3/implementation-proposal",
+        "artifact-ref://v9-3/review-notes"
+      ],
+      "lineage_record_id": "lineage-v9-3-synthesis",
+      "orchestration_run_id": "orch-v9-3-290585a635d8",
+      "output_artifact_ref": "artifact-ref://v9-3/synthesis",
+      "producer_agent_id": "agent-synthesis",
+      "producer_attempt_id": "attempt-synthesis-1",
+      "producer_station_id": "station-synthesis",
+      "producer_station_run_id": "station-run-synthesis",
+      "request_id": "req-v9-3-d5bda90a21",
+      "schema_version": "v9.0"
+    }
+  ],
+  "attempt_history": [
+    {
+      "agent_id": "agent-research",
+      "attempt_id": "attempt-research-1",
+      "attempt_number": 1,
+      "checkpoint_ref": "checkpoint-ref://v9-3/research-1",
+      "created_at": "2026-06-10T06:30:16Z",
+      "error_ref": null,
+      "orchestration_run_id": "orch-v9-3-290585a635d8",
+      "previous_attempt_id": null,
+      "schema_version": "v9_3.attempt_history_record.v1",
+      "station_id": "station-research",
+      "station_run_id": "station-run-research",
+      "status": "succeeded"
+    },
+    {
+      "agent_id": "agent-implementation",
+      "attempt_id": "attempt-implementation-1",
+      "attempt_number": 1,
+      "checkpoint_ref": "checkpoint-ref://v9-3/implementation-1",
+      "created_at": "2026-06-10T06:30:16Z",
+      "error_ref": "error-ref://v9-3/worker-timeout",
+      "orchestration_run_id": "orch-v9-3-290585a635d8",
+      "previous_attempt_id": null,
+      "schema_version": "v9_3.attempt_history_record.v1",
+      "station_id": "station-implementation",
+      "station_run_id": "station-run-implementation",
+      "status": "failed"
+    },
+    {
+      "agent_id": "agent-implementation",
+      "attempt_id": "attempt-implementation-2",
+      "attempt_number": 2,
+      "checkpoint_ref": "checkpoint-ref://v9-3/implementation-2",
+      "created_at": "2026-06-10T06:30:16Z",
+      "error_ref": null,
+      "orchestration_run_id": "orch-v9-3-290585a635d8",
+      "previous_attempt_id": "attempt-implementation-1",
+      "schema_version": "v9_3.attempt_history_record.v1",
+      "station_id": "station-implementation",
+      "station_run_id": "station-run-implementation-retry",
+      "status": "recovered"
+    },
+    {
+      "agent_id": "agent-review",
+      "attempt_id": "attempt-review-1",
+      "attempt_number": 1,
+      "checkpoint_ref": "checkpoint-ref://v9-3/review-1",
+      "created_at": "2026-06-10T06:30:16Z",
+      "error_ref": null,
+      "orchestration_run_id": "orch-v9-3-290585a635d8",
+      "previous_attempt_id": null,
+      "schema_version": "v9_3.attempt_history_record.v1",
+      "station_id": "station-review",
+      "station_run_id": "station-run-review",
+      "status": "succeeded"
+    },
+    {
+      "agent_id": "agent-synthesis",
+      "attempt_id": "attempt-synthesis-1",
+      "attempt_number": 1,
+      "checkpoint_ref": "checkpoint-ref://v9-3/synthesis-1",
+      "created_at": "2026-06-10T06:30:16Z",
+      "error_ref": null,
+      "orchestration_run_id": "orch-v9-3-290585a635d8",
+      "previous_attempt_id": null,
+      "schema_version": "v9_3.attempt_history_record.v1",
+      "station_id": "station-synthesis",
+      "station_run_id": "station-run-synthesis",
+      "status": "succeeded"
+    }
+  ],
+  "branch_states": [
+    {
+      "attempt_id": "attempt-research-1",
+      "audit_ref": "audit://v9-3/branch/research",
+      "branch_id": "branch-serial-research",
+      "checkpoint_ref": "checkpoint-ref://v9-3/research-1",
+      "correlation_id": "corr-v9-3-90a558b392",
+      "created_at": "2026-06-10T06:30:16Z",
+      "downstream_branch_ids": [
+        "branch-parallel-implementation",
+        "branch-parallel-review"
+      ],
+      "orchestration_run_id": "orch-v9-3-290585a635d8",
+      "request_id": "req-v9-3-d5bda90a21",
+      "schema_version": "v9_3.branch_state.v1",
+      "state": "succeeded",
+      "station_id": "station-research",
+      "station_run_id": "station-run-research",
+      "upstream_branch_ids": []
+    },
+    {
+      "attempt_id": "attempt-implementation-2",
+      "audit_ref": "audit://v9-3/branch/implementation",
+      "branch_id": "branch-parallel-implementation",
+      "checkpoint_ref": "checkpoint-ref://v9-3/implementation-2",
+      "correlation_id": "corr-v9-3-90a558b392",
+      "created_at": "2026-06-10T06:30:16Z",
+      "downstream_branch_ids": [
+        "branch-fan-in"
+      ],
+      "orchestration_run_id": "orch-v9-3-290585a635d8",
+      "request_id": "req-v9-3-d5bda90a21",
+      "schema_version": "v9_3.branch_state.v1",
+      "state": "recovered",
+      "station_id": "station-implementation",
+      "station_run_id": "station-run-implementation-retry",
+      "upstream_branch_ids": [
+        "branch-serial-research"
+      ]
+    },
+    {
+      "attempt_id": "attempt-review-1",
+      "audit_ref": "audit://v9-3/branch/review",
+      "branch_id": "branch-parallel-review",
+      "checkpoint_ref": "checkpoint-ref://v9-3/review-1",
+      "correlation_id": "corr-v9-3-90a558b392",
+      "created_at": "2026-06-10T06:30:16Z",
+      "downstream_branch_ids": [
+        "branch-fan-in"
+      ],
+      "orchestration_run_id": "orch-v9-3-290585a635d8",
+      "request_id": "req-v9-3-d5bda90a21",
+      "schema_version": "v9_3.branch_state.v1",
+      "state": "succeeded",
+      "station_id": "station-review",
+      "station_run_id": "station-run-review",
+      "upstream_branch_ids": [
+        "branch-serial-research"
+      ]
+    },
+    {
+      "attempt_id": "attempt-synthesis-1",
+      "audit_ref": "audit://v9-3/branch/synthesis",
+      "branch_id": "branch-fan-in",
+      "checkpoint_ref": "checkpoint-ref://v9-3/synthesis-1",
+      "correlation_id": "corr-v9-3-90a558b392",
+      "created_at": "2026-06-10T06:30:16Z",
+      "downstream_branch_ids": [],
+      "orchestration_run_id": "orch-v9-3-290585a635d8",
+      "request_id": "req-v9-3-d5bda90a21",
+      "schema_version": "v9_3.branch_state.v1",
+      "state": "succeeded",
+      "station_id": "station-synthesis",
+      "station_run_id": "station-run-synthesis",
+      "upstream_branch_ids": [
+        "branch-parallel-implementation",
+        "branch-parallel-review"
+      ]
+    }
+  ],
+  "conflict_review_records": [
+    {
+      "audit_ref": "audit://v9-3/conflict-review/synthesis",
+      "conflict_review_id": "conflict-review-v9-3-synthesis",
+      "conflict_summary_ref": "conflict-summary-ref://v9-3/synthesis-compatible",
+      "created_at": "2026-06-10T06:30:16Z",
+      "human_review_required": false,
+      "input_artifact_refs": [
+        "artifact-ref://v9-3/implementation-proposal",
+        "artifact-ref://v9-3/review-notes"
+      ],
+      "orchestration_run_id": "orch-v9-3-290585a635d8",
+      "review_decision": "merge_with_attribution",
+      "schema_version": "v9_3.conflict_review_record.v1"
+    }
+  ],
+  "fan_in_join_decisions": [
+    {
+      "attribution_refs": [
+        "lineage-v9-3-implementation",
+        "lineage-v9-3-review"
+      ],
+      "audit_ref": "audit://v9-3/fan-in/synthesis",
+      "conflict_review_ref": "conflict-review://v9-3/synthesis",
+      "correlation_id": "corr-v9-3-90a558b392",
+      "created_at": "2026-06-10T06:30:16Z",
+      "decision": "ready_to_synthesize",
+      "input_artifact_refs": [
+        "artifact-ref://v9-3/implementation-proposal",
+        "artifact-ref://v9-3/review-notes"
+      ],
+      "input_branch_ids": [
+        "branch-parallel-implementation",
+        "branch-parallel-review"
+      ],
+      "join_decision_id": "join-v9-3-synthesis",
+      "missing_input_refs": [],
+      "orchestration_run_id": "orch-v9-3-290585a635d8",
+      "request_id": "req-v9-3-d5bda90a21",
+      "schema_version": "v9_3.fan_in_join_decision.v1",
+      "synthesis_artifact_ref": "artifact-ref://v9-3/synthesis",
+      "target_branch_id": "branch-fan-in"
+    }
+  ],
+  "fan_out_dispatches": [
+    {
+      "audit_ref": "audit://v9-3/fan-out/research",
+      "correlation_id": "corr-v9-3-90a558b392",
+      "created_at": "2026-06-10T06:30:16Z",
+      "dispatch_id": "dispatch-research-to-parallel",
+      "input_artifact_refs": [
+        "artifact-ref://v9-3/research-brief"
+      ],
+      "orchestration_run_id": "orch-v9-3-290585a635d8",
+      "policy_decision_ref": "policy-decision://v9-3/fan-out/research",
+      "request_id": "req-v9-3-d5bda90a21",
+      "schema_version": "v9_3.fan_out_dispatch.v1",
+      "source_branch_id": "branch-serial-research",
+      "target_branch_ids": [
+        "branch-parallel-implementation",
+        "branch-parallel-review"
+      ]
+    }
+  ],
+  "generated_at": "2026-06-10T06:30:16Z",
+  "goal": "V9-3 bounded multi-Agent orchestration runtime slice",
+  "lost_worker_recovery_decisions": [
+    {
+      "audit_ref": "audit://v9-3/recovery/implementation",
+      "correlation_id": "corr-v9-3-90a558b392",
+      "created_at": "2026-06-10T06:30:16Z",
+      "credential_decision_ref": "credential-decision://v9-3/recovery/implementation",
+      "decision": "recover",
+      "failed_attempt_id": "attempt-implementation-1",
+      "incident_timeline_ref": "incident-timeline://v9-3/implementation-worker-recovered",
+      "lost_worker_id": "worker-v9-3-implementation-old",
+      "old_attempt_retained": true,
+      "old_error_ref": "error-ref://v9-3/worker-timeout",
+      "orchestration_run_id": "orch-v9-3-290585a635d8",
+      "policy_decision_ref": "policy-decision://v9-3/recovery/implementation",
+      "previous_checkpoint_ref": "checkpoint-ref://v9-3/implementation-1",
+      "recovery_decision_id": "recovery-v9-3-implementation",
+      "replacement_attempt_id": "attempt-implementation-2",
+      "replacement_worker_id": "worker-v9-3-implementation-replacement",
+      "request_id": "req-v9-3-d5bda90a21",
+      "schema_version": "v9_3.lost_worker_recovery_decision.v1"
+    }
+  ],
+  "orchestration_messages": [
+    {
+      "artifact_refs": [
+        "artifact-ref://v9-3/research-brief"
+      ],
+      "attempt_id": "attempt-research-1",
+      "audit_ref": "audit://v9-3/message/msg-research-task",
+      "branch_id": "branch-serial-research",
+      "correlation_id": "corr-v9-3-90a558b392",
+      "created_at": "2026-06-10T06:30:16Z",
+      "message_id": "msg-research-task",
+      "message_kind": "task",
+      "orchestration_run_id": "orch-v9-3-290585a635d8",
+      "payload_refs": [
+        "payload-ref://v9-3/msg-research-task"
+      ],
+      "receiver_agent_id": "agent-research",
+      "request_id": "req-v9-3-d5bda90a21",
+      "schema_version": "v9.0",
+      "sender_agent_id": "agent-synthesis",
+      "station_id": "station-research",
+      "station_run_id": "station-run-research"
+    },
+    {
+      "artifact_refs": [
+        "artifact-ref://v9-3/research-brief"
+      ],
+      "attempt_id": "attempt-research-1",
+      "audit_ref": "audit://v9-3/message/msg-research-result",
+      "branch_id": "branch-serial-research",
+      "correlation_id": "corr-v9-3-90a558b392",
+      "created_at": "2026-06-10T06:30:16Z",
+      "message_id": "msg-research-result",
+      "message_kind": "result",
+      "orchestration_run_id": "orch-v9-3-290585a635d8",
+      "payload_refs": [
+        "payload-ref://v9-3/msg-research-result"
+      ],
+      "receiver_agent_id": "agent-implementation",
+      "request_id": "req-v9-3-d5bda90a21",
+      "schema_version": "v9.0",
+      "sender_agent_id": "agent-research",
+      "station_id": "station-research",
+      "station_run_id": "station-run-research"
+    },
+    {
+      "artifact_refs": [
+        "artifact-ref://v9-3/implementation-proposal"
+      ],
+      "attempt_id": "attempt-implementation-2",
+      "audit_ref": "audit://v9-3/message/msg-implementation-result",
+      "branch_id": "branch-parallel-implementation",
+      "correlation_id": "corr-v9-3-90a558b392",
+      "created_at": "2026-06-10T06:30:16Z",
+      "message_id": "msg-implementation-result",
+      "message_kind": "result",
+      "orchestration_run_id": "orch-v9-3-290585a635d8",
+      "payload_refs": [
+        "payload-ref://v9-3/msg-implementation-result"
+      ],
+      "receiver_agent_id": "agent-synthesis",
+      "request_id": "req-v9-3-d5bda90a21",
+      "schema_version": "v9.0",
+      "sender_agent_id": "agent-implementation",
+      "station_id": "station-implementation",
+      "station_run_id": "station-run-implementation-retry"
+    },
+    {
+      "artifact_refs": [
+        "artifact-ref://v9-3/review-notes"
+      ],
+      "attempt_id": "attempt-review-1",
+      "audit_ref": "audit://v9-3/message/msg-review-result",
+      "branch_id": "branch-parallel-review",
+      "correlation_id": "corr-v9-3-90a558b392",
+      "created_at": "2026-06-10T06:30:16Z",
+      "message_id": "msg-review-result",
+      "message_kind": "review",
+      "orchestration_run_id": "orch-v9-3-290585a635d8",
+      "payload_refs": [
+        "payload-ref://v9-3/msg-review-result"
+      ],
+      "receiver_agent_id": "agent-synthesis",
+      "request_id": "req-v9-3-d5bda90a21",
+      "schema_version": "v9.0",
+      "sender_agent_id": "agent-review",
+      "station_id": "station-review",
+      "station_run_id": "station-run-review"
+    },
+    {
+      "artifact_refs": [
+        "artifact-ref://v9-3/synthesis"
+      ],
+      "attempt_id": "attempt-synthesis-1",
+      "audit_ref": "audit://v9-3/message/msg-synthesis-result",
+      "branch_id": "branch-fan-in",
+      "correlation_id": "corr-v9-3-90a558b392",
+      "created_at": "2026-06-10T06:30:16Z",
+      "message_id": "msg-synthesis-result",
+      "message_kind": "synthesis",
+      "orchestration_run_id": "orch-v9-3-290585a635d8",
+      "payload_refs": [
+        "payload-ref://v9-3/msg-synthesis-result"
+      ],
+      "receiver_agent_id": "agent-review",
+      "request_id": "req-v9-3-d5bda90a21",
+      "schema_version": "v9.0",
+      "sender_agent_id": "agent-synthesis",
+      "station_id": "station-synthesis",
+      "station_run_id": "station-run-synthesis"
+    }
+  ],
+  "orchestration_run": {
+    "agent_ids": [
+      "agent-research",
+      "agent-implementation",
+      "agent-review",
+      "agent-synthesis"
+    ],
+    "audit_ref": "audit://v9-3/run/orch-v9-3-290585a635d8",
+    "branch_ids": [
+      "branch-serial-research",
+      "branch-parallel-implementation",
+      "branch-parallel-review",
+      "branch-fan-in"
+    ],
+    "correlation_id": "corr-v9-3-90a558b392",
+    "created_at": "2026-06-10T06:30:16Z",
+    "evidence_scope": "real_runtime_fixture",
+    "orchestration_run_id": "orch-v9-3-290585a635d8",
+    "request_id": "req-v9-3-d5bda90a21",
+    "runtime_backed": true,
+    "schema_version": "v9_3.orchestration_run.v1",
+    "station_ids": [
+      "station-research",
+      "station-implementation",
+      "station-review",
+      "station-synthesis"
+    ],
+    "status": "succeeded",
+    "workflow_instance_id": "workflow-v9-3-9c26815f5172"
+  },
+  "roman_forum_discussion": {
+    "acceptance_checks": {
+      "at_least_two_discussion_turns": "PASS",
+      "attribution_preserving_synthesis": "PASS",
+      "message_refs_between_agents": "PASS",
+      "role_specific_agents_visible": "PASS",
+      "source_agent_direct_mutation_denied": "PASS"
+    },
+    "discussion_messages": [
+      {
+        "argument_summary": "技术进步本身不必然削弱自由；真正的风险是人把判断权交给不可审计的系统。",
+        "artifact_ref": "artifact-ref://v9-3/roman-forum/philosopher-opening",
+        "attempt_id": "attempt-roman-philosopher-1",
+        "audit_ref": "audit://v9-3/roman-forum/roman-msg-01-philosopher-opening",
+        "correlation_id": "corr-v9-3-90a558b392",
+        "created_at": "2026-06-10T06:30:16Z",
+        "message_id": "roman-msg-01-philosopher-opening",
+        "message_kind": "argument",
+        "orchestration_run_id": "orch-v9-3-290585a635d8",
+        "receiver_agent_id": "moderator_agent",
+        "references": [],
+        "request_id": "req-v9-3-d5bda90a21",
+        "sender_agent_id": "philosopher_agent",
+        "turn": 1
+      },
+      {
+        "argument_summary": "工具会扩大行动范围，但如果没有权限、日志和人工确认，系统便利会变成事实上的路径锁定。",
+        "artifact_ref": "artifact-ref://v9-3/roman-forum/engineer-response",
+        "attempt_id": "attempt-roman-engineer-1",
+        "audit_ref": "audit://v9-3/roman-forum/roman-msg-02-engineer-response",
+        "correlation_id": "corr-v9-3-90a558b392",
+        "created_at": "2026-06-10T06:30:16Z",
+        "message_id": "roman-msg-02-engineer-response",
+        "message_kind": "counterpoint",
+        "orchestration_run_id": "orch-v9-3-290585a635d8",
+        "receiver_agent_id": "philosopher_agent",
+        "references": [
+          "roman-msg-01-philosopher-opening"
+        ],
+        "request_id": "req-v9-3-d5bda90a21",
+        "sender_agent_id": "engineer_agent",
+        "turn": 1
+      },
+      {
+        "argument_summary": "历史上新工具常同时扩展表达和制造新依赖；关键差异在于制度是否提供可迁移性和纠错渠道。",
+        "artifact_ref": "artifact-ref://v9-3/roman-forum/historian-context",
+        "attempt_id": "attempt-roman-historian-1",
+        "audit_ref": "audit://v9-3/roman-forum/roman-msg-03-historian-context",
+        "correlation_id": "corr-v9-3-90a558b392",
+        "created_at": "2026-06-10T06:30:16Z",
+        "message_id": "roman-msg-03-historian-context",
+        "message_kind": "historical_context",
+        "orchestration_run_id": "orch-v9-3-290585a635d8",
+        "receiver_agent_id": "moderator_agent",
+        "references": [
+          "roman-msg-02-engineer-response"
+        ],
+        "request_id": "req-v9-3-d5bda90a21",
+        "sender_agent_id": "historian_agent",
+        "turn": 2
+      },
+      {
+        "argument_summary": "如果用户不能理解、拒绝或撤销自动化建议，所谓增强能力会转化为责任不对等。",
+        "artifact_ref": "artifact-ref://v9-3/roman-forum/ethicist-challenge",
+        "attempt_id": "attempt-roman-ethicist-1",
+        "audit_ref": "audit://v9-3/roman-forum/roman-msg-04-ethicist-challenge",
+        "correlation_id": "corr-v9-3-90a558b392",
+        "created_at": "2026-06-10T06:30:16Z",
+        "message_id": "roman-msg-04-ethicist-challenge",
+        "message_kind": "challenge",
+        "orchestration_run_id": "orch-v9-3-290585a635d8",
+        "receiver_agent_id": "engineer_agent",
+        "references": [
+          "roman-msg-01-philosopher-opening",
+          "roman-msg-02-engineer-response"
+        ],
+        "request_id": "req-v9-3-d5bda90a21",
+        "sender_agent_id": "ethicist_agent",
+        "turn": 2
+      },
+      {
+        "argument_summary": "共识：技术扩展自由必须以可解释、可拒绝、可审计为条件。分歧：技术依赖是自由的新形式还是自由的折损。",
+        "artifact_ref": "artifact-ref://v9-3/roman-forum/attributed-synthesis",
+        "attempt_id": "attempt-roman-moderator-1",
+        "audit_ref": "audit://v9-3/roman-forum/roman-msg-05-moderator-synthesis",
+        "correlation_id": "corr-v9-3-90a558b392",
+        "created_at": "2026-06-10T06:30:16Z",
+        "message_id": "roman-msg-05-moderator-synthesis",
+        "message_kind": "synthesis",
+        "orchestration_run_id": "orch-v9-3-290585a635d8",
+        "receiver_agent_id": "all_agents",
+        "references": [
+          "roman-msg-01-philosopher-opening",
+          "roman-msg-02-engineer-response",
+          "roman-msg-03-historian-context",
+          "roman-msg-04-ethicist-challenge"
+        ],
+        "request_id": "req-v9-3-d5bda90a21",
+        "sender_agent_id": "moderator_agent",
+        "turn": 3
+      }
+    ],
+    "evidence_chain_ref": "evidence-chain://v9-3/roman-forum",
+    "evidence_scope": "real_runtime_fixture",
+    "message_graph_edges": [
+      {
+        "from": "roman-msg-01-philosopher-opening",
+        "relationship": "counterpoint",
+        "to": "roman-msg-02-engineer-response"
+      },
+      {
+        "from": "roman-msg-02-engineer-response",
+        "relationship": "historical_context",
+        "to": "roman-msg-03-historian-context"
+      },
+      {
+        "from": "roman-msg-01-philosopher-opening",
+        "relationship": "ethical_challenge",
+        "to": "roman-msg-04-ethicist-challenge"
+      },
+      {
+        "from": "roman-msg-02-engineer-response",
+        "relationship": "ethical_challenge",
+        "to": "roman-msg-04-ethicist-challenge"
+      },
+      {
+        "from": "roman-msg-01-philosopher-opening",
+        "relationship": "synthesis_input",
+        "to": "roman-msg-05-moderator-synthesis"
+      },
+      {
+        "from": "roman-msg-02-engineer-response",
+        "relationship": "synthesis_input",
+        "to": "roman-msg-05-moderator-synthesis"
+      },
+      {
+        "from": "roman-msg-03-historian-context",
+        "relationship": "synthesis_input",
+        "to": "roman-msg-05-moderator-synthesis"
+      },
+      {
+        "from": "roman-msg-04-ethicist-challenge",
+        "relationship": "synthesis_input",
+        "to": "roman-msg-05-moderator-synthesis"
+      }
+    ],
+    "orchestration_run_id": "orch-v9-3-290585a635d8",
+    "role_agents": [
+      {
+        "agent_id": "philosopher_agent",
+        "attempt_id": "attempt-roman-philosopher-1",
+        "goal": "界定自由、欲望和技术依赖之间的张力。",
+        "identity": "斯多葛主义与自由意志视角",
+        "mcp_refs": [
+          "mcp://v9-3/evidence-readonly"
+        ],
+        "memory_refs": [
+          "memory-ref://v9-3/roman-forum/philosopher"
+        ],
+        "role": "哲学家 Agent",
+        "skill_refs": [
+          "skill://v9-3/philosophical-argument"
+        ],
+        "station_id": "station-roman-philosopher"
+      },
+      {
+        "agent_id": "engineer_agent",
+        "attempt_id": "attempt-roman-engineer-1",
+        "goal": "说明技术如何扩展行动空间，同时指出系统依赖风险。",
+        "identity": "系统工程与工具增强视角",
+        "mcp_refs": [
+          "mcp://v9-3/evidence-readonly"
+        ],
+        "memory_refs": [
+          "memory-ref://v9-3/roman-forum/engineer"
+        ],
+        "role": "工程师 Agent",
+        "skill_refs": [
+          "skill://v9-3/system-tradeoff-analysis"
+        ],
+        "station_id": "station-roman-engineer"
+      },
+      {
+        "agent_id": "historian_agent",
+        "attempt_id": "attempt-roman-historian-1",
+        "goal": "用印刷术、工业化和互联网的历史类比约束讨论。",
+        "identity": "历史类比与制度演化视角",
+        "mcp_refs": [
+          "mcp://v9-3/evidence-readonly"
+        ],
+        "memory_refs": [
+          "memory-ref://v9-3/roman-forum/historian"
+        ],
+        "role": "历史学家 Agent",
+        "skill_refs": [
+          "skill://v9-3/historical-comparison"
+        ],
+        "station_id": "station-roman-historian"
+      },
+      {
+        "agent_id": "ethicist_agent",
+        "attempt_id": "attempt-roman-ethicist-1",
+        "goal": "审查自动化是否削弱人的责任、选择和退出权。",
+        "identity": "责任、选择架构与权力边界视角",
+        "mcp_refs": [
+          "mcp://v9-3/evidence-readonly"
+        ],
+        "memory_refs": [
+          "memory-ref://v9-3/roman-forum/ethicist"
+        ],
+        "role": "伦理学家 Agent",
+        "skill_refs": [
+          "skill://v9-3/ethics-risk-review"
+        ],
+        "station_id": "station-roman-ethicist"
+      },
+      {
+        "agent_id": "moderator_agent",
+        "attempt_id": "attempt-roman-moderator-1",
+        "goal": "组织多轮讨论，保留 attribution_refs，并输出综合结论。",
+        "identity": "归纳共识、分歧和可审计引用",
+        "mcp_refs": [],
+        "memory_refs": [
+          "memory-ref://v9-3/roman-forum/moderator"
+        ],
+        "role": "主持与综合 Agent",
+        "skill_refs": [
+          "skill://v9-3/attributed-synthesis"
+        ],
+        "station_id": "station-roman-moderator"
+      }
+    ],
+    "runtime_backed": true,
+    "scenario_id": "US-V9-07",
+    "schema_version": "v9_3.roman_forum_discussion.v1",
+    "status": "PASS",
+    "synthesis": {
+      "artifact_ref": "artifact-ref://v9-3/roman-forum/attributed-synthesis",
+      "attribution_refs": [
+        "roman-msg-01-philosopher-opening",
+        "roman-msg-02-engineer-response",
+        "roman-msg-03-historian-context",
+        "roman-msg-04-ethicist-challenge"
+      ],
+      "producer_agent_id": "moderator_agent",
+      "producer_attempt_id": "attempt-roman-moderator-1"
+    },
+    "user_goal": "罗马广场：让哲学家、工程师、历史学家、伦理学家讨论“技术进步是否会削弱人的自由”，互相质询并总结共识和分歧。"
+  },
+  "source_agent_direct_mutation_check": {
+    "audit_ref": "audit://v9-3/source-agent-denial/431ab7a3df00",
+    "operation": "station.rerun",
+    "reason": "source_agent_direct_mutation_denied",
+    "runtime_truth_mutated": false,
+    "source": "agent",
+    "status": "DENIED"
+  },
+  "stage_id": "V9-3",
+  "station_agent_bindings": [
+    {
+      "agent_id": "agent-research",
+      "audit_ref": "audit://v9-3/binding/agent-research",
+      "binding_id": "binding-v9-3-agent-research",
+      "correlation_id": "corr-v9-3-90a558b392",
+      "created_at": "2026-06-10T06:30:16Z",
+      "credential_decision_ref": "credential-decision://v9-3/agent-research/redacted",
+      "orchestration_run_id": "orch-v9-3-290585a635d8",
+      "policy_ref": "policy://v9-3/agent-research/station-bound",
+      "request_id": "req-v9-3-d5bda90a21",
+      "schema_version": "v9_3.station_agent_binding.v1",
+      "station_id": "station-research"
+    },
+    {
+      "agent_id": "agent-implementation",
+      "audit_ref": "audit://v9-3/binding/agent-implementation",
+      "binding_id": "binding-v9-3-agent-implementation",
+      "correlation_id": "corr-v9-3-90a558b392",
+      "created_at": "2026-06-10T06:30:16Z",
+      "credential_decision_ref": "credential-decision://v9-3/agent-implementation/redacted",
+      "orchestration_run_id": "orch-v9-3-290585a635d8",
+      "policy_ref": "policy://v9-3/agent-implementation/station-bound",
+      "request_id": "req-v9-3-d5bda90a21",
+      "schema_version": "v9_3.station_agent_binding.v1",
+      "station_id": "station-implementation"
+    },
+    {
+      "agent_id": "agent-review",
+      "audit_ref": "audit://v9-3/binding/agent-review",
+      "binding_id": "binding-v9-3-agent-review",
+      "correlation_id": "corr-v9-3-90a558b392",
+      "created_at": "2026-06-10T06:30:16Z",
+      "credential_decision_ref": "credential-decision://v9-3/agent-review/redacted",
+      "orchestration_run_id": "orch-v9-3-290585a635d8",
+      "policy_ref": "policy://v9-3/agent-review/station-bound",
+      "request_id": "req-v9-3-d5bda90a21",
+      "schema_version": "v9_3.station_agent_binding.v1",
+      "station_id": "station-review"
+    },
+    {
+      "agent_id": "agent-synthesis",
+      "audit_ref": "audit://v9-3/binding/agent-synthesis",
+      "binding_id": "binding-v9-3-agent-synthesis",
+      "correlation_id": "corr-v9-3-90a558b392",
+      "created_at": "2026-06-10T06:30:16Z",
+      "credential_decision_ref": "credential-decision://v9-3/agent-synthesis/redacted",
+      "orchestration_run_id": "orch-v9-3-290585a635d8",
+      "policy_ref": "policy://v9-3/agent-synthesis/station-bound",
+      "request_id": "req-v9-3-d5bda90a21",
+      "schema_version": "v9_3.station_agent_binding.v1",
+      "station_id": "station-synthesis"
+    }
+  ],
+  "user_scenarios": [
+    {
+      "acceptance_checks": {
+        "at_least_two_discussion_turns": "PASS",
+        "attribution_preserving_synthesis": "PASS",
+        "message_refs_between_agents": "PASS",
+        "role_specific_agents_visible": "PASS",
+        "source_agent_direct_mutation_denied": "PASS"
+      },
+      "attribution_refs": [
+        "roman-msg-01-philosopher-opening",
+        "roman-msg-02-engineer-response",
+        "roman-msg-03-historian-context",
+        "roman-msg-04-ethicist-challenge"
+      ],
+      "discussion_turn_count": 5,
+      "evidence_chain_ref": "evidence-chain://v9-3/roman-forum",
+      "evidence_scope": "real_runtime_fixture",
+      "message_graph_ref": "roman-forum-discussion.json",
+      "message_refs": [
+        "roman-msg-01-philosopher-opening",
+        "roman-msg-02-engineer-response",
+        "roman-msg-03-historian-context",
+        "roman-msg-04-ethicist-challenge",
+        "roman-msg-05-moderator-synthesis"
+      ],
+      "orchestration_run_id": "orch-v9-3-290585a635d8",
+      "role_specific_agents": [
+        "philosopher_agent",
+        "engineer_agent",
+        "historian_agent",
+        "ethicist_agent",
+        "moderator_agent"
+      ],
+      "runtime_backed": true,
+      "scenario_id": "US-V9-07",
+      "status": "PASS",
+      "synthesis_ref": "artifact-ref://v9-3/roman-forum/attributed-synthesis"
+    },
+    {
+      "blocked_reason": "provider_image_generation_not_available_in_local_fixture",
+      "creative_brief_ref": "artifact-ref://v9-3/video/creative-brief",
+      "evidence_scope": "blocked_provider_unavailable",
+      "provider_invocation_ref": null,
+      "provider_model_ref": null,
+      "runtime_backed": false,
+      "scenario_id": "US-V9-08",
+      "script_ref": "artifact-ref://v9-3/video/script",
+      "shot_list_ref": "artifact-ref://v9-3/video/shot-list",
+      "status": "BLOCKED",
+      "storyboard_image_artifact_refs": [],
+      "storyboard_prompt_refs": [
+        "artifact-ref://v9-3/video/storyboard-prompt-1",
+        "artifact-ref://v9-3/video/storyboard-prompt-2",
+        "artifact-ref://v9-3/video/storyboard-prompt-3",
+        "artifact-ref://v9-3/video/storyboard-prompt-4"
+      ],
+      "visual_consistency_report_ref": "artifact-ref://v9-3/video/visual-consistency-report"
+    },
+    {
+      "evidence_scope": "real_runtime_fixture",
+      "lineage_refs": [
+        "lineage-v9-3-research",
+        "lineage-v9-3-implementation",
+        "lineage-v9-3-review",
+        "lineage-v9-3-synthesis"
+      ],
+      "mutation_applied_before_confirmation": false,
+      "runtime_backed": true,
+      "scenario_id": "US-V9-09",
+      "source_agent_direct_mutation_denied": true,
+      "status": "PASS",
+      "user_confirmation_required": true,
+      "workflow_diff_ref": "workflow-diff://v9-3/optimization/video-workflow"
+    }
+  ]
+}

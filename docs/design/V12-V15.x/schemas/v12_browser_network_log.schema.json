@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://harnessos.local/schemas/v12_browser_network_log.schema.json",
+  "title": "V12BrowserNetworkLog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "test_run_id", "page_url", "requests", "forbidden_route_scan", "created_at"],
+  "properties": {
+    "schema_version": { "const": "v12.browser_network_log.v1" },
+    "test_run_id": { "type": "string", "minLength": 1 },
+    "page_url": { "type": "string", "minLength": 1 },
+    "requests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["method", "url", "allowed"],
+        "properties": {
+          "method": { "type": "string", "minLength": 1 },
+          "url": { "type": "string", "minLength": 1 },
+          "allowed": { "type": "boolean" }
+        }
+      }
+    },
+    "forbidden_route_scan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "forbidden_matches"],
+      "properties": {
+        "status": { "enum": ["PASS", "FAIL"] },
+        "forbidden_matches": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "created_at": { "type": "string", "format": "date-time" }
+  }
+}

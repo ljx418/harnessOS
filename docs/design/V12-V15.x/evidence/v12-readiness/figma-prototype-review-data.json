@@ -1,0 +1,51 @@
+{
+  "stage_id": "V12-0P",
+  "artifact_type": "figma_prototype_review",
+  "status": "PASS_FOR_V12_IMPLEMENTATION_READINESS_REVIEW",
+  "figma_file_url": "https://www.figma.com/design/OU9PQsSpHwUsv1kiI7r8OP/HarnessOS?node-id=0-1&p=f&t=D8tMCCRGBy4BnLmJ-0",
+  "figma_file_key": "OU9PQsSpHwUsv1kiI7r8OP",
+  "figma_page_name": "V12 Prototype Review",
+  "prototype_screens": [
+    {
+      "node_id": "5:2",
+      "name": "01 Product Shell / Onboarding"
+    },
+    {
+      "node_id": "5:40",
+      "name": "02 Browser Workbench Canvas / Read-only Foundation"
+    },
+    {
+      "node_id": "5:770",
+      "name": "03 Selected Node Inspector / Detail State"
+    },
+    {
+      "node_id": "5:803",
+      "name": "04 Chat Workbench / Proposal Timeline"
+    },
+    {
+      "node_id": "5:825",
+      "name": "05 Evidence And Quality Drawer / Supporting Review"
+    }
+  ],
+  "editable_layers": true,
+  "supports_ux_review_only": true,
+  "runtime_backed": false,
+  "browser_implementation_backed": false,
+  "xpert_reference_used_as_runtime_evidence": false,
+  "v12_read_only_canvas_boundary_visible": true,
+  "forbidden_positive_claims": {
+    "xpert_parity_complete": false,
+    "complete_workflow_studio_ready": false,
+    "production_ready": false,
+    "agent_executor_ready": false
+  },
+  "required_next_evidence": [
+    "real_harnessos_browser_screenshot",
+    "bff_route_log",
+    "dto_snapshot",
+    "browser_denylist_evidence",
+    "redaction_scan",
+    "no_false_green_scan"
+  ],
+  "created_at": "2026-06-12"
+}

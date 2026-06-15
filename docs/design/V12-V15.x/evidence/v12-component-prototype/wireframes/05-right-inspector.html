@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>V12-0A Right Inspector Wireframe</title>
+    <style>
+      body {
+        margin: 0;
+        background: #f8fafc;
+        font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif;
+        color: #172033;
+      }
+      .inspector {
+        margin: 24px auto;
+        width: 380px;
+        border: 1px solid #d8dee8;
+        border-radius: 16px;
+        background: white;
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.1);
+        overflow: hidden;
+      }
+      .header {
+        padding: 16px;
+        border-bottom: 1px solid #e5e7eb;
+      }
+      .header h1 {
+        margin: 0 0 6px;
+        font-size: 18px;
+      }
+      .header p {
+        margin: 0;
+        color: #667085;
+        font-size: 13px;
+      }
+      .tabs {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border-bottom: 1px solid #e5e7eb;
+      }
+      .tab {
+        padding: 11px 0;
+        text-align: center;
+        font-size: 13px;
+        color: #667085;
+      }
+      .tab.active {
+        color: #2563eb;
+        font-weight: 700;
+        box-shadow: inset 0 -2px #2563eb;
+      }
+      .section {
+        padding: 15px 16px;
+        border-bottom: 1px solid #f1f5f9;
+      }
+      .row {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        margin: 10px 0;
+        font-size: 13px;
+      }
+      .muted {
+        color: #667085;
+      }
+      .warning {
+        margin-top: 12px;
+        padding: 11px;
+        border: 1px dashed #f59e0b;
+        border-radius: 10px;
+        background: #fffbeb;
+        color: #92400e;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      .evidence {
+        color: #1d4ed8;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <aside class="inspector" aria-label="右侧检查器组件草图">
+      <header class="header">
+        <h1>分镜 Agent</h1>
+        <p>station-storyboard · selected · read-only projection</p>
+      </header>
+      <nav class="tabs">
+        <div class="tab active">概览</div>
+        <div class="tab">策略</div>
+        <div class="tab">质量</div>
+        <div class="tab">证据</div>
+      </nav>
+      <section class="section">
+        <div class="row"><span class="muted">角色</span><span>Storyboard Agent</span></div>
+        <div class="row"><span class="muted">目标</span><span>统一画风分镜</span></div>
+        <div class="row"><span class="muted">记忆摘要</span><span>角色/画风约束已载入</span></div>
+        <div class="row"><span class="muted">模型</span><span>redacted provider ref</span></div>
+      </section>
+      <section class="section">
+        <div class="row"><span class="muted">工具</span><span>storyboard.plan</span></div>
+        <div class="row"><span class="muted">MCP</span><span>provider:minimax-image</span></div>
+        <div class="warning">发布/运行不可用：当前 V12 检查器只展示投影和证据，不构造 runtime truth。</div>
+      </section>
+      <section class="section">
+        <div class="row"><span class="muted">证据</span><span class="evidence">storyboard-provider-evidence.json</span></div>
+        <div class="row"><span class="muted">质量</span><span>style consistency: pending review</span></div>
+      </section>
+    </aside>
+  </body>
+</html>

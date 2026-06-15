@@ -1,0 +1,163 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.6 Chrome/144.0.7559.236 Electron/40.8.4 Safari/537.36" version="29.6.6">
+  <diagram id="v4-0-current-gap-analysis" name="V4.0 Current Gap Analysis">
+    <mxGraphModel dx="2340" dy="1277" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="3000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=28;fontStyle=1" value="harnessOS V4.0 Current Gap Analysis: Workflow Console Platform" vertex="1">
+          <mxGeometry height="50" width="1640" x="280" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#94A3B8;fontSize=15;align=center;fontStyle=1" value="当前状态：V4.0-Z complete｜基线：Final Audit / Release Gate｜绿色=已完成，黄色=剩余缺口，红色=禁止路径" vertex="1">
+          <mxGeometry height="58" width="1620" x="290" y="85" as="geometry" />
+        </mxCell>
+        <mxCell id="section_arch" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2FE;strokeColor=#0284C7;fontSize=20;fontStyle=1;align=center" value="七平面目标架构：V4.0 产品 UI 消费 V3.6 后端事实源" vertex="1">
+          <mxGeometry height="52" width="2060" x="70" y="175" as="geometry" />
+        </mxCell>
+        <mxCell id="p0" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=13;fontStyle=1;align=center" value="Plane-0&lt;br&gt;V4.0 Product UI&lt;br&gt;&lt;br&gt;Workflow Studio Shell&lt;br&gt;Stitch 浅色高保真 + ComfyUI-like 底层画布&lt;br&gt;节点库 / Stateful Agent 助手 / Patch Diff&lt;br&gt;Station / Quality / Context Panels" vertex="1">
+          <mxGeometry height="150" width="250" x="70" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="p1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=13;align=center" value="Plane-1&lt;br&gt;V3.5 Application Adaptation Layer&lt;br&gt;&lt;br&gt;SDK / BFF / hooks / EventBridge&lt;br&gt;Embed / templates / capability token&lt;br&gt;已冻结为接入层基线" vertex="1">
+          <mxGeometry height="160" width="300" x="370" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="p2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#7C3AED;fontSize=13;align=center" value="Plane-2&lt;br&gt;V3.6 Workflow Runtime Layer&lt;br&gt;&lt;br&gt;Template / Version / Instance&lt;br&gt;Station / StationRun / Board&lt;br&gt;Patch / Quality / Context&lt;br&gt;V4.0 必须消费该层" vertex="1">
+          <mxGeometry height="180" width="310" x="720" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="p3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=13;align=center" value="Plane-3&lt;br&gt;Harness Core&lt;br&gt;&lt;br&gt;Session / Turn / Job / Artifact&lt;br&gt;Approval / Trace / Policy / Scope&lt;br&gt;V4.0 不直接读 Core Store" vertex="1">
+          <mxGeometry height="150" width="270" x="1080" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="p4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=13;align=center" value="Plane-4&lt;br&gt;Runtime Adapter &amp; Governance&lt;br&gt;&lt;br&gt;执行边界 / policy / approval&lt;br&gt;secret hygiene / trace&lt;br&gt;V4.0 不新增绕过入口" vertex="1">
+          <mxGeometry height="150" width="260" x="1400" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="p5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#22C55E;fontSize=13;align=center" value="Plane-5&lt;br&gt;Domain Pack / Descriptor&lt;br&gt;&lt;br&gt;workflow / agent / skill descriptors&lt;br&gt;quality descriptors / policy bundles&lt;br&gt;V4.0 不以业务 pack 出门" vertex="1">
+          <mxGeometry height="130" width="230" x="1700" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="p6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#22C55E;fontSize=13;align=center" value="Plane-6&lt;br&gt;Connector / Tool / Store / Asset&lt;br&gt;&lt;br&gt;MCP / stdio / HTTP connectors&lt;br&gt;model APIs / media engines / storage&lt;br&gt;V4.0-E 不依赖外部 MCP 出门" vertex="1">
+          <mxGeometry height="140" width="230" x="1700" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="governance" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1F5F9;strokeColor=#64748B;fontSize=13;align=center" value="治理链路贯穿：Product UI -&gt; BFF / SDK / hooks -&gt; V3.6 runtime RPC -&gt; Core Job / Artifact / Approval / Trace&lt;br&gt;Workflow Console 不得绕过 V3.5 auth、EventBridge、Core governance 或 RuntimeAdapter 边界" vertex="1">
+          <mxGeometry height="82" width="1040" x="520" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="e01" edge="1" parent="1" source="p0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#475569;endArrow=block;endFill=1" target="p1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="p1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#475569;endArrow=block;endFill=1" target="p2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e23" edge="1" parent="1" source="p2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#475569;endArrow=block;endFill=1" target="p3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e34" edge="1" parent="1" source="p3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#475569;endArrow=block;endFill=1" target="p4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e45" edge="1" parent="1" source="p4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#475569;endArrow=block;endFill=1" target="p5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e46" edge="1" parent="1" source="p4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#475569;endArrow=block;endFill=1" target="p6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="section_migration" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2FE;strokeColor=#0284C7;fontSize=20;fontStyle=1;align=center" value="架构迁移差异：V3.5 接入层 -&gt; V3.6 运行时层 -&gt; V4.0 产品 UI" vertex="1">
+          <mxGeometry height="52" width="2060" x="70" y="625" as="geometry" />
+        </mxCell>
+        <mxCell id="mig_v35" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B82F6;align=left;spacingLeft=16;fontSize=14" value="V3.5 已完成：Application Adaptation Layer&lt;br&gt;&lt;br&gt;• 解决“外部 App 如何接入 harnessOS”&lt;br&gt;• 交付 SDK / BFF / hooks / EventBridge&lt;br&gt;• 交付 capability token / scope guard&lt;br&gt;• 交付 embed contract / templates / reference app&lt;br&gt;• 边界：dev/local complete，不是 production-ready external app support" vertex="1">
+          <mxGeometry height="210" width="590" x="100" y="715" as="geometry" />
+        </mxCell>
+        <mxCell id="mig_v36" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F3FF;strokeColor=#7C3AED;align=left;spacingLeft=16;fontSize=14;fontStyle=1" value="V3.6 已完成：Workflow Runtime Layer&lt;br&gt;&lt;br&gt;• 解决“接入后如何运行流水线”&lt;br&gt;• 新增 Template / Version / Instance / Station / StationRun&lt;br&gt;• 绑定 Job / Artifact / Approval / Trace&lt;br&gt;• 新增 QualityEvaluation / Board API / Business Context / Patch&lt;br&gt;• 出门：Dummy Pipeline E2E 通过" vertex="1">
+          <mxGeometry height="210" width="590" x="805" y="715" as="geometry" />
+        </mxCell>
+        <mxCell id="mig_v40" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#059669;align=left;spacingLeft=16;fontSize=14" value="V4.0 后续正式开发：Workflow Studio / AgentTalkWindow&lt;br&gt;&lt;br&gt;• 消费 V3.6 Board API 和 EventBridge&lt;br&gt;• 使用 WorkflowPatch 做 Agent 编辑&lt;br&gt;• 使用 QualityEvaluation 做质量面板&lt;br&gt;• 使用 workflow context 承接业务事件&lt;br&gt;• V3.6-J 后可正式开发，但不得固化 mock schema" vertex="1">
+          <mxGeometry height="210" width="590" x="1510" y="715" as="geometry" />
+        </mxCell>
+        <mxCell id="em1" edge="1" parent="1" source="mig_v35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#0284C7;endArrow=block;endFill=1" target="mig_v36">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="em2" edge="1" parent="1" source="mig_v36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#7C3AED;endArrow=block;endFill=1" target="mig_v40">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="section_gap" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF2FF;strokeColor=#4F46E5;fontSize=20;fontStyle=1;align=center" value="当前状态 -&gt; 剩余核心差距 -&gt; V4.0 final audit gate" vertex="1">
+          <mxGeometry height="52" width="2060" x="70" y="1010" as="geometry" />
+        </mxCell>
+        <mxCell id="current" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B82F6;align=left;spacingLeft=18;fontSize=15" value="当前已完成&lt;br&gt;&lt;br&gt;• V3.5：Application Adaptation Layer baseline&lt;br&gt;• V3.6：Workflow Runtime Contract + Dummy Pipeline E2E&lt;br&gt;• V4.0-0/A/A2：UI contract、Workflow Studio shell、真实 BFF read/event bridge&lt;br&gt;• V4.0-D：Quality / Approval / Context operation panels&lt;br&gt;• V4.0-E/F：Reference Console integration + browser smoke baseline&lt;br&gt;• V4.0-G：用户显式确认的 patch apply/reject/publish&lt;br&gt;• V4.0-H：canvas / Inspector intent 到 patch proposal 桥接&lt;br&gt;• V4.0-I/J：Agent stateful assistant + governance baseline&lt;br&gt;• V4.0-K/L：Agent handoff + lifecycle / audit / recovery&lt;br&gt;• V4.0-M/N/O/P：evidence、canvas、proposal workflow、AgentTalk E2E&lt;br&gt;• V4.0-Q/R/S：executor design、production preflight、auth/tenant design&lt;br&gt;• V4.0-T/U/V/W/X/Y/Z：production follow-up designs、consolidation、final audit" vertex="1">
+          <mxGeometry height="210" width="590" x="100" y="1100" as="geometry" />
+        </mxCell>
+        <mxCell id="gap" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFBEB;strokeColor=#F59E0B;align=left;spacingLeft=18;fontSize=15" value="当前剩余差距&lt;br&gt;&lt;br&gt;• 仍没有完整 AgentTalkWindow 状态机和真实 Agent executor&lt;br&gt;• Agent 仍不能自动 apply / reject / publish / approval.respond&lt;br&gt;• Handoff 已有 lifecycle / audit / recovery，但仍不是 executor&lt;br&gt;• Agent 仍不能 update context / emit business event / start workflow&lt;br&gt;• 仍没有完整低代码画布编辑器和 layout persistence&lt;br&gt;• 仍不是 complete Workflow Studio ready" vertex="1">
+          <mxGeometry height="210" width="590" x="805" y="1100" as="geometry" />
+        </mxCell>
+        <mxCell id="target" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#059669;align=left;spacingLeft=18;fontSize=15" value="V4.0-Z Final Audit Gate&lt;br&gt;&lt;br&gt;• 允许：governed dev/local Workflow Console + production readiness design gates ready for implementation review&lt;br&gt;• T/U/V/W：token、secret、observability、external app 设计合同&lt;br&gt;• X：production readiness consolidation&lt;br&gt;• Y：controlled executor implementation gate&lt;br&gt;• Z：final audit package&lt;br&gt;• 仍 no production-ready / no enterprise auth / no executor ready" vertex="1">
+          <mxGeometry height="210" width="590" x="1510" y="1100" as="geometry" />
+        </mxCell>
+        <mxCell id="eg1" edge="1" parent="1" source="current" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#0284C7;endArrow=block;endFill=1" target="gap">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eg2" edge="1" parent="1" source="gap" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#D97706;endArrow=block;endFill=1" target="target">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="section_summary" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF2FF;strokeColor=#4F46E5;fontSize=20;fontStyle=1;align=center" value="开发计划摘要" vertex="1">
+          <mxGeometry height="52" width="2060" x="70" y="1395" as="geometry" />
+        </mxCell>
+        <mxCell id="summary_now" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF2FF;strokeColor=#4F46E5;align=left;spacingLeft=18;fontSize=15" value="当前开发阶段&lt;br&gt;&lt;br&gt;V4.0-Z Final Audit / Release Gate complete&lt;br&gt;&lt;br&gt;已验证：&lt;br&gt;• R/S/T/U/V/W design contracts&lt;br&gt;• X production readiness consolidation&lt;br&gt;• Y executor implementation gate&lt;br&gt;• Z final audit contract&lt;br&gt;• forbidden route / claim guard" vertex="1">
+          <mxGeometry height="170" width="620" x="100" y="1475" as="geometry" />
+        </mxCell>
+        <mxCell id="summary_next" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF2FF;strokeColor=#4F46E5;align=left;spacingLeft=16;fontSize=14" value="下一阶段优先项&lt;br&gt;&lt;br&gt;• 进入 implementation review，而不是继续扩大 V4.0 claim&lt;br&gt;• 先审计 production blockers 和 executor blockers&lt;br&gt;• production auth / tenant / token / secret / observability / onboarding 仍需独立实现&lt;br&gt;• claim guard / No False Green 继续保留" vertex="1">
+          <mxGeometry height="170" width="620" x="790" y="1475" as="geometry" />
+        </mxCell>
+        <mxCell id="summary_final" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF2FF;strokeColor=#4F46E5;align=left;spacingLeft=18;fontSize=15" value="当前允许声明&lt;br&gt;&lt;br&gt;V4.0 complete: governed dev/local Workflow Console and production readiness design gates ready for implementation review&lt;br&gt;&lt;br&gt;仍不能声明：&lt;br&gt;production-ready / enterprise auth / OAuth / SSO / multi-tenant control plane / executor" vertex="1">
+          <mxGeometry height="170" width="620" x="1480" y="1475" as="geometry" />
+        </mxCell>
+        <mxCell id="summary_headless_v4x" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFEFF;strokeColor=#0891B2;align=left;spacingLeft=18;fontSize=14;fontStyle=1" value="V4.x 后续路线修正：V4.1 后主线转为 Headless Core + TUI / Command Palette + Drawio + HTML Report + Thin Web Console。V4.2-A 只做 Headless Interaction Pivot；通用 run / rerun / controlled runtime 延后到 V4.2-B/C。前向 gap source：docs/design/V4.x/v4_x_headless_current_gap_analysis.md" vertex="1">
+          <mxGeometry height="52" width="2000" x="100" y="1660" as="geometry" />
+        </mxCell>
+        <mxCell id="section_matrix" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#64748B;fontSize=20;fontStyle=1;align=center" value="V4.0 Capability Matrix 与阶段影响范围" vertex="1">
+          <mxGeometry height="52" width="2060" x="70" y="1730" as="geometry" />
+        </mxCell>
+        <mxCell id="m0" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=13;fontStyle=1;align=center" value="V4.0-0 complete&lt;br&gt;Baseline / UI Contract Sync&lt;br&gt;Plane-0 / Plane-1 / Plane-2&lt;br&gt;已落地：contract map、mock-to-real check、No False Green、source scan" vertex="1">
+          <mxGeometry height="125" width="360" x="90" y="1820" as="geometry" />
+        </mxCell>
+        <mxCell id="ma" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=13;align=center" value="V4.0-A complete&lt;br&gt;Workflow Console Read-only MVP&lt;br&gt;Plane-0 / Plane-1 / Plane-2&lt;br&gt;已落地：React/Vite app、BFF-only client、station/artifact/approval/quality/trace/event panels、redaction tests" vertex="1">
+          <mxGeometry height="125" width="360" x="500" y="1820" as="geometry" />
+        </mxCell>
+        <mxCell id="mb" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=13;align=center" value="V4.0-B/C/G&lt;br&gt;Patch Preparation + Editing Hardening&lt;br&gt;Plane-0 / Plane-1 / Plane-2&lt;br&gt;已落地：propose/diff/risk 展示 + 用户确认 apply/reject/publish" vertex="1">
+          <mxGeometry height="125" width="360" x="910" y="1820" as="geometry" />
+        </mxCell>
+        <mxCell id="mc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=13;align=center" value="V4.0-C/I complete&lt;br&gt;AgentTalk preparation + Stateful baseline&lt;br&gt;Plane-0 / Plane-1 / Plane-2&lt;br&gt;已落地：session/message/suggestion、非执行 action intents、source=agent propose-only" vertex="1">
+          <mxGeometry height="125" width="360" x="1320" y="1820" as="geometry" />
+        </mxCell>
+        <mxCell id="md" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=13;align=center" value="V4.0-D complete&lt;br&gt;Quality / Approval / Context Panels&lt;br&gt;Plane-0 / Plane-1 / Plane-2&lt;br&gt;已落地：Quality read-only、workflow-bound approval.respond、context.business update、business.event emit" vertex="1">
+          <mxGeometry height="125" width="360" x="1730" y="1820" as="geometry" />
+        </mxCell>
+        <mxCell id="mef" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=13;fontStyle=1;align=center" value="V4.0-E complete&lt;br&gt;Reference Workflow Console integration baseline&lt;br&gt;Plane-0 through Plane-6&lt;br&gt;已落地：UI + BFF + SDK/hooks + EventBridge + V3.6 runtime integration tests" vertex="1">
+          <mxGeometry height="125" width="360" x="270" y="1990" as="geometry" />
+        </mxCell>
+        <mxCell id="mg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=13;fontStyle=1;align=center" value="V4.0-F complete&lt;br&gt;Browser Smoke Baseline&lt;br&gt;Plane-0 / Plane-1 / Plane-2&lt;br&gt;已落地：真实浏览器 open/select/render/approve/context/event refresh&lt;br&gt;No direct /v1/*，DOM redaction" vertex="1">
+          <mxGeometry height="125" width="360" x="680" y="1990" as="geometry" />
+        </mxCell>
+        <mxCell id="mh" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF2F2;strokeColor=#DC2626;fontSize=13;align=center" value="Forbidden Paths&lt;br&gt;No direct Core Store&lt;br&gt;No UI-only backend mutation route&lt;br&gt;No Agent auto apply/publish/respond&lt;br&gt;No mock schema promoted to protocol&lt;br&gt;No legacy approval.approve/reject for workflow-bound approval" vertex="1">
+          <mxGeometry height="125" width="360" x="1090" y="1990" as="geometry" />
+        </mxCell>
+        <mxCell id="mi" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#64748B;fontSize=13;align=center" value="Evidence Sources&lt;br&gt;V4.0-Z focused tests&lt;br&gt;V4.0 focused regression&lt;br&gt;workflow-console unit/build/e2e&lt;br&gt;V3.6 / V3.5 regressions&lt;br&gt;full pytest / TS SDK&lt;br&gt;drawio XML validation" vertex="1">
+          <mxGeometry height="125" width="360" x="1500" y="1990" as="geometry" />
+        </mxCell>
+        <mxCell id="mj" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#059669;fontSize=13;fontStyle=1;align=center" value="Allowed Claim&lt;br&gt;V4.0 complete: governed dev/local Workflow Console and production readiness design gates ready for implementation review&lt;br&gt;仍不是 production-ready / enterprise auth / OAuth / SSO / multi-tenant / executor" vertex="1">
+          <mxGeometry height="125" width="460" x="830" y="2160" as="geometry" />
+        </mxCell>
+        <mxCell id="section_accept" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#059669;fontSize=20;fontStyle=1;align=center" value="P0 出门条件、非目标与旧形态挑战" vertex="1">
+          <mxGeometry height="52" width="2060" x="70" y="2370" as="geometry" />
+        </mxCell>
+        <mxCell id="p0_list" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#059669;align=left;spacingLeft=16;fontSize=14" value="Final Roadmap Evidence Gates&lt;br&gt;&lt;br&gt;1. O：canvas proposal workflow 已完成治理收口&lt;br&gt;2. P：AgentTalk 交互 E2E 不得自动执行 mutation&lt;br&gt;3. Q：controlled executor 只做设计门禁，不声明 ready&lt;br&gt;4. R/S/T/U/V/W：production readiness follow-up designs，不声明 production-ready&lt;br&gt;5. X/Y/Z：consolidation、executor implementation gate、final audit&lt;br&gt;6. 所有阶段继续禁止 /v1 direct、Core Store direct、UI-only mutation bypass&lt;br&gt;7. md 与 drawio 必须同步维护" vertex="1">
+          <mxGeometry height="300" width="680" x="100" y="2470" as="geometry" />
+        </mxCell>
+        <mxCell id="non_goals" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#64748B;align=left;spacingLeft=16;fontSize=14" value="Non-Goals&lt;br&gt;&lt;br&gt;• production-ready external app support&lt;br&gt;• enterprise auth / OAuth / SSO&lt;br&gt;• distributed workflow engine&lt;br&gt;• GPU/media render orchestration&lt;br&gt;• Video Studio 真实业务流作为默认验收&lt;br&gt;• complete AgentTalkWindow&lt;br&gt;• complete Workflow Studio&lt;br&gt;• 完整多租户商业化权限后台" vertex="1">
+          <mxGeometry height="300" width="560" x="830" y="2470" as="geometry" />
+        </mxCell>
+        <mxCell id="challenge" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF2F2;strokeColor=#DC2626;align=left;spacingLeft=16;fontSize=14" value="Challenge To Previous Gap Shape&lt;br&gt;&lt;br&gt;• 不再把六大能力域当正式架构&lt;br&gt;• 不再让 Workflow Studio 绕过 V3.6 API&lt;br&gt;• 不再让 mock schema 反向定义 runtime contract&lt;br&gt;• Plane-0 是产品 UI；Plane-2 是 workflow runtime&lt;br&gt;• V4.0 目标是产品化 V3.6 后端事实源&lt;br&gt;• drawio 与 md 必须同步维护" vertex="1">
+          <mxGeometry height="300" width="620" x="1440" y="2470" as="geometry" />
+        </mxCell>
+        <mxCell id="section_core_files" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1F5F9;strokeColor=#64748B;fontSize=18;fontStyle=1;align=center" value="核心维护文件" vertex="1">
+          <mxGeometry height="48" width="1700" x="250" y="2830" as="geometry" />
+        </mxCell>
+        <mxCell id="core_files" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#94A3B8;fontSize=14;align=center" value="后续与用户交互时优先维护这对文件：&lt;br&gt;docs/design/V4.0/v4_0_current_gap_analysis.md&lt;br&gt;docs/design/V4.0/v4_0_current_gap_analysis.drawio&lt;br&gt;&lt;br&gt;修改原则：文字合同与图形视图必须同步；架构迁移差异、核心差距、开发计划摘要、Capability Matrix、P0/P1、V4.0 Gate 必须保持一致。" vertex="1">
+          <mxGeometry height="130" width="1700" x="250" y="2900" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

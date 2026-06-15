@@ -1,0 +1,13 @@
+command: npm --prefix apps/workflow-console run build
+status: PASS
+captured_at: 2026-06-12
+
+summary:
+- TypeScript project build passed.
+- Vite production build passed.
+- shadcn-style component foundation compiled with Radix, lucide, CVA, clsx, tailwind-merge and Tailwind utilities.
+- Existing workflow-console routes remained in the build.
+
+notes:
+- This build log proves component foundation compilation only.
+- It does not prove Xpert parity complete, complete Workflow Studio ready, production ready or Agent executor ready.

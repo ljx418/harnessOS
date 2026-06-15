@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>V12-0A Agent Station Node Card Wireframe</title>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: #f8fafc;
+        font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif;
+      }
+      .stage {
+        display: grid;
+        grid-template-columns: 350px 280px;
+        gap: 18px;
+        align-items: start;
+      }
+      .card,
+      .popover {
+        border: 1px solid #c7d2fe;
+        border-radius: 18px;
+        background: #fff;
+        box-shadow: 0 22px 44px rgba(15, 23, 42, 0.14);
+        overflow: hidden;
+      }
+      .card {
+        position: relative;
+      }
+      .card.selected {
+        outline: 3px solid #2563eb;
+      }
+      .head {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 16px;
+        border-bottom: 1px solid #e5e7eb;
+      }
+      .role {
+        display: flex;
+        gap: 12px;
+      }
+      .avatar {
+        width: 44px;
+        height: 44px;
+        display: grid;
+        place-items: center;
+        border-radius: 14px;
+        background: #eff6ff;
+        color: #2563eb;
+      }
+      svg {
+        width: 22px;
+        height: 22px;
+      }
+      h1 {
+        margin: 0;
+        font-size: 16px;
+      }
+      .status {
+        margin-top: 5px;
+        color: #15803d;
+        font-size: 12px;
+      }
+      .menu {
+        width: 32px;
+        height: 32px;
+        border: 1px solid #d8dee8;
+        border-radius: 9px;
+        background: #fff;
+      }
+      .body {
+        padding: 14px 16px 16px;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: 82px 1fr;
+        gap: 10px;
+        margin: 9px 0;
+        font-size: 13px;
+      }
+      .label {
+        color: #667085;
+      }
+      .tags {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .tag {
+        padding: 4px 7px;
+        border-radius: 7px;
+        background: #f1f5f9;
+        color: #475467;
+        font-size: 12px;
+      }
+      .io {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        padding: 0 16px 16px;
+      }
+      .io-box {
+        border: 1px dashed #cbd5e1;
+        border-radius: 10px;
+        padding: 9px;
+        background: #fbfdff;
+        font-size: 12px;
+        line-height: 1.5;
+      }
+      .port {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border: 2px solid white;
+        border-radius: 999px;
+        background: #2563eb;
+        box-shadow: 0 0 0 1px #93c5fd;
+      }
+      .in1 { left: -6px; top: 88px; }
+      .in2 { left: -6px; top: 132px; background: #7c3aed; }
+      .out1 { right: -6px; top: 88px; }
+      .out2 { right: -6px; top: 132px; background: #16a34a; }
+      .ports {
+        padding: 10px 16px;
+        background: #f8fafc;
+        border-top: 1px solid #e5e7eb;
+        color: #667085;
+        font-size: 12px;
+      }
+      .popover {
+        padding: 14px;
+      }
+      .popover h2 {
+        margin: 0 0 10px;
+        font-size: 15px;
+      }
+      .option {
+        display: flex;
+        justify-content: space-between;
+        padding: 9px 0;
+        border-bottom: 1px solid #eef2f7;
+        font-size: 13px;
+      }
+      .option span {
+        color: #667085;
+      }
+      .disabled {
+        color: #94a3b8;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="stage">
+      <article class="card selected" aria-label="Agent 工位节点卡片组件草图">
+        <span class="port in1"></span><span class="port in2"></span><span class="port out1"></span><span class="port out2"></span>
+        <header class="head">
+          <div class="role">
+            <div class="avatar" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M7 10h10M9 14h6M5 18h14" /></svg>
+            </div>
+            <div>
+              <h1>分镜 Agent</h1>
+              <div class="status">selected · evidence ready</div>
+            </div>
+          </div>
+          <button class="menu" title="打开节点菜单">⋯</button>
+        </header>
+        <section class="body">
+          <div class="row"><span class="label">目标</span><span>把创意点子转成统一画风分镜</span></div>
+          <div class="row"><span class="label">模型</span><span>MiniMax image provider · redacted ref</span></div>
+          <div class="row">
+            <span class="label">工具</span>
+            <span class="tags"><span class="tag">storyboard.plan</span><span class="tag">artifact.preview</span></span>
+          </div>
+          <div class="row">
+            <span class="label">技能/MCP</span>
+            <span class="tags"><span class="tag">visual-storytelling</span><span class="tag">mcp:minimax-image</span></span>
+          </div>
+        </section>
+        <section class="io">
+          <div class="io-box"><strong>多输入</strong><br />创意 brief<br />角色设定<br />风格约束</div>
+          <div class="io-box"><strong>多输出</strong><br />镜头表<br />图像提示词<br />证据 refs</div>
+        </section>
+        <footer class="ports">端口：2 input / 2 output · hover 显示端口名 · click 打开详情</footer>
+      </article>
+
+      <aside class="popover" aria-label="节点详情下拉">
+        <h2>点击“⋯”后的节点菜单</h2>
+        <div class="option"><strong>打开检查器</strong><span>role/goal/tools</span></div>
+        <div class="option"><strong>查看证据</strong><span>redacted refs</span></div>
+        <div class="option"><strong>查看质量报告</strong><span>pending</span></div>
+        <div class="option disabled"><strong>直接运行</strong><span>需要 WorkflowDiff 确认</span></div>
+      </aside>
+    </main>
+  </body>
+</html>

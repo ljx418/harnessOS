@@ -1,0 +1,80 @@
+HarnessOS  harnessOS  phase:awaiting_confirmation  mode:interactive  model:local-interactive-no-provider  provider:local  sandbox:workspace-write  evidence:workflow-timeline
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+当前选中: WorkflowDiff proposal · 确认前不会 apply / publish / run · actions:confirm_proposal/revise_proposal/reject_proposal
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+… 已折叠历史内容 54 行，可用 /history 查看
+▣ WorkflowDiff  waiting_confirmation  diff-1
+  变更: station-storyboard, station-coding
+  动作: confirm_proposal / revise_proposal / reject_proposal
+  确认前不会 apply / publish / run
+  证据: docs/design/V9.x/evidence/v9-6-workflow-studio/workflow_diff_proposal.json
+
+▣ 用户  completed  interactive-user-12
+  我想做一个多Agent的工作流，期望可以实现对同一个话题的不同角度讨论，最后有一个Agent能对讨论做出总结，要求至少执行三四轮讨论
+
+▣ 助手  completed  interactive-assistant-13
+  已捕获目标：我想做一个多Agent的工作流，期望可以实现对同一个话题的不同角度讨论，最后有一个Agent能对讨论做出总结，要求至少执行三四轮讨论。正在生成本地 WorkflowDiff proposal；当前不会 apply / publish / run。
+
+▣ 计划  proposal_ready  interactive-plan-14
+  当前步骤: await-confirmation
+  ✓ capture-topic: 捕获讨论主题和目标
+  ✓ create-personas: 创建 3 个不同视角的讨论 Agent
+  ✓ set-rounds: 设置 4 轮讨论：开场、反驳、澄清、综合
+  ✓ summarizer: 增加总结 Agent 输出共识、分歧和后续问题
+  · await-confirmation: 等待用户确认后才可进入运行
+
+▣ 工位 / Agent  proposed  station-stoic
+  Agent: Stoic Perspective Agent  目标: 从斯多葛主义视角讨论：我想做一个多Agent的工作流，期望可以实现对同一个话题的不同角度讨论，最后有一个Agent能对讨论做出总结，要求至少执行三四轮讨论
+  Tools: persona.reason, discussion.round
+  Skills: philosophy-dialogue, counterargument
+  证据: docs/design/V10.x/evidence/v10-cli-local-validation/validation-summary.json
+
+▣ 工位 / Agent  proposed  station-socratic
+  Agent: Socratic Question Agent  目标: 通过追问澄清概念、前提和论证漏洞
+  Tools: persona.question, discussion.challenge
+  Skills: questioning, dialogue-synthesis
+  证据: docs/design/V10.x/evidence/v10-cli-local-validation/validation-summary.json
+
+▣ 工位 / Agent  proposed  station-pragmatist
+  Agent: Pragmatist Agent  目标: 从可执行方案、影响和权衡角度提出现实判断
+  Tools: impact.analysis, tradeoff.map
+  Skills: practical-reasoning
+  证据: docs/design/V10.x/evidence/v10-cli-local-validation/validation-summary.json
+
+▣ 工位 / Agent  proposed  station-summarizer
+  Agent: Summary And Quality Agent  目标: 汇总三四轮讨论，输出共识、分歧、证据缺口和可行动建议
+  Tools: discussion.summarize, quality.check
+  Skills: synthesis, quality-review
+  证据: docs/design/V10.x/evidence/v10-cli-local-validation/validation-summary.json
+
+▣ 产物预览  proposal_ready  interactive-output-19
+  摘要: 预计产出：4 轮多 Agent 对话记录、每轮观点差异表、总结 Agent 的共识/分歧/下一步建议。当前只是 proposal，未运行真实 Agent。
+  Artifacts: artifact-ref://v10/proposed-roman-forum-discussion
+  Quality: quality-ref://v10/discussion-round-count-and-summary-agent
+  证据: docs/design/V10.x/evidence/v10-cli-local-validation/validation-summary.json
+
+▣ WorkflowDiff  pending_confirmation  interactive-diff-20
+  目标: 我想做一个多Agent的工作流，期望可以实现对同一个话题的不同角度讨论，最后有一个Agent能对讨论做出总结，要求至少执行三四轮讨论
+  变更: station-stoic, station-socratic, station-pragmatist, station-summarizer
+  动作: confirm_proposal / revise_proposal / reject_proposal
+  确认前不会 apply / publish / run
+  证据: docs/design/V10.x/evidence/v10-cli-local-validation/validation-summary.json
+
+▣ 助手  completed  interactive-assistant-21
+  等待确认：已生成 Stoic Perspective Agent / Socratic Question Agent / Pragmatist Agent / Summary And Quality Agent。输入 confirm_proposal 确认，revise_proposal 修改，reject_proposal 放弃；当前 proposa…
+
+▣ 工作流状态线  awaiting_confirmation  v11-workflow-state-timeline
+  目标: goal-ref://v11/current-user-goal
+  确认门: 需要用户确认
+  ✓ goal: 目标已捕获：我想做一个多Agent的工作流，期望可以实现对同一个话题的不同角度讨论，最后有一个Agent能对讨论做出总结，要求至少执行三四轮讨论 [done]
+  ✓ spec: WorkflowSpec 草案已生成 [done]
+  ✓ diff: WorkflowDiff proposal 已生成 [done]
+  · confirmation: 等待用户 confirm / revise / reject [awaiting_confirmation] · durable mutation requires explicit user confirmation
+  ! run: 工作流运行 [blocked] · blocked until WorkflowDiff is confirmed
+  · runtime_report: Runtime Report [pending] · no runtime report before run
+  · evidence: Evidence Chain [pending] · evidence is recorded only after governed runtime action
+  Evidence scope: tui_read_model_fixture
+  证据: docs/design/V11.x/evidence/v11-3-workflow-timeline/acceptance-data.json
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+› 输入自然语言目标，或使用 /help /stations /evidence /diff /exit

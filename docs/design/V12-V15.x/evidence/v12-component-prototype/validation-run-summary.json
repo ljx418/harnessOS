@@ -1,0 +1,120 @@
+{
+  "schema_version": "v12.component_prototype_validation_run_summary.v1",
+  "stage_id": "V12-0A",
+  "status": "PASS_WITH_LIMITATION",
+  "created_at": "2026-06-14T00:00:00+08:00",
+  "commands": [
+    {
+      "command": "/usr/bin/python3 -m json.tool docs/design/V12-V15.x/evidence/v12-component-prototype/component-prototype-review-data.json",
+      "status": "PASS"
+    },
+    {
+      "command": "/usr/bin/python3 -m json.tool docs/design/V12-V15.x/evidence/v12-component-prototype/artifact-manifest.json",
+      "status": "PASS"
+    },
+    {
+      "command": "/usr/bin/python3 -m json.tool docs/design/V12-V15.x/evidence/v12-component-prototype/component-prototype-schema-validation-report.json",
+      "status": "PASS"
+    },
+    {
+      "command": "/usr/bin/python3 -m json.tool docs/design/V12-V15.x/evidence/v12-component-prototype/static-render-report.json",
+      "status": "PASS"
+    },
+    {
+      "command": "/usr/bin/python3 -m json.tool docs/design/V12-V15.x/evidence/v12-component-prototype/xpert-style-concept-board.static-render-report.json",
+      "status": "PASS"
+    },
+    {
+      "command": "/usr/bin/python3 -m json.tool docs/design/V12-V15.x/evidence/v12-component-prototype/light-studio-component-detail-board.static-render-report.json",
+      "status": "PASS"
+    },
+    {
+      "command": "/usr/bin/python3 -m json.tool docs/design/V12-V15.x/evidence/v12-component-prototype/light-studio-annotated-component-sketches.static-render-report.json",
+      "status": "PASS"
+    },
+    {
+      "command": "/usr/bin/python3 -m json.tool docs/design/V12-V15.x/evidence/v12-component-prototype/imag2-experience/static-render-report.json",
+      "status": "PASS"
+    },
+    {
+      "command": "/usr/bin/python3 -m json.tool docs/design/V12-V15.x/evidence/v12-component-prototype/interaction-experience-detail.static-render-report.json",
+      "status": "PASS"
+    },
+    {
+      "command": "xmllint --noout docs/design/V12-V15.x/evidence/v12-component-prototype/imag2-experience/assets/01-overall-workbench.svg",
+      "status": "PASS"
+    },
+    {
+      "command": "xmllint --noout docs/design/V12-V15.x/evidence/v12-component-prototype/imag2-experience/assets/02-component-sheet.svg",
+      "status": "PASS"
+    },
+    {
+      "command": "xmllint --noout docs/design/V12-V15.x/evidence/v12-component-prototype/imag2-experience/assets/03-interaction-flow.svg",
+      "status": "PASS"
+    },
+    {
+      "command": "xmllint --noout docs/design/V12-V15.x/v12_to_v15_current_gap_analysis.drawio",
+      "status": "PASS"
+    },
+    {
+      "command": "xmllint --noout docs/design/V12-V15.x/evidence/v12-component-prototype/v12-user-state-machine.drawio",
+      "status": "PASS"
+    },
+    {
+      "command": "qlmanage -t -s 1440 -o docs/design/V12-V15.x/evidence/v12-component-prototype docs/design/V12-V15.x/evidence/v12-component-prototype/index.html",
+      "status": "PASS"
+    },
+    {
+      "command": "qlmanage -t -s 1440 -o docs/design/V12-V15.x/evidence/v12-component-prototype docs/design/V12-V15.x/evidence/v12-component-prototype/xpert-style-concept-board.html",
+      "status": "PASS"
+    },
+    {
+      "command": "qlmanage -t -s 1440 -o docs/design/V12-V15.x/evidence/v12-component-prototype docs/design/V12-V15.x/evidence/v12-component-prototype/light-studio-component-detail-board.html",
+      "status": "PASS"
+    },
+    {
+      "command": "qlmanage -t -s 1440 -o docs/design/V12-V15.x/evidence/v12-component-prototype docs/design/V12-V15.x/evidence/v12-component-prototype/light-studio-annotated-component-sketches.html",
+      "status": "PASS"
+    },
+    {
+      "command": "qlmanage -t -s 1440 -o docs/design/V12-V15.x/evidence/v12-component-prototype/imag2-experience docs/design/V12-V15.x/evidence/v12-component-prototype/imag2-experience/index.html",
+      "status": "PASS"
+    },
+    {
+      "command": "qlmanage -t -s 1440 -o docs/design/V12-V15.x/evidence/v12-component-prototype docs/design/V12-V15.x/evidence/v12-component-prototype/interaction-experience-detail.html",
+      "status": "PASS"
+    },
+    {
+      "command": "node -e \"import('playwright')...\"",
+      "status": "SKIPPED_UNAVAILABLE",
+      "reason": "The local repository environment does not include the playwright package."
+    }
+  ],
+  "safe_context_scan": {
+    "forbidden_claim_terms": "PASS_WITH_SAFE_CONTEXT_ONLY",
+    "redaction_terms": "PASS_WITH_SAFE_CONTEXT_ONLY"
+  },
+  "limitations": [
+    "V12-0A evidence is design-only and does not prove real browser implementation.",
+    "The Xpert-inspired concept board is design-only direction evidence and does not prove Xpert parity, product-grade frontend completion or real browser implementation.",
+    "The Light Studio component detail board is design-only component handoff evidence and does not prove real browser implementation.",
+    "The Light Studio annotated component sketch board is design-only visual sketch evidence and does not prove real browser implementation.",
+        "The imag2 target-experience pack is host-native concept image and local SVG factual mirror evidence; it does not prove browser, BFF, DTO or runtime implementation.",
+        "The interaction detail review is V12-0P prototype input only; it does not prove browser, BFF, DTO or runtime implementation.",
+    "Third-party JSON Schema validator is not installed locally; JSON parse and required-field review were recorded instead.",
+    "Playwright screenshot was not produced because the package is unavailable; QuickLook static thumbnail was produced as supporting design evidence."
+  ],
+  "ux_issue_closure": {
+    "reported_issues": 9,
+    "confirmed_real": 9,
+    "closed_in_prototype": 9,
+    "remaining_stage": "V12-0P high-fidelity visual and interaction refinement"
+  },
+  "next_allowed_stage": "V12-0P Figma or high-fidelity prototype planning after review",
+  "blocked_stages": [
+    "V12 real browser implementation",
+    "V13 editable Workflow Studio implementation",
+    "V14 plugin runtime implementation",
+    "V15 final acceptance"
+  ]
+}

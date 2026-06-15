@@ -1,0 +1,119 @@
+{
+  "schema_version": "v12.component_prototype_review.v1",
+  "stage_id": "V12-0A",
+  "status": "PASS_WITH_MINOR_ISSUES",
+  "evidence_scope": "design_only",
+  "runtime_backed": false,
+  "browser_implementation_backed": false,
+  "figma_backed": false,
+  "artifact_manifest_ref": "artifact-manifest.json",
+  "components": [
+    {
+      "component_id": "global_top_bar",
+      "status": "ACCEPTED_WITH_BOUNDED_REVISION",
+      "asset_ref": null,
+      "wireframe_ref": "wireframes/01-global-top-bar.html",
+      "visual_artifact_type": "wireframe",
+      "visual_artifact_exception_reason": null,
+      "user_goal": "用户在 10 秒内识别当前工作空间、项目、模型、环境、证据状态和安全下一步。",
+      "accepted_boundaries": [
+        "design_only",
+        "no_runtime_evidence",
+        "proposal_or_review_before_publish_run"
+      ],
+      "open_questions": [
+        "V12-0P 需要决定发布按钮使用下拉菜单还是分段按钮，并基于状态机图固化 API/运行/证据/权限状态色。"
+      ]
+    },
+    {
+      "component_id": "left_product_navigation",
+      "status": "ACCEPTED_WITH_BOUNDED_REVISION",
+      "asset_ref": null,
+      "wireframe_ref": "wireframes/02-left-product-navigation.html",
+      "visual_artifact_type": "wireframe",
+      "visual_artifact_exception_reason": null,
+      "user_goal": "用户能快速定位工作台、智能体、工作流、技能/MCP、证据和监控区域。",
+      "accepted_boundaries": [
+        "design_only",
+        "no_runtime_evidence",
+        "section_switch_only"
+      ],
+      "open_questions": [
+        "V12-0P 需要细化一级 rail 与二级导航的折叠、焦点和键盘访问行为。"
+      ]
+    },
+    {
+      "component_id": "canvas_workbench",
+      "status": "ACCEPTED_WITH_BOUNDED_REVISION",
+      "asset_ref": null,
+      "wireframe_ref": "wireframes/03-canvas-workbench.html",
+      "visual_artifact_type": "wireframe",
+      "visual_artifact_exception_reason": null,
+      "user_goal": "用户能理解 V12 是浏览器工作台和只读画布基础，并看到节点选择、禁用动作原因和小地图。",
+      "accepted_boundaries": [
+        "design_only",
+        "no_browser_implementation_evidence",
+        "read_only_canvas_foundation",
+        "no_auto_publish_run"
+      ],
+      "open_questions": [
+        "V12-0P 需要决定 toolbar/add menu 的视觉密度、曲线连线动效和 disabled tooltip 位置。"
+      ]
+    },
+    {
+      "component_id": "agent_station_node_card",
+      "status": "ACCEPTED_WITH_BOUNDED_REVISION",
+      "asset_ref": null,
+      "wireframe_ref": "wireframes/04-agent-station-node-card.html",
+      "visual_artifact_type": "wireframe",
+      "visual_artifact_exception_reason": null,
+      "user_goal": "用户能看懂每个工位 Agent 的角色、目标、模型、工具、技能、MCP、端口和证据引用。",
+      "accepted_boundaries": [
+        "design_only",
+        "no_agent_executor_ready_claim",
+        "redacted_provider_ref_only"
+      ],
+      "open_questions": [
+        "V12-0P 需要统一 completed/running/blocked/missing config 的状态色，并固化多输入/多输出端口标签。"
+      ]
+    },
+    {
+      "component_id": "right_inspector",
+      "status": "ACCEPTED_WITH_BOUNDED_REVISION",
+      "asset_ref": null,
+      "wireframe_ref": "wireframes/05-right-inspector.html",
+      "visual_artifact_type": "wireframe",
+      "visual_artifact_exception_reason": null,
+      "user_goal": "用户选择节点后能解释角色、目标、记忆摘要、工具、策略、质量和证据，并看到 blocked/disabled 原因。",
+      "accepted_boundaries": [
+        "design_only",
+        "no_runtime_truth",
+        "redacted_refs_only"
+      ],
+      "open_questions": [
+        "V12-0P 需要决定 inspector tab 与 evidence drawer 的联动层级。"
+      ]
+    },
+    {
+      "component_id": "chat_workbench_proposal_timeline",
+      "status": "ACCEPTED_WITH_BOUNDED_REVISION",
+      "asset_ref": null,
+      "wireframe_ref": "wireframes/06-chat-workbench-proposal-timeline.html",
+      "visual_artifact_type": "wireframe",
+      "visual_artifact_exception_reason": null,
+      "user_goal": "用户能从自然语言目标进入 proposal timeline，并在确认前明确知道不会 publish/run。",
+      "accepted_boundaries": [
+        "design_only",
+        "proposal_only",
+        "no_runtime_execution",
+        "confirm_revise_reject_required"
+      ],
+      "open_questions": [
+        "V12-0P 需要明确独立 Chatbox 历史、proposal timeline 与画布高亮的同步方式。"
+      ]
+    }
+  ],
+  "no_false_green_scan": "PASS",
+  "redaction_scan": "PASS",
+  "created_at": "2026-06-14T00:00:00+08:00"
+}

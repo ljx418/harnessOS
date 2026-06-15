@@ -1,0 +1,25 @@
+
+> @harnessos/mission-tui@0.1.0 test
+> node --test __tests__/*.test.js
+
+✔ renders CLI-native shell with status line and bottom composer (4.055305ms)
+✔ CLI default fixture resolves when launched from package cwd (122.756794ms)
+✔ renders all required V10 user scenarios in wide fixture (1.252218ms)
+✔ rejects negative fixtures that would create false green (2.205251ms)
+✔ generates V10 shell and final acceptance evidence (6.418616ms)
+✔ interactive mode appends live user input without durable mutation (2.072502ms)
+✔ parses gateway stdio response shape and rejects invalid lines (0.634806ms)
+✔ gateway reducer renders session, turn, trace, and assistant output (2.580253ms)
+✔ agent-backed turn uses a gateway client and is not local-parser evidence (2.003343ms)
+✔ agent-backed failed gateway turn is visible but cannot satisfy acceptance (2.129456ms)
+✔ dotenv parser supports local V10 provider configuration without exposing secret values (0.582883ms)
+✔ dotenv loader skips empty and placeholder provider keys (4.352845ms)
+✔ interactive multi-agent discussion input is visible in current viewport (1.714843ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 660.860924

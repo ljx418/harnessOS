@@ -1,0 +1,11 @@
+Timeline: v11-workflow-state-timeline
+evidence_scope=tui_read_model_fixture
+confirmation_required=true
+durable_mutation_before_confirmation=false
+goal: done | 目标已捕获：我想做一个多Agent的工作流，期望可以实现对同一个话题的不同角度讨论，最后有一个Agent能对讨论做出总结，要求至少执行三四轮讨论
+spec: done | WorkflowSpec 草案已生成
+diff: done | WorkflowDiff proposal 已生成
+confirmation: awaiting_confirmation | 等待用户 confirm / revise / reject | reason=durable mutation requires explicit user confirmation
+run: blocked | 工作流运行 | reason=blocked until WorkflowDiff is confirmed
+runtime_report: pending | Runtime Report | reason=no runtime report before run
+evidence: pending | Evidence Chain | reason=evidence is recorded only after governed runtime action

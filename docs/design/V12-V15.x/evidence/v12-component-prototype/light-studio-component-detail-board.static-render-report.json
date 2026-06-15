@@ -1,0 +1,29 @@
+{
+  "schema_version": "v12.light_studio_component_detail_static_render_report.v1",
+  "stage_id": "V12-0A",
+  "status": "PASS",
+  "created_at": "2026-06-14T08:36:00+08:00",
+  "render_command": "qlmanage -t -s 1440 -o docs/design/V12-V15.x/evidence/v12-component-prototype docs/design/V12-V15.x/evidence/v12-component-prototype/light-studio-component-detail-board.html",
+  "html_path": "docs/design/V12-V15.x/evidence/v12-component-prototype/light-studio-component-detail-board.html",
+  "html_sha256": "2b8a4c72cdb79cd3c4470d0c576dd8d862c7ff71eb866ef99df88be4e63a6a6f",
+  "thumbnail_path": "docs/design/V12-V15.x/evidence/v12-component-prototype/light-studio-component-detail-board.html.png",
+  "thumbnail_sha256": "102e2946c79af088ee273d10f1274bce960ae94fe176153445dd913b62bae7d2",
+  "evidence_scope": "design_only_component_detail_static_render",
+  "recommended_direction": "Light Studio Workbench",
+  "component_detail_scope": [
+    "design tokens",
+    "page skeleton dimensions",
+    "top bar states",
+    "left navigation information architecture",
+    "read-only canvas interactions",
+    "agent station node IO",
+    "right inspector tabs",
+    "chat workbench proposal timeline",
+    "V12-0P review checklist"
+  ],
+  "browser_implementation_backed": false,
+  "bff_backed": false,
+  "runtime_backed": false,
+  "xpert_parity_claimed": false,
+  "not_runtime_evidence": true
+}

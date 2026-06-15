@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Xpert 画布交互专项体验审计</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6f7fb;
+        --paper: #ffffff;
+        --ink: #152033;
+        --muted: #667085;
+        --line: #d8deea;
+        --blue: #2563eb;
+        --blue-soft: #eaf1ff;
+        --green: #0f8a5f;
+        --green-soft: #e8f7f1;
+        --amber: #b45309;
+        --amber-soft: #fff2d8;
+        --red: #b42318;
+        --red-soft: #fff0ee;
+        --violet: #6d28d9;
+        --violet-soft: #f0eaff;
+        --shadow: 0 18px 45px rgba(21, 32, 51, 0.09);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          "PingFang SC", "Microsoft YaHei", sans-serif;
+        background:
+          radial-gradient(circle at 15% 0%, rgba(37, 99, 235, 0.12), transparent 30%),
+          linear-gradient(180deg, #fbfcff 0%, var(--bg) 42%, #eef2f8 100%);
+        color: var(--ink);
+      }
+
+      main {
+        width: min(1240px, calc(100vw - 48px));
+        margin: 0 auto;
+        padding: 40px 0 72px;
+      }
+
+      header.hero {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 28px;
+        align-items: stretch;
+        margin-bottom: 28px;
+      }
+
+      .hero-copy,
+      .card,
+      .shot,
+      .notice {
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(216, 222, 234, 0.9);
+        box-shadow: var(--shadow);
+      }
+
+      .hero-copy {
+        border-radius: 20px;
+        padding: 32px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: var(--blue-soft);
+        color: var(--blue);
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      h1 {
+        margin: 18px 0 12px;
+        font-size: 38px;
+        line-height: 1.08;
+        letter-spacing: 0;
+      }
+
+      h2 {
+        margin: 0 0 14px;
+        font-size: 24px;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin: 0 0 10px;
+        font-size: 17px;
+        letter-spacing: 0;
+      }
+
+      p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.68;
+      }
+
+      .lead {
+        font-size: 16px;
+        color: #445063;
+      }
+
+      .hero-meta {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 24px;
+      }
+
+      .metric {
+        padding: 14px;
+        border-radius: 14px;
+        background: #f8faff;
+        border: 1px solid #e7ebf5;
+      }
+
+      .metric strong {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 18px;
+      }
+
+      .metric span {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .hero-shot {
+        overflow: hidden;
+        border-radius: 20px;
+        position: relative;
+      }
+
+      .hero-shot img {
+        width: 100%;
+        height: 100%;
+        min-height: 330px;
+        object-fit: cover;
+        object-position: left top;
+        display: block;
+      }
+
+      .hero-shot .caption {
+        position: absolute;
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        padding: 12px 14px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.88);
+        border: 1px solid rgba(216, 222, 234, 0.9);
+        color: #344054;
+        font-size: 13px;
+      }
+
+      .grid {
+        display: grid;
+        gap: 18px;
+      }
+
+      .grid.two {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .grid.three {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      section {
+        margin-top: 28px;
+      }
+
+      .card {
+        border-radius: 18px;
+        padding: 22px;
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 4px 9px;
+        font-size: 12px;
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+
+      .tag.green {
+        background: var(--green-soft);
+        color: var(--green);
+      }
+
+      .tag.amber {
+        background: var(--amber-soft);
+        color: var(--amber);
+      }
+
+      .tag.red {
+        background: var(--red-soft);
+        color: var(--red);
+      }
+
+      .tag.violet {
+        background: var(--violet-soft);
+        color: var(--violet);
+      }
+
+      .shot {
+        border-radius: 18px;
+        overflow: hidden;
+      }
+
+      .shot img {
+        width: 100%;
+        display: block;
+        background: #fff;
+      }
+
+      .shot figcaption {
+        padding: 14px 16px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.55;
+        background: #fff;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow: hidden;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: #fff;
+      }
+
+      th,
+      td {
+        padding: 13px 14px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      th {
+        background: #f2f5fa;
+        color: #344054;
+      }
+
+      tr:last-child td {
+        border-bottom: 0;
+      }
+
+      code {
+        border-radius: 7px;
+        padding: 2px 6px;
+        background: #eef2f7;
+        color: #334155;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+          monospace;
+        font-size: 12px;
+      }
+
+      .notice {
+        border-radius: 18px;
+        padding: 18px 20px;
+        display: grid;
+        grid-template-columns: 24px 1fr;
+        gap: 12px;
+        align-items: start;
+      }
+
+      .notice strong {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      .checklist {
+        display: grid;
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      .check {
+        display: grid;
+        grid-template-columns: 20px 1fr;
+        gap: 10px;
+        padding: 11px 12px;
+        border: 1px solid #e6ebf4;
+        background: #fbfcff;
+        border-radius: 12px;
+        color: #475467;
+        line-height: 1.5;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        margin-top: 6px;
+        border-radius: 50%;
+        background: var(--blue);
+      }
+
+      .sources {
+        display: grid;
+        gap: 8px;
+        color: #475467;
+        font-size: 13px;
+      }
+
+      .sources div {
+        padding: 10px 12px;
+        border: 1px solid #e6ebf4;
+        border-radius: 10px;
+        background: #fbfcff;
+        overflow-wrap: anywhere;
+      }
+
+      @media (max-width: 900px) {
+        main {
+          width: min(100vw - 24px, 100%);
+          padding: 20px 0 42px;
+        }
+
+        header.hero,
+        .grid.two,
+        .grid.three {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          font-size: 30px;
+        }
+
+        .hero-meta {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">Xpert Canvas UX Survey · 真实本地页面截图</span>
+          <h1>Xpert 画布交互专项体验审计</h1>
+          <p class="lead">
+            本页基于本地部署的 Xpert WebApp 和 Playwright 截图，聚焦用户给出的画布体验：
+            节点编排、端口连线、属性检查器、实体菜单、自动布局、发布预览和工作台信息架构。
+            结论用于 HarnessOS V12-V15 前端追赶规划，不代表直接复制 Xpert 代码。
+          </p>
+          <div class="hero-meta">
+            <div class="metric">
+              <strong>6 张</strong>
+              <span>本地浏览器截图证据</span>
+            </div>
+            <div class="metric">
+              <strong>4 类</strong>
+              <span>画布关键交互：选中、配置、加节点、布局</span>
+            </div>
+            <div class="metric">
+              <strong>Foblex Flow</strong>
+              <span>源码中使用的画布/连线基础</span>
+            </div>
+            <div class="metric">
+              <strong>AGPL-3.0</strong>
+              <span>只能做体验基准，不能直接嫁接代码</span>
+            </div>
+          </div>
+        </div>
+        <figure class="hero-shot">
+          <img src="xpert-canvas-loaded.png" alt="Xpert 本地画布加载截图" />
+          <figcaption class="caption">
+            真实本地 Xpert Studio 画布：左侧实体导航、中心点阵画布、顶部操作栏、底部画布工具条、右下缩略图。
+          </figcaption>
+        </figure>
+      </header>
+
+      <section>
+        <div class="notice">
+          <div>⚠</div>
+          <div>
+            <strong>证据边界</strong>
+            <p>
+              为绕过本地模型配置向导阻塞，本次进入画布使用了本地 benchmark fixture 和 placeholder model。
+              这些截图证明“Xpert 画布 UI 与交互结构已被实际打开和操作”，不证明 Xpert 模型调用或生产运行能力。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid three">
+        <div class="card">
+          <span class="tag green">已确认</span>
+          <h3>本地画布可进入</h3>
+          <p>
+            成功进入 <code>/xpert/x/{id}/agents</code>，页面显示 Workspace、Agent、Authorization、Memory、Logs、
+            Monitoring、Auto save、Agent Settings、Preview、Features、Publish。
+          </p>
+        </div>
+        <div class="card">
+          <span class="tag green">已确认</span>
+          <h3>节点可选中并打开检查器</h3>
+          <p>
+            选中 Agent 节点后，右侧检查器展示模型、Prompt、Message History、附件、参数、中间件、知识库、工具、重试、
+            fallback 和输出结构。
+          </p>
+        </div>
+        <div class="card">
+          <span class="tag amber">受限</span>
+          <h3>未验证真实模型执行</h3>
+          <p>
+            本次关注画布体验。页面中出现 “Please choose right copilot llm” 提示，说明 fixture 模型不可作为真实运行证据。
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Xpert 画布交互拆解</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>交互层</th>
+              <th>Xpert 体验</th>
+              <th>对 HarnessOS 的追赶要求</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>空间架构</td>
+              <td>左侧全局图标栏 + Xpert 实体侧栏 + 无限点阵画布 + 顶部发布/预览工具栏 + 底部画布工具条 + 缩略图。</td>
+              <td>不能只做 TUI 或静态 drawio，需要 Product Console / Studio 级别的画布工作台。</td>
+            </tr>
+            <tr>
+              <td>节点与端口</td>
+              <td>节点有输入/输出端口、选中态、边界高亮、快捷加号、连接线和可重排位置。</td>
+              <td>WorkflowSpec / Station / Agent / Tool / Evidence 需要有可编辑节点模型和端口类型。</td>
+            </tr>
+            <tr>
+              <td>右侧检查器</td>
+              <td>节点属性不是弹窗，而是常驻侧栏，覆盖模型、Prompt、记忆、附件、工具、知识库、错误处理和输出结构。</td>
+              <td>HarnessOS 需要把 Agent role/goal/memory/tools/MCP/skills/evidence 做成同一检查器，而不是散落报告。</td>
+            </tr>
+            <tr>
+              <td>添加实体</td>
+              <td>底部/上下文菜单支持 New Agent、External Expert、Knowledgebase、Toolset、Middleware、Workflow 等。</td>
+              <td>需要插件/能力目录入口，并与安全边界绑定；不可直接变成 unrestricted executor。</td>
+            </tr>
+            <tr>
+              <td>画布操作</td>
+              <td>缩放、撤销/重做、历史、添加、自动布局、缩略图、拖拽移动形成低代码工作台基本体验。</td>
+              <td>后续需要实现 autosave draft、undo/redo history、layout engine、minimap、browser E2E 验收。</td>
+            </tr>
+            <tr>
+              <td>发布与预览</td>
+              <td>顶部直接暴露 Preview、Features、Publish，编辑和试跑之间切换非常短。</td>
+              <td>HarnessOS 需要保留人工确认和 evidence chain，同时补预览入口和发布前门禁。</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="grid two">
+        <figure class="shot">
+          <img src="xpert-canvas-node-selected.png" alt="Xpert 节点选中和右侧检查器截图" />
+          <figcaption>
+            节点选中态：画布节点高亮，右侧打开 Agent 属性检查器。这里是 Xpert 与 HarnessOS 当前差距最大的部分：
+            用户能在一个连续视图里查看模型、Prompt、工具、知识库、输出结构和错误处理。
+          </figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="xpert-canvas-add-menu.png" alt="Xpert 画布添加节点菜单截图" />
+          <figcaption>
+            添加菜单：New Agent、External Expert、Knowledgebase、Toolset、Middleware、Workflow 都从画布入口进入。
+            这说明 Xpert 把“能力装配”放在工作台第一层，而不是隐藏在文档或配置文件。
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="grid two">
+        <figure class="shot">
+          <img src="xpert-canvas-agent-settings.png" alt="Xpert Agent Settings 截图" />
+          <figcaption>
+            Agent Settings：并发数和递归限制等全局 Agent 行为被放在顶部入口，属于“运行行为可视化配置”。
+          </figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="xpert-canvas-auto-layout.png" alt="Xpert 自动布局后画布截图" />
+          <figcaption>
+            自动布局：底部画布工具条提供缩放、撤销、重做、历史、添加、自动布局。HarnessOS 后续画布需要补这一类基本操作。
+          </figcaption>
+        </figure>
+      </section>
+
+      <section>
+        <h2>源码对应关系</h2>
+        <div class="sources">
+          <div>
+            画布主体：
+            <code>/Users/Zhuanz/Desktop/workspace/xpert/apps/cloud/src/app/features/xpert/studio/studio.component.html</code>
+            使用 <code>f-flow</code>、<code>f-canvas</code>、<code>f-background</code>、<code>f-connection</code>、
+            <code>fNode</code>、<code>fCreateConnection</code>、<code>fReassignConnection</code> 和
+            <code>fNodePositionChange</code>。
+          </div>
+          <div>
+            Agent 节点：
+            <code>/Users/Zhuanz/Desktop/workspace/xpert/apps/cloud/src/app/features/xpert/studio/components/agent/agent.component.html</code>
+            定义 Agent 输入/输出端口、节点状态、模型、工具/知识/工作流连接点。
+          </div>
+          <div>
+            添加菜单：
+            <code>/Users/Zhuanz/Desktop/workspace/xpert/apps/cloud/src/app/features/xpert/studio/components/context-menu/context-menu.component.html</code>
+            提供 New Agent、External Expert、Knowledgebase、Toolset、Middleware、Workflow 等画布实体入口。
+          </div>
+          <div>
+            顶部工具栏：
+            <code>/Users/Zhuanz/Desktop/workspace/xpert/apps/cloud/src/app/features/xpert/studio/header/header.component.html</code>
+            暴露 Auto save、Agent Settings、Preview、Features、Publish。
+          </div>
+          <div>
+            自动布局：
+            <code>/Users/Zhuanz/Desktop/workspace/xpert/apps/cloud/src/app/features/xpert/studio/domain/layout/layout.ts</code>
+            使用 <code>elkjs</code> 处理横向主链和纵向子树布局。
+          </div>
+        </div>
+      </section>
+
+      <section class="grid two">
+        <div class="card">
+          <span class="tag violet">追赶路线</span>
+          <h2>HarnessOS 应吸收的设计</h2>
+          <div class="checklist">
+            <div class="check"><span class="dot"></span><span>建立浏览器画布工作台，而不是只依赖 TUI 和 HTML 报告。</span></div>
+            <div class="check"><span class="dot"></span><span>把 Workflow / Station / Agent / Tool / MCP / Evidence 都做成一等实体节点。</span></div>
+            <div class="check"><span class="dot"></span><span>选中节点后提供常驻检查器，集中展示 role、goal、memory、tools、skills、MCP、产物和质量。</span></div>
+            <div class="check"><span class="dot"></span><span>实现端口连线、拖拽、自动布局、缩略图、撤销/重做、历史和预览。</span></div>
+            <div class="check"><span class="dot"></span><span>把运行证据和权限边界嵌入画布，避免画布成为绕过治理的 runtime truth。</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <span class="tag red">不要照搬</span>
+          <h2>必须避免的误区</h2>
+          <div class="checklist">
+            <div class="check"><span class="dot"></span><span>Xpert 是 AGPL-3.0 项目，不能把前端整体复制进 HarnessOS 后继续闭源使用。</span></div>
+            <div class="check"><span class="dot"></span><span>不能把“画布编辑体验”误写成 Agent executor ready 或 complete Workflow Studio ready。</span></div>
+            <div class="check"><span class="dot"></span><span>不能让浏览器画布直接写 WorkflowStore / StationRun / Artifact；必须通过 BFF/DTO/确认门禁。</span></div>
+            <div class="check"><span class="dot"></span><span>不能用 fixture canvas 作为真实模型调用或真实运行证据。</span></div>
+            <div class="check"><span class="dot"></span><span>不能为了追赶低代码体验而削弱 HarnessOS 已有的 evidence chain、redaction 和 approval guard。</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>本次审计产物</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>文件</th>
+              <th>用途</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>xpert-canvas-survey-results.json</code></td>
+              <td>Playwright 操作日志、页面 URL、截图路径、页面文字摘录。</td>
+            </tr>
+            <tr>
+              <td><code>xpert-canvas-survey-report.md</code></td>
+              <td>机器生成的原始 Markdown 截图清单。</td>
+            </tr>
+            <tr>
+              <td><code>inspect-xpert-canvas.mjs</code></td>
+              <td>本地 Xpert canvas 自动化体验脚本。</td>
+            </tr>
+            <tr>
+              <td><code>xpert-canvas-*.png</code></td>
+              <td>画布加载、节点选中、设置面板、添加菜单、自动布局等截图证据。</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </body>
+</html>
