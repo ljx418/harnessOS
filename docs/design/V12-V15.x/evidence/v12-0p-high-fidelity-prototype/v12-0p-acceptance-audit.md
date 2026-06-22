@@ -13,6 +13,8 @@ implementation, BFF integration, DTO correctness or runtime execution.
 - `v12_0p_high_fidelity_prototype_plan.md`
 - `v12_0p_interaction_experience_spec.md`
 - `index.html`
+- `gemini-light-studio-input.html`
+- `gemini-derived-light-studio-v1.html`
 - `prototype-review-data.json`
 - `prd-spec-review.md`
 - V12-0A component prototype and imag2 target-experience pack
@@ -29,6 +31,8 @@ implementation, BFF integration, DTO correctness or runtime execution.
 | Bottom workbench semantics | PASS | Chat, proposal timeline, Trace, quality and evidence tabs are defined. |
 | State enum coverage | PASS | API, node, edge, confirmation, evidence and blocked states are documented. |
 | PRD spec review | PASS | `prd-spec-review.md` maps prototype to PRD requirements. |
+| Gemini input preserved | PASS | Raw external prototype input is stored for traceability. |
+| Gemini-derived prototype | PASS | A derived HarnessOS prototype aligns the external input with frozen V12-0P decisions. |
 | No False Green | PASS_WITH_SAFE_CONTEXT_ONLY | Matches are limited to stop condition and blocked-claim contexts. |
 | Redaction scan | PASS_NO_MATCH | No forbidden raw content terms were found. |
 | Static render evidence | PASS | QuickLook generated `index.html.png`. |
@@ -44,6 +48,7 @@ implementation, BFF integration, DTO correctness or runtime execution.
 | Canvas nodes are disconnected generic blocks | NOT_TRIGGERED |
 | Bottom workbench is a generic chat box without ownership | NOT_TRIGGERED |
 | Product overclaim appears as a positive completion statement | NOT_TRIGGERED |
+| External Gemini input is treated as runtime or browser implementation proof | NOT_TRIGGERED |
 
 ## Open Human Review Questions
 

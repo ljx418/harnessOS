@@ -1,0 +1,44 @@
+{
+  "package_id": "project-introduction-poster-pack",
+  "status": "DESIGN_REVIEW_READY",
+  "scope": "project introduction and application scenario poster set",
+  "not_runtime_evidence": true,
+  "not_bff_evidence": true,
+  "not_browser_implementation_evidence": true,
+  "not_xpert_parity_evidence": true,
+  "posters": [
+    "poster-master.png",
+    "poster-01-quickstart.png",
+    "poster-02-workflow-map.png",
+    "poster-03-use-cases.png",
+    "poster-04-business-outcomes.png",
+    "poster-05-trust-and-evidence.png"
+  ],
+  "required_scenarios": [
+    "multi_agent_discussion",
+    "video_storyboard_workflow",
+    "local_document_summary",
+    "coding_proposal_workflow",
+    "evidence_audit"
+  ],
+  "acceptance_checks": {
+    "one_image_quick_start": "PASS_PENDING_REVIEW",
+    "workflow_examples_enumerated": "PASS_PENDING_REVIEW",
+    "business_outcomes_present": "PASS_PENDING_REVIEW",
+    "trust_and_evidence_boundary_present": "PASS_PENDING_REVIEW",
+    "false_green_guard_present": "PASS_PENDING_REVIEW"
+  },
+  "forbidden_positive_claims": [
+    "production ready",
+    "Xpert parity complete",
+    "complete Workflow Studio ready",
+    "Agent executor ready",
+    "生产可用",
+    "已完全追平 Xpert",
+    "完整 Workflow Studio 已完成",
+    "Agent 执行器已完成"
+  ],
+  "allowed_claim": "HarnessOS project introduction poster set ready for review.",
+  "created_at": "2026-06-16"
+}
+

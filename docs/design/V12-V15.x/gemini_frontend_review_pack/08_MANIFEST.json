@@ -1,0 +1,36 @@
+{
+  "package_id": "v12_gemini_generation_pack",
+  "status": "GENERATION_INPUT_READY",
+  "file_count": 9,
+  "design_only": true,
+  "browser_implementation_backed": false,
+  "bff_backed": false,
+  "dto_backed": false,
+  "runtime_backed": false,
+  "starter_prototype_source": "derived from current accepted V12-0P direction, not the incorrect earlier Gemini draft",
+  "allowed_statement": "V12 Gemini generation package ready for external review.",
+  "files": [
+    "00_README.md",
+    "01_GEMINI_GENERATION_PROMPT.md",
+    "02_PRODUCT_AND_BOUNDARIES.md",
+    "03_FROZEN_UX_DECISIONS.md",
+    "04_USER_SCENARIOS_AND_ACCEPTANCE.md",
+    "05_STARTER_PROTOTYPE_LIGHT_STUDIO.html",
+    "06_REFERENCE_RENDER.png",
+    "07_REVIEW_CHECKLIST.json",
+    "08_MANIFEST.json"
+  ],
+  "forbidden_positive_claims": [
+    "Xpert parity complete",
+    "Xpert-level UX complete",
+    "product-grade frontend complete",
+    "complete Workflow Studio ready",
+    "production ready",
+    "Agent executor ready",
+    "已完全追平 Xpert",
+    "产品级前端已完成",
+    "完整工作流工作台已完成",
+    "生产可用",
+    "Agent 执行器已完成"
+  ]
+}

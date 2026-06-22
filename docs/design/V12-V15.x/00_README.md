@@ -101,6 +101,7 @@ V15 complete: Xpert-level frontend interaction baseline ready for review.
 - `v12_component_prototype_plan.md`
 - `v12_component_prototype_execution_plan.md`
 - `v12_0p_high_fidelity_prototype_plan.md`
+- `v12_0p_component_design_decision_record.md`
 
 ## V12 Implementation-Readiness Documents
 
@@ -152,6 +153,8 @@ V15 complete: Xpert-level frontend interaction baseline ready for review.
 - `evidence/v12-component-prototype/redaction-scan.txt`
 - `evidence/v12-readiness/component-inventory-review.md`
 - `evidence/v12-0p-high-fidelity-prototype/index.html`
+- `evidence/v12-0p-high-fidelity-prototype/imag2-vs-html-comparison.html`
+- `evidence/v12-0p-high-fidelity-prototype/imag2-vs-html-comparison.fullpage.png`
 - `evidence/v12-0p-high-fidelity-prototype/index.html.png`
 - `evidence/v12-0p-high-fidelity-prototype/prototype-review-data.json`
 - `evidence/v12-0p-high-fidelity-prototype/artifact-manifest.json`

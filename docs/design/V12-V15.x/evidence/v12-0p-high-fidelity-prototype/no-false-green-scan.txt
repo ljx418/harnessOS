@@ -3,6 +3,7 @@ V12-0P No False Green Scan
 Scope:
 - docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype
 - docs/design/V12-V15.x/v12_0p_high_fidelity_prototype_plan.md
+- docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/component-deep-design-v4.html
 
 Command:
 rg -n "Xpert parity complete|Xpert-level UX complete|product-grade frontend complete|complete Workflow Studio ready|production ready|Agent executor ready|已完全追平|生产可用|完整工作流工作台已完成|Agent 执行器已完成" docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype docs/design/V12-V15.x/v12_0p_high_fidelity_prototype_plan.md
@@ -13,6 +14,8 @@ PASS_WITH_SAFE_CONTEXT_ONLY
 Matches:
 - v12_0p_high_fidelity_prototype_plan.md lines 97-98: stop condition / forbidden UI copy context.
 - prototype-review-data.json blocked_claims array: explicit blocked claims list.
+- component-deep-design-v4.html: forbidden-claim language appears only in
+  "禁止声明" and "不得声明" boundary explanations.
 
 Audit note:
 No forbidden term appears as a positive completion claim. The prototype keeps

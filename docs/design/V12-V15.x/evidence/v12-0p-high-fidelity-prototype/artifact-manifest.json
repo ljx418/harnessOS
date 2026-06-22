@@ -10,15 +10,21 @@
     {
       "artifact_id": "v12_0p_high_fidelity_plan",
       "path": "docs/design/V12-V15.x/v12_0p_high_fidelity_prototype_plan.md",
-      "sha256": "a46420fcc45e875932ac16ea017c93d59202f87f95d4c59b6744cca03cd1cac9",
+      "sha256": "ba4b06ba78e00f58a4fbf20eca0ab92d6b702903f08b7b91a3ae58db129bab6b",
       "purpose": "V12-0P development and acceptance plan"
     },
     {
-      "artifact_id": "v12_0p_html_review_page",
-      "path": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/index.html",
-      "sha256": "df3cd179957c867a4695b921d3b80d726e707c6b23f872387ae853421272a529",
-      "purpose": "Human-readable high-fidelity prototype review page"
+      "artifact_id": "v12_0p_component_design_decision_record",
+      "path": "docs/design/V12-V15.x/v12_0p_component_design_decision_record.md",
+      "sha256": "095312cc33ac0de679c81be8843c6c704aa94d8aeb88439c18bd444d920bf778",
+      "purpose": "Frozen V12-0P component decisions accepted from the high-fidelity review page and used as Figma handoff contract"
     },
+        {
+            "artifact_id": "v12_0p_html_review_page",
+            "path": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/index.html",
+            "sha256": "fa54f14a6d439fc6f17edf5c0b5295b8feeb738ddc97d2acad2f6c036e89f5ec",
+            "purpose": "Human-readable high-fidelity prototype review page"
+        },
     {
       "artifact_id": "v12_0p_static_render",
       "path": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/index.html.png",
@@ -43,17 +49,18 @@
       "sha256": "9f4f42324c7089e206899fbc65d71ecf814e1eab14d43267f1f220c274db6800",
       "purpose": "Self-audit and acceptance summary"
     },
-    {
-      "artifact_id": "v12_0p_no_false_green_scan",
-      "path": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/no-false-green-scan.txt",
-      "purpose": "Forbidden claim scan"
-    },
-    {
-      "artifact_id": "v12_0p_redaction_scan",
-      "path": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/redaction-scan.txt",
-      "sha256": "a228727ff19393373fcfa684e433e73cbc32dc7dcdef120bd74ab6d5c42367b7",
-      "purpose": "Forbidden raw content scan"
-    },
+        {
+            "artifact_id": "v12_0p_no_false_green_scan",
+            "path": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/no-false-green-scan.txt",
+            "sha256": "8a7a43a249afb07dc23d75d00bc9ee854260d31ec1fa41acea83cb8c3cdbb336",
+            "purpose": "Forbidden claim scan"
+        },
+        {
+            "artifact_id": "v12_0p_redaction_scan",
+            "path": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/redaction-scan.txt",
+            "sha256": "845ef9691ecc03b0c343413be8df1768c835df74ddcdb793267f1a85f9539f49",
+            "purpose": "Forbidden raw content scan"
+        },
     {
       "artifact_id": "v12_0p_quality_gap_analysis",
       "path": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/prototype-quality-gap-analysis.md",
@@ -63,7 +70,7 @@
     {
       "artifact_id": "v12_0p_imag2_vs_html_comparison",
       "path": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/imag2-vs-html-comparison.html",
-      "sha256": "57c45a7987f7c3a8a7f4aa6ce53c8f15d6a2b002f24643b8efd60115acb32a90",
+      "sha256": "4378639e8b3d85d7cd935721ac897734752f88fa68f96692fccf697b8402a08c",
       "purpose": "Side-by-side design comparison against imag2 overall target, with navigation IA, deep component-library review, user scenarios and self-audit"
     },
     {
@@ -81,7 +88,7 @@
     {
       "artifact_id": "v12_0p_imag2_vs_html_comparison_fullpage_render",
       "path": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/imag2-vs-html-comparison.fullpage.png",
-      "sha256": "622b557bb2a76085eb94029ff05268458b9962f147bbe398d6a5d638e0fe8d61",
+      "sha256": "a7f453c7932d0e89e9e07ee42a39b90dd6ea241e286d771f5c8452f66ee10b59",
       "purpose": "Full-page Chromium render of the extended review page"
     },
     {
@@ -138,17 +145,60 @@
       "sha256": "0f6b552a8ad4e85ddb5ef92050920f7bc0af03ed942757fe980d67147bac92c2",
       "purpose": "Prompt, decision and boundary record for icon-system enhancement"
     },
+        {
+            "artifact_id": "v12_0p_component_library_deep_design_audit",
+            "path": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/component-library-deep-design-audit.md",
+            "sha256": "2c2e749a4ba38b5c94a9422043e999f7125b071268472864c660278976a22d41",
+            "purpose": "Self-audit for the deep component library, scenario and target-experience review"
+        },
+        {
+            "artifact_id": "v12_0p_component_deep_design_v4",
+            "path": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/component-deep-design-v4.html",
+            "sha256": "b27ae3e313090b0474e8200639bd20cf1257ed7ba96c5e5ec93c53cb29697e0f",
+            "purpose": "Detailed component design board with annotated total layout, navigation IA, canvas, node card, inspector, bottom workbench, state matrix and user paths"
+        },
+        {
+            "artifact_id": "v12_0p_component_deep_design_v4_browser_render",
+            "path": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/component-deep-design-v4.playwright.png",
+            "sha256": "b3e08cb55a93fbd3b4e4c319b95695138dd9ea13bac786bd540c584c84632cce",
+            "purpose": "Chromium/Playwright full-page render of the V12-0P component deep design v4 page"
+        },
     {
-      "artifact_id": "v12_0p_component_library_deep_design_audit",
-      "path": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/component-library-deep-design-audit.md",
-      "sha256": "2c2e749a4ba38b5c94a9422043e999f7125b071268472864c660278976a22d41",
-      "purpose": "Self-audit for the deep component library, scenario and target-experience review"
+      "artifact_id": "v12_0p_figma_mcp_attempt",
+      "path": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/figma-mcp-attempt.md",
+      "sha256": "ba41506361585991c7cd5054436cc13242bd3412e8edea90bfb4950239088f25",
+      "purpose": "Figma MCP attempt record; blocked by Starter plan tool-call limit before Figma mutation"
+    },
+    {
+      "artifact_id": "v12_0p_gemini_input_prototype",
+      "path": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/gemini-light-studio-input.html",
+      "sha256": "462d764982577de2a9cec2c6e303d12dfd2829953c65c553ba391ae35ffcb6ce",
+      "purpose": "Raw Gemini-generated Light Studio prototype input preserved as design evidence input"
+    },
+    {
+      "artifact_id": "v12_0p_gemini_derived_prototype",
+      "path": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/gemini-derived-light-studio-v1.html",
+      "sha256": "261c5f228d8985e867ad622440e7e09f7fba8a5d2ddad831820db2063ac1296c",
+      "purpose": "HarnessOS-derived prototype refined from Gemini input and aligned to V12-0P frozen component decisions"
+    },
+    {
+      "artifact_id": "v12_0p_gemini_input_browser_render",
+      "path": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/gemini-light-studio-input.playwright.png",
+      "sha256": "b4bf2e25d20f7926ee75cb6c5170b0773006eea057ca93c59e4faf49334553f7",
+      "purpose": "Chromium/Playwright render of the raw Gemini input prototype"
+    },
+    {
+      "artifact_id": "v12_0p_gemini_derived_browser_render",
+      "path": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/gemini-derived-light-studio-v1.playwright.png",
+      "sha256": "43a286aa06ed90e4b42019800430290ceaa5dd1adc97358803059256bc2d2e2b",
+      "purpose": "Chromium/Playwright render of the HarnessOS-derived Gemini prototype"
     }
   ],
   "design_inputs": [
     "docs/design/V12-V15.x/evidence/v12-component-prototype/index.html",
     "docs/design/V12-V15.x/evidence/v12-component-prototype/imag2-experience/index.html",
-    "docs/design/V12-V15.x/evidence/v12-component-prototype/interaction-experience-detail.html"
+    "docs/design/V12-V15.x/evidence/v12-component-prototype/interaction-experience-detail.html",
+    "docs/design/V12-V15.x/v12_0p_component_design_decision_record.md"
   ],
   "not_evidence_for": [
     "real_browser_implementation",

@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HarnessOS V12 Light Studio Prototype - Gemini Input</title>
+    <style>
+      :root {
+        --bg: #f5f7fb;
+        --surface: #ffffff;
+        --surface-2: #f8fbff;
+        --line: #dbe3ee;
+        --text: #0f172a;
+        --muted: #64748b;
+        --blue: #2563eb;
+        --green: #16a34a;
+        --amber: #d97706;
+        --red: #dc2626;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      header {
+        height: 48px;
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        align-items: center;
+        padding: 0 16px;
+        background: var(--surface);
+      }
+
+      .main {
+        flex: 1;
+        display: flex;
+        overflow: hidden;
+      }
+      .rail {
+        width: 64px;
+        border-right: 1px solid var(--line);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 16px;
+      }
+      .sidebar {
+        width: 240px;
+        border-right: 1px solid var(--line);
+        padding: 16px;
+      }
+
+      .canvas-area {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+      }
+      .canvas {
+        flex: 1;
+        background-image: radial-gradient(var(--line) 1px, transparent 1px);
+        background-size: 20px 20px;
+      }
+
+      .workbench {
+        height: 280px;
+        border-top: 1px solid var(--line);
+        background: var(--surface);
+        display: flex;
+      }
+
+      .inspector {
+        width: 320px;
+        border-left: 1px solid var(--line);
+        padding: 16px;
+        overflow-y: auto;
+        background: var(--surface-2);
+      }
+
+      .field {
+        margin-bottom: 12px;
+      }
+      label {
+        display: block;
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 4px;
+      }
+      .value {
+        font-size: 14px;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <strong>HarnessOS</strong>
+      <span style="margin-left: 16px; color: var(--muted)">Light Studio / 总结讨论工作流</span>
+    </header>
+    <div class="main">
+      <nav class="rail">
+        <div style="width: 32px; height: 32px; background: var(--blue); border-radius: 6px"></div>
+      </nav>
+      <aside class="sidebar">
+        <h4>Workflow Context</h4>
+        <div style="font-size: 14px">已选: 总结讨论工作流</div>
+      </aside>
+      <main class="canvas-area">
+        <div class="canvas">
+          <div
+            style="
+              width: 160px;
+              height: 80px;
+              border: 1px solid var(--line);
+              background: var(--surface);
+              border-radius: 8px;
+              margin: 100px;
+              padding: 12px;
+              box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            "
+          >
+            <div style="font-size: 12px; font-weight: bold">总结 Agent</div>
+            <div style="font-size: 11px; color: var(--green)">运行中</div>
+          </div>
+        </div>
+        <section class="workbench">
+          <div style="flex: 1; padding: 16px">
+            <div style="border: 1px solid var(--line); border-radius: 8px; padding: 12px; height: 100%">
+              <strong>Workspace Chat</strong>
+              <div style="margin-top: 8px; color: var(--muted)">请输入目标或修订建议...</div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <aside class="inspector">
+        <h2>节点详情</h2>
+        <div class="field">
+          <label>角色</label>
+          <div class="value">总结者</div>
+        </div>
+        <div class="field">
+          <label>目标</label>
+          <div class="value">输出统一结论与建议</div>
+        </div>
+        <div class="field">
+          <label>证据</label>
+          <div class="value">storyboard-evidence.json</div>
+        </div>
+      </aside>
+    </div>
+  </body>
+</html>
+

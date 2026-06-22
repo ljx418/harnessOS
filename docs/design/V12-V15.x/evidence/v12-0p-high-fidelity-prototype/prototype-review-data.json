@@ -24,6 +24,8 @@
   "prototype_artifacts": {
     "html_review_page": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/index.html",
     "static_render_screenshot": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/index.html.png",
+    "gemini_input_html": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/gemini-light-studio-input.html",
+    "gemini_derived_html": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/gemini-derived-light-studio-v1.html",
     "prd_spec_review": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/prd-spec-review.md",
     "acceptance_audit": "docs/design/V12-V15.x/evidence/v12-0p-high-fidelity-prototype/v12-0p-acceptance-audit.md"
   },
@@ -72,6 +74,8 @@
   "acceptance_checks": {
     "index_html_exists": "PASS",
     "static_render_exists": "PASS",
+    "gemini_input_preserved": "PASS",
+    "gemini_derived_prototype_exists": "PASS",
     "prd_spec_review": "PASS",
     "no_false_green_scan": "PASS_WITH_SAFE_CONTEXT_ONLY",
     "redaction_scan": "PASS_WITH_SAFE_CONTEXT_ONLY",

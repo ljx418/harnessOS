@@ -60,6 +60,21 @@ directions are accepted:
 - right inspector;
 - Chat Workbench + proposal timeline.
 
+V12-0P also freezes the accepted high-fidelity component decisions in:
+
+```text
+docs/design/V12-V15.x/v12_0p_component_design_decision_record.md
+```
+
+The Figma prototype must treat that record as the source of truth for:
+
+- L1/L2 navigation ownership;
+- component responsibilities;
+- canvas node/port/edge semantics;
+- Inspector and bottom workbench boundaries;
+- visible state machine;
+- design-only evidence boundary.
+
 The Figma prototype may refine visual detail, but it must not silently change
 accepted component responsibilities or V12 boundaries.
 
@@ -118,6 +133,7 @@ HarnessOS semantics:
 | --- | --- |
 | Editable Figma layers | Reviewer can inspect and edit major UI groups as layers. |
 | Component sketch handoff | Reviewer can trace Figma screens back to accepted V12-0A component sketches. |
+| V12-0P decision handoff | Reviewer can trace Figma screens back to `v12_0p_component_design_decision_record.md`. |
 | Information architecture | Reviewer can identify workspace/project/app, canvas, node inspector, chat workbench and evidence surfaces. |
 | V12 boundary visibility | Prototype clearly states V12 is read-only canvas foundation and proposal handoff. |
 | Xpert reference usage | Prototype borrows workbench patterns but does not copy Xpert assets or claim parity. |
@@ -144,6 +160,7 @@ redaction scan and No False Green scan.
 
 - Figma prototype is used as HarnessOS runtime evidence.
 - Figma freeze starts before V12-0A component prototype report is accepted.
+- Figma prototype silently changes the V12-0P frozen component decision record.
 - Prototype is a single flattened screenshot with no editable structure.
 - Prototype claims complete Workflow Studio, Xpert parity complete, production
   ready or Agent executor ready.

@@ -17,6 +17,7 @@ Xpert parity evidence.
 - `v12_component_prototype_plan.md`
 - `v12_component_prototype_execution_plan.md`
 - `v12_0p_interaction_experience_spec.md`
+- `v12_0p_component_design_decision_record.md`
 - `v12_figma_prototype_review_plan.md`
 - `v12_to_v15_target_prd.md`
 - `v12_to_v15_target_architecture.md`
@@ -58,6 +59,27 @@ The high-fidelity prototype must include:
 | Right inspector | Overview, configuration, policy, quality, evidence, validation and disabled reasons. | Projection, not runtime truth. |
 | Bottom workbench | Chat, proposal timeline, trace, quality and evidence tabs. | Supporting review surface. |
 | Interaction states | Hover, selected, blocked, invalid edge, awaiting confirmation, API offline and evidence missing. | Design states, not execution proof. |
+
+## Frozen Design Decisions
+
+The accepted V12-0P design decisions are frozen in:
+
+```text
+docs/design/V12-V15.x/v12_0p_component_design_decision_record.md
+```
+
+That record is the canonical handoff from HTML prototype review into Figma /
+high-fidelity prototype design. Future Figma work may improve visual polish,
+spacing and component detail, but must not silently change:
+
+- L1 product rail as product domain navigation;
+- L2 sidebar as current workflow-context navigation;
+- Agent / skill / MCP resources living in drawer or Inspector, not workflow L2;
+- canvas node cards with concrete ports and edge semantics;
+- Inspector as read-only projection;
+- bottom Chat as independent workspace chat with proposal handoff semantics;
+- visible state machine and confirmation boundaries;
+- design-only evidence boundary.
 
 ## Acceptance Criteria
 

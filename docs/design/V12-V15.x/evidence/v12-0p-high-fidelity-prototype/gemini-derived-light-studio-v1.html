@@ -1,0 +1,804 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HarnessOS V12-0P Gemini Derived Light Studio Prototype</title>
+    <style>
+      :root {
+        --bg: #f4f7fb;
+        --surface: #ffffff;
+        --surface-soft: #f8fbff;
+        --line: #dbe3ee;
+        --line-strong: #c7d4e5;
+        --text: #0f172a;
+        --muted: #64748b;
+        --blue: #2563eb;
+        --blue-soft: #eaf1ff;
+        --green: #16a34a;
+        --green-soft: #dcfce7;
+        --amber: #d97706;
+        --amber-soft: #fef3c7;
+        --red: #dc2626;
+        --red-soft: #fee2e2;
+        --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+        font-family:
+          "Inter",
+          ui-sans-serif,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          "PingFang SC",
+          "Microsoft YaHei",
+          sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at 18% 0%, rgba(37, 99, 235, 0.1), transparent 26%),
+          linear-gradient(180deg, #fbfdff 0%, var(--bg) 100%);
+        color: var(--text);
+      }
+
+      .page {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 12px 18px;
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.86);
+        backdrop-filter: blur(12px);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 24px;
+        font-weight: 900;
+      }
+
+      .logo {
+        display: grid;
+        width: 34px;
+        height: 34px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 4px;
+        padding: 4px;
+        border-radius: 11px;
+        background: #e2e8f0;
+      }
+
+      .logo span {
+        border-radius: 999px;
+        background: #64748b;
+      }
+
+      .top-chip-row {
+        display: flex;
+        flex: 1;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: #fff;
+        color: #334155;
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .chip.blue {
+        border-color: #bfdbfe;
+        background: var(--blue-soft);
+        color: #1d4ed8;
+      }
+
+      .chip.green {
+        border-color: #bbf7d0;
+        background: var(--green-soft);
+        color: #15803d;
+      }
+
+      .chip.amber {
+        border-color: #fde68a;
+        background: var(--amber-soft);
+        color: #b45309;
+      }
+
+      .button {
+        padding: 10px 14px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+        color: #334155;
+        font-size: 13px;
+        font-weight: 850;
+      }
+
+      .button.primary {
+        border-color: #2563eb;
+        background: #2563eb;
+        color: #fff;
+      }
+
+      .layout {
+        display: grid;
+        min-height: calc(100vh - 63px);
+        grid-template-columns: 68px 248px minmax(0, 1fr) 320px;
+      }
+
+      .rail {
+        padding: 18px 12px;
+        border-right: 1px solid var(--line);
+        background: #fff;
+      }
+
+      .rail-btn {
+        display: grid;
+        place-items: center;
+        width: 42px;
+        height: 42px;
+        margin: 0 auto 12px;
+        border: 1px solid transparent;
+        border-radius: 14px;
+        color: #64748b;
+        font-size: 15px;
+        font-weight: 900;
+      }
+
+      .rail-btn.active {
+        border-color: #bfdbfe;
+        background: var(--blue-soft);
+        color: var(--blue);
+      }
+
+      .sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        border-right: 1px solid var(--line);
+        background: #fbfdff;
+        padding: 18px 16px;
+      }
+
+      .sidebar h2 {
+        margin: 0;
+        color: var(--blue);
+        font-size: 22px;
+      }
+
+      .panel {
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: #fff;
+        box-shadow: var(--shadow);
+      }
+
+      .workflow-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 11px 12px;
+        border-radius: 14px;
+        color: #334155;
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      .workflow-item.active {
+        background: var(--blue-soft);
+        color: var(--blue);
+      }
+
+      .workflow-item + .workflow-item {
+        margin-top: 10px;
+      }
+
+      .canvas-shell {
+        display: flex;
+        min-width: 0;
+        flex-direction: column;
+      }
+
+      .toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.88);
+      }
+
+      .tool-row {
+        display: flex;
+        gap: 8px;
+      }
+
+      .tool {
+        display: inline-flex;
+        min-width: 38px;
+        justify-content: center;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+        color: #64748b;
+        font-size: 13px;
+        font-weight: 900;
+      }
+
+      .tool.active {
+        border-color: #bfdbfe;
+        background: var(--blue-soft);
+        color: var(--blue);
+      }
+
+      .canvas {
+        position: relative;
+        min-height: 0;
+        flex: 1;
+        background:
+          radial-gradient(circle, rgba(37, 99, 235, 0.18) 1.2px, transparent 1.2px) 0 0 / 24px 24px,
+          #f8fbff;
+      }
+
+      svg.edges {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .edge {
+        fill: none;
+        stroke: #94a3b8;
+        stroke-width: 3;
+        stroke-linecap: round;
+      }
+
+      .edge.active {
+        stroke: var(--blue);
+      }
+
+      .edge.blocked {
+        stroke: var(--amber);
+        stroke-dasharray: 8 8;
+      }
+
+      .node {
+        position: absolute;
+        width: 188px;
+        padding: 14px;
+        border: 1px solid var(--line-strong);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.96);
+        box-shadow: var(--shadow);
+        transition: 160ms ease;
+      }
+
+      .node.selected {
+        border: 2px solid var(--blue);
+        box-shadow: 0 22px 44px rgba(37, 99, 235, 0.18);
+      }
+
+      .node.waiting {
+        border-color: #f59e0b;
+      }
+
+      .node-head {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .node-id {
+        display: grid;
+        place-items: center;
+        width: 26px;
+        height: 26px;
+        border-radius: 9px;
+        background: #e0e7ff;
+        color: var(--blue);
+        font-size: 12px;
+        font-weight: 950;
+      }
+
+      .node-name {
+        flex: 1;
+        font-size: 16px;
+        font-weight: 900;
+      }
+
+      .status {
+        padding: 4px 7px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 900;
+      }
+
+      .status.ready {
+        background: var(--green-soft);
+        color: var(--green);
+      }
+
+      .status.run {
+        background: var(--blue-soft);
+        color: var(--blue);
+      }
+
+      .status.wait {
+        background: var(--amber-soft);
+        color: var(--amber);
+      }
+
+      .meta {
+        display: grid;
+        gap: 8px;
+        margin-top: 12px;
+        padding-top: 10px;
+        border-top: 1px solid #edf2f7;
+        color: #64748b;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .meta-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .port {
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        border: 3px solid #60a5fa;
+        border-radius: 999px;
+        background: #fff;
+      }
+
+      .port.in.top {
+        top: -8px;
+        left: 50%;
+      }
+
+      .port.in.left {
+        top: 52%;
+        left: -8px;
+      }
+
+      .port.out.right {
+        top: 52%;
+        right: -8px;
+      }
+
+      .port.out.bottom {
+        bottom: -8px;
+        left: 50%;
+      }
+
+      .minimap {
+        position: absolute;
+        right: 18px;
+        bottom: 18px;
+        width: 134px;
+        height: 90px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.84);
+        box-shadow: var(--shadow);
+      }
+
+      .bottom {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        height: 274px;
+        border-top: 1px solid var(--line);
+        background: #fff;
+      }
+
+      .workbench-panel {
+        padding: 14px 16px;
+        min-width: 0;
+      }
+
+      .tabs {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .tab {
+        color: #64748b;
+        font-size: 13px;
+        font-weight: 850;
+      }
+
+      .tab.active {
+        color: var(--blue);
+      }
+
+      .chat-card,
+      .trace-card {
+        height: calc(100% - 36px);
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: #fbfdff;
+      }
+
+      .chat-card strong,
+      .trace-card strong {
+        display: block;
+        font-size: 15px;
+        margin-bottom: 8px;
+      }
+
+      .chat-input {
+        margin-top: 14px;
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .chat-field {
+        flex: 1;
+        padding: 12px 14px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+        color: #94a3b8;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .send {
+        width: 42px;
+        height: 42px;
+        border: 0;
+        border-radius: 14px;
+        background: var(--blue);
+        color: #fff;
+        font-weight: 900;
+      }
+
+      .trace-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 10px 0;
+        border-bottom: 1px solid #edf2f7;
+        color: #334155;
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .trace-row:last-child {
+        border-bottom: 0;
+      }
+
+      .trace-dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        margin-right: 8px;
+        border-radius: 999px;
+        background: var(--blue);
+      }
+
+      .inspector {
+        padding: 18px 16px;
+        border-left: 1px solid var(--line);
+        background: var(--surface-soft);
+        overflow: auto;
+      }
+
+      .inspector h2 {
+        margin: 0 0 4px;
+        font-size: 30px;
+      }
+
+      .inspector .sub {
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 750;
+      }
+
+      .field {
+        margin-top: 14px;
+      }
+
+      .field label {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 850;
+      }
+
+      .value {
+        padding: 12px 14px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+        color: #334155;
+        font-size: 13px;
+        line-height: 1.45;
+        font-weight: 750;
+      }
+
+      .node[data-node="trigger"] { left: 48px; top: 232px; }
+      .node[data-node="planner"] { left: 270px; top: 170px; }
+      .node[data-node="agent-a"] { left: 540px; top: 110px; }
+      .node[data-node="agent-b"] { left: 540px; top: 324px; }
+      .node[data-node="summary"] { left: 820px; top: 220px; }
+      .node[data-node="quality"] { left: 820px; top: 448px; }
+
+      .design-note {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        padding: 8px 12px;
+        border: 1px solid #fed7aa;
+        border-radius: 999px;
+        background: #fff7ed;
+        color: #9a3412;
+        font-size: 12px;
+        font-weight: 850;
+      }
+
+      @media (max-width: 1280px) {
+        .layout {
+          grid-template-columns: 64px 220px minmax(0, 1fr);
+        }
+
+        .inspector {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="topbar">
+        <div class="brand">
+          <div class="logo"><span></span><span></span><span></span><span></span></div>
+          <span>HarnessOS V12</span>
+        </div>
+        <div class="top-chip-row">
+          <span class="chip blue">Light Studio</span>
+          <span class="chip">工作空间 演示空间</span>
+          <span class="chip">项目 V12 关键用户场景</span>
+          <span class="chip">环境 沙箱 Sandbox</span>
+          <span class="chip">模型 MiniMax-M2.7</span>
+          <span class="chip">提供商 MiniMax</span>
+          <span class="chip green">API 在线</span>
+          <span class="chip blue">运行中</span>
+          <span class="chip amber">等待确认</span>
+        </div>
+        <button class="button">保存草稿</button>
+        <button class="button primary">提交审批</button>
+      </header>
+
+      <section class="layout">
+        <nav class="rail">
+          <div class="rail-btn active">H</div>
+          <div class="rail-btn">A</div>
+          <div class="rail-btn">W</div>
+          <div class="rail-btn">E</div>
+          <div class="rail-btn">S</div>
+        </nav>
+
+        <aside class="sidebar">
+          <h2>工作流平台</h2>
+          <div class="panel">
+            <div class="workflow-item active"><span>分镜生成工作流</span><b>3</b></div>
+            <div class="workflow-item"><span>罗马广场讨论</span><b>4</b></div>
+            <div class="workflow-item"><span>代码审查工作流</span><b>2</b></div>
+          </div>
+          <div class="panel">
+            <div style="margin-bottom: 10px; color: #94a3b8; font-size: 12px; font-weight: 850">上下文资源</div>
+            <div class="workflow-item"><span>智能体</span><b>6</b></div>
+            <div class="workflow-item"><span>技能</span><b>12</b></div>
+            <div class="workflow-item"><span>MCP</span><b>4</b></div>
+            <div class="workflow-item"><span>证据</span><b>18</b></div>
+            <div class="workflow-item"><span>运行记录</span><b>2</b></div>
+          </div>
+        </aside>
+
+        <main class="canvas-shell">
+          <div class="toolbar">
+            <div class="tool-row">
+              <span class="tool active">选</span>
+              <span class="tool">连</span>
+              <span class="tool">搜</span>
+              <span class="tool">+</span>
+              <span class="tool">锁</span>
+            </div>
+            <div class="tool-row">
+              <span class="chip blue">画布缩放 100%</span>
+              <span class="chip amber">只读画布</span>
+            </div>
+          </div>
+          <div class="canvas">
+            <div class="design-note">design_only · 非 browser / BFF / runtime 证据</div>
+            <svg class="edges" viewBox="0 0 1040 520" preserveAspectRatio="none">
+              <path class="edge active" d="M170 274 C220 274 228 220 270 220" />
+              <path class="edge" d="M458 220 C510 206 500 150 540 150" />
+              <path class="edge" d="M458 220 C510 244 504 364 540 364" />
+              <path class="edge active" d="M728 150 C790 150 756 262 820 262" />
+              <path class="edge active" d="M728 364 C788 360 760 290 820 286" />
+              <path class="edge blocked" d="M914 320 C958 360 952 454 910 466" />
+            </svg>
+
+            <div class="node" data-node="trigger">
+              <div class="port out right"></div>
+              <div class="node-head">
+                <span class="node-id">1</span>
+                <span class="node-name">触发器</span>
+                <span class="status ready">就绪</span>
+              </div>
+              <div class="meta">
+                <div class="meta-row"><span>事件触发</span><b>对话</b></div>
+                <div class="meta-row"><span>输出</span><b>goal</b></div>
+              </div>
+            </div>
+
+            <div class="node" data-node="planner">
+              <div class="port in left"></div>
+              <div class="port out right"></div>
+              <div class="node-head">
+                <span class="node-id">2</span>
+                <span class="node-name">规划 Agent</span>
+                <span class="status ready">就绪</span>
+              </div>
+              <div class="meta">
+                <div class="meta-row"><span>角色</span><b>规划师</b></div>
+                <div class="meta-row"><span>证据</span><b>v12-op-plan</b></div>
+              </div>
+            </div>
+
+            <div class="node" data-node="agent-a">
+              <div class="port in left"></div>
+              <div class="port out right"></div>
+              <div class="node-head">
+                <span class="node-id">3</span>
+                <span class="node-name">讨论 Agent A</span>
+                <span class="status ready">就绪</span>
+              </div>
+              <div class="meta">
+                <div class="meta-row"><span>角色</span><b>斯多葛派</b></div>
+                <div class="meta-row"><span>输出</span><b>观点</b></div>
+              </div>
+            </div>
+
+            <div class="node" data-node="agent-b">
+              <div class="port in left"></div>
+              <div class="port out right"></div>
+              <div class="node-head">
+                <span class="node-id">4</span>
+                <span class="node-name">讨论 Agent B</span>
+                <span class="status ready">就绪</span>
+              </div>
+              <div class="meta">
+                <div class="meta-row"><span>角色</span><b>苏格拉底派</b></div>
+                <div class="meta-row"><span>输出</span><b>追问</b></div>
+              </div>
+            </div>
+
+            <div class="node selected" data-node="summary">
+              <div class="port in left"></div>
+              <div class="port out bottom"></div>
+              <div class="node-head">
+                <span class="node-id">5</span>
+                <span class="node-name">总结 Agent</span>
+                <span class="status run">运行中</span>
+              </div>
+              <div class="meta">
+                <div class="meta-row"><span>工具</span><b>summary</b></div>
+                <div class="meta-row"><span>证据</span><b>storyboard-evidence</b></div>
+              </div>
+            </div>
+
+            <div class="node waiting" data-node="quality">
+              <div class="port in top"></div>
+              <div class="node-head">
+                <span class="node-id">6</span>
+                <span class="node-name">质检 Agent</span>
+                <span class="status wait">等待</span>
+              </div>
+              <div class="meta">
+                <div class="meta-row"><span>质量</span><b>待检查</b></div>
+                <div class="meta-row"><span>证据</span><b>review-ref</b></div>
+              </div>
+            </div>
+
+            <div class="minimap"></div>
+          </div>
+
+          <section class="bottom">
+            <div class="workbench-panel">
+              <div class="tabs">
+                <span class="tab active">对话</span>
+                <span class="tab">提案时间线</span>
+                <span class="tab">Trace</span>
+                <span class="tab">质量</span>
+                <span class="tab">证据</span>
+              </div>
+              <div class="chat-card">
+                <strong>Workspace Chat</strong>
+                <div style="color: #64748b; line-height: 1.62; font-size: 14px">
+                  请基于已收集的证据，生成 V12 关键用户场景的方案总结与风险建议，并输出下一步行动项。
+                </div>
+                <div style="display:flex; gap:10px; margin-top:12px; flex-wrap:wrap;">
+                  <span class="chip blue">workspace chat</span>
+                  <span class="chip amber">不会自动发布 / 运行</span>
+                  <span class="chip">/help</span>
+                  <span class="chip">/stations</span>
+                  <span class="chip">/evidence</span>
+                  <span class="chip">/diff</span>
+                </div>
+                <div class="chat-input">
+                  <div class="chat-field">请输入目标、修订建议或确认反馈...</div>
+                  <button class="send">↗</button>
+                </div>
+              </div>
+            </div>
+            <div class="workbench-panel">
+              <div class="tabs">
+                <span class="tab active">方案生成时间线</span>
+              </div>
+              <div class="trace-card">
+                <strong>方案生成时间线</strong>
+                <div class="trace-row"><span><i class="trace-dot"></i>触发器 接收目标</span><b>完成</b></div>
+                <div class="trace-row"><span><i class="trace-dot" style="background:#16a34a"></i>规划 Agent 制定计划</span><b>完成</b></div>
+                <div class="trace-row"><span><i class="trace-dot"></i>讨论 Agent A 产出观点</span><b>完成</b></div>
+                <div class="trace-row"><span><i class="trace-dot"></i>讨论 Agent B 产出追问</span><b>完成</b></div>
+                <div class="trace-row"><span><i class="trace-dot" style="background:#f59e0b"></i>总结 Agent 生成总结与建议</span><b>运行中</b></div>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <aside class="inspector">
+          <h2>总结Agent</h2>
+          <div class="sub">选中节点 · StationAgentProfile</div>
+          <div class="field"><label>角色</label><div class="value">总结者</div></div>
+          <div class="field"><label>目标</label><div class="value">基于多视角讨论输出统一结论与行动建议，保留分歧项与证据引用。</div></div>
+          <div class="field"><label>记忆摘要</label><div class="value">整合多轮观点，提炼共识与分歧。</div></div>
+          <div class="field"><label>工具</label><div class="value">workspace.read, markdown.summary</div></div>
+          <div class="field"><label>技能</label><div class="value">dialogue-synthesis, insight-extraction</div></div>
+          <div class="field"><label>MCP</label><div class="value">minimax-image, artifact.preview</div></div>
+          <div class="field"><label>质量</label><div class="value">质量门槛：待人工复核</div></div>
+          <div class="field"><label>证据</label><div class="value">storyboard-evidence.json</div></div>
+          <div class="field"><label>最新输出</label><div class="value">共识：多 Agent 讨论能覆盖多个视角。建议：保留质检 Agent 作为每轮输出验收节点。</div></div>
+        </aside>
+      </section>
+    </div>
+  </body>
+</html>
+

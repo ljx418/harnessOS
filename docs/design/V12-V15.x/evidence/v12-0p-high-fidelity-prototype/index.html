@@ -192,6 +192,54 @@
         gap: 16px;
       }
 
+      .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+
+      .comparison-card {
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: #fff;
+        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+      }
+
+      .comparison-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--line);
+        background: #fbfdff;
+      }
+
+      .comparison-head strong {
+        font-size: 15px;
+      }
+
+      .comparison-body {
+        padding: 14px;
+      }
+
+      .comparison-body img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+      }
+
+      .comparison-note {
+        margin-top: 10px;
+        color: #64748b;
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
       .mini-card {
         background: var(--panel);
         border: 1px solid var(--line);
@@ -918,6 +966,7 @@
 
       @media (max-width: 1180px) {
         .hero,
+        .grid-2,
         .grid-3,
         .status-grid,
         .artifact-grid,
@@ -969,6 +1018,42 @@
             <div class="label">下一门禁</div>
             <div class="value">通过本原型审查后，进入 V12 implementation-readiness audit；仍不得跳过 BFF / browser boundary 验收。</div>
           </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Gemini 输入与 HarnessOS 派生原型</h2>
+        <p>
+          这次 V12-0P 审查新增记录了一个外部原型输入。左侧保留 Gemini 生成的最小 Light Studio
+          原型；右侧是基于当前冻结决策派生出的 HarnessOS 原型代码。两者都属于
+          design_only 设计证据，不计入真实 browser / BFF / runtime 实现。
+        </p>
+        <div class="grid-2" style="margin-top: 16px">
+          <article class="comparison-card">
+            <div class="comparison-head">
+              <strong>Gemini 原始输入</strong>
+              <span class="tag">external design input</span>
+            </div>
+            <div class="comparison-body">
+              <img src="./gemini-light-studio-input.playwright.png" alt="Gemini 原始 Light Studio 原型截图" />
+              <div class="comparison-note">
+                作为外部设计输入原样落盘，保留其信息架构、组件边界和最小产品形态。
+              </div>
+            </div>
+          </article>
+          <article class="comparison-card">
+            <div class="comparison-head">
+              <strong>HarnessOS 派生原型</strong>
+              <span class="tag">aligned to V12-0P decisions</span>
+            </div>
+            <div class="comparison-body">
+              <img src="./gemini-derived-light-studio-v1.playwright.png" alt="HarnessOS 派生 Light Studio 原型截图" />
+              <div class="comparison-note">
+                已补 L1/L2 导航、状态 chips、曲线连线、多节点、Inspector 和底部工作台，符合当前 V12-0P
+                冻结方向。
+              </div>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -1163,6 +1248,27 @@
               <div class="field"><small>质量与证据</small><div>quality_ref: q-204。evidence_ref: ev-storyboard-071。redaction: PASS。</div></div>
             </aside>
           </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>组件深度设计稿 v4</h2>
+        <div class="grid-3">
+          <div class="mini-card">
+            <strong>为什么新增</strong>
+            <p>上一版仍偏整体展示，组件细节不足。v4 单独展开导航、画布、节点卡、Inspector、底部工作台、状态枚举和用户路径。</p>
+          </div>
+          <div class="mini-card">
+            <strong>重点修复</strong>
+            <p>工作流平台作为一级路由；候选节点和模板收纳到二级上下文；节点补多输入多输出端口；连线改为完整曲线；Inspector 与底部工作台分层更清楚。</p>
+          </div>
+          <div class="mini-card">
+            <strong>审查入口</strong>
+            <p><a class="button primary" href="component-deep-design-v4.html">打开组件深度设计稿 v4</a></p>
+          </div>
+        </div>
+        <div class="footer-note">
+          该 v4 页面仍是 design_only 原型证据，不能替代 HarnessOS 真实浏览器实现、BFF 日志、DTO snapshot、Playwright trace 或 runtime evidence。
         </div>
       </section>
 
