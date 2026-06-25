@@ -1,0 +1,19 @@
+{
+  "schema_version": "v14.unsafe_package_denial.v1",
+  "package_id": "pkg-v14-unsafe-shell-executor",
+  "status": "denied",
+  "denial_reason": "未审执行载荷、全局作用域请求和未知权限被策略拒绝",
+  "blocked_fields": [
+    "unknown_executable_payload",
+    "unreviewed_permission",
+    "scope_escalation_request"
+  ],
+  "blocked_permissions": [
+    "execute:shell",
+    "scope:global"
+  ],
+  "active_capability_created": false,
+  "runtime_backed": false,
+  "audit_ref": "audit://v14/extension/unsafe-shell-executor",
+  "created_at": "2026-06-24T00:00:00Z"
+}

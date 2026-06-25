@@ -1,0 +1,40 @@
+{
+  "schema_version": "pv16.claim_to_evidence_matrix.v1",
+  "status": "PASS",
+  "allowed_claim": "PV16 complete: product-runtime hardening pilot ready for review.",
+  "claims": [
+    {
+      "claim_id": "pv16_entity_mutation",
+      "status": "PASS",
+      "evidence_refs": [
+        "entity-crud-report.json",
+        "bff-route-log.json"
+      ]
+    },
+    {
+      "claim_id": "pv16_runtime_run_inspect",
+      "status": "PASS",
+      "evidence_refs": [
+        "runtime-run-inspect-report.json",
+        "runtime-inspect-screenshot.png"
+      ]
+    },
+    {
+      "claim_id": "pv16_deployment_hardening",
+      "status": "PASS",
+      "evidence_refs": [
+        "deployment-smoke-output.txt",
+        "deployment-health-report.json"
+      ]
+    },
+    {
+      "claim_id": "pv16_product_runtime_journey",
+      "status": "PASS",
+      "evidence_refs": [
+        "ux-hardening-report.json",
+        "product-journey-screenshot.png"
+      ]
+    }
+  ],
+  "created_at": "2026-06-25T00:00:00Z"
+}

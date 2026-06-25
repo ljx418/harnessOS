@@ -1,0 +1,32 @@
+{
+  "schema_version": "v13.substage_verification_report.v1",
+  "status": "PASS",
+  "stages": [
+    {
+      "stage_id": "V13-R0",
+      "status": "PASS",
+      "evidence_ref": "prd-spec-review.md"
+    },
+    {
+      "stage_id": "V13-S1",
+      "status": "PASS",
+      "evidence_ref": "graph-roundtrip-report.json"
+    },
+    {
+      "stage_id": "V13-S2",
+      "status": "PASS",
+      "evidence_ref": "browser-action-log.json"
+    },
+    {
+      "stage_id": "V13-S3",
+      "status": "PASS",
+      "evidence_ref": "confirmation-transcript.txt"
+    },
+    {
+      "stage_id": "V13-SA",
+      "status": "PASS",
+      "evidence_ref": "v13-workflow-studio-acceptance-data.json"
+    }
+  ],
+  "created_at": "2026-06-25T00:00:00Z"
+}

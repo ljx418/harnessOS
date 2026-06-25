@@ -1,0 +1,54 @@
+{
+  "schema_version": "pv16.runtime_run_inspect_report.v1",
+  "status": "PASS",
+  "run_ref": "runtime-run:pv16:wfi_a82481f4fd80",
+  "workflow_instance_id": "wfi_a82481f4fd80",
+  "workflow_version_ref": "wfv_a4743cfc89e1",
+  "runtime_backed": true,
+  "runtime_status": "waiting_approval",
+  "runtime_event_refs": [
+    "gateway-event://wfi_a82481f4fd80/turn.started",
+    "gateway-event://wfi_a82481f4fd80/turn.completed"
+  ],
+  "trace_refs": [
+    "trace://pv16/runtime/wfi_a82481f4fd80"
+  ],
+  "artifact_refs": [
+    "artifact://pv16/runtime/output-2"
+  ],
+  "quality_refs": [
+    "quality://pv16/runtime/local-smoke"
+  ],
+  "audit_ref": "audit://pv16/runtime/confirm-run",
+  "created_at": "2026-06-25T00:00:00Z",
+  "inspection": {
+    "schema_version": "pv16.runtime_inspection.v1",
+    "status": "PASS",
+    "run_ref": "runtime-run:pv16:wfi_a82481f4fd80",
+    "runtime_backed": true,
+    "progress": [
+      {
+        "step": "workspace_loaded",
+        "status": "PASS",
+        "evidence_ref": "entity-crud-report.json"
+      },
+      {
+        "step": "workflow_confirmed",
+        "status": "PASS",
+        "evidence_ref": "diff-v13-editable-studio-pilot-001"
+      },
+      {
+        "step": "runtime_events_collected",
+        "status": "PASS",
+        "evidence_ref": "trace://pv16/runtime/wfi_a82481f4fd80"
+      },
+      {
+        "step": "artifact_refs_attached",
+        "status": "PASS",
+        "evidence_ref": "artifact://pv16/runtime/output-2"
+      }
+    ],
+    "audit_ref": "audit://pv16/runtime/inspect",
+    "created_at": "2026-06-25T00:00:00Z"
+  }
+}

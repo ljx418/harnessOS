@@ -1,0 +1,159 @@
+{
+  "schema_version": "v15.observability_deployment_artifact_manifest.v1",
+  "stage_id": "V15-SA",
+  "status": "PASS",
+  "evidence_scope": "aggregate_reconciliation",
+  "not_production_ga_evidence": true,
+  "required_artifacts": [
+    {
+      "artifact_id": "acceptance_data",
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/acceptance-data.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "bc0142ec38b686558c4ed2cea61357b7105bff06475997133e27f2fc53b9b906"
+    },
+    {
+      "artifact_id": "artifact_manifest",
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/artifact-manifest.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "fff647bf40df0c7b6cefe74f7ff83de3e7dbf645f8d9ecfcc2b8827c68920d13"
+    },
+    {
+      "artifact_id": "trace_timeline",
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/trace-timeline.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "bc0ddd1d1d5f33e64fe5acc0149f87c3dd9ee16d13bbf2876782f6b4cda1f6f4"
+    },
+    {
+      "artifact_id": "metrics_snapshot",
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/metrics-snapshot.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "5523dd70a34fe33c223798ca64a613ebfc0ccb007e60ac852b9e74dd6ec1c6b2"
+    },
+    {
+      "artifact_id": "audit_export_package",
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/audit-export-package.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "41afe4dd7d3cce3ee391aa5d56c690e6e55a0389c26eb007b023b022b383453e"
+    },
+    {
+      "artifact_id": "incident_timeline",
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/incident-timeline.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "2f78bcd72a9a83a01f98867585d0773d4f46c7240fce57145816e4310d350b4d"
+    },
+    {
+      "artifact_id": "deployment_profile",
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/deployment-profile.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "685e449b936806ea0b0bf70ad99fe72f78e4e5f378d92a819daf7abff47306bd"
+    },
+    {
+      "artifact_id": "health_check_result",
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/health-check-result.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "b86a52362ea76a910c334e610353f4aa39ae06f1aa3c29a4c7bc3c7c0e24fb1c"
+    },
+    {
+      "artifact_id": "deployment_smoke_output",
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/deployment-smoke-output.txt",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "03b7143e4847f8c1c4a99baba4b006a77249cb7bb11eb3b1394526e5e611d486"
+    },
+    {
+      "artifact_id": "final_scenario_matrix",
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/final-scenario-matrix.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "57017a9d78105a8b0c7de0ddcf3d66af8deef664812c3895ebdb9b4ea8bb4e4d"
+    },
+    {
+      "artifact_id": "product_shell_screenshot",
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/product-shell-screenshot.png",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "89c69a26c0508529596e84cb899d10a28ccbc2c1827a24aed56c5abadfe4d4eb"
+    },
+    {
+      "artifact_id": "observability_dashboard_screenshot",
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/observability-dashboard-screenshot.png",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "7d1a4cc40a11c84c192339a3b219ba409b5e158433827e506ea6b53c3bf88360"
+    },
+    {
+      "artifact_id": "browser_network_log",
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/browser-network-log.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "34a643e6902a3e479573276f0c4727186e02b97295f46d6aee247139df4e6cdd"
+    },
+    {
+      "artifact_id": "bff_route_log",
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/bff-route-log.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "99feba5d42b45a05c50f38a629c6948ec136b744088ac37bc529a741a3dc5959"
+    },
+    {
+      "artifact_id": "prd_spec_review",
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/prd-spec-review.md",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "2d43bf4114773429e6ea39450df9f927d70bc3b56c057f65d4bdbdddfe435ad9"
+    },
+    {
+      "artifact_id": "target_architecture_review",
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/target-architecture-review.md",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "2141f6df6cfc9a2625eb26b6c79b2b370e9628be5a6a5db85a0c2c33ed9f1219"
+    },
+    {
+      "artifact_id": "audit_opinion",
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/audit-opinion.md",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "3584ef7643e0a922863d52b29ce53684898d4658ab77bf11db8cad584e2ff019"
+    },
+    {
+      "artifact_id": "audit_closure",
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/audit-closure.md",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "5e91fa4e80cbf08539d1d0ef2dd140325c99b7fb780af4102618d515edb61df3"
+    },
+    {
+      "artifact_id": "no_false_green_scan",
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/no-false-green-scan.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "8ce1e627ae2b6fdb6a1e7a138c5cac74474185a1d474c6b6aa1b76043d71efab"
+    },
+    {
+      "artifact_id": "redaction_scan",
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/redaction-scan.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "e38c67f673ee5052f11878e3164d3065088cef91ab471d636adfe5a7f57f80e8"
+    }
+  ],
+  "blocked_claims": [
+    "browser implementation complete",
+    "BFF runtime evidence complete",
+    "Xpert parity complete",
+    "product-grade frontend complete",
+    "complete Workflow Studio ready",
+    "production ready",
+    "Agent executor ready"
+  ],
+  "created_at": "2026-06-24T00:00:00Z"
+}

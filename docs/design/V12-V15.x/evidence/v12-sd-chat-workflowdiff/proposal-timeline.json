@@ -1,0 +1,40 @@
+{
+  "schema_version": "v12.workbench_proposal_timeline.v1",
+  "proposal_timeline_id": "timeline-v12-markdown-summary-real",
+  "conversation_id": "conv-v12-markdown-summary-goal-real",
+  "workflow_diff_proposal_ref": "diff-v12-readonly-proposal-ref",
+  "current_state": "awaiting_user_confirmation",
+  "events": [
+    {
+      "event_id": "evt-v12-goal-received",
+      "label": "目标已接收",
+      "state": "goal_received",
+      "risk_level": "low",
+      "created_at": "2026-06-23T00:00:00Z"
+    },
+    {
+      "event_id": "evt-v12-proposal-ready",
+      "label": "WorkflowDiff 提案已生成",
+      "state": "proposal_ready",
+      "risk_level": "medium",
+      "created_at": "2026-06-23T00:00:10Z"
+    },
+    {
+      "event_id": "evt-v12-awaiting-confirmation",
+      "label": "等待人工确认交接",
+      "state": "awaiting_user_confirmation",
+      "risk_level": "medium",
+      "created_at": "2026-06-23T00:00:20Z"
+    }
+  ],
+  "changed_node_refs": [
+    "folder_input",
+    "quality_check"
+  ],
+  "blocked_runtime_actions": [
+    "publish",
+    "run",
+    "apply_to_workflow_spec_graph"
+  ],
+  "audit_ref": "audit://v12/current-stage/proposal-timeline"
+}

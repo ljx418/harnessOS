@@ -1,0 +1,36 @@
+{
+  "schema_version": "v14.skill_package_manifest.v1",
+  "package": {
+    "schema_version": "v14.extension_package_manifest.v1",
+    "package_id": "pkg-v14-skill-summary-guard",
+    "display_name": "总结质量守护 Skill",
+    "package_kind": "skill",
+    "publisher": "HarnessOS Local Review",
+    "version": "0.14.0-review",
+    "trust_level": "reviewed_local",
+    "status": "approved",
+    "requested_permissions": [
+      "read:workflow_diff",
+      "write:quality_hint"
+    ],
+    "required_credential_refs": [],
+    "redacted_config_refs": [
+      "config_ref:v14-summary-guard-redacted"
+    ],
+    "capability_refs": [
+      "skill:markdown.summary.guard"
+    ],
+    "scope_requirements": [
+      "workspace",
+      "project",
+      "app",
+      "agent"
+    ],
+    "audit_ref": "audit://v14/extension/skill-summary-guard",
+    "created_at": "2026-06-24T00:00:00Z"
+  },
+  "skill_refs": [
+    "skill:markdown.summary.guard"
+  ],
+  "runtime_backed": false
+}

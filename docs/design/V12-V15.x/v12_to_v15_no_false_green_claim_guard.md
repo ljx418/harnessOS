@@ -2,11 +2,12 @@
 
 ## Allowed Claims
 
-- V12-V15 planning complete: Xpert-level frontend interaction and productization roadmap ready for review.
+- V12-V15 planning complete: staged product experience and frontend interaction baseline roadmap ready for review.
 - V12 complete: product entity, browser workbench and canvas foundation ready for review.
 - V13 complete: editable Workflow Studio pilot slice ready for review.
 - V14 complete: governed extension ecosystem pilot ready for review.
-- V15 complete: Xpert-level frontend interaction baseline ready for review.
+- V15 complete: frontend interaction baseline ready for review.
+- PV16 complete: product-runtime hardening pilot ready for review.
 
 ## Forbidden Positive Claims
 
@@ -48,6 +49,10 @@ as release notes, dashboard status or completion claims.
 
 V15 cannot claim baseline readiness unless V12, V13 and V14 evidence packages
 exist and pass. Planning docs cannot satisfy implementation evidence.
+
+PV16 cannot claim product-runtime hardening pilot readiness unless PV16-S1,
+PV16-S2, PV16-S3, PV16-S4 and PV16-SA evidence exists and
+`tools/post_v15/run_product_runtime_hardening_acceptance.py` PASSes.
 
 ## Reference Evidence Rule
 

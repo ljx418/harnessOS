@@ -1,0 +1,71 @@
+{
+  "schema_version": "v15.observability_deployment_acceptance_report.v1",
+  "status": "PASS",
+  "stage_id": "V15-SA",
+  "substage_status": {
+    "V15-R0": "PASS",
+    "V15-S1": "PASS",
+    "V15-S2": "PASS",
+    "V15-S3": "PASS",
+    "V15-SA": "PASS"
+  },
+  "dependency_results": [
+    {
+      "stage": "V12",
+      "status": "PASS",
+      "path": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/acceptance-data.json"
+    },
+    {
+      "stage": "V13",
+      "status": "PASS",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/v13-workflow-studio-acceptance-data.json"
+    },
+    {
+      "stage": "V14",
+      "status": "PASS",
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/acceptance-data.json"
+    }
+  ],
+  "evidence_dir": "docs/design/V12-V15.x/evidence/v15-observability-deployment",
+  "missing_artifacts": [],
+  "schema_results": [
+    {
+      "status": "PASS",
+      "data": "docs/design/V12-V15.x/evidence/v15-observability-deployment/acceptance-data.json",
+      "schema": "docs/design/V12-V15.x/schemas/v15_observability_deployment_acceptance_data.schema.json"
+    },
+    {
+      "status": "PASS",
+      "data": "docs/design/V12-V15.x/evidence/v15-observability-deployment/artifact-manifest.json",
+      "schema": "docs/design/V12-V15.x/schemas/v15_observability_deployment_artifact_manifest.schema.json"
+    }
+  ],
+  "claim_scan": {
+    "status": "PASS",
+    "matches": []
+  },
+  "redaction_scan": {
+    "status": "PASS",
+    "matches": []
+  },
+  "browser_boundary": {
+    "status": "PASS",
+    "forbidden_matches": []
+  },
+  "deployment_smoke": {
+    "status": "PASS",
+    "evidence_ref": "deployment-smoke-output.txt"
+  },
+  "allowed_claim": "V15 frontend interaction baseline ready for review.",
+  "forbidden_positive_claims": [
+    "browser implementation complete",
+    "BFF runtime evidence complete",
+    "Xpert parity complete",
+    "product-grade frontend complete",
+    "complete Workflow Studio ready",
+    "production ready",
+    "Agent executor ready"
+  ],
+  "runtime_backed": false,
+  "created_at": "2026-06-24T00:00:00+08:00"
+}

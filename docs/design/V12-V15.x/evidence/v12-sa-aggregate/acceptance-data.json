@@ -1,0 +1,99 @@
+{
+  "schema_version": "v12.remaining_stage_acceptance_data.v1",
+  "stage_id": "V12-SA",
+  "status": "PASS",
+  "evidence_scope": "aggregate_reconciliation",
+  "runtime_backed": false,
+  "browser_backed": true,
+  "bff_backed": true,
+  "dto_backed": true,
+  "design_only_used_as_browser_evidence": false,
+  "xpert_reference_used_as_harnessos_evidence": false,
+  "scenario_results": [
+    {
+      "scenario_id": "US-V12-SA",
+      "status": "PASS",
+      "user_visible_result": "Reviewer sees V12 claim-to-evidence reconciliation and deferred V13-V15 scope.",
+      "evidence_refs": [
+        "docs/design/V12-V15.x/evidence/v12-sa-aggregate/browser-screenshot.png",
+        "docs/design/V12-V15.x/evidence/v12-sa-aggregate/bff-route-log.json"
+      ]
+    }
+  ],
+  "required_artifacts": {
+    "acceptance_data": {
+      "path": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/acceptance-data.json",
+      "status": "PRESENT"
+    },
+    "browser_screenshot": {
+      "path": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/browser-screenshot.png",
+      "status": "PRESENT"
+    },
+    "browser_network_log": {
+      "path": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/browser-network-log.json",
+      "status": "PRESENT"
+    },
+    "bff_route_log": {
+      "path": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/bff-route-log.json",
+      "status": "PRESENT"
+    },
+    "schema_validation_report": {
+      "path": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/schema-validation-report.json",
+      "status": "PRESENT"
+    },
+    "prd_spec_review": {
+      "path": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/prd-spec-review.md",
+      "status": "PRESENT"
+    },
+    "target_architecture_review": {
+      "path": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/target-architecture-review.md",
+      "status": "PRESENT"
+    },
+    "audit_opinion": {
+      "path": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/audit-opinion.md",
+      "status": "PRESENT"
+    },
+    "audit_closure": {
+      "path": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/audit-closure.md",
+      "status": "PRESENT"
+    },
+    "no_false_green_scan": {
+      "path": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/no-false-green-scan.txt",
+      "status": "PRESENT"
+    },
+    "redaction_scan": {
+      "path": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/redaction-scan.txt",
+      "status": "PRESENT"
+    }
+  },
+  "schema_validation": {
+    "status": "PASS",
+    "evidence_ref": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/schema-validation-report.json"
+  },
+  "browser_boundary": {
+    "status": "PASS",
+    "evidence_ref": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/browser-network-log.json"
+  },
+  "prd_review": {
+    "status": "PASS",
+    "evidence_ref": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/prd-spec-review.md"
+  },
+  "target_architecture_review": {
+    "status": "PASS",
+    "evidence_ref": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/target-architecture-review.md"
+  },
+  "audit": {
+    "fatal_findings": 0,
+    "major_findings": 0,
+    "closure_status": "CLOSED"
+  },
+  "claim_scan": {
+    "status": "PASS",
+    "evidence_ref": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/no-false-green-scan.txt"
+  },
+  "redaction_scan": {
+    "status": "PASS",
+    "evidence_ref": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/redaction-scan.txt"
+  },
+  "created_at": "2026-06-24T00:00:00+08:00"
+}

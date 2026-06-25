@@ -1,0 +1,15 @@
+{
+  "schema_version": "v14.no_false_green_scan.v1",
+  "status": "PASS",
+  "blocked_claims": [
+    "browser implementation complete",
+    "BFF runtime evidence complete",
+    "Xpert parity complete",
+    "product-grade frontend complete",
+    "complete Workflow Studio ready",
+    "production ready",
+    "Agent executor ready"
+  ],
+  "allowed_claim": "V14 complete: governed extension ecosystem pilot ready for review.",
+  "created_at": "2026-06-24T00:00:00Z"
+}

@@ -1,0 +1,73 @@
+{
+  "schema_version": "v13.interaction_parity_report.v1",
+  "status": "PASS",
+  "source_reference": "C:/Users/Administrator/Downloads/harnessos_v13_prototype (1).html",
+  "viewport": {
+    "width": 1500,
+    "height": 980
+  },
+  "checks": [
+    {
+      "check_id": "l1_agents_route_updates_l2",
+      "status": "PASS"
+    },
+    {
+      "check_id": "l1_workbench_route_restores_scenarios",
+      "status": "PASS"
+    },
+    {
+      "check_id": "scenario_storyboard_morphs_canvas",
+      "status": "PASS"
+    },
+    {
+      "check_id": "scenario_roma_restores_canvas",
+      "status": "PASS"
+    },
+    {
+      "check_id": "keyboard_zoom_and_reset",
+      "status": "PASS",
+      "zoom_before": "100%",
+      "zoom_after": "110%"
+    },
+    {
+      "check_id": "node_drag_updates_canvas_geometry",
+      "status": "PASS",
+      "before": {
+        "x": 486,
+        "y": 290
+      },
+      "after": {
+        "x": 551,
+        "y": 319
+      }
+    },
+    {
+      "check_id": "port_drag_creates_free_connection",
+      "status": "PASS"
+    },
+    {
+      "check_id": "chat_help_command_appends_reply",
+      "status": "PASS"
+    },
+    {
+      "check_id": "text_layout_no_visible_overflow",
+      "status": "PASS",
+      "scanned_elements": 39
+    },
+    {
+      "check_id": "state_menu_updates_api_pill",
+      "status": "PASS"
+    },
+    {
+      "check_id": "simulation_reaches_blocked_modal_and_handoff",
+      "status": "PASS"
+    }
+  ],
+  "screenshots": [
+    "scenario-storyboard-screenshot.png",
+    "chat-command-screenshot.png",
+    "simulation-blocked-modal-screenshot.png"
+  ],
+  "runtime_backed": false,
+  "created_at": "2026-06-25T00:00:00Z"
+}

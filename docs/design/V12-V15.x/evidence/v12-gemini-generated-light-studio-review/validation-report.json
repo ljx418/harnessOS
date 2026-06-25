@@ -1,0 +1,119 @@
+{
+  "output": {
+    "actual_files": [
+      "README.md",
+      "artifact-manifest.json",
+      "audit-notes.md",
+      "index.html",
+      "index.local-render.png",
+      "styles.generated.css",
+      "validation-report.json"
+    ],
+    "bff_backed": false,
+    "browser_implementation_backed": false,
+    "dto_backed": false,
+    "evidence_scope": "design_only",
+    "exists": true,
+    "external_dependency_scan": "PASS",
+    "external_dependency_terms": [],
+    "forbidden_positive_claim_hits": [
+      {
+        "line": 30,
+        "path": "docs/design/V12-V15.x/evidence/v12-gemini-generated-light-studio-review/artifact-manifest.json",
+        "safe_context": true,
+        "term": "Xpert parity complete"
+      },
+      {
+        "line": 31,
+        "path": "docs/design/V12-V15.x/evidence/v12-gemini-generated-light-studio-review/artifact-manifest.json",
+        "safe_context": true,
+        "term": "Xpert-level UX complete"
+      },
+      {
+        "line": 32,
+        "path": "docs/design/V12-V15.x/evidence/v12-gemini-generated-light-studio-review/artifact-manifest.json",
+        "safe_context": true,
+        "term": "product-grade frontend complete"
+      },
+      {
+        "line": 33,
+        "path": "docs/design/V12-V15.x/evidence/v12-gemini-generated-light-studio-review/artifact-manifest.json",
+        "safe_context": true,
+        "term": "complete Workflow Studio ready"
+      },
+      {
+        "line": 34,
+        "path": "docs/design/V12-V15.x/evidence/v12-gemini-generated-light-studio-review/artifact-manifest.json",
+        "safe_context": true,
+        "term": "production ready"
+      },
+      {
+        "line": 35,
+        "path": "docs/design/V12-V15.x/evidence/v12-gemini-generated-light-studio-review/artifact-manifest.json",
+        "safe_context": true,
+        "term": "Agent executor ready"
+      },
+      {
+        "line": 36,
+        "path": "docs/design/V12-V15.x/evidence/v12-gemini-generated-light-studio-review/artifact-manifest.json",
+        "safe_context": true,
+        "term": "已完全追平 Xpert"
+      },
+      {
+        "line": 37,
+        "path": "docs/design/V12-V15.x/evidence/v12-gemini-generated-light-studio-review/artifact-manifest.json",
+        "safe_context": true,
+        "term": "产品级前端已完成"
+      },
+      {
+        "line": 38,
+        "path": "docs/design/V12-V15.x/evidence/v12-gemini-generated-light-studio-review/artifact-manifest.json",
+        "safe_context": true,
+        "term": "完整工作流工作台已完成"
+      },
+      {
+        "line": 39,
+        "path": "docs/design/V12-V15.x/evidence/v12-gemini-generated-light-studio-review/artifact-manifest.json",
+        "safe_context": true,
+        "term": "生产可用"
+      },
+      {
+        "line": 40,
+        "path": "docs/design/V12-V15.x/evidence/v12-gemini-generated-light-studio-review/artifact-manifest.json",
+        "safe_context": true,
+        "term": "Agent 执行器已完成"
+      }
+    ],
+    "forbidden_positive_claim_scan": "PASS",
+    "missing_required_files": [],
+    "missing_state_terms": [],
+    "output_dir": "docs/design/V12-V15.x/evidence/v12-gemini-generated-light-studio-review",
+    "pending_gemini_output": false,
+    "redaction_hits": [],
+    "redaction_scan": "PASS",
+    "required_files": [
+      "index.html",
+      "README.md",
+      "audit-notes.md"
+    ],
+    "required_state_terms": "PASS",
+    "runtime_backed": false,
+    "supports_review": true,
+    "version_drift_scan": "PASS",
+    "version_drift_terms": []
+  },
+  "pack": {
+    "actual_count": 9,
+    "expected_count": 9,
+    "extra": [],
+    "manifest_error": null,
+    "manifest_json": "PASS",
+    "matches_expected_files": true,
+    "missing": [],
+    "pack_dir": "docs/design/V12-V15.x/gemini_frontend_review_pack",
+    "review_checklist_error": null,
+    "review_checklist_json": "PASS"
+  },
+  "schema_version": "v12.gemini_frontend_review_validation.v1",
+  "status": "PASS"
+}

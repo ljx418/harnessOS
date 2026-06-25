@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HarnessOS V13 可视化自动化验收报告</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f7fb;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #64748b;
+      --line: #dbe3ef;
+      --brand: #2563eb;
+      --good: #0f9f6e;
+      --warn: #b7791f;
+      --bad: #c2410c;
+      --shadow: 0 18px 48px rgba(15, 23, 42, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
+      line-height: 1.62;
+    }
+    header {
+      padding: 34px 40px 26px;
+      background: #0f172a;
+      color: white;
+    }
+    header p { max-width: 980px; color: #cbd5e1; margin: 10px 0 0; }
+    main { max-width: 1240px; margin: 0 auto; padding: 28px 24px 56px; }
+    section { margin-top: 22px; }
+    h1, h2, h3 { margin: 0; line-height: 1.18; }
+    h1 { font-size: 30px; }
+    h2 { font-size: 21px; margin-bottom: 12px; }
+    h3 { font-size: 15px; }
+    p { margin: 8px 0; }
+    code { padding: 2px 6px; border-radius: 6px; background: #eef2ff; color: #1e40af; }
+    .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+    .metric strong { display: block; color: var(--muted); font-size: 12px; }
+    .metric span { display: block; margin-top: 6px; font-size: 24px; font-weight: 800; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .pass { background: #dcfce7; color: #047857; }
+    .fail { background: #fee2e2; color: #b91c1c; }
+    .warn { background: #fef3c7; color: #92400e; }
+    .neutral { background: #e2e8f0; color: #334155; }
+    .screenshot-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    figure { margin: 0; }
+    figure img {
+      width: 100%;
+      display: block;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f8fafc;
+    }
+    figcaption { margin-top: 8px; color: var(--muted); font-size: 13px; }
+    table { width: 100%; border-collapse: collapse; overflow: hidden; border-radius: 8px; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { background: #f8fafc; color: #475569; font-size: 12px; }
+    ul { padding-left: 20px; }
+    .note { border-left: 4px solid var(--brand); background: #eff6ff; }
+    .risk { border-left: 4px solid var(--warn); background: #fffbeb; }
+    .footer { color: var(--muted); font-size: 13px; }
+    @media (max-width: 900px) {
+      header { padding: 26px 20px; }
+      main { padding: 20px 14px 40px; }
+      .grid, .two, .screenshot-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>HarnessOS V13 可视化自动化验收报告</h1>
+    <p>报告日期：2026-06-25。本报告由 headless Chrome/CDP 自动化测试、截图证据、schema 校验、claim scan 与 redaction scan 生成。结论仅覆盖 V13 editable Studio pilot slice ready for review，不声明完整 Workflow Studio、生产可用或 runtime complete。</p>
+  </header>
+  <main>
+    <section class="grid">
+      <div class='card metric'><strong>自动化总状态</strong><span><span class='badge pass'>PASS</span></span></div>
+      <div class='card metric'><strong>端口连线最大偏差</strong><span><span class='badge pass'>1.553px</span></span></div>
+      <div class='card metric'><strong>截图证据</strong><span><span class='badge neutral'>12 张</span></span></div>
+      <div class='card metric'><strong>Manifest Artifact</strong><span><span class='badge neutral'>32 项</span></span></div>
+    </section>
+
+    <section class="card note">
+      <h2>验收结论</h2>
+      <p><strong>通过范围：</strong>V13 editable Studio pilot slice 可供审查。用户可以在浏览器中查看 V13 Studio 画布、选择节点、缩放、拖拽、切换场景、使用 Chat Workbench 指令、查看 WorkflowDiff 并走到人工 handoff。</p>
+      <p><strong>明确不通过/不声明范围：</strong>不证明完整 Workflow Studio，不证明 runtime execution，不证明 product-grade frontend complete，不证明 Xpert parity，不证明 production ready，不证明 Agent executor ready。</p>
+    </section>
+
+    <section class="two">
+      <div class="card">
+        <h2>目标架构摘要</h2>
+        <ul>
+          <li>产品目标：从 CLI/TUI-first governed runtime 演进为可审查的 Studio 产品界面。</li>
+          <li>浏览器必须经过 Studio BFF 和 DTO，不得直接写 runtime truth。</li>
+          <li>V13 目标：editable WorkflowSpecGraph pilot、GraphValidationResult、NodeInspector、WorkflowDiffProposal、handoff-only 确认。</li>
+          <li>后续 V14/V15 才覆盖 governed extension ecosystem、trace/metrics/audit/deployment smoke。</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>当前实现摘要</h2>
+        <ul>
+          <li>Browser route：<code>?studio=v13-editable-studio</code>。</li>
+          <li>BFF route：<code>/bff/v13/*</code> 与测试 route-log 端点。</li>
+          <li>DTO：<code>v13.workflow_spec_graph.v1</code>，节点数 8，边数 8。</li>
+          <li>WorkflowDiff：<code>diff-v13-editable-studio-pilot-001</code>，状态 <code>awaiting_user_confirmation</code>，<code>publish_or_run_started=false</code>。</li>
+          <li>Runtime boundary：<code>runtime_backed=false</code>。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>自动化测试命令</h2>
+      <ul><li><code>python3 tools/v13/run_v13_workflow_studio_acceptance.py</code></li>
+<li><code>node node_modules/typescript/bin/tsc -p tsconfig.json</code></li>
+<li><code>node node_modules/vite/bin/vite.js build</code></li>
+<li><code>node e2e/v13_cdp_acceptance.mjs</code></li>
+<li><code>python3 tools/v13/generate_v13_visual_acceptance_html_report.py</code></li></ul>
+      <p>本次自动化使用 headless Chrome/CDP 截图，不会抢占桌面焦点或弹出可见窗口。</p>
+    </section>
+
+    <section>
+      <h2>用户场景截图证据</h2>
+      <div class="screenshot-grid">
+      <figure class="card">
+        <h3>默认画布与连接线端口对齐</h3>
+        <img src="../evidence/v13-workflow-studio-pilot/edge-default-screenshot.png" alt="默认画布与连接线端口对齐" />
+        <figcaption>展示 V13 Studio 默认拓扑、选中节点、静态蓝色选中路径和端口贴合连线。<br /><code>edge-default-screenshot.png</code></figcaption>
+      </figure>
+
+
+      <figure class="card">
+        <h3>缩放后的连接线稳定性</h3>
+        <img src="../evidence/v13-workflow-studio-pilot/edge-zoom-screenshot.png" alt="缩放后的连接线稳定性" />
+        <figcaption>自动化在键盘缩放后验证 SVG path 起止点仍贴合对应 port。<br /><code>edge-zoom-screenshot.png</code></figcaption>
+      </figure>
+
+
+      <figure class="card">
+        <h3>普通滚轮缩放缺陷回归</h3>
+        <img src="../evidence/v13-workflow-studio-pilot/canvas-defect-wheel-zoom.png" alt="普通滚轮缩放缺陷回归" />
+        <figcaption>自动化在画布内直接使用鼠标滚轮缩放，并验证缩放后连线和箭头仍可见。<br /><code>canvas-defect-wheel-zoom.png</code></figcaption>
+      </figure>
+
+
+      <figure class="card">
+        <h3>右侧空白区域节点拖放</h3>
+        <img src="../evidence/v13-workflow-studio-pilot/canvas-defect-right-area-drag.png" alt="右侧空白区域节点拖放" />
+        <figcaption>自动化将节点拖入右侧可见空白区域，验证该区域不再只是背景。<br /><code>canvas-defect-right-area-drag.png</code></figcaption>
+      </figure>
+
+
+      <figure class="card">
+        <h3>自由连线取消路径</h3>
+        <img src="../evidence/v13-workflow-studio-pilot/canvas-defect-connect-cancel.png" alt="自由连线取消路径" />
+        <figcaption>自动化覆盖 Esc 和释放到空白的取消路径，确认取消不会创建新边。<br /><code>canvas-defect-connect-cancel.png</code></figcaption>
+      </figure>
+
+
+      <figure class="card">
+        <h3>拖拽后的画布几何</h3>
+        <img src="../evidence/v13-workflow-studio-pilot/edge-drag-screenshot.png" alt="拖拽后的画布几何" />
+        <figcaption>自动化拖拽节点后重新检测端口距离，防止视觉节点与 DTO 坐标分离。<br /><code>edge-drag-screenshot.png</code></figcaption>
+      </figure>
+
+
+      <figure class="card">
+        <h3>端口拖拽自由连接</h3>
+        <img src="../evidence/v13-workflow-studio-pilot/edge-free-connect-screenshot.png" alt="端口拖拽自由连接" />
+        <figcaption>自动化从输出端口拖到输入端口，创建一条新的 WorkflowSpecGraph proposal 边。<br /><code>edge-free-connect-screenshot.png</code></figcaption>
+      </figure>
+
+
+      <figure class="card">
+        <h3>场景切换：视频分镜工作流</h3>
+        <img src="../evidence/v13-workflow-studio-pilot/scenario-storyboard-screenshot.png" alt="场景切换：视频分镜工作流" />
+        <figcaption>验证 L1/L2 场景切换会重组 6 站拓扑和 inspector 内容。<br /><code>scenario-storyboard-screenshot.png</code></figcaption>
+      </figure>
+
+
+      <figure class="card">
+        <h3>Chat Workbench 指令路径</h3>
+        <img src="../evidence/v13-workflow-studio-pilot/chat-command-screenshot.png" alt="Chat Workbench 指令路径" />
+        <figcaption>验证 /help 指令追加回复，并保留 proposal-only 边界。<br /><code>chat-command-screenshot.png</code></figcaption>
+      </figure>
+
+
+      <figure class="card">
+        <h3>仿真阻断状态下的边线语义</h3>
+        <img src="../evidence/v13-workflow-studio-pilot/simulation-edge-state-screenshot.png" alt="仿真阻断状态下的边线语义" />
+        <figcaption>展示 completed/blocked 边线状态，强调只做设计期仿真与人工交接。<br /><code>simulation-edge-state-screenshot.png</code></figcaption>
+      </figure>
+
+
+      <figure class="card">
+        <h3>高风险交接确认弹层</h3>
+        <img src="../evidence/v13-workflow-studio-pilot/simulation-blocked-modal-screenshot.png" alt="高风险交接确认弹层" />
+        <figcaption>验证第 6 站进入人工确认卡口，不触发 publish/run。<br /><code>simulation-blocked-modal-screenshot.png</code></figcaption>
+      </figure>
+
+
+      <figure class="card">
+        <h3>节点 Inspector 投影</h3>
+        <img src="../evidence/v13-workflow-studio-pilot/node-inspector-screenshot.png" alt="节点 Inspector 投影" />
+        <figcaption>验证选中节点 inspector 能展示角色、目标、工具、技能、MCP 与存证关系。<br /><code>node-inspector-screenshot.png</code></figcaption>
+      </figure>
+    </div>
+    </section>
+
+    <section class="card">
+      <h2>连接线几何验收</h2>
+      <p>自动化读取 SVG path 起止点和 DOM port 外沿锚点，使用屏幕坐标计算距离。阈值为 3.5px；缺端口、缺箭头 marker 或跳过边都会失败。</p>
+      <table>
+        <thead><tr><th>检查点</th><th>状态</th><th>边数量</th><th>阈值</th></tr></thead>
+        <tbody><tr><td>initial_100</td><td><span class='badge pass'>PASS</span></td><td>6</td><td>3.5 px</td></tr>
+<tr><td>wheel_zoom</td><td><span class='badge pass'>PASS</span></td><td>6</td><td>3.5 px</td></tr>
+<tr><td>right_area_drag</td><td><span class='badge pass'>PASS</span></td><td>6</td><td>3.5 px</td></tr>
+<tr><td>zoom_110</td><td><span class='badge pass'>PASS</span></td><td>6</td><td>3.5 px</td></tr>
+<tr><td>after_drag</td><td><span class='badge pass'>PASS</span></td><td>6</td><td>3.5 px</td></tr>
+<tr><td>after_free_connection</td><td><span class='badge pass'>PASS</span></td><td>7</td><td>3.5 px</td></tr>
+<tr><td>simulation_blocked</td><td><span class='badge pass'>PASS</span></td><td>7</td><td>3.5 px</td></tr></tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>画布缺陷回归</h2>
+      <p>本区专门覆盖用户指出的四项问题：普通滚轮缩放、右侧可见空白拖放、自由连线取消、首屏连线和箭头可见性。</p>
+      <table>
+        <thead><tr><th>缺陷编号</th><th>验收目标</th><th>状态</th><th>截图证据</th></tr></thead>
+        <tbody><tr><td>CANVAS-01</td><td>首屏连线与箭头可见</td><td><span class='badge pass'>PASS</span></td><td>edge-default-screenshot.png</td></tr>
+<tr><td>CANVAS-02</td><td>画布普通滚轮缩放</td><td><span class='badge pass'>PASS</span></td><td>canvas-defect-wheel-zoom.png</td></tr>
+<tr><td>CANVAS-03</td><td>右侧可见空白区域可拖放节点</td><td><span class='badge pass'>PASS</span></td><td>canvas-defect-right-area-drag.png</td></tr>
+<tr><td>CANVAS-04</td><td>自由连线可取消且不会假创建</td><td><span class='badge pass'>PASS</span></td><td>canvas-defect-connect-cancel.png</td></tr></tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>交互路径验收</h2>
+      <table>
+        <thead><tr><th>检查项</th><th>状态</th><th>说明</th></tr></thead>
+        <tbody><tr><td>l1_agents_route_updates_l2</td><td><span class='badge pass'>PASS</span></td><td>一级导航切到智能体目录，L2 内容更新。</td></tr>
+<tr><td>l1_workbench_route_restores_scenarios</td><td><span class='badge pass'>PASS</span></td><td>返回工作流平台后场景列表恢复。</td></tr>
+<tr><td>scenario_storyboard_morphs_canvas</td><td><span class='badge pass'>PASS</span></td><td>切换到视频分镜场景，画布拓扑和文案更新。</td></tr>
+<tr><td>scenario_roma_restores_canvas</td><td><span class='badge pass'>PASS</span></td><td>切回罗马广场讨论工作流。</td></tr>
+<tr><td>keyboard_zoom_and_reset</td><td><span class='badge pass'>PASS</span></td><td>键盘缩放从 100% 到 110%，随后复位。</td></tr>
+<tr><td>node_drag_updates_canvas_geometry</td><td><span class='badge pass'>PASS</span></td><td>节点拖拽后 bounding box 和 edge quality 均更新。</td></tr>
+<tr><td>port_drag_creates_free_connection</td><td><span class='badge pass'>PASS</span></td><td>自动化交互检查通过。</td></tr>
+<tr><td>chat_help_command_appends_reply</td><td><span class='badge pass'>PASS</span></td><td>Chat Workbench /help 指令追加可见回复。</td></tr>
+<tr><td>text_layout_no_visible_overflow</td><td><span class='badge pass'>PASS</span></td><td>扫描 39 个关键文本元素，无可见溢出。</td></tr>
+<tr><td>state_menu_updates_api_pill</td><td><span class='badge pass'>PASS</span></td><td>状态菜单切换 API 限流 pill。</td></tr>
+<tr><td>simulation_reaches_blocked_modal_and_handoff</td><td><span class='badge pass'>PASS</span></td><td>仿真进入阻断弹层并完成 handoff-only 确认。</td></tr></tbody>
+      </table>
+    </section>
+
+    <section class="two">
+      <div class="card">
+        <h2>安全与不实声明扫描</h2>
+        <ul>
+          <li>Claim scan：<span class="badge pass">PASS</span></li>
+          <li>Redaction scan：<span class="badge pass">PASS</span></li>
+          <li>Missing artifacts：0</li>
+          <li>Health evidence：<code>ok</code></li>
+        </ul>
+      </div>
+      <div class="card risk">
+        <h2>现实风险说明</h2>
+        <ul>
+          <li>当前报告证明的是 V13 pilot 交互审查路径，不是生产部署验收。</li>
+          <li>截图和 DOM 检测不能替代后续 V15 runtime/deployment evidence。</li>
+          <li>V14 插件/技能/工具/MCP 生态仍需单独 readiness、实现和验收。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card footer">
+      <h2>证据位置</h2>
+      <p>HTML 报告：<code>docs/design/V12-V15.x/reports/v13_visual_acceptance_report.html</code></p>
+      <p>自动化证据目录：<code>docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot</code></p>
+      <p>JSON 验收报告：<code>docs/design/V12-V15.x/reports/v13_workflow_studio_acceptance_report.json</code></p>
+    </section>
+  </main>
+</body>
+</html>

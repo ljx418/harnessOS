@@ -1,0 +1,35 @@
+{
+  "schema_version": "v14.mcp_connector_manifest.v1",
+  "package": {
+    "schema_version": "v14.extension_package_manifest.v1",
+    "package_id": "pkg-v14-mcp-readonly-docs",
+    "display_name": "只读文档 MCP Connector",
+    "package_kind": "mcp_connector",
+    "publisher": "HarnessOS Local Review",
+    "version": "0.14.0-review",
+    "trust_level": "reviewed_local",
+    "status": "approved",
+    "requested_permissions": [
+      "read:document_index"
+    ],
+    "required_credential_refs": [
+      "credential_ref:v14-docs-mcp-redacted"
+    ],
+    "redacted_config_refs": [
+      "config_ref:v14-docs-mcp-redacted"
+    ],
+    "capability_refs": [
+      "mcp:readonly-docs"
+    ],
+    "scope_requirements": [
+      "workspace",
+      "project"
+    ],
+    "audit_ref": "audit://v14/extension/mcp-readonly-docs",
+    "created_at": "2026-06-24T00:00:00Z"
+  },
+  "connector_refs": [
+    "mcp:readonly-docs"
+  ],
+  "runtime_backed": false
+}

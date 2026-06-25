@@ -1,0 +1,7 @@
+V15 bounded local deployment smoke
+command=python3 tools/v15/run_v15_observability_deployment_acceptance.py
+GET http://127.0.0.1:18044/bff/v15/system/health -> 200
+GET http://127.0.0.1:4178/?studio=v15-observability-deployment -> 200
+V15 bounded local smoke completed with test-only BFF and browser preview
+rollback=Stop preview and test-only BFF processes; no production resource is changed.
+not_production_ga=true

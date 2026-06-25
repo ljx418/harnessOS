@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://harnessos.local/schemas/v13_workflow_studio_acceptance_data.schema.json",
+  "title": "V13WorkflowStudioAcceptanceData",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "stage_id",
+    "status",
+    "evidence_scope",
+    "runtime_backed",
+    "browser_backed",
+    "bff_backed",
+    "dto_backed",
+    "workflow_spec_graph",
+    "workflow_diff_proposal",
+    "graph_roundtrip",
+    "browser_boundary",
+    "confirmation_boundary",
+    "scenario_results",
+    "required_artifacts",
+    "prd_review",
+    "target_architecture_review",
+    "audit",
+    "claim_scan",
+    "redaction_scan",
+    "created_at"
+  ],
+  "properties": {
+    "schema_version": { "const": "v13.workflow_studio_acceptance_data.v1" },
+    "stage_id": { "enum": ["V13-R0", "V13-S1", "V13-S2", "V13-S3", "V13-SA"] },
+    "status": { "enum": ["PASS", "PARTIAL", "FAIL", "BLOCKED"] },
+    "evidence_scope": { "enum": ["readiness", "graph_schema", "editable_canvas", "workflowdiff_confirmation", "aggregate_reconciliation"] },
+    "runtime_backed": { "type": "boolean" },
+    "browser_backed": { "type": "boolean" },
+    "bff_backed": { "type": "boolean" },
+    "dto_backed": { "type": "boolean" },
+    "workflow_spec_graph": { "$ref": "#/$defs/checkResult" },
+    "workflow_diff_proposal": { "$ref": "#/$defs/checkResult" },
+    "graph_roundtrip": { "$ref": "#/$defs/checkResult" },
+    "browser_boundary": { "$ref": "#/$defs/checkResult" },
+    "confirmation_boundary": { "$ref": "#/$defs/checkResult" },
+    "scenario_results": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["scenario_id", "status", "user_visible_result", "evidence_refs"],
+        "properties": {
+          "scenario_id": { "type": "string", "minLength": 1 },
+          "status": { "enum": ["PASS", "PARTIAL", "FAIL", "BLOCKED"] },
+          "user_visible_result": { "type": "string", "minLength": 1 },
+          "evidence_refs": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    },
+    "required_artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "acceptance_data",
+        "artifact_manifest",
+        "studio_canvas_screenshot",
+        "node_inspector_screenshot",
+        "workflow_spec_graph",
+        "workflow_diff_proposal",
+        "graph_roundtrip_report",
+        "browser_action_log",
+        "browser_network_log",
+        "bff_route_log",
+        "interaction_parity_report",
+        "edge_quality_report",
+        "canvas_defect_regression_report",
+        "edge_default_screenshot",
+        "canvas_defect_wheel_zoom",
+        "canvas_defect_right_area_drag",
+        "canvas_defect_connect_cancel",
+        "edge_zoom_screenshot",
+        "edge_drag_screenshot",
+        "edge_free_connect_screenshot",
+        "simulation_edge_state_screenshot",
+        "scenario_morph_screenshot",
+        "scenario_storyboard_screenshot",
+        "chat_command_screenshot",
+        "simulation_blocked_modal_screenshot",
+        "confirmation_transcript",
+        "prd_spec_review",
+        "target_architecture_review",
+        "audit_opinion",
+        "audit_closure",
+        "no_false_green_scan",
+        "redaction_scan"
+      ],
+      "properties": {
+        "acceptance_data": { "$ref": "#/$defs/artifactStatus" },
+        "artifact_manifest": { "$ref": "#/$defs/artifactStatus" },
+        "studio_canvas_screenshot": { "$ref": "#/$defs/artifactStatus" },
+        "node_inspector_screenshot": { "$ref": "#/$defs/artifactStatus" },
+        "workflow_spec_graph": { "$ref": "#/$defs/artifactStatus" },
+        "workflow_diff_proposal": { "$ref": "#/$defs/artifactStatus" },
+        "graph_roundtrip_report": { "$ref": "#/$defs/artifactStatus" },
+        "browser_action_log": { "$ref": "#/$defs/artifactStatus" },
+        "browser_network_log": { "$ref": "#/$defs/artifactStatus" },
+        "bff_route_log": { "$ref": "#/$defs/artifactStatus" },
+        "interaction_parity_report": { "$ref": "#/$defs/artifactStatus" },
+        "edge_quality_report": { "$ref": "#/$defs/artifactStatus" },
+        "canvas_defect_regression_report": { "$ref": "#/$defs/artifactStatus" },
+        "edge_default_screenshot": { "$ref": "#/$defs/artifactStatus" },
+        "canvas_defect_wheel_zoom": { "$ref": "#/$defs/artifactStatus" },
+        "canvas_defect_right_area_drag": { "$ref": "#/$defs/artifactStatus" },
+        "canvas_defect_connect_cancel": { "$ref": "#/$defs/artifactStatus" },
+        "edge_zoom_screenshot": { "$ref": "#/$defs/artifactStatus" },
+        "edge_drag_screenshot": { "$ref": "#/$defs/artifactStatus" },
+        "edge_free_connect_screenshot": { "$ref": "#/$defs/artifactStatus" },
+        "simulation_edge_state_screenshot": { "$ref": "#/$defs/artifactStatus" },
+        "scenario_morph_screenshot": { "$ref": "#/$defs/artifactStatus" },
+        "scenario_storyboard_screenshot": { "$ref": "#/$defs/artifactStatus" },
+        "chat_command_screenshot": { "$ref": "#/$defs/artifactStatus" },
+        "simulation_blocked_modal_screenshot": { "$ref": "#/$defs/artifactStatus" },
+        "confirmation_transcript": { "$ref": "#/$defs/artifactStatus" },
+        "prd_spec_review": { "$ref": "#/$defs/artifactStatus" },
+        "target_architecture_review": { "$ref": "#/$defs/artifactStatus" },
+        "audit_opinion": { "$ref": "#/$defs/artifactStatus" },
+        "audit_closure": { "$ref": "#/$defs/artifactStatus" },
+        "no_false_green_scan": { "$ref": "#/$defs/artifactStatus" },
+        "redaction_scan": { "$ref": "#/$defs/artifactStatus" }
+      }
+    },
+    "prd_review": { "$ref": "#/$defs/checkResult" },
+    "target_architecture_review": { "$ref": "#/$defs/checkResult" },
+    "audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fatal_findings", "major_findings", "closure_status"],
+      "properties": {
+        "fatal_findings": { "type": "integer", "minimum": 0 },
+        "major_findings": { "type": "integer", "minimum": 0 },
+        "closure_status": { "enum": ["CLOSED", "OPEN", "BLOCKED"] }
+      }
+    },
+    "claim_scan": { "$ref": "#/$defs/checkResult" },
+    "redaction_scan": { "$ref": "#/$defs/checkResult" },
+    "created_at": { "type": "string", "format": "date-time" }
+  },
+  "$defs": {
+    "artifactStatus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "status"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["PRESENT", "MISSING", "NOT_APPLICABLE"] }
+      }
+    },
+    "checkResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "evidence_ref"],
+      "properties": {
+        "status": { "enum": ["PASS", "FAIL", "BLOCKED"] },
+        "evidence_ref": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

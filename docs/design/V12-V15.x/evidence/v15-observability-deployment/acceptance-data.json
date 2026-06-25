@@ -1,0 +1,170 @@
+{
+  "schema_version": "v15.observability_deployment_acceptance_data.v1",
+  "stage_id": "V15-SA",
+  "status": "PASS",
+  "evidence_scope": "aggregate_reconciliation",
+  "runtime_backed": false,
+  "browser_backed": true,
+  "bff_backed": true,
+  "dto_backed": true,
+  "observability_review": {
+    "status": "PASS",
+    "evidence_ref": "trace-timeline.json"
+  },
+  "deployment_smoke": {
+    "status": "PASS",
+    "evidence_ref": "deployment-smoke-output.txt"
+  },
+  "final_scenario_matrix": {
+    "status": "PASS",
+    "evidence_ref": "final-scenario-matrix.json"
+  },
+  "browser_boundary": {
+    "status": "PASS",
+    "evidence_ref": "browser-network-log.json"
+  },
+  "scenario_results": [
+    {
+      "scenario_id": "V15-S1",
+      "status": "PASS",
+      "user_visible_result": "用户可查看只读 trace、metrics、audit 和 incident evidence。",
+      "evidence_refs": [
+        "trace-timeline.json",
+        "metrics-snapshot.json",
+        "observability-dashboard-screenshot.png"
+      ]
+    },
+    {
+      "scenario_id": "V15-S2",
+      "status": "PASS",
+      "user_visible_result": "用户可运行本地健康检查和 bounded deployment smoke，并看到具体输出。",
+      "evidence_refs": [
+        "health-check-result.json",
+        "deployment-smoke-output.txt",
+        "product-shell-screenshot.png"
+      ]
+    },
+    {
+      "scenario_id": "V15-S3",
+      "status": "PASS",
+      "user_visible_result": "最终场景矩阵映射 V12/V13/V14/V15 HarnessOS evidence。",
+      "evidence_refs": [
+        "final-scenario-matrix.json",
+        "dependency-evidence-map.json"
+      ]
+    },
+    {
+      "scenario_id": "V15-SA",
+      "status": "PASS",
+      "user_visible_result": "聚合证据可支撑 V15 frontend interaction baseline ready for review。",
+      "evidence_refs": [
+        "artifact-manifest.json",
+        "audit-opinion.md"
+      ]
+    }
+  ],
+  "required_artifacts": {
+    "acceptance_data": {
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/acceptance-data.json",
+      "status": "PRESENT"
+    },
+    "artifact_manifest": {
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/artifact-manifest.json",
+      "status": "PRESENT"
+    },
+    "trace_timeline": {
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/trace-timeline.json",
+      "status": "PRESENT"
+    },
+    "metrics_snapshot": {
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/metrics-snapshot.json",
+      "status": "PRESENT"
+    },
+    "audit_export_package": {
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/audit-export-package.json",
+      "status": "PRESENT"
+    },
+    "incident_timeline": {
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/incident-timeline.json",
+      "status": "PRESENT"
+    },
+    "deployment_profile": {
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/deployment-profile.json",
+      "status": "PRESENT"
+    },
+    "health_check_result": {
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/health-check-result.json",
+      "status": "PRESENT"
+    },
+    "deployment_smoke_output": {
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/deployment-smoke-output.txt",
+      "status": "PRESENT"
+    },
+    "final_scenario_matrix": {
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/final-scenario-matrix.json",
+      "status": "PRESENT"
+    },
+    "product_shell_screenshot": {
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/product-shell-screenshot.png",
+      "status": "PRESENT"
+    },
+    "observability_dashboard_screenshot": {
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/observability-dashboard-screenshot.png",
+      "status": "PRESENT"
+    },
+    "browser_network_log": {
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/browser-network-log.json",
+      "status": "PRESENT"
+    },
+    "bff_route_log": {
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/bff-route-log.json",
+      "status": "PRESENT"
+    },
+    "prd_spec_review": {
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/prd-spec-review.md",
+      "status": "PRESENT"
+    },
+    "target_architecture_review": {
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/target-architecture-review.md",
+      "status": "PRESENT"
+    },
+    "audit_opinion": {
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/audit-opinion.md",
+      "status": "PRESENT"
+    },
+    "audit_closure": {
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/audit-closure.md",
+      "status": "PRESENT"
+    },
+    "no_false_green_scan": {
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/no-false-green-scan.json",
+      "status": "PRESENT"
+    },
+    "redaction_scan": {
+      "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/redaction-scan.json",
+      "status": "PRESENT"
+    }
+  },
+  "prd_review": {
+    "status": "PASS",
+    "evidence_ref": "prd-spec-review.md"
+  },
+  "target_architecture_review": {
+    "status": "PASS",
+    "evidence_ref": "target-architecture-review.md"
+  },
+  "audit": {
+    "fatal_findings": 0,
+    "major_findings": 0,
+    "closure_status": "CLOSED"
+  },
+  "claim_scan": {
+    "status": "PASS",
+    "evidence_ref": "no-false-green-scan.json"
+  },
+  "redaction_scan": {
+    "status": "PASS",
+    "evidence_ref": "redaction-scan.json"
+  },
+  "created_at": "2026-06-24T00:00:00Z"
+}

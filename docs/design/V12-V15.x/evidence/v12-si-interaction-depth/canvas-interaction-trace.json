@@ -1,0 +1,52 @@
+{
+  "schema_version": "v12.canvas_interaction_trace.v1",
+  "trace_id": "trace-v12-interaction-depth-real",
+  "selected_node_ref": "quality_check",
+  "inspector_projection_ref": "inspector-quality-check",
+  "disabled_action_reasons": [
+    {
+      "action_id": "add_node",
+      "label": "添加节点",
+      "reason": "V12 只读画布阶段：需要 V13 WorkflowDiff 确认后才允许编辑"
+    },
+    {
+      "action_id": "publish_run",
+      "label": "发布 / 运行",
+      "reason": "V12 不允许发布或运行工作流"
+    },
+    {
+      "action_id": "auto_layout",
+      "label": "自动布局",
+      "reason": "V12 仅记录布局意图，不写入 WorkflowSpecGraph"
+    }
+  ],
+  "state_fixtures": [
+    {
+      "state": "selected",
+      "visible": true,
+      "description": "quality_check 节点高亮并同步 Inspector"
+    },
+    {
+      "state": "denied",
+      "visible": true,
+      "description": "发布/运行动作被边界策略阻止"
+    },
+    {
+      "state": "loading",
+      "visible": true,
+      "description": "BFF projection 加载中状态可见"
+    },
+    {
+      "state": "failure",
+      "visible": true,
+      "description": "BFF projection 失败时回退到本地只读投影"
+    }
+  ],
+  "focus_targets": [
+    "v12-goal-input",
+    "v12-revise-proposal",
+    "v12-reject-proposal",
+    "v12-open-graph-review"
+  ],
+  "audit_ref": "audit://v12/current-stage/interaction-trace"
+}

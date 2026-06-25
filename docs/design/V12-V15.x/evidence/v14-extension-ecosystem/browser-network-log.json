@@ -1,0 +1,76 @@
+{
+  "schema_version": "v14.browser_network_log.v1",
+  "status": "PASS",
+  "requests": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4177/?studio=v14-extension-ecosystem",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4177/assets/index-DyOdZcZ-.js",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4177/assets/index-BVTWCZ_l.css",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4177/bff/v14/system/health",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4177/bff/v14/extensions/packages",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4177/bff/v14/extensions/packages/pkg-v14-unsafe-shell-executor/compatibility-check",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4177/bff/v14/extensions/packages/pkg-v14-tool-quality-review-pack",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4177/bff/v14/extensions/packages/pkg-v14-tool-quality-review-pack/compatibility-check",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4177/bff/v14/extensions/packages/pkg-v14-tool-quality-review-pack/install-decision",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4177/bff/v14/extensions/packages/pkg-v14-tool-quality-review-pack/activate",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4177/bff/v14/agents/agent-v12-quality-reviewer-real/capability-bindings",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4177/bff/v14/extensions/packages/pkg-v14-unsafe-shell-executor/unsafe-denial",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4177/bff/v14/extensions/audit/audit%3A%2F%2Fv14%2Fextension%2Funsafe-shell-executor",
+      "allowed": true
+    }
+  ],
+  "forbidden_route_scan": {
+    "status": "PASS",
+    "forbidden_matches": []
+  },
+  "created_at": "2026-06-24T00:00:00Z"
+}

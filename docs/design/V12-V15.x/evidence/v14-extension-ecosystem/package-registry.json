@@ -1,0 +1,164 @@
+{
+  "schema_version": "v14.extension_package_registry.v1",
+  "workspace_id": "ws-v12-technical-content-real",
+  "project_id": "proj-v12-local-knowledge-real",
+  "app_id": "app-v12-markdown-workflow-real",
+  "packages": [
+    {
+      "schema_version": "v14.extension_package_manifest.v1",
+      "package_id": "pkg-v14-tool-quality-review-pack",
+      "display_name": "质量审查扩展包",
+      "package_kind": "tool_capability",
+      "publisher": "HarnessOS Local Review",
+      "version": "0.14.0-review",
+      "trust_level": "reviewed_local",
+      "status": "approved",
+      "requested_permissions": [
+        "read:artifact_summary",
+        "write:evidence_note"
+      ],
+      "required_credential_refs": [
+        "credential_ref:v14-quality-review-redacted"
+      ],
+      "redacted_config_refs": [
+        "config_ref:v14-quality-review-redacted"
+      ],
+      "capability_refs": [
+        "tool:quality.review",
+        "skill:markdown.summary",
+        "mcp:readonly-docs"
+      ],
+      "scope_requirements": [
+        "workspace",
+        "project",
+        "app",
+        "agent",
+        "station"
+      ],
+      "audit_ref": "audit://v14/extension/pkg-quality-review",
+      "created_at": "2026-06-24T00:00:00Z"
+    },
+    {
+      "schema_version": "v14.extension_package_manifest.v1",
+      "package_id": "pkg-v14-plugin-evidence-annotator",
+      "display_name": "证据标注插件",
+      "package_kind": "plugin",
+      "publisher": "HarnessOS Local Review",
+      "version": "0.14.0-review",
+      "trust_level": "reviewed_local",
+      "status": "approved",
+      "requested_permissions": [
+        "read:evidence_refs",
+        "write:review_note"
+      ],
+      "required_credential_refs": [],
+      "redacted_config_refs": [
+        "config_ref:v14-evidence-annotator-redacted"
+      ],
+      "capability_refs": [
+        "plugin:evidence.annotator"
+      ],
+      "scope_requirements": [
+        "workspace",
+        "project",
+        "app"
+      ],
+      "audit_ref": "audit://v14/extension/plugin-evidence-annotator",
+      "created_at": "2026-06-24T00:00:00Z"
+    },
+    {
+      "schema_version": "v14.extension_package_manifest.v1",
+      "package_id": "pkg-v14-skill-summary-guard",
+      "display_name": "总结质量守护 Skill",
+      "package_kind": "skill",
+      "publisher": "HarnessOS Local Review",
+      "version": "0.14.0-review",
+      "trust_level": "reviewed_local",
+      "status": "approved",
+      "requested_permissions": [
+        "read:workflow_diff",
+        "write:quality_hint"
+      ],
+      "required_credential_refs": [],
+      "redacted_config_refs": [
+        "config_ref:v14-summary-guard-redacted"
+      ],
+      "capability_refs": [
+        "skill:markdown.summary.guard"
+      ],
+      "scope_requirements": [
+        "workspace",
+        "project",
+        "app",
+        "agent"
+      ],
+      "audit_ref": "audit://v14/extension/skill-summary-guard",
+      "created_at": "2026-06-24T00:00:00Z"
+    },
+    {
+      "schema_version": "v14.extension_package_manifest.v1",
+      "package_id": "pkg-v14-mcp-readonly-docs",
+      "display_name": "只读文档 MCP Connector",
+      "package_kind": "mcp_connector",
+      "publisher": "HarnessOS Local Review",
+      "version": "0.14.0-review",
+      "trust_level": "reviewed_local",
+      "status": "approved",
+      "requested_permissions": [
+        "read:document_index"
+      ],
+      "required_credential_refs": [
+        "credential_ref:v14-docs-mcp-redacted"
+      ],
+      "redacted_config_refs": [
+        "config_ref:v14-docs-mcp-redacted"
+      ],
+      "capability_refs": [
+        "mcp:readonly-docs"
+      ],
+      "scope_requirements": [
+        "workspace",
+        "project"
+      ],
+      "audit_ref": "audit://v14/extension/mcp-readonly-docs",
+      "created_at": "2026-06-24T00:00:00Z"
+    },
+    {
+      "schema_version": "v14.extension_package_manifest.v1",
+      "package_id": "pkg-v14-unsafe-shell-executor",
+      "display_name": "未审 Shell 执行器",
+      "package_kind": "tool_capability",
+      "publisher": "Unknown Local Package",
+      "version": "0.0.1-unreviewed",
+      "trust_level": "unreviewed",
+      "status": "unsafe_denied",
+      "requested_permissions": [
+        "execute:shell",
+        "read:secret_ref_probe",
+        "scope:global"
+      ],
+      "required_credential_refs": [
+        "credential_ref:v14-unsafe-redacted"
+      ],
+      "redacted_config_refs": [
+        "config_ref:v14-unsafe-redacted"
+      ],
+      "capability_refs": [
+        "tool:unsafe.shell"
+      ],
+      "scope_requirements": [
+        "global"
+      ],
+      "blocked_fields": [
+        "unknown_executable_payload",
+        "unreviewed_permission",
+        "scope_escalation_request"
+      ],
+      "audit_ref": "audit://v14/extension/unsafe-shell-executor",
+      "created_at": "2026-06-24T00:00:00Z"
+    }
+  ],
+  "runtime_backed": false,
+  "audit_ref": "audit://v14/extension/package-registry",
+  "created_at": "2026-06-24T00:00:00Z"
+}

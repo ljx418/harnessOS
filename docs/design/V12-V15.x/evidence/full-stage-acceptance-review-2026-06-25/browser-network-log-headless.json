@@ -1,0 +1,339 @@
+{
+  "schema_version": "full_frontend_acceptance.browser_network_log.v1",
+  "status": "PASS",
+  "mode": "headless",
+  "requests": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/?studio=v12-readonly-canvas",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/assets/index-DyOdZcZ-.js",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/assets/index-BVTWCZ_l.css",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/bff/v12/system/health",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/bff/v12/workspaces",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/bff/v12/workspaces/ws-v12-technical-content-real/projects",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/bff/v12/projects/proj-v12-local-knowledge-real/apps",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/bff/v12/apps/app-v12-markdown-workflow-real/station-agents",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/bff/v12/apps/app-v12-markdown-workflow-real/canvas",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/bff/v12/canvas/nodes/quality_check/inspector",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/bff/v12/apps/app-v12-markdown-workflow-real/workbench/conversations",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/bff/v12/workflow-diff/diff-v12-readonly-proposal-ref",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/bff/v12/apps/app-v12-markdown-workflow-real/interaction-trace",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4186/bff/v12/workbench/proposals/diff-v12-readonly-proposal-ref/confirm-handoff",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/?studio=v13-editable-studio",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/assets/index-DyOdZcZ-.js",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/assets/index-BVTWCZ_l.css",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/bff/v13/system/health",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/bff/v13/studio/node-inspector/summary_agent",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4186/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4186/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4186/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4186/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4186/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4186/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4186/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4186/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4186/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4186/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4186/bff/v13/workflow-diff/diff-v13-editable-studio-pilot-001/confirm-publish-handoff",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/?studio=v14-extension-ecosystem",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/assets/index-DyOdZcZ-.js",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/assets/index-BVTWCZ_l.css",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/bff/v14/system/health",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/bff/v14/extensions/packages",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4186/bff/v14/extensions/packages/pkg-v14-unsafe-shell-executor/compatibility-check",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/bff/v14/extensions/packages/pkg-v14-tool-quality-review-pack",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4186/bff/v14/extensions/packages/pkg-v14-tool-quality-review-pack/compatibility-check",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4186/bff/v14/extensions/packages/pkg-v14-tool-quality-review-pack/install-decision",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4186/bff/v14/extensions/packages/pkg-v14-tool-quality-review-pack/activate",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4186/bff/v14/agents/agent-v12-quality-reviewer-real/capability-bindings",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4186/bff/v14/extensions/packages/pkg-v14-unsafe-shell-executor/unsafe-denial",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/bff/v14/extensions/audit/audit%3A%2F%2Fv14%2Fextension%2Funsafe-shell-executor",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/?studio=v15-observability-deployment",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/assets/index-DyOdZcZ-.js",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/assets/index-BVTWCZ_l.css",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/bff/v15/system/health",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/bff/v15/observability/trace-timeline",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/bff/v15/observability/metrics-snapshot",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/bff/v15/observability/audit-export",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/bff/v15/observability/incidents",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/bff/v15/deployment/profile",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/bff/v15/final-scenario-matrix",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4186/bff/v15/deployment/health-check",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4186/bff/v15/deployment/smoke",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/?studio=pv16-product-runtime-hardening",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/assets/index-DyOdZcZ-.js",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/assets/index-BVTWCZ_l.css",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/bff/pv16/system/health",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/bff/pv16/product-runtime/state",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4186/bff/pv16/entities/mutate",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4186/bff/pv16/entities/mutate",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4186/bff/pv16/runtime/confirm-run",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4186/bff/pv16/runtime/inspect/runtime-run%3Apv16%3Awfi_caead029c850",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4186/bff/pv16/deployment/hardening-smoke",
+      "allowed": true
+    }
+  ],
+  "forbidden_matches": [],
+  "created_at": "2026-06-25T08:05:38.300Z"
+}

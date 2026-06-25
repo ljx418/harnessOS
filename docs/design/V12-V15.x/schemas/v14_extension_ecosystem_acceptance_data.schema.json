@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://harnessos.local/schemas/v14_extension_ecosystem_acceptance_data.schema.json",
+  "title": "V14ExtensionEcosystemAcceptanceData",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "stage_id",
+    "status",
+    "evidence_scope",
+    "runtime_backed",
+    "browser_backed",
+    "bff_backed",
+    "dto_backed",
+    "manifest_validation",
+    "compatibility_decision",
+    "scoped_activation",
+    "unsafe_denial",
+    "browser_boundary",
+    "scenario_results",
+    "required_artifacts",
+    "prd_review",
+    "target_architecture_review",
+    "audit",
+    "claim_scan",
+    "redaction_scan",
+    "created_at"
+  ],
+  "properties": {
+    "schema_version": { "const": "v14.extension_ecosystem_acceptance_data.v1" },
+    "stage_id": { "enum": ["V14-R0", "V14-S1", "V14-S2", "V14-S3", "V14-SA"] },
+    "status": { "enum": ["PASS", "PARTIAL", "FAIL", "BLOCKED"] },
+    "evidence_scope": {
+      "enum": [
+        "readiness",
+        "manifest_compatibility",
+        "scoped_activation",
+        "unsafe_denial",
+        "aggregate_reconciliation"
+      ]
+    },
+    "runtime_backed": { "type": "boolean" },
+    "browser_backed": { "type": "boolean" },
+    "bff_backed": { "type": "boolean" },
+    "dto_backed": { "type": "boolean" },
+    "manifest_validation": { "$ref": "#/$defs/checkResult" },
+    "compatibility_decision": { "$ref": "#/$defs/checkResult" },
+    "scoped_activation": { "$ref": "#/$defs/checkResult" },
+    "unsafe_denial": { "$ref": "#/$defs/checkResult" },
+    "browser_boundary": { "$ref": "#/$defs/checkResult" },
+    "scenario_results": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/scenarioResult" }
+    },
+    "required_artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "acceptance_data",
+        "artifact_manifest",
+        "plugin_manifest",
+        "skill_manifest",
+        "tool_capability_manifest",
+        "mcp_connector_manifest",
+        "compatibility_decision",
+        "install_decision",
+        "activation_decision",
+        "scoped_capability_binding",
+        "unsafe_package_denial",
+        "agent_binding_screenshot",
+        "denied_package_screenshot",
+        "browser_action_log",
+        "browser_network_log",
+        "bff_route_log",
+        "negative_compatibility_fixtures",
+        "policy_audit_ref",
+        "prd_spec_review",
+        "target_architecture_review",
+        "audit_opinion",
+        "audit_closure",
+        "no_false_green_scan",
+        "redaction_scan"
+      ],
+      "properties": {
+        "acceptance_data": { "$ref": "#/$defs/artifactStatus" },
+        "artifact_manifest": { "$ref": "#/$defs/artifactStatus" },
+        "plugin_manifest": { "$ref": "#/$defs/artifactStatus" },
+        "skill_manifest": { "$ref": "#/$defs/artifactStatus" },
+        "tool_capability_manifest": { "$ref": "#/$defs/artifactStatus" },
+        "mcp_connector_manifest": { "$ref": "#/$defs/artifactStatus" },
+        "compatibility_decision": { "$ref": "#/$defs/artifactStatus" },
+        "install_decision": { "$ref": "#/$defs/artifactStatus" },
+        "activation_decision": { "$ref": "#/$defs/artifactStatus" },
+        "scoped_capability_binding": { "$ref": "#/$defs/artifactStatus" },
+        "unsafe_package_denial": { "$ref": "#/$defs/artifactStatus" },
+        "agent_binding_screenshot": { "$ref": "#/$defs/artifactStatus" },
+        "denied_package_screenshot": { "$ref": "#/$defs/artifactStatus" },
+        "browser_action_log": { "$ref": "#/$defs/artifactStatus" },
+        "browser_network_log": { "$ref": "#/$defs/artifactStatus" },
+        "bff_route_log": { "$ref": "#/$defs/artifactStatus" },
+        "negative_compatibility_fixtures": { "$ref": "#/$defs/artifactStatus" },
+        "policy_audit_ref": { "$ref": "#/$defs/artifactStatus" },
+        "prd_spec_review": { "$ref": "#/$defs/artifactStatus" },
+        "target_architecture_review": { "$ref": "#/$defs/artifactStatus" },
+        "audit_opinion": { "$ref": "#/$defs/artifactStatus" },
+        "audit_closure": { "$ref": "#/$defs/artifactStatus" },
+        "no_false_green_scan": { "$ref": "#/$defs/artifactStatus" },
+        "redaction_scan": { "$ref": "#/$defs/artifactStatus" }
+      }
+    },
+    "prd_review": { "$ref": "#/$defs/checkResult" },
+    "target_architecture_review": { "$ref": "#/$defs/checkResult" },
+    "audit": { "$ref": "#/$defs/auditResult" },
+    "claim_scan": { "$ref": "#/$defs/checkResult" },
+    "redaction_scan": { "$ref": "#/$defs/checkResult" },
+    "created_at": { "type": "string", "format": "date-time" }
+  },
+  "$defs": {
+    "artifactStatus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "status"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["PRESENT", "MISSING", "NOT_APPLICABLE"] }
+      }
+    },
+    "auditResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fatal_findings", "major_findings", "closure_status"],
+      "properties": {
+        "fatal_findings": { "type": "integer", "minimum": 0 },
+        "major_findings": { "type": "integer", "minimum": 0 },
+        "closure_status": { "enum": ["CLOSED", "OPEN", "BLOCKED"] }
+      }
+    },
+    "checkResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "evidence_ref"],
+      "properties": {
+        "status": { "enum": ["PASS", "FAIL", "BLOCKED"] },
+        "evidence_ref": { "type": "string", "minLength": 1 }
+      }
+    },
+    "scenarioResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scenario_id", "status", "user_visible_result", "evidence_refs"],
+      "properties": {
+        "scenario_id": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["PASS", "PARTIAL", "FAIL", "BLOCKED"] },
+        "user_visible_result": { "type": "string", "minLength": 1 },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

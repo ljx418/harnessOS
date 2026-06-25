@@ -1,0 +1,97 @@
+{
+  "schema_version": "pv16.product_runtime_route_log.v1",
+  "status": "PASS",
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/bff/pv16/system/health",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/pv16/system/health",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/pv16/product-runtime/state",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/pv16/entities/mutate",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/pv16/entities/mutate",
+      "status": 403,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/pv16/runtime/confirm-run",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/pv16/runtime/inspect/runtime-run:pv16:wfi_a82481f4fd80",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/pv16/deployment/hardening-smoke",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/pv16/entities/mutate",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/pv16/entities/ownership-denial",
+      "status": 403,
+      "user_agent": "node"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/pv16/runtime/confirm-run",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/pv16/runtime/inspect/runtime-run:pv16:wfi_a82481f4fd80",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/pv16/deployment/profile",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/pv16/deployment/hardening-smoke",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/pv16/product-runtime/journey",
+      "status": 200,
+      "user_agent": "node"
+    }
+  ],
+  "forbidden_matches": []
+}

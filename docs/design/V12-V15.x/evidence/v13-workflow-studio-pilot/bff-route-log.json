@@ -1,0 +1,277 @@
+{
+  "schema_version": "v13.studio_route_log.v1",
+  "status": "PASS",
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/bff/v13/system/health",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/v13/system/health",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/v13/studio/node-inspector/summary_agent",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/v13/studio/node-inspector/start_goal",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/v13/studio/node-inspector/start_goal",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/v13/studio/node-inspector/start_goal",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/v13/studio/node-inspector/start_goal",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v13/workflow-diff/diff-v13-editable-studio-pilot-001/revise",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v13/workflow-diff/diff-v13-editable-studio-pilot-001/reject",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v13/workflow-diff/diff-v13-editable-studio-pilot-001/confirm-publish-handoff",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/v13/studio/node-inspector/summary_agent",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/v13/studio/node-inspector/summary_agent",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/v13/studio/node-inspector/folder_reader",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/v13/studio/node-inspector/folder_reader",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/v13/studio/node-inspector/start_goal",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/v13/studio/node-inspector/quality_gate",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/v13/studio/node-inspector/start_goal",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v13/workflow-diff/diff-v13-editable-studio-pilot-001/confirm-publish-handoff",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v13/workflow-diff/diff-v13-editable-studio-pilot-001/revise",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v13/workflow-diff/diff-v13-editable-studio-pilot-001/reject",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v13/workflow-diff/diff-v13-editable-studio-pilot-001/confirm-publish-handoff",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/v13/studio/node-inspector/summary_agent",
+      "status": 200,
+      "user_agent": "node"
+    }
+  ],
+  "forbidden_matches": []
+}

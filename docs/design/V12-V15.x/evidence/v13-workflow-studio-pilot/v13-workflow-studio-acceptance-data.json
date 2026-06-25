@@ -1,0 +1,224 @@
+{
+  "schema_version": "v13.workflow_studio_acceptance_data.v1",
+  "stage_id": "V13-SA",
+  "status": "PASS",
+  "evidence_scope": "aggregate_reconciliation",
+  "runtime_backed": false,
+  "browser_backed": true,
+  "bff_backed": true,
+  "dto_backed": true,
+  "workflow_spec_graph": {
+    "status": "PASS",
+    "evidence_ref": "workflow-spec-graph.json"
+  },
+  "workflow_diff_proposal": {
+    "status": "PASS",
+    "evidence_ref": "workflow-diff-proposal.json"
+  },
+  "graph_roundtrip": {
+    "status": "PASS",
+    "evidence_ref": "graph-roundtrip-report.json"
+  },
+  "browser_boundary": {
+    "status": "PASS",
+    "evidence_ref": "browser-network-log.json"
+  },
+  "confirmation_boundary": {
+    "status": "PASS",
+    "evidence_ref": "confirmation-transcript.txt"
+  },
+  "scenario_results": [
+    {
+      "scenario_id": "V13-S1",
+      "status": "PASS",
+      "user_visible_result": "WorkflowSpecGraph 通过 BFF 获取并完成合法/非法图校验。",
+      "evidence_refs": [
+        "workflow-spec-graph.json",
+        "graph-roundtrip-report.json"
+      ]
+    },
+    {
+      "scenario_id": "V13-S2",
+      "status": "PASS",
+      "user_visible_result": "用户可在浏览器画布添加、移动、连接、配置节点，并体验 L1/L2、缩放、拖拽、聊天、仿真卡口。",
+      "evidence_refs": [
+        "studio-canvas-screenshot.png",
+        "node-inspector-screenshot.png",
+        "browser-action-log.json",
+        "interaction-parity-report.json",
+        "edge-quality-report.json",
+        "canvas-defect-regression-report.json"
+      ]
+    },
+    {
+      "scenario_id": "V13-S3",
+      "status": "PASS",
+      "user_visible_result": "WorkflowDiff 可修订、拒绝、确认交接，且不会发布或运行。",
+      "evidence_refs": [
+        "workflow-diff-proposal.json",
+        "confirmation-transcript.txt"
+      ]
+    },
+    {
+      "scenario_id": "V13-SA",
+      "status": "PASS",
+      "user_visible_result": "聚合证据可支撑 V13 editable Studio pilot slice ready for review。",
+      "evidence_refs": [
+        "artifact-manifest.json",
+        "audit-opinion.md"
+      ]
+    }
+  ],
+  "required_artifacts": {
+    "acceptance_data": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/v13-workflow-studio-acceptance-data.json",
+      "status": "PRESENT"
+    },
+    "artifact_manifest": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/artifact-manifest.json",
+      "status": "PRESENT"
+    },
+    "studio_canvas_screenshot": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/studio-canvas-screenshot.png",
+      "status": "PRESENT"
+    },
+    "node_inspector_screenshot": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/node-inspector-screenshot.png",
+      "status": "PRESENT"
+    },
+    "workflow_spec_graph": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/workflow-spec-graph.json",
+      "status": "PRESENT"
+    },
+    "workflow_diff_proposal": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/workflow-diff-proposal.json",
+      "status": "PRESENT"
+    },
+    "graph_roundtrip_report": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/graph-roundtrip-report.json",
+      "status": "PRESENT"
+    },
+    "browser_action_log": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/browser-action-log.json",
+      "status": "PRESENT"
+    },
+    "browser_network_log": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/browser-network-log.json",
+      "status": "PRESENT"
+    },
+    "bff_route_log": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/bff-route-log.json",
+      "status": "PRESENT"
+    },
+    "interaction_parity_report": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/interaction-parity-report.json",
+      "status": "PRESENT"
+    },
+    "edge_quality_report": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/edge-quality-report.json",
+      "status": "PRESENT"
+    },
+    "canvas_defect_regression_report": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/canvas-defect-regression-report.json",
+      "status": "PRESENT"
+    },
+    "edge_default_screenshot": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/edge-default-screenshot.png",
+      "status": "PRESENT"
+    },
+    "canvas_defect_wheel_zoom": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/canvas-defect-wheel-zoom.png",
+      "status": "PRESENT"
+    },
+    "canvas_defect_right_area_drag": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/canvas-defect-right-area-drag.png",
+      "status": "PRESENT"
+    },
+    "canvas_defect_connect_cancel": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/canvas-defect-connect-cancel.png",
+      "status": "PRESENT"
+    },
+    "edge_zoom_screenshot": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/edge-zoom-screenshot.png",
+      "status": "PRESENT"
+    },
+    "edge_drag_screenshot": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/edge-drag-screenshot.png",
+      "status": "PRESENT"
+    },
+    "edge_free_connect_screenshot": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/edge-free-connect-screenshot.png",
+      "status": "PRESENT"
+    },
+    "simulation_edge_state_screenshot": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/simulation-edge-state-screenshot.png",
+      "status": "PRESENT"
+    },
+    "scenario_morph_screenshot": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/scenario-morph-screenshot.png",
+      "status": "PRESENT"
+    },
+    "scenario_storyboard_screenshot": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/scenario-storyboard-screenshot.png",
+      "status": "PRESENT"
+    },
+    "chat_command_screenshot": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/chat-command-screenshot.png",
+      "status": "PRESENT"
+    },
+    "simulation_blocked_modal_screenshot": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/simulation-blocked-modal-screenshot.png",
+      "status": "PRESENT"
+    },
+    "confirmation_transcript": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/confirmation-transcript.txt",
+      "status": "PRESENT"
+    },
+    "prd_spec_review": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/prd-spec-review.md",
+      "status": "PRESENT"
+    },
+    "target_architecture_review": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/target-architecture-review.md",
+      "status": "PRESENT"
+    },
+    "audit_opinion": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/audit-opinion.md",
+      "status": "PRESENT"
+    },
+    "audit_closure": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/audit-closure.md",
+      "status": "PRESENT"
+    },
+    "no_false_green_scan": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/no-false-green-scan.json",
+      "status": "PRESENT"
+    },
+    "redaction_scan": {
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/redaction-scan.json",
+      "status": "PRESENT"
+    }
+  },
+  "prd_review": {
+    "status": "PASS",
+    "evidence_ref": "prd-spec-review.md"
+  },
+  "target_architecture_review": {
+    "status": "PASS",
+    "evidence_ref": "target-architecture-review.md"
+  },
+  "audit": {
+    "fatal_findings": 0,
+    "major_findings": 0,
+    "closure_status": "CLOSED"
+  },
+  "claim_scan": {
+    "status": "PASS",
+    "evidence_ref": "no-false-green-scan.json"
+  },
+  "redaction_scan": {
+    "status": "PASS",
+    "evidence_ref": "redaction-scan.json"
+  },
+  "created_at": "2026-06-25T00:00:00Z"
+}

@@ -8,6 +8,10 @@ function staticStudioState(): VisualAcceptanceState | null {
   if (
     state === "overview" ||
     state === "v12-readonly-canvas" ||
+    state === "v13-editable-studio" ||
+    state === "v14-extension-ecosystem" ||
+    state === "v15-observability-deployment" ||
+    state === "pv16-product-runtime-hardening" ||
     state === "agent-draft-proposal" ||
     state === "folder-debug-scan" ||
     state === "running-board" ||

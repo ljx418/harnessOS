@@ -1,0 +1,62 @@
+{
+  "schema_version": "post_v15.product_runtime_hardening_acceptance_report.v1",
+  "status": "PASS",
+  "stage_id": "PV16-SA",
+  "evidence_dir": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening",
+  "missing_artifacts": [],
+  "schema_results": [
+    {
+      "status": "PASS",
+      "data": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/acceptance-data.json",
+      "schema": "docs/design/V12-V15.x/schemas/post_v15_product_runtime_hardening_acceptance_data.schema.json",
+      "reason": ""
+    },
+    {
+      "status": "PASS",
+      "data": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/artifact-manifest.json",
+      "schema": "docs/design/V12-V15.x/schemas/post_v15_product_runtime_hardening_artifact_manifest.schema.json",
+      "reason": ""
+    }
+  ],
+  "browser_boundary": {
+    "status": "PASS",
+    "forbidden_matches": []
+  },
+  "runtime_evidence": {
+    "status": "PASS",
+    "missing_fields": [],
+    "runtime_backed": true
+  },
+  "deployment_smoke": {
+    "status": "PASS",
+    "has_command": true,
+    "has_health": true
+  },
+  "stage_results": {
+    "status": "PASS",
+    "missing_stage_ids": [],
+    "failing_stage_ids": [],
+    "missing_evidence_stage_ids": []
+  },
+  "claim_to_evidence": {
+    "status": "PASS",
+    "claim_count": 4,
+    "missing_evidence_claim_ids": []
+  },
+  "claim_scan": {
+    "status": "PASS",
+    "matches": []
+  },
+  "redaction_scan": {
+    "status": "PASS",
+    "matches": []
+  },
+  "allowed_claim": "PV16 complete: product-runtime hardening pilot ready for review.",
+  "forbidden_positive_claims": [
+    "production ready",
+    "Xpert parity complete",
+    "product-grade frontend complete",
+    "complete Workflow Studio ready",
+    "Agent executor ready"
+  ]
+}

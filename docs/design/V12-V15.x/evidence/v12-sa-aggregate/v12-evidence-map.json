@@ -1,0 +1,16 @@
+{
+  "schema_version": "v12.sa_evidence_map.v1",
+  "status": "PASS",
+  "required_groups": [
+    "V12-GR",
+    "V12-SD",
+    "V12-SI",
+    "V12-SQ"
+  ],
+  "deferred_groups": [
+    "V13-editable-studio",
+    "V14-extension-ecosystem",
+    "V15-observability-deployment"
+  ],
+  "created_at": "2026-06-24T00:00:00+08:00"
+}

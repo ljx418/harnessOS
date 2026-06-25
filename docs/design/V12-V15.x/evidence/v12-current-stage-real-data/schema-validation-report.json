@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "results": [
+    {
+      "schema": "docs/design/V12-V15.x/schemas/v12_browser_network_log.schema.json",
+      "data": "docs/design/V12-V15.x/evidence/v12-current-stage-real-data/browser-network-log.json",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "schema": "docs/design/V12-V15.x/schemas/v12_product_entity_projection.schema.json",
+      "data": "docs/design/V12-V15.x/evidence/v12-current-stage-real-data/product-entity-projection.json",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "schema": "docs/design/V12-V15.x/schemas/v12_canvas_read_model.schema.json",
+      "data": "docs/design/V12-V15.x/evidence/v12-current-stage-real-data/canvas-read-model.json",
+      "status": "PASS",
+      "errors": []
+    }
+  ]
+}

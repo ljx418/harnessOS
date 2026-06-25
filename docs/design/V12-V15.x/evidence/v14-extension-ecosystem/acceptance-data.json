@@ -1,0 +1,191 @@
+{
+  "schema_version": "v14.extension_ecosystem_acceptance_data.v1",
+  "stage_id": "V14-SA",
+  "status": "PASS",
+  "evidence_scope": "aggregate_reconciliation",
+  "runtime_backed": false,
+  "browser_backed": true,
+  "bff_backed": true,
+  "dto_backed": true,
+  "manifest_validation": {
+    "status": "PASS",
+    "evidence_ref": "plugin-manifest.json"
+  },
+  "compatibility_decision": {
+    "status": "PASS",
+    "evidence_ref": "compatibility-decision.json"
+  },
+  "scoped_activation": {
+    "status": "PASS",
+    "evidence_ref": "activation-decision.json"
+  },
+  "unsafe_denial": {
+    "status": "PASS",
+    "evidence_ref": "unsafe-package-denial.json"
+  },
+  "browser_boundary": {
+    "status": "PASS",
+    "evidence_ref": "browser-network-log.json"
+  },
+  "scenario_results": [
+    {
+      "scenario_id": "V14-S1",
+      "status": "PASS",
+      "user_visible_result": "审查者可查看扩展包、兼容性状态、权限、脱敏配置和 audit ref。",
+      "evidence_refs": [
+        "plugin-manifest.json",
+        "compatibility-decision.json",
+        "negative-compatibility-fixtures.json"
+      ]
+    },
+    {
+      "scenario_id": "V14-S2",
+      "status": "PASS",
+      "user_visible_result": "审查者可将已审查能力激活到指定 Agent/Station 作用域。",
+      "evidence_refs": [
+        "activation-decision.json",
+        "scoped-capability-binding.json",
+        "agent-binding-screenshot.png"
+      ]
+    },
+    {
+      "scenario_id": "V14-S3",
+      "status": "PASS",
+      "user_visible_result": "不安全扩展被拒绝，拒绝原因和审计引用可见。",
+      "evidence_refs": [
+        "unsafe-package-denial.json",
+        "policy-audit-ref.json",
+        "denied-package-screenshot.png"
+      ]
+    },
+    {
+      "scenario_id": "V14-SA",
+      "status": "PASS",
+      "user_visible_result": "聚合证据可支撑 V14 governed extension ecosystem pilot ready for review。",
+      "evidence_refs": [
+        "artifact-manifest.json",
+        "audit-opinion.md"
+      ]
+    }
+  ],
+  "required_artifacts": {
+    "acceptance_data": {
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/acceptance-data.json",
+      "status": "PRESENT"
+    },
+    "artifact_manifest": {
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/artifact-manifest.json",
+      "status": "PRESENT"
+    },
+    "plugin_manifest": {
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/plugin-manifest.json",
+      "status": "PRESENT"
+    },
+    "skill_manifest": {
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/skill-manifest.json",
+      "status": "PRESENT"
+    },
+    "tool_capability_manifest": {
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/tool-capability-manifest.json",
+      "status": "PRESENT"
+    },
+    "mcp_connector_manifest": {
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/mcp-connector-manifest.json",
+      "status": "PRESENT"
+    },
+    "compatibility_decision": {
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/compatibility-decision.json",
+      "status": "PRESENT"
+    },
+    "install_decision": {
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/install-decision.json",
+      "status": "PRESENT"
+    },
+    "activation_decision": {
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/activation-decision.json",
+      "status": "PRESENT"
+    },
+    "scoped_capability_binding": {
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/scoped-capability-binding.json",
+      "status": "PRESENT"
+    },
+    "unsafe_package_denial": {
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/unsafe-package-denial.json",
+      "status": "PRESENT"
+    },
+    "agent_binding_screenshot": {
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/agent-binding-screenshot.png",
+      "status": "PRESENT"
+    },
+    "denied_package_screenshot": {
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/denied-package-screenshot.png",
+      "status": "PRESENT"
+    },
+    "browser_action_log": {
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/browser-action-log.json",
+      "status": "PRESENT"
+    },
+    "browser_network_log": {
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/browser-network-log.json",
+      "status": "PRESENT"
+    },
+    "bff_route_log": {
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/bff-route-log.json",
+      "status": "PRESENT"
+    },
+    "negative_compatibility_fixtures": {
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/negative-compatibility-fixtures.json",
+      "status": "PRESENT"
+    },
+    "policy_audit_ref": {
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/policy-audit-ref.json",
+      "status": "PRESENT"
+    },
+    "prd_spec_review": {
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/prd-spec-review.md",
+      "status": "PRESENT"
+    },
+    "target_architecture_review": {
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/target-architecture-review.md",
+      "status": "PRESENT"
+    },
+    "audit_opinion": {
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/audit-opinion.md",
+      "status": "PRESENT"
+    },
+    "audit_closure": {
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/audit-closure.md",
+      "status": "PRESENT"
+    },
+    "no_false_green_scan": {
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/no-false-green-scan.json",
+      "status": "PRESENT"
+    },
+    "redaction_scan": {
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/redaction-scan.json",
+      "status": "PRESENT"
+    }
+  },
+  "prd_review": {
+    "status": "PASS",
+    "evidence_ref": "prd-spec-review.md"
+  },
+  "target_architecture_review": {
+    "status": "PASS",
+    "evidence_ref": "target-architecture-review.md"
+  },
+  "audit": {
+    "fatal_findings": 0,
+    "major_findings": 0,
+    "closure_status": "CLOSED"
+  },
+  "claim_scan": {
+    "status": "PASS",
+    "evidence_ref": "no-false-green-scan.json"
+  },
+  "redaction_scan": {
+    "status": "PASS",
+    "evidence_ref": "redaction-scan.json"
+  },
+  "created_at": "2026-06-24T00:00:00Z"
+}

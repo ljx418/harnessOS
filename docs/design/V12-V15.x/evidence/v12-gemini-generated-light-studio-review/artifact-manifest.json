@@ -1,0 +1,42 @@
+{
+  "artifact_id": "v12_gemini_generated_light_studio_review",
+  "status": "GEMINI_OUTPUT_IMPORTED_FOR_REVIEW",
+  "evidence_scope": "design_only",
+  "browser_implementation_backed": false,
+  "bff_backed": false,
+  "dto_backed": false,
+  "runtime_backed": false,
+  "source_pack": "docs/design/V12-V15.x/gemini_frontend_review_pack",
+  "imported_source": "C:\\Users\\Administrator\\Downloads\\harnessos_v13_prototype.html",
+  "expected_output_files": [
+    "index.html",
+    "README.md",
+    "audit-notes.md"
+  ],
+  "optional_output_files": [
+    "styles.generated.css",
+    "styles.css",
+    "app.js",
+    "index.local-render.png"
+  ],
+  "render_evidence": {
+    "local_chrome_headless_screenshot": "index.local-render.png"
+  },
+  "dependency_policy": {
+    "external_tailwind_cdn_removed": true,
+    "local_generated_css": "styles.generated.css"
+  },
+  "blocked_claims": [
+    "Xpert parity complete",
+    "Xpert-level UX complete",
+    "product-grade frontend complete",
+    "complete Workflow Studio ready",
+    "production ready",
+    "Agent executor ready",
+    "已完全追平 Xpert",
+    "产品级前端已完成",
+    "完整工作流工作台已完成",
+    "生产可用",
+    "Agent 执行器已完成"
+  ]
+}

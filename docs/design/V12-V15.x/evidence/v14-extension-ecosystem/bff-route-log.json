@@ -1,0 +1,133 @@
+{
+  "schema_version": "v14.extension_route_log.v1",
+  "status": "PASS",
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/bff/v14/system/health",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/v14/extensions/packages",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/v14/extensions/packages/pkg-v14-tool-quality-review-pack",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/v14/extensions/packages/pkg-v14-unsafe-shell-executor",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v14/extensions/packages/pkg-v14-tool-quality-review-pack/compatibility-check",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v14/extensions/packages/pkg-v14-unsafe-shell-executor/compatibility-check",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/v14/system/health",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/v14/extensions/packages",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v14/extensions/packages/pkg-v14-unsafe-shell-executor/compatibility-check",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v14/extensions/packages/pkg-v14-tool-quality-review-pack/compatibility-check",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/v14/extensions/packages/pkg-v14-tool-quality-review-pack",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v14/extensions/packages/pkg-v14-tool-quality-review-pack/install-decision",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v14/extensions/packages/pkg-v14-tool-quality-review-pack/activate",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v14/agents/agent-v12-quality-reviewer-real/capability-bindings",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v14/extensions/packages/pkg-v14-unsafe-shell-executor/unsafe-denial",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/v14/extensions/audit/audit://v14/extension/unsafe-shell-executor",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v14/extensions/packages/pkg-v14-tool-quality-review-pack/install-decision",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v14/extensions/packages/pkg-v14-tool-quality-review-pack/activate",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v14/agents/agent-v12-quality-reviewer-real/capability-bindings",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/v14/extensions/packages/pkg-v14-unsafe-shell-executor/unsafe-denial",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/v14/extensions/audit/audit://v14/extension/unsafe-shell-executor",
+      "status": 200,
+      "user_agent": "node"
+    }
+  ],
+  "forbidden_matches": []
+}

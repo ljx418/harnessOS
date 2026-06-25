@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://harnessos.local/schemas/post_v15_product_runtime_hardening_acceptance_data.schema.json",
+  "title": "PostV15ProductRuntimeHardeningAcceptanceData",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "stage_id",
+    "status",
+    "evidence_scope",
+    "runtime_backed",
+    "browser_backed",
+    "bff_backed",
+    "dto_backed",
+    "durable_entity_mutation",
+    "runtime_run_inspect",
+    "deployment_smoke",
+    "product_runtime_journey",
+    "browser_boundary",
+    "scenario_results",
+    "required_artifacts",
+    "prd_review",
+    "target_architecture_review",
+    "audit",
+    "claim_scan",
+    "redaction_scan",
+    "created_at"
+  ],
+  "properties": {
+    "schema_version": { "const": "post_v15.product_runtime_hardening_acceptance_data.v1" },
+    "stage_id": { "enum": ["PV16-R0", "PV16-S1", "PV16-S2", "PV16-S3", "PV16-S4", "PV16-SA"] },
+    "status": { "enum": ["PASS", "PARTIAL", "FAIL", "BLOCKED"] },
+    "evidence_scope": {
+      "enum": [
+        "readiness",
+        "durable_entity_hardening",
+        "runtime_run_inspect_pilot",
+        "self_host_hardening_smoke",
+        "product_runtime_journey",
+        "aggregate_reconciliation"
+      ]
+    },
+    "runtime_backed": { "type": "boolean" },
+    "browser_backed": { "type": "boolean" },
+    "bff_backed": { "type": "boolean" },
+    "dto_backed": { "type": "boolean" },
+    "durable_entity_mutation": { "$ref": "#/$defs/checkResult" },
+    "runtime_run_inspect": { "$ref": "#/$defs/checkResult" },
+    "deployment_smoke": { "$ref": "#/$defs/checkResult" },
+    "product_runtime_journey": { "$ref": "#/$defs/checkResult" },
+    "browser_boundary": { "$ref": "#/$defs/checkResult" },
+    "scenario_results": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/scenarioResult" }
+    },
+    "required_artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "acceptance_data",
+        "artifact_manifest",
+        "entity_crud_report",
+        "runtime_run_inspect_report",
+        "deployment_smoke_output",
+        "deployment_health_report",
+        "ux_hardening_report",
+        "claim_to_evidence_matrix",
+        "product_journey_screenshot",
+        "runtime_inspect_screenshot",
+        "browser_network_log",
+        "bff_route_log",
+        "prd_spec_review",
+        "target_architecture_review",
+        "audit_closure",
+        "no_false_green_scan",
+        "redaction_scan"
+      ],
+      "properties": {
+        "acceptance_data": { "$ref": "#/$defs/artifactStatus" },
+        "artifact_manifest": { "$ref": "#/$defs/artifactStatus" },
+        "entity_crud_report": { "$ref": "#/$defs/artifactStatus" },
+        "runtime_run_inspect_report": { "$ref": "#/$defs/artifactStatus" },
+        "deployment_smoke_output": { "$ref": "#/$defs/artifactStatus" },
+        "deployment_health_report": { "$ref": "#/$defs/artifactStatus" },
+        "ux_hardening_report": { "$ref": "#/$defs/artifactStatus" },
+        "claim_to_evidence_matrix": { "$ref": "#/$defs/artifactStatus" },
+        "product_journey_screenshot": { "$ref": "#/$defs/artifactStatus" },
+        "runtime_inspect_screenshot": { "$ref": "#/$defs/artifactStatus" },
+        "browser_network_log": { "$ref": "#/$defs/artifactStatus" },
+        "bff_route_log": { "$ref": "#/$defs/artifactStatus" },
+        "prd_spec_review": { "$ref": "#/$defs/artifactStatus" },
+        "target_architecture_review": { "$ref": "#/$defs/artifactStatus" },
+        "audit_closure": { "$ref": "#/$defs/artifactStatus" },
+        "no_false_green_scan": { "$ref": "#/$defs/artifactStatus" },
+        "redaction_scan": { "$ref": "#/$defs/artifactStatus" }
+      }
+    },
+    "prd_review": { "$ref": "#/$defs/checkResult" },
+    "target_architecture_review": { "$ref": "#/$defs/checkResult" },
+    "audit": { "$ref": "#/$defs/auditResult" },
+    "claim_scan": { "$ref": "#/$defs/checkResult" },
+    "redaction_scan": { "$ref": "#/$defs/checkResult" },
+    "created_at": { "type": "string", "format": "date-time" }
+  },
+  "$defs": {
+    "artifactStatus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "status"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["PRESENT", "MISSING", "NOT_APPLICABLE"] }
+      }
+    },
+    "auditResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fatal_findings", "major_findings", "closure_status"],
+      "properties": {
+        "fatal_findings": { "type": "integer", "minimum": 0 },
+        "major_findings": { "type": "integer", "minimum": 0 },
+        "closure_status": { "enum": ["CLOSED", "OPEN", "BLOCKED"] }
+      }
+    },
+    "checkResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "evidence_ref"],
+      "properties": {
+        "status": { "enum": ["PASS", "FAIL", "BLOCKED"] },
+        "evidence_ref": { "type": "string", "minLength": 1 }
+      }
+    },
+    "scenarioResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scenario_id", "status", "user_visible_result", "evidence_refs"],
+      "properties": {
+        "scenario_id": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["PASS", "PARTIAL", "FAIL", "BLOCKED"] },
+        "user_visible_result": { "type": "string", "minLength": 1 },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

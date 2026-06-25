@@ -1,0 +1,99 @@
+{
+  "schema_version": "v12.remaining_stage_acceptance_data.v1",
+  "stage_id": "V12-SQ",
+  "status": "PASS",
+  "evidence_scope": "product_polish",
+  "runtime_backed": false,
+  "browser_backed": true,
+  "bff_backed": true,
+  "dto_backed": true,
+  "design_only_used_as_browser_evidence": false,
+  "xpert_reference_used_as_harnessos_evidence": false,
+  "scenario_results": [
+    {
+      "scenario_id": "US-V12-07",
+      "status": "PASS",
+      "user_visible_result": "Reviewer sees coherent workbench hierarchy, constrained layout and component usage.",
+      "evidence_refs": [
+        "docs/design/V12-V15.x/evidence/v12-sq-product-polish/browser-screenshot.png",
+        "docs/design/V12-V15.x/evidence/v12-sq-product-polish/bff-route-log.json"
+      ]
+    }
+  ],
+  "required_artifacts": {
+    "acceptance_data": {
+      "path": "docs/design/V12-V15.x/evidence/v12-sq-product-polish/acceptance-data.json",
+      "status": "PRESENT"
+    },
+    "browser_screenshot": {
+      "path": "docs/design/V12-V15.x/evidence/v12-sq-product-polish/browser-screenshot.png",
+      "status": "PRESENT"
+    },
+    "browser_network_log": {
+      "path": "docs/design/V12-V15.x/evidence/v12-sq-product-polish/browser-network-log.json",
+      "status": "PRESENT"
+    },
+    "bff_route_log": {
+      "path": "docs/design/V12-V15.x/evidence/v12-sq-product-polish/bff-route-log.json",
+      "status": "PRESENT"
+    },
+    "schema_validation_report": {
+      "path": "docs/design/V12-V15.x/evidence/v12-sq-product-polish/schema-validation-report.json",
+      "status": "PRESENT"
+    },
+    "prd_spec_review": {
+      "path": "docs/design/V12-V15.x/evidence/v12-sq-product-polish/prd-spec-review.md",
+      "status": "PRESENT"
+    },
+    "target_architecture_review": {
+      "path": "docs/design/V12-V15.x/evidence/v12-sq-product-polish/target-architecture-review.md",
+      "status": "PRESENT"
+    },
+    "audit_opinion": {
+      "path": "docs/design/V12-V15.x/evidence/v12-sq-product-polish/audit-opinion.md",
+      "status": "PRESENT"
+    },
+    "audit_closure": {
+      "path": "docs/design/V12-V15.x/evidence/v12-sq-product-polish/audit-closure.md",
+      "status": "PRESENT"
+    },
+    "no_false_green_scan": {
+      "path": "docs/design/V12-V15.x/evidence/v12-sq-product-polish/no-false-green-scan.txt",
+      "status": "PRESENT"
+    },
+    "redaction_scan": {
+      "path": "docs/design/V12-V15.x/evidence/v12-sq-product-polish/redaction-scan.txt",
+      "status": "PRESENT"
+    }
+  },
+  "schema_validation": {
+    "status": "PASS",
+    "evidence_ref": "docs/design/V12-V15.x/evidence/v12-sq-product-polish/schema-validation-report.json"
+  },
+  "browser_boundary": {
+    "status": "PASS",
+    "evidence_ref": "docs/design/V12-V15.x/evidence/v12-sq-product-polish/browser-network-log.json"
+  },
+  "prd_review": {
+    "status": "PASS",
+    "evidence_ref": "docs/design/V12-V15.x/evidence/v12-sq-product-polish/prd-spec-review.md"
+  },
+  "target_architecture_review": {
+    "status": "PASS",
+    "evidence_ref": "docs/design/V12-V15.x/evidence/v12-sq-product-polish/target-architecture-review.md"
+  },
+  "audit": {
+    "fatal_findings": 0,
+    "major_findings": 0,
+    "closure_status": "CLOSED"
+  },
+  "claim_scan": {
+    "status": "PASS",
+    "evidence_ref": "docs/design/V12-V15.x/evidence/v12-sq-product-polish/no-false-green-scan.txt"
+  },
+  "redaction_scan": {
+    "status": "PASS",
+    "evidence_ref": "docs/design/V12-V15.x/evidence/v12-sq-product-polish/redaction-scan.txt"
+  },
+  "created_at": "2026-06-24T00:00:00+08:00"
+}

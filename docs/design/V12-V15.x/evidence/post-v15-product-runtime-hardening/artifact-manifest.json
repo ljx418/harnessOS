@@ -1,0 +1,115 @@
+{
+  "schema_version": "post_v15.product_runtime_hardening_artifact_manifest.v1",
+  "stage_id": "PV16-SA",
+  "status": "PASS",
+  "artifact_root": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening",
+  "artifacts": [
+    {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/acceptance-data.json",
+      "kind": "json",
+      "sha256": "4e017d21f15510b7473960d42a6cea53e53c58686e000190c0bffd5ed28ad547",
+      "evidence_role": "acceptance_data"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/entity-crud-report.json",
+      "kind": "json",
+      "sha256": "58411a03f35db3b6d532f88461c77fc5cf9e9a5b5d1dd5faf3147ab9ab8aafe0",
+      "evidence_role": "entity_crud_report"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/runtime-run-inspect-report.json",
+      "kind": "json",
+      "sha256": "3325710a834be3a15ae487a08454b0c715f25afd0fb6a9ce99c4d76a55da8a4b",
+      "evidence_role": "runtime_run_inspect_report"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/deployment-smoke-output.txt",
+      "kind": "text",
+      "sha256": "976c2dc35ee953713475a90135e893ba3a787ec52d27a15072987fafce2bcb50",
+      "evidence_role": "deployment_smoke_output"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/deployment-health-report.json",
+      "kind": "json",
+      "sha256": "7a4c6e0fed8b3456d5ca7c4825f7cc829740eb8b71e5817d87c76573ffd90391",
+      "evidence_role": "deployment_health_report"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/ux-hardening-report.json",
+      "kind": "json",
+      "sha256": "a6ad1e35ebc6f642eb245067a486045935aa404c4276b4fd5091b895a7f0614c",
+      "evidence_role": "ux_hardening_report"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/claim-to-evidence-matrix.json",
+      "kind": "json",
+      "sha256": "1d86cdd0e3b9a53768ee4ce490bf9f0e6adc847d44a3e6439797c9fa3ec102e8",
+      "evidence_role": "claim_to_evidence_matrix"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/product-journey-screenshot.png",
+      "kind": "screenshot",
+      "sha256": "6e96d71d57344ff85059f3ebf983e61314dbdf83a242785cbd544417f1a5e0f3",
+      "evidence_role": "product_journey_screenshot"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/runtime-inspect-screenshot.png",
+      "kind": "screenshot",
+      "sha256": "c9ec78757941b7486a0bddebaee737c6eda673ab0a6b1e51e1d7658c84b3507a",
+      "evidence_role": "runtime_inspect_screenshot"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/browser-network-log.json",
+      "kind": "json",
+      "sha256": "b619326292542266947a1e8be59bb9ff496e903f54d218c86eab6d4cafa60623",
+      "evidence_role": "browser_network_log"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/bff-route-log.json",
+      "kind": "json",
+      "sha256": "7ff25e929944bfdf3e6698bced30f42b62e39e8c2feed8902954626d2248db6e",
+      "evidence_role": "bff_route_log"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/prd-spec-review.md",
+      "kind": "markdown",
+      "sha256": "6658a922ef1c2e0963215dbef080f2a28e3230c5a1ecf73e3e34a5f409ced663",
+      "evidence_role": "prd_spec_review"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/target-architecture-review.md",
+      "kind": "markdown",
+      "sha256": "4b0592ee72788f4c44a446ed2e91dc9df41cc813564be07390c1e11d453dd7cd",
+      "evidence_role": "target_architecture_review"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/audit-closure.md",
+      "kind": "markdown",
+      "sha256": "e432d610181576703ba806ef6832978bcdc5e8f50fdc1ed9d965ad02e8805d51",
+      "evidence_role": "audit_closure"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/no-false-green-scan.txt",
+      "kind": "text",
+      "sha256": "daf41d97d45275cd8f68bba384c831d862304bdaf9a5a41e1b7a3e688860701e",
+      "evidence_role": "no_false_green_scan"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/redaction-scan.txt",
+      "kind": "text",
+      "sha256": "1aa0f834b8b4f2abbe075b3c956e690db17cd5ecd7f6646b12b4520cb9bd82dd",
+      "evidence_role": "redaction_scan"
+    }
+  ],
+  "claim_boundary": {
+    "allowed_claim": "PV16 complete: product-runtime hardening pilot ready for review.",
+    "forbidden_claims": [
+      "production ready",
+      "Xpert parity complete",
+      "product-grade frontend complete",
+      "complete Workflow Studio ready",
+      "Agent executor ready"
+    ]
+  },
+  "created_at": "2026-06-25T00:00:00Z"
+}

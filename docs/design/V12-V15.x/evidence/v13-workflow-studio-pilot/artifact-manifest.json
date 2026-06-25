@@ -1,0 +1,243 @@
+{
+  "schema_version": "v13.workflow_studio_artifact_manifest.v1",
+  "stage_id": "V13-SA",
+  "status": "PASS",
+  "evidence_scope": "aggregate_reconciliation",
+  "not_runtime_execution_evidence": true,
+  "required_artifacts": [
+    {
+      "artifact_id": "acceptance_data",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/v13-workflow-studio-acceptance-data.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "8f42bb4658c35df7a701ff7cae5a230e1bed9eea50d6f1812c71c55aef7d9ce6"
+    },
+    {
+      "artifact_id": "artifact_manifest",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/artifact-manifest.json",
+      "required_for_pass": true,
+      "status": "MISSING",
+      "sha256": null
+    },
+    {
+      "artifact_id": "studio_canvas_screenshot",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/studio-canvas-screenshot.png",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "eb6fe686968d216cd11690b25dfc15868efffc985c521748a6d739c90d141ef9"
+    },
+    {
+      "artifact_id": "node_inspector_screenshot",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/node-inspector-screenshot.png",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "4659ae2552a1a6e35febb982d00e7d4b5222791a29ca7cff2c4b073e88fdad7a"
+    },
+    {
+      "artifact_id": "workflow_spec_graph",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/workflow-spec-graph.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "2379f0625c9a53a33a84f91415c6c66419b2f5483c7ef7624d5a585b5d610a73"
+    },
+    {
+      "artifact_id": "workflow_diff_proposal",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/workflow-diff-proposal.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "44f6bf0f7d5c75d52749b00501d548221f4fe52a40c19de1de92ea4aed2330ed"
+    },
+    {
+      "artifact_id": "graph_roundtrip_report",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/graph-roundtrip-report.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "de308e4e4c8b3036f18d37d7ef675d052d21b4e6d8f7f4c36ee4f797bec5d0f5"
+    },
+    {
+      "artifact_id": "browser_action_log",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/browser-action-log.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "67aa2e974fd2eafe7e2d560296362cdd23c74585adcc90ee1d8d3a5b42f6ca17"
+    },
+    {
+      "artifact_id": "browser_network_log",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/browser-network-log.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "e776685204c2ca0231b37eb8fa194ddc252a16cfef596bb0cd961ee93a9f8477"
+    },
+    {
+      "artifact_id": "bff_route_log",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/bff-route-log.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "c40f27d6bcd618608a96b58323c17b376514bc4a8e03fa23e0ef5cb69c8a3d9e"
+    },
+    {
+      "artifact_id": "interaction_parity_report",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/interaction-parity-report.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "e7d72145abc70d3382bfbf044d7e97e9c18564b7d106c03d3f9148bd812a6f72"
+    },
+    {
+      "artifact_id": "edge_quality_report",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/edge-quality-report.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "aefb20f671c7111aa886c66dcb898ae9bb48da385b226ebc43dd2a7e35cb12ad"
+    },
+    {
+      "artifact_id": "canvas_defect_regression_report",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/canvas-defect-regression-report.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "63113f6afb970bba245db6c5f0426648a6be9924bf9f326cc5a57b817eedab59"
+    },
+    {
+      "artifact_id": "edge_default_screenshot",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/edge-default-screenshot.png",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "69678087c82051cbdb45fd5467e1d90fefd02cfd79917c97468f1dfe16b3c599"
+    },
+    {
+      "artifact_id": "canvas_defect_wheel_zoom",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/canvas-defect-wheel-zoom.png",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "7971464af3f08edb66cb843e7d267e5420ed07fedbd5c67c703e1a2f3aee1bd5"
+    },
+    {
+      "artifact_id": "canvas_defect_right_area_drag",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/canvas-defect-right-area-drag.png",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "79320c6c4c367e26bed62f8476ab1ac60f233213fb5d5a12d25357b7d196624b"
+    },
+    {
+      "artifact_id": "canvas_defect_connect_cancel",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/canvas-defect-connect-cancel.png",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "3dd45732fb7bf7012df95795b80f4670ff1e71bee321056fe6b7e83f48e1b102"
+    },
+    {
+      "artifact_id": "edge_zoom_screenshot",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/edge-zoom-screenshot.png",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "ee4fe24cc02d555bf0f24ee97b7afd23d4f307c537b512806c3179f6a3c36e09"
+    },
+    {
+      "artifact_id": "edge_drag_screenshot",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/edge-drag-screenshot.png",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "0e4da5cc929405b28aaa97dd5d82c551c3bcc810043a96ca09750a9996d503c6"
+    },
+    {
+      "artifact_id": "edge_free_connect_screenshot",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/edge-free-connect-screenshot.png",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "a1e3317fcc5d65e41b8ff48ac61b1cd1bca5651a39b6f8ae1b5f7d16af9ba037"
+    },
+    {
+      "artifact_id": "simulation_edge_state_screenshot",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/simulation-edge-state-screenshot.png",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "5ac475dcd9c88f35d72a1de8f395443f05478e850a5bc853f047c74c852491d1"
+    },
+    {
+      "artifact_id": "scenario_morph_screenshot",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/scenario-morph-screenshot.png",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "c4348febc49727329e92abb468a54f90f20c7a699208b3d3132a373f88959589"
+    },
+    {
+      "artifact_id": "scenario_storyboard_screenshot",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/scenario-storyboard-screenshot.png",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "e0080b1ce7439bed6d18ca5b1a1d584741b4a03a10a50435d26ab7348184e834"
+    },
+    {
+      "artifact_id": "chat_command_screenshot",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/chat-command-screenshot.png",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "bd5aa48815c8ed7bbe1d60e4c74bfa16110454b5aadd46cbc67e3838080cd86a"
+    },
+    {
+      "artifact_id": "simulation_blocked_modal_screenshot",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/simulation-blocked-modal-screenshot.png",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "6f4ee905675a1e602ef6ebe0e3cda0b94d94fceb3919b5096f8e3bc92d9a9cb8"
+    },
+    {
+      "artifact_id": "confirmation_transcript",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/confirmation-transcript.txt",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "6fdff3fabc4d0a05c687fbc8048bb025898533f1775b9dc6ec7cd2fc2e1f89d8"
+    },
+    {
+      "artifact_id": "prd_spec_review",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/prd-spec-review.md",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "a1681b0d3d2f569e2bbda7a2d65a612c4c98ba4edb047323617b9ded7c6abadf"
+    },
+    {
+      "artifact_id": "target_architecture_review",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/target-architecture-review.md",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "fe261f38053e910cbff87556b7ee94541588d097ceac4b7216631f40ed9a3072"
+    },
+    {
+      "artifact_id": "audit_opinion",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/audit-opinion.md",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "d333bd2cc405de99cc1c0f3577f0c9c3c807aa48fc514ad40b0cbcefce737f62"
+    },
+    {
+      "artifact_id": "audit_closure",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/audit-closure.md",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "86c9348311c1113968938ae1e444fde43e1d1c2742f78cff44dcc06984d87047"
+    },
+    {
+      "artifact_id": "no_false_green_scan",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/no-false-green-scan.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "815baf2939a1560549531d94ffcdab7bf10216330a9098f888f93d5b9b868926"
+    },
+    {
+      "artifact_id": "redaction_scan",
+      "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/redaction-scan.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "d45cf214d4f77f732ea264f62a5d889bbbcf44fac6da00ea86807287f2539daa"
+    }
+  ],
+  "blocked_claims": [
+    "browser implementation complete",
+    "BFF runtime evidence complete",
+    "Xpert parity complete",
+    "product-grade frontend complete",
+    "complete Workflow Studio ready",
+    "production ready",
+    "Agent executor ready"
+  ],
+  "created_at": "2026-06-25T00:00:00Z"
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": "v14.tool_capability_manifest.v1",
+  "package": {
+    "schema_version": "v14.extension_package_manifest.v1",
+    "package_id": "pkg-v14-tool-quality-review-pack",
+    "display_name": "质量审查扩展包",
+    "package_kind": "tool_capability",
+    "publisher": "HarnessOS Local Review",
+    "version": "0.14.0-review",
+    "trust_level": "reviewed_local",
+    "status": "approved",
+    "requested_permissions": [
+      "read:artifact_summary",
+      "write:evidence_note"
+    ],
+    "required_credential_refs": [
+      "credential_ref:v14-quality-review-redacted"
+    ],
+    "redacted_config_refs": [
+      "config_ref:v14-quality-review-redacted"
+    ],
+    "capability_refs": [
+      "tool:quality.review",
+      "skill:markdown.summary",
+      "mcp:readonly-docs"
+    ],
+    "scope_requirements": [
+      "workspace",
+      "project",
+      "app",
+      "agent",
+      "station"
+    ],
+    "audit_ref": "audit://v14/extension/pkg-quality-review",
+    "created_at": "2026-06-24T00:00:00Z"
+  },
+  "tool_refs": [
+    "tool:quality.review"
+  ],
+  "runtime_backed": false
+}

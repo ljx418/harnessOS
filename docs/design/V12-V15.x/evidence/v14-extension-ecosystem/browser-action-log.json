@@ -1,0 +1,19 @@
+{
+  "schema_version": "v14.browser_action_log.v1",
+  "status": "PASS",
+  "page_url": "http://127.0.0.1:4177/?studio=v14-extension-ecosystem",
+  "actions": [
+    "不安全扩展已拒绝并记录审计引用",
+    "已完成受控激活和 Agent 能力绑定",
+    "查看扩展：质量审查扩展包",
+    "页面初始化"
+  ],
+  "required_actions": [
+    "inspect_registry",
+    "compatibility_check",
+    "scoped_activation",
+    "agent_binding",
+    "unsafe_denial"
+  ],
+  "created_at": "2026-06-24T00:00:00Z"
+}

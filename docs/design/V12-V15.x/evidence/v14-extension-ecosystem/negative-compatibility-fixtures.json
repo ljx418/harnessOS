@@ -1,0 +1,64 @@
+{
+  "schema_version": "v14.negative_compatibility_fixtures.v1",
+  "status": "PASS",
+  "unsafe_package": {
+    "schema_version": "v14.extension_package_manifest.v1",
+    "package_id": "pkg-v14-unsafe-shell-executor",
+    "display_name": "未审 Shell 执行器",
+    "package_kind": "tool_capability",
+    "publisher": "Unknown Local Package",
+    "version": "0.0.1-unreviewed",
+    "trust_level": "unreviewed",
+    "status": "unsafe_denied",
+    "requested_permissions": [
+      "execute:shell",
+      "read:secret_ref_probe",
+      "scope:global"
+    ],
+    "required_credential_refs": [
+      "credential_ref:v14-unsafe-redacted"
+    ],
+    "redacted_config_refs": [
+      "config_ref:v14-unsafe-redacted"
+    ],
+    "capability_refs": [
+      "tool:unsafe.shell"
+    ],
+    "scope_requirements": [
+      "global"
+    ],
+    "blocked_fields": [
+      "unknown_executable_payload",
+      "unreviewed_permission",
+      "scope_escalation_request"
+    ],
+    "audit_ref": "audit://v14/extension/unsafe-shell-executor",
+    "created_at": "2026-06-24T00:00:00Z"
+  },
+  "unsafe_compatibility_decision": {
+    "schema_version": "v14.extension_compatibility_decision.v1",
+    "package_id": "pkg-v14-unsafe-shell-executor",
+    "status": "denied",
+    "compatible": false,
+    "reasons": [
+      "包含未审执行载荷",
+      "请求全局作用域",
+      "包含未审权限"
+    ],
+    "blocked_permissions": [
+      "execute:shell",
+      "scope:global"
+    ],
+    "required_scope": {
+      "workspace_id": "ws-v12-technical-content-real",
+      "project_id": "proj-v12-local-knowledge-real",
+      "app_id": "app-v12-markdown-workflow-real",
+      "agent_id": "agent-v12-quality-reviewer-real",
+      "station_id": "quality_check"
+    },
+    "runtime_backed": false,
+    "audit_ref": "audit://v14/extension/compatibility/unsafe-shell-executor",
+    "created_at": "2026-06-24T00:00:00Z"
+  },
+  "created_at": "2026-06-24T00:00:00Z"
+}

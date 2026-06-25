@@ -1,0 +1,115 @@
+{
+  "schema_version": "v12.remaining_stage_artifact_manifest.v1",
+  "stage_id": "V12-SQ",
+  "status": "PASS",
+  "evidence_scope": "product_polish",
+  "not_pass_evidence": false,
+  "required_artifacts": [
+    {
+      "artifact_id": "acceptance_data",
+      "path": "acceptance-data.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "8eea8fc494a41de0fc31529a3047104c3b26ba4b8690b7046966f09282bb588c"
+    },
+    {
+      "artifact_id": "browser_screenshot",
+      "path": "browser-screenshot.png",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "779b45cd7f0640194a42f98b7ff77151f2380eaa25eba172af0cf27b5506acbc"
+    },
+    {
+      "artifact_id": "constrained_screenshot",
+      "path": "browser-screenshot-constrained.png",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "dfee7e23a7935054105367ac7ce037a710858c503779d709067b3f4ad34706e1"
+    },
+    {
+      "artifact_id": "browser_network_log",
+      "path": "browser-network-log.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "4d3b721adfdac71c1d32fe876e801bea50ce9970c0fa83416adbcd1431e2c844"
+    },
+    {
+      "artifact_id": "bff_route_log",
+      "path": "bff-route-log.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "ab57cf2a5ec6ed8a1ef28185ab6a5c470c144dea3c0f4865db8535544c33a9cc"
+    },
+    {
+      "artifact_id": "component_inventory_review",
+      "path": "component-inventory-review.md",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "1a4fe9bdf1b788c962efd019dc6374eb1110e6aed4550952cfecf735c99032e8"
+    },
+    {
+      "artifact_id": "human_ux_review",
+      "path": "human-ux-review.md",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "917bf38022410231df520f828f2dbc7cad8480f3a9e68a13da76119579ad693a"
+    },
+    {
+      "artifact_id": "schema_validation_report",
+      "path": "schema-validation-report.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "52ef3d9e151a5c553cdf56ea91a70188175b1d03be8e9574a03660b4bac17338"
+    },
+    {
+      "artifact_id": "prd_spec_review",
+      "path": "prd-spec-review.md",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "63137b73e39e4d26023e6f3bb7d9cdf35b518d5a62b0bd0ca02659c8f595c8a1"
+    },
+    {
+      "artifact_id": "target_architecture_review",
+      "path": "target-architecture-review.md",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "57808b875373d34851c15a451d6de8083c70fd3573b0d1df74f719ecb373f835"
+    },
+    {
+      "artifact_id": "audit_opinion",
+      "path": "audit-opinion.md",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "e78bfafbeb70abffb223ddc6917d5436155d919c79b5f5785228f9589fbd747a"
+    },
+    {
+      "artifact_id": "audit_closure",
+      "path": "audit-closure.md",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "f5fbddbb9156dddee1174bddebd8455d570feda26a17c8c3e6f6f86e6dcc7d96"
+    },
+    {
+      "artifact_id": "no_false_green_scan",
+      "path": "no-false-green-scan.txt",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "04807ec72c0b464234ef99bc5c4f3c4317ff7f6b0bcc68313f3a44960faa006e"
+    },
+    {
+      "artifact_id": "redaction_scan",
+      "path": "redaction-scan.txt",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "3bcd907dd8ddb7d41a2d66f99527ab002660b931c5296c54bc702f14d2e3587b"
+    }
+  ],
+  "blocked_claims": [
+    "complete Workflow Studio ready",
+    "product-grade frontend complete",
+    "Xpert-level UX complete",
+    "production ready",
+    "Agent executor ready"
+  ],
+  "created_at": "2026-06-24T00:00:00+08:00"
+}

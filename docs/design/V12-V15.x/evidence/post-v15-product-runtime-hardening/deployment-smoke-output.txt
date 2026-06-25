@@ -1,0 +1,9 @@
+PV16 deployment hardening smoke
+COMMAND: python3 tools/post_v15/run_product_runtime_hardening_acceptance.py
+GET http://127.0.0.1:18040/bff/pv16/system/health -> 200
+GET http://127.0.0.1:4174/?studio=pv16-product-runtime-hardening -> 200
+health: PASS
+runtime_gateway: PASS
+redaction: PASS
+rollback=Stop preview and test-only BFF processes; no persistent production resource is changed.
+not_production_ga=true

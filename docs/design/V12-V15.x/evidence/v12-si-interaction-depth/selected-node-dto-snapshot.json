@@ -1,0 +1,27 @@
+{
+  "schema_version": "v12.canvas_inspector_projection.v1",
+  "inspector_projection_ref": "inspector-quality-check",
+  "selected_node_ref": "quality_check",
+  "entity_type": "station_agent",
+  "role": "reviewer",
+  "goal": "检查总结质量并生成可审计 quality report",
+  "memory_policy_ref": "memory-v12-quality-agent-redacted",
+  "model_profile_ref": "provider_ref:minimax-or-deepseek-redacted",
+  "tool_binding_refs": [
+    "tool:quality.review"
+  ],
+  "skill_binding_refs": [
+    "skill:markdown.summary"
+  ],
+  "mcp_binding_refs": [
+    "mcp:readonly-docs"
+  ],
+  "quality_refs": [
+    "quality:v12-readonly-gate"
+  ],
+  "evidence_refs": [
+    "evidence://v12/current-stage/quality-check"
+  ],
+  "redaction_status": "PASS",
+  "audit_ref": "audit://v12/current-stage/inspector-quality-check"
+}

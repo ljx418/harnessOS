@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HarnessOS V12-PV16 阶段自动化验收报告</title>
+  <style>
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #172026; background: #f6f7f9; }
+    header { padding: 32px 40px; background: #102033; color: #fff; }
+    main { max-width: 1280px; margin: 0 auto; padding: 28px; }
+    section { background: #fff; border: 1px solid #d8dee6; border-radius: 8px; padding: 20px; margin-bottom: 18px; }
+    h1, h2 { margin: 0 0 12px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { border-bottom: 1px solid #e2e7ee; padding: 10px; text-align: left; vertical-align: top; }
+    th { background: #f0f3f6; }
+    code, pre { background: #f3f5f7; border-radius: 6px; }
+    pre { padding: 10px; overflow: auto; max-height: 240px; }
+    .pass, .pass_bounded, .conditional_pass { color: #166534; font-weight: 700; }
+    .partial, .expected_fail { color: #92400e; font-weight: 700; }
+    .fail, .not_complete, .not_implemented, .missing { color: #991b1b; font-weight: 700; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+    article { border: 1px solid #d8dee6; border-radius: 8px; padding: 12px; background: #fbfcfd; }
+    img { width: 100%; border: 1px solid #d8dee6; border-radius: 6px; background: #fff; }
+    .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+    .summary div { background: #eef4fb; border-radius: 8px; padding: 12px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>HarnessOS V12-PV16 阶段自动化验收报告</h1>
+    <p>生成时间：2026-06-25T00:00:00+08:00 · 状态：<strong>PASS</strong></p>
+  </header>
+  <main>
+    <section>
+      <h2>结论摘要</h2>
+      <div class="summary">
+        <div><strong>PRD 基准</strong><br>docs/design/V12-V15.x/v12_to_v15_target_prd.md</div>
+        <div><strong>目标架构</strong><br>docs/design/V12-V15.x/v12_to_v15_target_architecture.md</div>
+        <div><strong>预览地址</strong><br>http://127.0.0.1:4186</div>
+        <div><strong>边界</strong><br>不声明 production ready / Xpert parity / complete Studio</div>
+      </div>
+      <p>本报告证明 V12-PV16 阶段页面可被人类审查，并覆盖只读画布、editable Studio pilot、扩展生态 pilot、观测与 bounded deployment smoke、PV16 product-runtime hardening pilot。报告不声明生产级交付、完整 Studio、Xpert parity、产品级前端完成或 Agent executor ready。</p>
+    </section>
+    <section><h2>目标架构与当前实现</h2><table><thead><tr><th>架构平面</th><th>目标</th><th>当前实现</th><th>状态</th></tr></thead><tbody><tr><td>Product Console / Mission Studio</td><td>统一产品入口、Studio、Inspector、evidence browser</td><td>V12-PV16 有分阶段页面和一条 product-runtime pilot 旅程；尚未合并为完整产品入口</td><td class='partial'>PARTIAL</td></tr><tr><td>Canvas Workbench</td><td>只读 foundation 到可编辑 Studio pilot</td><td>V12 只读画布 PASS；V13 add/connect/move/configure pilot PASS</td><td class='pass_bounded'>PASS_BOUNDED</td></tr><tr><td>Product Entity Control</td><td>workspace/project/app/Station Agent durable mutation</td><td>PV16-S1 通过 BFF-only mutation、ownership denial 和 audit refs 证明 bounded pilot</td><td class='pass_bounded'>PASS_BOUNDED</td></tr><tr><td>Runtime Gateway</td><td>确认后 runtime-backed run/inspect</td><td>PV16-S2 通过 controlled runtime run/inspect refs 证明 bounded pilot；不代表 Agent executor ready</td><td class='pass_bounded'>PASS_BOUNDED</td></tr><tr><td>Observability / Operations</td><td>trace/metrics/audit/deployment health</td><td>V15 bounded dashboard 和 local smoke PASS；不是生产 GA</td><td class='pass_bounded'>PASS_BOUNDED</td></tr><tr><td>Deployment / Self-hosting</td><td>self-host profile、health、smoke、rollback</td><td>PV16-S3 本地 hardening smoke、health report 和 rollback notes PASS；不是生产部署</td><td class='pass_bounded'>PASS_BOUNDED</td></tr></tbody></table></section>
+    <section><h2>用户场景覆盖</h2><table><thead><tr><th>场景</th><th>证据</th><th>状态</th></tr></thead><tbody><tr><td>打开产品工作台并理解当前 workspace/project/app</td><td>V12 screenshot + route/network logs</td><td class='pass_bounded'>PASS_BOUNDED</td></tr><tr><td>体验工作流画布选择、Inspector、禁用动作说明</td><td>V12/V13 browser automation screenshots</td><td class='pass_bounded'>PASS_BOUNDED</td></tr><tr><td>编辑 Studio pilot：添加、连接、移动、配置节点</td><td>V13 browser automation + acceptance data</td><td class='pass_bounded'>PASS_BOUNDED</td></tr><tr><td>扩展包兼容性、scoped activation、unsafe denial</td><td>V14 browser automation + acceptance data</td><td class='pass_bounded'>PASS_BOUNDED</td></tr><tr><td>观察 trace/metrics/audit/incident 并运行 bounded smoke</td><td>V15 browser automation + acceptance data</td><td class='pass_bounded'>PASS_BOUNDED</td></tr><tr><td>持久化创建/更新实体</td><td>PV16 browser automation + entity CRUD report + BFF route log</td><td class='pass_bounded'>PASS_BOUNDED</td></tr><tr><td>真实 runtime-backed run/inspect</td><td>PV16 runtime run inspect report + runtime screenshot + acceptance runner</td><td class='pass_bounded'>PASS_BOUNDED</td></tr><tr><td>产品运行时连续旅程</td><td>PV16 product journey screenshot + UX hardening report</td><td class='pass_bounded'>PASS_BOUNDED</td></tr></tbody></table></section>
+    <section><h2>自动化截图证据</h2><div class="cards"><article><strong>headless · V12-readonly-workbench</strong><p class='pass'>PASS</p><p>用户可查看实体侧栏、只读画布、Inspector、禁用动作原因和 WorkflowDiff handoff。</p><img src='headless-v12-readonly-workbench.png' alt='V12-readonly-workbench' /></article><article><strong>headless · V13-editable-studio-pilot</strong><p class='pass'>PASS</p><p>用户可添加、连接、移动、配置节点并确认 WorkflowDiff handoff；不发布、不运行。</p><img src='headless-v13-editable-studio.png' alt='V13-editable-studio-pilot' /></article><article><strong>headless · V14-extension-ecosystem-pilot</strong><p class='pass'>PASS</p><p>用户可查看扩展包兼容性、执行 scoped activation、看到 unsafe package 被拒绝和 audit ref。</p><img src='headless-v14-extension-ecosystem.png' alt='V14-extension-ecosystem-pilot' /></article><article><strong>headless · V15-observability-deployment-baseline</strong><p class='pass'>PASS</p><p>用户可查看 trace/metrics/audit/incident，执行本地 health check 和 bounded smoke。</p><img src='headless-v15-observability-deployment.png' alt='V15-observability-deployment-baseline' /></article><article><strong>headless · PV16-product-runtime-hardening-pilot</strong><p class='pass'>PASS</p><p>用户可更新产品实体、看到 ownership denial、确认 runtime-backed run/inspect，并运行 bounded deployment hardening smoke。</p><img src='headless-pv16-product-runtime-hardening.png' alt='PV16-product-runtime-hardening-pilot' /></article></div></section>
+    <section><h2>自动化检查命令</h2><table><thead><tr><th>检查</th><th>状态</th><th>耗时</th><th>命令</th></tr></thead><tbody><tr><td>Python runner syntax</td><td class='pass'>PASS</td><td>0.12s</td><td><code>python3 -m py_compile apps/workflow-console/e2e/bff_smoke_server.py tools/v12/run_v12_real_data_acceptance.py tools/v12/run_v12_remaining_stage_acceptance.py tools/v13/run_v13_workflow_studio_acceptance.py tools/v14/run_v14_extension_ecosystem_acceptance.py tools/v15/run_v15_observability_deployment_acceptance.py tools/post_v15/run_product_runtime_hardening_acceptance.py tools/v12_v15/run_full_frontend_acceptance_review.py</code></td></tr><tr><td>TypeScript test compile</td><td class='pass'>PASS</td><td>4.25s</td><td><code>node node_modules/typescript/bin/tsc -p tsconfig.test.json</code></td></tr><tr><td>Workflow console build</td><td class='pass'>PASS</td><td>15.15s</td><td><code>node node_modules/vite/bin/vite.js build</code></td></tr><tr><td>Unit tests</td><td class='pass'>PASS</td><td>1.77s</td><td><code>bash -lc node --test dist-test/__tests__/*.test.js</code></td></tr><tr><td>Browser scenario automation (headless)</td><td class='pass'>PASS</td><td>4.84s</td><td><code>Chrome CDP headless + node e2e/full_frontend_acceptance_review.mjs</code></td></tr><tr><td>V12 real-data acceptance</td><td class='pass'>PASS</td><td>5.28s</td><td><code>python3 tools/v12/run_v12_real_data_acceptance.py</code></td></tr><tr><td>V12 remaining-stage acceptance</td><td class='pass'>PASS</td><td>6.56s</td><td><code>python3 tools/v12/run_v12_remaining_stage_acceptance.py</code></td></tr><tr><td>V13 Studio acceptance</td><td class='pass'>PASS</td><td>32.53s</td><td><code>python3 tools/v13/run_v13_workflow_studio_acceptance.py</code></td></tr><tr><td>V14 extension acceptance</td><td class='pass'>PASS</td><td>21.86s</td><td><code>python3 tools/v14/run_v14_extension_ecosystem_acceptance.py</code></td></tr><tr><td>V15 observability/deployment acceptance</td><td class='pass'>PASS</td><td>20.22s</td><td><code>python3 tools/v15/run_v15_observability_deployment_acceptance.py</code></td></tr><tr><td>PV16 product-runtime hardening acceptance</td><td class='pass'>PASS</td><td>0.27s</td><td><code>python3 tools/post_v15/run_product_runtime_hardening_acceptance.py</code></td></tr></tbody></table></section>
+    <section><h2>阶段验收数据摘要</h2><div class="cards"><article><strong>V12 remaining</strong><p class='pass'>PASS</p><pre>{
+  &quot;schema_version&quot;: &quot;v12.remaining_stage_acceptance_data.v1&quot;,
+  &quot;stage_id&quot;: &quot;V12-SA&quot;,
+  &quot;status&quot;: &quot;PASS&quot;,
+  &quot;evidence_scope&quot;: &quot;aggregate_reconciliation&quot;,
+  &quot;runtime_backed&quot;: false,
+  &quot;browser_backed&quot;: true,
+  &quot;bff_backed&quot;: true,
+  &quot;dto_backed&quot;: true,
+  &quot;design_only_used_as_browser_evidence&quot;: false,
+  &quot;xpert_reference_used_as_harnessos_evidence&quot;: false,
+  &quot;scenario_results&quot;: [
+    {
+      &quot;scenario_id&quot;: &quot;US-V12-SA&quot;,
+      &quot;status&quot;: &quot;PASS&quot;,
+      &quot;user_visible_result&quot;: &quot;Reviewer sees V12 claim-to-evidence reconciliation and deferred V13-V15 scope.&quot;,
+      &quot;evidence_refs&quot;: [
+        &quot;docs/design/V12-V15.x/evidence/v12-sa-aggregate/browser-screenshot.png&quot;,
+        &quot;docs/design/V12-V15.x/evidence/v12-sa-aggregate/bff-route-log.json&quot;
+      ]
+    }
+  ],
+  &quot;required_artifacts&quot;: {
+    &quot;acceptance_data&quot;: {
+      &quot;path&quot;: &quot;docs/design/V12-V15.x/evidence/v12-sa-aggregate/acceptance-data.json&quot;,
+      &quot;status&quot;: &quot;PRESENT&quot;
+    },
+    &quot;browser_screenshot&quot;: {
+      &quot;path&quot;: &quot;docs/design/V12-V15.x/evidence/v12-sa-aggregate/browser-screenshot.png&quot;,
+      &quot;status&quot;: &quot;PRESENT&quot;
+    },
+    &quot;browser_network_log&quot;: {
+      &quot;path&quot;: &quot;docs/design/V12-V15.x/evidence/v12-sa-aggregate/browser-network-log.json&quot;,
+   </pre></article><article><strong>V13 Studio</strong><p class='pass'>PASS</p><pre>{
+  &quot;schema_version&quot;: &quot;v13.workflow_studio_acceptance_data.v1&quot;,
+  &quot;stage_id&quot;: &quot;V13-SA&quot;,
+  &quot;status&quot;: &quot;PASS&quot;,
+  &quot;evidence_scope&quot;: &quot;aggregate_reconciliation&quot;,
+  &quot;runtime_backed&quot;: false,
+  &quot;browser_backed&quot;: true,
+  &quot;bff_backed&quot;: true,
+  &quot;dto_backed&quot;: true,
+  &quot;workflow_spec_graph&quot;: {
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;evidence_ref&quot;: &quot;workflow-spec-graph.json&quot;
+  },
+  &quot;workflow_diff_proposal&quot;: {
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;evidence_ref&quot;: &quot;workflow-diff-proposal.json&quot;
+  },
+  &quot;graph_roundtrip&quot;: {
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;evidence_ref&quot;: &quot;graph-roundtrip-report.json&quot;
+  },
+  &quot;browser_boundary&quot;: {
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;evidence_ref&quot;: &quot;browser-network-log.json&quot;
+  },
+  &quot;confirmation_boundary&quot;: {
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;evidence_ref&quot;: &quot;confirmation-transcript.txt&quot;
+  },
+  &quot;scenario_results&quot;: [
+    {
+      &quot;scenario_id&quot;: &quot;V13-S1&quot;,
+      &quot;status&quot;: &quot;PASS&quot;,
+      &quot;user_visible_result&quot;: &quot;WorkflowSpecGraph 通过 BFF 获取并完成合法/非法图校验。&quot;,
+      &quot;evidence_refs&quot;: [
+        &quot;workflow-spec-graph.json&quot;,
+        &quot;graph-roundtrip-report.json&quot;
+      ]
+    },
+    {
+      &quot;scenario_id&quot;: &quot;V13-S2&quot;,
+      &quot;status&quot;: &quot;PASS&quot;,
+      &quot;user_visible_result&quot;: &quot;用户可在浏览器画布添加、移动、连接、配置节点，并体验 L1/L2、缩放、拖拽、聊天、仿真卡口。&quot;,
+      &quot;evidence_refs&quot;: </pre></article><article><strong>V14 extension</strong><p class='pass'>PASS</p><pre>{
+  &quot;schema_version&quot;: &quot;v14.extension_ecosystem_acceptance_data.v1&quot;,
+  &quot;stage_id&quot;: &quot;V14-SA&quot;,
+  &quot;status&quot;: &quot;PASS&quot;,
+  &quot;evidence_scope&quot;: &quot;aggregate_reconciliation&quot;,
+  &quot;runtime_backed&quot;: false,
+  &quot;browser_backed&quot;: true,
+  &quot;bff_backed&quot;: true,
+  &quot;dto_backed&quot;: true,
+  &quot;manifest_validation&quot;: {
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;evidence_ref&quot;: &quot;plugin-manifest.json&quot;
+  },
+  &quot;compatibility_decision&quot;: {
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;evidence_ref&quot;: &quot;compatibility-decision.json&quot;
+  },
+  &quot;scoped_activation&quot;: {
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;evidence_ref&quot;: &quot;activation-decision.json&quot;
+  },
+  &quot;unsafe_denial&quot;: {
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;evidence_ref&quot;: &quot;unsafe-package-denial.json&quot;
+  },
+  &quot;browser_boundary&quot;: {
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;evidence_ref&quot;: &quot;browser-network-log.json&quot;
+  },
+  &quot;scenario_results&quot;: [
+    {
+      &quot;scenario_id&quot;: &quot;V14-S1&quot;,
+      &quot;status&quot;: &quot;PASS&quot;,
+      &quot;user_visible_result&quot;: &quot;审查者可查看扩展包、兼容性状态、权限、脱敏配置和 audit ref。&quot;,
+      &quot;evidence_refs&quot;: [
+        &quot;plugin-manifest.json&quot;,
+        &quot;compatibility-decision.json&quot;,
+        &quot;negative-compatibility-fixtures.json&quot;
+      ]
+    },
+    {
+      &quot;scenario_id&quot;: &quot;V14-S2&quot;,
+      &quot;status&quot;: &quot;PASS&quot;,
+      &quot;user_visible_result&quot;: &quot;审查者可将已审查能力激活到指定 Agent/Station 作用域。&quot;,
+      </pre></article><article><strong>V15 observability</strong><p class='pass'>PASS</p><pre>{
+  &quot;schema_version&quot;: &quot;v15.observability_deployment_acceptance_data.v1&quot;,
+  &quot;stage_id&quot;: &quot;V15-SA&quot;,
+  &quot;status&quot;: &quot;PASS&quot;,
+  &quot;evidence_scope&quot;: &quot;aggregate_reconciliation&quot;,
+  &quot;runtime_backed&quot;: false,
+  &quot;browser_backed&quot;: true,
+  &quot;bff_backed&quot;: true,
+  &quot;dto_backed&quot;: true,
+  &quot;observability_review&quot;: {
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;evidence_ref&quot;: &quot;trace-timeline.json&quot;
+  },
+  &quot;deployment_smoke&quot;: {
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;evidence_ref&quot;: &quot;deployment-smoke-output.txt&quot;
+  },
+  &quot;final_scenario_matrix&quot;: {
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;evidence_ref&quot;: &quot;final-scenario-matrix.json&quot;
+  },
+  &quot;browser_boundary&quot;: {
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;evidence_ref&quot;: &quot;browser-network-log.json&quot;
+  },
+  &quot;scenario_results&quot;: [
+    {
+      &quot;scenario_id&quot;: &quot;V15-S1&quot;,
+      &quot;status&quot;: &quot;PASS&quot;,
+      &quot;user_visible_result&quot;: &quot;用户可查看只读 trace、metrics、audit 和 incident evidence。&quot;,
+      &quot;evidence_refs&quot;: [
+        &quot;trace-timeline.json&quot;,
+        &quot;metrics-snapshot.json&quot;,
+        &quot;observability-dashboard-screenshot.png&quot;
+      ]
+    },
+    {
+      &quot;scenario_id&quot;: &quot;V15-S2&quot;,
+      &quot;status&quot;: &quot;PASS&quot;,
+      &quot;user_visible_result&quot;: &quot;用户可运行本地健康检查和 bounded deployment smoke，并看到具体输出。&quot;,
+      &quot;evidence_refs&quot;: [
+        &quot;health-check-result.json&quot;,
+        &quot;deployme</pre></article><article><strong>PV16 product-runtime</strong><p class='pass'>PASS</p><pre>{
+  &quot;schema_version&quot;: &quot;post_v15.product_runtime_hardening_acceptance_data.v1&quot;,
+  &quot;stage_id&quot;: &quot;PV16-SA&quot;,
+  &quot;status&quot;: &quot;PASS&quot;,
+  &quot;evidence_scope&quot;: &quot;aggregate_reconciliation&quot;,
+  &quot;runtime_backed&quot;: true,
+  &quot;browser_backed&quot;: true,
+  &quot;bff_backed&quot;: true,
+  &quot;dto_backed&quot;: true,
+  &quot;durable_entity_mutation&quot;: {
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;evidence_ref&quot;: &quot;entity-crud-report.json&quot;
+  },
+  &quot;runtime_run_inspect&quot;: {
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;evidence_ref&quot;: &quot;runtime-run-inspect-report.json&quot;
+  },
+  &quot;deployment_smoke&quot;: {
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;evidence_ref&quot;: &quot;deployment-smoke-output.txt&quot;
+  },
+  &quot;product_runtime_journey&quot;: {
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;evidence_ref&quot;: &quot;ux-hardening-report.json&quot;
+  },
+  &quot;browser_boundary&quot;: {
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;evidence_ref&quot;: &quot;browser-network-log.json&quot;
+  },
+  &quot;scenario_results&quot;: [
+    {
+      &quot;scenario_id&quot;: &quot;PV16-S1&quot;,
+      &quot;status&quot;: &quot;PASS&quot;,
+      &quot;user_visible_result&quot;: &quot;用户可更新产品实体并看到 audit refs，同时越权 mutation 被拒绝。&quot;,
+      &quot;evidence_refs&quot;: [
+        &quot;entity-crud-report.json&quot;,
+        &quot;bff-route-log.json&quot;
+      ]
+    },
+    {
+      &quot;scenario_id&quot;: &quot;PV16-S2&quot;,
+      &quot;status&quot;: &quot;PASS&quot;,
+      &quot;user_visible_result&quot;: &quot;用户可确认 WorkflowSpec 运行并检视 runtime-backed refs。&quot;,
+      &quot;evid</pre></article><article><strong>PV16 acceptance report</strong><p class='pass'>PASS</p><pre>{
+  &quot;schema_version&quot;: &quot;post_v15.product_runtime_hardening_acceptance_report.v1&quot;,
+  &quot;status&quot;: &quot;PASS&quot;,
+  &quot;stage_id&quot;: &quot;PV16-SA&quot;,
+  &quot;evidence_dir&quot;: &quot;docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening&quot;,
+  &quot;missing_artifacts&quot;: [],
+  &quot;schema_results&quot;: [
+    {
+      &quot;status&quot;: &quot;PASS&quot;,
+      &quot;data&quot;: &quot;docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/acceptance-data.json&quot;,
+      &quot;schema&quot;: &quot;docs/design/V12-V15.x/schemas/post_v15_product_runtime_hardening_acceptance_data.schema.json&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    {
+      &quot;status&quot;: &quot;PASS&quot;,
+      &quot;data&quot;: &quot;docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/artifact-manifest.json&quot;,
+      &quot;schema&quot;: &quot;docs/design/V12-V15.x/schemas/post_v15_product_runtime_hardening_artifact_manifest.schema.json&quot;,
+      &quot;reason&quot;: &quot;&quot;
+    }
+  ],
+  &quot;browser_boundary&quot;: {
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;forbidden_matches&quot;: []
+  },
+  &quot;runtime_evidence&quot;: {
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;missing_fields&quot;: [],
+    &quot;runtime_backed&quot;: true
+  },
+  &quot;deployment_smoke&quot;: {
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;has_command&quot;: true,
+    &quot;has_health&quot;: true
+  },
+  &quot;stage_results&quot;: {
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;missing_stage_ids&quot;: [],
+    &quot;failing_stage_ids&quot;: [],
+   </pre></article><article><strong>PV16 document support</strong><p class='pv16_bounded_pilot_ready_for_review'>PV16_BOUNDED_PILOT_READY_FOR_REVIEW</p><pre>{
+  &quot;report_name&quot;: &quot;post_v15_document_support_audit_report&quot;,
+  &quot;generated_on&quot;: &quot;2026-06-25&quot;,
+  &quot;status&quot;: &quot;PV16_BOUNDED_PILOT_READY_FOR_REVIEW&quot;,
+  &quot;supports&quot;: {
+    &quot;bounded_v12_v15_acceptance&quot;: true,
+    &quot;pv16_planning&quot;: true,
+    &quot;direct_pv16_implementation&quot;: true,
+    &quot;pv16_bounded_exit_acceptance&quot;: true,
+    &quot;complete_target_prd&quot;: false,
+    &quot;production_ready&quot;: false
+  },
+  &quot;accepted_baseline&quot;: {
+    &quot;v12&quot;: &quot;product entity, browser workbench and read-only canvas foundation ready for review&quot;,
+    &quot;v13&quot;: &quot;editable Workflow Studio pilot slice ready for review&quot;,
+    &quot;v14&quot;: &quot;governed extension ecosystem pilot ready for review&quot;,
+    &quot;v15&quot;: &quot;frontend interaction baseline ready for review&quot;
+  },
+  &quot;post_v15_required_closures&quot;: [
+    &quot;durable product entity mutation with audit refs&quot;,
+    &quot;runtime-backed workflow run and inspect evidence&quot;,
+    &quot;self-hosting smoke hardening with actual command output&quot;,
+    &quot;product-runtime journey interaction hardening&quot;,
+    &quot;PV16 schemas and acceptance runner&quot;,
+    &quot;PV16 readiness audit with no open fatal or major findings&quot;
+  ],
+  &quot;blocking_findings&quot;: [],
+  &quot;closed_findings&quot;: [
+    {
+      &quot;id&quot;: &quot;PV16-DOC-001&quot;,
+      &quot;severity&quot;: &quot;major&quot;,
+      &quot;status&quot;: &quot;c</pre></article></div></section>
+    <section>
+      <h2>不实信息防护</h2>
+      <p>允许声明：V12 complete: product entity, browser workbench and read-only canvas foundation ready for review. / V13 complete: editable Workflow Studio pilot slice ready for review. / V14 complete: governed extension ecosystem pilot ready for review. / V15 complete: frontend interaction baseline ready for review. / PV16 complete: product-runtime hardening pilot ready for review.</p>
+      <p>禁止声明：production ready / Xpert parity complete / product-grade frontend complete / complete Workflow Studio ready / Agent executor ready</p>
+      <p>所有 runtime-backed=false 的阶段在报告中保持原样展示，未把设计证据、截图或 bounded smoke 伪装为生产运行证据。</p>
+    </section>
+  </main>
+</body>
+</html>

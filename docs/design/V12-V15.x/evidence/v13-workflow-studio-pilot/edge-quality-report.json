@@ -1,0 +1,511 @@
+{
+  "schema_version": "v13.edge_quality_report.v1",
+  "status": "PASS",
+  "checks": [
+    {
+      "check_id": "initial_100",
+      "status": "PASS",
+      "threshold_px": 3.5,
+      "expected_edge_count": 6,
+      "edges": [
+        {
+          "edge_id": "start-folder",
+          "source_node_id": "start_goal",
+          "target_node_id": "folder_reader",
+          "source_distance_px": 1.414,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "idle"
+        },
+        {
+          "edge_id": "folder-quality",
+          "source_node_id": "folder_reader",
+          "target_node_id": "quality_gate",
+          "source_distance_px": 1.414,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "idle"
+        },
+        {
+          "edge_id": "folder-evidence",
+          "source_node_id": "folder_reader",
+          "target_node_id": "evidence_review",
+          "source_distance_px": 1.414,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "idle"
+        },
+        {
+          "edge_id": "quality-summary",
+          "source_node_id": "quality_gate",
+          "target_node_id": "summary_agent",
+          "source_distance_px": 1.414,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "selected"
+        },
+        {
+          "edge_id": "evidence-summary",
+          "source_node_id": "evidence_review",
+          "target_node_id": "summary_agent",
+          "source_distance_px": 1.414,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "selected"
+        },
+        {
+          "edge_id": "summary-final",
+          "source_node_id": "summary_agent",
+          "target_node_id": "final_markdown",
+          "source_distance_px": 1.414,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "selected"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "check_id": "wheel_zoom",
+      "status": "PASS",
+      "threshold_px": 3.5,
+      "expected_edge_count": 6,
+      "edges": [
+        {
+          "edge_id": "start-folder",
+          "source_node_id": "start_goal",
+          "target_node_id": "folder_reader",
+          "source_distance_px": 1.414,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "idle"
+        },
+        {
+          "edge_id": "folder-quality",
+          "source_node_id": "folder_reader",
+          "target_node_id": "quality_gate",
+          "source_distance_px": 1.414,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "idle"
+        },
+        {
+          "edge_id": "folder-evidence",
+          "source_node_id": "folder_reader",
+          "target_node_id": "evidence_review",
+          "source_distance_px": 1.414,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "idle"
+        },
+        {
+          "edge_id": "quality-summary",
+          "source_node_id": "quality_gate",
+          "target_node_id": "summary_agent",
+          "source_distance_px": 1.414,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "selected"
+        },
+        {
+          "edge_id": "evidence-summary",
+          "source_node_id": "evidence_review",
+          "target_node_id": "summary_agent",
+          "source_distance_px": 1.414,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "selected"
+        },
+        {
+          "edge_id": "summary-final",
+          "source_node_id": "summary_agent",
+          "target_node_id": "final_markdown",
+          "source_distance_px": 1.414,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "selected"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "check_id": "right_area_drag",
+      "status": "PASS",
+      "threshold_px": 3.5,
+      "expected_edge_count": 6,
+      "edges": [
+        {
+          "edge_id": "start-folder",
+          "source_node_id": "start_goal",
+          "target_node_id": "folder_reader",
+          "source_distance_px": 1.414,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "idle"
+        },
+        {
+          "edge_id": "folder-quality",
+          "source_node_id": "folder_reader",
+          "target_node_id": "quality_gate",
+          "source_distance_px": 1.414,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "idle"
+        },
+        {
+          "edge_id": "folder-evidence",
+          "source_node_id": "folder_reader",
+          "target_node_id": "evidence_review",
+          "source_distance_px": 1.414,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "idle"
+        },
+        {
+          "edge_id": "quality-summary",
+          "source_node_id": "quality_gate",
+          "target_node_id": "summary_agent",
+          "source_distance_px": 1.414,
+          "target_distance_px": 0.722,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "selected"
+        },
+        {
+          "edge_id": "evidence-summary",
+          "source_node_id": "evidence_review",
+          "target_node_id": "summary_agent",
+          "source_distance_px": 1.414,
+          "target_distance_px": 0.722,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "selected"
+        },
+        {
+          "edge_id": "summary-final",
+          "source_node_id": "summary_agent",
+          "target_node_id": "final_markdown",
+          "source_distance_px": 0.722,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "selected"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "check_id": "zoom_110",
+      "status": "PASS",
+      "threshold_px": 3.5,
+      "expected_edge_count": 6,
+      "edges": [
+        {
+          "edge_id": "start-folder",
+          "source_node_id": "start_goal",
+          "target_node_id": "folder_reader",
+          "source_distance_px": 1.545,
+          "target_distance_px": 1.545,
+          "marker_visible": true,
+          "endpoint_gap_px": 10.924,
+          "state": "idle"
+        },
+        {
+          "edge_id": "folder-quality",
+          "source_node_id": "folder_reader",
+          "target_node_id": "quality_gate",
+          "source_distance_px": 1.545,
+          "target_distance_px": 1.545,
+          "marker_visible": true,
+          "endpoint_gap_px": 10.924,
+          "state": "idle"
+        },
+        {
+          "edge_id": "folder-evidence",
+          "source_node_id": "folder_reader",
+          "target_node_id": "evidence_review",
+          "source_distance_px": 1.545,
+          "target_distance_px": 1.545,
+          "marker_visible": true,
+          "endpoint_gap_px": 10.924,
+          "state": "idle"
+        },
+        {
+          "edge_id": "quality-summary",
+          "source_node_id": "quality_gate",
+          "target_node_id": "summary_agent",
+          "source_distance_px": 1.545,
+          "target_distance_px": 1.545,
+          "marker_visible": true,
+          "endpoint_gap_px": 10.924,
+          "state": "selected"
+        },
+        {
+          "edge_id": "evidence-summary",
+          "source_node_id": "evidence_review",
+          "target_node_id": "summary_agent",
+          "source_distance_px": 1.545,
+          "target_distance_px": 1.545,
+          "marker_visible": true,
+          "endpoint_gap_px": 10.924,
+          "state": "selected"
+        },
+        {
+          "edge_id": "summary-final",
+          "source_node_id": "summary_agent",
+          "target_node_id": "final_markdown",
+          "source_distance_px": 1.545,
+          "target_distance_px": 1.545,
+          "marker_visible": true,
+          "endpoint_gap_px": 10.924,
+          "state": "selected"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "check_id": "after_drag",
+      "status": "PASS",
+      "threshold_px": 3.5,
+      "expected_edge_count": 6,
+      "edges": [
+        {
+          "edge_id": "start-folder",
+          "source_node_id": "start_goal",
+          "target_node_id": "folder_reader",
+          "source_distance_px": 1.414,
+          "target_distance_px": 0.722,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "selected"
+        },
+        {
+          "edge_id": "folder-quality",
+          "source_node_id": "folder_reader",
+          "target_node_id": "quality_gate",
+          "source_distance_px": 0.722,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "selected"
+        },
+        {
+          "edge_id": "folder-evidence",
+          "source_node_id": "folder_reader",
+          "target_node_id": "evidence_review",
+          "source_distance_px": 0.722,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "selected"
+        },
+        {
+          "edge_id": "quality-summary",
+          "source_node_id": "quality_gate",
+          "target_node_id": "summary_agent",
+          "source_distance_px": 1.414,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "idle"
+        },
+        {
+          "edge_id": "evidence-summary",
+          "source_node_id": "evidence_review",
+          "target_node_id": "summary_agent",
+          "source_distance_px": 1.414,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "idle"
+        },
+        {
+          "edge_id": "summary-final",
+          "source_node_id": "summary_agent",
+          "target_node_id": "final_markdown",
+          "source_distance_px": 1.414,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "idle"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "check_id": "after_free_connection",
+      "status": "PASS",
+      "threshold_px": 3.5,
+      "expected_edge_count": 7,
+      "edges": [
+        {
+          "edge_id": "start-folder",
+          "source_node_id": "start_goal",
+          "target_node_id": "folder_reader",
+          "source_distance_px": 1.414,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "selected"
+        },
+        {
+          "edge_id": "folder-quality",
+          "source_node_id": "folder_reader",
+          "target_node_id": "quality_gate",
+          "source_distance_px": 1.414,
+          "target_distance_px": 0.722,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "idle"
+        },
+        {
+          "edge_id": "folder-evidence",
+          "source_node_id": "folder_reader",
+          "target_node_id": "evidence_review",
+          "source_distance_px": 1.414,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "idle"
+        },
+        {
+          "edge_id": "quality-summary",
+          "source_node_id": "quality_gate",
+          "target_node_id": "summary_agent",
+          "source_distance_px": 0.722,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "idle"
+        },
+        {
+          "edge_id": "evidence-summary",
+          "source_node_id": "evidence_review",
+          "target_node_id": "summary_agent",
+          "source_distance_px": 1.414,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "idle"
+        },
+        {
+          "edge_id": "summary-final",
+          "source_node_id": "summary_agent",
+          "target_node_id": "final_markdown",
+          "source_distance_px": 1.414,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "idle"
+        },
+        {
+          "edge_id": "manual__start_goal__quality_gate",
+          "source_node_id": "start_goal",
+          "target_node_id": "quality_gate",
+          "source_distance_px": 1.414,
+          "target_distance_px": 0.722,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "selected"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "check_id": "simulation_blocked",
+      "status": "PASS",
+      "threshold_px": 3.5,
+      "expected_edge_count": 7,
+      "edges": [
+        {
+          "edge_id": "start-folder",
+          "source_node_id": "start_goal",
+          "target_node_id": "folder_reader",
+          "source_distance_px": 1.414,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "completed"
+        },
+        {
+          "edge_id": "folder-quality",
+          "source_node_id": "folder_reader",
+          "target_node_id": "quality_gate",
+          "source_distance_px": 1.414,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "completed"
+        },
+        {
+          "edge_id": "folder-evidence",
+          "source_node_id": "folder_reader",
+          "target_node_id": "evidence_review",
+          "source_distance_px": 1.414,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "completed"
+        },
+        {
+          "edge_id": "quality-summary",
+          "source_node_id": "quality_gate",
+          "target_node_id": "summary_agent",
+          "source_distance_px": 1.414,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "completed"
+        },
+        {
+          "edge_id": "evidence-summary",
+          "source_node_id": "evidence_review",
+          "target_node_id": "summary_agent",
+          "source_distance_px": 1.414,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "completed"
+        },
+        {
+          "edge_id": "summary-final",
+          "source_node_id": "summary_agent",
+          "target_node_id": "final_markdown",
+          "source_distance_px": 1.414,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "blocked"
+        },
+        {
+          "edge_id": "manual__start_goal__quality_gate",
+          "source_node_id": "start_goal",
+          "target_node_id": "quality_gate",
+          "source_distance_px": 1.414,
+          "target_distance_px": 1.414,
+          "marker_visible": true,
+          "endpoint_gap_px": 10,
+          "state": "completed"
+        }
+      ],
+      "failures": []
+    }
+  ],
+  "runtime_backed": false,
+  "created_at": "2026-06-25T00:00:00Z"
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": "v15.substage_verification_report.v1",
+  "status": "PASS",
+  "stages": [
+    {
+      "stage_id": "V15-R0",
+      "status": "PASS",
+      "evidence_ref": "prd-spec-review.md"
+    },
+    {
+      "stage_id": "V15-S1",
+      "status": "PASS",
+      "evidence_ref": "trace-timeline.json"
+    },
+    {
+      "stage_id": "V15-S2",
+      "status": "PASS",
+      "evidence_ref": "deployment-smoke-output.txt"
+    },
+    {
+      "stage_id": "V15-S3",
+      "status": "PASS",
+      "evidence_ref": "final-scenario-matrix.json"
+    },
+    {
+      "stage_id": "V15-SA",
+      "status": "PASS",
+      "evidence_ref": "acceptance-data.json"
+    }
+  ],
+  "created_at": "2026-06-24T00:00:00Z"
+}

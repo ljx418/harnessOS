@@ -1,0 +1,36 @@
+{
+  "schema_version": "v12.execution_name_scan_report.v2",
+  "created_at": "2026-06-24T00:00:00+08:00",
+  "status": "PASS",
+  "rule": "Former M12/M13/M14/M15 milestone labels may appear only in migration or historical-note contexts; executable milestones must use V12-*, V13-*, V14-* or V15-*.",
+  "safe_contexts": [
+    "docs/design/V12-V15.x/v12_to_v15_milestone_roadmap.md Execution Naming Migration table",
+    "docs/design/V12-V15.x/v12_to_v15_current_gap_analysis.drawio naming-rule note",
+    "reports that document this scan"
+  ],
+  "executable_name_status": "PASS",
+  "new_executable_name_pattern": "V12-* / V13-* / V14-* / V15-*",
+  "legacy_hits_are_safe": true,
+  "known_legacy_mappings": {
+    "M12-A": "V12-GA",
+    "M12-0A": "V12-G0A",
+    "M12-P": "V12-GP",
+    "M12-0P-G": "V12-G0P",
+    "M12-C1": "V12-GR",
+    "M12-B": "V12-GB",
+    "M12-C": "V12-GC",
+    "M12-D": "V12-SD",
+    "M12-I": "V12-SI",
+    "M12-Q": "V12-SQ",
+    "M12-AGG": "V12-SA",
+    "M13-A": "V13-SA",
+    "M13-B": "V13-SB",
+    "M13-C": "V13-SC",
+    "M14": "V14-SA",
+    "M15-A": "V15-SA",
+    "M15-B": "V15-SB",
+    "M15-C": "V15-SC",
+    "M15-D": "V15-SD",
+    "M15-E": "V15-SE"
+  }
+}

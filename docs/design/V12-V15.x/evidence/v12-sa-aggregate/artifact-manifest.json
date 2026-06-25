@@ -1,0 +1,108 @@
+{
+  "schema_version": "v12.remaining_stage_artifact_manifest.v1",
+  "stage_id": "V12-SA",
+  "status": "PASS",
+  "evidence_scope": "aggregate_reconciliation",
+  "not_pass_evidence": false,
+  "required_artifacts": [
+    {
+      "artifact_id": "acceptance_data",
+      "path": "acceptance-data.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "e16082a54de85d797e9ad5096a4999dc4b1c31bbc691f2f0f3a75fa93c369710"
+    },
+    {
+      "artifact_id": "evidence_map",
+      "path": "v12-evidence-map.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "5544b78c65c1266b7e9d6b838c5ae11cc8a50d3395f7f7290594a79193bcc1cc"
+    },
+    {
+      "artifact_id": "claim_to_evidence_matrix",
+      "path": "claim-to-evidence-matrix.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "264a39bafe12aa286dd963ddf1121dbb3e031310c4aabfbd7203cfe5f346d03e"
+    },
+    {
+      "artifact_id": "browser_screenshot",
+      "path": "browser-screenshot.png",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "779b45cd7f0640194a42f98b7ff77151f2380eaa25eba172af0cf27b5506acbc"
+    },
+    {
+      "artifact_id": "browser_network_log",
+      "path": "browser-network-log.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "378c6a25c22d45ab174a8dd19dd905faf29806464a536e279ba1db0eabd33ce2"
+    },
+    {
+      "artifact_id": "bff_route_log",
+      "path": "bff-route-log.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "ab57cf2a5ec6ed8a1ef28185ab6a5c470c144dea3c0f4865db8535544c33a9cc"
+    },
+    {
+      "artifact_id": "schema_validation_report",
+      "path": "schema-validation-report.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "52ef3d9e151a5c553cdf56ea91a70188175b1d03be8e9574a03660b4bac17338"
+    },
+    {
+      "artifact_id": "prd_spec_review",
+      "path": "prd-spec-review.md",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "d72add96711f38391ce7e246c90464bbedf2266d5c50efa61d2f8375d68beb1f"
+    },
+    {
+      "artifact_id": "target_architecture_review",
+      "path": "target-architecture-review.md",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "113b3126432243834e04cb545562b14f82fb5de231d1691bd8b6fc20bc26d8d3"
+    },
+    {
+      "artifact_id": "audit_opinion",
+      "path": "audit-opinion.md",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "574e478a10b3f6131e93f785b46c14e93aa52f473fd4333f03e049dc7ff01bac"
+    },
+    {
+      "artifact_id": "audit_closure",
+      "path": "audit-closure.md",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "c07d0b946e2b1f14c8ec9c80ee564618a4b87c954f375a8cdcdf2c86ec64e7e7"
+    },
+    {
+      "artifact_id": "no_false_green_scan",
+      "path": "no-false-green-scan.txt",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "89605143a1f950ed117413b78a901a3304bf30fc33761eaa32cc4adf3f706d6f"
+    },
+    {
+      "artifact_id": "redaction_scan",
+      "path": "redaction-scan.txt",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "3bcd907dd8ddb7d41a2d66f99527ab002660b931c5296c54bc702f14d2e3587b"
+    }
+  ],
+  "blocked_claims": [
+    "complete Workflow Studio ready",
+    "product-grade frontend complete",
+    "Xpert-level UX complete",
+    "production ready",
+    "Agent executor ready"
+  ],
+  "created_at": "2026-06-24T00:00:00+08:00"
+}

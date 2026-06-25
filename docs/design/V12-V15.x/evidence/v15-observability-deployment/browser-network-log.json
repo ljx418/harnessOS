@@ -1,0 +1,71 @@
+{
+  "schema_version": "v15.browser_network_log.v1",
+  "status": "PASS",
+  "requests": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4178/?studio=v15-observability-deployment",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4178/assets/index-DyOdZcZ-.js",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4178/assets/index-BVTWCZ_l.css",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4178/bff/v15/system/health",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4178/bff/v15/observability/trace-timeline",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4178/bff/v15/observability/metrics-snapshot",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4178/bff/v15/observability/audit-export",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4178/bff/v15/observability/incidents",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4178/bff/v15/deployment/profile",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4178/bff/v15/final-scenario-matrix",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4178/bff/v15/deployment/health-check",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4178/bff/v15/deployment/smoke",
+      "allowed": true
+    }
+  ],
+  "forbidden_route_scan": {
+    "status": "PASS",
+    "forbidden_matches": []
+  },
+  "created_at": "2026-06-24T00:00:00Z"
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": "v13.document_support_audit_report.v1",
+  "created_at": "2026-06-24T00:00:00+08:00",
+  "status": "SUPERSEDED_BY_POST_IMPLEMENTATION_AUDIT",
+  "stage_scope": "V13 editable Workflow Studio pilot",
+  "audit_depth": "blocking",
+  "supports_v13_readiness_planning": true,
+  "supports_v13_implementation_without_readiness_closure": false,
+  "required_documents": [
+    "docs/design/V12-V15.x/v13_workflow_studio_dsl_readiness_plan.md",
+    "docs/design/V12-V15.x/v13_implementation_readiness_audit.md",
+    "docs/design/V12-V15.x/v13_development_and_acceptance_plan.md",
+    "docs/design/V12-V15.x/v13_prd_architecture_coverage_audit.md",
+    "docs/design/V12-V15.x/schemas/v13_workflow_studio_acceptance_data.schema.json",
+    "docs/design/V12-V15.x/schemas/v13_workflow_studio_artifact_manifest.schema.json"
+  ],
+  "document_hashes": {
+    "docs/design/V12-V15.x/v13_workflow_studio_dsl_readiness_plan.md": "5c204757bada98121dee7045dfadad1974a9edc6603ffa4da17d066e4244a9fc",
+    "docs/design/V12-V15.x/v13_implementation_readiness_audit.md": "51c045217598d192cdd9753631b7af16de37afdefd1e1205201b34d48fd76094",
+    "docs/design/V12-V15.x/v13_development_and_acceptance_plan.md": "5f1f00ea09af549c4e7cd16ef7c20ce3c80c7263efdd36eeea778594143d44ee",
+    "docs/design/V12-V15.x/v13_prd_architecture_coverage_audit.md": "14463d4cdc91439550d71a5096c527fddb60436de309073c61dc5a3d33562490",
+    "docs/design/V12-V15.x/schemas/v13_workflow_studio_acceptance_data.schema.json": "80c776165e288c945ab8ad125f968deff775c0e774e0ca7c3dd3fd19d953ae6e",
+    "docs/design/V12-V15.x/schemas/v13_workflow_studio_artifact_manifest.schema.json": "e95819d4a9e7efc7ae16c135e09af013ca0fa894fc9e6c77f31e1ab23545d904"
+  },
+  "blocking_rules": [
+    "V13 implementation must not start while V13-R0 has open fatal or major findings.",
+    "V13 evidence must not be used to claim complete Workflow Studio ready, production ready, Xpert parity complete, product-grade frontend complete or Agent executor ready.",
+    "V13 confirmation handoff must not be counted as runtime execution evidence."
+  ],
+  "allowed_claim": "V13 readiness planning complete: editable Workflow Studio pilot scope, boundaries and evidence contract ready for implementation-readiness review.",
+  "superseded_by": "docs/design/V12-V15.x/v13_post_implementation_audit.md",
+  "superseded_report": "docs/design/V12-V15.x/reports/v13_workflow_studio_acceptance_report.json",
+  "post_implementation_status": "PASS",
+  "note": "This readiness-only audit is retained for history. Current V13 implementation evidence is tracked by the post-implementation audit and acceptance report."
+}

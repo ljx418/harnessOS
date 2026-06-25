@@ -1,10 +1,29 @@
 {
-  "schema_version": "v12.drawio_validation_report.v1",
-  "created_at": "2026-06-14T00:00:00+08:00",
-  "drawio_path": "docs/design/V12-V15.x/v12_to_v15_current_gap_analysis.drawio",
-  "sha256": "dc8e945feb584df2f106778a093279487c582b4a9a9d577cfb66652a8d076450",
-  "xmllint_command": "xmllint --noout docs/design/V12-V15.x/v12_to_v15_current_gap_analysis.drawio",
-  "xmllint_status": "PASS",
-  "scope": "V12-V15 planning, architecture, current gap, development plan, milestones, acceptance gates, exit conditions, V12 component prototype sketch gate, V12 component review schema and artifact manifest gates, V12 shadcn-style component foundation, V12 Figma prototype review gate, product polish hardening, interaction depth foundation and goal-to-workflow loop evidence gates",
-  "not_runtime_evidence": true
+  "schema_version": "v12.drawio_validation_report.v6",
+  "status": "PASS",
+  "path": "docs/design/V12-V15.x/v12_to_v15_current_gap_analysis.drawio",
+  "style_source": "redesigned for PV16 product-runtime hardening planning with low text density, semantic colors and bounded-claim guardrails",
+  "page_count": 7,
+  "max_page_count": 8,
+  "language": "zh-CN",
+  "required_sections": [
+    "总览",
+    "目标架构与当前差异",
+    "PV16 开发及验收计划",
+    "项目里程碑",
+    "验收门槛",
+    "出门条件",
+    "目标体验闭环与审计门禁"
+  ],
+  "color_legend": {
+    "green": "completed and accepted bounded evidence",
+    "yellow": "post-V15 scope selection or next planning target",
+    "blue": "future gated capability not yet authorized",
+    "red": "blocking risk or no-go",
+    "gray": "shared boundary or inherited plane"
+  },
+  "overflow_mitigation": "short labels, larger boxes, pageWidth 1800, overflow hidden",
+  "forbidden_exact_claim_scan": "PASS",
+  "sha256": "317d519ae183d330c464a019faa8c7465b0acbb583129247f3f258f4377b7ff3",
+  "created_at": "2026-06-25T00:00:00+08:00"
 }

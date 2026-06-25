@@ -1,0 +1,46 @@
+{
+  "schema_version": "v15.final_scenario_matrix.v1",
+  "workspace_id": "ws-v12-technical-content-real",
+  "project_id": "proj-v12-local-knowledge-real",
+  "app_id": "app-v12-markdown-workflow-real",
+  "run_ref": "run-v15-final-interaction-review",
+  "request_id": "req-v15-local-ops-review",
+  "correlation_id": "corr-v15-local-ops-review",
+  "evidence_scope": "browser_e2e",
+  "scenarios": [
+    {
+      "scenario_id": "v12_product_workbench",
+      "label": "V12 product workbench and read-only canvas foundation",
+      "status": "PASS",
+      "evidence_ref": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/acceptance-data.json"
+    },
+    {
+      "scenario_id": "v13_editable_studio_pilot",
+      "label": "V13 editable Workflow Studio pilot slice",
+      "status": "PASS",
+      "evidence_ref": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/v13-workflow-studio-acceptance-data.json"
+    },
+    {
+      "scenario_id": "v14_extension_ecosystem_pilot",
+      "label": "V14 governed extension ecosystem pilot",
+      "status": "PASS",
+      "evidence_ref": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/acceptance-data.json"
+    },
+    {
+      "scenario_id": "v15_observability_review",
+      "label": "V15 trace, metrics, audit and incident review",
+      "status": "PASS",
+      "evidence_ref": "docs/design/V12-V15.x/evidence/v15-observability-deployment/trace-timeline.json"
+    },
+    {
+      "scenario_id": "v15_deployment_smoke",
+      "label": "V15 bounded local deployment smoke",
+      "status": "PASS",
+      "evidence_ref": "docs/design/V12-V15.x/evidence/v15-observability-deployment/deployment-smoke-output.txt"
+    }
+  ],
+  "allowed_claim": "V15 frontend interaction baseline ready for review.",
+  "runtime_backed": false,
+  "audit_ref": "audit://v15/final-scenario-matrix",
+  "created_at": "2026-06-24T00:00:00Z"
+}

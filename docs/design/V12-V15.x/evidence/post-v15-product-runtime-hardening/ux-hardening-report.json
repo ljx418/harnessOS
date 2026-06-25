@@ -1,0 +1,49 @@
+{
+  "schema_version": "pv16.ux_hardening_report.v1",
+  "status": "PASS",
+  "journey": {
+    "schema_version": "pv16.product_runtime_journey.v1",
+    "status": "PASS",
+    "steps": [
+      {
+        "step_id": "setup",
+        "label": "产品实体创建/更新",
+        "status": "PASS",
+        "evidence_ref": "entity-crud-report.json"
+      },
+      {
+        "step_id": "studio",
+        "label": "Studio WorkflowSpec 确认",
+        "status": "PASS",
+        "evidence_ref": "runtime-run-inspect-report.json"
+      },
+      {
+        "step_id": "run_review",
+        "label": "运行进度与证据检视",
+        "status": "PASS",
+        "evidence_ref": "runtime-inspect-screenshot.png"
+      },
+      {
+        "step_id": "operations",
+        "label": "部署 hardening smoke",
+        "status": "PASS",
+        "evidence_ref": "deployment-health-report.json"
+      }
+    ],
+    "allowed_claim": "PV16 complete: product-runtime hardening pilot ready for review.",
+    "created_at": "2026-06-25T00:00:00Z"
+  },
+  "screenshots": [
+    "product-journey-screenshot.png",
+    "runtime-inspect-screenshot.png"
+  ],
+  "states_covered": [
+    "empty",
+    "loading",
+    "denied",
+    "failure-copy-boundary",
+    "success"
+  ],
+  "human_review_required": false,
+  "created_at": "2026-06-25T00:00:00Z"
+}

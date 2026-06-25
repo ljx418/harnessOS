@@ -1,0 +1,22 @@
+{
+  "schema_version": "v15.deployment_smoke_result.v1",
+  "workspace_id": "ws-v12-technical-content-real",
+  "project_id": "proj-v12-local-knowledge-real",
+  "app_id": "app-v12-markdown-workflow-real",
+  "run_ref": "run-v15-final-interaction-review",
+  "request_id": "req-v15-local-ops-review",
+  "correlation_id": "corr-v15-local-ops-review",
+  "evidence_scope": "browser_e2e",
+  "status": "PASS",
+  "command": "python3 tools/v15/run_v15_observability_deployment_acceptance.py",
+  "command_output": [
+    "GET http://127.0.0.1:18044/bff/v15/system/health -> 200",
+    "GET http://127.0.0.1:4178/?studio=v15-observability-deployment -> 200",
+    "V15 bounded local smoke completed with test-only BFF and browser preview"
+  ],
+  "rollback_notes": "Stop preview and test-only BFF processes; no production resource is changed.",
+  "not_production_ga": true,
+  "runtime_backed": false,
+  "audit_ref": "audit://v15/deployment/smoke",
+  "created_at": "2026-06-24T00:00:00Z"
+}

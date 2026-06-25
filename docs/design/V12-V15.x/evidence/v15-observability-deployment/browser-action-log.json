@@ -1,0 +1,18 @@
+{
+  "schema_version": "v15.browser_action_log.v1",
+  "status": "PASS",
+  "page_url": "http://127.0.0.1:4178/?studio=v15-observability-deployment",
+  "actions": [
+    "bounded deployment smoke PASS",
+    "本地健康检查 PASS",
+    "已加载 V15 只读证据 DTO",
+    "页面初始化"
+  ],
+  "required_actions": [
+    "inspect_observability",
+    "run_health_check",
+    "run_deployment_smoke",
+    "review_final_matrix"
+  ],
+  "created_at": "2026-06-24T00:00:00Z"
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": "v15.dependency_evidence_map.v1",
+  "status": "PASS",
+  "dependencies": {
+    "V12": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/acceptance-data.json",
+    "V13": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/v13-workflow-studio-acceptance-data.json",
+    "V14": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/acceptance-data.json"
+  },
+  "created_at": "2026-06-24T00:00:00Z"
+}

@@ -2,12 +2,20 @@ import { v41WorkflowNodes } from "../../fixtures/workflowStudioFixtures.js";
 import { Button, Panel, StatusBadge, Tabs } from "../base/BaseComponents.js";
 import { AgentAssistantPanel, BottomRunPanel, FolderInputInspector, GovernanceEvidencePanel } from "../panels/RightPanels.js";
 import { V12ReadOnlyWorkbench } from "../v12/V12ReadOnlyWorkbench.js";
+import { V13EditableStudio } from "../v13/V13EditableStudio.js";
+import { V14ExtensionEcosystem } from "../v14/V14ExtensionEcosystem.js";
+import { V15ObservabilityDeployment } from "../v15/V15ObservabilityDeployment.js";
+import { PV16ProductRuntimeHardening } from "../pv16/PV16ProductRuntimeHardening.js";
 import { WorkflowCanvas } from "../workflow/WorkflowCanvas.js";
 import "./workflow-studio-layout.css";
 
 export type VisualAcceptanceState =
   | "overview"
   | "v12-readonly-canvas"
+  | "v13-editable-studio"
+  | "v14-extension-ecosystem"
+  | "v15-observability-deployment"
+  | "pv16-product-runtime-hardening"
   | "agent-draft-proposal"
   | "folder-debug-scan"
   | "running-board"
@@ -21,6 +29,18 @@ export interface WorkflowStudioLayoutProps {
 export function WorkflowStudioLayout({ state = "overview" }: WorkflowStudioLayoutProps) {
   if (state === "v12-readonly-canvas") {
     return <V12ReadOnlyWorkbench />;
+  }
+  if (state === "v13-editable-studio") {
+    return <V13EditableStudio />;
+  }
+  if (state === "v14-extension-ecosystem") {
+    return <V14ExtensionEcosystem />;
+  }
+  if (state === "v15-observability-deployment") {
+    return <V15ObservabilityDeployment />;
+  }
+  if (state === "pv16-product-runtime-hardening") {
+    return <PV16ProductRuntimeHardening />;
   }
 
   const rightPanel = state === "folder-debug-scan" ? <FolderInputInspector /> : state === "governance-evidence" ? <GovernanceEvidencePanel /> : <AgentAssistantPanel />;

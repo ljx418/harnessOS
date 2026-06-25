@@ -1,0 +1,1 @@
+PASS: desktop and constrained screenshots generated for review.

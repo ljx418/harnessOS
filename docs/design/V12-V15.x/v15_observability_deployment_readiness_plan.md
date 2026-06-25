@@ -2,9 +2,11 @@
 
 ## Current Decision
 
-V15 final acceptance is blocked until V12, V13 and V14 evidence packages exist
-and pass. This document supports V15 implementation-readiness review after
-those dependencies pass.
+V15 final acceptance was blocked until V12, V13 and V14 evidence packages
+existed and passed. Those dependencies now exist and pass, and the bounded V15
+observability, deployment and final interaction baseline evidence package also
+passes. This document is retained as the readiness contract that authorized the
+V15 implementation path.
 
 Allowed after dependency PASS:
 
@@ -12,6 +14,13 @@ Allowed after dependency PASS:
 - Deployment smoke and health check planning.
 - Final frontend interaction scenario planning.
 - Final evidence aggregation and No False Green planning.
+
+Completed bounded evidence after dependency PASS:
+
+- Observability dashboard browser evidence.
+- Deployment health and bounded smoke evidence.
+- Final V12-V15 scenario matrix evidence.
+- Aggregate V15 acceptance data and artifact manifest.
 
 Blocked:
 
@@ -185,7 +194,8 @@ docs/design/V12-V15.x/evidence/v15-observability-deployment/
 
 Required:
 
-- `v15-final-acceptance-data.json`
+- `acceptance-data.json`
+- `artifact-manifest.json`
 - `trace-timeline.json`
 - `metrics-snapshot.json`
 - `audit-export-package.json`
@@ -194,11 +204,10 @@ Required:
 - `health-check-result.json`
 - `deployment-smoke-output.txt`
 - `final-scenario-matrix.json`
-- `product-shell-final-screenshot.png`
+- `product-shell-screenshot.png`
 - `observability-dashboard-screenshot.png`
-- `redaction-scan.txt`
-- `no-false-green-scan.txt`
-- `drawio-validation.txt`
+- `redaction-scan.json`
+- `no-false-green-scan.json`
 - `prd-spec-review.md`
 
 ## V15 Stop Conditions
@@ -210,4 +219,3 @@ Required:
 - Xpert reference screenshot is counted as HarnessOS implementation evidence.
 - Any forbidden positive claim appears outside safe context.
 - Redaction scan fails.
-

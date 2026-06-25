@@ -1,0 +1,22 @@
+{
+  "schema_version": "v13.studio_node_inspector.v1",
+  "workflow_id": "wf-v13-markdown-summary-studio-pilot",
+  "selected_node_ref": "summary_agent",
+  "label": "总结 Agent",
+  "node_kind": "station",
+  "status": "configured",
+  "editable_fields": [
+    "label",
+    "position",
+    "status"
+  ],
+  "blocked_fields": [
+    "runtime_truth",
+    "publish_state",
+    "execution_state"
+  ],
+  "agent_profile_ref": "agent-v12-quality-reviewer-real",
+  "capability_ref": null,
+  "runtime_backed": false,
+  "audit_ref": "audit://v13/studio-pilot/inspector/summary_agent"
+}

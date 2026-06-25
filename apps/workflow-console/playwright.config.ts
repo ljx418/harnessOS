@@ -2,6 +2,7 @@ import { defineConfig, devices } from "@playwright/test";
 
 const bffPort = Number(process.env.WORKFLOW_CONSOLE_BFF_PORT || 18040);
 const previewPort = Number(process.env.WORKFLOW_CONSOLE_PREVIEW_PORT || 4174);
+const pythonExecutable = process.env.WORKFLOW_CONSOLE_PYTHON || "../../.venv/bin/python";
 const useLocalChrome = process.env.WORKFLOW_CONSOLE_LOCAL_CHROME === "1";
 const localChromeExecutable =
   process.env.WORKFLOW_CONSOLE_CHROME_EXECUTABLE || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
@@ -42,7 +43,7 @@ export default defineConfig({
   ],
   webServer: [
     {
-      command: "../../.venv/bin/python e2e/bff_smoke_server.py",
+      command: `${pythonExecutable} e2e/bff_smoke_server.py`,
       url: `http://127.0.0.1:${bffPort}/__test/health`,
       cwd: ".",
       timeout: 30_000,
@@ -54,7 +55,7 @@ export default defineConfig({
       },
     },
     {
-      command: `npm run preview -- --host 127.0.0.1 --port ${previewPort}`,
+      command: `node node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port ${previewPort}`,
       url: `http://127.0.0.1:${previewPort}`,
       cwd: ".",
       timeout: 30_000,

@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://harnessos.local/schemas/v15_observability_deployment_acceptance_data.schema.json",
+  "title": "V15ObservabilityDeploymentAcceptanceData",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "stage_id",
+    "status",
+    "evidence_scope",
+    "runtime_backed",
+    "browser_backed",
+    "bff_backed",
+    "dto_backed",
+    "observability_review",
+    "deployment_smoke",
+    "final_scenario_matrix",
+    "browser_boundary",
+    "scenario_results",
+    "required_artifacts",
+    "prd_review",
+    "target_architecture_review",
+    "audit",
+    "claim_scan",
+    "redaction_scan",
+    "created_at"
+  ],
+  "properties": {
+    "schema_version": { "const": "v15.observability_deployment_acceptance_data.v1" },
+    "stage_id": { "enum": ["V15-R0", "V15-S1", "V15-S2", "V15-S3", "V15-SA"] },
+    "status": { "enum": ["PASS", "PARTIAL", "FAIL", "BLOCKED"] },
+    "evidence_scope": {
+      "enum": [
+        "readiness",
+        "observability_dashboard",
+        "deployment_smoke",
+        "final_scenario_matrix",
+        "aggregate_reconciliation"
+      ]
+    },
+    "runtime_backed": { "type": "boolean" },
+    "browser_backed": { "type": "boolean" },
+    "bff_backed": { "type": "boolean" },
+    "dto_backed": { "type": "boolean" },
+    "observability_review": { "$ref": "#/$defs/checkResult" },
+    "deployment_smoke": { "$ref": "#/$defs/checkResult" },
+    "final_scenario_matrix": { "$ref": "#/$defs/checkResult" },
+    "browser_boundary": { "$ref": "#/$defs/checkResult" },
+    "scenario_results": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/scenarioResult" }
+    },
+    "required_artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "acceptance_data",
+        "artifact_manifest",
+        "trace_timeline",
+        "metrics_snapshot",
+        "audit_export_package",
+        "incident_timeline",
+        "deployment_profile",
+        "health_check_result",
+        "deployment_smoke_output",
+        "final_scenario_matrix",
+        "product_shell_screenshot",
+        "observability_dashboard_screenshot",
+        "browser_network_log",
+        "bff_route_log",
+        "prd_spec_review",
+        "target_architecture_review",
+        "audit_opinion",
+        "audit_closure",
+        "no_false_green_scan",
+        "redaction_scan"
+      ],
+      "properties": {
+        "acceptance_data": { "$ref": "#/$defs/artifactStatus" },
+        "artifact_manifest": { "$ref": "#/$defs/artifactStatus" },
+        "trace_timeline": { "$ref": "#/$defs/artifactStatus" },
+        "metrics_snapshot": { "$ref": "#/$defs/artifactStatus" },
+        "audit_export_package": { "$ref": "#/$defs/artifactStatus" },
+        "incident_timeline": { "$ref": "#/$defs/artifactStatus" },
+        "deployment_profile": { "$ref": "#/$defs/artifactStatus" },
+        "health_check_result": { "$ref": "#/$defs/artifactStatus" },
+        "deployment_smoke_output": { "$ref": "#/$defs/artifactStatus" },
+        "final_scenario_matrix": { "$ref": "#/$defs/artifactStatus" },
+        "product_shell_screenshot": { "$ref": "#/$defs/artifactStatus" },
+        "observability_dashboard_screenshot": { "$ref": "#/$defs/artifactStatus" },
+        "browser_network_log": { "$ref": "#/$defs/artifactStatus" },
+        "bff_route_log": { "$ref": "#/$defs/artifactStatus" },
+        "prd_spec_review": { "$ref": "#/$defs/artifactStatus" },
+        "target_architecture_review": { "$ref": "#/$defs/artifactStatus" },
+        "audit_opinion": { "$ref": "#/$defs/artifactStatus" },
+        "audit_closure": { "$ref": "#/$defs/artifactStatus" },
+        "no_false_green_scan": { "$ref": "#/$defs/artifactStatus" },
+        "redaction_scan": { "$ref": "#/$defs/artifactStatus" }
+      }
+    },
+    "prd_review": { "$ref": "#/$defs/checkResult" },
+    "target_architecture_review": { "$ref": "#/$defs/checkResult" },
+    "audit": { "$ref": "#/$defs/auditResult" },
+    "claim_scan": { "$ref": "#/$defs/checkResult" },
+    "redaction_scan": { "$ref": "#/$defs/checkResult" },
+    "created_at": { "type": "string", "format": "date-time" }
+  },
+  "$defs": {
+    "artifactStatus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "status"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["PRESENT", "MISSING", "NOT_APPLICABLE"] }
+      }
+    },
+    "auditResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fatal_findings", "major_findings", "closure_status"],
+      "properties": {
+        "fatal_findings": { "type": "integer", "minimum": 0 },
+        "major_findings": { "type": "integer", "minimum": 0 },
+        "closure_status": { "enum": ["CLOSED", "OPEN", "BLOCKED"] }
+      }
+    },
+    "checkResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "evidence_ref"],
+      "properties": {
+        "status": { "enum": ["PASS", "FAIL", "BLOCKED"] },
+        "evidence_ref": { "type": "string", "minLength": 1 }
+      }
+    },
+    "scenarioResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scenario_id", "status", "user_visible_result", "evidence_refs"],
+      "properties": {
+        "scenario_id": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["PASS", "PARTIAL", "FAIL", "BLOCKED"] },
+        "user_visible_result": { "type": "string", "minLength": 1 },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

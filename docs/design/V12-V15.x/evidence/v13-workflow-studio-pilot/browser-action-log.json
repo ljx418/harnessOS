@@ -1,0 +1,29 @@
+{
+  "schema_version": "v13.browser_action_log.v1",
+  "status": "PASS",
+  "page_url": "http://127.0.0.1:4176/?studio=v13-editable-studio",
+  "actions": [
+    "确认交接：handoff_ready 步进节点：6 仿真阻断：等待人工确认 步进节点：5 步进节点：4 步进节点：3 步进节点：2 步进节点：1 Chat 指令已进入 proposal-only 队列：/help 选中节点：对话输入 自由连线创建：对话输入 -> 讨论 Agent A 选中节点：讨论 Agent A 开始自由连线：对话输入 选中节点：对话输入 选中节点：规划 Agent 拖拽节点：folder_reader 选中节点：规划 Agent 场景转换：罗马广场讨论工作流 场景转换：视频分镜创作工作流 L1 路由切换：workbench"
+  ],
+  "required_actions": [
+    "add_node",
+    "move_node",
+    "connect_node",
+    "configure_node",
+    "revise",
+    "reject",
+    "confirm_handoff",
+    "l1_route_switch",
+    "scenario_switch",
+    "wheel_zoom",
+    "right_area_drag",
+    "connect_cancel",
+    "zoom_keyboard",
+    "node_drag",
+    "port_drag_free_connection",
+    "chat_command",
+    "state_menu",
+    "simulation_modal"
+  ],
+  "created_at": "2026-06-25T00:00:00Z"
+}

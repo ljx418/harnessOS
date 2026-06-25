@@ -1,0 +1,43 @@
+{
+  "schema_version": "pv16.deployment_health_report.v1",
+  "status": "PASS",
+  "profile": {
+    "schema_version": "pv16.deployment_hardening_profile.v1",
+    "profile_id": "deployment-profile:pv16-local-hardening",
+    "profile_kind": "local_non_destructive_hardening_smoke",
+    "checks": [
+      "bff_health",
+      "frontend_shell",
+      "runtime_gateway_status",
+      "evidence_artifacts",
+      "redaction_scan"
+    ],
+    "rollback_notes": "Stop preview and test-only BFF processes; no persistent production resource is changed.",
+    "not_production_ga": true,
+    "audit_ref": "audit://pv16/deployment/profile",
+    "created_at": "2026-06-25T00:00:00Z"
+  },
+  "health_checks": [
+    {
+      "check_id": "bff_health",
+      "status": "PASS",
+      "output": "GET /bff/pv16/system/health -> 200"
+    },
+    {
+      "check_id": "runtime_gateway",
+      "status": "PASS",
+      "output": "GatewayService local seeded workflow inspectable"
+    },
+    {
+      "check_id": "frontend_route",
+      "status": "PASS",
+      "output": "PV16 product-runtime page loaded"
+    },
+    {
+      "check_id": "redaction",
+      "status": "PASS",
+      "output": "Only redacted refs are exposed"
+    }
+  ],
+  "created_at": "2026-06-25T00:00:00Z"
+}

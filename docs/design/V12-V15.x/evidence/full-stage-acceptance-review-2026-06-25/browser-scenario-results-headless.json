@@ -1,0 +1,57 @@
+{
+  "schema_version": "full_frontend_acceptance.browser_scenario_results.v1",
+  "status": "PASS",
+  "mode": "headless",
+  "base_url": "http://127.0.0.1:4186",
+  "scenarios": [
+    {
+      "scenario_id": "V12-readonly-workbench",
+      "status": "PASS",
+      "user_visible_result": "用户可查看实体侧栏、只读画布、Inspector、禁用动作原因和 WorkflowDiff handoff。",
+      "screenshot": "headless-v12-readonly-workbench.png",
+      "runtime_backed": false
+    },
+    {
+      "scenario_id": "V13-editable-studio-pilot",
+      "status": "PASS",
+      "user_visible_result": "用户可添加、连接、移动、配置节点并确认 WorkflowDiff handoff；不发布、不运行。",
+      "screenshot": "headless-v13-editable-studio.png",
+      "runtime_backed": false
+    },
+    {
+      "scenario_id": "V14-extension-ecosystem-pilot",
+      "status": "PASS",
+      "user_visible_result": "用户可查看扩展包兼容性、执行 scoped activation、看到 unsafe package 被拒绝和 audit ref。",
+      "screenshot": "headless-v14-extension-ecosystem.png",
+      "runtime_backed": false
+    },
+    {
+      "scenario_id": "V15-observability-deployment-baseline",
+      "status": "PASS",
+      "user_visible_result": "用户可查看 trace/metrics/audit/incident，执行本地 health check 和 bounded smoke。",
+      "screenshot": "headless-v15-observability-deployment.png",
+      "runtime_backed": false
+    },
+    {
+      "scenario_id": "PV16-product-runtime-hardening-pilot",
+      "status": "PASS",
+      "user_visible_result": "用户可更新产品实体、看到 ownership denial、确认 runtime-backed run/inspect，并运行 bounded deployment hardening smoke。",
+      "screenshot": "headless-pv16-product-runtime-hardening.png",
+      "runtime_backed": true
+    }
+  ],
+  "browser_boundary": {
+    "status": "PASS",
+    "forbidden_matches": []
+  },
+  "blocked_claims": [
+    "browser implementation complete",
+    "BFF runtime evidence complete",
+    "Xpert parity complete",
+    "product-grade frontend complete",
+    "complete Workflow Studio ready",
+    "production ready",
+    "Agent executor ready"
+  ],
+  "created_at": "2026-06-25T08:05:38.300Z"
+}

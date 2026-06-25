@@ -1,0 +1,25 @@
+{
+  "schema_version": "v15.deployment_profile.v1",
+  "workspace_id": "ws-v12-technical-content-real",
+  "project_id": "proj-v12-local-knowledge-real",
+  "app_id": "app-v12-markdown-workflow-real",
+  "run_ref": "run-v15-final-interaction-review",
+  "request_id": "req-v15-local-ops-review",
+  "correlation_id": "corr-v15-local-ops-review",
+  "evidence_scope": "browser_e2e",
+  "profile_id": "deployment-profile:v15-local-bounded-review",
+  "profile_kind": "local_bounded_smoke",
+  "frontend_base_url_ref": "http://127.0.0.1:4178",
+  "bff_base_url_ref": "http://127.0.0.1:18044",
+  "checks": [
+    "bff_health",
+    "frontend_shell",
+    "v15_observability_routes",
+    "evidence_dependencies"
+  ],
+  "rollback_notes": "Stop preview and test-only BFF processes; no production resource is changed.",
+  "not_production_ga": true,
+  "runtime_backed": false,
+  "audit_ref": "audit://v15/deployment/profile",
+  "created_at": "2026-06-24T00:00:00Z"
+}

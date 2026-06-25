@@ -1,0 +1,141 @@
+{
+  "schema_version": "v13.workflow_spec_graph.v1",
+  "workflow_id": "wf-v13-markdown-summary-studio-pilot",
+  "workspace_id": "ws-v12-technical-content-real",
+  "project_id": "proj-v12-local-knowledge-real",
+  "app_id": "app-v12-markdown-workflow-real",
+  "version_ref": "workflow-version:v13-draft-001",
+  "runtime_backed": false,
+  "nodes": [
+    {
+      "node_id": "start_goal",
+      "label": "目标输入",
+      "node_kind": "start",
+      "status": "configured",
+      "position": {
+        "x": 0,
+        "y": 120
+      }
+    },
+    {
+      "node_id": "folder_reader",
+      "label": "读取 Markdown 文件夹",
+      "node_kind": "tool",
+      "status": "configured",
+      "capability_ref": "tool:folder.readonly_scan",
+      "position": {
+        "x": 260,
+        "y": 120
+      }
+    },
+    {
+      "node_id": "summary_agent",
+      "label": "总结 Agent",
+      "node_kind": "station",
+      "status": "configured",
+      "agent_profile_ref": "agent-v12-quality-reviewer-real",
+      "position": {
+        "x": 540,
+        "y": 80
+      }
+    },
+    {
+      "node_id": "quality_branch",
+      "label": "质量分支",
+      "node_kind": "fan_out",
+      "status": "configured",
+      "position": {
+        "x": 800,
+        "y": 120
+      }
+    },
+    {
+      "node_id": "quality_gate",
+      "label": "质量检查",
+      "node_kind": "quality_gate",
+      "status": "configured",
+      "capability_ref": "tool:quality.review",
+      "position": {
+        "x": 1060,
+        "y": 40
+      }
+    },
+    {
+      "node_id": "evidence_review",
+      "label": "证据审查",
+      "node_kind": "evidence",
+      "status": "configured",
+      "position": {
+        "x": 1060,
+        "y": 210
+      }
+    },
+    {
+      "node_id": "merge_review",
+      "label": "审查汇合",
+      "node_kind": "fan_in",
+      "status": "configured",
+      "position": {
+        "x": 1330,
+        "y": 120
+      }
+    },
+    {
+      "node_id": "final_markdown",
+      "label": "输出 Markdown 总结",
+      "node_kind": "end",
+      "status": "configured",
+      "position": {
+        "x": 1600,
+        "y": 120
+      }
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "start-folder",
+      "source_node_id": "start_goal",
+      "target_node_id": "folder_reader"
+    },
+    {
+      "edge_id": "folder-summary",
+      "source_node_id": "folder_reader",
+      "target_node_id": "summary_agent"
+    },
+    {
+      "edge_id": "summary-branch",
+      "source_node_id": "summary_agent",
+      "target_node_id": "quality_branch"
+    },
+    {
+      "edge_id": "branch-quality",
+      "source_node_id": "quality_branch",
+      "target_node_id": "quality_gate"
+    },
+    {
+      "edge_id": "branch-evidence",
+      "source_node_id": "quality_branch",
+      "target_node_id": "evidence_review"
+    },
+    {
+      "edge_id": "quality-merge",
+      "source_node_id": "quality_gate",
+      "target_node_id": "merge_review"
+    },
+    {
+      "edge_id": "evidence-merge",
+      "source_node_id": "evidence_review",
+      "target_node_id": "merge_review"
+    },
+    {
+      "edge_id": "merge-final",
+      "source_node_id": "merge_review",
+      "target_node_id": "final_markdown"
+    }
+  ],
+  "evidence_refs": [
+    "evidence://v13/studio-pilot/workflow-spec-graph"
+  ],
+  "audit_ref": "audit://v13/studio-pilot/workflow-spec-graph",
+  "created_at": "2026-06-24T00:00:00Z"
+}

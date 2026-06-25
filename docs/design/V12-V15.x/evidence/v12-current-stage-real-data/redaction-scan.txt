@@ -1,0 +1,17 @@
+V12 Current Stage Redaction Scan
+
+Scope:
+- docs/design/V12-V15.x/evidence/v12-current-stage-real-data
+- apps/workflow-console/src/ui/v12
+- apps/workflow-console/e2e/workflow-v12-real-data-readiness.spec.ts
+- apps/workflow-console/e2e/bff_smoke_server.py
+- tools/v12/run_v12_real_data_acceptance.py
+
+Result: PASS_WITH_SAFE_CONTEXT_ONLY
+
+Matches:
+- apps/workflow-console/e2e/workflow-v12-real-data-readiness.spec.ts contains `signed URL` only as a negative assertion.
+- apps/workflow-console/e2e/bff_smoke_server.py contains `raw_trace_payload` and `secret-token-value` only in an existing fake-event endpoint used by earlier event-truth tests, outside the V12 `/bff/v12/*` DTO acceptance route.
+
+Audit note:
+The V12 current-stage real-data DTOs and generated evidence do not contain raw secrets, bearer tokens, raw provider payloads, raw artifact content, signed URLs, or credential raw secret material.

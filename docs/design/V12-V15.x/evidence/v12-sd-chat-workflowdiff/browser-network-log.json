@@ -1,0 +1,187 @@
+{
+  "schema_version": "v12.browser_network_log.v1",
+  "test_run_id": "v12-sd",
+  "page_url": "http://127.0.0.1:4175/?studio=v12-readonly-canvas",
+  "requests": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/system/health",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/workspaces",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/workspaces/ws-v12-technical-content-real/projects",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/projects/proj-v12-local-knowledge-real/apps",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/apps/app-v12-markdown-workflow-real/station-agents",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/apps/app-v12-markdown-workflow-real/canvas",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/canvas/nodes/quality_check/inspector",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/apps/app-v12-markdown-workflow-real/workbench/conversations",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/workflow-diff/diff-v12-readonly-proposal-ref",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/apps/app-v12-markdown-workflow-real/interaction-trace",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:18041/bff/v12/workbench/messages",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:18041/bff/v12/workbench/proposals/diff-v12-readonly-proposal-ref/revise",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:18041/bff/v12/workbench/proposals/diff-v12-readonly-proposal-ref/reject",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:18041/bff/v12/workbench/proposals/diff-v12-readonly-proposal-ref/confirm-handoff",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/workspaces/wrong-workspace/projects",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/system/health",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/workspaces",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/workspaces/ws-v12-technical-content-real/projects",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/projects/proj-v12-local-knowledge-real/apps",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/apps/app-v12-markdown-workflow-real/station-agents",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/apps/app-v12-markdown-workflow-real/canvas",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/canvas/nodes/quality_check/inspector",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/apps/app-v12-markdown-workflow-real/workbench/conversations",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/workflow-diff/diff-v12-readonly-proposal-ref",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/apps/app-v12-markdown-workflow-real/interaction-trace",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/system/health",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/workspaces",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/workspaces/ws-v12-technical-content-real/projects",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/projects/proj-v12-local-knowledge-real/apps",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/apps/app-v12-markdown-workflow-real/station-agents",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/apps/app-v12-markdown-workflow-real/canvas",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/canvas/nodes/quality_check/inspector",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/apps/app-v12-markdown-workflow-real/workbench/conversations",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/workflow-diff/diff-v12-readonly-proposal-ref",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18041/bff/v12/apps/app-v12-markdown-workflow-real/interaction-trace",
+      "allowed": true
+    }
+  ],
+  "forbidden_route_scan": {
+    "status": "PASS",
+    "forbidden_matches": []
+  },
+  "created_at": "2026-06-24T00:00:00+08:00"
+}

@@ -1,0 +1,1242 @@
+{
+  "schema_version": "full_frontend_acceptance.report_data.v1",
+  "status": "PASS",
+  "created_at": "2026-06-25T00:00:00+08:00",
+  "base_url": "http://127.0.0.1:4186",
+  "prd_source": "docs/design/V12-V15.x/v12_to_v15_target_prd.md",
+  "architecture_source": "docs/design/V12-V15.x/v12_to_v15_target_architecture.md",
+  "html_report": "docs/design/V12-V15.x/evidence/full-stage-acceptance-review-2026-06-25/index.html",
+  "command_results": [
+    {
+      "name": "Python runner syntax",
+      "status": "PASS",
+      "command": "python3 -m py_compile apps/workflow-console/e2e/bff_smoke_server.py tools/v12/run_v12_real_data_acceptance.py tools/v12/run_v12_remaining_stage_acceptance.py tools/v13/run_v13_workflow_studio_acceptance.py tools/v14/run_v14_extension_ecosystem_acceptance.py tools/v15/run_v15_observability_deployment_acceptance.py tools/post_v15/run_product_runtime_hardening_acceptance.py tools/v12_v15/run_full_frontend_acceptance_review.py",
+      "duration_seconds": 0.12,
+      "output_tail": "",
+      "expected_failure": false
+    },
+    {
+      "name": "TypeScript test compile",
+      "status": "PASS",
+      "command": "node node_modules/typescript/bin/tsc -p tsconfig.test.json",
+      "duration_seconds": 4.25,
+      "output_tail": "",
+      "expected_failure": false
+    },
+    {
+      "name": "Workflow console build",
+      "status": "PASS",
+      "command": "node node_modules/vite/bin/vite.js build",
+      "duration_seconds": 15.15,
+      "output_tail": "vite v5.4.21 building for production...\ntransforming...\n✓ 1997 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   0.41 kB │ gzip:   0.28 kB\ndist/assets/index-BVTWCZ_l.css   95.35 kB │ gzip:  18.00 kB\ndist/assets/index-DyOdZcZ-.js   619.42 kB │ gzip: 197.20 kB\n\n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.\n✓ built in 14.82s\n",
+      "expected_failure": false
+    },
+    {
+      "name": "Unit tests",
+      "status": "PASS",
+      "command": "bash -lc node --test dist-test/__tests__/*.test.js",
+      "duration_seconds": 1.77,
+      "output_tail": "guage\nok 53 - workflow console copy avoids production false-green language\n  ---\n  duration_ms: 379.496335\n  type: 'test'\n  ...\n# Subtest: production readiness preflight contract stays design-only\nok 54 - production readiness preflight contract stays design-only\n  ---\n  duration_ms: 6.83019\n  type: 'test'\n  ...\n# Subtest: production preflight contract covers required gap categories\nok 55 - production preflight contract covers required gap categories\n  ---\n  duration_ms: 6.525073\n  type: 'test'\n  ...\n# Subtest: workflow console client does not expose production admin routes\nok 56 - workflow console client does not expose production admin routes\n  ---\n  duration_ms: 12.3074\n  type: 'test'\n  ...\n# Subtest: QualityPanel is read-only and redacts issue metadata\nok 57 - QualityPanel is read-only and redacts issue metadata\n  ---\n  duration_ms: 2.804362\n  type: 'test'\n  ...\n# Subtest: reference console E2E test source does not import demo fixture data\nok 58 - reference console E2E test source does not import demo fixture data\n  ---\n  duration_ms: 1.725752\n  type: 'test'\n  ...\n# Subtest: reference console renders real BFF DTOs and seeded PatchDiffDTO\nok 59 - reference console renders real BFF DTOs and seeded PatchDiffDTO\n  ---\n  duration_ms: 8.557319\n  type: 'test'\n  ...\n# Subtest: event refresh ignores fake event status and reloads runtime truth\nok 60 - event refresh ignores fake event status and reloads runtime truth\n  ---\n  duration_ms: 0.544925\n  type: 'test'\n  ...\n# Subtest: V12 read-only workbench source exposes product entities, inspector and boundary copy\nok 61 - V12 read-only workbench source exposes product entities, inspector and boundary copy\n  ---\n  duration_ms: 0.441643\n  type: 'test'\n  ...\n# Subtest: ConsoleShell renders read-only board summaries\nok 62 - ConsoleShell renders read-only board summaries\n  ---\n  duration_ms: 9.351631\n  type: 'test'\n  ...\n# Subtest: node library search and placeholder controls provide feedback\nok 63 - node library search and placeholder controls provide feedback\n  ---\n  duration_ms: 4.150075\n  type: 'test'\n  ...\n# Subtest: Stitch-aligned shell keeps canvas first with rails, working mode tabs and real canvas controls\nok 64 - Stitch-aligned shell keeps canvas first with rails, working mode tabs and real canvas controls\n  ---\n  duration_ms: 3.752375\n  type: 'test'\n  ...\n# Subtest: AgentTalk shell is fixture-only and redacts timeline, patch, approval and context\nok 65 - AgentTalk shell is fixture-only and redacts timeline, patch, approval and context\n  ---\n  duration_ms: 0.620451\n  type: 'test'\n  ...\n# Subtest: Embed bootstrap exposes only BFF-local event URL and no mutation actions\nok 66 - Embed bootstrap exposes only BFF-local event URL and no mutation actions\n  ---\n  duration_ms: 0.151113\n  type: 'test'\n  ...\n# Subtest: rendered board output redacts sensitive values\nok 67 - rendered board output redacts sensitive values\n  ---\n  duration_ms: 0.392172\n  type: 'test'\n  ...\n# Subtest: EventFeed redacts raw event payload details\nok 68 - EventFeed redacts raw event payload details\n  ---\n  duration_ms: 0.241599\n  type: 'test'\n  ...\n# Subtest: Workflow editing panel does not expose raw high-risk apply\nok 69 - Workflow editing panel does not expose raw high-risk apply\n  ---\n  duration_ms: 0.538653\n  type: 'test'\n  ...\n# Subtest: demo mode is explicit only\nok 70 - demo mode is explicit only\n  ---\n  duration_ms: 0.454047\n  type: 'test'\n  ...\n# Subtest: loadWorkflowConsoleData hydrates from BFF-style real DTOs\nok 71 - loadWorkflowConsoleData hydrates from BFF-style real DTOs\n  ---\n  duration_ms: 0.919378\n  type: 'test'\n  ...\n# Subtest: event refresh is driven by allowlisted live events\nok 72 - event refresh is driven by allowlisted live events\n  ---\n  duration_ms: 0.114133\n  type: 'test'\n  ...\n# Subtest: operation client uses structured BFF routes only\nok 73 - operation client uses structured BFF routes only\n  ---\n  duration_ms: 16.322029\n  type: 'test'\n  ...\n# Subtest: event bridge client follows the BFF stream\nok 74 - event bridge client follows the BFF stream\n  ---\n  duration_ms: 0.234905\n  type: 'test'\n  ...\n# Subtest: ConsoleShell renders BFF-style real board DTO without leaking secrets\nok 75 - ConsoleShell renders BFF-style real board DTO without leaking secrets\n  ---\n  duration_ms: 8.568836\n  type: 'test'\n  ...\n# Subtest: editing client uses structured BFF routes for governed writes\nok 76 - editing client uses structured BFF routes for governed writes\n  ---\n  duration_ms: 12.960582\n  type: 'test'\n  ...\n# Subtest: editing panel exposes apply reject publish only as user-confirmed actions\nok 77 - editing panel exposes apply reject publish only as user-confirmed actions\n  ---\n  duration_ms: 2.735011\n  type: 'test'\n  ...\n# Subtest: high risk patch renders disabled apply state\nok 78 - high risk patch renders disabled apply state\n  ---\n  duration_ms: 0.325634\n  type: 'test'\n  ...\n1..78\n# tests 78\n# suites 0\n# pass 78\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 1746.319906\n",
+      "expected_failure": false
+    },
+    {
+      "name": "Browser scenario automation (headless)",
+      "status": "PASS",
+      "command": "Chrome CDP headless + node e2e/full_frontend_acceptance_review.mjs",
+      "duration_seconds": 4.84,
+      "output_tail": "",
+      "expected_failure": false
+    },
+    {
+      "name": "V12 real-data acceptance",
+      "status": "PASS",
+      "command": "python3 tools/v12/run_v12_real_data_acceptance.py",
+      "duration_seconds": 5.28,
+      "output_tail": "241982 bytes written to file C:\\workspace\\harnessos\\docs\\design\\V12-V15.x\\evidence\\v12-current-stage-real-data\\v12-real-data-readonly-workbench.png\n{\n  \"status\": \"PASS\",\n  \"missing_routes\": []\n}\n",
+      "expected_failure": false
+    },
+    {
+      "name": "V12 remaining-stage acceptance",
+      "status": "PASS",
+      "command": "python3 tools/v12/run_v12_remaining_stage_acceptance.py",
+      "duration_seconds": 6.56,
+      "output_tail": "241982 bytes written to file C:\\workspace\\harnessos\\docs\\design\\V12-V15.x\\evidence\\v12-sq-product-polish\\browser-screenshot.png\n159948 bytes written to file C:\\workspace\\harnessos\\docs\\design\\V12-V15.x\\evidence\\v12-sq-product-polish\\browser-screenshot-constrained.png\n{\n  \"status\": \"PASS\",\n  \"stages\": [\n    \"V12-SD\",\n    \"V12-SI\",\n    \"V12-SQ\",\n    \"V12-SA\"\n  ]\n}\n",
+      "expected_failure": false
+    },
+    {
+      "name": "V13 Studio acceptance",
+      "status": "PASS",
+      "command": "python3 tools/v13/run_v13_workflow_studio_acceptance.py",
+      "duration_seconds": 32.53,
+      "output_tail": "{\n  \"schema_version\": \"v13.workflow_studio_acceptance_report.v1\",\n  \"status\": \"PASS\",\n  \"stage_id\": \"V13-SA\",\n  \"substage_status\": {\n    \"V13-R0\": \"PASS\",\n    \"V13-S1\": \"PASS\",\n    \"V13-S2\": \"PASS\",\n    \"V13-S3\": \"PASS\",\n    \"V13-SA\": \"PASS\"\n  },\n  \"evidence_dir\": \"docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot\",\n  \"missing_artifacts\": [],\n  \"schema_results\": [\n    {\n      \"status\": \"PASS\",\n      \"data\": \"docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/v13-workflow-studio-acceptance-data.json\",\n      \"schema\": \"docs/design/V12-V15.x/schemas/v13_workflow_studio_acceptance_data.schema.json\"\n    },\n    {\n      \"status\": \"PASS\",\n      \"data\": \"docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/artifact-manifest.json\",\n      \"schema\": \"docs/design/V12-V15.x/schemas/v13_workflow_studio_artifact_manifest.schema.json\"\n    }\n  ],\n  \"canvas_defect_regression\": {\n    \"status\": \"PASS\",\n    \"defects\": [\n      {\n        \"defect_id\": \"CANVAS-01\",\n        \"title\": \"首屏连线与箭头可见\",\n        \"status\": \"PASS\",\n        \"assertions\": [\n          \"默认拓扑边完整\",\n          \"每条边均有 markerEnd\",\n          \"端点停在端口外沿而非被端口遮挡\"\n        ],\n        \"dom_metrics\": {\n          \"status\": \"PASS\",\n          \"edge_count\": 6,\n          \"max_source_distance_px\": 1.414,\n          \"max_target_distance_px\": 1.414,\n          \"threshold_px\": 3.5\n        },\n        \"screenshot_refs\": [\n          \"edge-default-screenshot.png\"\n        ],\n        \"false_green_guards\": [\n          \"missing_port_is_fail\",\n          \"missing_marker_is_fail\",\n          \"skipped_edge_is_fail\"\n        ]\n      },\n      {\n        \"defect_id\": \"CANVAS-02\",\n        \"title\": \"画布普通滚轮缩放\",\n        \"status\": \"PASS\",\n        \"assertions\": [\n          \"不按 Ctrl 的滚轮会改变缩放值\",\n          \"缩放后边线仍与端口外沿对齐\"\n        ],\n        \"dom_metrics\": {\n          \"zoom_before\": \"100%\",\n          \"zoom_after\": \"154%\",\n          \"edge_quality\": {\n            \"status\": \"PASS\",\n            \"edge_count\": 6,\n            \"max_source_distance_px\": 1.414,\n            \"max_target_distance_px\": 1.414,\n            \"threshold_px\": 3.5\n          }\n        },\n        \"screenshot_refs\": [\n          \"canvas-defect-wheel-zoom.png\"\n        ],\n        \"false_green_guards\": [\n          \"zoom_label_must_change\",\n          \"edge_quality_checked_after_wheel\"\n        ]\n      },\n      {\n        \"defect_id\": \"CANVAS-03\",\n        \"title\": \"右侧可见空白区域可拖放节点\",\n        \"status\": \"PASS\",\n        \"assertions\": [\n          \"节点可以落到右侧可见画布区域\",\n          \"拖动后边线仍对齐\",\n          \"拖动提交 graph 校验\"\n        ],\n        \"dom_metrics\": {\n          \"before\": {\n            \"x\": 1162,\n            \"y\": 264,\n            \"width\": 223,\n            \"height\": 160\n          },\n          \"after\": {\n            \"x\": 1029,\n            \"y\": 302,\n            \"width\": 145,\n            \"height\": 104\n          },\n          \"workspace\": {\n            \"x\": 296,\n            \"y\": 100,\n            \"width\": 884,\n            \"height\": 652\n          },\n          \"edge_quality\": {\n            \"status\": \"PASS\",\n            \"edge_count\": 6,\n            \"max_source_distance_px\": 1.414,\n            \"max_target_distance_px\": 1.414,\n            \"threshold_px\": 3.5\n          }\n        },\n        \"screenshot_refs\": [\n          \"canvas-defect-right-area-drag.png\"\n        ],\n        \"false_green_guards\": [\n          \"node_must_enter_right_visible_area\",\n          \"edge_quality_checked_after_drag\"\n        ]\n      },\n      {\n        \"defect_id\": \"CANVAS-04\",\n        \"title\": \"自由连线可取消且不会假创建\",\n        \"status\": \"PASS\",\n        \"assertions\": [\n          \"Esc 取消移除 preview\",\n          \"释放到空白取消\",\n          \"取消后边数量不变\"\n        ],\n        \"dom_metrics\": {\n          \"edge_count_before\": 6,\n          \"edge_count_after_escape_cancel\": 6,\n          \"edge_count_after_blank_cancel\": 6\n        },\n        \"screenshot_refs\": [\n          \"canvas-defect-connect-cancel.png\"\n        ],\n        \"false_green_guards\": [\n          \"preview_must_disappear\",\n          \"edge_count_must_not_change\"\n        ]\n      }\n    ],\n    \"evidence_ref\": \"canvas-defect-regression-report.json\"\n  },\n  \"claim_scan\": {\n    \"status\": \"PASS\",\n    \"matches\": []\n  },\n  \"redaction_scan\": {\n    \"status\": \"PASS\",\n    \"matches\": []\n  },\n  \"allowed_claim\": \"V13 complete: editable Workflow Studio pilot slice ready for review.\",\n  \"forbidden_positive_claims\": [\n    \"browser implementation complete\",\n    \"BFF runtime evidence complete\",\n    \"Xpert parity complete\",\n    \"product-grade frontend complete\",\n    \"complete Workflow Studio ready\",\n    \"production ready\",\n    \"Agent executor ready\"\n  ],\n  \"runtime_backed\": false,\n  \"created_at\": \"2026-06-25T00:00:00+08:00\"\n}\n",
+      "expected_failure": false
+    },
+    {
+      "name": "V14 extension acceptance",
+      "status": "PASS",
+      "command": "python3 tools/v14/run_v14_extension_ecosystem_acceptance.py",
+      "duration_seconds": 21.86,
+      "output_tail": "{\n  \"schema_version\": \"v14.extension_ecosystem_acceptance_report.v1\",\n  \"status\": \"PASS\",\n  \"stage_id\": \"V14-SA\",\n  \"substage_status\": {\n    \"V14-R0\": \"PASS\",\n    \"V14-S1\": \"PASS\",\n    \"V14-S2\": \"PASS\",\n    \"V14-S3\": \"PASS\",\n    \"V14-SA\": \"PASS\"\n  },\n  \"evidence_dir\": \"docs/design/V12-V15.x/evidence/v14-extension-ecosystem\",\n  \"missing_artifacts\": [],\n  \"schema_results\": [\n    {\n      \"status\": \"PASS\",\n      \"data\": \"docs/design/V12-V15.x/evidence/v14-extension-ecosystem/acceptance-data.json\",\n      \"schema\": \"docs/design/V12-V15.x/schemas/v14_extension_ecosystem_acceptance_data.schema.json\"\n    },\n    {\n      \"status\": \"PASS\",\n      \"data\": \"docs/design/V12-V15.x/evidence/v14-extension-ecosystem/artifact-manifest.json\",\n      \"schema\": \"docs/design/V12-V15.x/schemas/v14_extension_ecosystem_artifact_manifest.schema.json\"\n    }\n  ],\n  \"claim_scan\": {\n    \"status\": \"PASS\",\n    \"matches\": []\n  },\n  \"redaction_scan\": {\n    \"status\": \"PASS\",\n    \"matches\": []\n  },\n  \"browser_boundary\": {\n    \"status\": \"PASS\",\n    \"forbidden_matches\": []\n  },\n  \"allowed_claim\": \"V14 complete: governed extension ecosystem pilot ready for review.\",\n  \"forbidden_positive_claims\": [\n    \"browser implementation complete\",\n    \"BFF runtime evidence complete\",\n    \"Xpert parity complete\",\n    \"product-grade frontend complete\",\n    \"complete Workflow Studio ready\",\n    \"production ready\",\n    \"Agent executor ready\"\n  ],\n  \"runtime_backed\": false,\n  \"created_at\": \"2026-06-24T00:00:00+08:00\"\n}\n",
+      "expected_failure": false
+    },
+    {
+      "name": "V15 observability/deployment acceptance",
+      "status": "PASS",
+      "command": "python3 tools/v15/run_v15_observability_deployment_acceptance.py",
+      "duration_seconds": 20.22,
+      "output_tail": "{\n  \"schema_version\": \"v15.observability_deployment_acceptance_report.v1\",\n  \"status\": \"PASS\",\n  \"stage_id\": \"V15-SA\",\n  \"substage_status\": {\n    \"V15-R0\": \"PASS\",\n    \"V15-S1\": \"PASS\",\n    \"V15-S2\": \"PASS\",\n    \"V15-S3\": \"PASS\",\n    \"V15-SA\": \"PASS\"\n  },\n  \"dependency_results\": [\n    {\n      \"stage\": \"V12\",\n      \"status\": \"PASS\",\n      \"path\": \"docs/design/V12-V15.x/evidence/v12-sa-aggregate/acceptance-data.json\"\n    },\n    {\n      \"stage\": \"V13\",\n      \"status\": \"PASS\",\n      \"path\": \"docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/v13-workflow-studio-acceptance-data.json\"\n    },\n    {\n      \"stage\": \"V14\",\n      \"status\": \"PASS\",\n      \"path\": \"docs/design/V12-V15.x/evidence/v14-extension-ecosystem/acceptance-data.json\"\n    }\n  ],\n  \"evidence_dir\": \"docs/design/V12-V15.x/evidence/v15-observability-deployment\",\n  \"missing_artifacts\": [],\n  \"schema_results\": [\n    {\n      \"status\": \"PASS\",\n      \"data\": \"docs/design/V12-V15.x/evidence/v15-observability-deployment/acceptance-data.json\",\n      \"schema\": \"docs/design/V12-V15.x/schemas/v15_observability_deployment_acceptance_data.schema.json\"\n    },\n    {\n      \"status\": \"PASS\",\n      \"data\": \"docs/design/V12-V15.x/evidence/v15-observability-deployment/artifact-manifest.json\",\n      \"schema\": \"docs/design/V12-V15.x/schemas/v15_observability_deployment_artifact_manifest.schema.json\"\n    }\n  ],\n  \"claim_scan\": {\n    \"status\": \"PASS\",\n    \"matches\": []\n  },\n  \"redaction_scan\": {\n    \"status\": \"PASS\",\n    \"matches\": []\n  },\n  \"browser_boundary\": {\n    \"status\": \"PASS\",\n    \"forbidden_matches\": []\n  },\n  \"deployment_smoke\": {\n    \"status\": \"PASS\",\n    \"evidence_ref\": \"deployment-smoke-output.txt\"\n  },\n  \"allowed_claim\": \"V15 frontend interaction baseline ready for review.\",\n  \"forbidden_positive_claims\": [\n    \"browser implementation complete\",\n    \"BFF runtime evidence complete\",\n    \"Xpert parity complete\",\n    \"product-grade frontend complete\",\n    \"complete Workflow Studio ready\",\n    \"production ready\",\n    \"Agent executor ready\"\n  ],\n  \"runtime_backed\": false,\n  \"created_at\": \"2026-06-24T00:00:00+08:00\"\n}\n",
+      "expected_failure": false
+    },
+    {
+      "name": "PV16 product-runtime hardening acceptance",
+      "status": "PASS",
+      "command": "python3 tools/post_v15/run_product_runtime_hardening_acceptance.py",
+      "duration_seconds": 0.27,
+      "output_tail": "{\n  \"schema_version\": \"post_v15.product_runtime_hardening_acceptance_report.v1\",\n  \"status\": \"PASS\",\n  \"stage_id\": \"PV16-SA\",\n  \"evidence_dir\": \"docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening\",\n  \"missing_artifacts\": [],\n  \"schema_results\": [\n    {\n      \"status\": \"PASS\",\n      \"data\": \"docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/acceptance-data.json\",\n      \"schema\": \"docs/design/V12-V15.x/schemas/post_v15_product_runtime_hardening_acceptance_data.schema.json\",\n      \"reason\": \"\"\n    },\n    {\n      \"status\": \"PASS\",\n      \"data\": \"docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/artifact-manifest.json\",\n      \"schema\": \"docs/design/V12-V15.x/schemas/post_v15_product_runtime_hardening_artifact_manifest.schema.json\",\n      \"reason\": \"\"\n    }\n  ],\n  \"browser_boundary\": {\n    \"status\": \"PASS\",\n    \"forbidden_matches\": []\n  },\n  \"runtime_evidence\": {\n    \"status\": \"PASS\",\n    \"missing_fields\": [],\n    \"runtime_backed\": true\n  },\n  \"deployment_smoke\": {\n    \"status\": \"PASS\",\n    \"has_command\": true,\n    \"has_health\": true\n  },\n  \"stage_results\": {\n    \"status\": \"PASS\",\n    \"missing_stage_ids\": [],\n    \"failing_stage_ids\": [],\n    \"missing_evidence_stage_ids\": []\n  },\n  \"claim_to_evidence\": {\n    \"status\": \"PASS\",\n    \"claim_count\": 4,\n    \"missing_evidence_claim_ids\": []\n  },\n  \"claim_scan\": {\n    \"status\": \"PASS\",\n    \"matches\": []\n  },\n  \"redaction_scan\": {\n    \"status\": \"PASS\",\n    \"matches\": []\n  },\n  \"allowed_claim\": \"PV16 complete: product-runtime hardening pilot ready for review.\",\n  \"forbidden_positive_claims\": [\n    \"production ready\",\n    \"Xpert parity complete\",\n    \"product-grade frontend complete\",\n    \"complete Workflow Studio ready\",\n    \"Agent executor ready\"\n  ]\n}\n",
+      "expected_failure": false
+    }
+  ],
+  "browser_results": [
+    {
+      "schema_version": "full_frontend_acceptance.browser_scenario_results.v1",
+      "status": "PASS",
+      "mode": "headless",
+      "base_url": "http://127.0.0.1:4186",
+      "scenarios": [
+        {
+          "scenario_id": "V12-readonly-workbench",
+          "status": "PASS",
+          "user_visible_result": "用户可查看实体侧栏、只读画布、Inspector、禁用动作原因和 WorkflowDiff handoff。",
+          "screenshot": "headless-v12-readonly-workbench.png",
+          "runtime_backed": false
+        },
+        {
+          "scenario_id": "V13-editable-studio-pilot",
+          "status": "PASS",
+          "user_visible_result": "用户可添加、连接、移动、配置节点并确认 WorkflowDiff handoff；不发布、不运行。",
+          "screenshot": "headless-v13-editable-studio.png",
+          "runtime_backed": false
+        },
+        {
+          "scenario_id": "V14-extension-ecosystem-pilot",
+          "status": "PASS",
+          "user_visible_result": "用户可查看扩展包兼容性、执行 scoped activation、看到 unsafe package 被拒绝和 audit ref。",
+          "screenshot": "headless-v14-extension-ecosystem.png",
+          "runtime_backed": false
+        },
+        {
+          "scenario_id": "V15-observability-deployment-baseline",
+          "status": "PASS",
+          "user_visible_result": "用户可查看 trace/metrics/audit/incident，执行本地 health check 和 bounded smoke。",
+          "screenshot": "headless-v15-observability-deployment.png",
+          "runtime_backed": false
+        },
+        {
+          "scenario_id": "PV16-product-runtime-hardening-pilot",
+          "status": "PASS",
+          "user_visible_result": "用户可更新产品实体、看到 ownership denial、确认 runtime-backed run/inspect，并运行 bounded deployment hardening smoke。",
+          "screenshot": "headless-pv16-product-runtime-hardening.png",
+          "runtime_backed": true
+        }
+      ],
+      "browser_boundary": {
+        "status": "PASS",
+        "forbidden_matches": []
+      },
+      "blocked_claims": [
+        "browser implementation complete",
+        "BFF runtime evidence complete",
+        "Xpert parity complete",
+        "product-grade frontend complete",
+        "complete Workflow Studio ready",
+        "production ready",
+        "Agent executor ready"
+      ],
+      "created_at": "2026-06-25T08:05:38.300Z"
+    }
+  ],
+  "existing_reports": {
+    "V12 remaining": {
+      "schema_version": "v12.remaining_stage_acceptance_data.v1",
+      "stage_id": "V12-SA",
+      "status": "PASS",
+      "evidence_scope": "aggregate_reconciliation",
+      "runtime_backed": false,
+      "browser_backed": true,
+      "bff_backed": true,
+      "dto_backed": true,
+      "design_only_used_as_browser_evidence": false,
+      "xpert_reference_used_as_harnessos_evidence": false,
+      "scenario_results": [
+        {
+          "scenario_id": "US-V12-SA",
+          "status": "PASS",
+          "user_visible_result": "Reviewer sees V12 claim-to-evidence reconciliation and deferred V13-V15 scope.",
+          "evidence_refs": [
+            "docs/design/V12-V15.x/evidence/v12-sa-aggregate/browser-screenshot.png",
+            "docs/design/V12-V15.x/evidence/v12-sa-aggregate/bff-route-log.json"
+          ]
+        }
+      ],
+      "required_artifacts": {
+        "acceptance_data": {
+          "path": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/acceptance-data.json",
+          "status": "PRESENT"
+        },
+        "browser_screenshot": {
+          "path": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/browser-screenshot.png",
+          "status": "PRESENT"
+        },
+        "browser_network_log": {
+          "path": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/browser-network-log.json",
+          "status": "PRESENT"
+        },
+        "bff_route_log": {
+          "path": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/bff-route-log.json",
+          "status": "PRESENT"
+        },
+        "schema_validation_report": {
+          "path": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/schema-validation-report.json",
+          "status": "PRESENT"
+        },
+        "prd_spec_review": {
+          "path": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/prd-spec-review.md",
+          "status": "PRESENT"
+        },
+        "target_architecture_review": {
+          "path": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/target-architecture-review.md",
+          "status": "PRESENT"
+        },
+        "audit_opinion": {
+          "path": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/audit-opinion.md",
+          "status": "PRESENT"
+        },
+        "audit_closure": {
+          "path": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/audit-closure.md",
+          "status": "PRESENT"
+        },
+        "no_false_green_scan": {
+          "path": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/no-false-green-scan.txt",
+          "status": "PRESENT"
+        },
+        "redaction_scan": {
+          "path": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/redaction-scan.txt",
+          "status": "PRESENT"
+        }
+      },
+      "schema_validation": {
+        "status": "PASS",
+        "evidence_ref": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/schema-validation-report.json"
+      },
+      "browser_boundary": {
+        "status": "PASS",
+        "evidence_ref": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/browser-network-log.json"
+      },
+      "prd_review": {
+        "status": "PASS",
+        "evidence_ref": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/prd-spec-review.md"
+      },
+      "target_architecture_review": {
+        "status": "PASS",
+        "evidence_ref": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/target-architecture-review.md"
+      },
+      "audit": {
+        "fatal_findings": 0,
+        "major_findings": 0,
+        "closure_status": "CLOSED"
+      },
+      "claim_scan": {
+        "status": "PASS",
+        "evidence_ref": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/no-false-green-scan.txt"
+      },
+      "redaction_scan": {
+        "status": "PASS",
+        "evidence_ref": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/redaction-scan.txt"
+      },
+      "created_at": "2026-06-24T00:00:00+08:00"
+    },
+    "V13 Studio": {
+      "schema_version": "v13.workflow_studio_acceptance_data.v1",
+      "stage_id": "V13-SA",
+      "status": "PASS",
+      "evidence_scope": "aggregate_reconciliation",
+      "runtime_backed": false,
+      "browser_backed": true,
+      "bff_backed": true,
+      "dto_backed": true,
+      "workflow_spec_graph": {
+        "status": "PASS",
+        "evidence_ref": "workflow-spec-graph.json"
+      },
+      "workflow_diff_proposal": {
+        "status": "PASS",
+        "evidence_ref": "workflow-diff-proposal.json"
+      },
+      "graph_roundtrip": {
+        "status": "PASS",
+        "evidence_ref": "graph-roundtrip-report.json"
+      },
+      "browser_boundary": {
+        "status": "PASS",
+        "evidence_ref": "browser-network-log.json"
+      },
+      "confirmation_boundary": {
+        "status": "PASS",
+        "evidence_ref": "confirmation-transcript.txt"
+      },
+      "scenario_results": [
+        {
+          "scenario_id": "V13-S1",
+          "status": "PASS",
+          "user_visible_result": "WorkflowSpecGraph 通过 BFF 获取并完成合法/非法图校验。",
+          "evidence_refs": [
+            "workflow-spec-graph.json",
+            "graph-roundtrip-report.json"
+          ]
+        },
+        {
+          "scenario_id": "V13-S2",
+          "status": "PASS",
+          "user_visible_result": "用户可在浏览器画布添加、移动、连接、配置节点，并体验 L1/L2、缩放、拖拽、聊天、仿真卡口。",
+          "evidence_refs": [
+            "studio-canvas-screenshot.png",
+            "node-inspector-screenshot.png",
+            "browser-action-log.json",
+            "interaction-parity-report.json",
+            "edge-quality-report.json",
+            "canvas-defect-regression-report.json"
+          ]
+        },
+        {
+          "scenario_id": "V13-S3",
+          "status": "PASS",
+          "user_visible_result": "WorkflowDiff 可修订、拒绝、确认交接，且不会发布或运行。",
+          "evidence_refs": [
+            "workflow-diff-proposal.json",
+            "confirmation-transcript.txt"
+          ]
+        },
+        {
+          "scenario_id": "V13-SA",
+          "status": "PASS",
+          "user_visible_result": "聚合证据可支撑 V13 editable Studio pilot slice ready for review。",
+          "evidence_refs": [
+            "artifact-manifest.json",
+            "audit-opinion.md"
+          ]
+        }
+      ],
+      "required_artifacts": {
+        "acceptance_data": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/v13-workflow-studio-acceptance-data.json",
+          "status": "PRESENT"
+        },
+        "artifact_manifest": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/artifact-manifest.json",
+          "status": "PRESENT"
+        },
+        "studio_canvas_screenshot": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/studio-canvas-screenshot.png",
+          "status": "PRESENT"
+        },
+        "node_inspector_screenshot": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/node-inspector-screenshot.png",
+          "status": "PRESENT"
+        },
+        "workflow_spec_graph": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/workflow-spec-graph.json",
+          "status": "PRESENT"
+        },
+        "workflow_diff_proposal": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/workflow-diff-proposal.json",
+          "status": "PRESENT"
+        },
+        "graph_roundtrip_report": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/graph-roundtrip-report.json",
+          "status": "PRESENT"
+        },
+        "browser_action_log": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/browser-action-log.json",
+          "status": "PRESENT"
+        },
+        "browser_network_log": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/browser-network-log.json",
+          "status": "PRESENT"
+        },
+        "bff_route_log": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/bff-route-log.json",
+          "status": "PRESENT"
+        },
+        "interaction_parity_report": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/interaction-parity-report.json",
+          "status": "PRESENT"
+        },
+        "edge_quality_report": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/edge-quality-report.json",
+          "status": "PRESENT"
+        },
+        "canvas_defect_regression_report": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/canvas-defect-regression-report.json",
+          "status": "PRESENT"
+        },
+        "edge_default_screenshot": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/edge-default-screenshot.png",
+          "status": "PRESENT"
+        },
+        "canvas_defect_wheel_zoom": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/canvas-defect-wheel-zoom.png",
+          "status": "PRESENT"
+        },
+        "canvas_defect_right_area_drag": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/canvas-defect-right-area-drag.png",
+          "status": "PRESENT"
+        },
+        "canvas_defect_connect_cancel": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/canvas-defect-connect-cancel.png",
+          "status": "PRESENT"
+        },
+        "edge_zoom_screenshot": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/edge-zoom-screenshot.png",
+          "status": "PRESENT"
+        },
+        "edge_drag_screenshot": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/edge-drag-screenshot.png",
+          "status": "PRESENT"
+        },
+        "edge_free_connect_screenshot": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/edge-free-connect-screenshot.png",
+          "status": "PRESENT"
+        },
+        "simulation_edge_state_screenshot": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/simulation-edge-state-screenshot.png",
+          "status": "PRESENT"
+        },
+        "scenario_morph_screenshot": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/scenario-morph-screenshot.png",
+          "status": "PRESENT"
+        },
+        "scenario_storyboard_screenshot": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/scenario-storyboard-screenshot.png",
+          "status": "PRESENT"
+        },
+        "chat_command_screenshot": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/chat-command-screenshot.png",
+          "status": "PRESENT"
+        },
+        "simulation_blocked_modal_screenshot": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/simulation-blocked-modal-screenshot.png",
+          "status": "PRESENT"
+        },
+        "confirmation_transcript": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/confirmation-transcript.txt",
+          "status": "PRESENT"
+        },
+        "prd_spec_review": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/prd-spec-review.md",
+          "status": "PRESENT"
+        },
+        "target_architecture_review": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/target-architecture-review.md",
+          "status": "PRESENT"
+        },
+        "audit_opinion": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/audit-opinion.md",
+          "status": "PRESENT"
+        },
+        "audit_closure": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/audit-closure.md",
+          "status": "PRESENT"
+        },
+        "no_false_green_scan": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/no-false-green-scan.json",
+          "status": "PRESENT"
+        },
+        "redaction_scan": {
+          "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/redaction-scan.json",
+          "status": "PRESENT"
+        }
+      },
+      "prd_review": {
+        "status": "PASS",
+        "evidence_ref": "prd-spec-review.md"
+      },
+      "target_architecture_review": {
+        "status": "PASS",
+        "evidence_ref": "target-architecture-review.md"
+      },
+      "audit": {
+        "fatal_findings": 0,
+        "major_findings": 0,
+        "closure_status": "CLOSED"
+      },
+      "claim_scan": {
+        "status": "PASS",
+        "evidence_ref": "no-false-green-scan.json"
+      },
+      "redaction_scan": {
+        "status": "PASS",
+        "evidence_ref": "redaction-scan.json"
+      },
+      "created_at": "2026-06-25T00:00:00Z"
+    },
+    "V14 extension": {
+      "schema_version": "v14.extension_ecosystem_acceptance_data.v1",
+      "stage_id": "V14-SA",
+      "status": "PASS",
+      "evidence_scope": "aggregate_reconciliation",
+      "runtime_backed": false,
+      "browser_backed": true,
+      "bff_backed": true,
+      "dto_backed": true,
+      "manifest_validation": {
+        "status": "PASS",
+        "evidence_ref": "plugin-manifest.json"
+      },
+      "compatibility_decision": {
+        "status": "PASS",
+        "evidence_ref": "compatibility-decision.json"
+      },
+      "scoped_activation": {
+        "status": "PASS",
+        "evidence_ref": "activation-decision.json"
+      },
+      "unsafe_denial": {
+        "status": "PASS",
+        "evidence_ref": "unsafe-package-denial.json"
+      },
+      "browser_boundary": {
+        "status": "PASS",
+        "evidence_ref": "browser-network-log.json"
+      },
+      "scenario_results": [
+        {
+          "scenario_id": "V14-S1",
+          "status": "PASS",
+          "user_visible_result": "审查者可查看扩展包、兼容性状态、权限、脱敏配置和 audit ref。",
+          "evidence_refs": [
+            "plugin-manifest.json",
+            "compatibility-decision.json",
+            "negative-compatibility-fixtures.json"
+          ]
+        },
+        {
+          "scenario_id": "V14-S2",
+          "status": "PASS",
+          "user_visible_result": "审查者可将已审查能力激活到指定 Agent/Station 作用域。",
+          "evidence_refs": [
+            "activation-decision.json",
+            "scoped-capability-binding.json",
+            "agent-binding-screenshot.png"
+          ]
+        },
+        {
+          "scenario_id": "V14-S3",
+          "status": "PASS",
+          "user_visible_result": "不安全扩展被拒绝，拒绝原因和审计引用可见。",
+          "evidence_refs": [
+            "unsafe-package-denial.json",
+            "policy-audit-ref.json",
+            "denied-package-screenshot.png"
+          ]
+        },
+        {
+          "scenario_id": "V14-SA",
+          "status": "PASS",
+          "user_visible_result": "聚合证据可支撑 V14 governed extension ecosystem pilot ready for review。",
+          "evidence_refs": [
+            "artifact-manifest.json",
+            "audit-opinion.md"
+          ]
+        }
+      ],
+      "required_artifacts": {
+        "acceptance_data": {
+          "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/acceptance-data.json",
+          "status": "PRESENT"
+        },
+        "artifact_manifest": {
+          "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/artifact-manifest.json",
+          "status": "PRESENT"
+        },
+        "plugin_manifest": {
+          "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/plugin-manifest.json",
+          "status": "PRESENT"
+        },
+        "skill_manifest": {
+          "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/skill-manifest.json",
+          "status": "PRESENT"
+        },
+        "tool_capability_manifest": {
+          "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/tool-capability-manifest.json",
+          "status": "PRESENT"
+        },
+        "mcp_connector_manifest": {
+          "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/mcp-connector-manifest.json",
+          "status": "PRESENT"
+        },
+        "compatibility_decision": {
+          "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/compatibility-decision.json",
+          "status": "PRESENT"
+        },
+        "install_decision": {
+          "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/install-decision.json",
+          "status": "PRESENT"
+        },
+        "activation_decision": {
+          "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/activation-decision.json",
+          "status": "PRESENT"
+        },
+        "scoped_capability_binding": {
+          "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/scoped-capability-binding.json",
+          "status": "PRESENT"
+        },
+        "unsafe_package_denial": {
+          "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/unsafe-package-denial.json",
+          "status": "PRESENT"
+        },
+        "agent_binding_screenshot": {
+          "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/agent-binding-screenshot.png",
+          "status": "PRESENT"
+        },
+        "denied_package_screenshot": {
+          "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/denied-package-screenshot.png",
+          "status": "PRESENT"
+        },
+        "browser_action_log": {
+          "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/browser-action-log.json",
+          "status": "PRESENT"
+        },
+        "browser_network_log": {
+          "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/browser-network-log.json",
+          "status": "PRESENT"
+        },
+        "bff_route_log": {
+          "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/bff-route-log.json",
+          "status": "PRESENT"
+        },
+        "negative_compatibility_fixtures": {
+          "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/negative-compatibility-fixtures.json",
+          "status": "PRESENT"
+        },
+        "policy_audit_ref": {
+          "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/policy-audit-ref.json",
+          "status": "PRESENT"
+        },
+        "prd_spec_review": {
+          "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/prd-spec-review.md",
+          "status": "PRESENT"
+        },
+        "target_architecture_review": {
+          "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/target-architecture-review.md",
+          "status": "PRESENT"
+        },
+        "audit_opinion": {
+          "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/audit-opinion.md",
+          "status": "PRESENT"
+        },
+        "audit_closure": {
+          "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/audit-closure.md",
+          "status": "PRESENT"
+        },
+        "no_false_green_scan": {
+          "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/no-false-green-scan.json",
+          "status": "PRESENT"
+        },
+        "redaction_scan": {
+          "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/redaction-scan.json",
+          "status": "PRESENT"
+        }
+      },
+      "prd_review": {
+        "status": "PASS",
+        "evidence_ref": "prd-spec-review.md"
+      },
+      "target_architecture_review": {
+        "status": "PASS",
+        "evidence_ref": "target-architecture-review.md"
+      },
+      "audit": {
+        "fatal_findings": 0,
+        "major_findings": 0,
+        "closure_status": "CLOSED"
+      },
+      "claim_scan": {
+        "status": "PASS",
+        "evidence_ref": "no-false-green-scan.json"
+      },
+      "redaction_scan": {
+        "status": "PASS",
+        "evidence_ref": "redaction-scan.json"
+      },
+      "created_at": "2026-06-24T00:00:00Z"
+    },
+    "V15 observability": {
+      "schema_version": "v15.observability_deployment_acceptance_data.v1",
+      "stage_id": "V15-SA",
+      "status": "PASS",
+      "evidence_scope": "aggregate_reconciliation",
+      "runtime_backed": false,
+      "browser_backed": true,
+      "bff_backed": true,
+      "dto_backed": true,
+      "observability_review": {
+        "status": "PASS",
+        "evidence_ref": "trace-timeline.json"
+      },
+      "deployment_smoke": {
+        "status": "PASS",
+        "evidence_ref": "deployment-smoke-output.txt"
+      },
+      "final_scenario_matrix": {
+        "status": "PASS",
+        "evidence_ref": "final-scenario-matrix.json"
+      },
+      "browser_boundary": {
+        "status": "PASS",
+        "evidence_ref": "browser-network-log.json"
+      },
+      "scenario_results": [
+        {
+          "scenario_id": "V15-S1",
+          "status": "PASS",
+          "user_visible_result": "用户可查看只读 trace、metrics、audit 和 incident evidence。",
+          "evidence_refs": [
+            "trace-timeline.json",
+            "metrics-snapshot.json",
+            "observability-dashboard-screenshot.png"
+          ]
+        },
+        {
+          "scenario_id": "V15-S2",
+          "status": "PASS",
+          "user_visible_result": "用户可运行本地健康检查和 bounded deployment smoke，并看到具体输出。",
+          "evidence_refs": [
+            "health-check-result.json",
+            "deployment-smoke-output.txt",
+            "product-shell-screenshot.png"
+          ]
+        },
+        {
+          "scenario_id": "V15-S3",
+          "status": "PASS",
+          "user_visible_result": "最终场景矩阵映射 V12/V13/V14/V15 HarnessOS evidence。",
+          "evidence_refs": [
+            "final-scenario-matrix.json",
+            "dependency-evidence-map.json"
+          ]
+        },
+        {
+          "scenario_id": "V15-SA",
+          "status": "PASS",
+          "user_visible_result": "聚合证据可支撑 V15 frontend interaction baseline ready for review。",
+          "evidence_refs": [
+            "artifact-manifest.json",
+            "audit-opinion.md"
+          ]
+        }
+      ],
+      "required_artifacts": {
+        "acceptance_data": {
+          "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/acceptance-data.json",
+          "status": "PRESENT"
+        },
+        "artifact_manifest": {
+          "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/artifact-manifest.json",
+          "status": "PRESENT"
+        },
+        "trace_timeline": {
+          "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/trace-timeline.json",
+          "status": "PRESENT"
+        },
+        "metrics_snapshot": {
+          "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/metrics-snapshot.json",
+          "status": "PRESENT"
+        },
+        "audit_export_package": {
+          "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/audit-export-package.json",
+          "status": "PRESENT"
+        },
+        "incident_timeline": {
+          "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/incident-timeline.json",
+          "status": "PRESENT"
+        },
+        "deployment_profile": {
+          "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/deployment-profile.json",
+          "status": "PRESENT"
+        },
+        "health_check_result": {
+          "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/health-check-result.json",
+          "status": "PRESENT"
+        },
+        "deployment_smoke_output": {
+          "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/deployment-smoke-output.txt",
+          "status": "PRESENT"
+        },
+        "final_scenario_matrix": {
+          "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/final-scenario-matrix.json",
+          "status": "PRESENT"
+        },
+        "product_shell_screenshot": {
+          "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/product-shell-screenshot.png",
+          "status": "PRESENT"
+        },
+        "observability_dashboard_screenshot": {
+          "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/observability-dashboard-screenshot.png",
+          "status": "PRESENT"
+        },
+        "browser_network_log": {
+          "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/browser-network-log.json",
+          "status": "PRESENT"
+        },
+        "bff_route_log": {
+          "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/bff-route-log.json",
+          "status": "PRESENT"
+        },
+        "prd_spec_review": {
+          "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/prd-spec-review.md",
+          "status": "PRESENT"
+        },
+        "target_architecture_review": {
+          "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/target-architecture-review.md",
+          "status": "PRESENT"
+        },
+        "audit_opinion": {
+          "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/audit-opinion.md",
+          "status": "PRESENT"
+        },
+        "audit_closure": {
+          "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/audit-closure.md",
+          "status": "PRESENT"
+        },
+        "no_false_green_scan": {
+          "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/no-false-green-scan.json",
+          "status": "PRESENT"
+        },
+        "redaction_scan": {
+          "path": "docs/design/V12-V15.x/evidence/v15-observability-deployment/redaction-scan.json",
+          "status": "PRESENT"
+        }
+      },
+      "prd_review": {
+        "status": "PASS",
+        "evidence_ref": "prd-spec-review.md"
+      },
+      "target_architecture_review": {
+        "status": "PASS",
+        "evidence_ref": "target-architecture-review.md"
+      },
+      "audit": {
+        "fatal_findings": 0,
+        "major_findings": 0,
+        "closure_status": "CLOSED"
+      },
+      "claim_scan": {
+        "status": "PASS",
+        "evidence_ref": "no-false-green-scan.json"
+      },
+      "redaction_scan": {
+        "status": "PASS",
+        "evidence_ref": "redaction-scan.json"
+      },
+      "created_at": "2026-06-24T00:00:00Z"
+    },
+    "PV16 product-runtime": {
+      "schema_version": "post_v15.product_runtime_hardening_acceptance_data.v1",
+      "stage_id": "PV16-SA",
+      "status": "PASS",
+      "evidence_scope": "aggregate_reconciliation",
+      "runtime_backed": true,
+      "browser_backed": true,
+      "bff_backed": true,
+      "dto_backed": true,
+      "durable_entity_mutation": {
+        "status": "PASS",
+        "evidence_ref": "entity-crud-report.json"
+      },
+      "runtime_run_inspect": {
+        "status": "PASS",
+        "evidence_ref": "runtime-run-inspect-report.json"
+      },
+      "deployment_smoke": {
+        "status": "PASS",
+        "evidence_ref": "deployment-smoke-output.txt"
+      },
+      "product_runtime_journey": {
+        "status": "PASS",
+        "evidence_ref": "ux-hardening-report.json"
+      },
+      "browser_boundary": {
+        "status": "PASS",
+        "evidence_ref": "browser-network-log.json"
+      },
+      "scenario_results": [
+        {
+          "scenario_id": "PV16-S1",
+          "status": "PASS",
+          "user_visible_result": "用户可更新产品实体并看到 audit refs，同时越权 mutation 被拒绝。",
+          "evidence_refs": [
+            "entity-crud-report.json",
+            "bff-route-log.json"
+          ]
+        },
+        {
+          "scenario_id": "PV16-S2",
+          "status": "PASS",
+          "user_visible_result": "用户可确认 WorkflowSpec 运行并检视 runtime-backed refs。",
+          "evidence_refs": [
+            "runtime-run-inspect-report.json",
+            "runtime-inspect-screenshot.png"
+          ]
+        },
+        {
+          "scenario_id": "PV16-S3",
+          "status": "PASS",
+          "user_visible_result": "用户可运行本地 deployment hardening smoke 并看到命令输出。",
+          "evidence_refs": [
+            "deployment-smoke-output.txt",
+            "deployment-health-report.json"
+          ]
+        },
+        {
+          "scenario_id": "PV16-S4",
+          "status": "PASS",
+          "user_visible_result": "用户可跟随 setup、Studio、run review、operations 的连续旅程。",
+          "evidence_refs": [
+            "ux-hardening-report.json",
+            "product-journey-screenshot.png"
+          ]
+        },
+        {
+          "scenario_id": "PV16-SA",
+          "status": "PASS",
+          "user_visible_result": "聚合证据可支撑 PV16 bounded pilot review 声明。",
+          "evidence_refs": [
+            "claim-to-evidence-matrix.json",
+            "artifact-manifest.json"
+          ]
+        }
+      ],
+      "required_artifacts": {
+        "acceptance_data": {
+          "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/acceptance-data.json",
+          "status": "PRESENT"
+        },
+        "artifact_manifest": {
+          "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/artifact-manifest.json",
+          "status": "PRESENT"
+        },
+        "entity_crud_report": {
+          "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/entity-crud-report.json",
+          "status": "PRESENT"
+        },
+        "runtime_run_inspect_report": {
+          "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/runtime-run-inspect-report.json",
+          "status": "PRESENT"
+        },
+        "deployment_smoke_output": {
+          "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/deployment-smoke-output.txt",
+          "status": "PRESENT"
+        },
+        "deployment_health_report": {
+          "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/deployment-health-report.json",
+          "status": "PRESENT"
+        },
+        "ux_hardening_report": {
+          "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/ux-hardening-report.json",
+          "status": "PRESENT"
+        },
+        "claim_to_evidence_matrix": {
+          "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/claim-to-evidence-matrix.json",
+          "status": "PRESENT"
+        },
+        "product_journey_screenshot": {
+          "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/product-journey-screenshot.png",
+          "status": "PRESENT"
+        },
+        "runtime_inspect_screenshot": {
+          "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/runtime-inspect-screenshot.png",
+          "status": "PRESENT"
+        },
+        "browser_network_log": {
+          "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/browser-network-log.json",
+          "status": "PRESENT"
+        },
+        "bff_route_log": {
+          "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/bff-route-log.json",
+          "status": "PRESENT"
+        },
+        "prd_spec_review": {
+          "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/prd-spec-review.md",
+          "status": "PRESENT"
+        },
+        "target_architecture_review": {
+          "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/target-architecture-review.md",
+          "status": "PRESENT"
+        },
+        "audit_closure": {
+          "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/audit-closure.md",
+          "status": "PRESENT"
+        },
+        "no_false_green_scan": {
+          "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/no-false-green-scan.txt",
+          "status": "PRESENT"
+        },
+        "redaction_scan": {
+          "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/redaction-scan.txt",
+          "status": "PRESENT"
+        }
+      },
+      "prd_review": {
+        "status": "PASS",
+        "evidence_ref": "prd-spec-review.md"
+      },
+      "target_architecture_review": {
+        "status": "PASS",
+        "evidence_ref": "target-architecture-review.md"
+      },
+      "audit": {
+        "fatal_findings": 0,
+        "major_findings": 0,
+        "closure_status": "CLOSED"
+      },
+      "claim_scan": {
+        "status": "PASS",
+        "evidence_ref": "no-false-green-scan.txt"
+      },
+      "redaction_scan": {
+        "status": "PASS",
+        "evidence_ref": "redaction-scan.txt"
+      },
+      "created_at": "2026-06-25T00:00:00Z"
+    },
+    "PV16 acceptance report": {
+      "schema_version": "post_v15.product_runtime_hardening_acceptance_report.v1",
+      "status": "PASS",
+      "stage_id": "PV16-SA",
+      "evidence_dir": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening",
+      "missing_artifacts": [],
+      "schema_results": [
+        {
+          "status": "PASS",
+          "data": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/acceptance-data.json",
+          "schema": "docs/design/V12-V15.x/schemas/post_v15_product_runtime_hardening_acceptance_data.schema.json",
+          "reason": ""
+        },
+        {
+          "status": "PASS",
+          "data": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/artifact-manifest.json",
+          "schema": "docs/design/V12-V15.x/schemas/post_v15_product_runtime_hardening_artifact_manifest.schema.json",
+          "reason": ""
+        }
+      ],
+      "browser_boundary": {
+        "status": "PASS",
+        "forbidden_matches": []
+      },
+      "runtime_evidence": {
+        "status": "PASS",
+        "missing_fields": [],
+        "runtime_backed": true
+      },
+      "deployment_smoke": {
+        "status": "PASS",
+        "has_command": true,
+        "has_health": true
+      },
+      "stage_results": {
+        "status": "PASS",
+        "missing_stage_ids": [],
+        "failing_stage_ids": [],
+        "missing_evidence_stage_ids": []
+      },
+      "claim_to_evidence": {
+        "status": "PASS",
+        "claim_count": 4,
+        "missing_evidence_claim_ids": []
+      },
+      "claim_scan": {
+        "status": "PASS",
+        "matches": []
+      },
+      "redaction_scan": {
+        "status": "PASS",
+        "matches": []
+      },
+      "allowed_claim": "PV16 complete: product-runtime hardening pilot ready for review.",
+      "forbidden_positive_claims": [
+        "production ready",
+        "Xpert parity complete",
+        "product-grade frontend complete",
+        "complete Workflow Studio ready",
+        "Agent executor ready"
+      ]
+    },
+    "PV16 document support": {
+      "report_name": "post_v15_document_support_audit_report",
+      "generated_on": "2026-06-25",
+      "status": "PV16_BOUNDED_PILOT_READY_FOR_REVIEW",
+      "supports": {
+        "bounded_v12_v15_acceptance": true,
+        "pv16_planning": true,
+        "direct_pv16_implementation": true,
+        "pv16_bounded_exit_acceptance": true,
+        "complete_target_prd": false,
+        "production_ready": false
+      },
+      "accepted_baseline": {
+        "v12": "product entity, browser workbench and read-only canvas foundation ready for review",
+        "v13": "editable Workflow Studio pilot slice ready for review",
+        "v14": "governed extension ecosystem pilot ready for review",
+        "v15": "frontend interaction baseline ready for review"
+      },
+      "post_v15_required_closures": [
+        "durable product entity mutation with audit refs",
+        "runtime-backed workflow run and inspect evidence",
+        "self-hosting smoke hardening with actual command output",
+        "product-runtime journey interaction hardening",
+        "PV16 schemas and acceptance runner",
+        "PV16 readiness audit with no open fatal or major findings"
+      ],
+      "blocking_findings": [],
+      "closed_findings": [
+        {
+          "id": "PV16-DOC-001",
+          "severity": "major",
+          "status": "closed",
+          "finding": "PV16 direct implementation could not start until schemas, runner and readiness audit existed.",
+          "closure": "Created PV16 schemas, runner spec, runner implementation and implementation readiness audit."
+        },
+        {
+          "id": "PV16-DOC-002",
+          "severity": "major",
+          "status": "closed",
+          "finding": "PRD and architecture text could be misread as claiming the full product-runtime target by V15.",
+          "closure": "Reworded the PRD vision, target experience and success criteria plus architecture intent so V12-V15 remain bounded baselines and PV16 owns product-runtime hardening."
+        },
+        {
+          "id": "PV16-DOC-003",
+          "severity": "major",
+          "status": "closed",
+          "finding": "PV16 substage PASS could be overclaimed if the runner only checked aggregate files.",
+          "closure": "Added PV16-R0.1 runner rules, per-stage scenario checks, claim-to-evidence validation, CDP evidence generation helper and PASS evidence package."
+        }
+      ],
+      "forbidden_claims": [
+        "production ready",
+        "Xpert parity complete",
+        "product-grade frontend complete",
+        "complete Workflow Studio ready",
+        "Agent executor ready"
+      ],
+      "accepted_allowed_claim": "PV16 complete: product-runtime hardening pilot ready for review",
+      "implementation_entry": {
+        "status": "COMPLETE_FOR_BOUNDED_PILOT",
+        "scope": "PV16-S1 through PV16-SA bounded pilot implementation",
+        "readiness_audit": "docs/design/V12-V15.x/post_v15_implementation_readiness_audit.md",
+        "runner": "tools/post_v15/run_product_runtime_hardening_acceptance.py"
+      },
+      "exit_acceptance": {
+        "status": "PASS",
+        "evidence": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/",
+        "acceptance_report": "docs/design/V12-V15.x/reports/post_v15_product_runtime_hardening_acceptance_report.json",
+        "allowed_claim": "PV16 complete: product-runtime hardening pilot ready for review"
+      }
+    }
+  },
+  "architecture_matrix": [
+    {
+      "plane": "Product Console / Mission Studio",
+      "target": "统一产品入口、Studio、Inspector、evidence browser",
+      "current": "V12-PV16 有分阶段页面和一条 product-runtime pilot 旅程；尚未合并为完整产品入口",
+      "status": "PARTIAL"
+    },
+    {
+      "plane": "Canvas Workbench",
+      "target": "只读 foundation 到可编辑 Studio pilot",
+      "current": "V12 只读画布 PASS；V13 add/connect/move/configure pilot PASS",
+      "status": "PASS_BOUNDED"
+    },
+    {
+      "plane": "Product Entity Control",
+      "target": "workspace/project/app/Station Agent durable mutation",
+      "current": "PV16-S1 通过 BFF-only mutation、ownership denial 和 audit refs 证明 bounded pilot",
+      "status": "PASS_BOUNDED"
+    },
+    {
+      "plane": "Runtime Gateway",
+      "target": "确认后 runtime-backed run/inspect",
+      "current": "PV16-S2 通过 controlled runtime run/inspect refs 证明 bounded pilot；不代表 Agent executor ready",
+      "status": "PASS_BOUNDED"
+    },
+    {
+      "plane": "Observability / Operations",
+      "target": "trace/metrics/audit/deployment health",
+      "current": "V15 bounded dashboard 和 local smoke PASS；不是生产 GA",
+      "status": "PASS_BOUNDED"
+    },
+    {
+      "plane": "Deployment / Self-hosting",
+      "target": "self-host profile、health、smoke、rollback",
+      "current": "PV16-S3 本地 hardening smoke、health report 和 rollback notes PASS；不是生产部署",
+      "status": "PASS_BOUNDED"
+    }
+  ],
+  "coverage_matrix": [
+    {
+      "scenario": "打开产品工作台并理解当前 workspace/project/app",
+      "evidence": "V12 screenshot + route/network logs",
+      "status": "PASS_BOUNDED"
+    },
+    {
+      "scenario": "体验工作流画布选择、Inspector、禁用动作说明",
+      "evidence": "V12/V13 browser automation screenshots",
+      "status": "PASS_BOUNDED"
+    },
+    {
+      "scenario": "编辑 Studio pilot：添加、连接、移动、配置节点",
+      "evidence": "V13 browser automation + acceptance data",
+      "status": "PASS_BOUNDED"
+    },
+    {
+      "scenario": "扩展包兼容性、scoped activation、unsafe denial",
+      "evidence": "V14 browser automation + acceptance data",
+      "status": "PASS_BOUNDED"
+    },
+    {
+      "scenario": "观察 trace/metrics/audit/incident 并运行 bounded smoke",
+      "evidence": "V15 browser automation + acceptance data",
+      "status": "PASS_BOUNDED"
+    },
+    {
+      "scenario": "持久化创建/更新实体",
+      "evidence": "PV16 browser automation + entity CRUD report + BFF route log",
+      "status": "PASS_BOUNDED"
+    },
+    {
+      "scenario": "真实 runtime-backed run/inspect",
+      "evidence": "PV16 runtime run inspect report + runtime screenshot + acceptance runner",
+      "status": "PASS_BOUNDED"
+    },
+    {
+      "scenario": "产品运行时连续旅程",
+      "evidence": "PV16 product journey screenshot + UX hardening report",
+      "status": "PASS_BOUNDED"
+    }
+  ],
+  "claim_boundary": {
+    "allowed": [
+      "V12 complete: product entity, browser workbench and read-only canvas foundation ready for review.",
+      "V13 complete: editable Workflow Studio pilot slice ready for review.",
+      "V14 complete: governed extension ecosystem pilot ready for review.",
+      "V15 complete: frontend interaction baseline ready for review.",
+      "PV16 complete: product-runtime hardening pilot ready for review."
+    ],
+    "not_allowed": [
+      "production ready",
+      "Xpert parity complete",
+      "product-grade frontend complete",
+      "complete Workflow Studio ready",
+      "Agent executor ready"
+    ]
+  }
+}

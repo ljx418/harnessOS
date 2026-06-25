@@ -1,0 +1,79 @@
+{
+  "schema_version": "v12.workbench_conversation_list.v1",
+  "app_id": "app-v12-markdown-workflow-real",
+  "conversations": [
+    {
+      "schema_version": "v12.workbench_conversation.v1",
+      "conversation_id": "conv-v12-markdown-summary-goal-real",
+      "workspace_id": "ws-v12-technical-content-real",
+      "project_id": "proj-v12-local-knowledge-real",
+      "app_id": "app-v12-markdown-workflow-real",
+      "participant_refs": [
+        "actor:local-reviewer",
+        "assistant:v12-workbench"
+      ],
+      "goal_summary": "把本地 Markdown 技术文档总结成可审计工作流",
+      "messages": [
+        {
+          "message_id": "msg-v12-user-goal-real",
+          "role": "user",
+          "redacted_text_ref": "text_ref:v12-goal-markdown-summary-redacted",
+          "summary": "总结本地 Markdown 技术文档，并在质量检查后输出证据包。",
+          "created_at": "2026-06-23T00:00:00Z"
+        },
+        {
+          "message_id": "msg-v12-assistant-proposal-real",
+          "role": "assistant",
+          "redacted_text_ref": "text_ref:v12-assistant-proposal-redacted",
+          "summary": "已生成只读 WorkflowDiff 提案，等待人工确认交接。",
+          "created_at": "2026-06-23T00:00:10Z"
+        }
+      ],
+      "proposal_timeline_ref": "timeline-v12-markdown-summary-real",
+      "evidence_scope": "proposal_only_not_runtime",
+      "audit_ref": "audit://v12/current-stage/workbench-conversation",
+      "created_at": "2026-06-23T00:00:00Z"
+    }
+  ],
+  "proposal_timeline": {
+    "schema_version": "v12.workbench_proposal_timeline.v1",
+    "proposal_timeline_id": "timeline-v12-markdown-summary-real",
+    "conversation_id": "conv-v12-markdown-summary-goal-real",
+    "workflow_diff_proposal_ref": "diff-v12-readonly-proposal-ref",
+    "current_state": "awaiting_user_confirmation",
+    "events": [
+      {
+        "event_id": "evt-v12-goal-received",
+        "label": "目标已接收",
+        "state": "goal_received",
+        "risk_level": "low",
+        "created_at": "2026-06-23T00:00:00Z"
+      },
+      {
+        "event_id": "evt-v12-proposal-ready",
+        "label": "WorkflowDiff 提案已生成",
+        "state": "proposal_ready",
+        "risk_level": "medium",
+        "created_at": "2026-06-23T00:00:10Z"
+      },
+      {
+        "event_id": "evt-v12-awaiting-confirmation",
+        "label": "等待人工确认交接",
+        "state": "awaiting_user_confirmation",
+        "risk_level": "medium",
+        "created_at": "2026-06-23T00:00:20Z"
+      }
+    ],
+    "changed_node_refs": [
+      "folder_input",
+      "quality_check"
+    ],
+    "blocked_runtime_actions": [
+      "publish",
+      "run",
+      "apply_to_workflow_spec_graph"
+    ],
+    "audit_ref": "audit://v12/current-stage/proposal-timeline"
+  },
+  "created_at": "2026-06-23T00:00:00Z"
+}

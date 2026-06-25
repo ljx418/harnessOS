@@ -1,0 +1,4 @@
+Status: PASS
+
+Safe claim only: V12-SQ ready for bounded review.
+Forbidden completion claims are not used as positive product claims.

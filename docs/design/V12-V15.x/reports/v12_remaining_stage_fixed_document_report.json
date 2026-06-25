@@ -1,0 +1,33 @@
+{
+  "schema_version": "v12.remaining_stage_fixed_document_report.v1",
+  "created_at": "2026-06-24T00:00:00+08:00",
+  "status": "PASS",
+  "documents": [
+    {
+      "path": "docs/design/V12-V15.x/v12_remaining_stage_development_and_acceptance_plan.md",
+      "line_count": 270,
+      "sha256": "e5e3f79334a59a171e5c71b619a8c0ba7a8b5757605c92bd9f85fdfaef0be661"
+    },
+    {
+      "path": "docs/design/V12-V15.x/v12_remaining_stage_prd_architecture_coverage_audit.md",
+      "line_count": 120,
+      "sha256": "d8b86d4f87c6c8466a5b825d8ec0bd86c38f2fe4311f658320602aebd5439822"
+    },
+    {
+      "path": "docs/design/V12-V15.x/v12_sa_aggregate_validator_spec.md",
+      "line_count": 60,
+      "sha256": "47ab7ead42b3a64afc39ab28e6ba3c839fe17c1f4ae89bd4aae0e64b4d523fb8"
+    },
+    {
+      "path": "docs/design/V12-V15.x/schemas/v12_remaining_stage_acceptance_data.schema.json",
+      "line_count": 141,
+      "sha256": "ba9b5a921864c181b0e17076e3d1e2df7e7ebe65b810b47b3c395afd17ac28e7"
+    },
+    {
+      "path": "docs/design/V12-V15.x/schemas/v12_remaining_stage_artifact_manifest.schema.json",
+      "line_count": 68,
+      "sha256": "0d0a75f85c8df1bac49af5e823605023cc62e211115679af66755c1185ef9c4e"
+    }
+  ],
+  "audit_note": "Required remaining-stage plan, coverage audit, aggregate validator and schemas are present as independent reviewable files."
+}

@@ -1,0 +1,187 @@
+{
+  "schema_version": "v14.extension_ecosystem_artifact_manifest.v1",
+  "stage_id": "V14-SA",
+  "status": "PASS",
+  "evidence_scope": "aggregate_reconciliation",
+  "not_unrestricted_plugin_runtime_evidence": true,
+  "required_artifacts": [
+    {
+      "artifact_id": "acceptance_data",
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/acceptance-data.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "2595aed4a3691586fa2445d77ca27b1e5928f0890c1e3adf53d7d151f0d5a131"
+    },
+    {
+      "artifact_id": "artifact_manifest",
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/artifact-manifest.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "18d72eeb120a7604799f1882ffd2580610a37f3d1688eb05cbef3e8fb15b74f2"
+    },
+    {
+      "artifact_id": "plugin_manifest",
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/plugin-manifest.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "26200b28a0f28fbf1c45b6beb2d2cde8464739ce27158aefb9289b5272a1b196"
+    },
+    {
+      "artifact_id": "skill_manifest",
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/skill-manifest.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "e0dd1021241d72c439c39c2969f9690f1ce9d78f10e7f886c7ab277bcc399e2d"
+    },
+    {
+      "artifact_id": "tool_capability_manifest",
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/tool-capability-manifest.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "8afd131238c4045808ff5f342289a6e07f1af4704042c62f50d9c53b8d275ba8"
+    },
+    {
+      "artifact_id": "mcp_connector_manifest",
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/mcp-connector-manifest.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "3c76003037b2bf780507ad0c8e44c82b6eb9d1841a643aefa17cbe3892702842"
+    },
+    {
+      "artifact_id": "compatibility_decision",
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/compatibility-decision.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "e1a9d1d9997c6dcb4a722a47b88877b6c40c59f20ec081cf48dc2fd74d336bef"
+    },
+    {
+      "artifact_id": "install_decision",
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/install-decision.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "0a1401233ab4117ab29ed6c8295b4cfc67c13042888797658853c5daf80b4276"
+    },
+    {
+      "artifact_id": "activation_decision",
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/activation-decision.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "b1524f9005599ca46a622d9a40e6f67c6e80c481c83e9f48f31542f99326150a"
+    },
+    {
+      "artifact_id": "scoped_capability_binding",
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/scoped-capability-binding.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "e2a8c66d2a4a1747a0a2cdbdc8ca8092c68fea9cd7ea7364d7dc9d45a939e9ea"
+    },
+    {
+      "artifact_id": "unsafe_package_denial",
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/unsafe-package-denial.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "c136967546202bf2b64838c0825eb77c2ba0f1052aa8c12106a5b21b256d9ff4"
+    },
+    {
+      "artifact_id": "agent_binding_screenshot",
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/agent-binding-screenshot.png",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "75c78b57c7aa87e0936f4645de19af3f196340fe615896cf9618aa930549b7fc"
+    },
+    {
+      "artifact_id": "denied_package_screenshot",
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/denied-package-screenshot.png",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "1d0d63cde34af43979486ce344727388f9e058e96af6cea3855f0e3d41d97182"
+    },
+    {
+      "artifact_id": "browser_action_log",
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/browser-action-log.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "911e6482e6f5feb5073cea7f6aaf373e72e8f26e4390eb0edc85bc182581d86d"
+    },
+    {
+      "artifact_id": "browser_network_log",
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/browser-network-log.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "1ec4714eb71df1a1be988e7e57256ee9bf2b99e25352845efce700107c8e3652"
+    },
+    {
+      "artifact_id": "bff_route_log",
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/bff-route-log.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "58151d8f584860dcb5322025d6067ab04912b336732e7ed731334a28b595ea87"
+    },
+    {
+      "artifact_id": "negative_compatibility_fixtures",
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/negative-compatibility-fixtures.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "e285afa63729beca9a73fa78c0069e854611a73ded1244b3f89acc47f230f356"
+    },
+    {
+      "artifact_id": "policy_audit_ref",
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/policy-audit-ref.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "329188d8b4af2a6a1e3a3e8d185af3bf6db74b80fd8965a3e51965df135f1c50"
+    },
+    {
+      "artifact_id": "prd_spec_review",
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/prd-spec-review.md",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "9f02bb37d1999d244ffe0d3b14e0be300e62e511f84d2fdd15893126f96314b7"
+    },
+    {
+      "artifact_id": "target_architecture_review",
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/target-architecture-review.md",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "c567c130246aed1146a3e0c3e202c93c6f3d4470d859fd94a21deb97fb1a98bc"
+    },
+    {
+      "artifact_id": "audit_opinion",
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/audit-opinion.md",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "5731df5e7da4b788539f213673e720f165b7ed23a60b01fa8385079ce7070490"
+    },
+    {
+      "artifact_id": "audit_closure",
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/audit-closure.md",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "40b71ded566629efadeded7a08623c841010d33f24016bee124557c9d4a400dd"
+    },
+    {
+      "artifact_id": "no_false_green_scan",
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/no-false-green-scan.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "36cef3d3c2355909a048caea8277267174c33d885fd1b4a230750a684d169753"
+    },
+    {
+      "artifact_id": "redaction_scan",
+      "path": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/redaction-scan.json",
+      "required_for_pass": true,
+      "status": "PRESENT",
+      "sha256": "e60ddf0120de90397581941a54b5cdab9d3f2cc5ef327d6f9a035dc14634276a"
+    }
+  ],
+  "blocked_claims": [
+    "browser implementation complete",
+    "BFF runtime evidence complete",
+    "Xpert parity complete",
+    "product-grade frontend complete",
+    "complete Workflow Studio ready",
+    "production ready",
+    "Agent executor ready"
+  ],
+  "created_at": "2026-06-24T00:00:00Z"
+}

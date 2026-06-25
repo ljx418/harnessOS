@@ -1,0 +1,13 @@
+{
+  "schema_version": "v14.redaction_scan.v1",
+  "status": "PASS",
+  "forbidden_patterns": [
+    "raw_secret",
+    "Bearer ",
+    "signed URL",
+    "sk-",
+    "AKIA"
+  ],
+  "matches": [],
+  "created_at": "2026-06-24T00:00:00Z"
+}

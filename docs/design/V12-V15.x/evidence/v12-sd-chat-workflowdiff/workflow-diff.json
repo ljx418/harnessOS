@@ -1,0 +1,14 @@
+{
+  "schema_version": "v12.workflow_diff_proposal_ref.v1",
+  "proposal_id": "diff-v12-readonly-proposal-ref",
+  "status": "awaiting_user_confirmation",
+  "before_graph_ref": "canvas-read-model:v12-current-stage",
+  "after_graph_ref": "workflow-diff-preview:v12-markdown-summary",
+  "changed_node_refs": [
+    "folder_input",
+    "quality_check"
+  ],
+  "confirmation_boundary": "handoff_only_no_publish_no_run",
+  "runtime_backed": false,
+  "audit_ref": "audit://v12/current-stage/workflow-diff-ref"
+}

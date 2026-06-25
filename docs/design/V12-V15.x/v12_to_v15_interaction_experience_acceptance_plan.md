@@ -12,7 +12,8 @@ Executable test intent is defined in
 
 ## Interaction Experience Target
 
-By V15, HarnessOS should provide an Xpert-inspired frontend interaction
+Across the accepted V12-V15 baseline and the current PV16 target, HarnessOS
+should provide a staged frontend interaction and product-runtime review
 baseline:
 
 - browser product entry is understandable without reading docs first;
@@ -27,7 +28,8 @@ baseline:
 - screenshots, network logs, DTOs and evidence packages prove the experience.
 
 This target does not mean complete Xpert parity, complete Workflow Studio
-ready, production ready or Agent executor ready.
+ready, production ready or Agent executor ready. V15 only supports frontend
+interaction baseline review; PV16 owns the runtime-backed product journey.
 
 ## UX Acceptance Layers
 
@@ -99,6 +101,14 @@ V15:
 - `ux_v15_final_scenario_matrix_links_evidence`
 - `ux_v15_no_false_green_and_redaction_pass`
 
+PV16:
+
+- `ux_pv16_entity_mutation_audit_refs_visible`
+- `ux_pv16_runtime_run_inspect_refs_visible`
+- `ux_pv16_deployment_hardening_output_visible`
+- `ux_pv16_setup_to_operations_journey_visible`
+- `ux_pv16_no_false_green_and_redaction_pass`
+
 ## Human Review Checklist
 
 Human review is still required because automation cannot fully judge product
@@ -154,7 +164,7 @@ Human acceptance states:
 
 V15 cannot claim:
 
-`V15 complete: Xpert-level frontend interaction baseline ready for review.`
+`V15 complete: frontend interaction baseline ready for review.`
 
 unless:
 
@@ -167,3 +177,7 @@ unless:
 - No False Green scan PASS;
 - redaction scan PASS;
 - drawio XML valid.
+
+PV16 cannot claim `PV16 complete: product-runtime hardening pilot ready for
+review.` unless PV16-S1/S2/S3/S4/SA scenario evidence exists, the
+claim-to-evidence matrix is complete and the post-V15 acceptance runner PASSes.

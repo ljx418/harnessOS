@@ -6,6 +6,12 @@ V13 is blocked until V12 product entity, BFF, workbench and read-only canvas
 foundation evidence exists. This document supports V13
 implementation-readiness review after V12 PASS.
 
+The blocking readiness audit is recorded separately in
+`v13_implementation_readiness_audit.md`. The executable development and
+acceptance contract is recorded in `v13_development_and_acceptance_plan.md`.
+The PRD and architecture coverage audit is recorded in
+`v13_prd_architecture_coverage_audit.md`.
+
 Allowed after V12 PASS:
 
 - Workflow Studio visual authoring planning.
@@ -174,6 +180,7 @@ docs/design/V12-V15.x/evidence/v13-workflow-studio-dsl/
 Required:
 
 - `v13-acceptance-data.json`
+- `artifact-manifest.json`
 - `studio-canvas-screenshot.png`
 - `node-inspector-screenshot.png`
 - `workflow-spec-graph.json`
@@ -184,6 +191,12 @@ Required:
 - `redaction-scan.txt`
 - `no-false-green-scan.txt`
 - `prd-spec-review.md`
+
+`v13-acceptance-data.json` must validate against
+`schemas/v13_workflow_studio_acceptance_data.schema.json`.
+
+`artifact-manifest.json` must validate against
+`schemas/v13_workflow_studio_artifact_manifest.schema.json`.
 
 ## V13 Stop Conditions
 

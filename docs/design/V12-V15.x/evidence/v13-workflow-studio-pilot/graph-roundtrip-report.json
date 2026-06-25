@@ -1,0 +1,29 @@
+{
+  "schema_version": "v13.graph_roundtrip_report.v1",
+  "status": "PASS",
+  "valid_graph": {
+    "schema_version": "v13.workflow_graph_validation_result.v1",
+    "workflow_id": "wf-v13-markdown-summary-studio-pilot",
+    "status": "PASS",
+    "errors": [],
+    "runtime_backed": false,
+    "audit_ref": "audit://v13/studio-pilot/graph-validation",
+    "created_at": "2026-06-24T00:00:00Z"
+  },
+  "invalid_graph": {
+    "schema_version": "v13.workflow_graph_validation_result.v1",
+    "workflow_id": "wf-v13-markdown-summary-studio-pilot",
+    "status": "FAIL",
+    "errors": [
+      {
+        "code": "NODE_KIND_INVALID",
+        "message": "summary_agent has unsupported node_kind unsupported_node"
+      }
+    ],
+    "runtime_backed": false,
+    "audit_ref": "audit://v13/studio-pilot/graph-validation",
+    "created_at": "2026-06-24T00:00:00Z"
+  },
+  "runtime_backed": false,
+  "created_at": "2026-06-25T00:00:00Z"
+}

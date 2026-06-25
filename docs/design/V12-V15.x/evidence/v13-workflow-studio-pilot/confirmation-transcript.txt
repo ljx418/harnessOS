@@ -1,0 +1,6 @@
+V13 WorkflowDiff confirmation transcript
+revise=revised
+reject=rejected
+handoff=handoff_ready
+handoff_ref=handoff:v13-workflowdiff-publish-review
+publish_or_run_started=false

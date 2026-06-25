@@ -1,0 +1,30 @@
+{
+  "schema_version": "v13.workflow_diff_proposal.v1",
+  "proposal_id": "diff-v13-editable-studio-pilot-001",
+  "workflow_id": "wf-v13-markdown-summary-studio-pilot",
+  "status": "awaiting_user_confirmation",
+  "before_graph_ref": "workflow-spec-graph:v13-draft-001",
+  "after_graph_ref": "workflow-spec-graph:v13-local-edit-preview",
+  "changed_node_refs": [
+    "quality_gate",
+    "evidence_review"
+  ],
+  "changed_edge_refs": [
+    "quality-merge",
+    "evidence-merge"
+  ],
+  "confirmation_boundary": "handoff_only_no_publish_no_run",
+  "runtime_backed": false,
+  "publish_or_run_started": false,
+  "audit_ref": "audit://v13/studio-pilot/workflow-diff",
+  "validation_status": "PASS",
+  "graph_validation": {
+    "schema_version": "v13.workflow_graph_validation_result.v1",
+    "workflow_id": "wf-v13-markdown-summary-studio-pilot",
+    "status": "PASS",
+    "errors": [],
+    "runtime_backed": false,
+    "audit_ref": "audit://v13/studio-pilot/graph-validation",
+    "created_at": "2026-06-24T00:00:00Z"
+  }
+}

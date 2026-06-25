@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://harnessos.local/schemas/v12_remaining_stage_acceptance_data.schema.json",
+  "title": "V12RemainingStageAcceptanceData",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "stage_id",
+    "status",
+    "evidence_scope",
+    "runtime_backed",
+    "browser_backed",
+    "bff_backed",
+    "dto_backed",
+    "design_only_used_as_browser_evidence",
+    "xpert_reference_used_as_harnessos_evidence",
+    "scenario_results",
+    "required_artifacts",
+    "schema_validation",
+    "browser_boundary",
+    "prd_review",
+    "target_architecture_review",
+    "audit",
+    "claim_scan",
+    "redaction_scan",
+    "created_at"
+  ],
+  "properties": {
+    "schema_version": { "const": "v12.remaining_stage_acceptance_data.v1" },
+    "stage_id": {
+      "enum": [
+        "V12-SD",
+        "V12-SI",
+        "V12-SQ",
+        "V12-SA"
+      ]
+    },
+    "status": { "enum": ["PASS", "PARTIAL", "FAIL", "BLOCKED"] },
+    "evidence_scope": {
+      "enum": [
+        "browser_bff_read_model",
+        "browser_interaction",
+        "product_polish",
+        "aggregate_reconciliation"
+      ]
+    },
+    "runtime_backed": { "type": "boolean" },
+    "browser_backed": { "type": "boolean" },
+    "bff_backed": { "type": "boolean" },
+    "dto_backed": { "type": "boolean" },
+    "design_only_used_as_browser_evidence": { "const": false },
+    "xpert_reference_used_as_harnessos_evidence": { "const": false },
+    "scenario_results": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["scenario_id", "status", "user_visible_result", "evidence_refs"],
+        "properties": {
+          "scenario_id": { "type": "string", "minLength": 1 },
+          "status": { "enum": ["PASS", "PARTIAL", "FAIL", "BLOCKED"] },
+          "user_visible_result": { "type": "string", "minLength": 1 },
+          "evidence_refs": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    },
+    "required_artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "acceptance_data",
+        "browser_screenshot",
+        "browser_network_log",
+        "bff_route_log",
+        "schema_validation_report",
+        "prd_spec_review",
+        "target_architecture_review",
+        "audit_opinion",
+        "audit_closure",
+        "no_false_green_scan",
+        "redaction_scan"
+      ],
+      "properties": {
+        "acceptance_data": { "$ref": "#/$defs/artifactStatus" },
+        "browser_screenshot": { "$ref": "#/$defs/artifactStatus" },
+        "browser_network_log": { "$ref": "#/$defs/artifactStatus" },
+        "bff_route_log": { "$ref": "#/$defs/artifactStatus" },
+        "schema_validation_report": { "$ref": "#/$defs/artifactStatus" },
+        "prd_spec_review": { "$ref": "#/$defs/artifactStatus" },
+        "target_architecture_review": { "$ref": "#/$defs/artifactStatus" },
+        "audit_opinion": { "$ref": "#/$defs/artifactStatus" },
+        "audit_closure": { "$ref": "#/$defs/artifactStatus" },
+        "no_false_green_scan": { "$ref": "#/$defs/artifactStatus" },
+        "redaction_scan": { "$ref": "#/$defs/artifactStatus" }
+      }
+    },
+    "schema_validation": { "$ref": "#/$defs/checkResult" },
+    "browser_boundary": { "$ref": "#/$defs/checkResult" },
+    "prd_review": { "$ref": "#/$defs/checkResult" },
+    "target_architecture_review": { "$ref": "#/$defs/checkResult" },
+    "audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fatal_findings", "major_findings", "closure_status"],
+      "properties": {
+        "fatal_findings": { "type": "integer", "minimum": 0 },
+        "major_findings": { "type": "integer", "minimum": 0 },
+        "closure_status": { "enum": ["CLOSED", "OPEN", "BLOCKED"] }
+      }
+    },
+    "claim_scan": { "$ref": "#/$defs/checkResult" },
+    "redaction_scan": { "$ref": "#/$defs/checkResult" },
+    "created_at": { "type": "string", "format": "date-time" }
+  },
+  "$defs": {
+    "artifactStatus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "status"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["PRESENT", "MISSING", "NOT_APPLICABLE"] }
+      }
+    },
+    "checkResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "evidence_ref"],
+      "properties": {
+        "status": { "enum": ["PASS", "FAIL", "BLOCKED"] },
+        "evidence_ref": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

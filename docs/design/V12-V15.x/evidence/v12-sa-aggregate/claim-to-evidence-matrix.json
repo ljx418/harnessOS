@@ -1,0 +1,17 @@
+{
+  "schema_version": "v12.claim_to_evidence_matrix.v1",
+  "status": "PASS",
+  "claims": [
+    {
+      "claim": "V12 read-only workbench foundation ready for bounded review",
+      "evidence_refs": [
+        "evidence/v12-current-stage-real-data/",
+        "evidence/v12-sd-chat-workflowdiff/",
+        "evidence/v12-si-interaction-depth/",
+        "evidence/v12-sq-product-polish/"
+      ]
+    }
+  ],
+  "forbidden_claims_blocked": true,
+  "created_at": "2026-06-24T00:00:00+08:00"
+}

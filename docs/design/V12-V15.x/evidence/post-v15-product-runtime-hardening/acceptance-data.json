@@ -1,0 +1,169 @@
+{
+  "schema_version": "post_v15.product_runtime_hardening_acceptance_data.v1",
+  "stage_id": "PV16-SA",
+  "status": "PASS",
+  "evidence_scope": "aggregate_reconciliation",
+  "runtime_backed": true,
+  "browser_backed": true,
+  "bff_backed": true,
+  "dto_backed": true,
+  "durable_entity_mutation": {
+    "status": "PASS",
+    "evidence_ref": "entity-crud-report.json"
+  },
+  "runtime_run_inspect": {
+    "status": "PASS",
+    "evidence_ref": "runtime-run-inspect-report.json"
+  },
+  "deployment_smoke": {
+    "status": "PASS",
+    "evidence_ref": "deployment-smoke-output.txt"
+  },
+  "product_runtime_journey": {
+    "status": "PASS",
+    "evidence_ref": "ux-hardening-report.json"
+  },
+  "browser_boundary": {
+    "status": "PASS",
+    "evidence_ref": "browser-network-log.json"
+  },
+  "scenario_results": [
+    {
+      "scenario_id": "PV16-S1",
+      "status": "PASS",
+      "user_visible_result": "用户可更新产品实体并看到 audit refs，同时越权 mutation 被拒绝。",
+      "evidence_refs": [
+        "entity-crud-report.json",
+        "bff-route-log.json"
+      ]
+    },
+    {
+      "scenario_id": "PV16-S2",
+      "status": "PASS",
+      "user_visible_result": "用户可确认 WorkflowSpec 运行并检视 runtime-backed refs。",
+      "evidence_refs": [
+        "runtime-run-inspect-report.json",
+        "runtime-inspect-screenshot.png"
+      ]
+    },
+    {
+      "scenario_id": "PV16-S3",
+      "status": "PASS",
+      "user_visible_result": "用户可运行本地 deployment hardening smoke 并看到命令输出。",
+      "evidence_refs": [
+        "deployment-smoke-output.txt",
+        "deployment-health-report.json"
+      ]
+    },
+    {
+      "scenario_id": "PV16-S4",
+      "status": "PASS",
+      "user_visible_result": "用户可跟随 setup、Studio、run review、operations 的连续旅程。",
+      "evidence_refs": [
+        "ux-hardening-report.json",
+        "product-journey-screenshot.png"
+      ]
+    },
+    {
+      "scenario_id": "PV16-SA",
+      "status": "PASS",
+      "user_visible_result": "聚合证据可支撑 PV16 bounded pilot review 声明。",
+      "evidence_refs": [
+        "claim-to-evidence-matrix.json",
+        "artifact-manifest.json"
+      ]
+    }
+  ],
+  "required_artifacts": {
+    "acceptance_data": {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/acceptance-data.json",
+      "status": "PRESENT"
+    },
+    "artifact_manifest": {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/artifact-manifest.json",
+      "status": "PRESENT"
+    },
+    "entity_crud_report": {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/entity-crud-report.json",
+      "status": "PRESENT"
+    },
+    "runtime_run_inspect_report": {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/runtime-run-inspect-report.json",
+      "status": "PRESENT"
+    },
+    "deployment_smoke_output": {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/deployment-smoke-output.txt",
+      "status": "PRESENT"
+    },
+    "deployment_health_report": {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/deployment-health-report.json",
+      "status": "PRESENT"
+    },
+    "ux_hardening_report": {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/ux-hardening-report.json",
+      "status": "PRESENT"
+    },
+    "claim_to_evidence_matrix": {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/claim-to-evidence-matrix.json",
+      "status": "PRESENT"
+    },
+    "product_journey_screenshot": {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/product-journey-screenshot.png",
+      "status": "PRESENT"
+    },
+    "runtime_inspect_screenshot": {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/runtime-inspect-screenshot.png",
+      "status": "PRESENT"
+    },
+    "browser_network_log": {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/browser-network-log.json",
+      "status": "PRESENT"
+    },
+    "bff_route_log": {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/bff-route-log.json",
+      "status": "PRESENT"
+    },
+    "prd_spec_review": {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/prd-spec-review.md",
+      "status": "PRESENT"
+    },
+    "target_architecture_review": {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/target-architecture-review.md",
+      "status": "PRESENT"
+    },
+    "audit_closure": {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/audit-closure.md",
+      "status": "PRESENT"
+    },
+    "no_false_green_scan": {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/no-false-green-scan.txt",
+      "status": "PRESENT"
+    },
+    "redaction_scan": {
+      "path": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/redaction-scan.txt",
+      "status": "PRESENT"
+    }
+  },
+  "prd_review": {
+    "status": "PASS",
+    "evidence_ref": "prd-spec-review.md"
+  },
+  "target_architecture_review": {
+    "status": "PASS",
+    "evidence_ref": "target-architecture-review.md"
+  },
+  "audit": {
+    "fatal_findings": 0,
+    "major_findings": 0,
+    "closure_status": "CLOSED"
+  },
+  "claim_scan": {
+    "status": "PASS",
+    "evidence_ref": "no-false-green-scan.txt"
+  },
+  "redaction_scan": {
+    "status": "PASS",
+    "evidence_ref": "redaction-scan.txt"
+  },
+  "created_at": "2026-06-25T00:00:00Z"
+}

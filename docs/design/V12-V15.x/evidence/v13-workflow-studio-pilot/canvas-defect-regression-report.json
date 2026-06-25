@@ -1,0 +1,130 @@
+{
+  "schema_version": "v13.canvas_defect_regression_report.v1",
+  "status": "PASS",
+  "viewport": {
+    "width": 1500,
+    "height": 980
+  },
+  "defects": [
+    {
+      "defect_id": "CANVAS-01",
+      "title": "首屏连线与箭头可见",
+      "status": "PASS",
+      "assertions": [
+        "默认拓扑边完整",
+        "每条边均有 markerEnd",
+        "端点停在端口外沿而非被端口遮挡"
+      ],
+      "dom_metrics": {
+        "status": "PASS",
+        "edge_count": 6,
+        "max_source_distance_px": 1.414,
+        "max_target_distance_px": 1.414,
+        "threshold_px": 3.5
+      },
+      "screenshot_refs": [
+        "edge-default-screenshot.png"
+      ],
+      "false_green_guards": [
+        "missing_port_is_fail",
+        "missing_marker_is_fail",
+        "skipped_edge_is_fail"
+      ]
+    },
+    {
+      "defect_id": "CANVAS-02",
+      "title": "画布普通滚轮缩放",
+      "status": "PASS",
+      "assertions": [
+        "不按 Ctrl 的滚轮会改变缩放值",
+        "缩放后边线仍与端口外沿对齐"
+      ],
+      "dom_metrics": {
+        "zoom_before": "100%",
+        "zoom_after": "154%",
+        "edge_quality": {
+          "status": "PASS",
+          "edge_count": 6,
+          "max_source_distance_px": 1.414,
+          "max_target_distance_px": 1.414,
+          "threshold_px": 3.5
+        }
+      },
+      "screenshot_refs": [
+        "canvas-defect-wheel-zoom.png"
+      ],
+      "false_green_guards": [
+        "zoom_label_must_change",
+        "edge_quality_checked_after_wheel"
+      ]
+    },
+    {
+      "defect_id": "CANVAS-03",
+      "title": "右侧可见空白区域可拖放节点",
+      "status": "PASS",
+      "assertions": [
+        "节点可以落到右侧可见画布区域",
+        "拖动后边线仍对齐",
+        "拖动提交 graph 校验"
+      ],
+      "dom_metrics": {
+        "before": {
+          "x": 1162,
+          "y": 264,
+          "width": 223,
+          "height": 160
+        },
+        "after": {
+          "x": 1029,
+          "y": 302,
+          "width": 145,
+          "height": 104
+        },
+        "workspace": {
+          "x": 296,
+          "y": 100,
+          "width": 884,
+          "height": 652
+        },
+        "edge_quality": {
+          "status": "PASS",
+          "edge_count": 6,
+          "max_source_distance_px": 1.414,
+          "max_target_distance_px": 1.414,
+          "threshold_px": 3.5
+        }
+      },
+      "screenshot_refs": [
+        "canvas-defect-right-area-drag.png"
+      ],
+      "false_green_guards": [
+        "node_must_enter_right_visible_area",
+        "edge_quality_checked_after_drag"
+      ]
+    },
+    {
+      "defect_id": "CANVAS-04",
+      "title": "自由连线可取消且不会假创建",
+      "status": "PASS",
+      "assertions": [
+        "Esc 取消移除 preview",
+        "释放到空白取消",
+        "取消后边数量不变"
+      ],
+      "dom_metrics": {
+        "edge_count_before": 6,
+        "edge_count_after_escape_cancel": 6,
+        "edge_count_after_blank_cancel": 6
+      },
+      "screenshot_refs": [
+        "canvas-defect-connect-cancel.png"
+      ],
+      "false_green_guards": [
+        "preview_must_disappear",
+        "edge_count_must_not_change"
+      ]
+    }
+  ],
+  "runtime_backed": false,
+  "created_at": "2026-06-25T00:00:00Z"
+}

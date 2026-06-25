@@ -1,0 +1,8 @@
+{
+  "schema_version": "v12.system_health.v1",
+  "status": "ok",
+  "bff_backed": true,
+  "runtime_backed": false,
+  "evidence_scope": "browser_e2e",
+  "created_at": "2026-06-23T00:00:00Z"
+}

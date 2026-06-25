@@ -1,0 +1,21 @@
+{
+  "schema_version": "v12.product_entity_projection.v1",
+  "workspace": {
+    "workspace_id": "ws-v12-technical-content-real",
+    "name": "技术内容工作室"
+  },
+  "project": {
+    "project_id": "proj-v12-local-knowledge-real",
+    "workspace_id": "ws-v12-technical-content-real",
+    "name": "本地知识总结项目"
+  },
+  "app": {
+    "app_id": "app-v12-markdown-workflow-real",
+    "project_id": "proj-v12-local-knowledge-real",
+    "name": "Markdown 工作流应用",
+    "app_kind": "workflow_app"
+  },
+  "service_account_ref": "svc-v12-readonly-redacted-ref",
+  "evidence_scope": "browser_e2e",
+  "created_at": "2026-06-23T00:00:00Z"
+}

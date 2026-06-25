@@ -1,0 +1,1947 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HarnessOS V12-0P Light Studio - 设计审查原型</title>
+    <link rel="stylesheet" href="./styles.generated.css" />
+    <style>
+.canvas-dot-grid {
+        background-image: radial-gradient(circle at center, transparent 0%, rgba(244, 248, 255, 0.4) 100%),
+                          radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
+        background-size: 100% 100%, 24px 24px;
+        background-color: #fbfcfe;
+      }
+.spring-touch {
+        transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                    box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                    background-color 0.2s ease,
+                    opacity 0.2s ease,
+                    border-color 0.2s ease;
+      }
+      .spring-touch:hover {
+        transform: translateY(-1.5px) scale(1.02);
+      }
+      .spring-touch:active {
+        transform: translateY(1.5px) scale(0.96) !important;
+        box-shadow: inset 0 2px 4px rgba(15, 23, 42, 0.08) !important;
+      }
+.premium-crystal-card {
+        background: rgba(255, 255, 255, 0.65);
+        backdrop-filter: blur(28px) saturate(170%);
+        border: 1px solid rgba(255, 255, 255, 0.45);
+        box-shadow:
+          0 1px 3px 0 rgba(0, 0, 0, 0.01),
+          0 12px 36px 0 rgba(15, 23, 42, 0.03),
+          inset 0 1px 0 0 rgba(255, 255, 255, 0.95);
+      }
+      .premium-crystal-card-hover {
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .premium-crystal-card-hover:hover {
+        background: rgba(255, 255, 255, 0.8);
+        border-color: rgba(59, 130, 246, 0.35);
+        box-shadow:
+          0 4px 10px 0 rgba(15, 23, 42, 0.01),
+          0 24px 50px 0 rgba(15, 23, 42, 0.07),
+          inset 0 1px 0 0 rgba(255, 255, 255, 1),
+          0 0 25px 0 rgba(59, 130, 246, 0.08);
+        transform: translateY(-2px);
+      }
+.tactile-button-3d {
+        background: linear-gradient(180deg, #ffffff 0%, #fcfdfe 100%);
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        box-shadow:
+          0 1px 2px 0 rgba(0, 0, 0, 0.04),
+          inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+        transition: all 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+      .tactile-button-3d:hover {
+        background: linear-gradient(180deg, #ffffff 0%, #f4f7fb 100%);
+        border-color: rgba(15, 23, 42, 0.12);
+        box-shadow:
+          0 3px 8px 0 rgba(15, 23, 42, 0.04),
+          inset 0 1px 0 0 rgba(255, 255, 255, 1);
+        transform: translateY(-0.8px);
+      }
+      .tactile-button-3d:active {
+        background: #f1f3f7 !important;
+        border-color: rgba(15, 23, 42, 0.16) !important;
+        box-shadow: inset 0 2px 4px 0 rgba(15, 23, 42, 0.08) !important;
+        transform: translateY(1.2px) scale(0.96) !important;
+      }
+.node-selected-glow {
+        border-color: #3b82f6 !important;
+        box-shadow: 0 0 25px rgba(37, 99, 235, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+        animation: selected-pulse 2s infinite ease-in-out !important;
+      }
+      @keyframes selected-pulse {
+        0%, 100% { box-shadow: 0 0 12px rgba(37, 99, 235, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95); }
+        50% { box-shadow: 0 0 25px rgba(37, 99, 235, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.95); }
+      }
+.layout-transition {
+        transition: left 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                    top 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                    box-shadow 0.25s ease,
+                    border-color 0.25s ease,
+                    transform 0.2s ease;
+      }
+.sidebar-transition {
+        transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                    margin 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                    opacity 0.25s ease,
+                    border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+.running-edge {
+        stroke-dasharray: 6, 6;
+        animation: flow-dash 1.2s linear infinite;
+      }
+      @keyframes flow-dash {
+        to {
+          stroke-dashoffset: -20;
+        }
+      }
+::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 999px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+
+      .no-select {
+        user-select: none;
+        -webkit-user-select: none;
+      }
+
+      @keyframes shimmer {
+        100% { transform: translateX(100%); }
+      }
+    </style>
+  </head>
+  <body class="bg-[#fcfdfe] text-slate-800 font-sans antialiased selection:bg-brand-100 overflow-hidden h-screen flex flex-col no-select" data-stage="V12-0P" data-evidence-scope="design_only">
+    <div hidden data-review-state-coverage="api_online api_offline api_rate_limited api_unconfigured run_idle run_in_progress run_blocked run_failed awaiting_confirmation evidence_ready evidence_missing design_only_evidence node_hover node_selected blocked invalid_edge"></div>
+<header class="bg-white/60 backdrop-blur-xl border-b border-slate-100 h-14 flex items-center justify-between px-6 shrink-0 relative z-30 shadow-premium">
+      <div class="flex items-center space-x-5">
+<div class="flex items-center space-x-2.5 group cursor-pointer" onclick="showToast('HarnessOS V12 Light Studio 已就绪进行外部设计审查')">
+          <div class="relative w-8.5 h-8.5 rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-500 flex items-center justify-center p-1.5 shadow-md shadow-brand-500/15 overflow-hidden">
+            <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></span>
+            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 17l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 2v10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <span class="font-black text-sm tracking-tight text-slate-900 block leading-none">HarnessOS</span>
+            <span class="text-[9px] text-brand-600 font-extrabold tracking-wider uppercase">Light Studio</span>
+          </div>
+        </div>
+
+        <div class="h-4 w-px bg-slate-200/50"></div>
+<div class="relative group">
+          <button class="flex items-center space-x-1.5 bg-slate-50/60 hover:bg-slate-100/80 px-3 py-1.5 rounded-xl border border-slate-200/40 text-[11px] text-slate-650 font-semibold transition-all spring-touch">
+            <span>空间: <strong class="text-slate-800 font-bold">Demo_Space</strong></span>
+            <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+          </button>
+
+          <div class="absolute left-0 top-full mt-1.5 bg-white/95 backdrop-blur-md shadow-2xl border border-slate-100 rounded-xl p-3.5 w-56 hidden group-hover:block z-50 text-[11px] space-y-2">
+            <div class="text-slate-400 font-bold uppercase tracking-wider text-[8px] mb-1">环境基本参数</div>
+            <div class="flex justify-between"><span>工作空间:</span><strong class="text-slate-800">Demo_Space</strong></div>
+            <div class="flex justify-between"><span>当前环境:</span><strong class="text-slate-800">沙箱 Sandbox</strong></div>
+            <div class="flex justify-between"><span>核心模型:</span><strong class="text-slate-800">MiniMax-M2.7</strong></div>
+            <div class="flex justify-between"><span>供应商:</span><strong class="text-slate-800">MiniMax (API)</strong></div>
+          </div>
+        </div>
+      </div>
+<div class="flex items-center space-x-4">
+<div class="relative">
+          <button onclick="toggleStateDropdown(event)" id="state-simulation-btn" class="bg-slate-50/60 hover:bg-slate-100/80 text-[11px] text-slate-650 font-bold px-3 py-1.5 rounded-xl border border-slate-200/40 flex items-center space-x-1.5 transition-all spring-touch">
+            <svg class="w-3.5 h-3.5 text-slate-500 animate-[spin_8s_linear_infinite]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /></svg>
+            <span>仿真状态调节</span>
+            <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+          </button>
+<div id="state-simulation-dropdown" class="absolute right-0 top-full mt-2 bg-white/95 backdrop-blur-md shadow-2xl border border-slate-100 rounded-xl py-2.5 w-60 hidden z-50 text-xs animate-[slideIn_0.15s_ease-out]">
+            <div class="px-4 py-1 text-slate-400 font-extrabold border-b border-slate-50 mb-1.5 tracking-wider uppercase text-[8px]">API 状态仿真</div>
+            <button onclick="setSystemState('api', 'online')" class="w-full text-left px-4 py-1.5 hover:bg-slate-50 flex items-center space-x-2.5 font-semibold text-slate-700">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-sm shadow-emerald-500/30"></span> <span>api_online (在线就绪)</span>
+            </button>
+            <button onclick="setSystemState('api', 'offline')" class="w-full text-left px-4 py-1.5 hover:bg-slate-50 flex items-center space-x-2.5 font-semibold text-slate-700">
+              <span class="w-2 h-2 rounded-full bg-rose-500"></span> <span>api_offline (服务离线)</span>
+            </button>
+            <button onclick="setSystemState('api', 'rate_limited')" class="w-full text-left px-4 py-1.5 hover:bg-slate-50 flex items-center space-x-2.5 font-semibold text-slate-700">
+              <span class="w-2 h-2 rounded-full bg-amber-500"></span> <span>api_rate_limited (流控限频)</span>
+            </button>
+            <button onclick="setSystemState('api', 'unconfigured')" class="w-full text-left px-4 py-1.5 hover:bg-slate-50 flex items-center space-x-2.5 font-semibold text-slate-700">
+              <span class="w-2 h-2 rounded-full bg-slate-400"></span> <span>api_unconfigured (未配凭证)</span>
+            </button>
+            <div class="px-4 py-1 text-slate-400 font-extrabold border-b border-slate-50 my-1.5 tracking-wider uppercase text-[8px]">运行状态</div>
+            <button onclick="setSystemState('run', 'idle')" class="w-full text-left px-4 py-1.5 hover:bg-slate-50 flex items-center space-x-2.5 font-semibold text-slate-700">
+              <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> <span>run_idle (闲置就绪)</span>
+            </button>
+            <button onclick="setSystemState('run', 'in_progress')" class="w-full text-left px-4 py-1.5 hover:bg-slate-50 flex items-center space-x-2.5 font-semibold text-slate-700">
+              <span class="w-2 h-2 rounded-full bg-blue-500 animate-ping"></span> <span>run_in_progress (执行仿真)</span>
+            </button>
+            <button onclick="setSystemState('run', 'blocked')" class="w-full text-left px-4 py-1.5 hover:bg-slate-50 flex items-center space-x-2.5 font-semibold text-slate-700">
+              <span class="w-2 h-2 rounded-full bg-amber-500"></span> <span>run_blocked (节点阻断)</span>
+            </button>
+            <button onclick="setSystemState('run', 'failed')" class="w-full text-left px-4 py-1.5 hover:bg-slate-50 flex items-center space-x-2.5 font-semibold text-slate-700">
+              <span class="w-2 h-2 rounded-full bg-red-500"></span> <span>run_failed (引擎挂断)</span>
+            </button>
+          </div>
+        </div>
+<div class="flex items-center space-x-3.5" id="top-status-pills">
+          <span id="pill-api" class="inline-flex items-center px-3 py-1 rounded-xl text-[10.5px] font-bold bg-emerald-50/50 text-emerald-700 border border-emerald-500/20 shadow-sm transition-all">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 shadow-sm shadow-emerald-500/30"></span>
+            <span id="pill-api-text">API 在线</span>
+          </span>
+          <span id="pill-run" class="inline-flex items-center px-3 py-1 rounded-xl text-[10.5px] font-bold bg-blue-50/50 text-brand-600 border border-brand-500/20 shadow-sm transition-all">
+            <span class="w-1.5 h-1.5 rounded-full bg-brand-500 mr-1.5"></span>
+            <span id="pill-run-text">闲置就绪</span>
+          </span>
+          <span class="inline-flex items-center px-3 py-1 rounded-xl text-[10.5px] font-bold bg-amber-50/50 text-amber-700 border border-amber-500/20 shadow-sm">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-500 mr-1.5 animate-pulse"></span>
+            <span>等待确认</span>
+          </span>
+        </div>
+
+        <div class="h-4 w-px bg-slate-200/60"></div>
+<div class="bg-amber-100/50 text-amber-800 border border-amber-200/30 rounded-lg px-2.5 py-1 text-[10px] font-bold flex items-center space-x-1 shadow-sm">
+          <span class="uppercase tracking-wider">Design Only</span>
+        </div>
+      </div>
+    </header>
+<div class="flex flex-1 min-h-0 overflow-hidden relative">
+<nav class="w-14 bg-slate-950/90 backdrop-blur-xl border-r border-white/5 flex flex-col items-center justify-between py-5 shrink-0 z-20 shadow-xl">
+        <div class="flex flex-col space-y-5 w-full items-center" id="l1-rail-container">
+<button onclick="handleL1Route('workbench')" id="l1-btn-workbench" class="w-8.5 h-8.5 rounded-xl bg-brand-600 text-white flex items-center justify-center spring-touch relative group shadow-md shadow-brand-500/10">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1" /><rect x="14" y="3" width="7" height="5" rx="1" /><rect x="14" y="12" width="7" height="9" rx="1" /><rect x="3" y="16" width="7" height="5" rx="1" /></svg>
+            <div class="absolute left-14 bg-slate-900 text-white text-[10px] font-bold px-2 py-1.5 rounded-lg hidden group-hover:block whitespace-nowrap z-50 shadow-md">工作台 (L1)</div>
+            <span class="absolute left-0 top-3 w-1.2 h-2.5 bg-white rounded-r-full" id="l1-indicator"></span>
+          </button>
+<button onclick="handleL1Route('agents')" id="l1-btn-agents" class="w-8.5 h-8.5 rounded-xl hover:bg-slate-900 text-slate-400 hover:text-white flex items-center justify-center spring-touch relative group">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20"/><path d="M2 12a14.5 14.5 0 0 0 20 0"/><path d="M12 2v20"/><path d="M2 12h20"/></svg>
+            <div class="absolute left-14 bg-slate-900 text-white text-[10px] font-bold px-2 py-1.5 rounded-lg hidden group-hover:block whitespace-nowrap z-50 shadow-md">智能体目录</div>
+          </button>
+<button onclick="handleL1Route('workflows')" id="l1-btn-workflows" class="w-8.5 h-8.5 rounded-xl hover:bg-slate-900 text-slate-400 hover:text-white flex items-center justify-center spring-touch relative group">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div class="absolute left-14 bg-slate-900 text-white text-[10px] font-bold px-2 py-1.5 rounded-lg hidden group-hover:block whitespace-nowrap z-50 shadow-md">工作流配置</div>
+          </button>
+<button onclick="handleL1Route('skills')" id="l1-btn-skills" class="w-8.5 h-8.5 rounded-xl hover:bg-slate-900 text-slate-400 hover:text-white flex items-center justify-center spring-touch relative group">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 17l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div class="absolute left-14 bg-slate-900 text-white text-[10px] font-bold px-2 py-1.5 rounded-lg hidden group-hover:block whitespace-nowrap z-50 shadow-md">技能注册表</div>
+          </button>
+<button onclick="handleL1Route('mcp')" id="l1-btn-mcp" class="w-8.5 h-8.5 rounded-xl hover:bg-slate-900 text-slate-400 hover:text-white flex items-center justify-center spring-touch relative group">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><rect x="2" y="3" width="20" height="8" rx="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="2" y="13" width="20" height="8" rx="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 7h.01" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 17h.01" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div class="absolute left-14 bg-slate-900 text-white text-[10px] font-bold px-2 py-1.5 rounded-lg hidden group-hover:block whitespace-nowrap z-50 shadow-md">MCP 服务器</div>
+          </button>
+<button onclick="handleL1Route('evidence')" id="l1-btn-evidence" class="w-8.5 h-8.5 rounded-xl hover:bg-slate-900 text-slate-400 hover:text-white flex items-center justify-center spring-touch relative group">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div class="absolute left-14 bg-slate-900 text-white text-[10px] font-bold px-2 py-1.5 rounded-lg hidden group-hover:block whitespace-nowrap z-50 shadow-md">区块链存证库</div>
+          </button>
+<button onclick="handleL1Route('runs')" id="l1-btn-runs" class="w-8.5 h-8.5 rounded-xl hover:bg-slate-900 text-slate-400 hover:text-white flex items-center justify-center spring-touch relative group">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><circle cx="12" cy="12" r="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 6v6l4 2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div class="absolute left-14 bg-slate-900 text-white text-[10px] font-bold px-2 py-1.5 rounded-lg hidden group-hover:block whitespace-nowrap z-50 shadow-md">历史审计 Runs</div>
+          </button>
+        </div>
+
+        <div class="flex flex-col space-y-4 items-center">
+          <button onclick="handleL1Route('settings')" id="l1-btn-settings" class="w-8.5 h-8.5 rounded-xl hover:bg-slate-900 text-slate-400 hover:text-white flex items-center justify-center spring-touch relative group">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </nav>
+<aside class="w-60 bg-white/40 backdrop-blur-xl border-r border-slate-200/50 flex flex-col shrink-0 z-10 sidebar-transition relative shadow-premium" id="l2-sidebar">
+<div class="p-4 border-b border-slate-100 shrink-0 flex items-center justify-between" id="l2-sidebar-header">
+          <div class="truncate mr-2">
+            <h2 class="font-extrabold text-slate-900 text-xs tracking-wide uppercase flex items-center space-x-1.5">
+              <span id="l2-title-main">工作流平台</span>
+              <span class="text-[9px] bg-slate-50 text-slate-500 font-extrabold px-1.5 py-0.5 rounded border border-slate-150">V12-0P</span>
+            </h2>
+            <p class="text-[10px] text-slate-400 mt-1 truncate" id="l2-title-sub">项目级工作流编排与资源</p>
+          </div>
+<button onclick="toggleLeftSidebar()" class="p-1.5 hover:bg-slate-50 text-slate-400 hover:text-slate-600 rounded-lg transition-all shrink-0 spring-touch" title="收起侧栏">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>
+          </button>
+        </div>
+<div class="flex-1 overflow-y-auto px-3.5 py-4 space-y-6" id="l2-sidebar-body">
+<div>
+            <div class="px-2 text-[9px] font-black text-slate-400 tracking-wider uppercase mb-2.5">核心工作流场景 (L2)</div>
+            <div class="space-y-1" id="workflow-scenarios-panel">
+</div>
+          </div>
+        </div>
+<div class="p-3 bg-slate-50/50 border-t border-slate-100 text-[10px] text-slate-400">
+          <div class="font-extrabold text-slate-500">HarnessOS L2 Routing</div>
+          <div>本层资源动态随 L1 / 场景路由切换</div>
+        </div>
+      </aside>
+<div id="l2-sidebar-trigger" class="absolute left-14 top-1/2 -translate-y-1/2 z-20 hidden">
+        <button onclick="toggleLeftSidebar()" class="w-4 h-16 bg-white border border-l-0 border-slate-200/80 hover:bg-slate-50 text-slate-400 hover:text-slate-600 rounded-r-lg shadow-md flex items-center justify-center transition-all" title="展开侧栏">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+        </button>
+      </div>
+<section class="flex-1 flex flex-col min-w-0 bg-slate-100/30 relative">
+<div class="flex-1 relative overflow-hidden canvas-dot-grid flex flex-col">
+<div class="bg-white/80 backdrop-blur border-b border-slate-100 h-11 flex items-center justify-between px-4 shrink-0 relative z-10 shadow-sm">
+            <div class="flex items-center space-x-3.5">
+              <span class="text-[11px] text-slate-400 font-extrabold block">仿真控制：</span>
+<div class="flex items-center bg-slate-100/80 p-0.5 rounded-xl border border-slate-200/30 shadow-sm">
+<button onclick="startSimulation()" id="btn-sim-play" class="p-1.5 hover:bg-white text-emerald-600 hover:text-emerald-700 rounded-lg transition-all flex items-center justify-center spring-touch" title="启动流式执行仿真">
+                  <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                </button>
+<button onclick="pauseSimulation()" id="btn-sim-pause" class="p-1.5 hover:bg-white text-slate-400 hover:text-slate-600 rounded-lg transition-all flex items-center justify-center hidden spring-touch" title="暂停执行">
+                  <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" /></svg>
+                </button>
+<button onclick="stepSimulation()" id="btn-sim-step" class="p-1.5 hover:bg-white text-brand-500 hover:text-brand-600 rounded-lg transition-all flex items-center justify-center spring-touch" title="步进单个 Station">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 5l7 7-7 7M5 5l7 7-7 7" /></svg>
+                </button>
+<button onclick="resetSimulation()" id="btn-sim-reset" class="p-1.5 hover:bg-white text-rose-500 hover:text-rose-600 rounded-lg transition-all flex items-center justify-center spring-touch" title="重置仿真状态">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 8H17" /></svg>
+                </button>
+              </div>
+<span id="sim-status-badge" class="text-[10px] bg-slate-100 text-slate-500 px-2.5 py-0.5 rounded-lg font-bold border border-slate-200/40 shadow-sm">空闲 (Ready to Play)</span>
+            </div>
+<div class="flex items-center space-x-3.5">
+<div class="flex items-center bg-slate-150/70 p-0.5 rounded-xl border border-slate-200/40 shadow-sm space-x-1">
+<button onclick="zoomOut()" class="p-1 hover:bg-white text-slate-500 hover:text-slate-800 rounded-lg transition-all spring-touch" title="缩小 (快捷键: -)">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg>
+                </button>
+<button onclick="resetZoom()" class="px-2 py-0.5 hover:bg-white text-slate-700 font-extrabold text-[10px] rounded-lg transition-all spring-touch" id="canvas-zoom-indicator" title="重置为 100% (快捷键: 0)">100%</button>
+<button onclick="zoomIn()" class="p-1 hover:bg-white text-slate-500 hover:text-slate-800 rounded-lg transition-all spring-touch" title="放大 (快捷键: + / =)">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg>
+                </button>
+              </div>
+
+              <div class="h-4 w-px bg-slate-200/60"></div>
+
+              <div class="flex items-center space-x-2">
+<button onclick="toggleLeftSidebar()" id="canvas-toggle-left-btn" class="p-1.5 text-slate-400 hover:bg-slate-50 rounded-md transition-all spring-touch" title="切换左侧栏">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M9 3v18" /></svg>
+                </button>
+                <button onclick="toggleRightInspector()" id="canvas-toggle-right-btn" class="p-1.5 text-slate-400 hover:bg-slate-50 rounded-md transition-all spring-touch" title="切换右侧属性面板">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M15 3v18" /></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+<div class="flex-1 relative" id="canvas-workspace" onwheel="handleCanvasWheel(event)">
+<div id="zoom-container" class="absolute inset-0 origin-top-left transition-transform duration-150 ease-out" style="transform: scale(1.0);">
+<svg class="absolute inset-0 w-full h-full pointer-events-none z-0" id="svg-edges-canvas-container">
+                <defs>
+                  <filter id="wire-glow" x="-30%" y="-30%" width="160%" height="160%">
+                    <feGaussianBlur stdDeviation="3" result="blur" />
+                    <feMerge>
+                      <feMergeNode in="blur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                </defs>
+                <g id="svg-connections-group">
+</g>
+              </svg>
+<div onclick="selectNode(1)" id="node-1" class="absolute cursor-grab active:cursor-grabbing select-none premium-crystal-card hover:shadow-premium-hover hover:shadow-glow-blue-subtle w-[145px] z-10 layout-transition shadow-premium spring-touch" style="left: 40px; top: 180px;">
+                <span class="absolute w-3.5 h-3.5 bg-white border-2 border-slate-350 rounded-full -right-[7px] top-[40%] z-20 flex items-center justify-center port-pulse port out" id="port-1-out">
+                  <span class="w-1.5 h-1.5 bg-slate-500 rounded-full" id="node-1-dot"></span>
+                </span>
+                <div class="p-2.5 border-b border-slate-100/40 flex items-center space-x-1.5 bg-slate-50/40 rounded-t-2xl">
+                  <span class="w-4.5 h-4.5 rounded-lg bg-blue-100/60 text-brand-650 font-extrabold text-[10px] flex items-center justify-center">1</span>
+                  <span class="text-xs font-bold text-slate-800 truncate" id="node-1-title">对话输入</span>
+                  <span class="text-[9px] bg-emerald-100/60 text-emerald-800 font-extrabold px-1 rounded-md ml-auto shrink-0" id="node-1-badge">触发</span>
+                </div>
+                <div class="p-3 space-y-1.5 text-[10px] text-slate-500 font-medium">
+                  <div class="flex justify-between"><span>事件:</span><strong class="text-slate-700" id="node-1-meta-1">对话开始</strong></div>
+                  <div class="flex justify-between truncate"><span>输出:</span><span class="bg-slate-100/80 px-1 py-0.2 rounded font-mono text-slate-650" id="node-1-meta-2">topic</span></div>
+                </div>
+              </div>
+<div onclick="selectNode(2)" id="node-2" class="absolute cursor-grab active:cursor-grabbing select-none premium-crystal-card hover:border-brand-300 hover:shadow-premium-hover hover:shadow-glow-blue-subtle w-[145px] z-10 layout-transition shadow-premium spring-touch" style="left: 230px; top: 180px;">
+                <span class="absolute w-3.5 h-3.5 bg-white border-2 border-slate-350 rounded-full -left-[7px] top-[40%] z-20 flex items-center justify-center port in" id="port-2-in">
+                  <span class="w-1.5 h-1.5 bg-slate-400 rounded-full"></span>
+                </span>
+                <span class="absolute w-3.5 h-3.5 bg-white border-2 border-slate-350 rounded-full -right-[7px] top-[40%] z-20 flex items-center justify-center port-pulse port out" id="port-2-out">
+                  <span class="w-1.5 h-1.5 bg-slate-400 rounded-full" id="node-2-dot"></span>
+                </span>
+                <div class="p-2.5 border-b border-slate-100/40 flex items-center space-x-1.5 bg-slate-50/40 rounded-t-2xl">
+                  <span class="w-4.5 h-4.5 rounded-lg bg-blue-100/60 text-brand-655 font-extrabold text-[10px] flex items-center justify-center">2</span>
+                  <span class="text-xs font-bold text-slate-800 truncate" id="node-2-title">规划 Agent</span>
+                  <span class="text-[9px] bg-indigo-100/60 text-indigo-800 font-extrabold px-1.5 py-0.5 rounded-md ml-auto shrink-0" id="node-2-badge">智能</span>
+                </div>
+                <div class="p-3 space-y-1.5 text-[10px] text-slate-500 font-medium">
+                  <div class="flex justify-between"><span>角色:</span><strong class="text-slate-700" id="node-2-meta-1">辩题规划师</strong></div>
+                  <div class="flex justify-between truncate"><span>证据:</span><span class="text-brand-600 underline font-extrabold" id="node-2-meta-2">v12-0p-plan</span></div>
+                </div>
+              </div>
+<div onclick="selectNode(3)" id="node-3" class="absolute cursor-grab active:cursor-grabbing select-none premium-crystal-card hover:border-slate-300 hover:shadow-premium-hover hover:shadow-glow-blue-subtle w-[145px] z-10 layout-transition shadow-premium spring-touch" style="left: 420px; top: 90px;">
+                <span class="absolute w-3.5 h-3.5 bg-white border-2 border-slate-350 rounded-full -left-[7px] top-[40%] z-20 flex items-center justify-center port in" id="port-3-in">
+                  <span class="w-1.5 h-1.5 bg-slate-400 rounded-full"></span>
+                </span>
+                <span class="absolute w-3.5 h-3.5 bg-white border-2 border-slate-350 rounded-full -right-[7px] top-[40%] z-20 flex items-center justify-center port out" id="port-3-out">
+                  <span class="w-1.5 h-1.5 bg-slate-400 rounded-full" id="node-3-dot"></span>
+                </span>
+                <div class="p-2.5 border-b border-slate-100/40 flex items-center space-x-1.5 bg-slate-50/40 rounded-t-2xl">
+                  <span class="w-4.5 h-4.5 rounded-lg bg-blue-100/60 text-brand-655 font-extrabold text-[10px] flex items-center justify-center">3</span>
+                  <span class="text-xs font-bold text-slate-800 truncate" id="node-3-title">讨论 Agent A</span>
+                  <span class="text-[9px] bg-indigo-100/60 text-indigo-800 font-extrabold px-1.5 py-0.5 rounded-md ml-auto shrink-0" id="node-3-badge">智能</span>
+                </div>
+                <div class="p-3 space-y-1.5 text-[10px] text-slate-500 font-medium">
+                  <div class="flex justify-between"><span>立场:</span><strong class="text-slate-700" id="node-3-meta-1">批判主义</strong></div>
+                  <div class="flex justify-between truncate"><span>输出:</span><span class="bg-slate-100/80 px-1 py-0.2 rounded text-slate-600" id="node-3-meta-2">观点A</span></div>
+                </div>
+              </div>
+<div onclick="selectNode(4)" id="node-4" class="absolute cursor-grab active:cursor-grabbing select-none premium-crystal-card hover:border-slate-200 hover:shadow-premium-hover hover:shadow-glow-blue-subtle w-[145px] z-10 layout-transition shadow-premium spring-touch" style="left: 420px; top: 270px;">
+                <span class="absolute w-3.5 h-3.5 bg-white border-2 border-slate-355 rounded-full -left-[7px] top-[40%] z-20 flex items-center justify-center port in" id="port-4-in">
+                  <span class="w-1.5 h-1.5 bg-slate-400 rounded-full"></span>
+                </span>
+                <span class="absolute w-3.5 h-3.5 bg-white border-2 border-slate-355 rounded-full -right-[7px] top-[40%] z-20 flex items-center justify-center port out" id="port-4-out">
+                  <span class="w-1.5 h-1.5 bg-slate-400 rounded-full" id="node-4-dot"></span>
+                </span>
+                <div class="p-2.5 border-b border-slate-100/40 flex items-center space-x-1.5 bg-slate-50/40 rounded-t-2xl">
+                  <span class="w-4.5 h-4.5 rounded-lg bg-blue-100/60 text-brand-655 font-extrabold text-[10px] flex items-center justify-center">4</span>
+                  <span class="text-xs font-bold text-slate-800 truncate" id="node-4-title">讨论 Agent B</span>
+                  <span class="text-[9px] bg-indigo-100/60 text-indigo-800 font-extrabold px-1.5 py-0.5 rounded-md ml-auto shrink-0" id="node-4-badge">智能</span>
+                </div>
+                <div class="p-3 space-y-1.5 text-[10px] text-slate-500 font-medium">
+                  <div class="flex justify-between"><span>立场:</span><strong class="text-slate-700" id="node-4-meta-1">相对主义</strong></div>
+                  <div class="flex justify-between truncate"><span>输出:</span><span class="bg-slate-100/80 px-1 py-0.2 rounded text-slate-600" id="node-4-meta-2">观点B</span></div>
+                </div>
+              </div>
+<div onclick="selectNode(5)" id="node-5" class="absolute cursor-grab active:cursor-grabbing select-none bg-white/80 backdrop-blur-2xl border-2 border-brand-500 rounded-2xl shadow-premium-hover ring-4 ring-brand-100/40 w-[145px] z-20 layout-transition shadow-glow-blue-subtle spring-touch" style="left: 610px; top: 180px;">
+                <span class="absolute w-3.5 h-3.5 bg-white border-2 border-slate-355 rounded-full -left-[7px] top-[40%] z-20 flex items-center justify-center port in" id="port-5-in">
+                  <span class="w-1.5 h-1.5 bg-brand-600 rounded-full"></span>
+                </span>
+                <span class="absolute w-3.5 h-3.5 bg-white border-2 border-slate-355 rounded-full -right-[7px] top-[40%] z-20 flex items-center justify-center port out" id="port-5-out">
+                  <span class="w-1.5 h-1.5 bg-slate-400 rounded-full" id="node-5-dot"></span>
+                </span>
+                <div class="p-2.5 border-b border-brand-100/30 flex items-center space-x-1.5 bg-brand-50/70 rounded-t-2xl">
+                  <span class="w-4.5 h-4.5 rounded-lg bg-blue-100/60 text-brand-655 font-extrabold text-[10px] flex items-center justify-center shadow-sm">5</span>
+                  <span class="text-xs font-bold text-slate-800 truncate" id="node-5-title">总结 Agent</span>
+                  <span class="text-[9px] bg-brand-600 text-white font-extrabold px-1.5 py-0.5 rounded-md ml-auto shrink-0 shadow-sm" id="node-5-badge">就绪</span>
+                </div>
+                <div class="p-3 space-y-1.5 text-[10px] text-slate-500 font-medium">
+                  <div class="flex justify-between"><span>角色:</span><strong class="text-slate-800 font-semibold" id="node-5-meta-1">观点总结者</strong></div>
+                  <div class="flex justify-between truncate"><span>证据:</span><span class="text-brand-600 underline font-extrabold" id="node-5-meta-2">storyboard-ev</span></div>
+                </div>
+              </div>
+<div onclick="selectNode(6)" id="node-6" class="absolute cursor-grab active:cursor-grabbing select-none bg-amber-50/80 backdrop-blur-2xl border border-amber-300 rounded-2xl w-[145px] z-10 layout-transition shadow-premium spring-touch shadow-glow-orange-subtle" style="left: 800px; top: 180px;">
+                <span class="absolute w-3.5 h-3.5 bg-white border-2 border-amber-400 rounded-full -left-[7px] top-[40%] z-20 flex items-center justify-center port in" id="port-6-in">
+                  <span class="w-1.5 h-1.5 bg-amber-500 rounded-full" id="node-6-dot"></span>
+                </span>
+                <div class="p-2.5 border-b border-amber-100/40 flex items-center space-x-1.5 bg-amber-100/20 rounded-t-2xl">
+                  <span class="w-4.5 h-4.5 rounded-lg bg-amber-500 text-white font-extrabold text-[10px] flex items-center justify-center shadow-sm shadow-amber-500/5">6</span>
+                  <span class="text-xs font-bold text-slate-800 truncate" id="node-6-title">质检 Agent</span>
+                  <span class="text-[9px] bg-amber-600 text-white font-extrabold px-1.5 py-0.5 rounded-md ml-auto shrink-0 shadow-sm" id="node-6-badge">待人工</span>
+                </div>
+                <div class="p-3 space-y-1.5 text-[10px] text-slate-650 font-semibold">
+                  <div class="flex justify-between"><span>审查:</span><strong class="text-amber-800 font-bold" id="node-6-meta-1">待核验</strong></div>
+                  <div class="flex justify-between truncate"><span>审计:</span><span class="text-amber-700 underline font-extrabold" id="node-6-meta-2">review-ref</span></div>
+                </div>
+              </div>
+            </div>
+<div class="absolute bottom-4 right-4 bg-white/90 backdrop-blur-md border border-slate-100 rounded-2xl p-3.5 shadow-xl w-36 h-28 flex flex-col justify-between select-none z-10">
+              <div class="text-[8px] font-black text-slate-400 uppercase tracking-wider">MiniMap 拓扑投影</div>
+              <div class="flex-1 mt-1.5 relative border border-slate-150 bg-slate-50/50 rounded-xl overflow-hidden">
+<svg class="w-full h-full" id="minimap-svg"></svg>
+              </div>
+            </div>
+<div class="absolute bottom-4 left-4 bg-slate-950/95 text-slate-200 backdrop-blur-md rounded-xl px-4 py-2.5 text-[10px] font-bold flex items-center space-x-2.5 shadow-2xl z-10 border border-slate-800">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand-400 animate-pulse"></span>
+              <span>实时画布：已自适应 6 / 6 磁吸边</span>
+              <span class="text-slate-600">|</span>
+              <span>活动场景: <strong id="canvas-active-scenario-text" class="text-brand-400 font-extrabold">罗马广场讨论工作流</strong></span>
+            </div>
+
+          </div>
+        </div>
+<div class="h-[260px] bg-white/80 backdrop-blur-2xl border-t border-slate-100 flex shrink-0 z-10 shadow-[0_-8px_30px_rgb(0_0_0/0.02)]">
+<div class="w-[50%] border-r border-slate-150/60 p-5 flex flex-col justify-between overflow-hidden">
+            <div class="flex flex-col flex-1 overflow-hidden">
+              <div class="flex items-center justify-between mb-3.5 shrink-0">
+                <span class="text-xs font-black text-slate-900 tracking-wider uppercase flex items-center space-x-2">
+                  <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+                  <span>Workspace Chat 对话工作台</span>
+                </span>
+                <span class="text-[9px] font-black bg-amber-50 text-amber-700 border border-amber-100/50 px-2 py-0.5 rounded-md shadow-sm">设计隔离期草稿草图</span>
+              </div>
+<div id="chat-messages-box" class="flex-1 overflow-y-auto space-y-3.5 pr-2 py-1 text-xs">
+<div class="premium-crystal-card rounded-2xl p-3.5 shadow-sm border border-white/60">
+                  <span class="font-extrabold text-brand-600 block mb-1">Summary Agent (总结者 ID=5):</span>
+                  <p class="text-slate-600 leading-relaxed font-semibold">我已在后台解析了多轮批判学者与经验学者的长文讨论。目前，批判学派对“纯粹客观实体在没有意识干预下是否存在”提出了强有力的实证驳斥。我已经将这一分歧作为重点成果，收录进 <code class="bg-slate-200/60 px-1 rounded-md text-slate-800">storyboard-evidence.json</code> 中。</p>
+                </div>
+              </div>
+            </div>
+<div class="shrink-0 mt-3.5">
+              <div class="flex flex-wrap gap-1.5 mb-2.5">
+                <button onclick="appendSlashCommand('/stations')" class="text-[10px] text-slate-650 px-2.5 py-1 rounded-lg font-extrabold transition-all spring-touch tactile-button-3d">/stations (工作站)</button>
+                <button onclick="appendSlashCommand('/evidence')" class="text-[10px] text-slate-650 px-2.5 py-1 rounded-lg font-extrabold transition-all spring-touch tactile-button-3d">/evidence (存证链)</button>
+                <button onclick="appendSlashCommand('/diff')" class="text-[10px] text-slate-655 px-2.5 py-1 rounded-lg font-extrabold transition-all spring-touch tactile-button-3d">/diff (审查差异)</button>
+                <button onclick="appendSlashCommand('/help')" class="text-[10px] text-slate-655 px-2.5 py-1 rounded-lg font-extrabold transition-all spring-touch tactile-button-3d">/help (帮助)</button>
+              </div>
+<div class="relative">
+                <textarea id="workspace-chat-textarea" placeholder="在此键入指令、发送反馈 or 点选上方的斜杠提示..." class="w-full h-14 border border-slate-200/80 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/5 rounded-2xl p-3 text-xs text-slate-700 resize-none font-semibold pr-14 outline-none transition-all placeholder-slate-400 bg-white/70" onkeydown="handleChatKeyDown(event)"></textarea>
+                <button onclick="handleSendMessage()" class="absolute right-2.5 bottom-2.5 bg-brand-600 hover:bg-brand-700 text-white p-2 rounded-xl shadow-md shadow-brand-500/10 transition-all spring-touch">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+<div class="w-[50%] p-5 flex flex-col overflow-hidden">
+<div class="flex border-b border-slate-100 text-[11px] font-extrabold text-slate-400 mb-4 pb-0.5 shrink-0 space-x-6 animate-[slideIn_0.2s_ease]">
+              <button onclick="switchBottomTab('timeline')" id="btn-tab-timeline" class="pb-2.5 px-1.5 border-b-2 border-brand-500 text-brand-600 transition-all tracking-wide">时间线进度</button>
+              <button onclick="switchBottomTab('trace')" id="btn-tab-trace" class="pb-2.5 px-1.5 border-b-2 border-transparent hover:text-slate-700 transition-all tracking-wide">Trace 追溯日志</button>
+              <button onclick="switchBottomTab('quality')" id="btn-tab-quality" class="pb-2.5 px-1.5 border-b-2 border-transparent hover:text-slate-700 transition-all tracking-wide">合规质量规则</button>
+              <button onclick="switchBottomTab('evidence')" id="btn-tab-evidence" class="pb-2.5 px-1.5 border-b-2 border-transparent hover:text-slate-700 transition-all tracking-wide">审计存证详情</button>
+            </div>
+<div id="tab-content-timeline" class="flex-1 overflow-y-auto space-y-2.5 text-xs">
+</div>
+<div id="tab-content-trace" class="flex-1 overflow-y-auto space-y-2 text-[10.5px] font-mono bg-slate-950 text-slate-350 p-3 rounded-2xl hidden shadow-inner border border-slate-900">
+              <div class="text-slate-500">[15:38:12] INFO: Initializing L1 product router (Workbench Area)</div>
+              <div class="text-slate-505">[15:38:15] INFO: Station ID=2 Planner connected to pipeline broker.</div>
+              <div class="text-blue-400">[15:38:36] TRACE: Socrates instance generated logic-tree spec draft.</div>
+              <div class="text-blue-400">[15:38:41] TRACE: Protagoras instance verified experience references.</div>
+              <div class="text-emerald-400">[15:39:02] DEBUG: Consensus synthesis success. File 'storyboard-evidence.json' generated.</div>
+              <div class="text-amber-500 animate-pulse">[15:39:05] WARNING: Manual review trigger active on node-6 (QualityGate blocked).</div>
+            </div>
+<div id="tab-content-quality" class="flex-1 overflow-y-auto space-y-2.5 text-xs hidden">
+              <div class="bg-emerald-50/50 border border-emerald-500/10 text-emerald-800 p-3.5 rounded-xl flex items-start space-x-2.5">
+                <svg class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                <div>
+                  <div class="font-bold text-slate-800">辩证立场冲突校验</div>
+                  <div class="text-[10px] text-slate-500 mt-0.5">必须有至少 2 个持相反立场的 Agent 共同签署报告，确保对立主张的绝对可解释性。</div>
+                </div>
+              </div>
+              <div class="bg-amber-50/50 border border-amber-500/10 text-amber-800 p-3.5 rounded-xl flex items-start space-x-2.5">
+                <svg class="w-4 h-4 text-amber-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                <div>
+                  <div class="font-bold text-slate-800">链上凭证审计规则</div>
+                  <div class="text-[10px] text-slate-500 mt-0.5">总结文本内的每项高风险决策结论必须精确锚定 SHA-256 归档凭据，拒绝虚假和幻觉引用。</div>
+                </div>
+              </div>
+            </div>
+<div id="tab-content-evidence" class="flex-1 overflow-y-auto space-y-2 text-xs hidden">
+              <div class="border border-slate-100 rounded-xl p-3.5 bg-slate-50/50">
+                <div class="font-bold text-slate-800 flex items-center justify-between">
+                  <span>凭证单 ID: <strong class="text-brand-600">v12-0p-receipt-8942</strong></span>
+                  <span class="text-[9px] bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded font-black border border-slate-200/60">BLOCKCHAIN SHA256</span>
+                </div>
+                <div class="text-[10px] text-slate-500 mt-2.5 space-y-1">
+                  <div>业务存证类型: <span class="text-slate-700 font-bold">辩证探讨规则规约 Spec</span></div>
+                  <div>归档发起节点: <span class="text-slate-700 font-bold">规划 Agent (ID=2)</span></div>
+                  <div>归档区块链哈希: <code class="bg-slate-200/60 text-slate-600 px-1 rounded font-mono text-[9px]">$f28d844c92da0d421a890b42d7e17c0f$</code></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+<aside class="w-80 bg-white/70 backdrop-blur-2xl border-l border-slate-200/50 p-5 flex flex-col justify-between shrink-0 overflow-y-auto z-10 sidebar-transition relative shadow-premium" id="right-inspector">
+        <div class="space-y-5">
+<div class="flex items-center justify-between pb-3.5 border-b border-slate-100">
+            <div class="flex items-center space-x-2.5 truncate">
+              <span id="inspector-node-num" class="w-7 h-7 rounded-xl bg-brand-600 text-white font-black text-xs flex items-center justify-center transition-all shadow-md shadow-brand-500/10">5</span>
+              <div class="truncate">
+                <h2 id="inspector-node-name" class="font-bold text-slate-900 text-sm truncate">总结 Agent</h2>
+                <div class="text-[9px] text-slate-400 font-bold uppercase tracking-wider">选中节点 · Profile</div>
+              </div>
+            </div>
+<button onclick="toggleRightInspector()" class="p-1.5 hover:bg-slate-50 text-slate-400 hover:text-slate-600 rounded-lg transition-all shrink-0 spring-touch" title="收起详情">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+            </button>
+          </div>
+<div class="space-y-1.5">
+            <label class="block text-[9px] font-black text-slate-400 uppercase tracking-wider">角色定义 (Role)</label>
+            <div id="inspector-role" class="bg-slate-50/50 border border-slate-150 rounded-xl p-2.5 text-xs text-slate-750 font-bold leading-relaxed shadow-sm">
+              总结者 (Consensus Synthesizer)
+            </div>
+          </div>
+<div class="space-y-1.5">
+            <label class="block text-[9px] font-black text-slate-400 uppercase tracking-wider">目标规范 (Goal)</label>
+            <div id="inspector-goal" class="bg-slate-50/50 border border-slate-150 rounded-xl p-2.5 text-xs text-slate-700 font-semibold leading-relaxed shadow-sm">
+              基于多视角辩证对立的推演，合并共识并保留观点分歧，从而向最终用户生成可读度高的行政决策报告。
+            </div>
+          </div>
+<div class="space-y-1.5">
+            <label class="block text-[9px] font-black text-slate-400 uppercase tracking-wider">记忆摘要 (Memory Digest)</label>
+            <div id="inspector-memory" class="bg-slate-50/50 border border-slate-150 rounded-xl p-2.5 text-xs text-slate-600 leading-relaxed font-semibold shadow-sm">
+              整合了 Socrates (ID=3) 的三轮批判性反思与 Protagoras (ID=4) 关于认知多维度、主观意识重要性的两轮辩护，生成分治框架。
+            </div>
+          </div>
+<div class="grid grid-cols-2 gap-3.5">
+            <div class="space-y-1.5">
+              <label class="block text-[8px] font-black text-slate-400 uppercase tracking-wider">挂载工具 (Tools)</label>
+              <div id="inspector-tools" class="bg-slate-50/50 border border-slate-150 rounded-lg p-2.5 text-[10px] text-slate-700 truncate font-bold shadow-sm">
+                markdown.summary, consensus
+              </div>
+            </div>
+            <div class="space-y-1.5">
+              <label class="block text-[8px] font-black text-slate-400 uppercase tracking-wider">就绪技能 (Skills)</label>
+              <div id="inspector-skills" class="bg-slate-50/50 border border-slate-150 rounded-lg p-2.5 text-[10px] text-slate-700 truncate font-bold shadow-sm">
+                insight-extraction, logic
+              </div>
+            </div>
+          </div>
+<div class="space-y-1.5">
+            <label class="block text-[9px] font-black text-slate-400 uppercase tracking-wider">MCP 协议引用</label>
+            <div id="inspector-mcp" class="bg-slate-50/50 border border-slate-150 rounded-xl p-2.5 text-[10px] text-slate-500 font-mono shadow-sm">
+              mcp://consensus-broker-server
+            </div>
+          </div>
+<div class="bg-emerald-50/40 border border-emerald-500/10 rounded-2xl p-3.5 text-xs text-emerald-800 shadow-sm">
+            <div class="font-extrabold flex items-center space-x-1.5 mb-1.5">
+              <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+              <span>质量门槛规范 (已通过)</span>
+            </div>
+            <p id="inspector-quality" class="text-[10px] text-emerald-700 leading-relaxed font-semibold">保留完整的双方分歧，禁止在未达成共识时进行人工替代或指令合并；断言中必须锚定引用 evidence refs。</p>
+          </div>
+<div class="space-y-1.5">
+            <label class="block text-[9px] font-black text-slate-400 uppercase tracking-wider">存证链据关系</label>
+            <div id="inspector-evidence" class="bg-slate-50/50 border border-slate-150 rounded-xl p-2.5 text-xs text-slate-700 font-bold truncate text-brand-600 underline cursor-pointer">
+              storyboard-evidence.json (可溯源)
+            </div>
+          </div>
+        </div>
+<div class="border-t border-slate-100 pt-4">
+          <button onclick="handleShowSandboxModal()" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-extrabold text-xs py-3 px-4 rounded-2xl shadow-md shadow-brand-500/10 transition-all flex items-center justify-center space-x-1.5 spring-touch">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span>提交审计确认规约</span>
+          </button>
+          <div class="text-center text-[9px] text-slate-400 mt-2 font-bold tracking-wide">工作流设计审查原型 · 坚守安全边界</div>
+        </div>
+      </aside>
+<div id="right-inspector-trigger" class="absolute right-0 top-1/2 -translate-y-1/2 z-20 hidden">
+        <button onclick="toggleRightInspector()" class="w-4 h-16 bg-white border border-r-0 border-slate-200/80 hover:bg-slate-50 text-slate-400 hover:text-slate-600 rounded-l-lg shadow-md flex items-center justify-center transition-all" title="展开属性详情">
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>
+        </button>
+      </div>
+
+    </div>
+<div id="custom-toast" class="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 bg-slate-900/95 text-white text-xs font-bold px-4 py-2.5 rounded-full shadow-2xl flex items-center space-x-2 opacity-0 pointer-events-none transition-all duration-300">
+      <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+      <span id="custom-toast-text">消息提示</span>
+    </div>
+<div id="sandbox-modal" class="fixed inset-0 bg-slate-950/40 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-all duration-300">
+      <div class="bg-white rounded-2xl max-w-md w-full p-6 border border-slate-200/85 shadow-2xl mx-4">
+        <div class="flex items-start space-x-3">
+          <div class="w-10 h-10 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center shrink-0">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          </div>
+          <div>
+            <h3 class="font-black text-slate-900 text-sm">提交审计确认 (Design Review Lock)</h3>
+            <p class="text-xs text-slate-500 mt-2 leading-relaxed font-semibold">您正在锁定 V12-0P 轻量级设计原型。由于当前处于 <code class="bg-slate-100 text-slate-700 px-1.5 rounded-md font-mono text-[10px]">design_only</code> 安全隔离期，此操作属于信息架构一致性闭环演示，不支持对底层 Browser Runtime 引擎或 BFF 的实际篡改。</p>
+          </div>
+        </div>
+<div class="mt-4 bg-slate-50 rounded-2xl p-3.5 border border-slate-200/60">
+          <div class="text-[9px] font-black text-slate-400 uppercase tracking-wider">设计层隔离期凭证 SHA-256</div>
+          <div class="text-xs font-mono font-bold text-slate-600 mt-1.5 break-all">
+            sha256:d8a24d86b8c9d0a2f155c88b8e0a12e12f4b50308dcd3737
+          </div>
+        </div>
+<div class="mt-5 flex items-center justify-end space-x-2">
+          <button onclick="handleCloseSandboxModal()" class="px-4 py-2.5 text-xs font-bold text-slate-500 hover:bg-slate-100 rounded-xl transition-all">关闭预览</button>
+          <button onclick="handleConfirmSandbox()" class="px-4 py-2.5 text-xs font-black bg-brand-600 hover:bg-brand-500 text-white rounded-xl shadow-md shadow-brand-500/10 transition-all spring-touch">模拟签署</button>
+        </div>
+      </div>
+    </div>
+<script>
+      let currentScenario = 'roma';
+      let selectedNodeId = 5;
+      let currentL1Route = 'workbench';
+
+      let leftSidebarOpen = true;
+      let rightInspectorOpen = true;
+
+      let zoomScale = 1.0;
+      const minZoom = 0.5;
+      const maxZoom = 2.0;
+      const zoomStep = 0.1;
+
+      let isSimulating = false;
+      let simulationStep = 0; // 0: Idle, 1: Node 1 active, 2: Node 2 active...
+      let simTimer = null;
+      let nodeRunStates = {1:'idle', 2:'idle', 3:'idle', 4:'idle', 5:'idle', 6:'idle'};
+
+      const scenarioLayouts = {
+        roma: {
+          1: { left: 40, top: 180 },
+          2: { left: 230, top: 180 },
+          3: { left: 420, top: 90 },
+          4: { left: 420, top: 270 },
+          5: { left: 610, top: 180 },
+          6: { left: 800, top: 180 }
+        },
+        storyboard: {
+          1: { left: 40, top: 90 },
+          2: { left: 210, top: 180 },
+          3: { left: 380, top: 90 },
+          4: { left: 550, top: 180 },
+          5: { left: 720, top: 90 },
+          6: { left: 800, top: 270 }
+        },
+        codereview: {
+          1: { left: 40, top: 180 },
+          2: { left: 220, top: 180 },
+          3: { left: 410, top: 70 },
+          4: { left: 410, top: 290 },
+          5: { left: 620, top: 180 },
+          6: { left: 810, top: 180 }
+        },
+        docsummary: {
+          1: { left: 40, top: 180 },
+          2: { left: 190, top: 180 },
+          3: { left: 340, top: 180 },
+          4: { left: 490, top: 180 },
+          5: { left: 650, top: 180 },
+          6: { left: 810, top: 180 }
+        }
+      };
+
+      const scenarioData = {
+        roma: {
+          name: '罗马广场讨论工作流',
+          agentsCount: 6, skillsCount: 12, mcpCount: 4, evidenceCount: 18,
+          nodes: {
+            1: { title: '对话输入', type: '触发', m1: '对话开始', m2: 'topic' },
+            2: { title: '规划 Agent', type: '智能', m1: '辩题规划师', m2: 'v12-0p-plan' },
+            3: { title: '讨论 Agent A', type: '智能', m1: '批判主义', m2: '观点A' },
+            4: { title: '讨论 Agent B', type: '智能', m1: '相对主义', m2: '观点B' },
+            5: { title: '总结 Agent', type: '就绪', m1: '观点总结者', m2: 'storyboard-ev' },
+            6: { title: '质检 Agent', type: '待人工', m1: '待核验', m2: 'review-ref' }
+          },
+          inspector: {
+            1: { name: '对话输入', role: '事件监听器', goal: '监听来自工作空间对话框的特定 Prompt 激活。', digest: '识别出针对罗马广场特定辩题 "/discuss 智能体可解释性" 的触发命令。', tools: 'workspace.read, regex.parser', skills: 'intent-analysis', mcp: 'mcp://system-event-bus', quality: '符合事件参数合规，输入不为空。', evidence: 'None' },
+            2: { name: '规划 Agent', role: '辩题规划师', goal: '基于目标辩题，规划辩证探讨的角度。', digest: '分派批判派 (Socrates) 和相对派 (Protagoras) 作为两端推演工作站。', tools: 'planner.optimizer', skills: 'workflow-scheduling', mcp: 'mcp://planner-executor', quality: '生成的 WorkflowDraft 包含完备双向边，证据锚定度 100%。', evidence: 'spec-draft-v12.json' },
+            3: { name: '讨论 Agent A', role: '批判主义代理人 (Socrates)', goal: '代表严格的理性实证立场，对断言提出尖锐否定。', digest: '对相对派提出两轮“关于知识纯客观属性”的交互追问，形成批判节点报告。', tools: 'rational.verifier, socrates.logic', skills: 'dialectic-scrutiny', mcp: 'mcp://critic-broker', quality: '所有否定论点必须至少引用 1 个真实物理证据。', evidence: 'socrates-critique.json' },
+            4: { name: '讨论 Agent B', role: '相对主义代理人 (Protagoras)', goal: '代表经验相对立场，为意识主观体验提供实证和防御。', digest: '强调个体差异与感知限度，作为反思证据链输入给总结中心。', tools: 'phenomenon.indexer', skills: 'subjective-modeling', mcp: 'mcp://experience-broker', quality: '必须保留不可消弭的分歧点，并形成哈希，不合并差异。', evidence: 'protagoras-defense.json' },
+            5: { name: '总结 Agent', role: '观点总结者 (Scribe)', goal: '提炼共识、保留分歧，生成最终工作区对话报告。', digest: '整合了 Socrates (ID=3) 的三轮批判性反思与 Protagoras (ID=4) 关于认知多维度、主观意识重要性的两轮辩护，生成分治框架。', tools: 'markdown.summary, consensus.synthesizer', skills: 'insight-extraction, logic-synthesis', mcp: 'mcp://consensus-broker-server', quality: '保留完整的双方分歧，禁止在未达成共识时进行人工替代或指令合并；断言中必须锚定引用 evidence refs。', evidence: 'storyboard-evidence.json' },
+            6: { name: '质检 Agent', role: '审计守卫 (Auditor)', goal: '校验最终总结文本中所有观点引用的真实性，排除幻觉。', digest: '触发卡口：校验总结结果与原始批判立场，当前因斯多葛派的一个存证单据缺失而处于待确认阻塞状态。', tools: 'compliance.tester, hash.authenticator', skills: 'forensic-auditing', mcp: 'mcp://chain-of-trust', quality: '100% 交叉链上溯源。', evidence: 'review-ref.json' }
+          },
+          timeline: [
+            { time: '15:38:12', msg: '【触发】事件捕获器：/discuss 指令激活', state: '成功' },
+            { time: '15:38:15', msg: '【规划】编排规划师下发 2 组平行探索 Spec 规约', state: '完成' },
+            { time: '15:38:36', msg: '【智能体 A】Socrates 生成批判立场存证 receipt-934a', state: '完成' },
+            { time: '15:38:41', msg: '【智能体 B】Protagoras 提交相对辩词存证 receipt-122c', state: '完成' },
+            { time: '15:39:02', msg: '【总结】观点融合中心正在合成共识与分歧大纲', state: '处理中' }
+          ]
+        },
+        storyboard: {
+          name: '视频分镜创作工作流',
+          agentsCount: 6, skillsCount: 16, mcpCount: 5, evidenceCount: 22,
+          nodes: {
+            1: { title: '剧本输入', type: '触发', m1: '脚本Prompt', m2: 'script' },
+            2: { title: '导演助手', type: '智能', m1: '分镜编排器', m2: 'v12-sb-plan' },
+            3: { title: '艺术总监', type: '智能', m1: '视觉色调', m2: 'color-palette' },
+            4: { title: '摄影指导', type: '智能', m1: '机位景深', m2: 'cam-sequence' },
+            5: { title: '合成 Agent', type: '就绪', m1: '全镜合成者', m2: 'storyboard-json' },
+            6: { title: '版权守卫', type: '待人工', m1: '合规核验', m2: 'ip-audit' }
+          },
+          inspector: {
+            1: { name: '剧本输入', role: '创意创意端', goal: '解析文本小说，生成底层分镜描述单元。', digest: '提取出“赛博都市街角，阴雨”的核心关键词与意境。', tools: 'nlp.parser', skills: 'creative-parsing', mcp: 'mcp://creative-bus', quality: '输入创意分词词汇量满足电影脚本最低标准。', evidence: 'None' },
+            2: { name: '导演助手', role: '分镜规划师', goal: '基于创意风格生成一整套包含动作、场景的分镜工作蓝图。', digest: '生成 12 帧故事板草案骨架，作为下游美工与机位的上下文输入。', tools: 'blueprint.generator', skills: 'directing-assist', mcp: 'mcp://directing-server', quality: '输出格式 100% 合乎 StoryboardSpec 标准。', evidence: 'v12-sb-plan.json' },
+            3: { name: '艺术总监', role: '色彩艺术顾问', goal: '计算并分配画幅色彩基调、冷暖度与光照分布。', digest: '计算得出 #1a2a3a 蓝灰色雨夜基底。', tools: 'palette.generator, diffusion.preview', skills: 'color-grading', mcp: 'mcp://diffusion-service', quality: '色轮分配对比度高于电影美学 1.25 标准。', evidence: 'palette-v12.json' },
+            4: { name: '摄影指导', role: '镜头轨迹推演', goal: '计算三维空间中镜头的平摇、推拉轨迹及焦距景深。', digest: '生成广角转中景的平滑镜头轨迹参数。', tools: 'lens.calculator', skills: 'camera-movement', mcp: 'mcp://unreal-engine-mcp', quality: '运动镜头轨迹与对焦符合真实物理镜头组标准。', evidence: 'lens-sequence.json' },
+            5: { name: '合成 Agent', role: '全镜合并中心', goal: '将色彩、镜头、文本合成最终故事板预览图像及 JSON 交付物。', digest: '成功合成了 12 帧的高精故事板草案及引用参数。', tools: 'canvas.stitcher', skills: 'visual-synthesis', mcp: 'mcp://image-processor', quality: '帧关联完整，未发现大面积丢图或坐标溢出。', evidence: 'storyboard-json.json' },
+            6: { name: '版权守卫', role: '创意合规安全闸', goal: '审查人物外观、背景及元素是否涉嫌剽窃或侵犯注册商标。', digest: '卡口预警：因检测到街角海报酷似某经典电影画面，要求创作者进行手工调整确认。', tools: 'trademark.scanner', skills: 'ip-compliance', mcp: 'mcp://ip-database', quality: '无一例版权红线侵权。', evidence: 'ip-audit.json' }
+          },
+          timeline: [
+            { time: '11:12:01', msg: '【剧本】创意剧本解析及语义解析完毕', state: '成功' },
+            { time: '11:12:05', msg: '【导演助手】下发 12 帧视觉分镜场景 Spec 调度表', state: '完成' },
+            { time: '11:12:20', msg: '【艺术总监】电影级配色表生成：#1c2d3d 暗夜蓝基调', state: '完成' },
+            { time: '11:12:35', msg: '【摄影】平滑相机机位及焦距坐标测算就绪', state: '完成' },
+            { time: '11:12:50', msg: '【合成】12 帧高精分镜合成完毕，等待版权质检', state: '完成' }
+          ]
+        },
+        codereview: {
+          name: '代码审查工作流',
+          agentsCount: 6, skillsCount: 14, mcpCount: 4, evidenceCount: 15,
+          nodes: {
+            1: { title: 'Git Hook', type: '触发', m1: 'Push Event', m2: 'diff' },
+            2: { title: '编排 Planner', type: '智能', m1: 'CI 调度员', m2: 'v12-cr-spec' },
+            3: { title: '代码规范', type: '智能', m1: 'Linter 哨兵', m2: 'lint-report' },
+            4: { title: '安全审计', type: '智能', m1: 'SAST 漏扫', m2: 'sec-vulner' },
+            5: { title: '合并整合', type: '就绪', m1: 'Merge 合并者', m2: 'cr-summary' },
+            6: { title: '安全合规', type: '待人工', m1: '合规卡口', m2: 'auth-review' }
+          },
+          inspector: {
+            1: { name: 'Git Hook', role: '事件监听器', goal: '捕获 Git 代码推送并触发 diff 分解事件。', digest: '检测到 branch `feature-v12-light` 提交 5 个变动，合计 +245 -40 行。', tools: 'github.webhook', skills: 'event-broker', mcp: 'mcp://git-provider', quality: 'Diff 格式正确且无大范围二进制文件。', evidence: 'None' },
+            2: { name: '编排 Planner', role: '审查编排官', goal: '基于项目规范与变更领域，智能分派代码规范与安全审计。', digest: '识别出该变动涉及前端 CSS 与 JS 交互模块，精准分流给规范卫士与 SAST 扫漏工具。', tools: 'eslint.ast-parser', skills: 'clean-code-audit', mcp: 'mcp://ast-broker', quality: '符合 ESLint airbnb 顶级标准。', evidence: 'lint-report.json' },
+            3: { name: '代码规范', role: '代码规范卫士', goal: '采用 AST 静态语法树深度扫描变量冗余与规范错失。', digest: '发现 2 处未使用的 CSS 变量及 1 处未释放的局部事件监听。', tools: 'eslint.ast-parser', skills: 'clean-code-audit', mcp: 'mcp://ast-broker', quality: '符合 ESLint airbnb 顶级标准。', evidence: 'lint-report.json' },
+            4: { name: '安全审计', role: '安全合规官 (SAST)', goal: '深度扫描代码中是否包含硬编码的 API 密钥或 XSS 注入风险。', digest: '扫描完成，未发现硬编码凭据，但发现一处 innerHTML 用法警示。', tools: 'snyk.auditor, semgrep.engine', skills: 'vulnerability-detection', mcp: 'mcp://security-feed', quality: '无 Critical 或 High 风险漏洞。', evidence: 'sec-vulner.json' },
+            5: { name: '合并整合', role: '差异合并报告者', goal: '汇聚代码规范与安全审计报告，精细提炼成差异对比清单 (Diff List)。', digest: '合并成功，输出 3 条改进修复建议，均已附带详细的 lint-ref 和 sec-ref。', tools: 'diff.synthesizer', skills: 'report-consolidation', mcp: 'mcp://merge-service', quality: '总结内容具备事实根据，不含主观臆断。', evidence: 'cr-summary.json' },
+            6: { name: '安全合规', role: '安全门槛决策者', goal: '核对高敏感模块改动是否符合发布规范。', digest: '卡口警示：检测到修改了外部 CDN 路径，因安全合规规范，触发人工介入，等待团队审查批准。', tools: 'compliance.gatekeeper', skills: 'policy-enforcement', mcp: 'mcp://corporate-policies', quality: '符合安全合规准入。', evidence: 'auth-review.json' }
+          },
+          timeline: [
+            { time: '09:30:10', msg: '【捕获】Git PR Webhook diff 解析完成 (+245行)', state: '成功' },
+            { time: '09:30:12', msg: '【规划】CI 调度中心完成 AST 与 SAST 双重并轨拓扑', state: '完成' },
+            { time: '09:30:25', msg: '【静态分析】ESLint-Shield 发现 2 处语法规则警告', state: '完成' },
+            { time: '09:30:31', msg: '【SAST漏洞】SemGrep 审计结束：发现一处逻辑隔离问题', state: '完成' },
+            { time: '09:30:45', msg: '【合并】差异报告生成成功，等待人工合规授权', state: '完成' }
+          ]
+        },
+        docsummary: {
+          name: '文档总结工作流',
+          agentsCount: 6, skillsCount: 11, mcpCount: 3, evidenceCount: 12,
+          nodes: {
+            1: { title: '文档上传', type: '触发', m1: 'PDF Stream', m2: 'raw-pdf' },
+            2: { title: '结构解析', type: '智能', m1: 'Doc Parser', m2: 'v12-doc-spec' },
+            3: { title: '事实抽取', type: '智能', m1: '信息捕获', m2: 'fact-bank' },
+            4: { title: '反思查漏', type: '智能', m1: '事实核验', m2: 'hallu-check' },
+            5: { title: '精简撰写', type: '就绪', m1: '资深编辑', m2: 'executive-summary' },
+            6: { title: '信源追溯', type: '就绪', m1: '合规追源', m2: 'evidence-ref' }
+          },
+          inspector: {
+            1: { name: '文档上传', role: '文件接口端', goal: '加载 PDF 字符并转换为带页面标定的文本树。', digest: '成功载入 “关于 HarnessOS V12 浏览器及 BFF 实现的审查报告”，共 14 页。', tools: 'pdf.ocr-loader', skills: 'document-ingestion', mcp: 'mcp://filesystem-mcp', quality: '文档包含 OCR 字符图层，且无损坏。', evidence: 'None' },
+            2: { name: '结构解析', role: '结构化切片师', goal: '基于文档层级，切分节、目、页，作为后续长文本总结段落。', digest: '提取出 4 个核心章节与 18 个细分子目段落，标记证据引用坐标。', tools: 'doc-parser.tree', skills: 'layout-analysis', mcp: 'mcp://layout-server', quality: '格式标准度 100%。', evidence: 'v12-doc-spec.json' },
+            3: { name: '事实抽取', role: '事实信息抽取器', goal: '抽取文档中所有明确阐述的事实、哈希、模型供应商。', digest: '抽取 24 处关键断言（如 Gemini-3-pro 与 Nano-banana 适配事实）。', tools: 'fact.extractor', skills: 'entity-extraction', mcp: 'mcp://fact-store', quality: '提取结果必须带有精确 of 页码锚定。', evidence: 'fact-bank.json' },
+            4: { name: '反思查漏', role: '事实核验警卫 (Hallucination Checker)', goal: '深度核验抽取的事实中是否包含由于切片导致的上下文误解。', digest: '交叉比对：核实了关于“本包不能作为 browser 证据”的结论，确定无由于拼接造成的断章取义。', tools: 'cross.verifier', skills: 'logic-checking', mcp: 'mcp://verification-agent', quality: '排除幻觉率达 100%。', evidence: 'hallu-check.json' },
+            5: { name: '精简撰写', role: '资深文案编辑', goal: '将事实性抽取合并为针对 AI Studio 负责人的高信息 density executive summary。', digest: '报告编写完成。格式精美，高度提炼，突出边界警示。', tools: 'editor.writer', skills: 'executive-synthesis', mcp: 'mcp://scribe-broker', quality: '摘要文字不夹杂任何未存证的自创断言。', evidence: 'executive-summary.json' },
+            6: { name: '信源追溯', role: '信源守卫官 (Compliance Checker)', goal: '提供百分百交叉溯源。', digest: '已全量锚定事实依据。所有生成的段落 and 要点，均可在此处与上传 PDF 进行双向追踪跳转。', tools: 'audit.tracker', skills: 'source-tracing', mcp: 'mcp://compliance-blockchain', quality: '追溯关联率 100%。', evidence: 'evidence-ref.json' }
+          },
+          timeline: [
+            { time: '14:20:02', msg: '【读取】14页 PDF 高阶规范文档输入就绪', state: '成功' },
+            { time: '14:20:05', msg: '【切片】结构切片师完成 18 个段落的位置标记', state: '完成' },
+            { time: '14:20:21', msg: '【提取】事实性特征信息(24处)提取完毕', state: '完成' },
+            { time: '14:20:30', msg: '【核验】防幻觉纠偏机制比对通过，无歧义事实', state: '完成' },
+            { time: '14:20:44', msg: '【精简编辑】摘要及信源存证单据链输出完毕', state: '完成' }
+          ]
+        }
+      };
+
+      const l1SidebarContent = {
+        workbench: {
+          mainTitle: "工作流平台",
+          subTitle: "项目级工作流编排与上下文资源",
+          bodyHTML: `
+            <div class="space-y-5">
+              <div>
+                <div class="px-2 text-[9px] font-black text-slate-400 tracking-wider uppercase mb-2.5">核心工作流场景 (L2)</div>
+                <div class="space-y-1" id="workflow-scenarios-panel">
+                  <button onclick="switchWorkflowScenario('roma')" id="btn-scenario-roma" class="w-full flex items-center justify-between px-2.5 py-2.5 rounded-xl text-left text-xs font-bold transition-all text-slate-655 hover:bg-slate-50 border border-transparent spring-touch shadow-tactile-btn active:shadow-tactile-3d-active">
+                    <div class="flex items-center space-x-2 truncate">
+                      <svg class="w-4 h-4 text-slate-450" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" /></svg>
+                      <span class="truncate">罗马广场讨论工作流</span>
+                    </div>
+                    <span class="bg-slate-100 text-slate-600 text-[10px] font-black px-1.5 py-0.5 rounded-full">6 站</span>
+                  </button>
+                  <button onclick="switchWorkflowScenario('storyboard')" id="btn-scenario-storyboard" class="w-full flex items-center justify-between px-2.5 py-2.5 rounded-xl text-left text-xs font-bold transition-all text-slate-655 hover:bg-slate-50 border border-transparent spring-touch shadow-tactile-btn active:shadow-tactile-3d-active">
+                    <div class="flex items-center space-x-2 truncate">
+                      <svg class="w-4 h-4 text-slate-455" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 00-2 2z" /></svg>
+                      <span class="truncate">视频分镜创作工作流</span>
+                    </div>
+                    <span class="bg-slate-100 text-slate-605 text-[10px] font-black px-1.5 py-0.5 rounded-full">6 站</span>
+                  </button>
+                  <button onclick="switchWorkflowScenario('codereview')" id="btn-scenario-codereview" class="w-full flex items-center justify-between px-2.5 py-2.5 rounded-xl text-left text-xs font-bold transition-all text-slate-655 hover:bg-slate-50 border border-transparent spring-touch shadow-tactile-btn active:shadow-tactile-3d-active">
+                    <div class="flex items-center space-x-2 truncate">
+                      <svg class="w-4 h-4 text-slate-455" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+                      <span class="truncate">代码审查工作流</span>
+                    </div>
+                    <span class="bg-slate-100 text-slate-600 text-[10px] font-black px-1.5 py-0.5 rounded-full">6 站</span>
+                  </button>
+                  <button onclick="switchWorkflowScenario('docsummary')" id="btn-scenario-docsummary" class="w-full flex items-center justify-between px-2.5 py-2.5 rounded-xl text-left text-xs font-bold transition-all text-slate-655 hover:bg-slate-50 border border-transparent spring-touch shadow-tactile-btn active:shadow-tactile-3d-active">
+                    <div class="flex items-center space-x-2 truncate">
+                      <svg class="w-4 h-4 text-slate-455" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                      <span class="truncate">文档总结工作流</span>
+                    </div>
+                    <span class="bg-slate-100 text-slate-505 text-[10px] font-black px-1.5 py-0.5 rounded-full">6 站</span>
+                  </button>
+                </div>
+              </div>
+<div>
+                <div class="px-2 text-[9px] font-black text-slate-400 tracking-wider uppercase mb-2">上下文审计计数</div>
+                <div class="space-y-1">
+                  <div class="flex items-center justify-between px-2 py-2 rounded-xl hover:bg-slate-50 text-xs text-slate-600 cursor-pointer transition-all">
+                    <div class="flex items-center space-x-2.5">
+                      <span class="w-1.5 h-1.5 rounded-full bg-brand-500 shadow-sm shadow-brand-500/20"></span>
+                      <span class="font-medium">关联智能体</span>
+                    </div>
+                    <span class="text-slate-400 font-extrabold text-[11px]" id="sidebar-count-agents">6</span>
+                  </div>
+                  <div class="flex items-center justify-between px-2 py-2 rounded-xl hover:bg-slate-50 text-xs text-slate-600 cursor-pointer transition-all">
+                    <div class="flex items-center space-x-2.5">
+                      <span class="w-1.5 h-1.5 rounded-full bg-indigo-500 shadow-sm shadow-indigo-500/20"></span>
+                      <span class="font-medium">就绪技能库</span>
+                    </div>
+                    <span class="text-slate-400 font-extrabold text-[11px]" id="sidebar-count-skills">12</span>
+                  </div>
+                  <div class="flex items-center justify-between px-2 py-2 rounded-xl hover:bg-slate-50 text-xs text-slate-600 cursor-pointer transition-all">
+                    <div class="flex items-center space-x-2.5">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-sm shadow-emerald-500/20"></span>
+                      <span class="font-medium">MCP 服务器</span>
+                    </div>
+                    <span class="text-slate-400 font-extrabold text-[11px]" id="sidebar-count-mcp">4</span>
+                  </div>
+                  <div class="flex items-center justify-between px-2 py-2 rounded-xl hover:bg-slate-50 text-xs text-slate-600 cursor-pointer transition-all">
+                    <div class="flex items-center space-x-2.5">
+                      <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                      <span class="font-medium">存证单据链</span>
+                    </div>
+                    <span class="text-slate-400 font-extrabold text-[11px]" id="sidebar-count-evidence">18</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `
+        },
+        agents: {
+          mainTitle: "智能体目录",
+          subTitle: "当前项目活跃 Agent / Station 目录表",
+          bodyHTML: `
+            <div class="space-y-3">
+              <div class="px-2 text-[9px] font-black text-slate-400 tracking-wider uppercase mb-1">活跃智能体 (5)</div>
+              <div class="space-y-1.5">
+                <div class="p-3 border border-slate-100 rounded-2xl bg-[#f8faff]/50">
+                  <div class="flex items-center justify-between font-bold text-xs text-slate-800">
+                    <span>Socrates (批判派)</span> <span class="text-[9px] bg-emerald-50 text-emerald-800 px-1.5 py-0.2 rounded-md font-bold">运行中</span>
+                  </div>
+                  <div class="text-[10px] text-slate-400 mt-1.5 leading-relaxed">负责对立立场反思，防堵事实认知偏误。</div>
+                </div>
+                <div class="p-3 border border-slate-100 rounded-2xl bg-[#f8faff]/50">
+                  <div class="flex items-center justify-between font-bold text-xs text-slate-800">
+                    <span>Protagoras (经验派)</span> <span class="text-[9px] bg-emerald-50 text-emerald-800 px-1.5 py-0.2 rounded-md font-bold">运行中</span>
+                  </div>
+                  <div class="text-[10px] text-slate-400 mt-1.5 leading-relaxed">代表主观经验验证，构建多维度认知。</div>
+                </div>
+                <div class="p-3 border border-slate-100 rounded-2xl bg-[#f8faff]/50">
+                  <div class="flex items-center justify-between font-bold text-xs text-slate-800">
+                    <span>Scribe (观点总结)</span> <span class="text-[9px] bg-blue-50 text-brand-650 px-1.5 py-0.2 rounded-md font-bold">就绪</span>
+                  </div>
+                  <div class="text-[10px] text-slate-400 mt-1.5 leading-relaxed">中立共识归纳器，归并多维结论。</div>
+                </div>
+              </div>
+            </div>
+          `
+        },
+        workflows: {
+          mainTitle: "工作流配置",
+          subTitle: "系统级 WorkflowSpec 拓扑定义与草稿配置",
+          bodyHTML: `
+            <div class="space-y-3">
+              <div class="px-2 text-[9px] font-black text-slate-400 tracking-wider uppercase mb-1">拓扑规约 (Spec)</div>
+              <div class="p-3.5 border border-slate-100 bg-[#f8faff]/60 rounded-2xl text-xs space-y-2.5">
+                <div>当前草稿: <strong class="text-slate-800">V12-0P-Draft</strong></div>
+                <div>存证模式: <span class="bg-indigo-50 text-indigo-700 px-1.5 py-0.2 rounded font-bold">哈希强校签</span></div>
+                <div class="h-px bg-slate-200 my-1"></div>
+                <div class="text-[10px] text-slate-505">此配置直接决定 Station 间连线的磁吸合规性。高危决策强刷区块链审计单。</div>
+              </div>
+            </div>
+          `
+        },
+        skills: {
+          mainTitle: "技能注册表",
+          subTitle: "挂载于工作站的提示词微模型与动作策略",
+          bodyHTML: `
+            <div class="space-y-3">
+              <div class="px-2 text-[9px] font-black text-slate-400 tracking-wider uppercase mb-1">已注册技能</div>
+              <div class="space-y-2 text-xs">
+                <div class="p-2.5 border border-slate-100 rounded-xl bg-slate-50/50 font-bold text-slate-700">dialectic-scrutiny (辩证辩驳)</div>
+                <div class="p-2.5 border border-slate-100 rounded-xl bg-slate-50/50 font-bold text-slate-700">insight-extraction (特征抽提)</div>
+                <div class="p-2.5 border border-slate-100 rounded-xl bg-slate-50/50 font-bold text-slate-700">clean-code-audit (整洁代码审)</div>
+              </div>
+            </div>
+          `
+        },
+        mcp: {
+          mainTitle: "MCP 目录",
+          subTitle: "外部工具、数据库和上下文服务器挂载",
+          bodyHTML: `
+            <div class="space-y-3">
+              <div class="px-2 text-[9px] font-black text-slate-400 tracking-wider uppercase mb-1">已连接服务器</div>
+              <div class="space-y-1.5 text-xs">
+                <div class="p-3 border border-slate-100 rounded-xl bg-[#f8faff]/50 flex items-center justify-between shadow-sm">
+                  <div>
+                    <span class="font-extrabold block text-slate-800">consensus-broker</span>
+                    <span class="text-[10px] text-slate-455">工具挂载数: 4</span>
+                  </div>
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-sm shadow-emerald-500/20"></span>
+                </div>
+                <div class="p-3 border border-slate-150 rounded-xl bg-[#f8faff]/50 flex items-center justify-between shadow-sm">
+                  <div>
+                    <span class="font-extrabold block text-slate-800">unreal-engine-mcp</span>
+                    <span class="text-[10px] text-slate-455">工具挂载数: 12</span>
+                  </div>
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                </div>
+              </div>
+            </div>
+          `
+        },
+        evidence: {
+          mainTitle: "区块链存证",
+          subTitle: "双向可信交叉信源链审计中心",
+          bodyHTML: `
+            <div class="space-y-3">
+              <div class="px-2 text-[9px] font-black text-slate-400 tracking-wider uppercase mb-1">SHA256 存证链 (最新3条)</div>
+              <div class="space-y-2 text-xs font-mono">
+                <div class="p-2.5 border border-slate-100 rounded-xl bg-slate-50/50">
+                  <span class="text-brand-650 font-bold block mb-1 text-[10px]">[V12-0P-PLAN]</span>
+                  <span class="text-[10px] text-slate-400 break-all">hash: f28d844c...a8910b</span>
+                </div>
+                <div class="p-2.5 border border-slate-100 rounded-xl bg-slate-50/50">
+                  <span class="text-brand-650 font-bold block mb-1 text-[10px]">[SOCRATES-CRITIQUE]</span>
+                  <span class="text-[10px] text-slate-400 break-all">hash: ab919bc01...8cdae7</span>
+                </div>
+              </div>
+            </div>
+          `
+        },
+        runs: {
+          mainTitle: "审计 Run 实例",
+          subTitle: "实时日志抓取、调试与阻断拦截详情",
+          bodyHTML: `
+            <div class="space-y-3">
+              <div class="px-2 text-[9px] font-black text-slate-400 tracking-wider uppercase mb-1">近期 Run 实例</div>
+              <div class="p-3 border border-slate-150 rounded-xl bg-slate-50/40 text-xs shadow-sm">
+                <div class="flex items-center justify-between font-bold">
+                  <span>Instance ID: #3942</span>
+                  <span class="text-[9px] bg-amber-50 text-amber-700 border border-amber-100/50 px-1.5 py-0.5 rounded font-bold">卡点挂起</span>
+                </div>
+                <div class="text-[10px] text-slate-455 mt-1.5 font-medium">耗时: 38s | 规则拦截率: 100%</div>
+              </div>
+            </div>
+          `
+        },
+        settings: {
+          mainTitle: "审计规约设置",
+          subTitle: "工作流隔离期安全合规决策参数设置",
+          bodyHTML: `
+            <div class="space-y-3">
+              <div class="px-2 text-[9px] font-black text-slate-400 tracking-wider uppercase mb-1">安全卡口策略</div>
+              <div class="p-3 border border-slate-150 bg-slate-50/50 rounded-xl text-xs font-bold text-slate-600 space-y-1.5">
+                <div class="flex justify-between"><span>双角色交叉确认:</span><span class="text-emerald-600 font-black">开启</span></div>
+                <div class="flex justify-between"><span>设计隔离水印 (Design_Only):</span><span class="text-brand-600 font-black">强保护</span></div>
+              </div>
+            </div>
+          `
+        }
+      };
+
+      function handleL1Route(routeId) {
+        currentL1Route = routeId;
+
+        const railButtons = {
+          workbench: '<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1" /><rect x="14" y="3" width="7" height="5" rx="1" /><rect x="14" y="12" width="7" height="9" rx="1" /><rect x="3" y="16" width="7" height="5" rx="1" /></svg>',
+          agents: '<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20"/><path d="M2 12a14.5 14.5 0 0 0 20 0"/><path d="M12 2v20"/><path d="M2 12h20"/></svg>',
+          workflows: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+          skills: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 17l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+          mcp: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><rect x="2" y="3" width="20" height="8" rx="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="2" y="13" width="20" height="8" rx="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 7h.01" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 17h.01" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+          evidence: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+          runs: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><circle cx="12" cy="12" r="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 6v6l4 2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+          settings: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><circle cx="12" cy="12" r="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l-.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+        };
+
+        Object.keys(railButtons).forEach(btnId => {
+          const btn = document.getElementById(`l1-btn-${btnId}`);
+          if (!btn) return;
+          const tooltip = btn.querySelector('.group-hover\\:block'); // 保留 tooltip
+          if (btnId === routeId) {
+            btn.className = "w-8.5 h-8.5 rounded-xl bg-brand-600 text-white flex items-center justify-center transition-all relative group shadow-md shadow-brand-500/10 spring-touch";
+            btn.innerHTML = railButtons[btnId] + (tooltip ? tooltip.outerHTML : '');
+          } else {
+            btn.className = "w-8.5 h-8.5 rounded-xl hover:bg-slate-900 text-slate-400 hover:text-white flex items-center justify-center transition-all relative group spring-touch";
+            btn.innerHTML = railButtons[btnId] + (tooltip ? tooltip.outerHTML : '');
+          }
+        });
+
+        const indicator = document.getElementById('l1-indicator');
+        const activeBtn = document.getElementById(`l1-btn-${routeId}`);
+        if (indicator && activeBtn) {
+          activeBtn.appendChild(indicator);
+        }
+
+        if (!leftSidebarOpen) {
+          toggleLeftSidebar();
+        }
+
+        const config = l1SidebarContent[routeId];
+        if (config) {
+          const headerEl = document.getElementById('l2-sidebar-header');
+          if (headerEl) {
+            headerEl.innerHTML = `
+              <div class="truncate mr-2">
+                <h2 class="font-extrabold text-slate-900 text-xs tracking-wide uppercase flex items-center space-x-1.5">
+                  <span>${config.mainTitle}</span>
+                  <span class="text-[9px] bg-slate-50 text-slate-500 font-extrabold px-1.5 py-0.5 rounded border border-slate-200/60">V12-0P</span>
+                </h2>
+                <p class="text-[10px] text-slate-400 mt-1 truncate font-medium">${config.subTitle}</p>
+              </div>
+              <button onclick="toggleLeftSidebar()" class="p-1.5 hover:bg-slate-100 text-slate-400 hover:text-slate-600 rounded-lg transition-all shrink-0 spring-touch" title="收起侧栏">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>
+              </button>
+            `;
+          }
+          const bodyEl = document.getElementById('l2-sidebar-body');
+          if (bodyEl) {
+            bodyEl.innerHTML = config.bodyHTML;
+          }
+
+          if (routeId === 'workbench') {
+            switchWorkflowScenario(currentScenario);
+          } else {
+            showToast(`已通过导航路由关系，切换至一级 L1 业务域: ${config.mainTitle}`);
+          }
+        }
+      }
+
+      function switchWorkflowScenario(id) {
+        currentScenario = id;
+        const data = scenarioData[id];
+        if (!data) return;
+
+        if (currentL1Route === 'workbench') {
+          const scenarios = ['roma', 'storyboard', 'codereview', 'docsummary'];
+          scenarios.forEach(sc => {
+            const btn = document.getElementById(`btn-scenario-${sc}`);
+            if (!btn) return; // 修复: 防止 workbench 尚未初载或 DOM 不匹配时产生 null 报错
+            if (sc === id) {
+              btn.className = "w-full flex items-center justify-between px-2.5 py-2.5 rounded-xl text-left text-xs font-bold transition-all text-brand-600 bg-brand-50 border border-brand-100/50 shadow-sm shadow-brand-500/5 spring-touch";
+              let iconSvgActive = `<svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" /></svg>`;
+              if (sc === 'storyboard') iconSvgActive = `<svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 00-2 2z" /></svg>`;
+              if (sc === 'codereview') iconSvgActive = `<svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>`;
+              if (sc === 'docsummary') iconSvgActive = `<svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>`;
+
+              btn.innerHTML = `<div class="flex items-center space-x-2 truncate">
+                ${iconSvgActive}
+                <span class="truncate">${data.name}</span>
+              </div>
+              <span class="bg-brand-100 text-brand-700 text-[10px] font-black px-1.5 py-0.5 rounded-full">6 站</span>`;
+            } else {
+              btn.className = "w-full flex items-center justify-between px-2.5 py-2.5 rounded-xl text-left text-xs font-bold transition-all text-slate-500 hover:bg-slate-50 border border-transparent spring-touch";
+              let iconSvg = `<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 00-2 2z" /></svg>`;
+              if (sc === 'storyboard') iconSvg = `<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 00-2 2z" /></svg>`;
+              if (sc === 'codereview') iconSvg = `<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>`;
+              if (sc === 'docsummary') iconSvg = `<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>`;
+              btn.innerHTML = `<div class="flex items-center space-x-2 truncate">
+                ${iconSvg}
+                <span class="truncate font-semibold text-slate-600">${scenarioData[sc].name}</span>
+              </div>
+              <span class="bg-slate-100 text-slate-505 text-[10px] font-black px-1.5 py-0.5 rounded-full">6 站</span>`;
+            }
+          });
+        }
+
+        const elAgents = document.getElementById('sidebar-count-agents');
+        if (elAgents) elAgents.innerText = data.agentsCount;
+        const elSkills = document.getElementById('sidebar-count-skills');
+        if (elSkills) elSkills.innerText = data.skillsCount;
+        const elMcp = document.getElementById('sidebar-count-mcp');
+        if (elMcp) elMcp.innerText = data.mcpCount;
+        const elEvidence = document.getElementById('sidebar-count-evidence');
+        if (elEvidence) elEvidence.innerText = data.evidenceCount;
+
+        const layout = scenarioLayouts[id];
+        if (layout) {
+          for (let i = 1; i <= 6; i++) {
+            const node = document.getElementById(`node-${i}`);
+            if (node && layout[i]) {
+              node.classList.add('layout-transition');
+              node.style.left = layout[i].left + "px";
+              node.style.top = layout[i].top + "px";
+            }
+
+            const nodeMeta = data.nodes[i];
+            if (nodeMeta) {
+              const elTitle = document.getElementById(`node-${i}-title`);
+              if (elTitle) elTitle.innerText = nodeMeta.title;
+              const elMeta1 = document.getElementById(`node-${i}-meta-1`);
+              if (elMeta1) elMeta1.innerText = nodeMeta.m1;
+              const elMeta2 = document.getElementById(`node-${i}-meta-2`);
+              if (elMeta2) elMeta2.innerText = nodeMeta.m2;
+            }
+
+            if (!isSimulating) {
+              setNodeVisualState(i, 'idle');
+            }
+          }
+        }
+
+        triggerSmoothRedraw(400);
+
+        const timelineContainer = document.getElementById('tab-content-timeline');
+        if (timelineContainer) {
+          timelineContainer.innerHTML = '';
+          data.timeline.forEach((step, idx) => {
+            const isProcessing = step.state === '处理中';
+            const dotColorClass = isProcessing ? 'bg-blue-500 animate-pulse' : 'bg-emerald-500';
+            const textColorClass = isProcessing ? 'text-blue-600 font-extrabold' : 'text-slate-600 font-bold';
+            const stateColorClass = isProcessing ? 'text-blue-600 font-black animate-pulse' : 'text-emerald-600 font-extrabold';
+
+            timelineContainer.innerHTML += `
+              <div class="flex items-center space-x-2 text-slate-500 font-semibold transition-all">
+                <span class="w-14 text-slate-400 font-mono">${step.time}</span>
+                <span class="w-1.5 h-1.5 rounded-full ${dotColorClass}"></span>
+                <span class="flex-1 ${textColorClass}">${step.msg}</span>
+                <span class="text-[11px] ${stateColorClass}">${step.state}</span>
+              </div>
+            `;
+          });
+        }
+
+        const elActiveScenario = document.getElementById('canvas-active-scenario-text');
+        if (elActiveScenario) elActiveScenario.innerText = data.name;
+
+        if (isSimulating) {
+          resetSimulation();
+        } else {
+          renderMiniMap();
+        }
+        selectNode(5);
+        showToast(`场景转换，拓扑配置已优雅重组: ${data.name}`);
+      }
+
+      function updateConnections() {
+        const workspace = document.getElementById('canvas-workspace');
+        const svgGroup = document.getElementById('svg-connections-group');
+        if (!workspace || !svgGroup) return;
+
+        svgGroup.innerHTML = ''; // 清空后计算重绘
+
+        const workflowEdges = [[1, 2], [2, 3], [2, 4], [3, 5], [4, 5], [5, 6]];
+
+        workflowEdges.forEach(([fromId, toId]) => {
+          const fromNode = document.getElementById(`node-${fromId}`);
+          const toNode = document.getElementById(`node-${toId}`);
+          if (!fromNode || !toNode) return;
+
+          const fromX = fromNode.offsetLeft + 145; // 卡片右边缘
+          const fromY = fromNode.offsetTop + 45;   // 磁吸出端口垂直中心
+          const toX = toNode.offsetLeft;          // 卡片左边缘
+          const toY = toNode.offsetTop + 45;       // 磁吸入端口垂直中心
+
+          const dx = Math.abs(toX - fromX);
+          const controlOffset = dx * 0.55;
+          const cp1X = fromX + controlOffset;
+          const cp1Y = fromY;
+          const cp2X = toX - controlOffset;
+          const cp2Y = toY;
+
+          const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+          path.setAttribute("d", `M ${fromX} ${fromY} C ${cp1X} ${cp1Y}, ${cp2X} ${cp2Y}, ${toX} ${toY}`);
+
+          const fromState = nodeRunStates[fromId];
+          const toState = nodeRunStates[toId];
+
+          if (isSimulating && fromState === 'completed' && (toState === 'active' || toState === 'completed')) {
+            path.setAttribute("stroke", "#2563eb");
+            path.setAttribute("stroke-width", "3.2");
+            path.setAttribute("class", "running-edge drop-shadow-[0_2px_10px_rgba(37,99,235,0.7)]");
+            path.setAttribute("filter", "url(#wire-glow)");
+            path.style.animation = "flow-dash 1.2s linear infinite";
+          } else {
+            const isRelatedToSelection = (selectedNodeId === fromId || selectedNodeId === toId);
+            if (isRelatedToSelection) {
+              path.setAttribute("stroke", "#3b82f6");
+              path.setAttribute("stroke-width", "3.2");
+              path.setAttribute("class", "transition-all duration-300 drop-shadow-[0_2px_10px_rgba(59,130,246,0.65)]");
+              path.setAttribute("filter", "url(#wire-glow)");
+            } else {
+              path.setAttribute("stroke", "#cbd5e1");
+              path.setAttribute("stroke-width", "1.8");
+              path.setAttribute("class", "opacity-45 transition-all duration-300");
+            }
+          }
+          path.setAttribute("fill", "none");
+          svgGroup.appendChild(path);
+        });
+
+        renderMiniMap();
+      }
+
+      function triggerSmoothRedraw(duration) {
+        let start = null;
+        function step(timestamp) {
+          if (!start) start = timestamp;
+          const elapsed = timestamp - start;
+          updateConnections();
+          if (elapsed < duration) {
+            requestAnimationFrame(step);
+          }
+        }
+        requestAnimationFrame(step);
+      }
+
+      function renderMiniMap() {
+        const mapSvg = document.getElementById('minimap-svg');
+        if (!mapSvg) return;
+
+        mapSvg.innerHTML = ''; // 清空重绘
+        const layout = scenarioLayouts[currentScenario];
+        if (!layout) return;
+
+        const workflowEdges = [[1, 2], [2, 3], [2, 4], [3, 5], [4, 5], [5, 6]];
+        workflowEdges.forEach(([fromId, toId]) => {
+          const fromNode = document.getElementById(`node-${fromId}`);
+          const toNode = document.getElementById(`node-${toId}`);
+          if (!fromNode || !toNode) return;
+
+          const fx = fromNode.offsetLeft / 8 + 3;
+          const fy = fromNode.offsetTop / 5 + 4;
+          const tx = toNode.offsetLeft / 8 + 3;
+          const ty = toNode.offsetTop / 5 + 4;
+
+          const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+          line.setAttribute("x1", fx);
+          line.setAttribute("y1", fy);
+          line.setAttribute("x2", tx);
+          line.setAttribute("y2", ty);
+
+          if (isSimulating && nodeRunStates[fromId] === 'completed' && (nodeRunStates[toId] === 'active' || nodeRunStates[toId] === 'completed')) {
+            line.setAttribute("stroke", "#3b82f6");
+            line.setAttribute("stroke-width", "1.5");
+          } else {
+            line.setAttribute("stroke", "#e2e8f0");
+            line.setAttribute("stroke-width", "1");
+          }
+          mapSvg.appendChild(line);
+        });
+
+        for (let i = 1; i <= 6; i++) {
+          const node = document.getElementById(`node-${i}`);
+          if (!node) continue;
+
+          const nx = node.offsetLeft / 8 + 3;
+          const ny = node.offsetTop / 5 + 4;
+
+          const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+          circle.setAttribute("cx", nx);
+          circle.setAttribute("cy", ny);
+
+          if (i === selectedNodeId) {
+            circle.setAttribute("r", "4.5");
+            circle.setAttribute("fill", "#2563eb");
+            circle.setAttribute("stroke", "#bfdbfe");
+            circle.setAttribute("stroke-width", "1.5");
+          } else {
+            circle.setAttribute("r", "3");
+            if (nodeRunStates[i] === 'completed') {
+              circle.setAttribute("fill", "#10b981");
+            } else if (nodeRunStates[i] === 'active') {
+              circle.setAttribute("fill", "#3b82f6");
+            } else if (i === 6 && currentScenario !== 'docsummary') {
+              circle.setAttribute("fill", "#f59e0b");
+            } else {
+              circle.setAttribute("fill", "#cbd5e1");
+            }
+          }
+          mapSvg.appendChild(circle);
+        }
+      }
+
+      function zoomIn() {
+        if (zoomScale < maxZoom) {
+          adjustZoom(zoomScale + zoomStep);
+        }
+      }
+
+      function zoomOut() {
+        if (zoomScale > minZoom) {
+          adjustZoom(zoomScale - zoomStep);
+        }
+      }
+
+      function resetZoom() {
+        adjustZoom(1.0);
+      }
+
+      function adjustZoom(newScale) {
+        zoomScale = Math.round(newScale * 10) / 10; // 规避 JS 浮点数精度 bug
+        const zoomContainer = document.getElementById('zoom-container');
+        if (zoomContainer) {
+          zoomContainer.style.transform = `scale(${zoomScale})`;
+        }
+        const indicator = document.getElementById('canvas-zoom-indicator');
+        if (indicator) {
+          indicator.innerText = `${Math.round(zoomScale * 100)}%`;
+        }
+        updateConnections();
+      }
+
+      function handleCanvasWheel(event) {
+        if (event.ctrlKey) {
+          event.preventDefault();
+          if (event.deltaY < 0) {
+            zoomIn();
+          } else {
+            zoomOut();
+          }
+        }
+      }
+
+      document.addEventListener('keydown', function(event) {
+        const activeEl = document.activeElement;
+        if (activeEl && (activeEl.tagName === 'TEXTAREA' || activeEl.tagName === 'INPUT')) {
+          return;
+        }
+
+        if (event.key === '=' || event.key === '+') {
+          event.preventDefault();
+          zoomIn();
+        } else if (event.key === '-' || event.key === '_') {
+          event.preventDefault();
+          zoomOut();
+        } else if (event.key === '0') {
+          event.preventDefault();
+          resetZoom();
+        }
+      });
+
+      function toggleStateDropdown(event) {
+        event.stopPropagation();
+        const dropdown = document.getElementById('state-simulation-dropdown');
+        if (dropdown) {
+          dropdown.classList.toggle('hidden');
+        }
+      }
+
+      document.addEventListener('click', function(event) {
+        const dropdown = document.getElementById('state-simulation-dropdown');
+        const button = document.getElementById('state-simulation-btn');
+        if (dropdown && !dropdown.classList.contains('hidden')) {
+          if (!dropdown.contains(event.target) && event.target !== button && !button.contains(event.target)) {
+            dropdown.classList.add('hidden');
+          }
+        }
+      });
+
+      function selectNode(id) {
+        selectedNodeId = id;
+
+        for (let i = 1; i <= 6; i++) {
+          const node = document.getElementById(`node-${i}`);
+          if (!node) continue;
+
+          const isSelected = (i === id);
+          if (isSelected) {
+            node.className = "absolute cursor-grab active:cursor-grabbing select-none bg-white rounded-2xl border-2 border-brand-500 w-[145px] z-20 layout-transition spring-touch node-selected-glow";
+
+            if (i === 6) {
+              const isPassed = (currentScenario === 'docsummary');
+              node.className = isPassed
+                ? "absolute cursor-grab active:cursor-grabbing select-none bg-emerald-50/90 rounded-2xl border-2 border-emerald-500 w-[145px] z-20 layout-transition spring-touch node-selected-glow"
+                : "absolute cursor-grab active:cursor-grabbing select-none bg-orange-50/90 rounded-2xl border-2 border-amber-500 w-[145px] z-20 layout-transition spring-touch node-selected-glow";
+            }
+          } else {
+            if (i === 6) {
+              const isPassed = (currentScenario === 'docsummary');
+              node.className = isPassed
+                ? "absolute cursor-grab active:cursor-grabbing select-none bg-emerald-50/90 rounded-2xl border border-emerald-500 w-[145px] z-10 layout-transition shadow-premium spring-touch"
+                : "absolute cursor-grab active:cursor-grabbing select-none bg-orange-50/90 rounded-2xl border border-amber-350 w-[145px] z-10 layout-transition shadow-premium spring-touch shadow-glow-orange-subtle";
+            } else if (i === 2) {
+              node.className = "absolute cursor-grab active:cursor-grabbing select-none bg-white rounded-2xl border border-slate-100 hover:border-brand-300 w-[145px] z-10 layout-transition shadow-premium spring-touch shadow-glow-blue-subtle";
+            } else {
+              node.className = "absolute cursor-grab active:cursor-grabbing select-none bg-white rounded-2xl border border-slate-100 hover:border-slate-200 w-[145px] z-10 layout-transition shadow-premium spring-touch shadow-glow-blue-subtle";
+            }
+          }
+        }
+
+        updateConnections();
+
+        const data = scenarioData[currentScenario].inspector[id];
+        if (data) {
+          const elNum = document.getElementById('inspector-node-num');
+          if (elNum) elNum.innerText = id;
+          const elName = document.getElementById('inspector-node-name');
+          if (elName) elName.innerText = data.name;
+          const elRole = document.getElementById('inspector-role');
+          if (elRole) elRole.innerText = data.role;
+          const elGoal = document.getElementById('inspector-goal');
+          if (elGoal) elGoal.innerText = data.goal;
+          const elMemory = document.getElementById('inspector-memory');
+          if (elMemory) elMemory.innerText = data.digest;
+          const elTools = document.getElementById('inspector-tools');
+          if (elTools) elTools.innerText = data.tools;
+          const elSkills = document.getElementById('inspector-skills');
+          if (elSkills) elSkills.innerText = data.skills;
+          const elMcp = document.getElementById('inspector-mcp');
+          if (elMcp) elMcp.innerText = data.mcp;
+          const elQuality = document.getElementById('inspector-quality');
+          if (elQuality) elQuality.innerText = data.quality;
+          const elEvidence = document.getElementById('inspector-evidence');
+          if (elEvidence) elEvidence.innerText = data.evidence;
+
+          const numPill = document.getElementById('inspector-node-num');
+          if (numPill) {
+            if (id === 6 && currentScenario !== 'docsummary') {
+              numPill.className = "w-7 h-7 rounded-xl bg-amber-500 text-white font-black text-xs flex items-center justify-center shadow-md shadow-amber-500/10";
+            } else if (id === 6 && currentScenario === 'docsummary') {
+              numPill.className = "w-7 h-7 rounded-xl bg-emerald-500 text-white font-black text-xs flex items-center justify-center shadow-md shadow-emerald-500/10";
+            } else {
+              numPill.className = "w-7 h-7 rounded-xl bg-brand-500 text-white font-black text-xs flex items-center justify-center shadow-md shadow-brand-500/10";
+            }
+          }
+        }
+
+        if (!rightInspectorOpen) {
+          toggleRightInspector();
+        }
+      }
+
+      function makeNodeDraggable(el, nodeId) {
+        if (!el) return;
+        let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+        el.onmousedown = function(e) {
+          e = e || window.event;
+          if (e.target.tagName === 'BUTTON' || e.target.closest('button')) return;
+          e.preventDefault();
+
+          el.classList.remove('layout-transition');
+
+          pos3 = e.clientX;
+          pos4 = e.clientY;
+
+          document.onmouseup = closeDragElement;
+          document.onmousemove = elementDrag;
+
+          selectNode(nodeId);
+        };
+
+        function elementDrag(e) {
+          e = e || window.event;
+          e.preventDefault();
+
+          pos1 = (pos3 - e.clientX) / zoomScale;
+          pos2 = (pos4 - e.clientY) / zoomScale;
+          pos3 = e.clientX;
+          pos4 = e.clientY;
+
+          let newTop = el.offsetTop - pos2;
+          let newLeft = el.offsetLeft - pos1;
+
+          const container = document.getElementById('canvas-workspace');
+          const maxLeft = container.clientWidth / zoomScale - el.clientWidth;
+          const maxTop = container.clientHeight / zoomScale - el.clientHeight;
+
+          if (newLeft < 0) newLeft = 0;
+          if (newLeft > maxLeft) newLeft = maxLeft;
+          if (newTop < 0) newTop = 0;
+          if (newTop > maxTop) newTop = maxTop;
+
+          el.style.top = newTop + "px";
+          el.style.left = newLeft + "px";
+
+          updateConnections();
+        }
+
+        function closeDragElement() {
+          el.classList.add('layout-transition');
+          document.onmouseup = null;
+          document.onmousemove = null;
+        }
+      }
+
+      function toggleLeftSidebar() {
+        const sidebar = document.getElementById('l2-sidebar');
+        const trigger = document.getElementById('l2-sidebar-trigger');
+        const canvasBtn = document.getElementById('canvas-toggle-left-btn');
+        if (!sidebar || !trigger || !canvasBtn) return;
+
+        leftSidebarOpen = !leftSidebarOpen;
+
+        if (leftSidebarOpen) {
+          sidebar.style.width = '240px';
+          sidebar.style.opacity = '1';
+          sidebar.style.borderRightWidth = '1px';
+          trigger.classList.add('hidden');
+          canvasBtn.classList.add('text-brand-500');
+          canvasBtn.classList.remove('text-slate-400');
+        } else {
+          sidebar.style.width = '0px';
+          sidebar.style.opacity = '0';
+          sidebar.style.borderRightWidth = '0px';
+          trigger.classList.remove('hidden');
+          canvasBtn.classList.remove('text-brand-500');
+          canvasBtn.classList.add('text-slate-400');
+        }
+
+        triggerSmoothRedraw(350);
+      }
+
+      function toggleRightInspector() {
+        const inspector = document.getElementById('right-inspector');
+        const trigger = document.getElementById('right-inspector-trigger');
+        const canvasBtn = document.getElementById('canvas-toggle-right-btn');
+        if (!inspector || !trigger || !canvasBtn) return;
+
+        rightInspectorOpen = !rightInspectorOpen;
+
+        if (rightInspectorOpen) {
+          inspector.style.width = '320px';
+          inspector.style.opacity = '1';
+          inspector.style.borderLeftWidth = '1px';
+          trigger.classList.add('hidden');
+          canvasBtn.classList.add('text-brand-500');
+          canvasBtn.classList.remove('text-slate-400');
+        } else {
+          inspector.style.width = '0px';
+          inspector.style.opacity = '0';
+          inspector.style.borderLeftWidth = '0px';
+          trigger.classList.remove('hidden');
+          canvasBtn.classList.remove('text-brand-500');
+          canvasBtn.classList.add('text-slate-400');
+        }
+
+        triggerSmoothRedraw(350);
+      }
+
+      function handleAutoLayout() {
+        switchWorkflowScenario(currentScenario);
+      }
+
+      function switchBottomTab(tabId) {
+        const tabs = ['timeline', 'trace', 'quality', 'evidence'];
+        tabs.forEach(t => {
+          const btn = document.getElementById(`btn-tab-${t}`);
+          const content = document.getElementById(`tab-content-${t}`);
+          if (!btn || !content) return;
+
+          if (t === tabId) {
+            btn.className = "pb-2.5 px-1.5 border-b-2 border-brand-500 text-brand-600 transition-all font-black tracking-wide";
+            content.classList.remove('hidden');
+          } else {
+            btn.className = "pb-2.5 px-1.5 border-b-2 border-transparent text-slate-400 hover:text-slate-700 transition-all tracking-wide";
+            content.classList.add('hidden');
+          }
+        });
+      }
+
+      function appendSlashCommand(cmd) {
+        const textarea = document.getElementById('workspace-chat-textarea');
+        if (!textarea) return;
+        textarea.value = cmd + ' ';
+        textarea.focus();
+        showToast(`已装填指令: ${cmd}`);
+      }
+
+      function handleChatKeyDown(event) {
+        if (event.key === 'Enter' && !event.shiftKey) {
+          event.preventDefault();
+          handleSendMessage();
+        }
+      }
+
+      function handleSendMessage() {
+        const textarea = document.getElementById('workspace-chat-textarea');
+        if (!textarea) return;
+        const text = textarea.value.trim();
+        if (!text) return;
+
+        const chatBox = document.getElementById('chat-messages-box');
+        if (!chatBox) return;
+
+        chatBox.innerHTML += `
+          <div class="bg-blue-50/50 border border-blue-100/60 rounded-2xl p-3 self-end ml-4 transition-all shadow-sm">
+            <span class="font-extrabold text-blue-700 block mb-0.5">管理员:</span>
+            <p class="text-slate-700 font-semibold leading-relaxed">${text}</p>
+          </div>
+        `;
+
+        textarea.value = '';
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        setTimeout(() => {
+          let replyRole = "Scribe (观点总结 ID=5)";
+          let replyContent = "收到指令。当前处于 <code class='bg-slate-100 text-slate-800 px-1 rounded-md text-[10px]'>design_only</code> 水印隔离防护期。审计日志链已刷新，规约一切合规。";
+
+          if (text.startsWith('/stations')) {
+            replyRole = "Planner Agent (规划调度 ID=2)";
+            replyContent = "<b>工作站拓扑清单</b> (Spec: V12-0P-READY):<br/>• Station 1 (对话输入触发器)<br/>• Station 2 (辩题规划指挥中心)<br/>• Station 3 (苏格拉底理性辩站)<br/>• Station 4 (普罗泰戈拉经验证站)<br/>• Station 5 (共识合并编写中心)<br/>• Station 6 (审计区块链合规卡点 - 挂起阻塞)";
+          } else if (text.startsWith('/evidence')) {
+            replyRole = "Auditor Agent (合规审计 ID=6)";
+            replyContent = "<b>区块链安全存证链审计结果:</b><br/>• 共检测到 3 项链上数据单。最新账本哈希值为 <code class='bg-slate-200/60 px-1 rounded font-mono text-[9px] text-slate-800'>f28d844c...7e17c0f</code>。<br/>• 当前因 Station 3 传入的局部批判存证账单未完全双重签名，自动处于挂卡卡口状态。请核实该节点的证据。";
+          } else if (text.startsWith('/diff')) {
+            replyRole = "Scribe (观点总结 ID=5)";
+            replyContent = "<b>智能差异合并比对表:</b><br/>• 变更草稿：<span class='text-brand-650 font-bold'>Spec-Roma-Draft</span><br/>• 变动节点数：0 | 边数：0 (无硬性持久化篡改权限，隔离演示。)";
+          } else if (text.startsWith('/help')) {
+            replyRole = "Light Studio 导航助手";
+            replyContent = "<b>指令列表:</b><br/>• <code class='bg-slate-200/60 px-1.5 py-0.5 rounded-md font-bold text-[10px] text-slate-800 font-mono'>/stations</code> - 获取当前画布的所有 Station 链路属性<br/>• <code class='bg-slate-200/60 px-1.5 py-0.5 rounded-md font-bold text-[10px] text-slate-800 font-mono'>/evidence</code> - 抓取区块链上最新生成的审计单信息<br/>• <code class='bg-slate-200/60 px-1.5 py-0.5 rounded-md font-bold text-[10px] text-slate-800 font-mono'>/diff</code> - 比对草稿与持久化版本的差异状态";
+          }
+
+          chatBox.innerHTML += `
+            <div class="bg-[#f8faff] border border-slate-50 rounded-2xl p-3 transition-all shadow-premium">
+              <span class="font-extrabold text-brand-600 block mb-1">${replyRole}:</span>
+              <p class="text-slate-655 leading-relaxed font-semibold">${replyContent}</p>
+            </div>
+          `;
+          chatBox.scrollTop = chatBox.scrollHeight;
+        }, 700);
+      }
+
+      function setSystemState(category, state) {
+        const pillApi = document.getElementById('pill-api');
+        const textApi = document.getElementById('pill-api-text');
+        const pillRun = document.getElementById('pill-run');
+        const textRun = document.getElementById('pill-run-text');
+
+        if (category === 'api') {
+          if (state === 'online') {
+            if (pillApi) pillApi.className = "inline-flex items-center px-2.5 py-1 rounded-xl text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-500/20 shadow-sm transition-all animate-[slideIn_0.2s_ease]";
+            if (textApi) textApi.innerHTML = "API 在线";
+            showToast("API 状态切换：api_online (全链路通信正常)");
+          } else if (state === 'offline') {
+            if (pillApi) pillApi.className = "inline-flex items-center px-2.5 py-1 rounded-xl text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-500/20 shadow-sm transition-all animate-[slideIn_0.2s_ease]";
+            if (textApi) textApi.innerHTML = "API 离线";
+            showToast("API 状态切换：api_offline (离线警报生效)");
+          } else if (state === 'rate_limited') {
+            if (pillApi) pillApi.className = "inline-flex items-center px-2.5 py-1 rounded-xl text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-500/20 shadow-sm transition-all animate-[slideIn_0.2s_ease]";
+            if (textApi) textApi.innerHTML = "API 限流";
+            showToast("API 状态切换：api_rate_limited (触发流控保护拦截)");
+          } else if (state === 'unconfigured') {
+            if (pillApi) pillApi.className = "inline-flex items-center px-2.5 py-1 rounded-xl text-[10px] font-bold bg-slate-100 text-slate-600 border border-slate-200 shadow-sm transition-all animate-[slideIn_0.2s_ease]";
+            if (textApi) textApi.innerHTML = "API 未配";
+            showToast("API 状态切换：api_unconfigured (凭证缺失，服务挂起)");
+          }
+        } else if (category === 'run') {
+          if (state === 'idle') {
+            if (pillRun) pillRun.className = "inline-flex items-center px-2.5 py-1 rounded-xl text-[10px] font-bold bg-slate-100 text-slate-600 border border-slate-200 shadow-sm transition-all animate-[slideIn_0.2s_ease]";
+            if (textRun) textRun.innerHTML = "闲置就绪";
+            showToast("运行状态切换：run_idle (空闲，准备审计)");
+          } else if (state === 'in_progress') {
+            if (pillRun) pillRun.className = "inline-flex items-center px-2.5 py-1 rounded-xl text-[10px] font-bold bg-blue-50 text-brand-600 border border-brand-500/20 shadow-sm transition-all animate-[slideIn_0.2s_ease]";
+            if (textRun) textRun.innerHTML = "流式执行中";
+            showToast("运行状态切换：run_in_progress (正在流式执行)");
+          } else if (state === 'blocked') {
+            if (pillRun) pillRun.className = "inline-flex items-center px-2.5 py-1 rounded-xl text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-100 shadow-sm transition-all animate-[slideIn_0.2s_ease]";
+            if (textRun) textRun.innerHTML = "节点阻断";
+            showToast("运行状态切换：run_blocked (强制质量卡口阻断中)");
+          } else if (state === 'failed') {
+            if (pillRun) pillRun.className = "inline-flex items-center px-2.5 py-1 rounded-xl text-[10px] font-bold bg-red-50 text-red-700 border border-red-200 shadow-sm transition-all animate-[slideIn_0.2s_ease]";
+            if (textRun) textRun.innerHTML = "执行失败";
+            showToast("运行状态切换：run_failed (引擎层 logic 阻断报错)");
+          }
+        }
+      }
+
+      function startSimulation() {
+        if (isSimulating) return;
+        isSimulating = true;
+
+        document.getElementById('btn-sim-play').classList.add('hidden');
+        document.getElementById('btn-sim-pause').classList.remove('hidden');
+        document.getElementById('sim-status-badge').innerText = "仿真播放中...";
+        document.getElementById('sim-status-badge').className = "text-[10px] bg-blue-50 text-blue-600 px-2.5 py-0.5 rounded-lg font-bold border border-blue-200/40 animate-pulse shadow-sm";
+
+        setSystemState('run', 'in_progress');
+
+        runSimulationLoop();
+      }
+
+      function pauseSimulation() {
+        if (!isSimulating) return;
+        isSimulating = false;
+        clearTimeout(simTimer);
+
+        document.getElementById('btn-sim-play').classList.remove('hidden');
+        document.getElementById('btn-sim-pause').classList.add('hidden');
+        document.getElementById('sim-status-badge').innerText = "仿真暂停";
+        document.getElementById('sim-status-badge').className = "text-[10px] bg-amber-50 text-amber-600 px-2.5 py-0.5 rounded-lg font-bold border border-amber-200/40 shadow-sm";
+        showToast("仿真执行已暂停");
+      }
+
+      function stepSimulation() {
+        if (simulationStep >= 6) {
+          showToast("已经到达最后一步，请重置后再试。");
+          return;
+        }
+        isSimulating = true;
+        runNextStep();
+        isSimulating = false;
+        document.getElementById('sim-status-badge').innerText = `单步调试: 站 ${simulationStep}`;
+      }
+
+      function resetSimulation() {
+        isSimulating = false;
+        clearTimeout(simTimer);
+        simulationStep = 0;
+        nodeRunStates = {1:'idle', 2:'idle', 3:'idle', 4:'idle', 5:'idle', 6:'idle'};
+
+        document.getElementById('btn-sim-play').classList.remove('hidden');
+        document.getElementById('btn-sim-pause').classList.add('hidden');
+        document.getElementById('sim-status-badge').innerText = "闲置 (Ready)";
+        document.getElementById('sim-status-badge').className = "text-[10px] bg-slate-100 text-slate-500 px-2.5 py-0.5 rounded-lg font-bold border border-slate-200/40 shadow-sm";
+
+        for(let i=1; i<=6; i++) {
+          setNodeVisualState(i, 'idle');
+        }
+        setSystemState('run', 'idle');
+        updateConnections();
+        selectNode(5);
+        showToast("仿真流程已完全重置。");
+      }
+
+      function runSimulationLoop() {
+        if (!isSimulating) return;
+        if (simulationStep >= 6) {
+          isSimulating = false;
+          document.getElementById('btn-sim-play').classList.remove('hidden');
+          document.getElementById('btn-sim-pause').classList.remove('hidden');
+          setSystemState('run', 'blocked');
+          document.getElementById('sim-status-badge').innerText = "等待人工确认 (Blocked)";
+          document.getElementById('sim-status-badge').className = "text-[10px] bg-rose-50 text-rose-600 px-2.5 py-0.5 rounded-lg font-bold border border-rose-200/40 shadow-sm";
+
+          setTimeout(() => {
+            handleShowSandboxModal();
+          }, 600);
+          return;
+        }
+
+        runNextStep();
+
+        simTimer = setTimeout(runSimulationLoop, 1800);
+      }
+
+      function runNextStep() {
+        simulationStep++;
+
+        for(let i = 1; i <= 6; i++) {
+          if (i < simulationStep) {
+            nodeRunStates[i] = 'completed';
+          } else if (i === simulationStep) {
+            nodeRunStates[i] = 'active';
+          } else {
+            nodeRunStates[i] = 'idle';
+          }
+          setNodeVisualState(i, nodeRunStates[i]);
+        }
+
+        selectNode(simulationStep);
+
+        injectSimulationOutput(simulationStep);
+
+        updateConnections();
+      }
+
+      function setNodeVisualState(nodeId, state) {
+        const node = document.getElementById(`node-${nodeId}`);
+        const badge = document.getElementById(`node-${nodeId}-badge`);
+        const dot = document.getElementById(`node-${nodeId}-dot`);
+        if (!node || !badge || !dot) return;
+
+        if (state === 'active') {
+          node.classList.add('ring-4', 'ring-blue-100', 'border-blue-400');
+          node.classList.remove('border-slate-105', 'border-emerald-500', 'border-amber-300');
+          badge.innerText = "流式中";
+          badge.className = "text-[9px] bg-blue-100 text-blue-800 font-extrabold px-1.5 py-0.5 rounded-md ml-auto shrink-0 animate-pulse";
+          dot.className = "w-1.5 h-1.5 bg-blue-500 rounded-full animate-ping";
+        } else if (state === 'completed') {
+          node.classList.remove('ring-4', 'ring-blue-100', 'border-blue-400', 'border-emerald-500');
+          node.classList.add('border-emerald-500');
+          badge.innerText = "已完成";
+          badge.className = "text-[9px] bg-emerald-100 text-emerald-800 font-extrabold px-1.5 py-0.5 rounded-md ml-auto shrink-0";
+          dot.className = "w-1.5 h-1.5 bg-emerald-500 rounded-full";
+        } else {
+          node.classList.remove('ring-4', 'ring-blue-100', 'border-blue-400', 'border-emerald-500');
+          const scenarioMeta = scenarioData[currentScenario].nodes[nodeId];
+          badge.innerText = scenarioMeta ? scenarioMeta.type : "就绪";
+
+          if (nodeId === 6 && currentScenario !== 'docsummary') {
+            node.className = "absolute cursor-grab active:cursor-grabbing transition-shadow duration-200 select-none bg-orange-50/90 rounded-2xl border border-amber-300 w-[145px] z-10 layout-transition shadow-premium spring-touch shadow-glow-orange-subtle";
+            badge.className = "text-[9px] bg-amber-100 text-amber-800 font-extrabold px-1.5 py-0.5 rounded-md ml-auto shrink-0";
+            dot.className = "w-1.5 h-1.5 bg-amber-500 rounded-full";
+          } else {
+            node.className = "absolute cursor-grab active:cursor-grabbing transition-shadow duration-200 select-none bg-white rounded-2xl border border-slate-100 hover:border-slate-200 w-[145px] z-10 layout-transition shadow-premium spring-touch shadow-glow-blue-subtle";
+            badge.className = "text-[9px] bg-slate-100 text-slate-500 font-extrabold px-1.5 py-0.5 rounded-md ml-auto shrink-0";
+            dot.className = "w-1.5 h-1.5 bg-slate-400 rounded-full";
+          }
+        }
+      }
+
+      function injectSimulationOutput(step) {
+        const chatBox = document.getElementById('chat-messages-box');
+        const traceBox = document.getElementById('tab-content-trace');
+        if (!chatBox || !traceBox) return;
+
+        const data = scenarioData[currentScenario];
+        const nodeInfo = data.nodes[step];
+        const inspectorInfo = data.inspector[step];
+
+        let agentSpeech = "";
+        if (step === 1) {
+          agentSpeech = `触发源已检测到审计输入！当前配置的目标辩证分析 Spec 参数：<code class='bg-slate-200 px-1 rounded'>${nodeInfo.m2}</code>。规划大脑正在就此进行全局协作安排。`;
+        } else if (step === 2) {
+          agentSpeech = `我已完成了多站协作辩驳链的规划。我们将在 Station 3 (批判学派) 和 Station 4 (经验学派) 两个支线上同步推演，最后在 Station 5 合并共识。已生成审计方案：<code class='bg-slate-200 px-1 rounded'>${nodeInfo.m2}</code>。`;
+        } else if (step === 3) {
+          agentSpeech = `作为批判学派代理，我坚持理性的不可动摇。任何不具备真实、链上存证哈希证明的事实陈述，其可信度均为零。观点文件已固化提交至 <code class='bg-slate-200 px-1 rounded'>${nodeInfo.m2}</code>。`;
+        } else if (step === 4) {
+          agentSpeech = `客观只是感知的集合。我已引入对主观经验维度的支持，将关于认知限度的边界分析同步推送给总结中心，存证关联号：<code class='bg-slate-200 px-1 rounded'>${nodeInfo.m2}</code>。`;
+        } else if (step === 5) {
+          agentSpeech = `我已聚合 Socrates 和 Protagoras 的多轮观点。我们找到了关于‘可解释性模型’的三处共识及一处关键逻辑冲突。冲突项已妥善保留，存证单据已锁定。`;
+        } else if (step === 6) {
+          agentSpeech = `⚠️ <b>质检卡点拦截阻断！</b> 由于当前为设计期草图演示，根据高风险动作防自动发布规约，已拦截 Station 5 发布的合并草卷，等待人工确认锁定（请点击页面右下角提交确认按钮，或点击 Station 6 批准）。`;
+        }
+
+        chatBox.innerHTML += `
+          <div class="bg-slate-50 border border-slate-100 rounded-2xl p-3 shadow-premium transition-all animate-[slideIn_0.3s_ease]">
+            <span class="font-extrabold text-brand-600 block mb-1">Station ${step} - ${inspectorInfo.name}:</span>
+            <p class="text-slate-655 leading-relaxed font-semibold text-[11px]">${agentSpeech}</p>
+          </div>
+        `;
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        const timestamp = new Date().toLocaleTimeString();
+        traceBox.innerHTML += `
+          <div class="text-blue-400 animate-pulse">[${timestamp}] TRACE: Station ID=${step} (${nodeInfo.title}) execution entered state: 'active'.</div>
+          <div class="text-slate-400">[${timestamp}] INFO: Mounted tools: [${inspectorInfo.tools}]. Committing evidence hash...</div>
+        `;
+        traceBox.scrollTop = traceBox.scrollHeight;
+      }
+
+      function handleShowSandboxModal() {
+        const modal = document.getElementById('sandbox-modal');
+        if (!modal) return;
+        modal.classList.remove('hidden');
+        setTimeout(() => { modal.classList.remove('opacity-0'); }, 50);
+      }
+
+      function handleCloseSandboxModal() {
+        const modal = document.getElementById('sandbox-modal');
+        if (!modal) return;
+        modal.classList.add('opacity-0');
+        setTimeout(() => { modal.classList.add('hidden'); }, 300);
+      }
+
+      function handleConfirmSandbox() {
+        handleCloseSandboxModal();
+        showToast("沙箱成果：模拟签署成功，证据单 Receipt 归入证据库！");
+        if (simulationStep >= 6) {
+          nodeRunStates[6] = 'completed';
+          setNodeVisualState(6, 'completed');
+          updateConnections();
+        }
+      }
+
+      function showToast(text) {
+        const toast = document.getElementById('custom-toast');
+        const textEl = document.getElementById('custom-toast-text');
+        if (!toast || !textEl) return;
+        textEl.innerText = text;
+        toast.classList.remove('opacity-0', 'pointer-events-none');
+        toast.classList.add('opacity-100');
+        setTimeout(() => {
+          toast.classList.add('opacity-0', 'pointer-events-none');
+          toast.classList.remove('opacity-100');
+        }, 3000);
+      }
+
+      window.onload = function() {
+        for (let i = 1; i <= 6; i++) {
+          makeNodeDraggable(document.getElementById(`node-${i}`), i);
+        }
+
+        window.addEventListener('resize', updateConnections);
+
+        document.getElementById('canvas-toggle-left-btn').classList.add('text-brand-500');
+        document.getElementById('canvas-toggle-right-btn').classList.add('text-brand-500');
+
+        handleL1Route('workbench');
+      };
+    </script>
+  </body>
+</html>
