@@ -12,6 +12,7 @@ function staticStudioState(): VisualAcceptanceState | null {
     state === "v14-extension-ecosystem" ||
     state === "v15-observability-deployment" ||
     state === "pv16-product-runtime-hardening" ||
+    state === "pv17-product-closed-loop" ||
     state === "agent-draft-proposal" ||
     state === "folder-debug-scan" ||
     state === "running-board" ||

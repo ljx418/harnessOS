@@ -1,0 +1,98 @@
+{
+  "schema_version": "pv17.entity_mutation_report.v1",
+  "status": "PASS",
+  "mutations": [
+    {
+      "schema_version": "pv17.product_closed_loop.v1",
+      "status": "accepted",
+      "entity_ref": {
+        "entity_kind": "station_agent",
+        "entity_id": "station_agent:pv17-reviewer",
+        "scope": {
+          "app_id": "reference_app",
+          "project_id": "demo_a",
+          "workspace_id": "local"
+        }
+      },
+      "entity": {
+        "entity_kind": "station_agent",
+        "entity_id": "station_agent:pv17-reviewer",
+        "display_name": "PV17 审查 Station Agent",
+        "scope": {
+          "app_id": "reference_app",
+          "project_id": "demo_a",
+          "workspace_id": "local"
+        },
+        "role": "reviewer",
+        "goal": "审查运行、证据和 No-Go 边界。",
+        "memory_refs": [],
+        "model_refs": [
+          "model:redacted"
+        ],
+        "tool_refs": [],
+        "skill_refs": [
+          "governance.review"
+        ],
+        "mcp_refs": [],
+        "audit_refs": [
+          {
+            "audit_ref_id": "pv17:audit:product_entity.station_agent.upsert:reference_app|demo_a|local:station_agent:pv17-reviewer",
+            "operation": "product_entity.station_agent.upsert",
+            "scope": {
+              "app_id": "reference_app",
+              "project_id": "demo_a",
+              "workspace_id": "local"
+            },
+            "entity_id": "station_agent:pv17-reviewer",
+            "created_at": "2026-06-26T02:34:54.223292Z",
+            "redaction_status": "redacted"
+          }
+        ],
+        "updated_at": "2026-06-26T02:34:54.223302Z",
+        "redaction_status": "redacted"
+      },
+      "audit_ref": {
+        "audit_ref_id": "pv17:audit:product_entity.station_agent.upsert:reference_app|demo_a|local:station_agent:pv17-reviewer",
+        "operation": "product_entity.station_agent.upsert",
+        "scope": {
+          "app_id": "reference_app",
+          "project_id": "demo_a",
+          "workspace_id": "local"
+        },
+        "entity_id": "station_agent:pv17-reviewer",
+        "created_at": "2026-06-26T02:34:54.223292Z",
+        "redaction_status": "redacted"
+      },
+      "policy_decision_ref": "pv17:policy:reference_app|demo_a|local:pv17-agent-1782441294085",
+      "denied_reason": null,
+      "redaction_status": "redacted",
+      "user_confirmed": true
+    }
+  ],
+  "negative_fixtures": [
+    {
+      "schema_version": "pv17.product_closed_loop.v1",
+      "status": "denied",
+      "entity_ref": {
+        "entity_kind": "project",
+        "entity_id": "demo_b"
+      },
+      "audit_ref": {
+        "audit_ref_id": "pv17:audit:product_entity.project.upsert:reference_app|demo_a|local:demo_b",
+        "operation": "product_entity.project.upsert",
+        "scope": {
+          "app_id": "reference_app",
+          "project_id": "demo_a",
+          "workspace_id": "local"
+        },
+        "entity_id": "demo_b",
+        "created_at": "2026-06-26T02:34:54.246550Z",
+        "redaction_status": "redacted"
+      },
+      "policy_decision_ref": "pv17:policy:reference_app|demo_a|local:pv17-denied-1782441294244",
+      "denied_reason": "owner_project_scope_mismatch",
+      "redaction_status": "redacted"
+    }
+  ],
+  "created_at": "2026-06-26T02:34:53.304Z"
+}

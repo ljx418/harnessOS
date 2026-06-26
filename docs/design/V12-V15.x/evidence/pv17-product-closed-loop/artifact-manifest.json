@@ -1,0 +1,99 @@
+{
+  "schema_version": "pv17.artifact_manifest.v1",
+  "status": "PASS",
+  "allowed_claim": "PV17 complete: product closed loop implementation ready for bounded review.",
+  "artifact_count": 18,
+  "artifacts": [
+    {
+      "path": "acceptance-data.json",
+      "size_bytes": 2260,
+      "sha256": "d33342f772136ff3ca4c712b2cba52520701d112495946f04312be3012eceb83"
+    },
+    {
+      "path": "audit-closure.md",
+      "size_bytes": 224,
+      "sha256": "63bd3930435f604236f53e89283d7052500eb91e7555bd2704b3a540dce4f416"
+    },
+    {
+      "path": "bff-route-log.json",
+      "size_bytes": 3316,
+      "sha256": "b9e5095a82d807d722e017388947ff52ae8c1dcfd187d709d25d76d6414a1c04"
+    },
+    {
+      "path": "browser-network-log.json",
+      "size_bytes": 2947,
+      "sha256": "1f42c37889508442615c22a4825c518b30ae71486e942d55e00e7416a5788c0f"
+    },
+    {
+      "path": "claim-to-evidence-matrix.json",
+      "size_bytes": 1636,
+      "sha256": "090754c94bbea5663acd07990aea4169abc078edc94a543a124d0a4569d1541b"
+    },
+    {
+      "path": "dto-snapshots.json",
+      "size_bytes": 19757,
+      "sha256": "96a2285396ebc522fbd698e1354e8e54f3ea6b7048343e9811eeb1c5e9dfb342"
+    },
+    {
+      "path": "entity-mutation-report.json",
+      "size_bytes": 3293,
+      "sha256": "2693b038aa6076546be0d88ae676fa20966d6713ffa0945023b50262f81a827b"
+    },
+    {
+      "path": "evidence-review-report.json",
+      "size_bytes": 3654,
+      "sha256": "b2394939242ae2f1b4a25943b4f605ca54f749e57ba7e946ec2a50ba14d2008f"
+    },
+    {
+      "path": "evidence-review-screenshot.png",
+      "size_bytes": 10624,
+      "sha256": "d2460f1af7d41454b58355e30f7baec9210fb4ddb97d9b7010ce24014a30582d"
+    },
+    {
+      "path": "no-false-green-scan.txt",
+      "size_bytes": 45,
+      "sha256": "daf41d97d45275cd8f68bba384c831d862304bdaf9a5a41e1b7a3e688860701e"
+    },
+    {
+      "path": "prd-spec-review.md",
+      "size_bytes": 527,
+      "sha256": "19bedfb4183494ba5b37732477455f8483cf583cf9714100d28e185b2e7046de"
+    },
+    {
+      "path": "product-console-report.json",
+      "size_bytes": 5663,
+      "sha256": "2efdf0865912026b3c5ac0f0363714e93afe090a6ff82fb2e67517adfcf0bc20"
+    },
+    {
+      "path": "product-console-screenshot.png",
+      "size_bytes": 62911,
+      "sha256": "dbc55b8e27b2a201f3c501b80351fead5ee0be947d33ac51bd6fd9f45307879e"
+    },
+    {
+      "path": "redaction-scan.txt",
+      "size_bytes": 59,
+      "sha256": "01ae0f04acc4eca4f7b18ffb47efd10e8088f50d6414f35f38129b46fede4bf5"
+    },
+    {
+      "path": "runtime-run-inspect-report.json",
+      "size_bytes": 9148,
+      "sha256": "c7cb80522ec4dd976e4a8ef8b05068008e871dded3a354ab9b2523f463a41733"
+    },
+    {
+      "path": "studio-run-inspect-screenshot.png",
+      "size_bytes": 11214,
+      "sha256": "26210d79e5b1f7b90c4894677bc3d3d60a215bf9592c6346fb73c53caabfb40a"
+    },
+    {
+      "path": "studio-workflow-version-report.json",
+      "size_bytes": 764,
+      "sha256": "d06f2947167d7408249a3ffdb038b3d294b2f32d8f0856db4d72e54ff411eec2"
+    },
+    {
+      "path": "target-architecture-review.md",
+      "size_bytes": 409,
+      "sha256": "c8855e2e7b071718d54961e950f6425fc66e65af42864b356b12134485b20807"
+    }
+  ],
+  "created_at": "2026-06-26T02:34:53.304Z"
+}

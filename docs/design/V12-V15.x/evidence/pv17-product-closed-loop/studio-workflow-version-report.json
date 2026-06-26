@@ -1,0 +1,22 @@
+{
+  "schema_version": "pv17.studio_workflow_version_report.v1",
+  "status": "PASS",
+  "workflow_diff": {
+    "workflow_patch_id": "wfp_391db458444d",
+    "workflow_template_id": "pv17_product_closed_loop_reference",
+    "workflow_draft_id": "wfd_23681c7fcdca",
+    "operation": "update_station_prompt",
+    "status": "proposed",
+    "proposed_by": "inspector_proposal",
+    "source": "inspector",
+    "intent_type": "inspector_update",
+    "requires_approval": false,
+    "risk_flags": []
+  },
+  "expected_revision": 2,
+  "confirmation_transcript": "用户在 Mission Studio 点击提出 Patch，再点击发布版本。",
+  "workflow_version_id": "wfv_494349b6f1ee",
+  "source": "mission_studio",
+  "published": true,
+  "created_at": "2026-06-26T02:34:53.304Z"
+}

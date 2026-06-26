@@ -1,0 +1,165 @@
+{
+  "schema_version": "harnessos.project_presentation.local_export_check.v1",
+  "created_at": "2026-06-25T18:25:00+08:00",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "codex_cli_version",
+      "command": "codex --version",
+      "status": "PASS",
+      "output": "codex-cli 0.142.2"
+    },
+    {
+      "name": "codex_image_generation_feature",
+      "command": "codex features list | rg image_generation",
+      "status": "PASS",
+      "output": "image_generation stable true"
+    },
+    {
+      "name": "host_native_generation",
+      "command": "image_gen host-native tool",
+      "status": "PASS",
+      "output": "22 images were generated and saved under ~/.codex/generated_images/<thread-id>/. "
+    },
+    {
+      "name": "docs_present_images",
+      "command": "find docs/present/harnessos-project-introduction/images -maxdepth 1 -type f -name *.png",
+      "status": "PASS",
+      "output": "22 persisted PNG files found."
+    }
+  ],
+  "generated_images": [
+    {
+      "id": "01-capability-status-map",
+      "path": "images/01-capability-status-map.png",
+      "source_path": "/home/administrator/.codex/generated_images/019ef01b-e7a7-78b0-9a84-62cb08b4fc29/ig_0f82b94463fae461016a3d00a53cb48191a9439ed601660e72.png",
+      "file_size_bytes": 1475786
+    },
+    {
+      "id": "02-target-architecture-map",
+      "path": "images/02-target-architecture-map.png",
+      "source_path": "/home/administrator/.codex/generated_images/019ef01b-e7a7-78b0-9a84-62cb08b4fc29/ig_0cc0f14e19d7b118016a3d0111e50881918378330139eca3f8.png",
+      "file_size_bytes": 1305702
+    },
+    {
+      "id": "03-user-journey-overview",
+      "path": "images/03-user-journey-overview.png",
+      "source_path": "/home/administrator/.codex/generated_images/019ef01b-e7a7-78b0-9a84-62cb08b4fc29/ig_071fe601d9a1b2a9016a3d01d2acc0819184a981f35d6a7031.png",
+      "file_size_bytes": 1372343
+    },
+    {
+      "id": "04-workflow-studio-experience",
+      "path": "images/04-workflow-studio-experience.png",
+      "source_path": "/home/administrator/.codex/generated_images/019ef01b-e7a7-78b0-9a84-62cb08b4fc29/ig_01a16321293420af016a3d0242b0fc819196f1814162d8828e.png",
+      "file_size_bytes": 1258148
+    },
+    {
+      "id": "05-evidence-governance-loop",
+      "path": "images/05-evidence-governance-loop.png",
+      "source_path": "/home/administrator/.codex/generated_images/019ef01b-e7a7-78b0-9a84-62cb08b4fc29/ig_0a40af7daf8c2b69016a3d02ad0b708191b21a5ec5f1b409fd.png",
+      "file_size_bytes": 1341684
+    },
+    {
+      "id": "06-extension-ecosystem",
+      "path": "images/06-extension-ecosystem.png",
+      "source_path": "/home/administrator/.codex/generated_images/019ef01b-e7a7-78b0-9a84-62cb08b4fc29/ig_09046890afaba5f3016a3d031d11bc8191914372fce6de9ed0.png",
+      "file_size_bytes": 1408332
+    },
+    {
+      "id": "07-runtime-ops-and-observability",
+      "path": "images/07-runtime-ops-and-observability.png",
+      "source_path": "/home/administrator/.codex/generated_images/019ef01b-e7a7-78b0-9a84-62cb08b4fc29/ig_03da765ca4f708d2016a3d038502148191b33f53e5b348c7b9.png",
+      "file_size_bytes": 1314137
+    },
+    {
+      "id": "08-application-prospects",
+      "path": "images/08-application-prospects.png",
+      "source_path": "/home/administrator/.codex/generated_images/019ef01b-e7a7-78b0-9a84-62cb08b4fc29/ig_015917d4f531620e016a3d03f27748819181b28a8f7085d571.png",
+      "file_size_bytes": 1482853
+    },
+    {
+      "id": "09-application-scenario-map",
+      "path": "images/09-application-scenario-map.png",
+      "source_path": "/home/administrator/.codex/generated_images/019efe6e-2559-7c41-9c22-963277775ab3/ig_01fdc19a058876e3016a3d0d615bac8191a19a5f54afb337bb.png",
+      "file_size_bytes": 1425064
+    },
+    {
+      "id": "10-application-scenario-radar",
+      "path": "images/10-application-scenario-radar.png",
+      "source_path": "/home/administrator/.codex/generated_images/019efe6e-2559-7c41-9c22-963277775ab3/ig_04779748456ffcc0016a3d0ec2446c8191bc512ca38bebbb61.png",
+      "file_size_bytes": 1514473
+    },
+    {
+      "id": "11-ai-studio",
+      "path": "images/11-ai-studio.png",
+      "source_path": "/home/administrator/.codex/generated_images/019efe6e-2559-7c41-9c22-963277775ab3/ig_020e545bcbdce252016a3d290a49f48191bf3bddf717bb14fc.png",
+      "file_size_bytes": 1706355
+    },
+    {
+      "id": "12-code-doc-review",
+      "path": "images/12-code-doc-review.png",
+      "source_path": "/home/administrator/.codex/generated_images/019efe6e-2559-7c41-9c22-963277775ab3/ig_020e545bcbdce252016a3d294ab688819189cc48926085ae14.png",
+      "file_size_bytes": 1292648
+    },
+    {
+      "id": "13-knowledge-workflow",
+      "path": "images/13-knowledge-workflow.png",
+      "source_path": "/home/administrator/.codex/generated_images/019efe6e-2559-7c41-9c22-963277775ab3/ig_020e545bcbdce252016a3d298e20788191a6a6a3b70447aed9.png",
+      "file_size_bytes": 1527832
+    },
+    {
+      "id": "14-content-storyboard",
+      "path": "images/14-content-storyboard.png",
+      "source_path": "/home/administrator/.codex/generated_images/019efe6e-2559-7c41-9c22-963277775ab3/ig_020e545bcbdce252016a3d29cc5dc88191927e1cf6022842bd.png",
+      "file_size_bytes": 1403603
+    },
+    {
+      "id": "15-extension-ecosystem-scenario",
+      "path": "images/15-extension-ecosystem-scenario.png",
+      "source_path": "/home/administrator/.codex/generated_images/019efe6e-2559-7c41-9c22-963277775ab3/ig_020e545bcbdce252016a3d2a10f790819191558503f46cd685.png",
+      "file_size_bytes": 1492613
+    },
+    {
+      "id": "16-ops-compliance",
+      "path": "images/16-ops-compliance.png",
+      "source_path": "/home/administrator/.codex/generated_images/019efe6e-2559-7c41-9c22-963277775ab3/ig_020e545bcbdce252016a3d2a51908c8191ad072f6b64df1788.png",
+      "file_size_bytes": 1490489
+    },
+    {
+      "id": "17-recruiting-interview",
+      "path": "images/17-recruiting-interview.png",
+      "source_path": "/home/administrator/.codex/generated_images/019efe6e-2559-7c41-9c22-963277775ab3/ig_020e545bcbdce252016a3d2a9049108191b4e66b0a4b017168.png",
+      "file_size_bytes": 1238011
+    },
+    {
+      "id": "18-investment-research",
+      "path": "images/18-investment-research.png",
+      "source_path": "/home/administrator/.codex/generated_images/019efe6e-2559-7c41-9c22-963277775ab3/ig_020e545bcbdce252016a3d2ad5933081918b423002768b5cfc.png",
+      "file_size_bytes": 1285546
+    },
+    {
+      "id": "19-sales-customer-ops",
+      "path": "images/19-sales-customer-ops.png",
+      "source_path": "/home/administrator/.codex/generated_images/019efe6e-2559-7c41-9c22-963277775ab3/ig_020e545bcbdce252016a3d2b11e0d88191872c0dabf72fd751.png",
+      "file_size_bytes": 1321170
+    },
+    {
+      "id": "20-legal-finance-workflow",
+      "path": "images/20-legal-finance-workflow.png",
+      "source_path": "/home/administrator/.codex/generated_images/019efe6e-2559-7c41-9c22-963277775ab3/ig_020e545bcbdce252016a3d2b61fd1081919bd67e396064ade0.png",
+      "file_size_bytes": 1764463
+    },
+    {
+      "id": "21-education-research",
+      "path": "images/21-education-research.png",
+      "source_path": "/home/administrator/.codex/generated_images/019efe6e-2559-7c41-9c22-963277775ab3/ig_020e545bcbdce252016a3d2ba7b3288191b9e9e9997efe831a.png",
+      "file_size_bytes": 1714138
+    },
+    {
+      "id": "22-private-operations",
+      "path": "images/22-private-operations.png",
+      "source_path": "/home/administrator/.codex/generated_images/019efe6e-2559-7c41-9c22-963277775ab3/ig_020e545bcbdce252016a3d2c14de84819186760047cf0ec743.png",
+      "file_size_bytes": 1669584
+    }
+  ]
+}

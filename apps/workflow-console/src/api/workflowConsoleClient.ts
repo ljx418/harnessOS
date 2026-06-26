@@ -22,6 +22,15 @@ import type {
   OperationEvidenceRecord,
   PatchQueueDTO,
   PatchActionResult,
+  PV17EntityMutationResultDTO,
+  PV17EvidenceSummaryDTO,
+  PV17ProductConsoleStateDTO,
+  PV17PublishResultDTO,
+  PV17RunConfirmResultDTO,
+  PV17RuntimeInspectDTO,
+  PV17StudioWorkflowDTO,
+  PV17SystemHealthDTO,
+  PV17WorkflowPatchResultDTO,
   PublishVersionResult,
   QualitySummary,
   WorkflowPatchDiff,
@@ -37,6 +46,88 @@ import type {
 
 export class WorkflowConsoleClient {
   constructor(private readonly basePath = "/bff") {}
+
+  getPV17SystemHealth(): Promise<PV17SystemHealthDTO> {
+    return this.get<PV17SystemHealthDTO>(this.pv17Path("/pv17/system/health"));
+  }
+
+  getPV17ProductConsoleState(): Promise<PV17ProductConsoleStateDTO> {
+    return this.get<PV17ProductConsoleStateDTO>(this.pv17Path("/pv17/product-console/state"));
+  }
+
+  mutatePV17Entity(
+    entityRoute: "workspaces" | "projects" | "apps" | "station-agents",
+    payload: {
+      scope?: Record<string, unknown>;
+      entity_kind: string;
+      operation: string;
+      user_confirmed: true;
+      source: "product_console" | "workflow_console" | "mission_studio";
+      idempotency_key: string;
+      payload: Record<string, unknown>;
+    },
+  ): Promise<PV17EntityMutationResultDTO> {
+    return this.post<PV17EntityMutationResultDTO>(this.pv17Path(`/pv17/entities/${entityRoute}`), payload);
+  }
+
+  getPV17StudioWorkflow(templateId: string): Promise<PV17StudioWorkflowDTO> {
+    return this.get<PV17StudioWorkflowDTO>(this.pv17Path(`/pv17/studio/workflows/${encodeURIComponent(templateId)}`));
+  }
+
+  proposePV17Patch(templateId: string, payload: CanvasPatchIntent): Promise<PV17WorkflowPatchResultDTO> {
+    return this.post<PV17WorkflowPatchResultDTO>(
+      this.pv17Path(`/pv17/studio/workflows/${encodeURIComponent(templateId)}/patches`),
+      payload as unknown as Record<string, unknown>,
+    );
+  }
+
+  publishPV17Workflow(
+    templateId: string,
+    payload: {
+      user_confirmed: true;
+      source: "editing_panel" | "workflow_console" | "mission_studio";
+      idempotency_key: string;
+      expected_draft_revision: number;
+      version: string;
+    },
+  ): Promise<PV17PublishResultDTO> {
+    return this.post<PV17PublishResultDTO>(this.pv17Path(`/pv17/studio/workflows/${encodeURIComponent(templateId)}/publish`), payload);
+  }
+
+  confirmPV17Run(
+    templateId: string,
+    payload: {
+      user_confirmed: true;
+      source: "run_panel" | "workflow_console" | "mission_studio";
+      idempotency_key: string;
+      workflow_template_id: string;
+      workflow_version_id: string;
+      input?: Record<string, unknown>;
+    },
+  ): Promise<PV17RunConfirmResultDTO> {
+    return this.post<PV17RunConfirmResultDTO>(this.pv17Path(`/pv17/runtime/workflows/${encodeURIComponent(templateId)}/confirm-run`), payload);
+  }
+
+  inspectPV17Instance(instanceId: string): Promise<PV17RuntimeInspectDTO> {
+    return this.get<PV17RuntimeInspectDTO>(this.pv17Path(`/pv17/runtime/instances/${encodeURIComponent(instanceId)}/inspect`));
+  }
+
+  getPV17EvidenceSummary(instanceId: string): Promise<PV17EvidenceSummaryDTO> {
+    return this.get<PV17EvidenceSummaryDTO>(this.pv17Path(`/pv17/evidence/instances/${encodeURIComponent(instanceId)}/summary`));
+  }
+
+  private pv17Path(path: string): string {
+    const scope = this.pv17ScopeQuery();
+    return `${path}${path.includes("?") ? "&" : "?"}${scope}`;
+  }
+
+  private pv17ScopeQuery(): string {
+    const params = typeof window === "undefined" ? null : new URLSearchParams(window.location.search);
+    const appId = params?.get("app_id") || "reference_app";
+    const projectId = params?.get("project_id") || "demo_a";
+    const workspaceId = params?.get("workspace_id") || "local";
+    return new URLSearchParams({ app_id: appId, project_id: projectId, workspace_id: workspaceId }).toString();
+  }
 
   listWorkflows(): Promise<WorkflowSummary[]> {
     return this.get<WorkflowSummary[]>("/workflows");
@@ -503,7 +594,10 @@ export class WorkflowConsoleClient {
   }
 }
 
-export const workflowConsoleClient = new WorkflowConsoleClient();
+const defaultBffBasePath =
+  ((import.meta as unknown as { env?: Record<string, string | undefined> }).env?.VITE_BFF_BASE_URL || "").trim() || "/bff";
+
+export const workflowConsoleClient = new WorkflowConsoleClient(defaultBffBasePath);
 
 const EVENT_SOURCE_TYPES = [
   "workflow.instance.started",

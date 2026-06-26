@@ -1,0 +1,71 @@
+{
+  "schema_version": "pv17.product_closed_loop_acceptance_data.v1",
+  "stage_id": "PV17-SA",
+  "status": "PASS",
+  "allowed_claim": "PV17 complete: product closed loop implementation ready for bounded review.",
+  "runtime_backed": true,
+  "browser_backed": true,
+  "bff_backed": true,
+  "dto_backed": true,
+  "stage_results": [
+    {
+      "stage_id": "PV17-S1-product-console",
+      "status": "PASS",
+      "user_visible_result": "用户看到当前产品上下文与系统健康状态。",
+      "evidence_refs": [
+        "product-console-report.json",
+        "product-console-screenshot.png"
+      ],
+      "blocking_failures": []
+    },
+    {
+      "stage_id": "PV17-S2-entity-mutation",
+      "status": "PASS",
+      "user_visible_result": "用户配置 Station Agent，并看到 accepted 与 denial evidence。",
+      "evidence_refs": [
+        "entity-mutation-report.json"
+      ],
+      "blocking_failures": []
+    },
+    {
+      "stage_id": "PV17-S3-studio-versioning",
+      "status": "PASS",
+      "user_visible_result": "用户提出 patch 并确认发布 WorkflowVersion。",
+      "evidence_refs": [
+        "studio-workflow-version-report.json"
+      ],
+      "blocking_failures": []
+    },
+    {
+      "stage_id": "PV17-S4-runtime-inspect",
+      "status": "PASS",
+      "user_visible_result": "用户确认运行并看到 runtime、trace、artifact、quality、approval refs。",
+      "evidence_refs": [
+        "runtime-run-inspect-report.json",
+        "studio-run-inspect-screenshot.png"
+      ],
+      "blocking_failures": []
+    },
+    {
+      "stage_id": "PV17-S5-evidence-review",
+      "status": "PASS",
+      "user_visible_result": "用户打开 Evidence Review 并看到 claim-to-evidence 与边界扫描结果。",
+      "evidence_refs": [
+        "evidence-review-report.json",
+        "evidence-review-screenshot.png"
+      ],
+      "blocking_failures": []
+    },
+    {
+      "stage_id": "PV17-SA-aggregate",
+      "status": "PASS",
+      "user_visible_result": "Reviewer 可用 acceptance runner 接受 bounded 产品闭环实现结论。",
+      "evidence_refs": [
+        "artifact-manifest.json",
+        "audit-closure.md"
+      ],
+      "blocking_failures": []
+    }
+  ],
+  "created_at": "2026-06-26T02:34:53.304Z"
+}

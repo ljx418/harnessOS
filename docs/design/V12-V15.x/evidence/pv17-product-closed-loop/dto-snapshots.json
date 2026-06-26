@@ -1,0 +1,624 @@
+{
+  "schema_version": "pv17.dto_snapshots.v1",
+  "status": "PASS",
+  "snapshots": {
+    "S1": {
+      "schema_version": "pv17.product_closed_loop.v1",
+      "status": "ok",
+      "api_status": "ok",
+      "gateway_status": "ok",
+      "workflow_store_status": "ok",
+      "frontend_config_status": "ok",
+      "method_count": 102,
+      "scope": {
+        "app_id": "reference_app",
+        "project_id": "demo_a",
+        "workspace_id": "local"
+      },
+      "created_at": "2026-06-26T02:34:53.469995Z",
+      "redaction_status": "redacted"
+    },
+    "S2": {
+      "schema_version": "pv17.product_closed_loop.v1",
+      "status": "accepted",
+      "entity_ref": {
+        "entity_kind": "station_agent",
+        "entity_id": "station_agent:pv17-reviewer",
+        "scope": {
+          "app_id": "reference_app",
+          "project_id": "demo_a",
+          "workspace_id": "local"
+        }
+      },
+      "entity": {
+        "entity_kind": "station_agent",
+        "entity_id": "station_agent:pv17-reviewer",
+        "display_name": "PV17 审查 Station Agent",
+        "scope": {
+          "app_id": "reference_app",
+          "project_id": "demo_a",
+          "workspace_id": "local"
+        },
+        "role": "reviewer",
+        "goal": "审查运行、证据和 No-Go 边界。",
+        "memory_refs": [],
+        "model_refs": [
+          "model:redacted"
+        ],
+        "tool_refs": [],
+        "skill_refs": [
+          "governance.review"
+        ],
+        "mcp_refs": [],
+        "audit_refs": [
+          {
+            "audit_ref_id": "pv17:audit:product_entity.station_agent.upsert:reference_app|demo_a|local:station_agent:pv17-reviewer",
+            "operation": "product_entity.station_agent.upsert",
+            "scope": {
+              "app_id": "reference_app",
+              "project_id": "demo_a",
+              "workspace_id": "local"
+            },
+            "entity_id": "station_agent:pv17-reviewer",
+            "created_at": "2026-06-26T02:34:54.223292Z",
+            "redaction_status": "redacted"
+          }
+        ],
+        "updated_at": "2026-06-26T02:34:54.223302Z",
+        "redaction_status": "redacted"
+      },
+      "audit_ref": {
+        "audit_ref_id": "pv17:audit:product_entity.station_agent.upsert:reference_app|demo_a|local:station_agent:pv17-reviewer",
+        "operation": "product_entity.station_agent.upsert",
+        "scope": {
+          "app_id": "reference_app",
+          "project_id": "demo_a",
+          "workspace_id": "local"
+        },
+        "entity_id": "station_agent:pv17-reviewer",
+        "created_at": "2026-06-26T02:34:54.223292Z",
+        "redaction_status": "redacted"
+      },
+      "policy_decision_ref": "pv17:policy:reference_app|demo_a|local:pv17-agent-1782441294085",
+      "denied_reason": null,
+      "redaction_status": "redacted"
+    },
+    "S3": {
+      "schema_version": "pv17.product_closed_loop.v1",
+      "status": "published",
+      "publish": {
+        "workflow_template_id": "pv17_product_closed_loop_reference",
+        "workflow_draft_id": "wfd_23681c7fcdca",
+        "draft_status": "published",
+        "draft_revision": 2,
+        "workflow_version_id": "wfv_494349b6f1ee",
+        "version": "pv17-1782441294219"
+      },
+      "audit_refs": [
+        {
+          "audit_ref_id": "pv17:audit:workflow.template.publish:reference_app|demo_a|local:pv17_product_closed_loop_reference",
+          "operation": "workflow.template.publish",
+          "scope": {
+            "app_id": "reference_app",
+            "project_id": "demo_a",
+            "workspace_id": "local"
+          },
+          "entity_id": "pv17_product_closed_loop_reference",
+          "created_at": "2026-06-26T02:34:54.356451Z",
+          "redaction_status": "redacted"
+        }
+      ],
+      "redaction_status": "redacted"
+    },
+    "S4": {
+      "schema_version": "pv17.product_closed_loop.v1",
+      "workflow_instance": {
+        "workflow_instance_id": "wfi_00fdd090a582",
+        "workflow_template_id": "pv17_product_closed_loop_reference",
+        "workflow_version_id": "wfv_494349b6f1ee",
+        "status": "waiting_approval"
+      },
+      "status": {
+        "workflow_instance_id": "wfi_00fdd090a582",
+        "status": "waiting_approval",
+        "current_station_ids": [
+          "station_c"
+        ],
+        "station_counts": {
+          "completed": 2,
+          "waiting_approval": 1
+        },
+        "job_counts": {},
+        "artifact_count": 0,
+        "quality_count": 2
+      },
+      "station_runs": [
+        {
+          "station_run_id": "sr_a830267c5535",
+          "workflow_instance_id": "wfi_00fdd090a582",
+          "station_id": "station_a",
+          "status": "completed",
+          "attempt": 1,
+          "rerun_of_station_run_id": null,
+          "job_id": "job_4a05ca82f02f",
+          "input_artifact_ids": [],
+          "output_artifact_ids": [
+            "art_6c7697cae5ee"
+          ],
+          "input_bindings": {},
+          "output_bindings": {
+            "a_out": [
+              "art_6c7697cae5ee"
+            ]
+          },
+          "quality_evaluation_ids": [
+            "qe_9ea798252891"
+          ],
+          "failure_context": {},
+          "trace_id": "trace_0bc64d51c969",
+          "started_at": "2026-06-26T02:34:54.406259Z",
+          "completed_at": "2026-06-26T02:34:54.458973Z",
+          "metadata": {
+            "station_name": "Collect Input",
+            "workflow_version_id": "wfv_494349b6f1ee",
+            "station_contracts": {
+              "input_contracts": [],
+              "output_contracts": [
+                {
+                  "contract_id": "a_out",
+                  "artifact_kind": "dummy.alpha",
+                  "direction": "output",
+                  "required": true,
+                  "cardinality": "one",
+                  "kind_match_policy": "exact",
+                  "schema_ref": null,
+                  "metadata_schema": {},
+                  "preview_policy": {},
+                  "large_file_policy_ref": null,
+                  "metadata": {}
+                }
+              ]
+            }
+          }
+        },
+        {
+          "station_run_id": "sr_3745a3b6f429",
+          "workflow_instance_id": "wfi_00fdd090a582",
+          "station_id": "station_b",
+          "status": "completed",
+          "attempt": 1,
+          "rerun_of_station_run_id": null,
+          "job_id": "job_15c879ee7528",
+          "input_artifact_ids": [
+            "art_6c7697cae5ee"
+          ],
+          "output_artifact_ids": [
+            "art_d7c97501964b"
+          ],
+          "input_bindings": {
+            "b_in": [
+              "art_6c7697cae5ee"
+            ]
+          },
+          "output_bindings": {
+            "b_out": [
+              "art_d7c97501964b"
+            ]
+          },
+          "quality_evaluation_ids": [
+            "qe_780887e14155"
+          ],
+          "failure_context": {},
+          "trace_id": "trace_71d1eafdee86",
+          "started_at": "2026-06-26T02:34:54.464218Z",
+          "completed_at": "2026-06-26T02:34:54.499452Z",
+          "metadata": {
+            "station_name": "Transform Input",
+            "workflow_version_id": "wfv_494349b6f1ee",
+            "station_contracts": {
+              "input_contracts": [
+                {
+                  "contract_id": "b_in",
+                  "artifact_kind": "dummy.alpha",
+                  "direction": "input",
+                  "required": true,
+                  "cardinality": "one",
+                  "kind_match_policy": "exact",
+                  "schema_ref": null,
+                  "metadata_schema": {},
+                  "preview_policy": {},
+                  "large_file_policy_ref": null,
+                  "metadata": {}
+                }
+              ],
+              "output_contracts": [
+                {
+                  "contract_id": "b_out",
+                  "artifact_kind": "dummy.beta",
+                  "direction": "output",
+                  "required": true,
+                  "cardinality": "one",
+                  "kind_match_policy": "exact",
+                  "schema_ref": null,
+                  "metadata_schema": {},
+                  "preview_policy": {},
+                  "large_file_policy_ref": null,
+                  "metadata": {}
+                }
+              ]
+            }
+          }
+        },
+        {
+          "station_run_id": "sr_26f3096a342e",
+          "workflow_instance_id": "wfi_00fdd090a582",
+          "station_id": "station_c",
+          "status": "waiting_approval",
+          "attempt": 1,
+          "rerun_of_station_run_id": null,
+          "job_id": null,
+          "input_artifact_ids": [
+            "art_d7c97501964b"
+          ],
+          "output_artifact_ids": [],
+          "input_bindings": {
+            "c_in": [
+              "art_d7c97501964b"
+            ]
+          },
+          "output_bindings": {},
+          "quality_evaluation_ids": [],
+          "failure_context": {},
+          "trace_id": "trace_e54e85cd6b89",
+          "started_at": null,
+          "completed_at": null,
+          "metadata": {
+            "station_name": "Human Gate",
+            "workflow_version_id": "wfv_494349b6f1ee",
+            "station_contracts": {
+              "input_contracts": [
+                {
+                  "contract_id": "c_in",
+                  "artifact_kind": "dummy.beta",
+                  "direction": "input",
+                  "required": true,
+                  "cardinality": "one",
+                  "kind_match_policy": "exact",
+                  "schema_ref": null,
+                  "metadata_schema": {},
+                  "preview_policy": {},
+                  "large_file_policy_ref": null,
+                  "metadata": {}
+                }
+              ],
+              "output_contracts": [
+                {
+                  "contract_id": "c_out",
+                  "artifact_kind": "dummy.final",
+                  "direction": "output",
+                  "required": true,
+                  "cardinality": "one",
+                  "kind_match_policy": "exact",
+                  "schema_ref": null,
+                  "metadata_schema": {},
+                  "preview_policy": {},
+                  "large_file_policy_ref": null,
+                  "metadata": {}
+                }
+              ]
+            },
+            "approval_id": "appr_206d9165e20c"
+          }
+        }
+      ],
+      "runtime_event_refs": [
+        {
+          "event_ref": "workflow.instance:wfi_00fdd090a582",
+          "event_type": "workflow.instance.waiting_approval",
+          "workflow_instance_id": "wfi_00fdd090a582"
+        },
+        {
+          "event_ref": "station.run:sr_a830267c5535",
+          "event_type": "station.run.completed",
+          "workflow_instance_id": "wfi_00fdd090a582",
+          "station_run_id": "sr_a830267c5535"
+        },
+        {
+          "event_ref": "station.run:sr_3745a3b6f429",
+          "event_type": "station.run.completed",
+          "workflow_instance_id": "wfi_00fdd090a582",
+          "station_run_id": "sr_3745a3b6f429"
+        },
+        {
+          "event_ref": "station.run:sr_26f3096a342e",
+          "event_type": "station.run.waiting_approval",
+          "workflow_instance_id": "wfi_00fdd090a582",
+          "station_run_id": "sr_26f3096a342e"
+        }
+      ],
+      "trace_refs": [
+        {
+          "trace_id": "trace_8e0f3dad33dc",
+          "workflow_instance_id": "wfi_00fdd090a582"
+        },
+        {
+          "trace_id": "trace_adf5aaef7ff9",
+          "event_type": "workflow.template.created"
+        },
+        {
+          "trace_id": "trace_8aa3ca5c398c",
+          "event_type": "workflow.template.published"
+        },
+        {
+          "trace_id": "trace_9d663af9a099",
+          "event_type": "station.run.completed"
+        },
+        {
+          "trace_id": "trace_437bf33affa9",
+          "event_type": "station.run.completed"
+        },
+        {
+          "trace_id": "trace_42e7750a86c5",
+          "event_type": "approval.request"
+        },
+        {
+          "trace_id": "trace_c8bd09389c88",
+          "event_type": "station.run.waiting_approval"
+        },
+        {
+          "trace_id": "trace_5cb4025ca0f3",
+          "event_type": "workflow.instance.started"
+        },
+        {
+          "trace_id": "trace_e69ba10240e8",
+          "event_type": "quality.evaluation.created"
+        },
+        {
+          "trace_id": "trace_5a4c47428408",
+          "event_type": "workflow.template.draft_updated"
+        },
+        {
+          "trace_id": "trace_730ba4e1dbc4",
+          "event_type": "workflow.patch.proposed"
+        },
+        {
+          "trace_id": "trace_38c06b9296e8",
+          "event_type": "workflow.patch.proposed"
+        },
+        {
+          "trace_id": "trace_d4cc47f4fd2b",
+          "event_type": "workflow.template.published"
+        },
+        {
+          "trace_id": "trace_06842928a4ae",
+          "event_type": "station.run.completed"
+        },
+        {
+          "trace_id": "trace_10161c4094a9",
+          "event_type": "station.run.completed"
+        },
+        {
+          "trace_id": "trace_e54e85cd6b89",
+          "event_type": "approval.request"
+        },
+        {
+          "trace_id": "trace_240f2e75846b",
+          "event_type": "station.run.waiting_approval"
+        },
+        {
+          "trace_id": "trace_5a0b3576d1b5",
+          "event_type": "workflow.instance.started"
+        },
+        {
+          "trace_id": "trace_d74454584250",
+          "event_type": "quality.evaluation.created"
+        },
+        {
+          "trace_id": "trace_fb85532bbc36",
+          "event_type": "quality.evaluation.created"
+        }
+      ],
+      "artifact_refs": [
+        {
+          "artifact_ref": "art_6c7697cae5ee",
+          "kind": "dummy.alpha",
+          "name": "station_a-a_out.json"
+        },
+        {
+          "artifact_ref": "art_d7c97501964b",
+          "kind": "dummy.beta",
+          "name": "station_b-b_out.json"
+        }
+      ],
+      "quality_refs": [
+        {
+          "quality_ref": "qe_9ea798252891",
+          "status": "passed",
+          "station_run_id": "sr_a830267c5535"
+        },
+        {
+          "quality_ref": "qe_780887e14155",
+          "status": "passed",
+          "station_run_id": "sr_3745a3b6f429"
+        }
+      ],
+      "approval_refs": [
+        {
+          "approval_ref": "appr_206d9165e20c",
+          "status": "pending",
+          "station_id": null
+        }
+      ],
+      "audit_refs": [
+        {
+          "audit_ref_id": "pv17:audit:runtime.instance.inspect:reference_app|demo_a|local:wfi_00fdd090a582",
+          "operation": "runtime.instance.inspect",
+          "scope": {
+            "app_id": "reference_app",
+            "project_id": "demo_a",
+            "workspace_id": "local"
+          },
+          "entity_id": "wfi_00fdd090a582",
+          "created_at": "2026-06-26T02:34:54.625416Z",
+          "redaction_status": "redacted"
+        }
+      ],
+      "redaction_status": "redacted"
+    },
+    "S5": {
+      "schema_version": "pv17.product_closed_loop.v1",
+      "claims": [
+        {
+          "claim": "正式 /bff/pv17 runtime inspect 可以读取 runtime refs。",
+          "evidence_refs": [
+            "workflow.instance:wfi_00fdd090a582",
+            "station.run:sr_a830267c5535",
+            "station.run:sr_3745a3b6f429",
+            "station.run:sr_26f3096a342e"
+          ],
+          "status": "supported"
+        },
+        {
+          "claim": "Evidence review 只汇总 trace/artifact/quality refs，不构造 runtime truth。",
+          "evidence_refs": [
+            "art_6c7697cae5ee",
+            "art_d7c97501964b"
+          ],
+          "status": "supported"
+        }
+      ],
+      "route_boundary": {
+        "allowed_prefix": "/bff/pv17",
+        "browser_denylist": [
+          "/v1/rpc",
+          "/internal/runtime",
+          "/runtime/store",
+          "/api/runtime",
+          "/debug/runtime"
+        ],
+        "status": "specified"
+      },
+      "redaction": {
+        "status": "redacted",
+        "provider_payload_allowed": false,
+        "artifact_content_allowed": false
+      },
+      "artifact_lineage": {
+        "artifact_refs": [
+          {
+            "artifact_ref": "art_6c7697cae5ee",
+            "kind": "dummy.alpha",
+            "name": "station_a-a_out.json"
+          },
+          {
+            "artifact_ref": "art_d7c97501964b",
+            "kind": "dummy.beta",
+            "name": "station_b-b_out.json"
+          }
+        ]
+      },
+      "trace_timeline": {
+        "trace_refs": [
+          {
+            "trace_id": "trace_8e0f3dad33dc",
+            "workflow_instance_id": "wfi_00fdd090a582"
+          },
+          {
+            "trace_id": "trace_adf5aaef7ff9",
+            "event_type": "workflow.template.created"
+          },
+          {
+            "trace_id": "trace_8aa3ca5c398c",
+            "event_type": "workflow.template.published"
+          },
+          {
+            "trace_id": "trace_9d663af9a099",
+            "event_type": "station.run.completed"
+          },
+          {
+            "trace_id": "trace_437bf33affa9",
+            "event_type": "station.run.completed"
+          },
+          {
+            "trace_id": "trace_42e7750a86c5",
+            "event_type": "approval.request"
+          },
+          {
+            "trace_id": "trace_c8bd09389c88",
+            "event_type": "station.run.waiting_approval"
+          },
+          {
+            "trace_id": "trace_5cb4025ca0f3",
+            "event_type": "workflow.instance.started"
+          },
+          {
+            "trace_id": "trace_e69ba10240e8",
+            "event_type": "quality.evaluation.created"
+          },
+          {
+            "trace_id": "trace_5a4c47428408",
+            "event_type": "workflow.template.draft_updated"
+          },
+          {
+            "trace_id": "trace_730ba4e1dbc4",
+            "event_type": "workflow.patch.proposed"
+          },
+          {
+            "trace_id": "trace_38c06b9296e8",
+            "event_type": "workflow.patch.proposed"
+          },
+          {
+            "trace_id": "trace_d4cc47f4fd2b",
+            "event_type": "workflow.template.published"
+          },
+          {
+            "trace_id": "trace_06842928a4ae",
+            "event_type": "station.run.completed"
+          },
+          {
+            "trace_id": "trace_10161c4094a9",
+            "event_type": "station.run.completed"
+          },
+          {
+            "trace_id": "trace_e54e85cd6b89",
+            "event_type": "approval.request"
+          },
+          {
+            "trace_id": "trace_240f2e75846b",
+            "event_type": "station.run.waiting_approval"
+          },
+          {
+            "trace_id": "trace_5a0b3576d1b5",
+            "event_type": "workflow.instance.started"
+          },
+          {
+            "trace_id": "trace_d74454584250",
+            "event_type": "quality.evaluation.created"
+          },
+          {
+            "trace_id": "trace_fb85532bbc36",
+            "event_type": "quality.evaluation.created"
+          }
+        ]
+      },
+      "missing_evidence": [],
+      "allowed_claim": "PV17 complete: product closed loop implementation ready for bounded review.",
+      "audit_refs": [
+        {
+          "audit_ref_id": "pv17:audit:evidence.summary.read:reference_app|demo_a|local:wfi_00fdd090a582",
+          "operation": "evidence.summary.read",
+          "scope": {
+            "app_id": "reference_app",
+            "project_id": "demo_a",
+            "workspace_id": "local"
+          },
+          "entity_id": "wfi_00fdd090a582",
+          "created_at": "2026-06-26T02:34:54.771902Z",
+          "redaction_status": "redacted"
+        }
+      ],
+      "redaction_status": "redacted"
+    }
+  },
+  "created_at": "2026-06-26T02:34:53.304Z"
+}

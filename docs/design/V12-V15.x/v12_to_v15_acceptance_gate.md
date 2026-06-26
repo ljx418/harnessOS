@@ -227,3 +227,44 @@ closed for the bounded pilot because real PV16 evidence exists under
 PV16 evidence must not be used to claim production ready, complete Workflow
 Studio ready, Agent executor ready, product-grade frontend complete or Xpert
 parity.
+
+## Post-PV16 PV17 Acceptance Gate
+
+The selected post-PV16 stage was PV17 Product Closed Loop. PV17 bounded review
+acceptance has passed. The following documentation gate was required before
+implementation and now remains as audit trace:
+
+- `pv17_product_closed_loop_prd.md` exists;
+- `pv17_product_closed_loop_target_architecture.md` exists;
+- `pv17_product_closed_loop_bff_dto_contract.md` exists;
+- `pv17_product_closed_loop_implementation_task_matrix.md` exists;
+- `pv17_product_closed_loop_development_and_acceptance_plan.md` exists;
+- `pv17_product_closed_loop_acceptance_runner_spec.md` exists;
+- `pv17_product_closed_loop_milestone_roadmap.md` exists;
+- `pv17_product_closed_loop_acceptance_gate.md` exists;
+- `pv17_product_closed_loop_current_gap_analysis.md` exists;
+- `pv17_product_closed_loop_implementation_readiness_audit.md` exists;
+- `pv17_product_closed_loop_gap_analysis.drawio` exists and has no more than
+  8 pages;
+- all PV17 documents state that PV16 `/bff/pv16/*` routes are test-only
+  evidence routes, not formal product API proof;
+- No False Green and redaction boundaries remain explicit.
+
+PV17 implementation evidence is recorded under
+`evidence/pv17-product-closed-loop/`, and
+`reports/pv17_product_closed_loop_acceptance_report.json` reports PASS. This
+does not upgrade HarnessOS to production ready, complete Workflow Studio ready,
+Agent executor ready, Xpert parity complete or product-grade frontend complete.
+
+The historical PV17 documentation gate only supported this document-stage
+claim before implementation:
+
+```text
+PV17 product closed loop documentation ready for implementation review.
+```
+
+The current accepted PV17 claim is narrower and evidence-backed:
+
+```text
+PV17 complete: product closed loop implementation ready for bounded review.
+```

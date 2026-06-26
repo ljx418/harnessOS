@@ -1,0 +1,39 @@
+{
+  "schema_version": "harnessos.project_presentation.validation_report.v1",
+  "created_at": "2026-06-25T18:25:00+08:00",
+  "overall_status": "PASS_WITH_HOST_NATIVE_IMAGE_EXPORT",
+  "checks": [
+    {
+      "name": "json_parse",
+      "status": "PASS",
+      "details": "project-status.json, sources.json, image-manifest.json and local-export-check.json parse successfully."
+    },
+    {
+      "name": "html_entry",
+      "status": "PASS",
+      "details": "index.html exists and references the 22 persisted image files."
+    },
+    {
+      "name": "host_native_image_generation",
+      "status": "PASS",
+      "details": "Codex CLI 0.142.2 host-native image generation persisted files under ~/.codex/generated_images/<thread-id>/."
+    },
+    {
+      "name": "image_files",
+      "status": "PASS",
+      "details": "22 PNG content images are written under images/."
+    },
+    {
+      "name": "false_green_claim_scan",
+      "status": "PASS",
+      "details": "Forbidden claim terms only appear in explicit No-Go or boundary contexts such as 不得宣称 and 不证明."
+    },
+    {
+      "name": "documentation_scope",
+      "status": "PASS",
+      "details": "The pack states that it is documentation-only and does not replace runtime, BFF, DTO or browser implementation evidence."
+    }
+  ],
+  "required_closure": "None for this documentation-only presentation pack.",
+  "review_note": "This package has 22 persisted host-native gpt-image-2 content images and passed JSON, PNG, screenshot and No False Green validation."
+}

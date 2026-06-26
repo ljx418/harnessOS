@@ -1,0 +1,239 @@
+{
+  "schema_version": "harnessos.project_presentation.image_manifest.v1",
+  "created_at": "2026-06-25T18:25:00+08:00",
+  "generator_required": "host-native imag2 capability via Codex image_gen / gpt-image-2",
+  "generation_status": "PASS_HOST_NATIVE_GPT_IMAGE_2_PERSISTED",
+  "environment_check": {
+    "codex_cli_version": "codex-cli 0.142.2",
+    "image_generation_feature": "enabled",
+    "imagegenext_feature": "disabled",
+    "default_source_directory": "See per-image source_path values; images were generated across Codex generated_images directories.",
+    "terminal_cli_status": "not required for this pass",
+    "host_native_status": "PASS",
+    "local_export_status": "PASS",
+    "local_export_output": "22 PNG files are persisted under docs/present/harnessos-project-introduction/images/."
+  },
+  "rule": "Only PNG files persisted under images/ count as generated documentation artifacts for this presentation pack.",
+  "images": [
+    {
+      "id": "01-capability-status-map",
+      "path": "images/01-capability-status-map.png",
+      "prompt": "prompts/01-capability-status-map.md",
+      "status": "GENERATED_GPT_IMAGE_2_PERSISTED",
+      "purpose": "当前可完成功能分类：已验收、受限完成、规划中、No-Go",
+      "generator": "host_native_gpt_image_2",
+      "source_path": "/home/administrator/.codex/generated_images/019ef01b-e7a7-78b0-9a84-62cb08b4fc29/ig_0f82b94463fae461016a3d00a53cb48191a9439ed601660e72.png",
+      "file_size_bytes": 1475786
+    },
+    {
+      "id": "02-target-architecture-map",
+      "path": "images/02-target-architecture-map.png",
+      "prompt": "prompts/02-target-architecture-map.md",
+      "status": "GENERATED_GPT_IMAGE_2_PERSISTED",
+      "purpose": "目标架构与当前架构关系",
+      "generator": "host_native_gpt_image_2",
+      "source_path": "/home/administrator/.codex/generated_images/019ef01b-e7a7-78b0-9a84-62cb08b4fc29/ig_0cc0f14e19d7b118016a3d0111e50881918378330139eca3f8.png",
+      "file_size_bytes": 1305702
+    },
+    {
+      "id": "03-user-journey-overview",
+      "path": "images/03-user-journey-overview.png",
+      "prompt": "prompts/03-user-journey-overview.md",
+      "status": "GENERATED_GPT_IMAGE_2_PERSISTED",
+      "purpose": "用户从目标到工作流、运行、证据和运维的目标体验",
+      "generator": "host_native_gpt_image_2",
+      "source_path": "/home/administrator/.codex/generated_images/019ef01b-e7a7-78b0-9a84-62cb08b4fc29/ig_071fe601d9a1b2a9016a3d01d2acc0819184a981f35d6a7031.png",
+      "file_size_bytes": 1372343
+    },
+    {
+      "id": "04-workflow-studio-experience",
+      "path": "images/04-workflow-studio-experience.png",
+      "prompt": "prompts/04-workflow-studio-experience.md",
+      "status": "GENERATED_GPT_IMAGE_2_PERSISTED",
+      "purpose": "Workflow Studio 画布、Agent 节点、连线与 Inspector 体验",
+      "generator": "host_native_gpt_image_2",
+      "source_path": "/home/administrator/.codex/generated_images/019ef01b-e7a7-78b0-9a84-62cb08b4fc29/ig_01a16321293420af016a3d0242b0fc819196f1814162d8828e.png",
+      "file_size_bytes": 1258148
+    },
+    {
+      "id": "05-evidence-governance-loop",
+      "path": "images/05-evidence-governance-loop.png",
+      "prompt": "prompts/05-evidence-governance-loop.md",
+      "status": "GENERATED_GPT_IMAGE_2_PERSISTED",
+      "purpose": "证据链、PRD 检视、No False Green、脱敏扫描、验收报告",
+      "generator": "host_native_gpt_image_2",
+      "source_path": "/home/administrator/.codex/generated_images/019ef01b-e7a7-78b0-9a84-62cb08b4fc29/ig_0a40af7daf8c2b69016a3d02ad0b708191b21a5ec5f1b409fd.png",
+      "file_size_bytes": 1341684
+    },
+    {
+      "id": "06-extension-ecosystem",
+      "path": "images/06-extension-ecosystem.png",
+      "prompt": "prompts/06-extension-ecosystem.md",
+      "status": "GENERATED_GPT_IMAGE_2_PERSISTED",
+      "purpose": "Plugin / Skill / Tool / MCP 受治理扩展生态",
+      "generator": "host_native_gpt_image_2",
+      "source_path": "/home/administrator/.codex/generated_images/019ef01b-e7a7-78b0-9a84-62cb08b4fc29/ig_09046890afaba5f3016a3d031d11bc8191914372fce6de9ed0.png",
+      "file_size_bytes": 1408332
+    },
+    {
+      "id": "07-runtime-ops-and-observability",
+      "path": "images/07-runtime-ops-and-observability.png",
+      "prompt": "prompts/07-runtime-ops-and-observability.md",
+      "status": "GENERATED_GPT_IMAGE_2_PERSISTED",
+      "purpose": "运行检查、Trace、Metrics、Audit、部署 smoke",
+      "generator": "host_native_gpt_image_2",
+      "source_path": "/home/administrator/.codex/generated_images/019ef01b-e7a7-78b0-9a84-62cb08b4fc29/ig_03da765ca4f708d2016a3d038502148191b33f53e5b348c7b9.png",
+      "file_size_bytes": 1314137
+    },
+    {
+      "id": "08-application-prospects",
+      "path": "images/08-application-prospects.png",
+      "prompt": "prompts/08-application-prospects.md",
+      "status": "GENERATED_GPT_IMAGE_2_PERSISTED",
+      "purpose": "应用前景与开源生态参考",
+      "generator": "host_native_gpt_image_2",
+      "source_path": "/home/administrator/.codex/generated_images/019ef01b-e7a7-78b0-9a84-62cb08b4fc29/ig_015917d4f531620e016a3d03f27748819181b28a8f7085d571.png",
+      "file_size_bytes": 1482853
+    },
+    {
+      "id": "09-application-scenario-map",
+      "path": "images/09-application-scenario-map.png",
+      "prompt": "prompts/09-application-scenario-map.md",
+      "status": "GENERATED_GPT_IMAGE_2_PERSISTED",
+      "purpose": "应用场景按当前可审查、受限 Pilot、规划需补证和 No-Go 分层",
+      "generator": "host_native_gpt_image_2",
+      "source_path": "/home/administrator/.codex/generated_images/019efe6e-2559-7c41-9c22-963277775ab3/ig_01fdc19a058876e3016a3d0d615bac8191a19a5f54afb337bb.png",
+      "file_size_bytes": 1425064
+    },
+    {
+      "id": "10-application-scenario-radar",
+      "path": "images/10-application-scenario-radar.png",
+      "prompt": "prompts/10-application-scenario-radar.md",
+      "status": "GENERATED_GPT_IMAGE_2_PERSISTED",
+      "purpose": "发散展示近期可审查、产品化方向、行业扩展和 No-Go 应用场景",
+      "generator": "host_native_gpt_image_2",
+      "source_path": "/home/administrator/.codex/generated_images/019efe6e-2559-7c41-9c22-963277775ab3/ig_04779748456ffcc0016a3d0ec2446c8191bc512ca38bebbb61.png",
+      "file_size_bytes": 1514473
+    },
+    {
+      "id": "11-ai-studio",
+      "path": "images/11-ai-studio.png",
+      "prompt": "prompts/11-ai-studio.md",
+      "status": "GENERATED_GPT_IMAGE_2_PERSISTED",
+      "purpose": "AI 工作室场景独立配图",
+      "generator": "host_native_gpt_image_2",
+      "source_path": "/home/administrator/.codex/generated_images/019efe6e-2559-7c41-9c22-963277775ab3/ig_020e545bcbdce252016a3d290a49f48191bf3bddf717bb14fc.png",
+      "file_size_bytes": 1706355
+    },
+    {
+      "id": "12-code-doc-review",
+      "path": "images/12-code-doc-review.png",
+      "prompt": "prompts/12-code-doc-review.md",
+      "status": "GENERATED_GPT_IMAGE_2_PERSISTED",
+      "purpose": "代码与文档审查场景独立配图",
+      "generator": "host_native_gpt_image_2",
+      "source_path": "/home/administrator/.codex/generated_images/019efe6e-2559-7c41-9c22-963277775ab3/ig_020e545bcbdce252016a3d294ab688819189cc48926085ae14.png",
+      "file_size_bytes": 1292648
+    },
+    {
+      "id": "13-knowledge-workflow",
+      "path": "images/13-knowledge-workflow.png",
+      "prompt": "prompts/13-knowledge-workflow.md",
+      "status": "GENERATED_GPT_IMAGE_2_PERSISTED",
+      "purpose": "知识工作流场景独立配图",
+      "generator": "host_native_gpt_image_2",
+      "source_path": "/home/administrator/.codex/generated_images/019efe6e-2559-7c41-9c22-963277775ab3/ig_020e545bcbdce252016a3d298e20788191a6a6a3b70447aed9.png",
+      "file_size_bytes": 1527832
+    },
+    {
+      "id": "14-content-storyboard",
+      "path": "images/14-content-storyboard.png",
+      "prompt": "prompts/14-content-storyboard.md",
+      "status": "GENERATED_GPT_IMAGE_2_PERSISTED",
+      "purpose": "内容与分镜场景独立配图",
+      "generator": "host_native_gpt_image_2",
+      "source_path": "/home/administrator/.codex/generated_images/019efe6e-2559-7c41-9c22-963277775ab3/ig_020e545bcbdce252016a3d29cc5dc88191927e1cf6022842bd.png",
+      "file_size_bytes": 1403603
+    },
+    {
+      "id": "15-extension-ecosystem-scenario",
+      "path": "images/15-extension-ecosystem-scenario.png",
+      "prompt": "prompts/15-extension-ecosystem-scenario.md",
+      "status": "GENERATED_GPT_IMAGE_2_PERSISTED",
+      "purpose": "扩展生态场景独立配图",
+      "generator": "host_native_gpt_image_2",
+      "source_path": "/home/administrator/.codex/generated_images/019efe6e-2559-7c41-9c22-963277775ab3/ig_020e545bcbdce252016a3d2a10f790819191558503f46cd685.png",
+      "file_size_bytes": 1492613
+    },
+    {
+      "id": "16-ops-compliance",
+      "path": "images/16-ops-compliance.png",
+      "prompt": "prompts/16-ops-compliance.md",
+      "status": "GENERATED_GPT_IMAGE_2_PERSISTED",
+      "purpose": "运维与合规场景独立配图",
+      "generator": "host_native_gpt_image_2",
+      "source_path": "/home/administrator/.codex/generated_images/019efe6e-2559-7c41-9c22-963277775ab3/ig_020e545bcbdce252016a3d2a51908c8191ad072f6b64df1788.png",
+      "file_size_bytes": 1490489
+    },
+    {
+      "id": "17-recruiting-interview",
+      "path": "images/17-recruiting-interview.png",
+      "prompt": "prompts/17-recruiting-interview.md",
+      "status": "GENERATED_GPT_IMAGE_2_PERSISTED",
+      "purpose": "招聘面试场景独立配图",
+      "generator": "host_native_gpt_image_2",
+      "source_path": "/home/administrator/.codex/generated_images/019efe6e-2559-7c41-9c22-963277775ab3/ig_020e545bcbdce252016a3d2a9049108191b4e66b0a4b017168.png",
+      "file_size_bytes": 1238011
+    },
+    {
+      "id": "18-investment-research",
+      "path": "images/18-investment-research.png",
+      "prompt": "prompts/18-investment-research.md",
+      "status": "GENERATED_GPT_IMAGE_2_PERSISTED",
+      "purpose": "投研分析场景独立配图",
+      "generator": "host_native_gpt_image_2",
+      "source_path": "/home/administrator/.codex/generated_images/019efe6e-2559-7c41-9c22-963277775ab3/ig_020e545bcbdce252016a3d2ad5933081918b423002768b5cfc.png",
+      "file_size_bytes": 1285546
+    },
+    {
+      "id": "19-sales-customer-ops",
+      "path": "images/19-sales-customer-ops.png",
+      "prompt": "prompts/19-sales-customer-ops.md",
+      "status": "GENERATED_GPT_IMAGE_2_PERSISTED",
+      "purpose": "销售与客服运营场景独立配图",
+      "generator": "host_native_gpt_image_2",
+      "source_path": "/home/administrator/.codex/generated_images/019efe6e-2559-7c41-9c22-963277775ab3/ig_020e545bcbdce252016a3d2b11e0d88191872c0dabf72fd751.png",
+      "file_size_bytes": 1321170
+    },
+    {
+      "id": "20-legal-finance-workflow",
+      "path": "images/20-legal-finance-workflow.png",
+      "prompt": "prompts/20-legal-finance-workflow.md",
+      "status": "GENERATED_GPT_IMAGE_2_PERSISTED",
+      "purpose": "法务与财务流程场景独立配图",
+      "generator": "host_native_gpt_image_2",
+      "source_path": "/home/administrator/.codex/generated_images/019efe6e-2559-7c41-9c22-963277775ab3/ig_020e545bcbdce252016a3d2b61fd1081919bd67e396064ade0.png",
+      "file_size_bytes": 1764463
+    },
+    {
+      "id": "21-education-research",
+      "path": "images/21-education-research.png",
+      "prompt": "prompts/21-education-research.md",
+      "status": "GENERATED_GPT_IMAGE_2_PERSISTED",
+      "purpose": "教育教研场景独立配图",
+      "generator": "host_native_gpt_image_2",
+      "source_path": "/home/administrator/.codex/generated_images/019efe6e-2559-7c41-9c22-963277775ab3/ig_020e545bcbdce252016a3d2ba7b3288191b9e9e9997efe831a.png",
+      "file_size_bytes": 1714138
+    },
+    {
+      "id": "22-private-operations",
+      "path": "images/22-private-operations.png",
+      "prompt": "prompts/22-private-operations.md",
+      "status": "GENERATED_GPT_IMAGE_2_PERSISTED",
+      "purpose": "私有化运维场景独立配图",
+      "generator": "host_native_gpt_image_2",
+      "source_path": "/home/administrator/.codex/generated_images/019efe6e-2559-7c41-9c22-963277775ab3/ig_020e545bcbdce252016a3d2c14de84819186760047cf0ec743.png",
+      "file_size_bytes": 1669584
+    }
+  ]
+}

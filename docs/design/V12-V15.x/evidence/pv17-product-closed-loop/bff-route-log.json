@@ -1,0 +1,83 @@
+{
+  "schema_version": "pv17.bff_route_log.v1",
+  "status": "PASS",
+  "routes": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18046/bff/pv17/system/health?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "source": "browser"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18046/bff/pv17/product-console/state?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "source": "browser"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18046/bff/pv17/studio/workflows/pv17_product_closed_loop_reference?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "source": "browser"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:18046/bff/pv17/entities/station-agents?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "source": "browser"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:18046/bff/pv17/studio/workflows/pv17_product_closed_loop_reference/patches?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "source": "browser"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18046/bff/pv17/studio/workflows/pv17_product_closed_loop_reference?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "source": "browser"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:18046/bff/pv17/studio/workflows/pv17_product_closed_loop_reference/publish?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "source": "browser"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18046/bff/pv17/studio/workflows/pv17_product_closed_loop_reference?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "source": "browser"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:18046/bff/pv17/runtime/workflows/pv17_product_closed_loop_reference/confirm-run?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "source": "browser"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18046/bff/pv17/runtime/instances/wfi_00fdd090a582/inspect?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "source": "browser"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18046/bff/pv17/evidence/instances/wfi_00fdd090a582/summary?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "source": "browser"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18046/bff/pv17/system/health?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "source": "direct_validation"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18046/bff/pv17/product-console/state?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "source": "direct_validation"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:18046/bff/pv17/studio/workflows/pv17_product_closed_loop_reference?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "source": "direct_validation"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:18046/bff/pv17/entities/projects?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "source": "direct_validation"
+    }
+  ],
+  "forbidden_matches": [],
+  "created_at": "2026-06-26T02:34:53.304Z"
+}

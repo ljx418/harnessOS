@@ -6,6 +6,7 @@ import { V13EditableStudio } from "../v13/V13EditableStudio.js";
 import { V14ExtensionEcosystem } from "../v14/V14ExtensionEcosystem.js";
 import { V15ObservabilityDeployment } from "../v15/V15ObservabilityDeployment.js";
 import { PV16ProductRuntimeHardening } from "../pv16/PV16ProductRuntimeHardening.js";
+import { PV17ProductClosedLoop } from "../pv17/PV17ProductClosedLoop.js";
 import { WorkflowCanvas } from "../workflow/WorkflowCanvas.js";
 import "./workflow-studio-layout.css";
 
@@ -16,6 +17,7 @@ export type VisualAcceptanceState =
   | "v14-extension-ecosystem"
   | "v15-observability-deployment"
   | "pv16-product-runtime-hardening"
+  | "pv17-product-closed-loop"
   | "agent-draft-proposal"
   | "folder-debug-scan"
   | "running-board"
@@ -41,6 +43,9 @@ export function WorkflowStudioLayout({ state = "overview" }: WorkflowStudioLayou
   }
   if (state === "pv16-product-runtime-hardening") {
     return <PV16ProductRuntimeHardening />;
+  }
+  if (state === "pv17-product-closed-loop") {
+    return <PV17ProductClosedLoop />;
   }
 
   const rightPanel = state === "folder-debug-scan" ? <FolderInputInspector /> : state === "governance-evidence" ? <GovernanceEvidencePanel /> : <AgentAssistantPanel />;

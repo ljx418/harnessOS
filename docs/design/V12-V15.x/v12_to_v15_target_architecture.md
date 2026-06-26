@@ -134,6 +134,7 @@ Accepted V12 baseline
   -> PV16 durable product mutation through BFF-only DTOs
   -> PV16 controlled runtime run/inspect evidence
   -> PV16 deployment hardening smoke and product journey evidence
+  -> PV17 accepted Product Closed Loop bounded review evidence
 ```
 
 The relationship is additive and gated. V13 reuses the V12 browser workbench,
@@ -149,6 +150,14 @@ runtime or store routes directly: product mutations go through BFF DTOs,
 confirmed WorkflowSpec runs go through the controlled runtime gateway, and
 observability reads trace/artifact/evidence refs emitted by the runtime rather
 than constructing runtime truth in the dashboard.
+
+PV17 is the selected post-PV16 product closed loop target. It keeps the same
+boundaries and adds a mainline architecture plan that moves the PV16 bounded
+pilot experience away from test-only `/bff/pv16/*` routes and toward formal
+`apps/api/routers/bff.py`, `apps/api/routers/runs.py`,
+`apps/gateway/service.py`, `core/workflows/store.py` and
+`apps/workflow-console` integration. PV17 documents are implementation
+readiness artifacts, not runtime evidence.
 
 ## Target Architecture Planes
 
@@ -204,6 +213,7 @@ User
 | Observability / Audit / Operations | Trace, metrics, audit export, incident timeline, health checks, deployment evidence. | Product capability overclaims. |
 | Deployment And Self-Hosting | Compose, env, storage, queue, observability, backup/restore docs. | Production GA claim before evidence. |
 | PV16 Product-Runtime Hardening | Durable product mutation, controlled runtime run/inspect handoff, deployment hardening smoke and product journey evidence. | Direct browser runtime calls, destructive deployment changes, production GA or complete Studio claims. |
+| PV17 Product Closed Loop | Mainline setup -> Product Console -> Mission Studio -> confirm run -> inspect -> evidence implementation using concrete code entities, formal `/bff/pv17/*` routes, BFF DTOs and browser E2E evidence. | Treating PV16 test-only BFF routes, PV17 documents alone or screenshots alone as production evidence. |
 
 ## Core Product Entities
 

@@ -1,0 +1,177 @@
+{
+  "schema_version": "pv17.product_console_report.v1",
+  "status": "PASS",
+  "user_visible_result": "用户看到 workspace、project、app、workflow、Station Agent 和 system health。",
+  "health": {
+    "schema_version": "pv17.product_closed_loop.v1",
+    "status": "ok",
+    "api_status": "ok",
+    "gateway_status": "ok",
+    "workflow_store_status": "ok",
+    "frontend_config_status": "ok",
+    "method_count": 102,
+    "scope": {
+      "app_id": "reference_app",
+      "project_id": "demo_a",
+      "workspace_id": "local"
+    },
+    "created_at": "2026-06-26T02:34:53.469995Z",
+    "redaction_status": "redacted"
+  },
+  "state": {
+    "schema_version": "pv17.product_closed_loop.v1",
+    "workspace": {
+      "entity_kind": "workspace",
+      "entity_id": "local",
+      "display_name": "local",
+      "scope": {
+        "app_id": "reference_app",
+        "project_id": "demo_a",
+        "workspace_id": "local"
+      },
+      "source": "scope_default_projection",
+      "audit_refs": [
+        {
+          "audit_ref_id": "pv17:audit:product_entity.workspace.default_projection:reference_app|demo_a|local:local",
+          "operation": "product_entity.workspace.default_projection",
+          "scope": {
+            "app_id": "reference_app",
+            "project_id": "demo_a",
+            "workspace_id": "local"
+          },
+          "entity_id": "local",
+          "created_at": "2026-06-26T02:34:53.476364Z",
+          "redaction_status": "redacted"
+        }
+      ],
+      "redaction_status": "redacted"
+    },
+    "project": {
+      "entity_kind": "project",
+      "entity_id": "demo_a",
+      "display_name": "demo_a",
+      "scope": {
+        "app_id": "reference_app",
+        "project_id": "demo_a",
+        "workspace_id": "local"
+      },
+      "source": "scope_default_projection",
+      "audit_refs": [
+        {
+          "audit_ref_id": "pv17:audit:product_entity.project.default_projection:reference_app|demo_a|local:demo_a",
+          "operation": "product_entity.project.default_projection",
+          "scope": {
+            "app_id": "reference_app",
+            "project_id": "demo_a",
+            "workspace_id": "local"
+          },
+          "entity_id": "demo_a",
+          "created_at": "2026-06-26T02:34:53.476374Z",
+          "redaction_status": "redacted"
+        }
+      ],
+      "redaction_status": "redacted"
+    },
+    "app": {
+      "entity_kind": "app",
+      "entity_id": "reference_app",
+      "display_name": "Reference App",
+      "scope": {
+        "app_id": "reference_app",
+        "project_id": "demo_a",
+        "workspace_id": "local"
+      },
+      "source": "app_registry_projection",
+      "audit_refs": [
+        {
+          "audit_ref_id": "pv17:audit:product_entity.app.default_projection:reference_app|demo_a|local:reference_app",
+          "operation": "product_entity.app.default_projection",
+          "scope": {
+            "app_id": "reference_app",
+            "project_id": "demo_a",
+            "workspace_id": "local"
+          },
+          "entity_id": "reference_app",
+          "created_at": "2026-06-26T02:34:53.476379Z",
+          "redaction_status": "redacted"
+        }
+      ],
+      "redaction_status": "redacted",
+      "domain": "reference",
+      "default_pack": "reference_app",
+      "connector_refs": [],
+      "metadata": {}
+    },
+    "workflows": [
+      {
+        "workflow_template_id": "pv17_product_closed_loop_reference",
+        "name": "PV17 Product Closed Loop Reference",
+        "latest_version_id": "wfv_426f9c2d12de",
+        "status": "published"
+      }
+    ],
+    "station_agents": [
+      {
+        "entity_kind": "station_agent",
+        "entity_id": "station_agent:default-reviewer",
+        "display_name": "默认审查 Station Agent",
+        "role": "reviewer",
+        "goal": "审查 workflow diff、runtime refs 和 evidence refs。",
+        "memory_refs": [],
+        "model_refs": [
+          "model:default-redacted"
+        ],
+        "tool_refs": [],
+        "skill_refs": [
+          "governance.review"
+        ],
+        "mcp_refs": [],
+        "scope": {
+          "app_id": "reference_app",
+          "project_id": "demo_a",
+          "workspace_id": "local"
+        },
+        "source": "default_projection",
+        "redaction_status": "redacted"
+      }
+    ],
+    "active_run": {
+      "workflow_instance_id": "wfi_d59e2e9f5fe5",
+      "workflow_template_id": "pv17_product_closed_loop_reference",
+      "workflow_version_id": "wfv_426f9c2d12de",
+      "status": "waiting_approval"
+    },
+    "evidence_summary": {
+      "status": "ready_for_inspect",
+      "workflow_instance_id": "wfi_d59e2e9f5fe5",
+      "runtime_event_ref_count": 3,
+      "artifact_ref_count": 2,
+      "quality_ref_count": 1,
+      "claims": [
+        "product_console_state_readable",
+        "runtime_instance_selectable"
+      ],
+      "missing_evidence": [],
+      "allowed_claim": "PV17 product closed loop implementation ready for bounded review only after PV17-SA passes.",
+      "redaction_status": "redacted"
+    },
+    "audit_refs": [
+      {
+        "audit_ref_id": "pv17:audit:product_console.state.read:reference_app|demo_a|local:scope",
+        "operation": "product_console.state.read",
+        "scope": {
+          "app_id": "reference_app",
+          "project_id": "demo_a",
+          "workspace_id": "local"
+        },
+        "entity_id": null,
+        "created_at": "2026-06-26T02:34:53.476389Z",
+        "redaction_status": "redacted"
+      }
+    ],
+    "created_at": "2026-06-26T02:34:53.476391Z",
+    "redaction_status": "redacted"
+  },
+  "screenshot": "product-console-screenshot.png",
+  "created_at": "2026-06-26T02:34:53.304Z"
+}

@@ -1,0 +1,141 @@
+{
+  "schema_version": "pv17.evidence_review_report.v1",
+  "status": "PASS",
+  "claims": [
+    {
+      "claim": "正式 /bff/pv17 runtime inspect 可以读取 runtime refs。",
+      "evidence_refs": [
+        "workflow.instance:wfi_00fdd090a582",
+        "station.run:sr_a830267c5535",
+        "station.run:sr_3745a3b6f429",
+        "station.run:sr_26f3096a342e"
+      ],
+      "status": "supported"
+    },
+    {
+      "claim": "Evidence review 只汇总 trace/artifact/quality refs，不构造 runtime truth。",
+      "evidence_refs": [
+        "art_6c7697cae5ee",
+        "art_d7c97501964b"
+      ],
+      "status": "supported"
+    }
+  ],
+  "route_boundary": {
+    "allowed_prefix": "/bff/pv17",
+    "browser_denylist": [
+      "/v1/rpc",
+      "/internal/runtime",
+      "/runtime/store",
+      "/api/runtime",
+      "/debug/runtime"
+    ],
+    "status": "specified"
+  },
+  "redaction": {
+    "status": "redacted",
+    "provider_payload_allowed": false,
+    "artifact_content_allowed": false
+  },
+  "artifact_lineage": {
+    "artifact_refs": [
+      {
+        "artifact_ref": "art_6c7697cae5ee",
+        "kind": "dummy.alpha",
+        "name": "station_a-a_out.json"
+      },
+      {
+        "artifact_ref": "art_d7c97501964b",
+        "kind": "dummy.beta",
+        "name": "station_b-b_out.json"
+      }
+    ]
+  },
+  "trace_timeline": {
+    "trace_refs": [
+      {
+        "trace_id": "trace_8e0f3dad33dc",
+        "workflow_instance_id": "wfi_00fdd090a582"
+      },
+      {
+        "trace_id": "trace_adf5aaef7ff9",
+        "event_type": "workflow.template.created"
+      },
+      {
+        "trace_id": "trace_8aa3ca5c398c",
+        "event_type": "workflow.template.published"
+      },
+      {
+        "trace_id": "trace_9d663af9a099",
+        "event_type": "station.run.completed"
+      },
+      {
+        "trace_id": "trace_437bf33affa9",
+        "event_type": "station.run.completed"
+      },
+      {
+        "trace_id": "trace_42e7750a86c5",
+        "event_type": "approval.request"
+      },
+      {
+        "trace_id": "trace_c8bd09389c88",
+        "event_type": "station.run.waiting_approval"
+      },
+      {
+        "trace_id": "trace_5cb4025ca0f3",
+        "event_type": "workflow.instance.started"
+      },
+      {
+        "trace_id": "trace_e69ba10240e8",
+        "event_type": "quality.evaluation.created"
+      },
+      {
+        "trace_id": "trace_5a4c47428408",
+        "event_type": "workflow.template.draft_updated"
+      },
+      {
+        "trace_id": "trace_730ba4e1dbc4",
+        "event_type": "workflow.patch.proposed"
+      },
+      {
+        "trace_id": "trace_38c06b9296e8",
+        "event_type": "workflow.patch.proposed"
+      },
+      {
+        "trace_id": "trace_d4cc47f4fd2b",
+        "event_type": "workflow.template.published"
+      },
+      {
+        "trace_id": "trace_06842928a4ae",
+        "event_type": "station.run.completed"
+      },
+      {
+        "trace_id": "trace_10161c4094a9",
+        "event_type": "station.run.completed"
+      },
+      {
+        "trace_id": "trace_e54e85cd6b89",
+        "event_type": "approval.request"
+      },
+      {
+        "trace_id": "trace_240f2e75846b",
+        "event_type": "station.run.waiting_approval"
+      },
+      {
+        "trace_id": "trace_5a0b3576d1b5",
+        "event_type": "workflow.instance.started"
+      },
+      {
+        "trace_id": "trace_d74454584250",
+        "event_type": "quality.evaluation.created"
+      },
+      {
+        "trace_id": "trace_fb85532bbc36",
+        "event_type": "quality.evaluation.created"
+      }
+    ]
+  },
+  "missing_evidence": [],
+  "screenshot": "evidence-review-screenshot.png",
+  "created_at": "2026-06-26T02:34:53.304Z"
+}

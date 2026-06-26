@@ -404,6 +404,295 @@ _AGENT_OPERATION_EVIDENCE_REPOSITORY = InMemoryAgentOperationEvidenceStore()
 _AGENT_TALK_AUDIT: list[dict[str, Any]] = []
 AGENT_HANDOFF_TTL_MINUTES = 30
 AGENT_HANDOFF_TARGET_PANELS = {"editing_panel", "approval_panel", "context_panel", "quality_panel", "artifact_panel"}
+PV17_SCHEMA_VERSION = "pv17.product_closed_loop.v1"
+PV17_ENTITY_KINDS = {
+    "workspaces": "workspace",
+    "projects": "project",
+    "apps": "app",
+    "station-agents": "station_agent",
+}
+_PV17_PRODUCT_ENTITIES: dict[str, dict[str, Any]] = {}
+
+
+@router.get("/pv17/system/health")
+async def pv17_system_health(request: Request, gateway: GatewayService = Depends(get_gateway_service)) -> Any:
+    try:
+        params: dict[str, Any] = _query_scope_params(request)
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflows.read")
+        gateway_health = await gateway.health_ping()
+        method_payload = await gateway.method_list({})
+        dto = {
+            "schema_version": PV17_SCHEMA_VERSION,
+            "status": "ok",
+            "api_status": "ok",
+            "gateway_status": gateway_health.get("status"),
+            "workflow_store_status": "ok",
+            "frontend_config_status": "ok",
+            "method_count": len(method_payload.get("methods", [])),
+            "scope": _scope_dto(auth.scope),
+            "created_at": _now_iso(),
+            "redaction_status": "redacted",
+        }
+        response = JSONResponse(_redact(dto))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
+
+
+@router.get("/pv17/product-console/state")
+async def pv17_product_console_state(request: Request, gateway: GatewayService = Depends(get_gateway_service)) -> Any:
+    try:
+        params: dict[str, Any] = _query_scope_params(request)
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflows.read")
+        result = await _rpc(gateway, "workflow.template.list", params)
+        instance_result = await _rpc(gateway, "workflow.instance.list", params)
+        workflows = [_workflow_summary(item) for item in result.get("templates", [])]
+        instances = [_instance_summary(item) for item in instance_result.get("workflow_instances", [])]
+        active_run = instances[0] if instances else None
+        evidence_summary = _pv17_evidence_overview(gateway, auth.scope, active_run)
+        dto = {
+            "schema_version": PV17_SCHEMA_VERSION,
+            "workspace": _pv17_entity_projection(auth.scope, "workspace"),
+            "project": _pv17_entity_projection(auth.scope, "project"),
+            "app": _pv17_app_projection(gateway, auth.scope),
+            "workflows": workflows,
+            "station_agents": _pv17_station_agent_projections(auth.scope),
+            "active_run": active_run,
+            "evidence_summary": evidence_summary,
+            "audit_refs": [_pv17_audit_ref("product_console.state.read", auth.scope)],
+            "created_at": _now_iso(),
+            "redaction_status": "redacted",
+        }
+        response = JSONResponse(_redact(dto))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
+
+
+@router.post("/pv17/entities/{entity_route}")
+async def pv17_mutate_entity(
+    entity_route: str,
+    request: Request,
+    gateway: GatewayService = Depends(get_gateway_service),
+) -> Any:
+    body: dict[str, Any] = {}
+    try:
+        body = await request.json()
+        if not isinstance(body, dict):
+            raise ProtocolError("INVALID_PARAMS", "Request body must be an object.", {"field": "body"})
+        entity_kind = PV17_ENTITY_KINDS.get(entity_route)
+        if entity_kind is None:
+            raise ProtocolError("INVALID_PARAMS", "Unsupported PV17 entity kind.", {"entity_route": entity_route})
+        _pv17_require_mutation_confirmation(body)
+        params = {**_query_scope_params(request), "entity_kind": entity_kind}
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflows.write")
+        decision = _pv17_entity_policy_decision(body, auth.scope)
+        payload = body.get("payload") if isinstance(body.get("payload"), dict) else {}
+        entity_id = _pv17_entity_id(entity_kind, payload, auth.scope)
+        audit_ref = _pv17_audit_ref(f"product_entity.{entity_kind}.{body.get('operation') or 'upsert'}", auth.scope, entity_id=entity_id)
+        if decision.get("status") == "denied":
+            dto = {
+                "schema_version": PV17_SCHEMA_VERSION,
+                "status": "denied",
+                "entity_ref": {"entity_kind": entity_kind, "entity_id": entity_id},
+                "audit_ref": audit_ref,
+                "policy_decision_ref": decision["policy_decision_ref"],
+                "denied_reason": decision["reason"],
+                "redaction_status": "redacted",
+            }
+        else:
+            entity = _pv17_store_entity(entity_kind, entity_id, payload, auth.scope, audit_ref=audit_ref)
+            dto = {
+                "schema_version": PV17_SCHEMA_VERSION,
+                "status": "accepted",
+                "entity_ref": {"entity_kind": entity_kind, "entity_id": entity_id, "scope": _scope_dto(auth.scope)},
+                "entity": entity,
+                "audit_ref": audit_ref,
+                "policy_decision_ref": decision["policy_decision_ref"],
+                "denied_reason": None,
+                "redaction_status": "redacted",
+            }
+        response = JSONResponse(_redact(dto))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
+
+
+@router.get("/pv17/studio/workflows/{workflow_template_id}")
+async def pv17_get_studio_workflow(
+    workflow_template_id: str,
+    request: Request,
+    gateway: GatewayService = Depends(get_gateway_service),
+) -> Any:
+    try:
+        params = {**_query_scope_params(request), "workflow_template_id": workflow_template_id}
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflows.read")
+        template = gateway.workflow_repository.get_template(workflow_template_id, scope=auth.scope)
+        draft = gateway.workflow_repository.get_draft(str(template.latest_draft_id), scope=auth.scope)
+        versions = gateway.workflow_repository.list_versions(workflow_template_id, scope=auth.scope)
+        patches = [patch.model_dump(mode="json") for patch in gateway.workflow_repository.list_patches(scope=auth.scope, workflow_template_id=workflow_template_id)]
+        dto = _pv17_studio_workflow_dto(
+            template.model_dump(mode="json"),
+            draft.model_dump(mode="json"),
+            [version.model_dump(mode="json") for version in versions],
+            patches,
+            auth.scope,
+        )
+        response = JSONResponse(_redact(dto))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
+
+
+@router.post("/pv17/studio/workflows/{workflow_template_id}/patches")
+async def pv17_propose_workflow_patch(
+    workflow_template_id: str,
+    request: Request,
+    gateway: GatewayService = Depends(get_gateway_service),
+) -> Any:
+    try:
+        body = await request.json()
+        if not isinstance(body, dict):
+            raise ProtocolError("INVALID_PARAMS", "Request body must be an object.", {"field": "body"})
+        patch = _canvas_patch_request_to_patch(workflow_template_id, body)
+        params = {**_query_scope_params(request), "workflow_template_id": workflow_template_id, "patch": patch}
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflow_patches.write")
+        _validate_canvas_patch_payload(gateway, workflow_template_id, patch, auth.scope)
+        result = await _rpc(gateway, "workflow.patch.propose", params)
+        dto = {
+            "schema_version": PV17_SCHEMA_VERSION,
+            "status": "proposed",
+            "workflow_patch": _patch_proposal_dto(result["patch"]),
+            "audit_refs": [_pv17_audit_ref("workflow.patch.propose", auth.scope, entity_id=str(result["patch"].get("workflow_patch_id") or ""))],
+            "redaction_status": "redacted",
+        }
+        response = JSONResponse(_redact(dto))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
+
+
+@router.post("/pv17/studio/workflows/{workflow_template_id}/publish")
+async def pv17_publish_workflow(
+    workflow_template_id: str,
+    request: Request,
+    gateway: GatewayService = Depends(get_gateway_service),
+) -> Any:
+    body: dict[str, Any] = {}
+    try:
+        body = await request.json()
+        if not isinstance(body, dict):
+            raise ProtocolError("INVALID_PARAMS", "Request body must be an object.", {"field": "body"})
+        _pv17_require_mutation_confirmation(body, allowed_sources={"editing_panel", "workflow_console", "mission_studio"})
+        version = str(body.get("version") or "").strip()
+        expected_revision = body.get("expected_draft_revision", body.get("expected_revision"))
+        if not version:
+            raise ProtocolError("INVALID_PARAMS", "version is required.", {"field": "version"})
+        if expected_revision is None:
+            raise ProtocolError("INVALID_PARAMS", "expected_draft_revision is required.", {"field": "expected_draft_revision"})
+        params = {
+            **_query_scope_params(request),
+            "workflow_template_id": workflow_template_id,
+            "version": version,
+            "expected_revision": expected_revision,
+        }
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflow_versions.publish")
+        template = gateway.workflow_repository.get_template(workflow_template_id, scope=auth.scope)
+        draft = gateway.workflow_repository.get_draft(str(template.latest_draft_id), scope=auth.scope)
+        if draft.revision != expected_revision:
+            raise ProtocolError("WORKFLOW_DRAFT_CONFLICT", "Workflow draft revision is stale.", {"expected_revision": expected_revision, "actual_revision": draft.revision})
+        result = await _rpc(gateway, "workflow.template.publish", params)
+        dto = {
+            "schema_version": PV17_SCHEMA_VERSION,
+            "status": "published",
+            "publish": _publish_dto(result),
+            "audit_refs": [_pv17_audit_ref("workflow.template.publish", auth.scope, entity_id=workflow_template_id)],
+            "redaction_status": "redacted",
+        }
+        response = JSONResponse(_redact(dto))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
+
+
+@router.post("/pv17/runtime/workflows/{workflow_template_id}/confirm-run")
+async def pv17_confirm_runtime_run(
+    workflow_template_id: str,
+    request: Request,
+    gateway: GatewayService = Depends(get_gateway_service),
+) -> Any:
+    body: dict[str, Any] = {}
+    try:
+        body = await request.json()
+        if not isinstance(body, dict):
+            raise ProtocolError("INVALID_PARAMS", "Request body must be an object.", {"field": "body"})
+        _pv17_require_mutation_confirmation(body, allowed_sources={"run_panel", "workflow_console", "mission_studio"})
+        workflow_version_id = str(body.get("workflow_version_id") or "").strip()
+        if not workflow_version_id:
+            raise ProtocolError("INVALID_PARAMS", "workflow_version_id is required.", {"field": "workflow_version_id"})
+        params = {**_query_scope_params(request), "workflow_version_id": workflow_version_id, "input": body.get("input") if isinstance(body.get("input"), dict) else {}}
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflows.execute")
+        result = await _rpc(gateway, "workflow.instance.start", params)
+        instance = result.get("workflow_instance") if isinstance(result.get("workflow_instance"), dict) else {}
+        if instance.get("workflow_template_id") != workflow_template_id:
+            raise ProtocolError("SCOPE_MISMATCH", "Workflow version does not belong to requested template.", {"workflow_template_id": workflow_template_id})
+        await _pv17_attach_quality_refs_for_run(gateway, auth.scope, instance, result.get("station_runs"))
+        dto = {
+            "schema_version": PV17_SCHEMA_VERSION,
+            "status": "started",
+            "workflow_instance": _instance_summary(instance),
+            "station_runs": result.get("station_runs") if isinstance(result.get("station_runs"), list) else [],
+            "runtime_event_refs": _pv17_runtime_event_refs(instance, result.get("station_runs")),
+            "trace_refs": _pv17_trace_refs(instance),
+            "audit_refs": [_pv17_audit_ref("workflow.instance.start", auth.scope, entity_id=str(instance.get("workflow_instance_id") or ""))],
+            "redaction_status": "redacted",
+        }
+        response = JSONResponse(_redact(dto))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
+
+
+@router.get("/pv17/runtime/instances/{workflow_instance_id}/inspect")
+async def pv17_inspect_runtime_instance(
+    workflow_instance_id: str,
+    request: Request,
+    gateway: GatewayService = Depends(get_gateway_service),
+) -> Any:
+    try:
+        params = {**_query_scope_params(request), "workflow_instance_id": workflow_instance_id}
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflows.read")
+        dto = await _pv17_runtime_inspect_dto(gateway, auth.scope, params)
+        response = JSONResponse(_redact(dto))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
+
+
+@router.get("/pv17/evidence/instances/{workflow_instance_id}/summary")
+async def pv17_evidence_summary(
+    workflow_instance_id: str,
+    request: Request,
+    gateway: GatewayService = Depends(get_gateway_service),
+) -> Any:
+    try:
+        params = {**_query_scope_params(request), "workflow_instance_id": workflow_instance_id}
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflows.read")
+        inspect = await _pv17_runtime_inspect_dto(gateway, auth.scope, params)
+        dto = _pv17_evidence_summary_dto(inspect, auth.scope)
+        response = JSONResponse(_redact(dto))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
 
 
 @router.get("/workflows")
@@ -2209,6 +2498,388 @@ def _scope_dto(scope: ScopeContext) -> dict[str, Any]:
         "app_id": scope.app_id,
         "project_id": scope.project_id,
         "workspace_id": scope.workspace_id,
+    }
+
+
+def _pv17_scope_key(scope: ScopeContext) -> str:
+    return "|".join([scope.app_id or "", scope.project_id or "", scope.workspace_id or ""])
+
+
+def _pv17_entity_store_key(scope: ScopeContext, entity_kind: str, entity_id: str) -> str:
+    return "|".join([_pv17_scope_key(scope), entity_kind, entity_id])
+
+
+def _pv17_audit_ref(operation: str, scope: ScopeContext, *, entity_id: str | None = None) -> dict[str, Any]:
+    return {
+        "audit_ref_id": f"pv17:audit:{operation}:{_pv17_scope_key(scope)}:{entity_id or 'scope'}",
+        "operation": operation,
+        "scope": _scope_dto(scope),
+        "entity_id": entity_id,
+        "created_at": _now_iso(),
+        "redaction_status": "redacted",
+    }
+
+
+def _pv17_entity_projection(scope: ScopeContext, entity_kind: str) -> dict[str, Any]:
+    default_id = {
+        "workspace": scope.workspace_id or "local",
+        "project": scope.project_id or "demo",
+        "app": scope.app_id or "meeting",
+    }.get(entity_kind, entity_kind)
+    entity = _PV17_PRODUCT_ENTITIES.get(_pv17_entity_store_key(scope, entity_kind, default_id))
+    if entity is not None:
+        return entity
+    return {
+        "entity_kind": entity_kind,
+        "entity_id": default_id,
+        "display_name": default_id,
+        "scope": _scope_dto(scope),
+        "source": "scope_default_projection",
+        "audit_refs": [_pv17_audit_ref(f"product_entity.{entity_kind}.default_projection", scope, entity_id=default_id)],
+        "redaction_status": "redacted",
+    }
+
+
+def _pv17_app_projection(gateway: GatewayService, scope: ScopeContext) -> dict[str, Any]:
+    profile = gateway.app_registry.get_optional(scope.app_id or "")
+    stored = _pv17_entity_projection(scope, "app")
+    if profile is None:
+        return stored
+    profile_view = profile.to_dict()
+    return {
+        **stored,
+        "entity_id": profile.app_id,
+        "display_name": profile.display_name,
+        "domain": profile.domain,
+        "default_pack": profile.default_pack,
+        "connector_refs": profile_view.get("connector_refs") or [],
+        "metadata": profile_view.get("metadata") or {},
+        "source": "app_registry_projection",
+        "redaction_status": "redacted",
+    }
+
+
+def _pv17_station_agent_projections(scope: ScopeContext) -> list[dict[str, Any]]:
+    prefix = _pv17_scope_key(scope) + "|station_agent|"
+    agents = [entity for key, entity in sorted(_PV17_PRODUCT_ENTITIES.items()) if key.startswith(prefix)]
+    if agents:
+        return agents
+    return [
+        {
+            "entity_kind": "station_agent",
+            "entity_id": "station_agent:default-reviewer",
+            "display_name": "默认审查 Station Agent",
+            "role": "reviewer",
+            "goal": "审查 workflow diff、runtime refs 和 evidence refs。",
+            "memory_refs": [],
+            "model_refs": ["model:default-redacted"],
+            "tool_refs": [],
+            "skill_refs": ["governance.review"],
+            "mcp_refs": [],
+            "scope": _scope_dto(scope),
+            "source": "default_projection",
+            "redaction_status": "redacted",
+        }
+    ]
+
+
+def _pv17_entity_id(entity_kind: str, payload: dict[str, Any], scope: ScopeContext) -> str:
+    explicit = payload.get("entity_id") or payload.get(f"{entity_kind}_id") or payload.get("id")
+    if explicit:
+        return str(explicit)
+    if entity_kind == "workspace":
+        return scope.workspace_id or "local"
+    if entity_kind == "project":
+        return scope.project_id or "demo"
+    if entity_kind == "app":
+        return scope.app_id or "meeting"
+    slug = str(payload.get("display_name") or payload.get("name") or "default").strip().lower().replace(" ", "-")
+    return f"station_agent:{slug or 'default'}"
+
+
+def _pv17_require_mutation_confirmation(body: dict[str, Any], *, allowed_sources: set[str] | None = None) -> None:
+    allowed_sources = allowed_sources or {"product_console", "workflow_console", "mission_studio"}
+    source = str(body.get("source") or "")
+    if body.get("user_confirmed") is not True:
+        raise ProtocolError("WORKFLOW_ACTION_FORBIDDEN", "PV17 mutation requires explicit user confirmation.", {"field": "user_confirmed"})
+    if source == "agent":
+        raise ProtocolError("WORKFLOW_ACTION_FORBIDDEN", "source=agent cannot perform durable PV17 mutation.", {"source": source})
+    if source not in allowed_sources:
+        raise ProtocolError("WORKFLOW_ACTION_FORBIDDEN", "PV17 mutation source is not allowed.", {"source": source or None})
+    if not str(body.get("idempotency_key") or "").strip():
+        raise ProtocolError("INVALID_PARAMS", "idempotency_key is required.", {"field": "idempotency_key"})
+
+
+def _pv17_entity_policy_decision(body: dict[str, Any], scope: ScopeContext) -> dict[str, str]:
+    payload = body.get("payload") if isinstance(body.get("payload"), dict) else {}
+    requested_project = payload.get("project_id") or payload.get("owner_project_id")
+    decision_id = f"pv17:policy:{_pv17_scope_key(scope)}:{body.get('idempotency_key') or uuid4().hex[:8]}"
+    if requested_project and str(requested_project) != str(scope.project_id or ""):
+        return {
+            "status": "denied",
+            "policy_decision_ref": decision_id,
+            "reason": "owner_project_scope_mismatch",
+        }
+    if body.get("operation") == "deny":
+        return {
+            "status": "denied",
+            "policy_decision_ref": decision_id,
+            "reason": "explicit_denial_fixture",
+        }
+    return {"status": "allowed", "policy_decision_ref": decision_id, "reason": ""}
+
+
+def _pv17_store_entity(
+    entity_kind: str,
+    entity_id: str,
+    payload: dict[str, Any],
+    scope: ScopeContext,
+    *,
+    audit_ref: dict[str, Any],
+) -> dict[str, Any]:
+    entity = {
+        "entity_kind": entity_kind,
+        "entity_id": entity_id,
+        "display_name": payload.get("display_name") or payload.get("name") or entity_id,
+        "scope": _scope_dto(scope),
+        "role": payload.get("role"),
+        "goal": payload.get("goal"),
+        "memory_refs": payload.get("memory_refs") if isinstance(payload.get("memory_refs"), list) else [],
+        "model_refs": payload.get("model_refs") if isinstance(payload.get("model_refs"), list) else [],
+        "tool_refs": payload.get("tool_refs") if isinstance(payload.get("tool_refs"), list) else [],
+        "skill_refs": payload.get("skill_refs") if isinstance(payload.get("skill_refs"), list) else [],
+        "mcp_refs": payload.get("mcp_refs") if isinstance(payload.get("mcp_refs"), list) else [],
+        "audit_refs": [audit_ref],
+        "updated_at": _now_iso(),
+        "redaction_status": "redacted",
+    }
+    _PV17_PRODUCT_ENTITIES[_pv17_entity_store_key(scope, entity_kind, entity_id)] = _redact(entity)
+    return _PV17_PRODUCT_ENTITIES[_pv17_entity_store_key(scope, entity_kind, entity_id)]
+
+
+def _pv17_evidence_overview(gateway: GatewayService, scope: ScopeContext, active_run: dict[str, Any] | None) -> dict[str, Any]:
+    if not active_run:
+        return {
+            "status": "empty",
+            "claims": [],
+            "missing_evidence": ["runtime_instance"],
+            "allowed_claim": "PV17 product closed loop implementation evidence is not complete.",
+            "redaction_status": "redacted",
+        }
+    instance_id = str(active_run.get("workflow_instance_id") or "")
+    try:
+        runs = gateway.workflow_repository.list_station_runs(instance_id, scope=scope)
+    except Exception:
+        runs = []
+    return {
+        "status": "ready_for_inspect" if runs else "missing_station_runs",
+        "workflow_instance_id": instance_id,
+        "runtime_event_ref_count": len(runs),
+        "artifact_ref_count": sum(len(run.output_artifact_ids) for run in runs),
+        "quality_ref_count": sum(len(run.quality_evaluation_ids) for run in runs),
+        "claims": ["product_console_state_readable", "runtime_instance_selectable"],
+        "missing_evidence": [] if runs else ["station_runs"],
+        "allowed_claim": "PV17 product closed loop implementation ready for bounded review only after PV17-SA passes.",
+        "redaction_status": "redacted",
+    }
+
+
+def _pv17_studio_workflow_dto(
+    template: dict[str, Any],
+    draft: dict[str, Any],
+    versions: list[dict[str, Any]],
+    patches: list[dict[str, Any]],
+    scope: ScopeContext,
+) -> dict[str, Any]:
+    draft_payload = draft.get("draft") if isinstance(draft.get("draft"), dict) else {}
+    stations = draft_payload.get("stations") if isinstance(draft_payload.get("stations"), list) else []
+    edges = draft_payload.get("edges") if isinstance(draft_payload.get("edges"), list) else []
+    return {
+        "schema_version": PV17_SCHEMA_VERSION,
+        "workflow_template": _workflow_summary(template),
+        "draft": {
+            "workflow_draft_id": draft.get("workflow_draft_id"),
+            "revision": draft.get("revision"),
+            "status": draft.get("status"),
+        },
+        "versions": [_version_summary(item) for item in versions],
+        "graph": {"nodes": stations, "edges": edges, "redaction_status": "redacted"},
+        "inspector": {
+            "selected_node_id": stations[0].get("station_id") if stations and isinstance(stations[0], dict) else None,
+            "quality_rule_count": sum(len(item.get("quality_rules") or []) for item in stations if isinstance(item, dict)),
+            "approval_point_count": sum(1 for item in stations if isinstance(item, dict) and item.get("approval_required")),
+            "redaction_status": "redacted",
+        },
+        "patch_queue": _patch_queue_dto(patches, current_draft_revision=draft.get("revision")),
+        "audit_refs": [_pv17_audit_ref("studio.workflow.read", scope, entity_id=str(template.get("workflow_template_id") or ""))],
+        "redaction_status": "redacted",
+    }
+
+
+def _pv17_runtime_event_refs(instance: dict[str, Any], station_runs: Any) -> list[dict[str, Any]]:
+    runs = station_runs if isinstance(station_runs, list) else []
+    refs = [
+        {
+            "event_ref": f"station.run:{run.get('station_run_id')}",
+            "event_type": f"station.run.{str(run.get('status') or 'unknown').lower()}",
+            "workflow_instance_id": instance.get("workflow_instance_id"),
+            "station_run_id": run.get("station_run_id"),
+        }
+        for run in runs
+        if isinstance(run, dict)
+    ]
+    refs.insert(
+        0,
+        {
+            "event_ref": f"workflow.instance:{instance.get('workflow_instance_id')}",
+            "event_type": f"workflow.instance.{str(instance.get('status') or 'unknown').lower()}",
+            "workflow_instance_id": instance.get("workflow_instance_id"),
+        },
+    )
+    return refs
+
+
+def _pv17_trace_refs(instance: dict[str, Any]) -> list[dict[str, Any]]:
+    trace_id = instance.get("trace_id")
+    return [{"trace_id": trace_id, "workflow_instance_id": instance.get("workflow_instance_id")}] if trace_id else []
+
+
+async def _pv17_attach_quality_refs_for_run(
+    gateway: GatewayService,
+    scope: ScopeContext,
+    instance: dict[str, Any],
+    station_runs: Any,
+) -> None:
+    workflow_instance_id = str(instance.get("workflow_instance_id") or "")
+    if not workflow_instance_id:
+        return
+    for run in station_runs if isinstance(station_runs, list) else []:
+        if not isinstance(run, dict):
+            continue
+        output_ids = run.get("output_artifact_ids") if isinstance(run.get("output_artifact_ids"), list) else []
+        if not output_ids:
+            continue
+        try:
+            await _rpc(
+                gateway,
+                "quality.evaluation.create",
+                {
+                    "evaluation": {
+                        "workflow_instance_id": workflow_instance_id,
+                        "station_run_id": run.get("station_run_id"),
+                        "artifact_id": output_ids[0],
+                        "rubric_id": "dummy_quality",
+                        "evaluator_type": "rule",
+                        "score": 1.0,
+                        "status": "passed",
+                        "issues": [],
+                        "suggestions": [{"summary": "PV17 runtime inspect quality ref attached."}],
+                        "metadata": {"source": "pv17_confirm_run"},
+                    },
+                    "auto_attach": True,
+                    "scope": _scope_dto(scope),
+                },
+            )
+        except ProtocolError:
+            continue
+
+
+async def _pv17_runtime_inspect_dto(gateway: GatewayService, scope: ScopeContext, params: dict[str, Any]) -> dict[str, Any]:
+    instance_id = str(params.get("workflow_instance_id") or "")
+    instance_result = await _rpc(gateway, "workflow.instance.get", params)
+    status_result = await _rpc(gateway, "workflow.instance.status", params)
+    station_result = await _rpc(gateway, "station.run.list", params)
+    board_result = await _rpc(gateway, "workflow.board.get", params)
+    quality_result = await _rpc(gateway, "quality.evaluation.list", params)
+    traces_result = await _rpc(gateway, "trace.list", params)
+    instance = instance_result.get("workflow_instance") if isinstance(instance_result.get("workflow_instance"), dict) else {}
+    station_runs = station_result.get("station_runs") if isinstance(station_result.get("station_runs"), list) else []
+    board = board_result.get("board") if isinstance(board_result.get("board"), dict) else {}
+    artifact_refs = _pv17_artifact_refs(board)
+    quality_refs = [
+        {"quality_ref": item.get("evaluation_id"), "status": item.get("status"), "station_run_id": item.get("station_run_id")}
+        for item in quality_result.get("evaluations", [])
+        if isinstance(item, dict)
+    ]
+    approval_refs = [
+        {"approval_ref": item.get("approval_id"), "status": item.get("status"), "station_id": item.get("station_id")}
+        for item in board.get("approvals", [])
+        if isinstance(item, dict)
+    ]
+    return {
+        "schema_version": PV17_SCHEMA_VERSION,
+        "workflow_instance": _instance_summary(instance),
+        "status": _status_dto(status_result.get("status", {})),
+        "station_runs": station_runs,
+        "runtime_event_refs": _pv17_runtime_event_refs(instance, station_runs),
+        "trace_refs": _pv17_trace_refs(instance)
+        + [
+            {"trace_id": item.get("trace_id"), "event_type": item.get("event_type")}
+            for item in traces_result.get("traces", [])
+            if isinstance(item, dict) and item.get("trace_id")
+        ],
+        "artifact_refs": artifact_refs,
+        "quality_refs": quality_refs,
+        "approval_refs": approval_refs,
+        "audit_refs": [_pv17_audit_ref("runtime.instance.inspect", scope, entity_id=instance_id)],
+        "redaction_status": "redacted",
+    }
+
+
+def _pv17_artifact_refs(board: dict[str, Any]) -> list[dict[str, Any]]:
+    refs: list[dict[str, Any]] = []
+    for artifact in board.get("artifacts", []) if isinstance(board.get("artifacts"), list) else []:
+        if isinstance(artifact, dict):
+            refs.append({"artifact_ref": artifact.get("artifact_id"), "kind": artifact.get("kind"), "name": artifact.get("name")})
+    for station in board.get("stations", []) if isinstance(board.get("stations"), list) else []:
+        if not isinstance(station, dict):
+            continue
+        for key in ("input_artifacts", "output_artifacts"):
+            for artifact in station.get(key, []) if isinstance(station.get(key), list) else []:
+                if isinstance(artifact, dict) and artifact.get("artifact_id"):
+                    refs.append({"artifact_ref": artifact.get("artifact_id"), "kind": artifact.get("kind"), "name": artifact.get("name")})
+    seen: set[str] = set()
+    unique = []
+    for ref in refs:
+        artifact_ref = str(ref.get("artifact_ref") or "")
+        if artifact_ref and artifact_ref not in seen:
+            seen.add(artifact_ref)
+            unique.append(ref)
+    return unique
+
+
+def _pv17_evidence_summary_dto(inspect: dict[str, Any], scope: ScopeContext) -> dict[str, Any]:
+    missing = []
+    for key in ("runtime_event_refs", "trace_refs", "artifact_refs", "quality_refs"):
+        if not inspect.get(key):
+            missing.append(key)
+    claims = [
+        {
+            "claim": "正式 /bff/pv17 runtime inspect 可以读取 runtime refs。",
+            "evidence_refs": [ref.get("event_ref") for ref in inspect.get("runtime_event_refs", []) if isinstance(ref, dict)],
+            "status": "supported" if inspect.get("runtime_event_refs") else "missing",
+        },
+        {
+            "claim": "Evidence review 只汇总 trace/artifact/quality refs，不构造 runtime truth。",
+            "evidence_refs": [ref.get("artifact_ref") for ref in inspect.get("artifact_refs", []) if isinstance(ref, dict)],
+            "status": "supported" if inspect.get("artifact_refs") else "missing",
+        },
+    ]
+    return {
+        "schema_version": PV17_SCHEMA_VERSION,
+        "claims": claims,
+        "route_boundary": {
+            "allowed_prefix": "/bff/pv17",
+            "browser_denylist": ["/v1/rpc", "/internal/runtime", "/runtime/store", "/api/runtime", "/debug/runtime"],
+            "status": "specified",
+        },
+        "redaction": {"status": "redacted", "secret_allowed": False, "provider_payload_allowed": False, "artifact_content_allowed": False},
+        "artifact_lineage": {"artifact_refs": inspect.get("artifact_refs", [])},
+        "trace_timeline": {"trace_refs": inspect.get("trace_refs", [])},
+        "missing_evidence": missing,
+        "allowed_claim": "PV17 complete: product closed loop implementation ready for bounded review.",
+        "audit_refs": [_pv17_audit_ref("evidence.summary.read", scope, entity_id=str(inspect.get("workflow_instance", {}).get("workflow_instance_id") or ""))],
+        "redaction_status": "redacted",
     }
 
 

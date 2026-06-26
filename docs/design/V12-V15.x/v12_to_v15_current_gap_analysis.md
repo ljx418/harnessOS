@@ -90,6 +90,16 @@ audit support, implementation evidence and a PASS from the post-V15 acceptance
 runner. These items must not be counted as V15 proof or as production,
 complete Studio, Xpert parity or Agent executor readiness.
 
+## Post-PV16 Resolved Gap
+
+PV17 Product Closed Loop has resolved the selected post-PV16 gap for bounded
+review: it turns the accepted V12-V15/PV16 review slices into one mainline
+product path without using PV16 test-only BFF routes as formal product API
+proof. The canonical PV17 gap document is
+`pv17_product_closed_loop_current_gap_analysis.md`, the drawio overview is
+`pv17_product_closed_loop_gap_analysis.drawio`, and the implementation evidence
+is under `evidence/pv17-product-closed-loop/`.
+
 ## PV16 Development And Acceptance Plan Summary
 
 | PV16 Slice | User-Visible Outcome | Required Evidence |

@@ -1,0 +1,67 @@
+{
+  "schema_version": "harnessos.project_presentation.status.v1",
+  "created_at": "2026-06-25T18:25:00+08:00",
+  "language": "zh-CN",
+  "scope": "documentation_only",
+  "status": {
+    "presentation_page": "READY_WITH_HOST_NATIVE_IMAGES_PERSISTED",
+    "image_generation": "PASS_HOST_NATIVE_GPT_IMAGE_2_PERSISTED",
+    "reason": "Codex CLI 0.142.2 restored host-native gpt-image-2 local persistence. 22 generated PNG files were copied from the Codex generated_images directories into docs/present/harnessos-project-introduction/images/.",
+    "terminal_cli_check": "Standalone gpt-imag2, gpt-image-2 and imag2 commands are not required for this pass.",
+    "garden_mode_check": "Not used; host-native image_gen path was used.",
+    "host_native_check": "PASS: host-native image generation wrote PNG files under ~/.codex/generated_images.",
+    "local_export_check": "PASS: docs/present/harnessos-project-introduction/images contains 22 persisted PNG files."
+  },
+  "accepted_capabilities": [
+    {
+      "stage": "V12",
+      "claim": "产品实体、浏览器工作台与只读画布 foundation 已完成有界审查证据。",
+      "evidence": "docs/design/V12-V15.x/evidence/v12-sa-aggregate/",
+      "boundary": "不证明运行时执行、产品级前端完成度或完整 Workflow Studio。"
+    },
+    {
+      "stage": "V13",
+      "claim": "可编辑 Workflow Studio pilot slice 已完成有界审查证据。",
+      "evidence": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/",
+      "boundary": "不证明完整 Studio、不证明运行时执行或自主发布。"
+    },
+    {
+      "stage": "V14",
+      "claim": "受治理的 Plugin / Skill / Tool / MCP 扩展生态 pilot 已完成有界审查证据。",
+      "evidence": "docs/design/V12-V15.x/evidence/v14-extension-ecosystem/",
+      "boundary": "不证明不受限插件市场或任意工具执行。"
+    },
+    {
+      "stage": "V15",
+      "claim": "前端交互、观测、审计和部署 smoke 基线已完成有界审查证据。",
+      "evidence": "docs/design/V12-V15.x/evidence/v15-observability-deployment/",
+      "boundary": "不证明生产部署或正式 GA。"
+    },
+    {
+      "stage": "PV16",
+      "claim": "产品运行时硬化 pilot 已完成有界审查证据。",
+      "evidence": "docs/design/V12-V15.x/evidence/post-v15-product-runtime-hardening/",
+      "boundary": "不证明完整 Agent 执行器、完整 Studio 或生产可用。"
+    }
+  ],
+  "limited_done": [
+    "浏览器工作台可以展示真实 BFF/DTO 数据，但 V12 画布仍是只读 foundation。",
+    "V13 Studio pilot 支持编辑、移动、连接和 WorkflowDiff handoff，但不是完整 Workflow Studio。",
+    "PV16 可展示受控 runtime run/inspect 证据，但不是完整 Agent executor。",
+    "部署 smoke 和 health 检查可审查，但不是生产部署声明。"
+  ],
+  "planned": [
+    "统一产品入口与面向真实用户的完整小工作室体验。",
+    "完整 Workflow Studio、版本化 DSL、运行发布治理和回滚体验。",
+    "更完整的多租户权限、审计、密钥治理、观测和运维手册。",
+    "Meeting、Interview、Knowledge、Media 等业务链路的端到端产品化。"
+  ],
+  "no_go": [
+    "不得宣称生产可用。",
+    "不得宣称已完全追平 Xpert。",
+    "不得宣称产品级前端已完成。",
+    "不得宣称完整 Workflow Studio 已完成。",
+    "不得宣称 Agent 执行器已完成。",
+    "不得用概念图、原型图或展示页替代运行时、BFF、DTO 或浏览器验收证据。"
+  ]
+}

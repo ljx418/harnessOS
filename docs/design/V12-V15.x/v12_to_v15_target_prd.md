@@ -112,6 +112,13 @@ setup-to-Studio-to-run-to-operations product journey. PV16 must not be used to
 claim production readiness, complete Workflow Studio readiness, Agent executor
 readiness, Xpert parity or product-grade frontend completion.
 
+The accepted post-PV16 implementation target is PV17 Product Closed Loop. PV17
+does not change the accepted PV16 bounded claim. It proves a bounded mainline
+browser journey through setup, Product Console, Mission Studio, confirmed run,
+runtime inspect and evidence review. PV17 evidence is recorded under
+`evidence/pv17-product-closed-loop/` and summarized in
+`reports/pv17_product_closed_loop_acceptance_report.json`.
+
 ## Target User Experience
 
 Across the accepted V12-V15 baseline and the current PV16 target, a user can:
@@ -164,6 +171,7 @@ claims.
 | V14 | User installs or enables scoped skills/tools/MCP capabilities and sees them bind into Agent/Station inspector panels. | Proves governed extension ecosystem pilot; does not prove unrestricted plugin ecosystem. |
 | V15 | User completes the browser scenario matrix with trace, metrics, audit, deployment smoke and final interaction review. | Proves frontend interaction baseline ready for review; does not prove production GA. |
 | PV16 | User creates or updates product entities, confirms a WorkflowSpec run, inspects runtime-backed progress/evidence and verifies a local hardening smoke. | Proves product-runtime hardening pilot only; does not prove production readiness or complete Studio. |
+| PV17 | User follows one mainline browser product path from setup through Product Console, Studio, confirmed run, runtime inspect and evidence review. | Proves a bounded product closed loop ready for review; does not prove production readiness, complete Workflow Studio or Agent executor readiness. |
 
 ## Required User Scenarios
 

@@ -621,3 +621,143 @@ export interface GovernanceReviewSummary {
   audit_timeline: Array<Record<string, unknown>>;
   redaction_status: "redacted";
 }
+
+export interface PV17AuditRef {
+  audit_ref_id: string;
+  operation: string;
+  scope?: Record<string, unknown>;
+  entity_id?: string | null;
+  created_at?: string;
+  redaction_status: "redacted";
+}
+
+export interface PV17SystemHealthDTO {
+  schema_version: string;
+  status: string;
+  api_status: string;
+  gateway_status: string;
+  workflow_store_status: string;
+  frontend_config_status: string;
+  method_count?: number;
+  scope?: Record<string, unknown>;
+  created_at?: string;
+  redaction_status: "redacted";
+}
+
+export interface PV17ProductEntityProjection {
+  entity_kind: string;
+  entity_id: string;
+  display_name?: string;
+  role?: string | null;
+  goal?: string | null;
+  connector_refs?: string[];
+  memory_refs?: string[];
+  model_refs?: string[];
+  tool_refs?: string[];
+  skill_refs?: string[];
+  mcp_refs?: string[];
+  source?: string;
+  audit_refs?: PV17AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface PV17ProductConsoleStateDTO {
+  schema_version: string;
+  workspace: PV17ProductEntityProjection;
+  project: PV17ProductEntityProjection;
+  app: PV17ProductEntityProjection & { domain?: string; default_pack?: string; metadata?: Record<string, unknown> };
+  workflows: WorkflowSummary[];
+  station_agents: PV17ProductEntityProjection[];
+  active_run?: WorkflowInstanceSummary | null;
+  evidence_summary: {
+    status: string;
+    workflow_instance_id?: string;
+    runtime_event_ref_count?: number;
+    artifact_ref_count?: number;
+    quality_ref_count?: number;
+    claims?: string[];
+    missing_evidence?: string[];
+    allowed_claim?: string;
+    redaction_status: "redacted";
+  };
+  audit_refs: PV17AuditRef[];
+  created_at?: string;
+  redaction_status: "redacted";
+}
+
+export interface PV17EntityMutationResultDTO {
+  schema_version: string;
+  status: "accepted" | "denied";
+  entity_ref: { entity_kind: string; entity_id: string; scope?: Record<string, unknown> };
+  entity?: PV17ProductEntityProjection;
+  audit_ref: PV17AuditRef;
+  policy_decision_ref: string;
+  denied_reason?: string | null;
+  redaction_status: "redacted";
+}
+
+export interface PV17StudioWorkflowDTO {
+  schema_version: string;
+  workflow_template: WorkflowSummary;
+  draft: { workflow_draft_id?: string; revision?: number; status?: string };
+  versions: WorkflowVersionSummary[];
+  graph: { nodes: Array<Record<string, unknown>>; edges: Array<Record<string, unknown>>; redaction_status: "redacted" };
+  inspector: Record<string, unknown>;
+  patch_queue: PatchQueueDTO[];
+  audit_refs: PV17AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface PV17WorkflowPatchResultDTO {
+  schema_version: string;
+  status: "proposed";
+  workflow_patch: WorkflowPatchProposal;
+  audit_refs: PV17AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface PV17PublishResultDTO {
+  schema_version: string;
+  status: "published";
+  publish: PublishVersionResult;
+  audit_refs: PV17AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface PV17RunConfirmResultDTO {
+  schema_version: string;
+  status: "started";
+  workflow_instance: WorkflowInstanceSummary;
+  station_runs: Array<Record<string, unknown>>;
+  runtime_event_refs: Array<Record<string, unknown>>;
+  trace_refs: Array<Record<string, unknown>>;
+  audit_refs: PV17AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface PV17RuntimeInspectDTO {
+  schema_version: string;
+  workflow_instance: WorkflowInstanceSummary;
+  status: WorkflowStatus;
+  station_runs: Array<Record<string, unknown>>;
+  runtime_event_refs: Array<Record<string, unknown>>;
+  trace_refs: Array<Record<string, unknown>>;
+  artifact_refs: Array<Record<string, unknown>>;
+  quality_refs: Array<Record<string, unknown>>;
+  approval_refs: Array<Record<string, unknown>>;
+  audit_refs: PV17AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface PV17EvidenceSummaryDTO {
+  schema_version: string;
+  claims: Array<{ claim: string; evidence_refs: unknown[]; status: string }>;
+  route_boundary: { allowed_prefix: string; browser_denylist: string[]; status: string };
+  redaction: { status: string; secret_allowed: boolean; provider_payload_allowed: boolean; artifact_content_allowed: boolean };
+  artifact_lineage: { artifact_refs: Array<Record<string, unknown>> };
+  trace_timeline: { trace_refs: Array<Record<string, unknown>> };
+  missing_evidence: string[];
+  allowed_claim: string;
+  audit_refs: PV17AuditRef[];
+  redaction_status: "redacted";
+}

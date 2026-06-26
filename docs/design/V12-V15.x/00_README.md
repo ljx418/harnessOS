@@ -86,6 +86,12 @@ observability and deployable operations.
   acceptance. PV16 is a separate stage because the target PRD contains durable
   mutation, runtime-backed run/inspect and self-hosting hardening outcomes that
   V15 does not prove.
+- The selected post-PV16 next stage was PV17 Product Closed Loop. PV17 has
+  passed bounded review acceptance for one mainline product path:
+  setup -> Product Console -> Mission Studio -> confirm run -> inspect ->
+  evidence. PV17 evidence does not change the bounded claims for V12-V15/PV16
+  and does not prove production readiness, complete Workflow Studio or Agent
+  executor readiness.
 - V12 design now starts with component-level prototype review before full Figma
   or real browser implementation. The required component sketch gate is defined
   in `v12_component_prototype_plan.md`; execution details, evidence paths and
@@ -106,6 +112,10 @@ V15 complete: frontend interaction baseline ready for review.
 ## Allowed PV16 Claim
 
 PV16 complete: product-runtime hardening pilot ready for review.
+
+## Allowed PV17 Claim
+
+PV17 complete: product closed loop implementation ready for bounded review.
 
 ## Forbidden Interpretations
 
@@ -168,6 +178,17 @@ PV16 complete: product-runtime hardening pilot ready for review.
 - `post_v15_prd_architecture_coverage_audit.md`
 - `post_v15_acceptance_runner_spec.md`
 - `post_v15_implementation_readiness_audit.md`
+- `pv17_product_closed_loop_prd.md`
+- `pv17_product_closed_loop_target_architecture.md`
+- `pv17_product_closed_loop_bff_dto_contract.md`
+- `pv17_product_closed_loop_implementation_task_matrix.md`
+- `pv17_product_closed_loop_development_and_acceptance_plan.md`
+- `pv17_product_closed_loop_acceptance_runner_spec.md`
+- `pv17_product_closed_loop_milestone_roadmap.md`
+- `pv17_product_closed_loop_acceptance_gate.md`
+- `pv17_product_closed_loop_current_gap_analysis.md`
+- `pv17_product_closed_loop_implementation_readiness_audit.md`
+- `pv17_product_closed_loop_gap_analysis.drawio`
 
 ## V12 Implementation-Readiness Documents
 

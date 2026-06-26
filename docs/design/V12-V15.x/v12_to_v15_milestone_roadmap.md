@@ -34,6 +34,9 @@
 | PV16-S3 | PV16 | Operator starts a documented local/self-host profile and completes smoke with command output | smoke output + health report + redaction scan | Self-host hardening smoke PASS |
 | PV16-S4 | PV16 | Reviewer follows setup, Studio, run review and operations as one coherent product journey | UX matrix + screenshots + accessibility notes + human review | Product-runtime journey PASS |
 | PV16-SA | PV16 | Reviewer accepts product-runtime hardening pilot without production or Xpert overclaims | acceptance data + artifact manifest + claim scan + redaction scan | Product-runtime hardening pilot ready for review |
+| PV17-R0 | PV17 | Reviewer sees product closed loop PRD, target architecture, development plan, milestone roadmap, acceptance gate and drawio before implementation | PV17 docs + drawio + claim scan | PV17 documentation gate retained as audit trace |
+| PV17-E0 | PV17 | Developer restores local Python validation before implementation | API/CLI/pack smoke output | Local validation entry PASS |
+| PV17-S1..SA | PV17 | User follows one mainline setup -> Product Console -> Mission Studio -> confirm run -> inspect -> evidence path | browser E2E + BFF route log + DTO snapshots + runtime inspect + evidence package | PV17 bounded product closed loop review PASS |
 
 ## Execution Naming Migration
 
@@ -94,6 +97,11 @@ version/stage labels. Historical mentions map to the current names as follows:
   with no open fatal or major findings, and the post-V15 acceptance runner
   passes.
 - PV16 cannot claim production readiness, complete Workflow Studio readiness,
+  Agent executor readiness, Xpert parity or product-grade frontend completion.
+- PV17 bounded review is complete because formal `/bff/pv17/*` routes, DTOs,
+  browser E2E evidence, runtime inspect DTOs, evidence package and acceptance
+  report exist for the bounded product closed loop scenario.
+- PV17 cannot claim production readiness, complete Workflow Studio readiness,
   Agent executor readiness, Xpert parity or product-grade frontend completion.
 - No stage may claim Xpert parity complete.
 - No stage may count Figma prototype screens as runtime evidence.

@@ -1,0 +1,78 @@
+{
+  "schema_version": "pv17.product_closed_loop_acceptance_report.v1",
+  "status": "PASS",
+  "stage_id": "PV17-SA",
+  "evidence_dir": "docs/design/V12-V15.x/evidence/pv17-product-closed-loop",
+  "missing_artifacts": [],
+  "schema_results": [
+    {
+      "status": "PASS",
+      "reason": ""
+    }
+  ],
+  "stage_results": {
+    "status": "PASS",
+    "missing_stage_ids": [],
+    "failing_stage_ids": [],
+    "missing_evidence_stage_ids": [],
+    "missing_user_visible_result_stage_ids": [],
+    "blocking_failure_stage_ids": []
+  },
+  "browser_boundary": {
+    "status": "PASS",
+    "forbidden_matches": []
+  },
+  "bff_boundary": {
+    "status": "PASS",
+    "uses_pv17": true,
+    "uses_pv16_positive_path": false
+  },
+  "dto_coverage": {
+    "status": "PASS",
+    "missing_stages": [],
+    "missing_schema_version": []
+  },
+  "entity_mutation": {
+    "status": "PASS",
+    "missing_required_fields": [],
+    "negative_fixture_count": 1
+  },
+  "studio_versioning": {
+    "status": "PASS",
+    "missing_fields": [],
+    "agent_silent_publish": false
+  },
+  "runtime_evidence": {
+    "status": "PASS",
+    "missing_fields": [],
+    "fixture_only": false
+  },
+  "claim_to_evidence": {
+    "status": "PASS",
+    "claim_count": 5,
+    "missing_evidence_claim_ids": [],
+    "failing_claim_ids": []
+  },
+  "claim_scan": {
+    "status": "PASS",
+    "matches": []
+  },
+  "redaction_scan": {
+    "status": "PASS",
+    "matches": []
+  },
+  "allowed_claim": "PV17 complete: product closed loop implementation ready for bounded review.",
+  "allowed_claim_check": {
+    "status": "PASS",
+    "actual": "PV17 complete: product closed loop implementation ready for bounded review.",
+    "expected": "PV17 complete: product closed loop implementation ready for bounded review."
+  },
+  "forbidden_positive_claims": [
+    "production ready",
+    "HarnessOS is production ready",
+    "Xpert parity complete",
+    "product-grade frontend complete",
+    "complete Workflow Studio ready",
+    "Agent executor ready"
+  ]
+}

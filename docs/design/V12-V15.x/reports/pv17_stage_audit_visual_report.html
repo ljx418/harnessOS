@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HarnessOS PV17 阶段性审计与自动化验收报告</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f8fb;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #5c6a82;
+      --line: #d8e0ec;
+      --green: #137a3d;
+      --green-bg: #e9f7ee;
+      --blue: #2357b8;
+      --blue-bg: #eaf1ff;
+      --amber: #9a5a00;
+      --amber-bg: #fff4df;
+      --red: #b42318;
+      --red-bg: #fff0ed;
+      --code: #0f172a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      line-height: 1.6;
+    }
+
+    main {
+      width: min(1180px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 36px 0 56px;
+    }
+
+    h1, h2, h3 {
+      line-height: 1.25;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 32px;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-top: 32px;
+      font-size: 22px;
+    }
+
+    h3 {
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      margin: 8px 0 0;
+    }
+
+    .hero {
+      display: grid;
+      gap: 18px;
+      padding: 28px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 13px;
+      font-weight: 700;
+      border: 1px solid transparent;
+    }
+
+    .badge.pass {
+      color: var(--green);
+      background: var(--green-bg);
+      border-color: #b8e4c6;
+    }
+
+    .badge.scope {
+      color: var(--blue);
+      background: var(--blue-bg);
+      border-color: #c5d6ff;
+    }
+
+    .badge.warn {
+      color: var(--amber);
+      background: var(--amber-bg);
+      border-color: #f2d39a;
+    }
+
+    .badge.no {
+      color: var(--red);
+      background: var(--red-bg);
+      border-color: #ffc7bf;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      min-width: 0;
+    }
+
+    .card p, .card li {
+      color: var(--muted);
+    }
+
+    .callout {
+      margin-top: 14px;
+      border-radius: 8px;
+      border: 1px solid #f2d39a;
+      background: var(--amber-bg);
+      color: #4f3100;
+      padding: 14px 16px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      display: table;
+    }
+
+    th, td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+
+    th {
+      background: #eef3fa;
+      color: #25324a;
+      font-weight: 700;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    code {
+      color: var(--code);
+      background: #edf2f7;
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+      font-size: 13px;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .step {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 14px;
+      min-height: 138px;
+    }
+
+    .step strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .shots {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    figure {
+      margin: 0;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    figure img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      object-position: top left;
+      border-bottom: 1px solid var(--line);
+      background: #eef3fa;
+    }
+
+    figcaption {
+      padding: 12px 14px 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .arch {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .layer {
+      border-left: 4px solid #7c98c7;
+      padding-left: 12px;
+      margin-top: 12px;
+    }
+
+    .layer.done {
+      border-left-color: var(--green);
+    }
+
+    .layer.limited {
+      border-left-color: var(--amber);
+    }
+
+    .layer.no {
+      border-left-color: var(--red);
+    }
+
+    ul {
+      margin: 8px 0 0 18px;
+      padding: 0;
+    }
+
+    .footer {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 26px;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .grid, .grid.two, .shots, .arch, .flow {
+        grid-template-columns: 1fr;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <div>
+        <h1>HarnessOS PV17 阶段性审计与自动化验收报告</h1>
+        <p>本报告基于原始 PRD、目标架构、当前代码、自动化测试、headless 浏览器端到端路径和证据包生成，用于判断 PV17 Product Closed Loop 是否达到受限评审出门条件。</p>
+      </div>
+      <div class="meta">
+        <span>生成日期：2026-06-26</span>
+        <span>阶段：PV17-SA</span>
+        <span>验收方式：代码检视 + 文档审计 + 自动化测试 + headless Chrome/CDP 截图</span>
+      </div>
+      <div>
+        <span class="badge pass">最终结论：PASS</span>
+        <span class="badge scope">允许声明：PV17 complete: product closed loop implementation ready for bounded review.</span>
+        <span class="badge warn">范围：受限产品闭环评审</span>
+      </div>
+      <div class="callout">
+        本报告不宣称 HarnessOS production ready、Xpert parity complete、product-grade frontend complete、complete Workflow Studio ready 或 Agent executor ready。截图、文档和介绍页只作为审计入口；最终 PASS 依赖自动化证据包、BFF 路由日志、DTO 快照和验收 runner。
+      </div>
+    </section>
+
+    <h2>一、阶段性验收摘要</h2>
+    <div class="grid">
+      <section class="card">
+        <h3>代码检视</h3>
+        <p>PV17 正向路径使用正式 <code>/bff/pv17/*</code> 路由，覆盖 Product Console、Station Agent mutation、Workflow patch/publish、runtime inspect 和 evidence summary。</p>
+      </section>
+      <section class="card">
+        <h3>文档审计</h3>
+        <p>PRD、目标架构、验收门槛、里程碑、gap drawio 和报告已从“待实现评审”更新为“bounded review 已通过，保留历史文档 gate 作为审计追溯”。</p>
+      </section>
+      <section class="card">
+        <h3>功能检查</h3>
+        <p>用户路径覆盖 setup、Product Console、Mission Studio、确认运行、运行检查和证据审查，acceptance runner 最终状态为 PASS。</p>
+      </section>
+    </div>
+
+    <h2>二、自动化验收结果</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>检查项</th>
+          <th>命令或数据源</th>
+          <th>结果</th>
+          <th>审计说明</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>后端核心与 PV17 pytest</td>
+          <td><code>.venv/bin/python -m pytest ... test_pv17_*.py</code></td>
+          <td><span class="badge pass">30 passed</span></td>
+          <td>覆盖 API runs、CLI headless、pack registry、pack assembly、PV17 BFF 和 acceptance runner 单测。</td>
+        </tr>
+        <tr>
+          <td>前端单元与客户端边界</td>
+          <td><code>node --test dist-test/__tests__/*.test.js</code></td>
+          <td><span class="badge pass">79 passed</span></td>
+          <td>包含 PV17 client formal BFF route only 检查，以及既有阶段 No False Green 用例。</td>
+        </tr>
+        <tr>
+          <td>前端类型检查与构建</td>
+          <td><code>tsc</code> + <code>vite build</code></td>
+          <td><span class="badge pass">PASS</span></td>
+          <td>构建成功；Vite 仅提示 chunk 大小警告，不影响本阶段验收结论。</td>
+        </tr>
+        <tr>
+          <td>PV17 headless 浏览器 E2E</td>
+          <td><code>tools/pv17/run_product_closed_loop_e2e.py</code></td>
+          <td><span class="badge pass">PASS</span></td>
+          <td>使用 headless Chrome/CDP，不弹出可见浏览器；刷新截图、网络日志、BFF 路由日志和证据 JSON。</td>
+        </tr>
+        <tr>
+          <td>PV17 acceptance runner</td>
+          <td><code>tools/pv17/run_product_closed_loop_acceptance.py</code></td>
+          <td><span class="badge pass">PASS</span></td>
+          <td>缺失证据为 0；schema、stage、browser boundary、BFF boundary、DTO coverage、redaction 和 claim scan 全部 PASS。</td>
+        </tr>
+        <tr>
+          <td>工作树格式检查</td>
+          <td><code>git diff --check</code></td>
+          <td><span class="badge pass">PASS</span></td>
+          <td>未发现 trailing whitespace 或 patch 格式问题。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>三、目标架构与当前实现</h2>
+    <div class="arch">
+      <section class="card">
+        <h3>目标架构</h3>
+        <div class="layer done">
+          <strong>Product Console</strong>
+          <p>统一呈现 workspace、project、app、workflow、Station Agent 和 system health。</p>
+        </div>
+        <div class="layer done">
+          <strong>Mission Studio</strong>
+          <p>WorkflowDiff/patch round-trip，publish/run 必须由用户确认。</p>
+        </div>
+        <div class="layer done">
+          <strong>BFF DTO Boundary</strong>
+          <p>浏览器只访问正式 <code>/bff/pv17/*</code>；禁止直连 runtime/internal/debug route。</p>
+        </div>
+        <div class="layer done">
+          <strong>Runtime Inspect + Evidence</strong>
+          <p>运行后可检查 workflow instance、StationRun、trace、artifact、quality、approval 和 claim-to-evidence。</p>
+        </div>
+        <div class="layer limited">
+          <strong>仍为受限范围</strong>
+          <p>PV17 证明 bounded product closed loop，不证明生产部署、多租户、完整 Agent executor 或 Xpert parity。</p>
+        </div>
+      </section>
+      <section class="card">
+        <h3>当前代码实现</h3>
+        <div class="layer done">
+          <strong><code>apps/api/routers/bff.py</code></strong>
+          <p>提供 <code>/bff/pv17/system/health</code>、<code>/product-console/state</code>、<code>/entities/station-agents</code>、<code>/studio/workflows/*</code>、<code>/runtime/*</code>、<code>/evidence/*</code>。</p>
+        </div>
+        <div class="layer done">
+          <strong><code>apps/workflow-console/src/ui/pv17/</code></strong>
+          <p>提供 PV17 Product Closed Loop UI，支持真实用户路径截图验收。</p>
+        </div>
+        <div class="layer done">
+          <strong><code>apps/workflow-console/e2e/pv17_cdp_acceptance.mjs</code></strong>
+          <p>通过 CDP 执行真实页面操作，采集网络请求并生成 3 张路径截图。</p>
+        </div>
+        <div class="layer done">
+          <strong><code>tools/pv17/</code></strong>
+          <p>包含 reference seed、formal BFF server、E2E runner 和 acceptance runner。</p>
+        </div>
+        <div class="layer no">
+          <strong>No-Go 仍有效</strong>
+          <p>不允许把 PV17 证据解释为 production ready、complete Workflow Studio ready 或 Agent executor ready。</p>
+        </div>
+      </section>
+    </div>
+
+    <h2>四、用户场景体验路径</h2>
+    <div class="flow">
+      <section class="step">
+        <strong>1. 进入产品上下文</strong>
+        <p>用户打开 PV17 页面，看到 workspace/project/app/workflow、Station Agent 和健康状态。</p>
+      </section>
+      <section class="step">
+        <strong>2. 配置 Station Agent</strong>
+        <p>用户提交 Agent 配置，BFF 返回 audit refs，同时保留拒绝路径证据。</p>
+      </section>
+      <section class="step">
+        <strong>3. Mission Studio 修改</strong>
+        <p>用户创建 patch proposal，并在明确确认后发布 WorkflowVersion。</p>
+      </section>
+      <section class="step">
+        <strong>4. 确认运行并检查</strong>
+        <p>用户确认 run 后查看 runtime inspect、trace refs、artifact refs、quality refs 和 approval refs。</p>
+      </section>
+      <section class="step">
+        <strong>5. Evidence Review</strong>
+        <p>用户看到 claim-to-evidence、route boundary、artifact lineage 和 redaction 结果。</p>
+      </section>
+    </div>
+
+    <h2>五、截图证据</h2>
+    <div class="shots">
+      <figure>
+        <img src="../evidence/pv17-product-closed-loop/product-console-screenshot.png" alt="PV17 Product Console 自动化截图" />
+        <figcaption>Product Console：当前产品上下文、系统健康和主线入口。</figcaption>
+      </figure>
+      <figure>
+        <img src="../evidence/pv17-product-closed-loop/studio-run-inspect-screenshot.png" alt="PV17 Mission Studio 与 Runtime Inspect 自动化截图" />
+        <figcaption>Mission Studio + Runtime Inspect：patch、publish、confirm run 和运行检查。</figcaption>
+      </figure>
+      <figure>
+        <img src="../evidence/pv17-product-closed-loop/evidence-review-screenshot.png" alt="PV17 Evidence Review 自动化截图" />
+        <figcaption>Evidence Review：claim-to-evidence、route boundary、redaction 和 lineage。</figcaption>
+      </figure>
+    </div>
+
+    <h2>六、边界与审查结论</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>审查维度</th>
+          <th>结论</th>
+          <th>证据</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>浏览器网络边界</td>
+          <td><span class="badge pass">PASS</span></td>
+          <td><code>browser-network-log.json</code> 中 forbidden route scan 为空，只出现 Vite 静态资源和 <code>/bff/pv17/*</code> 正向路径。</td>
+        </tr>
+        <tr>
+          <td>BFF 边界</td>
+          <td><span class="badge pass">PASS</span></td>
+          <td><code>bff-route-log.json</code> 显示 uses_pv17=true，uses_pv16_positive_path=false。</td>
+        </tr>
+        <tr>
+          <td>DTO 覆盖</td>
+          <td><span class="badge pass">PASS</span></td>
+          <td><code>dto-snapshots.json</code> 覆盖 S1-S5，包含 schema version。</td>
+        </tr>
+        <tr>
+          <td>PRD 规格检视</td>
+          <td><span class="badge pass">PASS</span></td>
+          <td><code>prd-spec-review.md</code> 记录 Product Console、entity mutation、Studio versioning、runtime inspect 和 evidence review 的对照结果。</td>
+        </tr>
+        <tr>
+          <td>目标架构检视</td>
+          <td><span class="badge pass">PASS</span></td>
+          <td><code>target-architecture-review.md</code> 记录目标架构层与当前代码实体的对应关系。</td>
+        </tr>
+        <tr>
+          <td>No False Green</td>
+          <td><span class="badge pass">PASS</span></td>
+          <td><code>no-false-green-scan.txt</code> 和 acceptance report 均无 forbidden positive claim 命中。</td>
+        </tr>
+        <tr>
+          <td>Redaction</td>
+          <td><span class="badge pass">PASS</span></td>
+          <td><code>redaction-scan.txt</code> 无 raw secret、raw provider payload 或 raw artifact content 泄露。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>七、剩余风险</h2>
+    <div class="grid two">
+      <section class="card">
+        <h3>非阻塞风险</h3>
+        <ul>
+          <li>Vite build 仍有 chunk size warning，影响性能优化判断，但不阻断 PV17 bounded review。</li>
+          <li>pytest 输出中存在 Starlette/Pydantic deprecation warnings，属于依赖迁移风险，不是本阶段功能失败。</li>
+          <li>一次并发顺序预检在 E2E 证据生成前运行 acceptance runner，因证据缺失失败；顺序重跑后已 PASS，最终结论以后者为准。</li>
+        </ul>
+      </section>
+      <section class="card">
+        <h3>不能外推的能力</h3>
+        <ul>
+          <li>不能宣称生产可用、多租户生产安全、完整部署运维闭环。</li>
+          <li>不能宣称完整 Workflow Studio 或 Agent executor 已完成。</li>
+          <li>不能宣称 Xpert parity 或产品级前端全部完成。</li>
+        </ul>
+      </section>
+    </div>
+
+    <h2>八、关键审计入口</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>文件</th>
+          <th>用途</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>docs/design/V12-V15.x/pv17_product_closed_loop_prd.md</code></td>
+          <td>PV17 规格来源。</td>
+        </tr>
+        <tr>
+          <td><code>docs/design/V12-V15.x/pv17_product_closed_loop_target_architecture.md</code></td>
+          <td>PV17 目标架构与代码实体映射。</td>
+        </tr>
+        <tr>
+          <td><code>docs/design/V12-V15.x/reports/pv17_product_closed_loop_acceptance_report.json</code></td>
+          <td>机器可读最终验收报告。</td>
+        </tr>
+        <tr>
+          <td><code>docs/design/V12-V15.x/evidence/pv17-product-closed-loop/</code></td>
+          <td>截图、网络日志、DTO 快照、claim matrix、PRD/架构 review 和 audit closure。</td>
+        </tr>
+        <tr>
+          <td><code>tools/pv17/run_product_closed_loop_acceptance.py</code></td>
+          <td>可重复执行的阶段验收 runner。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="footer">本 HTML 报告为阶段性审计材料。它总结自动化证据，不替代源码、PRD、目标架构、日志和 JSON 证据包本身。</p>
+  </main>
+</body>
+</html>

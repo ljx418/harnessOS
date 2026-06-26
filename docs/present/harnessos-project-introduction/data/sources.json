@@ -1,0 +1,68 @@
+{
+  "schema_version": "harnessos.project_presentation.sources.v1",
+  "created_at": "2026-06-25T00:00:00+08:00",
+  "local_sources": [
+    {
+      "title": "V12-V15 Target PRD",
+      "path": "docs/design/V12-V15.x/v12_to_v15_target_prd.md",
+      "usage": "目标体验、阶段边界、当前有界声明"
+    },
+    {
+      "title": "V12-V15 Target Architecture",
+      "path": "docs/design/V12-V15.x/v12_to_v15_target_architecture.md",
+      "usage": "目标架构平面、当前到目标的关联关系"
+    },
+    {
+      "title": "Full Stage Acceptance Summary",
+      "path": "docs/design/V12-V15.x/evidence/full-stage-acceptance-review-2026-06-25/acceptance-summary.json",
+      "usage": "V12/V13/V14/V15/PV16 有界验收状态"
+    },
+    {
+      "title": "TASKS",
+      "path": "TASKS.md",
+      "usage": "后续业务链路、生产治理和多 Agent 自动化规划"
+    }
+  ],
+  "external_sources": [
+    {
+      "title": "Model Context Protocol documentation",
+      "url": "https://modelcontextprotocol.io/docs/getting-started/intro",
+      "usage": "说明 MCP 作为 AI 应用连接外部系统、工具、数据和工作流的开放标准"
+    },
+    {
+      "title": "LangGraph official page",
+      "url": "https://www.langchain.com/langgraph",
+      "usage": "说明可定制 single-agent、multi-agent、hierarchical agent workflow 的行业方向"
+    },
+    {
+      "title": "React Flow documentation",
+      "url": "https://reactflow.dev/",
+      "usage": "说明节点拖拽、缩放、平移、选择、增删元素等画布交互基线"
+    },
+    {
+      "title": "OpenAI Agents SDK guide",
+      "url": "https://developers.openai.com/api/docs/guides/agents",
+      "usage": "说明 agents 规划、工具调用、跨专家协作和多步状态管理方向"
+    },
+    {
+      "title": "OpenAI Agents Python GitHub",
+      "url": "https://github.com/openai/openai-agents-python",
+      "usage": "补充开源 multi-agent workflow 框架参考"
+    },
+    {
+      "title": "Model Context Protocol GitHub organization",
+      "url": "https://github.com/modelcontextprotocol",
+      "usage": "补充 MCP 开源生态参考"
+    },
+    {
+      "title": "NSA MCP security design considerations",
+      "url": "https://www.nsa.gov/Press-Room/Press-Releases-Statements/Press-Release-View/Article/4496698/nsa-releases-security-design-considerations-for-ai-driven-automation-leveraging/",
+      "usage": "补充 MCP / AI-driven automation 的安全边界提醒"
+    },
+    {
+      "title": "SOC Prime MCP security risks and mitigations",
+      "url": "https://socprime.com/blog/mcp-security-risks-and-mitigations/",
+      "usage": "补充 MCP 风险、最小权限、审计和工具调用治理提醒"
+    }
+  ]
+}
