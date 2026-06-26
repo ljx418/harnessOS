@@ -1,0 +1,235 @@
+.pv18-opc {
+  min-height: 100vh;
+  padding: 24px;
+  color: #111827;
+  background: #f6f8fb;
+}
+
+.pv18-opc--state {
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+}
+
+.pv18-opc--error,
+.pv18-opc__error {
+  color: #991b1b;
+}
+
+.pv18-opc__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.pv18-opc__header h1 {
+  margin: 6px 0;
+  font-size: 30px;
+  line-height: 1.15;
+}
+
+.pv18-opc__header p {
+  margin: 0;
+  color: #475569;
+}
+
+.pv18-opc__eyebrow {
+  color: #0f766e;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.pv18-opc__status {
+  min-width: 220px;
+  padding: 12px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.pv18-opc__status span,
+.pv18-card span,
+.pv18-panel dt {
+  display: block;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.pv18-opc__status strong,
+.pv18-card strong {
+  display: block;
+  margin-top: 4px;
+  overflow-wrap: anywhere;
+}
+
+.pv18-opc__error {
+  margin-bottom: 16px;
+  padding: 10px 12px;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  background: #fef2f2;
+}
+
+.pv18-opc__cards {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.pv18-card,
+.pv18-panel {
+  border: 1px solid #d7e0ea;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.pv18-card {
+  min-height: 96px;
+  padding: 14px;
+}
+
+.pv18-card svg {
+  color: #0f766e;
+}
+
+.pv18-opc__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.pv18-panel {
+  padding: 16px;
+}
+
+.pv18-panel--wide {
+  grid-column: span 2;
+}
+
+.pv18-panel h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+}
+
+.pv18-panel dl {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 14px;
+}
+
+.pv18-field {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.pv18-field span {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.pv18-field input,
+.pv18-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 9px 10px;
+  color: #172033;
+  background: #ffffff;
+  font: inherit;
+  line-height: 1.45;
+}
+
+.pv18-field textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+
+.pv18-field input:focus,
+.pv18-field textarea:focus {
+  outline: 2px solid rgba(15, 118, 110, 0.18);
+  border-color: #0f766e;
+}
+
+.pv18-panel div {
+  min-width: 0;
+}
+
+.pv18-panel dd {
+  margin: 3px 0 0;
+  color: #172033;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.pv18-panel button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid #0f766e;
+  border-radius: 8px;
+  color: #ffffff;
+  background: #0f766e;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.pv18-panel button:disabled {
+  border-color: #cbd5e1;
+  color: #64748b;
+  background: #e2e8f0;
+  cursor: not-allowed;
+}
+
+.pv18-panel__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+@media (max-width: 1100px) {
+  .pv18-opc__cards,
+  .pv18-opc__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pv18-panel--wide {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 720px) {
+  .pv18-opc {
+    padding: 16px;
+  }
+
+  .pv18-opc__header {
+    display: block;
+  }
+
+  .pv18-opc__status {
+    margin-top: 12px;
+  }
+
+  .pv18-opc__cards,
+  .pv18-opc__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pv18-panel--wide {
+    grid-column: auto;
+  }
+}

@@ -1,0 +1,789 @@
+{
+  "schema_version": "pv18.quality_correction_report.v1",
+  "status": "PASS",
+  "quality_status": "pending_review",
+  "correction_status": "pending_human_review",
+  "requires_human_review": true,
+  "auto_publish_allowed": false,
+  "quality": {
+    "schema_version": "pv18.knowledge_opc.v1",
+    "quality_id": "pv18-quality-4588eb62",
+    "workspace_id": "knowledge:local:demo:default",
+    "quality_status": "pending_review",
+    "issues": [
+      {
+        "severity": "review",
+        "message": "citation review remains human gated"
+      }
+    ],
+    "low_signal_sources": [],
+    "correction_required": true,
+    "trace_refs": [
+      {
+        "trace_id": "pv18:trace:quality:pv18-quality-4588eb62",
+        "event_type": "knowledge.quality.pending_review"
+      }
+    ],
+    "audit_refs": [
+      {
+        "audit_ref_id": "pv18:audit:knowledge.quality.feedback:default||:pv18-quality-4588eb62",
+        "operation": "knowledge.quality.feedback",
+        "scope": {
+          "app_id": "default",
+          "project_id": null,
+          "workspace_id": null
+        },
+        "entity_id": "pv18-quality-4588eb62",
+        "created_at": "2026-06-26T20:15:29.207608Z",
+        "redaction_status": "redacted"
+      }
+    ],
+    "redaction_status": "redacted",
+    "data_service_workspace_id": "knowledge-local-demo-default",
+    "data_service_steps": [
+      {
+        "tool": "knowledge_quality_feedback_v2",
+        "job_id": "job_fdf063d8adb9",
+        "job_status": "completed",
+        "artifact_id": "art_734cad48b66c",
+        "envelope": {
+          "workspace_id": "knowledge-local-demo-default",
+          "operation_id": null,
+          "status": "ok",
+          "warnings": [],
+          "artifact_refs": [
+            {
+              "type": "workspace",
+              "artifact_ref": "artifact://c7610e226889bf61",
+              "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default"
+            }
+          ],
+          "next_actions": [],
+          "data": {
+            "feedback_id": "a8c8169afd14",
+            "created_at": "2026-06-26T20:15:33.354279Z",
+            "target_type": "query",
+            "target_id": "pv18-query",
+            "action": "needs_review",
+            "label": "",
+            "suggested_value": "",
+            "reason": "PV18 Knowledge OPC quality feedback",
+            "metadata": {
+              "source": "pv18_knowledge_opc",
+              "issue_count": 1,
+              "low_signal_count": 0
+            },
+            "debug_paths": {
+              "workspace": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default"
+            }
+          }
+        }
+      }
+    ],
+    "data_service_envelope": {
+      "workspace_id": "knowledge-local-demo-default",
+      "operation_id": null,
+      "status": "ok",
+      "warnings": [],
+      "artifact_refs": [
+        {
+          "type": "workspace",
+          "artifact_ref": "artifact://c7610e226889bf61",
+          "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default"
+        }
+      ],
+      "next_actions": [],
+      "data": {
+        "feedback_id": "a8c8169afd14",
+        "created_at": "2026-06-26T20:15:33.354279Z",
+        "target_type": "query",
+        "target_id": "pv18-query",
+        "action": "needs_review",
+        "label": "",
+        "suggested_value": "",
+        "reason": "PV18 Knowledge OPC quality feedback",
+        "metadata": {
+          "source": "pv18_knowledge_opc",
+          "issue_count": 1,
+          "low_signal_count": 0
+        },
+        "debug_paths": {
+          "workspace": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default"
+        }
+      }
+    },
+    "real_data_service": true
+  },
+  "correction": {
+    "schema_version": "pv18.knowledge_opc.v1",
+    "plan_id": "pv18-correction-8c5b4476",
+    "workspace_id": "knowledge:local:demo:default",
+    "status": "pending_human_review",
+    "rules": [
+      {
+        "action": "flag_reviewed_target",
+        "action_id": "action_rule_9bf591e75cd4",
+        "current_label": "",
+        "impact": {
+          "graph_edges": [],
+          "graph_nodes": [],
+          "llmwiki_pages": [],
+          "query_hit_note": "Query impact is applied at read time and depends on the operator query.",
+          "query_hits": [],
+          "summary": {
+            "graph_edge_count": 0,
+            "graph_node_count": 0,
+            "llmwiki_page_count": 0,
+            "total_matches": 0
+          }
+        },
+        "metadata": {
+          "issue_count": 1,
+          "low_signal_count": 0,
+          "source": "pv18_knowledge_opc"
+        },
+        "proposed_value": "",
+        "reason": "PV18 Knowledge OPC quality feedback",
+        "source_feedback_id": "9bf591e75cd4",
+        "source_rule_id": "rule_9bf591e75cd4",
+        "target_engines": [
+          "llmwiki",
+          "graphrag"
+        ],
+        "target_id": "pv18-query",
+        "target_type": "query"
+      },
+      {
+        "action": "flag_reviewed_target",
+        "action_id": "action_rule_00e945615ec0",
+        "current_label": "",
+        "impact": {
+          "graph_edges": [],
+          "graph_nodes": [],
+          "llmwiki_pages": [],
+          "query_hit_note": "Query impact is applied at read time and depends on the operator query.",
+          "query_hits": [],
+          "summary": {
+            "graph_edge_count": 0,
+            "graph_node_count": 0,
+            "llmwiki_page_count": 0,
+            "total_matches": 0
+          }
+        },
+        "metadata": {
+          "issue_count": 1,
+          "low_signal_count": 0,
+          "source": "pv18_knowledge_opc"
+        },
+        "proposed_value": "",
+        "reason": "PV18 Knowledge OPC quality feedback",
+        "source_feedback_id": "00e945615ec0",
+        "source_rule_id": "rule_00e945615ec0",
+        "target_engines": [
+          "llmwiki",
+          "graphrag"
+        ],
+        "target_id": "pv18-query",
+        "target_type": "query"
+      },
+      {
+        "action": "flag_reviewed_target",
+        "action_id": "action_rule_981f20b1a9f9",
+        "current_label": "",
+        "impact": {
+          "graph_edges": [],
+          "graph_nodes": [],
+          "llmwiki_pages": [],
+          "query_hit_note": "Query impact is applied at read time and depends on the operator query.",
+          "query_hits": [],
+          "summary": {
+            "graph_edge_count": 0,
+            "graph_node_count": 0,
+            "llmwiki_page_count": 0,
+            "total_matches": 0
+          }
+        },
+        "metadata": {
+          "issue_count": 1,
+          "low_signal_count": 0,
+          "source": "pv18_knowledge_opc"
+        },
+        "proposed_value": "",
+        "reason": "PV18 Knowledge OPC quality feedback",
+        "source_feedback_id": "981f20b1a9f9",
+        "source_rule_id": "rule_981f20b1a9f9",
+        "target_engines": [
+          "llmwiki",
+          "graphrag"
+        ],
+        "target_id": "pv18-query",
+        "target_type": "query"
+      },
+      {
+        "action": "flag_reviewed_target",
+        "action_id": "action_rule_a8c8169afd14",
+        "current_label": "",
+        "impact": {
+          "graph_edges": [],
+          "graph_nodes": [],
+          "llmwiki_pages": [],
+          "query_hit_note": "Query impact is applied at read time and depends on the operator query.",
+          "query_hits": [],
+          "summary": {
+            "graph_edge_count": 0,
+            "graph_node_count": 0,
+            "llmwiki_page_count": 0,
+            "total_matches": 0
+          }
+        },
+        "metadata": {
+          "issue_count": 1,
+          "low_signal_count": 0,
+          "source": "pv18_knowledge_opc"
+        },
+        "proposed_value": "",
+        "reason": "PV18 Knowledge OPC quality feedback",
+        "source_feedback_id": "a8c8169afd14",
+        "source_rule_id": "rule_a8c8169afd14",
+        "target_engines": [
+          "llmwiki",
+          "graphrag"
+        ],
+        "target_id": "pv18-query",
+        "target_type": "query"
+      }
+    ],
+    "requires_human_review": true,
+    "auto_publish_allowed": false,
+    "audit_refs": [
+      {
+        "audit_ref_id": "pv18:audit:knowledge.correction.plan:default||:pv18-correction-8c5b4476",
+        "operation": "knowledge.correction.plan",
+        "scope": {
+          "app_id": "default",
+          "project_id": null,
+          "workspace_id": null
+        },
+        "entity_id": "pv18-correction-8c5b4476",
+        "created_at": "2026-06-26T20:15:33.543926Z",
+        "redaction_status": "redacted"
+      }
+    ],
+    "redaction_status": "redacted",
+    "data_service_workspace_id": "knowledge-local-demo-default",
+    "data_service_steps": [
+      {
+        "tool": "knowledge_correction_rules_v2",
+        "job_id": "job_3045904189aa",
+        "job_status": "completed",
+        "artifact_id": "art_d106552575a9",
+        "envelope": {
+          "workspace_id": "knowledge-local-demo-default",
+          "operation_id": null,
+          "status": "ok",
+          "warnings": [],
+          "artifact_refs": [
+            {
+              "type": "workspace",
+              "artifact_ref": "artifact://c7610e226889bf61",
+              "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default"
+            }
+          ],
+          "next_actions": [],
+          "data": {
+            "rules_path_ref": "artifact://854495e0e2d676ac",
+            "items": [
+              {
+                "created_at": "2026-06-26T20:15:33.354279Z",
+                "current_label": "",
+                "metadata": {
+                  "issue_count": 1,
+                  "low_signal_count": 0,
+                  "source": "pv18_knowledge_opc"
+                },
+                "proposed_value": "",
+                "reason": "PV18 Knowledge OPC quality feedback",
+                "rule_id": "rule_a8c8169afd14",
+                "rule_type": "review",
+                "source_feedback_id": "a8c8169afd14",
+                "status": "draft",
+                "target_id": "pv18-query",
+                "target_type": "query"
+              }
+            ],
+            "total_count": 4,
+            "filtered_count": 1,
+            "summary": {
+              "rule_count": 4,
+              "status_counts": {
+                "approved": 3,
+                "draft": 1
+              },
+              "rule_type_counts": {
+                "review": 4
+              },
+              "target_type_counts": {
+                "query": 4
+              }
+            },
+            "generated_at": "2026-06-26T20:15:33.387108Z",
+            "schema_version": "1.0",
+            "debug_paths": {
+              "workspace": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default",
+              "rules_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default/quality/correction_rules.json"
+            }
+          }
+        }
+      },
+      {
+        "tool": "knowledge_review_correction_rule_v2",
+        "job_id": "job_30c24777c659",
+        "job_status": "completed",
+        "artifact_id": "art_0536bb5bfde9",
+        "envelope": {
+          "workspace_id": "knowledge-local-demo-default",
+          "operation_id": null,
+          "status": "ok",
+          "warnings": [],
+          "artifact_refs": [
+            {
+              "type": "workspace",
+              "artifact_ref": "artifact://c7610e226889bf61",
+              "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default"
+            }
+          ],
+          "next_actions": [],
+          "data": {
+            "rules_path_ref": "artifact://854495e0e2d676ac",
+            "rule": {
+              "created_at": "2026-06-26T20:15:33.354279Z",
+              "current_label": "",
+              "metadata": {
+                "issue_count": 1,
+                "low_signal_count": 0,
+                "source": "pv18_knowledge_opc"
+              },
+              "proposed_value": "",
+              "reason": "PV18 Knowledge OPC quality feedback",
+              "rule_id": "rule_a8c8169afd14",
+              "rule_type": "review",
+              "source_feedback_id": "a8c8169afd14",
+              "status": "approved",
+              "target_id": "pv18-query",
+              "target_type": "query",
+              "reviewed_at": "2026-06-26T20:15:44.153453Z",
+              "reviewer": "pv18-knowledge-opc",
+              "review_note": "PV18 bounded review approves the rule for non-destructive correction planning."
+            },
+            "summary": {
+              "rule_count": 4,
+              "status_counts": {
+                "approved": 4
+              },
+              "rule_type_counts": {
+                "review": 4
+              },
+              "target_type_counts": {
+                "query": 4
+              }
+            },
+            "correction_plan": {
+              "summary": {
+                "action_count": 4,
+                "action_counts": {
+                  "flag_reviewed_target": 4
+                },
+                "target_engine_counts": {
+                  "graphrag": 4,
+                  "llmwiki": 4
+                },
+                "target_type_counts": {
+                  "query": 4
+                },
+                "impacted_action_count": 0,
+                "impact_counts": {
+                  "graph_nodes": 0,
+                  "graph_edges": 0,
+                  "llmwiki_pages": 0
+                }
+              },
+              "source_rule_count": 4
+            },
+            "debug_paths": {
+              "workspace": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default",
+              "rules_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default/quality/correction_rules.json"
+            }
+          }
+        }
+      },
+      {
+        "tool": "knowledge_correction_plan_v2",
+        "job_id": "job_ce309dfbaf69",
+        "job_status": "completed",
+        "artifact_id": "art_4bb61392105d",
+        "envelope": {
+          "workspace_id": "knowledge-local-demo-default",
+          "operation_id": null,
+          "status": "ok",
+          "warnings": [],
+          "artifact_refs": [
+            {
+              "type": "workspace",
+              "artifact_ref": "artifact://c7610e226889bf61",
+              "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default"
+            }
+          ],
+          "next_actions": [],
+          "data": {
+            "actions": [
+              {
+                "action": "flag_reviewed_target",
+                "action_id": "action_rule_9bf591e75cd4",
+                "current_label": "",
+                "impact": {
+                  "graph_edges": [],
+                  "graph_nodes": [],
+                  "llmwiki_pages": [],
+                  "query_hit_note": "Query impact is applied at read time and depends on the operator query.",
+                  "query_hits": [],
+                  "summary": {
+                    "graph_edge_count": 0,
+                    "graph_node_count": 0,
+                    "llmwiki_page_count": 0,
+                    "total_matches": 0
+                  }
+                },
+                "metadata": {
+                  "issue_count": 1,
+                  "low_signal_count": 0,
+                  "source": "pv18_knowledge_opc"
+                },
+                "proposed_value": "",
+                "reason": "PV18 Knowledge OPC quality feedback",
+                "source_feedback_id": "9bf591e75cd4",
+                "source_rule_id": "rule_9bf591e75cd4",
+                "target_engines": [
+                  "llmwiki",
+                  "graphrag"
+                ],
+                "target_id": "pv18-query",
+                "target_type": "query"
+              },
+              {
+                "action": "flag_reviewed_target",
+                "action_id": "action_rule_00e945615ec0",
+                "current_label": "",
+                "impact": {
+                  "graph_edges": [],
+                  "graph_nodes": [],
+                  "llmwiki_pages": [],
+                  "query_hit_note": "Query impact is applied at read time and depends on the operator query.",
+                  "query_hits": [],
+                  "summary": {
+                    "graph_edge_count": 0,
+                    "graph_node_count": 0,
+                    "llmwiki_page_count": 0,
+                    "total_matches": 0
+                  }
+                },
+                "metadata": {
+                  "issue_count": 1,
+                  "low_signal_count": 0,
+                  "source": "pv18_knowledge_opc"
+                },
+                "proposed_value": "",
+                "reason": "PV18 Knowledge OPC quality feedback",
+                "source_feedback_id": "00e945615ec0",
+                "source_rule_id": "rule_00e945615ec0",
+                "target_engines": [
+                  "llmwiki",
+                  "graphrag"
+                ],
+                "target_id": "pv18-query",
+                "target_type": "query"
+              },
+              {
+                "action": "flag_reviewed_target",
+                "action_id": "action_rule_981f20b1a9f9",
+                "current_label": "",
+                "impact": {
+                  "graph_edges": [],
+                  "graph_nodes": [],
+                  "llmwiki_pages": [],
+                  "query_hit_note": "Query impact is applied at read time and depends on the operator query.",
+                  "query_hits": [],
+                  "summary": {
+                    "graph_edge_count": 0,
+                    "graph_node_count": 0,
+                    "llmwiki_page_count": 0,
+                    "total_matches": 0
+                  }
+                },
+                "metadata": {
+                  "issue_count": 1,
+                  "low_signal_count": 0,
+                  "source": "pv18_knowledge_opc"
+                },
+                "proposed_value": "",
+                "reason": "PV18 Knowledge OPC quality feedback",
+                "source_feedback_id": "981f20b1a9f9",
+                "source_rule_id": "rule_981f20b1a9f9",
+                "target_engines": [
+                  "llmwiki",
+                  "graphrag"
+                ],
+                "target_id": "pv18-query",
+                "target_type": "query"
+              },
+              {
+                "action": "flag_reviewed_target",
+                "action_id": "action_rule_a8c8169afd14",
+                "current_label": "",
+                "impact": {
+                  "graph_edges": [],
+                  "graph_nodes": [],
+                  "llmwiki_pages": [],
+                  "query_hit_note": "Query impact is applied at read time and depends on the operator query.",
+                  "query_hits": [],
+                  "summary": {
+                    "graph_edge_count": 0,
+                    "graph_node_count": 0,
+                    "llmwiki_page_count": 0,
+                    "total_matches": 0
+                  }
+                },
+                "metadata": {
+                  "issue_count": 1,
+                  "low_signal_count": 0,
+                  "source": "pv18_knowledge_opc"
+                },
+                "proposed_value": "",
+                "reason": "PV18 Knowledge OPC quality feedback",
+                "source_feedback_id": "a8c8169afd14",
+                "source_rule_id": "rule_a8c8169afd14",
+                "target_engines": [
+                  "llmwiki",
+                  "graphrag"
+                ],
+                "target_id": "pv18-query",
+                "target_type": "query"
+              }
+            ],
+            "generated_at": "2026-06-26T20:15:44.191915Z",
+            "notes": [
+              "Only approved rules are included.",
+              "The plan is a non-destructive governance layer; raw row data and engine artifacts are not rewritten.",
+              "Graph snapshots apply presentation suppress/rename/merge actions at read time."
+            ],
+            "schema_version": "1.0",
+            "source_rule_count": 4,
+            "summary": {
+              "action_count": 4,
+              "action_counts": {
+                "flag_reviewed_target": 4
+              },
+              "impact_counts": {
+                "graph_edges": 0,
+                "graph_nodes": 0,
+                "llmwiki_pages": 0
+              },
+              "impacted_action_count": 0,
+              "target_engine_counts": {
+                "graphrag": 4,
+                "llmwiki": 4
+              },
+              "target_type_counts": {
+                "query": 4
+              }
+            },
+            "debug_paths": {
+              "workspace": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default"
+            }
+          }
+        }
+      }
+    ],
+    "data_service_envelope": {
+      "workspace_id": "knowledge-local-demo-default",
+      "operation_id": null,
+      "status": "ok",
+      "warnings": [],
+      "artifact_refs": [
+        {
+          "type": "workspace",
+          "artifact_ref": "artifact://c7610e226889bf61",
+          "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default"
+        }
+      ],
+      "next_actions": [],
+      "data": {
+        "actions": [
+          {
+            "action": "flag_reviewed_target",
+            "action_id": "action_rule_9bf591e75cd4",
+            "current_label": "",
+            "impact": {
+              "graph_edges": [],
+              "graph_nodes": [],
+              "llmwiki_pages": [],
+              "query_hit_note": "Query impact is applied at read time and depends on the operator query.",
+              "query_hits": [],
+              "summary": {
+                "graph_edge_count": 0,
+                "graph_node_count": 0,
+                "llmwiki_page_count": 0,
+                "total_matches": 0
+              }
+            },
+            "metadata": {
+              "issue_count": 1,
+              "low_signal_count": 0,
+              "source": "pv18_knowledge_opc"
+            },
+            "proposed_value": "",
+            "reason": "PV18 Knowledge OPC quality feedback",
+            "source_feedback_id": "9bf591e75cd4",
+            "source_rule_id": "rule_9bf591e75cd4",
+            "target_engines": [
+              "llmwiki",
+              "graphrag"
+            ],
+            "target_id": "pv18-query",
+            "target_type": "query"
+          },
+          {
+            "action": "flag_reviewed_target",
+            "action_id": "action_rule_00e945615ec0",
+            "current_label": "",
+            "impact": {
+              "graph_edges": [],
+              "graph_nodes": [],
+              "llmwiki_pages": [],
+              "query_hit_note": "Query impact is applied at read time and depends on the operator query.",
+              "query_hits": [],
+              "summary": {
+                "graph_edge_count": 0,
+                "graph_node_count": 0,
+                "llmwiki_page_count": 0,
+                "total_matches": 0
+              }
+            },
+            "metadata": {
+              "issue_count": 1,
+              "low_signal_count": 0,
+              "source": "pv18_knowledge_opc"
+            },
+            "proposed_value": "",
+            "reason": "PV18 Knowledge OPC quality feedback",
+            "source_feedback_id": "00e945615ec0",
+            "source_rule_id": "rule_00e945615ec0",
+            "target_engines": [
+              "llmwiki",
+              "graphrag"
+            ],
+            "target_id": "pv18-query",
+            "target_type": "query"
+          },
+          {
+            "action": "flag_reviewed_target",
+            "action_id": "action_rule_981f20b1a9f9",
+            "current_label": "",
+            "impact": {
+              "graph_edges": [],
+              "graph_nodes": [],
+              "llmwiki_pages": [],
+              "query_hit_note": "Query impact is applied at read time and depends on the operator query.",
+              "query_hits": [],
+              "summary": {
+                "graph_edge_count": 0,
+                "graph_node_count": 0,
+                "llmwiki_page_count": 0,
+                "total_matches": 0
+              }
+            },
+            "metadata": {
+              "issue_count": 1,
+              "low_signal_count": 0,
+              "source": "pv18_knowledge_opc"
+            },
+            "proposed_value": "",
+            "reason": "PV18 Knowledge OPC quality feedback",
+            "source_feedback_id": "981f20b1a9f9",
+            "source_rule_id": "rule_981f20b1a9f9",
+            "target_engines": [
+              "llmwiki",
+              "graphrag"
+            ],
+            "target_id": "pv18-query",
+            "target_type": "query"
+          },
+          {
+            "action": "flag_reviewed_target",
+            "action_id": "action_rule_a8c8169afd14",
+            "current_label": "",
+            "impact": {
+              "graph_edges": [],
+              "graph_nodes": [],
+              "llmwiki_pages": [],
+              "query_hit_note": "Query impact is applied at read time and depends on the operator query.",
+              "query_hits": [],
+              "summary": {
+                "graph_edge_count": 0,
+                "graph_node_count": 0,
+                "llmwiki_page_count": 0,
+                "total_matches": 0
+              }
+            },
+            "metadata": {
+              "issue_count": 1,
+              "low_signal_count": 0,
+              "source": "pv18_knowledge_opc"
+            },
+            "proposed_value": "",
+            "reason": "PV18 Knowledge OPC quality feedback",
+            "source_feedback_id": "a8c8169afd14",
+            "source_rule_id": "rule_a8c8169afd14",
+            "target_engines": [
+              "llmwiki",
+              "graphrag"
+            ],
+            "target_id": "pv18-query",
+            "target_type": "query"
+          }
+        ],
+        "generated_at": "2026-06-26T20:15:44.191915Z",
+        "notes": [
+          "Only approved rules are included.",
+          "The plan is a non-destructive governance layer; raw row data and engine artifacts are not rewritten.",
+          "Graph snapshots apply presentation suppress/rename/merge actions at read time."
+        ],
+        "schema_version": "1.0",
+        "source_rule_count": 4,
+        "summary": {
+          "action_count": 4,
+          "action_counts": {
+            "flag_reviewed_target": 4
+          },
+          "impact_counts": {
+            "graph_edges": 0,
+            "graph_nodes": 0,
+            "llmwiki_pages": 0
+          },
+          "impacted_action_count": 0,
+          "target_engine_counts": {
+            "graphrag": 4,
+            "llmwiki": 4
+          },
+          "target_type_counts": {
+            "query": 4
+          }
+        },
+        "debug_paths": {
+          "workspace": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default"
+        }
+      }
+    },
+    "real_data_service": true
+  },
+  "created_at": "2026-06-27T00:00:00Z"
+}

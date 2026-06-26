@@ -41,6 +41,45 @@ class KnowledgeMcpWorkflowRunner:
     def __init__(self, connector_runtime: ConnectorExecutionRuntime) -> None:
         self.connector_runtime = connector_runtime
 
+    def call_tool(
+        self,
+        tool: str,
+        payload: dict[str, Any],
+        *,
+        session_id: Optional[str] = None,
+        turn_id: Optional[str] = None,
+        trace_id: Optional[str] = None,
+        parent_artifact_ids: Optional[list[str]] = None,
+    ) -> dict[str, Any]:
+        """Call one Data Service MCP tool and return its redacted envelope plus job steps."""
+        steps: list[dict[str, Any]] = []
+        connector = self.connector_runtime.connector_registry.get_connector(DATA_SERVICE_CONNECTOR_ID)
+        session: Optional[McpStdioSession] = None
+        if connector.get("metadata", {}).get("execution") == "mcp_stdio":
+            session = McpStdioSession(connector)
+
+        context = session if session is not None else _NullMcpSession()
+        with context as mcp_session:
+            active_session = mcp_session if isinstance(mcp_session, McpStdioSession) else None
+            envelope = self._call(
+                tool,
+                payload,
+                session_id=session_id,
+                turn_id=turn_id,
+                trace_id=trace_id,
+                steps=steps,
+                mcp_session=active_session,
+                parent_artifact_ids=parent_artifact_ids or [],
+            )
+        return {
+            "tool": tool,
+            "status": str(envelope.get("status") or "unknown"),
+            "workspace_id": envelope.get("workspace_id"),
+            "operation_id": envelope.get("operation_id"),
+            "envelope": envelope,
+            "steps": steps,
+        }
+
     def run_acceptance(
         self,
         *,

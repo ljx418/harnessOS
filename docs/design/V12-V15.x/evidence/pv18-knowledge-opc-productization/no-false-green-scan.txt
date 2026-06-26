@@ -1,0 +1,2 @@
+status=PASS
+禁止正向声明：production ready / Xpert parity complete / Agent executor ready

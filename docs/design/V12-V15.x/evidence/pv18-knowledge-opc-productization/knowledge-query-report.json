@@ -1,0 +1,1789 @@
+{
+  "schema_version": "pv18.knowledge_opc.v1",
+  "query_id": "pv18-query-b314c030",
+  "workspace_id": "knowledge:local:demo:default",
+  "data_service_workspace_id": "knowledge-local-demo-default-363993b8",
+  "status": "PASS",
+  "answer": "LLMWiki pages: 8 hits\nGraphRAG entities/units: 0 hits\nTop wiki result: PV18",
+  "brief": "真实 data_service MCP query_v2 结果；必须结合 citation 和 evidence 审查。",
+  "citation_bundle": {
+    "status": "pass",
+    "citations": [
+      {
+        "source_id": "e1d591f59f14f877",
+        "title": "PV18 Knowledge OPC Productization PRD",
+        "locator": "{\"kind\": \"lines\", \"start\": 161, \"end\": 173, \"heading_path\": [\"PV18 Knowledge OPC Productization Development And Acceptance Plan\"], \"passage_order\": 0}",
+        "authority": "PRIMARY_DOC",
+        "source_type": "markdown",
+        "coverage": "supporting"
+      },
+      {
+        "source_id": "e1d591f59f14f877",
+        "title": "PV18 Knowledge OPC Productization PRD",
+        "locator": "{\"kind\": \"lines\", \"start\": 115, \"end\": 142, \"heading_path\": [\"PV18 Knowledge OPC Productization Target Architecture\"], \"passage_order\": 0}",
+        "authority": "PRIMARY_DOC",
+        "source_type": "markdown",
+        "coverage": "supporting"
+      },
+      {
+        "source_id": "e1d591f59f14f877",
+        "title": "PV18 Knowledge OPC Productization PRD",
+        "locator": "{\"kind\": \"lines\", \"start\": 24, \"end\": 35, \"heading_path\": [\"PV18 Knowledge OPC Productization PRD\"], \"passage_order\": 0}",
+        "authority": "PRIMARY_DOC",
+        "source_type": "markdown",
+        "coverage": "supporting"
+      },
+      {
+        "source_id": "e1d591f59f14f877",
+        "title": "PV18 Knowledge OPC Productization PRD",
+        "locator": "{\"kind\": \"lines\", \"start\": 85, \"end\": 100, \"heading_path\": [\"PV18 Knowledge OPC Productization Target Architecture\"], \"passage_order\": 0}",
+        "authority": "PRIMARY_DOC",
+        "source_type": "markdown",
+        "coverage": "supporting"
+      },
+      {
+        "source_id": "e1d591f59f14f877",
+        "title": "PV18 Knowledge OPC Productization PRD",
+        "locator": "{\"kind\": \"lines\", \"start\": 143, \"end\": 148, \"heading_path\": [], \"passage_order\": 0}",
+        "authority": "PRIMARY_DOC",
+        "source_type": "markdown",
+        "coverage": "supporting"
+      },
+      {
+        "source_id": "e1d591f59f14f877",
+        "title": "PV18 Knowledge OPC Productization PRD",
+        "locator": "{\"kind\": \"lines\", \"start\": 71, \"end\": 76, \"heading_path\": [], \"passage_order\": 0}",
+        "authority": "PRIMARY_DOC",
+        "source_type": "markdown",
+        "coverage": "supporting"
+      },
+      {
+        "source_id": "e1d591f59f14f877",
+        "title": "PV18 Knowledge OPC Productization PRD",
+        "locator": "{\"kind\": \"lines\", \"start\": 1, \"end\": 6, \"heading_path\": [], \"passage_order\": 0}",
+        "authority": "PRIMARY_DOC",
+        "source_type": "markdown",
+        "coverage": "supporting"
+      },
+      {
+        "source_id": "e1d591f59f14f877",
+        "title": "PV18 Knowledge OPC Productization PRD",
+        "locator": "{\"kind\": \"lines\", \"start\": 101, \"end\": 114, \"heading_path\": [\"PV18 Knowledge OPC Productization Target Architecture\"], \"passage_order\": 1}",
+        "authority": "PRIMARY_DOC",
+        "source_type": "markdown",
+        "coverage": "supporting"
+      },
+      {
+        "source_id": "e1d591f59f14f877",
+        "title": "PV18 Knowledge OPC Productization PRD",
+        "locator": "{\"kind\": \"lines\", \"start\": 55, \"end\": 70, \"heading_path\": [\"PV18 Knowledge OPC Productization PRD\"], \"passage_order\": 0}",
+        "authority": "PRIMARY_DOC",
+        "source_type": "markdown",
+        "coverage": "supporting"
+      },
+      {
+        "source_id": "e1d591f59f14f877",
+        "title": "PV18 Knowledge OPC Productization PRD",
+        "locator": "{\"kind\": \"lines\", \"start\": 7, \"end\": 23, \"heading_path\": [\"PV18 Knowledge OPC Productization PRD\"], \"passage_order\": 0}",
+        "authority": "PRIMARY_DOC",
+        "source_type": "markdown",
+        "coverage": "supporting"
+      },
+      {
+        "source_id": "e1d591f59f14f877",
+        "title": "PV18 Knowledge OPC Productization PRD",
+        "locator": "{\"kind\": \"lines\", \"start\": 149, \"end\": 160, \"heading_path\": [\"PV18 Knowledge OPC Productization Development And Acceptance Plan\"], \"passage_order\": 0}",
+        "authority": "PRIMARY_DOC",
+        "source_type": "markdown",
+        "coverage": "supporting"
+      },
+      {
+        "source_id": "e1d591f59f14f877",
+        "title": "PV18 Knowledge OPC Productization PRD",
+        "locator": "{\"kind\": \"lines\", \"start\": 149, \"end\": 160, \"heading_path\": [\"PV18 Knowledge OPC Productization Development And Acceptance Plan\"], \"passage_order\": 1}",
+        "authority": "PRIMARY_DOC",
+        "source_type": "markdown",
+        "coverage": "supporting"
+      },
+      {
+        "source_id": "e1d591f59f14f877",
+        "title": "PV18 Knowledge OPC Productization PRD",
+        "locator": "{\"kind\": \"lines\", \"start\": 77, \"end\": 84, \"heading_path\": [\"PV18 Knowledge OPC Productization Target Architecture\"], \"passage_order\": 0}",
+        "authority": "PRIMARY_DOC",
+        "source_type": "markdown",
+        "coverage": "supporting"
+      },
+      {
+        "source_id": "e1d591f59f14f877",
+        "title": "PV18 Knowledge OPC Productization PRD",
+        "locator": "{\"kind\": \"lines\", \"start\": 174, \"end\": 206, \"heading_path\": [\"PV18 Knowledge OPC Productization Development And Acceptance Plan\", \"3. Evidence Package Proposal\"], \"passage_order\": 0}",
+        "authority": "PRIMARY_DOC",
+        "source_type": "markdown",
+        "coverage": "supporting"
+      },
+      {
+        "source_id": "e1d591f59f14f877",
+        "title": "PV18 Knowledge OPC Productization PRD",
+        "locator": "{\"kind\": \"lines\", \"start\": 101, \"end\": 114, \"heading_path\": [\"PV18 Knowledge OPC Productization Target Architecture\"], \"passage_order\": 0}",
+        "authority": "PRIMARY_DOC",
+        "source_type": "markdown",
+        "coverage": "supporting"
+      },
+      {
+        "source_id": "e1d591f59f14f877",
+        "title": "PV18 Knowledge OPC Productization PRD",
+        "locator": "{\"kind\": \"lines\", \"start\": 36, \"end\": 43, \"heading_path\": [\"PV18 Knowledge OPC Productization PRD\"], \"passage_order\": 0}",
+        "authority": "PRIMARY_DOC",
+        "source_type": "markdown",
+        "coverage": "supporting"
+      }
+    ]
+  },
+  "citation_coverage": {
+    "status": "pass",
+    "source_ref_count": 16
+  },
+  "source_refs": [
+    {
+      "source_id": "e1d591f59f14f877",
+      "title": "PV18 Knowledge OPC Productization PRD",
+      "locator": "{\"kind\": \"lines\", \"start\": 161, \"end\": 173, \"heading_path\": [\"PV18 Knowledge OPC Productization Development And Acceptance Plan\"], \"passage_order\": 0}",
+      "authority": "PRIMARY_DOC",
+      "source_type": "markdown",
+      "coverage": "supporting"
+    },
+    {
+      "source_id": "e1d591f59f14f877",
+      "title": "PV18 Knowledge OPC Productization PRD",
+      "locator": "{\"kind\": \"lines\", \"start\": 115, \"end\": 142, \"heading_path\": [\"PV18 Knowledge OPC Productization Target Architecture\"], \"passage_order\": 0}",
+      "authority": "PRIMARY_DOC",
+      "source_type": "markdown",
+      "coverage": "supporting"
+    },
+    {
+      "source_id": "e1d591f59f14f877",
+      "title": "PV18 Knowledge OPC Productization PRD",
+      "locator": "{\"kind\": \"lines\", \"start\": 24, \"end\": 35, \"heading_path\": [\"PV18 Knowledge OPC Productization PRD\"], \"passage_order\": 0}",
+      "authority": "PRIMARY_DOC",
+      "source_type": "markdown",
+      "coverage": "supporting"
+    },
+    {
+      "source_id": "e1d591f59f14f877",
+      "title": "PV18 Knowledge OPC Productization PRD",
+      "locator": "{\"kind\": \"lines\", \"start\": 85, \"end\": 100, \"heading_path\": [\"PV18 Knowledge OPC Productization Target Architecture\"], \"passage_order\": 0}",
+      "authority": "PRIMARY_DOC",
+      "source_type": "markdown",
+      "coverage": "supporting"
+    },
+    {
+      "source_id": "e1d591f59f14f877",
+      "title": "PV18 Knowledge OPC Productization PRD",
+      "locator": "{\"kind\": \"lines\", \"start\": 143, \"end\": 148, \"heading_path\": [], \"passage_order\": 0}",
+      "authority": "PRIMARY_DOC",
+      "source_type": "markdown",
+      "coverage": "supporting"
+    },
+    {
+      "source_id": "e1d591f59f14f877",
+      "title": "PV18 Knowledge OPC Productization PRD",
+      "locator": "{\"kind\": \"lines\", \"start\": 71, \"end\": 76, \"heading_path\": [], \"passage_order\": 0}",
+      "authority": "PRIMARY_DOC",
+      "source_type": "markdown",
+      "coverage": "supporting"
+    },
+    {
+      "source_id": "e1d591f59f14f877",
+      "title": "PV18 Knowledge OPC Productization PRD",
+      "locator": "{\"kind\": \"lines\", \"start\": 1, \"end\": 6, \"heading_path\": [], \"passage_order\": 0}",
+      "authority": "PRIMARY_DOC",
+      "source_type": "markdown",
+      "coverage": "supporting"
+    },
+    {
+      "source_id": "e1d591f59f14f877",
+      "title": "PV18 Knowledge OPC Productization PRD",
+      "locator": "{\"kind\": \"lines\", \"start\": 101, \"end\": 114, \"heading_path\": [\"PV18 Knowledge OPC Productization Target Architecture\"], \"passage_order\": 1}",
+      "authority": "PRIMARY_DOC",
+      "source_type": "markdown",
+      "coverage": "supporting"
+    },
+    {
+      "source_id": "e1d591f59f14f877",
+      "title": "PV18 Knowledge OPC Productization PRD",
+      "locator": "{\"kind\": \"lines\", \"start\": 55, \"end\": 70, \"heading_path\": [\"PV18 Knowledge OPC Productization PRD\"], \"passage_order\": 0}",
+      "authority": "PRIMARY_DOC",
+      "source_type": "markdown",
+      "coverage": "supporting"
+    },
+    {
+      "source_id": "e1d591f59f14f877",
+      "title": "PV18 Knowledge OPC Productization PRD",
+      "locator": "{\"kind\": \"lines\", \"start\": 7, \"end\": 23, \"heading_path\": [\"PV18 Knowledge OPC Productization PRD\"], \"passage_order\": 0}",
+      "authority": "PRIMARY_DOC",
+      "source_type": "markdown",
+      "coverage": "supporting"
+    },
+    {
+      "source_id": "e1d591f59f14f877",
+      "title": "PV18 Knowledge OPC Productization PRD",
+      "locator": "{\"kind\": \"lines\", \"start\": 149, \"end\": 160, \"heading_path\": [\"PV18 Knowledge OPC Productization Development And Acceptance Plan\"], \"passage_order\": 0}",
+      "authority": "PRIMARY_DOC",
+      "source_type": "markdown",
+      "coverage": "supporting"
+    },
+    {
+      "source_id": "e1d591f59f14f877",
+      "title": "PV18 Knowledge OPC Productization PRD",
+      "locator": "{\"kind\": \"lines\", \"start\": 149, \"end\": 160, \"heading_path\": [\"PV18 Knowledge OPC Productization Development And Acceptance Plan\"], \"passage_order\": 1}",
+      "authority": "PRIMARY_DOC",
+      "source_type": "markdown",
+      "coverage": "supporting"
+    },
+    {
+      "source_id": "e1d591f59f14f877",
+      "title": "PV18 Knowledge OPC Productization PRD",
+      "locator": "{\"kind\": \"lines\", \"start\": 77, \"end\": 84, \"heading_path\": [\"PV18 Knowledge OPC Productization Target Architecture\"], \"passage_order\": 0}",
+      "authority": "PRIMARY_DOC",
+      "source_type": "markdown",
+      "coverage": "supporting"
+    },
+    {
+      "source_id": "e1d591f59f14f877",
+      "title": "PV18 Knowledge OPC Productization PRD",
+      "locator": "{\"kind\": \"lines\", \"start\": 174, \"end\": 206, \"heading_path\": [\"PV18 Knowledge OPC Productization Development And Acceptance Plan\", \"3. Evidence Package Proposal\"], \"passage_order\": 0}",
+      "authority": "PRIMARY_DOC",
+      "source_type": "markdown",
+      "coverage": "supporting"
+    },
+    {
+      "source_id": "e1d591f59f14f877",
+      "title": "PV18 Knowledge OPC Productization PRD",
+      "locator": "{\"kind\": \"lines\", \"start\": 101, \"end\": 114, \"heading_path\": [\"PV18 Knowledge OPC Productization Target Architecture\"], \"passage_order\": 0}",
+      "authority": "PRIMARY_DOC",
+      "source_type": "markdown",
+      "coverage": "supporting"
+    },
+    {
+      "source_id": "e1d591f59f14f877",
+      "title": "PV18 Knowledge OPC Productization PRD",
+      "locator": "{\"kind\": \"lines\", \"start\": 36, \"end\": 43, \"heading_path\": [\"PV18 Knowledge OPC Productization PRD\"], \"passage_order\": 0}",
+      "authority": "PRIMARY_DOC",
+      "source_type": "markdown",
+      "coverage": "supporting"
+    }
+  ],
+  "artifact_refs": [
+    {
+      "artifact_ref": "art_fe89665b5a10",
+      "tool": "knowledge_workspace_create"
+    },
+    {
+      "type": "workspace",
+      "artifact_ref": "artifact://d41a5e1b5be5700c",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8"
+    },
+    {
+      "artifact_ref": "art_59605fdaadbd",
+      "tool": "knowledge_source_import"
+    },
+    {
+      "type": "source",
+      "source_id": "src_0b2d94a28d4cde2b",
+      "artifact_ref": "src_0b2d94a28d4cde2b"
+    },
+    {
+      "artifact_ref": "art_fef5622604dc",
+      "tool": "knowledge_build_start"
+    },
+    {
+      "type": "operation",
+      "operation_id": "op_7ae03879c6b7",
+      "artifact_ref": "op_7ae03879c6b7"
+    },
+    {
+      "artifact_ref": "art_eaa6f7caf160",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "artifact_ref": "art_8af73fb1a8e1",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "artifact_ref": "art_c27806fafc53",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "artifact_ref": "art_75a47bac55bd",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "artifact_ref": "art_46fe2a60b8e8",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "artifact_ref": "art_702832c6f1ed",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "artifact_ref": "art_5fc0f0633f12",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "artifact_ref": "art_3050827d96bd",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "artifact_ref": "art_7c7a8a0435b7",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "artifact_ref": "art_6ab9f6148454",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://997120df6161a6a3",
+      "debug_path": "source-pv18-knowledge-opc-productization-prd-e1d591f5"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://cd186f8a1af0644c",
+      "debug_path": "pv18"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://8db19c958f20aa7d",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/llmwiki/state/input_contract.json"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://619f58cd02e82559",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/cache/input_contract.json"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://cc34397872e25e46",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/input/distilled_units.jsonl"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://25095eb6a29e8faf",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/input/src_0b2d94a28d4cde2b.md"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://3434d2b32fba8e43",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/cache/index_manifest.json"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://098673c60081b06d",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/cache/execution_owner.json"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://19c72172730c55e4",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/cache/execution_request.json"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://d88f945da6f3e14e",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/state/graphrag.db"
+    },
+    {
+      "artifact_ref": "art_749d52d829b9",
+      "tool": "knowledge_query_v2"
+    },
+    {
+      "type": "workspace",
+      "artifact_ref": "artifact://d41a5e1b5be5700c",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8"
+    },
+    {
+      "artifact_ref": "art_cc3dc4a3b139",
+      "tool": "knowledge_quality_feedback_v2"
+    },
+    {
+      "type": "workspace",
+      "artifact_ref": "artifact://d41a5e1b5be5700c",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8"
+    },
+    {
+      "artifact_ref": "art_73c56af46911",
+      "tool": "knowledge_correction_rules_v2"
+    },
+    {
+      "type": "workspace",
+      "artifact_ref": "artifact://d41a5e1b5be5700c",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8"
+    },
+    {
+      "artifact_ref": "art_51cb90bbfe69",
+      "tool": "knowledge_review_correction_rule_v2"
+    },
+    {
+      "type": "workspace",
+      "artifact_ref": "artifact://d41a5e1b5be5700c",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8"
+    },
+    {
+      "artifact_ref": "art_4c370b2b3325",
+      "tool": "knowledge_correction_plan_v2"
+    },
+    {
+      "type": "workspace",
+      "artifact_ref": "artifact://d41a5e1b5be5700c",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8"
+    },
+    {
+      "artifact_ref": "art_5c01a25ad673",
+      "tool": "knowledge_workspace_archive"
+    },
+    {
+      "type": "workspace",
+      "artifact_ref": "artifact://d41a5e1b5be5700c",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8"
+    }
+  ],
+  "trace_refs": [
+    {
+      "trace_id": "pv18:trace:query:pv18-query-b314c030",
+      "event_type": "knowledge.query.answered"
+    }
+  ],
+  "runner_warnings": [],
+  "data_service_steps": [
+    {
+      "tool": "knowledge_workspace_create",
+      "job_id": "job_6e770c36adcc",
+      "job_status": "completed",
+      "artifact_id": "art_fe89665b5a10",
+      "envelope": {
+        "workspace_id": "knowledge-local-demo-default-363993b8",
+        "operation_id": null,
+        "status": "ok",
+        "warnings": [],
+        "artifact_refs": [
+          {
+            "type": "workspace",
+            "artifact_ref": "artifact://d41a5e1b5be5700c",
+            "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8"
+          }
+        ],
+        "next_actions": [
+          "knowledge_source_import",
+          "knowledge_workspace_describe"
+        ],
+        "data": {
+          "capabilities": {
+            "ingest": true,
+            "query": true,
+            "quality_feedback": true,
+            "build": true
+          },
+          "debug_paths": {
+            "workspace_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8"
+          }
+        }
+      }
+    },
+    {
+      "tool": "knowledge_source_import",
+      "job_id": "job_444333d8d8fc",
+      "job_status": "completed",
+      "artifact_id": "art_59605fdaadbd",
+      "envelope": {
+        "workspace_id": "knowledge-local-demo-default-363993b8",
+        "operation_id": null,
+        "status": "ok",
+        "warnings": [],
+        "artifact_refs": [
+          {
+            "type": "source",
+            "source_id": "src_0b2d94a28d4cde2b",
+            "artifact_ref": "src_0b2d94a28d4cde2b"
+          }
+        ],
+        "next_actions": [
+          "knowledge_build_start",
+          "knowledge_source_list"
+        ],
+        "data": {
+          "sources": [
+            {
+              "source_id": "src_0b2d94a28d4cde2b",
+              "sha256": "0b2d94a28d4cde2bc122ad33be960fc09730ba856dbc90e8d9e58a5b7481e726",
+              "title": "HarnessOS PV18 E2E 复核资料",
+              "status": "imported",
+              "debug_paths": {
+                "path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/sources/imported/src_0b2d94a28d4cde2b.md"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "tool": "knowledge_build_start",
+      "job_id": "job_21b49dc9c126",
+      "job_status": "completed",
+      "artifact_id": "art_fef5622604dc",
+      "envelope": {
+        "workspace_id": "knowledge-local-demo-default-363993b8",
+        "operation_id": "op_7ae03879c6b7",
+        "status": "queued",
+        "warnings": [],
+        "artifact_refs": [
+          {
+            "type": "operation",
+            "operation_id": "op_7ae03879c6b7",
+            "artifact_ref": "op_7ae03879c6b7"
+          }
+        ],
+        "next_actions": [
+          "knowledge_build_status"
+        ],
+        "data": {
+          "mode": "full",
+          "stage": "queued",
+          "progress": 0
+        }
+      }
+    },
+    {
+      "tool": "knowledge_build_status",
+      "job_id": "job_4c1f3bd4fe37",
+      "job_status": "completed",
+      "artifact_id": "art_eaa6f7caf160",
+      "envelope": {
+        "workspace_id": "knowledge-local-demo-default-363993b8",
+        "operation_id": "op_7ae03879c6b7",
+        "status": "running",
+        "warnings": [],
+        "artifact_refs": [],
+        "next_actions": [
+          "knowledge_build_status",
+          "knowledge_build_cancel"
+        ],
+        "data": {
+          "mode": "full",
+          "stage": "distill",
+          "progress": 0.25,
+          "error": {
+            "code": "error",
+            "message": "error",
+            "retryable": false
+          },
+          "retryable": true,
+          "artifact_refs": [],
+          "debug_paths": {
+            "artifacts": []
+          }
+        }
+      }
+    },
+    {
+      "tool": "knowledge_build_status",
+      "job_id": "job_1a2517717c5d",
+      "job_status": "completed",
+      "artifact_id": "art_8af73fb1a8e1",
+      "envelope": {
+        "workspace_id": "knowledge-local-demo-default-363993b8",
+        "operation_id": "op_7ae03879c6b7",
+        "status": "running",
+        "warnings": [],
+        "artifact_refs": [],
+        "next_actions": [
+          "knowledge_build_status",
+          "knowledge_build_cancel"
+        ],
+        "data": {
+          "mode": "full",
+          "stage": "llmwiki",
+          "progress": 0.45,
+          "error": {
+            "code": "error",
+            "message": "error",
+            "retryable": false
+          },
+          "retryable": true,
+          "artifact_refs": [],
+          "debug_paths": {
+            "artifacts": []
+          }
+        }
+      }
+    },
+    {
+      "tool": "knowledge_build_status",
+      "job_id": "job_f2017556eedd",
+      "job_status": "completed",
+      "artifact_id": "art_c27806fafc53",
+      "envelope": {
+        "workspace_id": "knowledge-local-demo-default-363993b8",
+        "operation_id": "op_7ae03879c6b7",
+        "status": "running",
+        "warnings": [],
+        "artifact_refs": [],
+        "next_actions": [
+          "knowledge_build_status",
+          "knowledge_build_cancel"
+        ],
+        "data": {
+          "mode": "full",
+          "stage": "llmwiki",
+          "progress": 0.45,
+          "error": {
+            "code": "error",
+            "message": "error",
+            "retryable": false
+          },
+          "retryable": true,
+          "artifact_refs": [],
+          "debug_paths": {
+            "artifacts": []
+          }
+        }
+      }
+    },
+    {
+      "tool": "knowledge_build_status",
+      "job_id": "job_2e0323c208a7",
+      "job_status": "completed",
+      "artifact_id": "art_75a47bac55bd",
+      "envelope": {
+        "workspace_id": "knowledge-local-demo-default-363993b8",
+        "operation_id": "op_7ae03879c6b7",
+        "status": "running",
+        "warnings": [],
+        "artifact_refs": [],
+        "next_actions": [
+          "knowledge_build_status",
+          "knowledge_build_cancel"
+        ],
+        "data": {
+          "mode": "full",
+          "stage": "llmwiki",
+          "progress": 0.45,
+          "error": {
+            "code": "error",
+            "message": "error",
+            "retryable": false
+          },
+          "retryable": true,
+          "artifact_refs": [],
+          "debug_paths": {
+            "artifacts": []
+          }
+        }
+      }
+    },
+    {
+      "tool": "knowledge_build_status",
+      "job_id": "job_1842958e99b2",
+      "job_status": "completed",
+      "artifact_id": "art_46fe2a60b8e8",
+      "envelope": {
+        "workspace_id": "knowledge-local-demo-default-363993b8",
+        "operation_id": "op_7ae03879c6b7",
+        "status": "running",
+        "warnings": [],
+        "artifact_refs": [],
+        "next_actions": [
+          "knowledge_build_status",
+          "knowledge_build_cancel"
+        ],
+        "data": {
+          "mode": "full",
+          "stage": "llmwiki",
+          "progress": 0.45,
+          "error": {
+            "code": "error",
+            "message": "error",
+            "retryable": false
+          },
+          "retryable": true,
+          "artifact_refs": [],
+          "debug_paths": {
+            "artifacts": []
+          }
+        }
+      }
+    },
+    {
+      "tool": "knowledge_build_status",
+      "job_id": "job_b336009a3161",
+      "job_status": "completed",
+      "artifact_id": "art_702832c6f1ed",
+      "envelope": {
+        "workspace_id": "knowledge-local-demo-default-363993b8",
+        "operation_id": "op_7ae03879c6b7",
+        "status": "running",
+        "warnings": [],
+        "artifact_refs": [],
+        "next_actions": [
+          "knowledge_build_status",
+          "knowledge_build_cancel"
+        ],
+        "data": {
+          "mode": "full",
+          "stage": "llmwiki",
+          "progress": 0.45,
+          "error": {
+            "code": "error",
+            "message": "error",
+            "retryable": false
+          },
+          "retryable": true,
+          "artifact_refs": [],
+          "debug_paths": {
+            "artifacts": []
+          }
+        }
+      }
+    },
+    {
+      "tool": "knowledge_build_status",
+      "job_id": "job_eddc122c1fa3",
+      "job_status": "completed",
+      "artifact_id": "art_5fc0f0633f12",
+      "envelope": {
+        "workspace_id": "knowledge-local-demo-default-363993b8",
+        "operation_id": "op_7ae03879c6b7",
+        "status": "running",
+        "warnings": [],
+        "artifact_refs": [],
+        "next_actions": [
+          "knowledge_build_status",
+          "knowledge_build_cancel"
+        ],
+        "data": {
+          "mode": "full",
+          "stage": "llmwiki",
+          "progress": 0.45,
+          "error": {
+            "code": "error",
+            "message": "error",
+            "retryable": false
+          },
+          "retryable": true,
+          "artifact_refs": [],
+          "debug_paths": {
+            "artifacts": []
+          }
+        }
+      }
+    },
+    {
+      "tool": "knowledge_build_status",
+      "job_id": "job_d992247af359",
+      "job_status": "completed",
+      "artifact_id": "art_3050827d96bd",
+      "envelope": {
+        "workspace_id": "knowledge-local-demo-default-363993b8",
+        "operation_id": "op_7ae03879c6b7",
+        "status": "running",
+        "warnings": [],
+        "artifact_refs": [],
+        "next_actions": [
+          "knowledge_build_status",
+          "knowledge_build_cancel"
+        ],
+        "data": {
+          "mode": "full",
+          "stage": "llmwiki",
+          "progress": 0.45,
+          "error": {
+            "code": "error",
+            "message": "error",
+            "retryable": false
+          },
+          "retryable": true,
+          "artifact_refs": [],
+          "debug_paths": {
+            "artifacts": []
+          }
+        }
+      }
+    },
+    {
+      "tool": "knowledge_build_status",
+      "job_id": "job_27e94d900155",
+      "job_status": "completed",
+      "artifact_id": "art_7c7a8a0435b7",
+      "envelope": {
+        "workspace_id": "knowledge-local-demo-default-363993b8",
+        "operation_id": "op_7ae03879c6b7",
+        "status": "running",
+        "warnings": [],
+        "artifact_refs": [],
+        "next_actions": [
+          "knowledge_build_status",
+          "knowledge_build_cancel"
+        ],
+        "data": {
+          "mode": "full",
+          "stage": "llmwiki",
+          "progress": 0.45,
+          "error": {
+            "code": "error",
+            "message": "error",
+            "retryable": false
+          },
+          "retryable": true,
+          "artifact_refs": [],
+          "debug_paths": {
+            "artifacts": []
+          }
+        }
+      }
+    },
+    {
+      "tool": "knowledge_build_status",
+      "job_id": "job_432ee403b9b1",
+      "job_status": "completed",
+      "artifact_id": "art_6ab9f6148454",
+      "envelope": {
+        "workspace_id": "knowledge-local-demo-default-363993b8",
+        "operation_id": "op_7ae03879c6b7",
+        "status": "completed",
+        "warnings": [],
+        "artifact_refs": [
+          {
+            "type": "artifact",
+            "artifact_ref": "artifact://997120df6161a6a3",
+            "debug_path": "source-pv18-knowledge-opc-productization-prd-e1d591f5"
+          },
+          {
+            "type": "artifact",
+            "artifact_ref": "artifact://cd186f8a1af0644c",
+            "debug_path": "pv18"
+          },
+          {
+            "type": "artifact",
+            "artifact_ref": "artifact://8db19c958f20aa7d",
+            "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/llmwiki/state/input_contract.json"
+          },
+          {
+            "type": "artifact",
+            "artifact_ref": "artifact://619f58cd02e82559",
+            "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/cache/input_contract.json"
+          },
+          {
+            "type": "artifact",
+            "artifact_ref": "artifact://cc34397872e25e46",
+            "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/input/distilled_units.jsonl"
+          },
+          {
+            "type": "artifact",
+            "artifact_ref": "artifact://25095eb6a29e8faf",
+            "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/input/src_0b2d94a28d4cde2b.md"
+          },
+          {
+            "type": "artifact",
+            "artifact_ref": "artifact://3434d2b32fba8e43",
+            "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/cache/index_manifest.json"
+          },
+          {
+            "type": "artifact",
+            "artifact_ref": "artifact://098673c60081b06d",
+            "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/cache/execution_owner.json"
+          },
+          {
+            "type": "artifact",
+            "artifact_ref": "artifact://19c72172730c55e4",
+            "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/cache/execution_request.json"
+          },
+          {
+            "type": "artifact",
+            "artifact_ref": "artifact://d88f945da6f3e14e",
+            "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/state/graphrag.db"
+          }
+        ],
+        "next_actions": [
+          "knowledge_build_status"
+        ],
+        "data": {
+          "mode": "full",
+          "stage": "completed",
+          "progress": 1,
+          "error": {
+            "code": "error",
+            "message": "error",
+            "retryable": false
+          },
+          "retryable": false,
+          "artifact_refs": [
+            {
+              "type": "artifact",
+              "artifact_ref": "artifact://997120df6161a6a3",
+              "debug_path": "source-pv18-knowledge-opc-productization-prd-e1d591f5"
+            },
+            {
+              "type": "artifact",
+              "artifact_ref": "artifact://cd186f8a1af0644c",
+              "debug_path": "pv18"
+            },
+            {
+              "type": "artifact",
+              "artifact_ref": "artifact://8db19c958f20aa7d",
+              "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/llmwiki/state/input_contract.json"
+            },
+            {
+              "type": "artifact",
+              "artifact_ref": "artifact://619f58cd02e82559",
+              "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/cache/input_contract.json"
+            },
+            {
+              "type": "artifact",
+              "artifact_ref": "artifact://cc34397872e25e46",
+              "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/input/distilled_units.jsonl"
+            },
+            {
+              "type": "artifact",
+              "artifact_ref": "artifact://25095eb6a29e8faf",
+              "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/input/src_0b2d94a28d4cde2b.md"
+            },
+            {
+              "type": "artifact",
+              "artifact_ref": "artifact://3434d2b32fba8e43",
+              "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/cache/index_manifest.json"
+            },
+            {
+              "type": "artifact",
+              "artifact_ref": "artifact://098673c60081b06d",
+              "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/cache/execution_owner.json"
+            },
+            {
+              "type": "artifact",
+              "artifact_ref": "artifact://19c72172730c55e4",
+              "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/cache/execution_request.json"
+            },
+            {
+              "type": "artifact",
+              "artifact_ref": "artifact://d88f945da6f3e14e",
+              "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/state/graphrag.db"
+            }
+          ],
+          "debug_paths": {
+            "artifacts": [
+              "source-pv18-knowledge-opc-productization-prd-e1d591f5",
+              "pv18",
+              "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/llmwiki/state/input_contract.json",
+              "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/cache/input_contract.json",
+              "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/input/distilled_units.jsonl",
+              "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/input/src_0b2d94a28d4cde2b.md",
+              "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/cache/index_manifest.json",
+              "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/cache/execution_owner.json",
+              "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/cache/execution_request.json",
+              "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/state/graphrag.db"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "tool": "knowledge_query_v2",
+      "job_id": "job_a7e41b59c2bb",
+      "job_status": "completed",
+      "artifact_id": "art_749d52d829b9",
+      "envelope": {
+        "workspace_id": "knowledge-local-demo-default-363993b8",
+        "operation_id": null,
+        "status": "ok",
+        "warnings": [],
+        "artifact_refs": [
+          {
+            "type": "workspace",
+            "artifact_ref": "artifact://d41a5e1b5be5700c",
+            "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8"
+          }
+        ],
+        "next_actions": [],
+        "data": {
+          "mode": "hybrid",
+          "query": "PV18 Knowledge OPC 如何证明业务工作流平台能力？",
+          "answer": "LLMWiki pages: 8 hits\nGraphRAG entities/units: 0 hits\nTop wiki result: PV18",
+          "hits": [
+            {
+              "title": "PV18",
+              "snippet": "<mark>PV18</mark>",
+              "source": "pv18",
+              "score": 0.000006159448684104409,
+              "meta": {
+                "kind": "page",
+                "slug": "pv18"
+              }
+            },
+            {
+              "title": "PV18 Knowledge OPC Productization PRD",
+              "snippet": "<mark>PV18</mark> <mark>Knowledge</mark> <mark>OPC</mark> Productization PRD",
+              "source": "source-pv18-knowledge-opc-productization-prd-e1d591f5",
+              "score": 0.000006147616993647421,
+              "meta": {
+                "kind": "page",
+                "slug": "source-pv18-knowledge-opc-productization-prd-e1d591f5"
+              }
+            },
+            {
+              "title": "Passage 71960162",
+              "snippet": "入口 口前 前置 置条 条件 实现 现不 不能 能开 开始 直到 本轮 目标 标架 架构 开发 发计 计划 里程 程碑 验收 收门 门槛 分析 存在 已存 存在 在并 并纳 纳入...",
+              "source": "",
+              "score": 0.000005451076967429267,
+              "meta": {
+                "kind": "passage",
+                "passage_id": "71960162-1cf9-4495-a18e-5671bd3a1091"
+              }
+            },
+            {
+              "title": "Passage 4286a748",
+              "snippet": "实现 现必 必须 须以 为接 接口 口来 来源 当前 已实 实现 最低",
+              "source": "",
+              "score": 0.000005141350849999236,
+              "meta": {
+                "kind": "passage",
+                "passage_id": "4286a748-dc4b-4fb8-a989-5f6ea984121c"
+              }
+            },
+            {
+              "title": "Passage 2069712b",
+              "snippet": "当前 前实 实现 现与 与证 证据 据状 状态 截至 已通 通过 过阶 阶段 段验 验收 已实 实现 浏览 览器 器工 工作 作台 台已 已实 实现 输入 入和 和证 证据 据审...",
+              "source": "",
+              "score": 0.000004945295623183937,
+              "meta": {
+                "kind": "passage",
+                "passage_id": "2069712b-12e0-4d4c-998e-3eb654605341"
+              }
+            },
+            {
+              "title": "Passage c8756efa",
+              "snippet": "当前 前到 到目 目标 标分 分层",
+              "source": "",
+              "score": 0.000004731294452671497,
+              "meta": {
+                "kind": "passage",
+                "passage_id": "c8756efa-a0ea-4ebb-9e50-e78b9a851dc8"
+              }
+            },
+            {
+              "title": "Passage 80d2e688",
+              "snippet": "用途 产品 品化 化拆 拆成 成可 可执 执行 行开 开发 发与 与验 验收 收阶 阶段 阅读 读对 对象 开发 测试 产品 审计 计人 人员 边界 本文 文是 是开 开发 发及...",
+              "source": "",
+              "score": 0.000004661790057307926,
+              "meta": {
+                "kind": "passage",
+                "passage_id": "80d2e688-69bd-49f1-a91f-5e46be5f110b"
+              }
+            },
+            {
+              "title": "Passage 6f6766c1",
+              "snippet": "用途 定义 产品 品化 化目 目标 标架 架构 当前 前差 差异 异和 和具 具体 体代 代码 码实 实体 体交 交互 阅读 读对 对象 架构 后端 前端 测试 审计 计人 人员...",
+              "source": "",
+              "score": 0.000004630969231393418,
+              "meta": {
+                "kind": "passage",
+                "passage_id": "6f6766c1-8168-4b89-bd4d-56d63219bcf3"
+              }
+            }
+          ],
+          "engine_payloads": {
+            "llmwiki": {
+              "pages": [
+                {
+                  "result_id": "pv18",
+                  "result_type": "page",
+                  "title": "PV18",
+                  "snippet": "<mark>PV18</mark>",
+                  "score": 0.000006159448684104409,
+                  "meta": {
+                    "slug": "pv18"
+                  }
+                },
+                {
+                  "result_id": "source-pv18-knowledge-opc-productization-prd-e1d591f5",
+                  "result_type": "page",
+                  "title": "PV18 Knowledge OPC Productization PRD",
+                  "snippet": "<mark>PV18</mark> <mark>Knowledge</mark> <mark>OPC</mark> Productization PRD",
+                  "score": 0.000006147616993647421,
+                  "meta": {
+                    "slug": "source-pv18-knowledge-opc-productization-prd-e1d591f5"
+                  }
+                }
+              ],
+              "passages": [
+                {
+                  "result_id": "71960162-1cf9-4495-a18e-5671bd3a1091",
+                  "result_type": "passage",
+                  "title": "Passage 71960162",
+                  "snippet": "入口 口前 前置 置条 条件 实现 现不 不能 能开 开始 直到 本轮 目标 标架 架构 开发 发计 计划 里程 程碑 验收 收门 门槛 分析 存在 已存 存在 在并 并纳 纳入...",
+                  "score": 0.000005451076967429267,
+                  "meta": {
+                    "passage_id": "71960162-1cf9-4495-a18e-5671bd3a1091",
+                    "source_id": "e1d591f59f14f877",
+                    "locator": "{\"kind\": \"lines\", \"start\": 161, \"end\": 173, \"heading_path\": [\"PV18 Knowledge OPC Productization Development And Acceptance Plan\"], \"passage_order\": 0}"
+                  }
+                },
+                {
+                  "result_id": "4286a748-dc4b-4fb8-a989-5f6ea984121c",
+                  "result_type": "passage",
+                  "title": "Passage 4286a748",
+                  "snippet": "实现 现必 必须 须以 为接 接口 口来 来源 当前 已实 实现 最低",
+                  "score": 0.000005141350849999236,
+                  "meta": {
+                    "passage_id": "4286a748-dc4b-4fb8-a989-5f6ea984121c",
+                    "source_id": "e1d591f59f14f877",
+                    "locator": "{\"kind\": \"lines\", \"start\": 115, \"end\": 142, \"heading_path\": [\"PV18 Knowledge OPC Productization Target Architecture\"], \"passage_order\": 0}"
+                  }
+                },
+                {
+                  "result_id": "2069712b-12e0-4d4c-998e-3eb654605341",
+                  "result_type": "passage",
+                  "title": "Passage 2069712b",
+                  "snippet": "当前 前实 实现 现与 与证 证据 据状 状态 截至 已通 通过 过阶 阶段 段验 验收 已实 实现 浏览 览器 器工 工作 作台 台已 已实 实现 输入 入和 和证 证据 据审...",
+                  "score": 0.000004945295623183937,
+                  "meta": {
+                    "passage_id": "2069712b-12e0-4d4c-998e-3eb654605341",
+                    "source_id": "e1d591f59f14f877",
+                    "locator": "{\"kind\": \"lines\", \"start\": 24, \"end\": 35, \"heading_path\": [\"PV18 Knowledge OPC Productization PRD\"], \"passage_order\": 0}"
+                  }
+                },
+                {
+                  "result_id": "c8756efa-a0ea-4ebb-9e50-e78b9a851dc8",
+                  "result_type": "passage",
+                  "title": "Passage c8756efa",
+                  "snippet": "当前 前到 到目 目标 标分 分层",
+                  "score": 0.000004731294452671497,
+                  "meta": {
+                    "passage_id": "c8756efa-a0ea-4ebb-9e50-e78b9a851dc8",
+                    "source_id": "e1d591f59f14f877",
+                    "locator": "{\"kind\": \"lines\", \"start\": 85, \"end\": 100, \"heading_path\": [\"PV18 Knowledge OPC Productization Target Architecture\"], \"passage_order\": 0}"
+                  }
+                },
+                {
+                  "result_id": "80d2e688-69bd-49f1-a91f-5e46be5f110b",
+                  "result_type": "passage",
+                  "title": "Passage 80d2e688",
+                  "snippet": "用途 产品 品化 化拆 拆成 成可 可执 执行 行开 开发 发与 与验 验收 收阶 阶段 阅读 读对 对象 开发 测试 产品 审计 计人 人员 边界 本文 文是 是开 开发 发及...",
+                  "score": 0.000004661790057307926,
+                  "meta": {
+                    "passage_id": "80d2e688-69bd-49f1-a91f-5e46be5f110b",
+                    "source_id": "e1d591f59f14f877",
+                    "locator": "{\"kind\": \"lines\", \"start\": 143, \"end\": 148, \"heading_path\": [], \"passage_order\": 0}"
+                  }
+                },
+                {
+                  "result_id": "6f6766c1-8168-4b89-bd4d-56d63219bcf3",
+                  "result_type": "passage",
+                  "title": "Passage 6f6766c1",
+                  "snippet": "用途 定义 产品 品化 化目 目标 标架 架构 当前 前差 差异 异和 和具 具体 体代 代码 码实 实体 体交 交互 阅读 读对 对象 架构 后端 前端 测试 审计 计人 人员...",
+                  "score": 0.000004630969231393418,
+                  "meta": {
+                    "passage_id": "6f6766c1-8168-4b89-bd4d-56d63219bcf3",
+                    "source_id": "e1d591f59f14f877",
+                    "locator": "{\"kind\": \"lines\", \"start\": 71, \"end\": 76, \"heading_path\": [], \"passage_order\": 0}"
+                  }
+                },
+                {
+                  "result_id": "7621267c-e2aa-430d-953e-b3a36fda3f0a",
+                  "result_type": "passage",
+                  "title": "Passage 7621267c",
+                  "snippet": "用途 定义 产品 品化 化阶 阶段 段的 的产 产品 品规 规格 阅读 读对 对象 产品 架构 开发 测试 审计 计人 人员 员和 和外 外部 边界 本文 文是 开发 发规 规格...",
+                  "score": 0.0000046024895009334456,
+                  "meta": {
+                    "passage_id": "7621267c-e2aa-430d-953e-b3a36fda3f0a",
+                    "source_id": "e1d591f59f14f877",
+                    "locator": "{\"kind\": \"lines\", \"start\": 1, \"end\": 6, \"heading_path\": [], \"passage_order\": 0}"
+                  }
+                },
+                {
+                  "result_id": "1c4a122d-7290-4491-845b-4f609198b3a1",
+                  "result_type": "passage",
+                  "title": "Passage 1c4a122d",
+                  "snippet": "已增 增加 浏览 览器 器依 依赖 可单 单独 独处 处理",
+                  "score": 0.000004566848545245926,
+                  "meta": {
+                    "passage_id": "1c4a122d-7290-4491-845b-4f609198b3a1",
+                    "source_id": "e1d591f59f14f877",
+                    "locator": "{\"kind\": \"lines\", \"start\": 101, \"end\": 114, \"heading_path\": [\"PV18 Knowledge OPC Productization Target Architecture\"], \"passage_order\": 1}"
+                  }
+                },
+                {
+                  "result_id": "0d1b9352-1ce3-4675-8803-6a34e2f6bcce",
+                  "result_type": "passage",
+                  "title": "Passage 0d1b9352",
+                  "snippet": "目标 标体 体验 实现 现完 完成 成后 用户 户应 应能 能在 在一 一个 页面 面完 完成 通过 过显 显式 式入 入口 进入 根路 路径 径继 继续 续保 保留 留当 当前...",
+                  "score": 0.000004364548504420894,
+                  "meta": {
+                    "passage_id": "0d1b9352-1ce3-4675-8803-6a34e2f6bcce",
+                    "source_id": "e1d591f59f14f877",
+                    "locator": "{\"kind\": \"lines\", \"start\": 55, \"end\": 70, \"heading_path\": [\"PV18 Knowledge OPC Productization PRD\"], \"passage_order\": 0}"
+                  }
+                },
+                {
+                  "result_id": "9ab2237a-46e1-4b59-9ce2-6164820dda73",
+                  "result_type": "passage",
+                  "title": "Passage 9ab2237a",
+                  "snippet": "阶段 段定 定位 选择 首个 个业 业务 务域 域为 目标 标是 是把 把当 当前 推进 进为 为一 一条 条可 可审 审查 查的 业务 务产 产品 品流 不替 替代 证明 产品...",
+                  "score": 0.000004283634426731806,
+                  "meta": {
+                    "passage_id": "9ab2237a-46e1-4b59-9ce2-6164820dda73",
+                    "source_id": "e1d591f59f14f877",
+                    "locator": "{\"kind\": \"lines\", \"start\": 7, \"end\": 23, \"heading_path\": [\"PV18 Knowledge OPC Productization PRD\"], \"passage_order\": 0}"
+                  }
+                },
+                {
+                  "result_id": "4c0e720f-edda-49b5-a4d4-fdd0558aefd5",
+                  "result_type": "passage",
+                  "title": "Passage 4c0e720f",
+                  "snippet": "用户 户可 可见 见效 效果 开发 发对 对象 验收 收证 证据 看到 已选 范围 代码 码实 实体 文档 索引 文档 档存 存在 在性 页数 扫描 用户 户打 打开 看到 和已...",
+                  "score": 0.0000042089590321940615,
+                  "meta": {
+                    "passage_id": "4c0e720f-edda-49b5-a4d4-fdd0558aefd5",
+                    "source_id": "e1d591f59f14f877",
+                    "locator": "{\"kind\": \"lines\", \"start\": 149, \"end\": 160, \"heading_path\": [\"PV18 Knowledge OPC Productization Development And Acceptance Plan\"], \"passage_order\": 0}"
+                  }
+                },
+                {
+                  "result_id": "678297c9-906f-4f63-91b3-d2ae83ea6672",
+                  "result_type": "passage",
+                  "title": "Passage 678297c9",
+                  "snippet": "接受 受一 一个 产品 品化 化实 实现 现结 结论",
+                  "score": 0.000004083585013468289,
+                  "meta": {
+                    "passage_id": "678297c9-906f-4f63-91b3-d2ae83ea6672",
+                    "source_id": "e1d591f59f14f877",
+                    "locator": "{\"kind\": \"lines\", \"start\": 149, \"end\": 160, \"heading_path\": [\"PV18 Knowledge OPC Productization Development And Acceptance Plan\"], \"passage_order\": 1}"
+                  }
+                },
+                {
+                  "result_id": "1bbf1cf5-231a-494e-939b-43eb2e607fe3",
+                  "result_type": "passage",
+                  "title": "Passage 1bbf1cf5",
+                  "snippet": "架构 构意 意图 采用 业务 产品 品化 化但 但不 不绕 绕过 过平 平台 台边 边界 的路 路径 业务 务能 能力 力必 必须 须继 继续 续运 运行 行在 分层 层内 不能...",
+                  "score": 0.0000038430263598471955,
+                  "meta": {
+                    "passage_id": "1bbf1cf5-231a-494e-939b-43eb2e607fe3",
+                    "source_id": "e1d591f59f14f877",
+                    "locator": "{\"kind\": \"lines\", \"start\": 77, \"end\": 84, \"heading_path\": [\"PV18 Knowledge OPC Productization Target Architecture\"], \"passage_order\": 0}"
+                  }
+                },
+                {
+                  "result_id": "3e911d8c-a80f-4eba-aa50-fa4101f9fbf3",
+                  "result_type": "passage",
+                  "title": "Passage 3e911d8c",
+                  "snippet": "后续 续实 实现 现证 证据 据建 建议 议落 落在 最低 低文 文件",
+                  "score": 0.000003819847218239835,
+                  "meta": {
+                    "passage_id": "3e911d8c-a80f-4eba-aa50-fa4101f9fbf3",
+                    "source_id": "e1d591f59f14f877",
+                    "locator": "{\"kind\": \"lines\", \"start\": 174, \"end\": 206, \"heading_path\": [\"PV18 Knowledge OPC Productization Development And Acceptance Plan\", \"3. Evidence Package Proposal\"], \"passage_order\": 0}"
+                  }
+                },
+                {
+                  "result_id": "d2f18d46-ece9-4a8b-9987-2a438bc05545",
+                  "result_type": "passage",
+                  "title": "Passage d2f18d46",
+                  "snippet": "具体 体代 代码 码实 实体 体状 状态 已实 实现 复用 需修 修改 待新 新增 已增 增加 入口 口与 与状 状态 态视 视图 后续 续只 只做 做体 体验 验增 增强 不扩...",
+                  "score": 0.0000037980589485484727,
+                  "meta": {
+                    "passage_id": "d2f18d46-ece9-4a8b-9987-2a438bc05545",
+                    "source_id": "e1d591f59f14f877",
+                    "locator": "{\"kind\": \"lines\", \"start\": 101, \"end\": 114, \"heading_path\": [\"PV18 Knowledge OPC Productization Target Architecture\"], \"passage_order\": 0}"
+                  }
+                },
+                {
+                  "result_id": "afdb4b07-b43f-45c5-a226-494032a1b855",
+                  "result_type": "passage",
+                  "title": "Passage afdb4b07",
+                  "snippet": "目标 标用 用户 用户 目标 标体 体验 要证 证明 明的 的内 内容 操作 作者 通过 过浏 浏览 览器 器创 创建 建知 知识 识空 空间 导入 入资 资料 查询 询答 答案...",
+                  "score": 0.00000332851191936145,
+                  "meta": {
+                    "passage_id": "afdb4b07-b43f-45c5-a226-494032a1b855",
+                    "source_id": "e1d591f59f14f877",
+                    "locator": "{\"kind\": \"lines\", \"start\": 36, \"end\": 43, \"heading_path\": [\"PV18 Knowledge OPC Productization PRD\"], \"passage_order\": 0}"
+                  }
+                }
+              ],
+              "citations": [
+                {
+                  "source_id": "e1d591f59f14f877",
+                  "title": "PV18 Knowledge OPC Productization PRD",
+                  "authority": "PRIMARY_DOC",
+                  "source_type": "markdown",
+                  "locator": "{\"kind\": \"lines\", \"start\": 161, \"end\": 173, \"heading_path\": [\"PV18 Knowledge OPC Productization Development And Acceptance Plan\"], \"passage_order\": 0}",
+                  "excerpt": "入口 口前 前置 置条 条件 实现 现不 不能 能开 开始 直到 本轮 目标 标架 架构 开发 发计 计划 里程 程碑 验收 收门 门槛 分析 存在 已存 存在 在并 并纳 纳入..."
+                },
+                {
+                  "source_id": "e1d591f59f14f877",
+                  "title": "PV18 Knowledge OPC Productization PRD",
+                  "authority": "PRIMARY_DOC",
+                  "source_type": "markdown",
+                  "locator": "{\"kind\": \"lines\", \"start\": 115, \"end\": 142, \"heading_path\": [\"PV18 Knowledge OPC Productization Target Architecture\"], \"passage_order\": 0}",
+                  "excerpt": "实现 现必 必须 须以 为接 接口 口来 来源 当前 已实 实现 最低"
+                },
+                {
+                  "source_id": "e1d591f59f14f877",
+                  "title": "PV18 Knowledge OPC Productization PRD",
+                  "authority": "PRIMARY_DOC",
+                  "source_type": "markdown",
+                  "locator": "{\"kind\": \"lines\", \"start\": 24, \"end\": 35, \"heading_path\": [\"PV18 Knowledge OPC Productization PRD\"], \"passage_order\": 0}",
+                  "excerpt": "当前 前实 实现 现与 与证 证据 据状 状态 截至 已通 通过 过阶 阶段 段验 验收 已实 实现 浏览 览器 器工 工作 作台 台已 已实 实现 输入 入和 和证 证据 据审..."
+                },
+                {
+                  "source_id": "e1d591f59f14f877",
+                  "title": "PV18 Knowledge OPC Productization PRD",
+                  "authority": "PRIMARY_DOC",
+                  "source_type": "markdown",
+                  "locator": "{\"kind\": \"lines\", \"start\": 85, \"end\": 100, \"heading_path\": [\"PV18 Knowledge OPC Productization Target Architecture\"], \"passage_order\": 0}",
+                  "excerpt": "当前 前到 到目 目标 标分 分层"
+                },
+                {
+                  "source_id": "e1d591f59f14f877",
+                  "title": "PV18 Knowledge OPC Productization PRD",
+                  "authority": "PRIMARY_DOC",
+                  "source_type": "markdown",
+                  "locator": "{\"kind\": \"lines\", \"start\": 143, \"end\": 148, \"heading_path\": [], \"passage_order\": 0}",
+                  "excerpt": "用途 产品 品化 化拆 拆成 成可 可执 执行 行开 开发 发与 与验 验收 收阶 阶段 阅读 读对 对象 开发 测试 产品 审计 计人 人员 边界 本文 文是 是开 开发 发及..."
+                },
+                {
+                  "source_id": "e1d591f59f14f877",
+                  "title": "PV18 Knowledge OPC Productization PRD",
+                  "authority": "PRIMARY_DOC",
+                  "source_type": "markdown",
+                  "locator": "{\"kind\": \"lines\", \"start\": 71, \"end\": 76, \"heading_path\": [], \"passage_order\": 0}",
+                  "excerpt": "用途 定义 产品 品化 化目 目标 标架 架构 当前 前差 差异 异和 和具 具体 体代 代码 码实 实体 体交 交互 阅读 读对 对象 架构 后端 前端 测试 审计 计人 人员..."
+                },
+                {
+                  "source_id": "e1d591f59f14f877",
+                  "title": "PV18 Knowledge OPC Productization PRD",
+                  "authority": "PRIMARY_DOC",
+                  "source_type": "markdown",
+                  "locator": "{\"kind\": \"lines\", \"start\": 1, \"end\": 6, \"heading_path\": [], \"passage_order\": 0}",
+                  "excerpt": "用途 定义 产品 品化 化阶 阶段 段的 的产 产品 品规 规格 阅读 读对 对象 产品 架构 开发 测试 审计 计人 人员 员和 和外 外部 边界 本文 文是 开发 发规 规格..."
+                },
+                {
+                  "source_id": "e1d591f59f14f877",
+                  "title": "PV18 Knowledge OPC Productization PRD",
+                  "authority": "PRIMARY_DOC",
+                  "source_type": "markdown",
+                  "locator": "{\"kind\": \"lines\", \"start\": 101, \"end\": 114, \"heading_path\": [\"PV18 Knowledge OPC Productization Target Architecture\"], \"passage_order\": 1}",
+                  "excerpt": "已增 增加 浏览 览器 器依 依赖 可单 单独 独处 处理"
+                },
+                {
+                  "source_id": "e1d591f59f14f877",
+                  "title": "PV18 Knowledge OPC Productization PRD",
+                  "authority": "PRIMARY_DOC",
+                  "source_type": "markdown",
+                  "locator": "{\"kind\": \"lines\", \"start\": 55, \"end\": 70, \"heading_path\": [\"PV18 Knowledge OPC Productization PRD\"], \"passage_order\": 0}",
+                  "excerpt": "目标 标体 体验 实现 现完 完成 成后 用户 户应 应能 能在 在一 一个 页面 面完 完成 通过 过显 显式 式入 入口 进入 根路 路径 径继 继续 续保 保留 留当 当前..."
+                },
+                {
+                  "source_id": "e1d591f59f14f877",
+                  "title": "PV18 Knowledge OPC Productization PRD",
+                  "authority": "PRIMARY_DOC",
+                  "source_type": "markdown",
+                  "locator": "{\"kind\": \"lines\", \"start\": 7, \"end\": 23, \"heading_path\": [\"PV18 Knowledge OPC Productization PRD\"], \"passage_order\": 0}",
+                  "excerpt": "阶段 段定 定位 选择 首个 个业 业务 务域 域为 目标 标是 是把 把当 当前 推进 进为 为一 一条 条可 可审 审查 查的 业务 务产 产品 品流 不替 替代 证明 产品..."
+                },
+                {
+                  "source_id": "e1d591f59f14f877",
+                  "title": "PV18 Knowledge OPC Productization PRD",
+                  "authority": "PRIMARY_DOC",
+                  "source_type": "markdown",
+                  "locator": "{\"kind\": \"lines\", \"start\": 149, \"end\": 160, \"heading_path\": [\"PV18 Knowledge OPC Productization Development And Acceptance Plan\"], \"passage_order\": 0}",
+                  "excerpt": "用户 户可 可见 见效 效果 开发 发对 对象 验收 收证 证据 看到 已选 范围 代码 码实 实体 文档 索引 文档 档存 存在 在性 页数 扫描 用户 户打 打开 看到 和已..."
+                },
+                {
+                  "source_id": "e1d591f59f14f877",
+                  "title": "PV18 Knowledge OPC Productization PRD",
+                  "authority": "PRIMARY_DOC",
+                  "source_type": "markdown",
+                  "locator": "{\"kind\": \"lines\", \"start\": 149, \"end\": 160, \"heading_path\": [\"PV18 Knowledge OPC Productization Development And Acceptance Plan\"], \"passage_order\": 1}",
+                  "excerpt": "接受 受一 一个 产品 品化 化实 实现 现结 结论"
+                },
+                {
+                  "source_id": "e1d591f59f14f877",
+                  "title": "PV18 Knowledge OPC Productization PRD",
+                  "authority": "PRIMARY_DOC",
+                  "source_type": "markdown",
+                  "locator": "{\"kind\": \"lines\", \"start\": 77, \"end\": 84, \"heading_path\": [\"PV18 Knowledge OPC Productization Target Architecture\"], \"passage_order\": 0}",
+                  "excerpt": "架构 构意 意图 采用 业务 产品 品化 化但 但不 不绕 绕过 过平 平台 台边 边界 的路 路径 业务 务能 能力 力必 必须 须继 继续 续运 运行 行在 分层 层内 不能..."
+                },
+                {
+                  "source_id": "e1d591f59f14f877",
+                  "title": "PV18 Knowledge OPC Productization PRD",
+                  "authority": "PRIMARY_DOC",
+                  "source_type": "markdown",
+                  "locator": "{\"kind\": \"lines\", \"start\": 174, \"end\": 206, \"heading_path\": [\"PV18 Knowledge OPC Productization Development And Acceptance Plan\", \"3. Evidence Package Proposal\"], \"passage_order\": 0}",
+                  "excerpt": "后续 续实 实现 现证 证据 据建 建议 议落 落在 最低 低文 文件"
+                },
+                {
+                  "source_id": "e1d591f59f14f877",
+                  "title": "PV18 Knowledge OPC Productization PRD",
+                  "authority": "PRIMARY_DOC",
+                  "source_type": "markdown",
+                  "locator": "{\"kind\": \"lines\", \"start\": 101, \"end\": 114, \"heading_path\": [\"PV18 Knowledge OPC Productization Target Architecture\"], \"passage_order\": 0}",
+                  "excerpt": "具体 体代 代码 码实 实体 体状 状态 已实 实现 复用 需修 修改 待新 新增 已增 增加 入口 口与 与状 状态 态视 视图 后续 续只 只做 做体 体验 验增 增强 不扩..."
+                },
+                {
+                  "source_id": "e1d591f59f14f877",
+                  "title": "PV18 Knowledge OPC Productization PRD",
+                  "authority": "PRIMARY_DOC",
+                  "source_type": "markdown",
+                  "locator": "{\"kind\": \"lines\", \"start\": 36, \"end\": 43, \"heading_path\": [\"PV18 Knowledge OPC Productization PRD\"], \"passage_order\": 0}",
+                  "excerpt": "目标 标用 用户 用户 目标 标体 体验 要证 证明 明的 的内 内容 操作 作者 通过 过浏 浏览 览器 器创 创建 建知 知识 识空 空间 导入 入资 资料 查询 询答 答案..."
+                }
+              ],
+              "related_pages": [
+                "pv18",
+                "source-pv18-knowledge-opc-productization-prd-e1d591f5"
+              ]
+            },
+            "graphrag": {
+              "graph_model_version": "1.0",
+              "entities": [],
+              "relationships": [],
+              "units": [],
+              "nodes": [],
+              "edges": [],
+              "communities": [],
+              "hits": [],
+              "stats": {
+                "entity_count": 0,
+                "theme_count": 0,
+                "relationship_count": 0,
+                "community_count": 0,
+                "document_count": 0
+              },
+              "db_path_ref": "artifact://d88f945da6f3e14e",
+              "source": "app.graphrag.bridge",
+              "debug_paths": {
+                "db_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/state/graphrag.db"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "knowledge_quality_feedback_v2",
+      "job_id": "job_6e1a9ae7cf1d",
+      "job_status": "completed",
+      "artifact_id": "art_cc3dc4a3b139",
+      "envelope": {
+        "workspace_id": "knowledge-local-demo-default-363993b8",
+        "operation_id": null,
+        "status": "ok",
+        "warnings": [],
+        "artifact_refs": [
+          {
+            "type": "workspace",
+            "artifact_ref": "artifact://d41a5e1b5be5700c",
+            "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8"
+          }
+        ],
+        "next_actions": [],
+        "data": {
+          "feedback_id": "f7bf25617384",
+          "created_at": "2026-06-26T20:15:28.502194Z",
+          "target_type": "query",
+          "target_id": "PV18 Knowledge OPC 如何证明业务工作流平台能力？",
+          "action": "needs_review",
+          "label": "",
+          "suggested_value": "",
+          "reason": "harnessOS external MCP acceptance feedback",
+          "metadata": {
+            "source": "harnessos"
+          },
+          "debug_paths": {
+            "workspace": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8"
+          }
+        }
+      }
+    },
+    {
+      "tool": "knowledge_correction_rules_v2",
+      "job_id": "job_f9d05233dca0",
+      "job_status": "completed",
+      "artifact_id": "art_73c56af46911",
+      "envelope": {
+        "workspace_id": "knowledge-local-demo-default-363993b8",
+        "operation_id": null,
+        "status": "ok",
+        "warnings": [],
+        "artifact_refs": [
+          {
+            "type": "workspace",
+            "artifact_ref": "artifact://d41a5e1b5be5700c",
+            "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8"
+          }
+        ],
+        "next_actions": [],
+        "data": {
+          "rules_path_ref": "artifact://650413079ca334a8",
+          "items": [
+            {
+              "created_at": "2026-06-26T20:15:28.502194Z",
+              "current_label": "",
+              "metadata": {
+                "source": "harnessos"
+              },
+              "proposed_value": "",
+              "reason": "harnessOS external MCP acceptance feedback",
+              "rule_id": "rule_f7bf25617384",
+              "rule_type": "review",
+              "source_feedback_id": "f7bf25617384",
+              "status": "draft",
+              "target_id": "PV18 Knowledge OPC 如何证明业务工作流平台能力？",
+              "target_type": "query"
+            }
+          ],
+          "total_count": 1,
+          "filtered_count": 1,
+          "summary": {
+            "rule_count": 1,
+            "status_counts": {
+              "draft": 1
+            },
+            "rule_type_counts": {
+              "review": 1
+            },
+            "target_type_counts": {
+              "query": 1
+            }
+          },
+          "generated_at": "2026-06-26T20:15:28.513903Z",
+          "schema_version": "1.0",
+          "debug_paths": {
+            "workspace": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8",
+            "rules_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/quality/correction_rules.json"
+          }
+        }
+      }
+    },
+    {
+      "tool": "knowledge_review_correction_rule_v2",
+      "job_id": "job_0795c282d847",
+      "job_status": "completed",
+      "artifact_id": "art_51cb90bbfe69",
+      "envelope": {
+        "workspace_id": "knowledge-local-demo-default-363993b8",
+        "operation_id": null,
+        "status": "ok",
+        "warnings": [],
+        "artifact_refs": [
+          {
+            "type": "workspace",
+            "artifact_ref": "artifact://d41a5e1b5be5700c",
+            "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8"
+          }
+        ],
+        "next_actions": [],
+        "data": {
+          "rules_path_ref": "artifact://650413079ca334a8",
+          "rule": {
+            "created_at": "2026-06-26T20:15:28.502194Z",
+            "current_label": "",
+            "metadata": {
+              "source": "harnessos"
+            },
+            "proposed_value": "",
+            "reason": "harnessOS external MCP acceptance feedback",
+            "rule_id": "rule_f7bf25617384",
+            "rule_type": "review",
+            "source_feedback_id": "f7bf25617384",
+            "status": "approved",
+            "target_id": "PV18 Knowledge OPC 如何证明业务工作流平台能力？",
+            "target_type": "query",
+            "reviewed_at": "2026-06-26T20:15:28.813059Z",
+            "reviewer": "harnessos",
+            "review_note": "External MCP acceptance review."
+          },
+          "summary": {
+            "rule_count": 1,
+            "status_counts": {
+              "approved": 1
+            },
+            "rule_type_counts": {
+              "review": 1
+            },
+            "target_type_counts": {
+              "query": 1
+            }
+          },
+          "correction_plan": {
+            "summary": {
+              "action_count": 1,
+              "action_counts": {
+                "flag_reviewed_target": 1
+              },
+              "target_engine_counts": {
+                "graphrag": 1,
+                "llmwiki": 1
+              },
+              "target_type_counts": {
+                "query": 1
+              },
+              "impacted_action_count": 0,
+              "impact_counts": {
+                "graph_nodes": 0,
+                "graph_edges": 0,
+                "llmwiki_pages": 0
+              }
+            },
+            "source_rule_count": 1
+          },
+          "debug_paths": {
+            "workspace": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8",
+            "rules_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/quality/correction_rules.json"
+          }
+        }
+      }
+    },
+    {
+      "tool": "knowledge_correction_plan_v2",
+      "job_id": "job_9c71399eeef5",
+      "job_status": "completed",
+      "artifact_id": "art_4c370b2b3325",
+      "envelope": {
+        "workspace_id": "knowledge-local-demo-default-363993b8",
+        "operation_id": null,
+        "status": "ok",
+        "warnings": [],
+        "artifact_refs": [
+          {
+            "type": "workspace",
+            "artifact_ref": "artifact://d41a5e1b5be5700c",
+            "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8"
+          }
+        ],
+        "next_actions": [],
+        "data": {
+          "actions": [
+            {
+              "action": "flag_reviewed_target",
+              "action_id": "action_rule_f7bf25617384",
+              "current_label": "",
+              "impact": {
+                "graph_edges": [],
+                "graph_nodes": [],
+                "llmwiki_pages": [],
+                "query_hit_note": "Query impact is applied at read time and depends on the operator query.",
+                "query_hits": [],
+                "summary": {
+                  "graph_edge_count": 0,
+                  "graph_node_count": 0,
+                  "llmwiki_page_count": 0,
+                  "total_matches": 0
+                }
+              },
+              "metadata": {
+                "source": "harnessos"
+              },
+              "proposed_value": "",
+              "reason": "harnessOS external MCP acceptance feedback",
+              "source_feedback_id": "f7bf25617384",
+              "source_rule_id": "rule_f7bf25617384",
+              "target_engines": [
+                "llmwiki",
+                "graphrag"
+              ],
+              "target_id": "PV18 Knowledge OPC 如何证明业务工作流平台能力？",
+              "target_type": "query"
+            }
+          ],
+          "generated_at": "2026-06-26T20:15:28.836091Z",
+          "notes": [
+            "Only approved rules are included.",
+            "The plan is a non-destructive governance layer; raw row data and engine artifacts are not rewritten.",
+            "Graph snapshots apply presentation suppress/rename/merge actions at read time."
+          ],
+          "schema_version": "1.0",
+          "source_rule_count": 1,
+          "summary": {
+            "action_count": 1,
+            "action_counts": {
+              "flag_reviewed_target": 1
+            },
+            "impact_counts": {
+              "graph_edges": 0,
+              "graph_nodes": 0,
+              "llmwiki_pages": 0
+            },
+            "impacted_action_count": 0,
+            "target_engine_counts": {
+              "graphrag": 1,
+              "llmwiki": 1
+            },
+            "target_type_counts": {
+              "query": 1
+            }
+          },
+          "debug_paths": {
+            "workspace": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8"
+          }
+        }
+      }
+    },
+    {
+      "tool": "knowledge_workspace_archive",
+      "job_id": "job_1c22ebb2d5c4",
+      "job_status": "completed",
+      "artifact_id": "art_5c01a25ad673",
+      "envelope": {
+        "workspace_id": "knowledge-local-demo-default-363993b8",
+        "operation_id": null,
+        "status": "ok",
+        "warnings": [],
+        "artifact_refs": [
+          {
+            "type": "workspace",
+            "artifact_ref": "artifact://d41a5e1b5be5700c",
+            "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8"
+          }
+        ],
+        "next_actions": [
+          "knowledge_workspace_list"
+        ],
+        "data": {
+          "workspace": {
+            "workspace_id": "knowledge-local-demo-default-363993b8",
+            "name": "knowledge-local-demo-default-363993b8",
+            "owner": "pv18-knowledge-opc",
+            "tags": [
+              "harnessos-e2e"
+            ],
+            "status": "archived",
+            "created_at": "2026-06-26T20:15:25.748732Z",
+            "updated_at": "2026-06-26T20:15:29.102683Z",
+            "archived_at": "2026-06-26T20:15:29.102683Z",
+            "archive_reason": "harnessOS external MCP acceptance completed",
+            "debug_paths": {
+              "workspace_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "real_data_service": true,
+  "audit_refs": [
+    {
+      "audit_ref_id": "pv18:audit:knowledge.query:default||:pv18-query-b314c030",
+      "operation": "knowledge.query",
+      "scope": {
+        "app_id": "default",
+        "project_id": null,
+        "workspace_id": null
+      },
+      "entity_id": "pv18-query-b314c030",
+      "created_at": "2026-06-26T20:15:29.203782Z",
+      "redaction_status": "redacted"
+    }
+  ],
+  "redaction_status": "redacted",
+  "verified": false,
+  "screenshot": "query-and-citation-screenshot.png",
+  "created_at": "2026-06-27T00:00:00Z"
+}

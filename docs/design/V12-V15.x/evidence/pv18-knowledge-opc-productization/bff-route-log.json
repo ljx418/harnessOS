@@ -1,0 +1,145 @@
+{
+  "schema_version": "pv18.knowledge_opc_route_log.v1",
+  "status": "PASS",
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/bff/pv18/knowledge/state",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/pv18/knowledge/state",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/pv18/knowledge/workspaces",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/pv18/knowledge/state",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/pv18/knowledge/sources/import",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/pv18/knowledge/state",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/pv18/knowledge/builds/start",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/pv18/knowledge/state",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/pv18/knowledge/query",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/pv18/knowledge/state",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/pv18/knowledge/quality-feedback",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/pv18/knowledge/state",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/pv18/knowledge/correction-plan",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/pv18/knowledge/state",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/pv18/knowledge/evidence/summary",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/pv18/knowledge/state",
+      "status": 200,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/pv18/knowledge/sources/import",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/pv18/knowledge/builds/start",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/pv18/knowledge/builds/pv18-build-4d022597/status",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/pv18/knowledge/query",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/pv18/knowledge/quality-feedback",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "POST",
+      "path": "/bff/pv18/knowledge/correction-plan",
+      "status": 200,
+      "user_agent": "node"
+    },
+    {
+      "method": "GET",
+      "path": "/bff/pv18/knowledge/evidence/summary",
+      "status": 200,
+      "user_agent": "node"
+    }
+  ],
+  "forbidden_matches": []
+}

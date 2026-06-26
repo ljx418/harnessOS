@@ -92,6 +92,13 @@ observability and deployable operations.
   evidence. PV17 evidence does not change the bounded claims for V12-V15/PV16
   and does not prove production readiness, complete Workflow Studio or Agent
   executor readiness.
+- The selected post-PV17 next stage was PV18 Knowledge OPC Productization.
+  PV18 selected Path C business pack productization and locked Knowledge as the
+  first business domain. PV18 has passed bounded review acceptance with
+  `/bff/pv18/knowledge/*`, browser Knowledge OPC workflow, real
+  `data_service_mcp` evidence, screenshots and acceptance runner output. It
+  does not prove production readiness, complete Workflow Studio, complete Agent
+  executor or full commercial Knowledge productization.
 - V12 design now starts with component-level prototype review before full Figma
   or real browser implementation. The required component sketch gate is defined
   in `v12_component_prototype_plan.md`; execution details, evidence paths and
@@ -116,6 +123,10 @@ PV16 complete: product-runtime hardening pilot ready for review.
 ## Allowed PV17 Claim
 
 PV17 complete: product closed loop implementation ready for bounded review.
+
+## Allowed PV18 Claim
+
+PV18 complete: Knowledge OPC productization implementation ready for bounded review.
 
 ## Forbidden Interpretations
 
@@ -189,6 +200,20 @@ PV17 complete: product closed loop implementation ready for bounded review.
 - `pv17_product_closed_loop_current_gap_analysis.md`
 - `pv17_product_closed_loop_implementation_readiness_audit.md`
 - `pv17_product_closed_loop_gap_analysis.drawio`
+- `pv18_knowledge_opc_productization_prd.md`
+- `pv18_knowledge_opc_productization_target_architecture.md`
+- `pv18_knowledge_opc_productization_development_and_acceptance_plan.md`
+- `pv18_knowledge_opc_productization_bff_dto_contract.md`
+- `pv18_knowledge_opc_productization_acceptance_runner_spec.md`
+- `pv18_knowledge_opc_productization_implementation_task_matrix.md`
+- `pv18_knowledge_opc_productization_milestone_roadmap.md`
+- `pv18_knowledge_opc_productization_acceptance_gate.md`
+- `pv18_knowledge_opc_productization_current_gap_analysis.md`
+- `pv18_knowledge_opc_productization_implementation_readiness_audit.md`
+- `pv18_knowledge_opc_productization_gap_analysis.drawio`
+- `schemas/pv18_knowledge_opc_acceptance_data.schema.json`
+- `schemas/pv18_knowledge_opc_artifact_manifest.schema.json`
+- `schemas/pv18_knowledge_opc_dto_snapshot.schema.json`
 
 ## V12 Implementation-Readiness Documents
 

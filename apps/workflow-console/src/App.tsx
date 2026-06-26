@@ -2,7 +2,9 @@ import { ConsoleShell } from "./components/ConsoleShell.js";
 import { useWorkflowConsoleData } from "./hooks/useWorkflowConsoleData.js";
 import { WorkflowStudioLayout, type VisualAcceptanceState } from "./ui/layout/WorkflowStudioLayout.js";
 
-function staticStudioState(): VisualAcceptanceState | null {
+type AppEntryState = VisualAcceptanceState | "workflow-console";
+
+function appEntryState(): AppEntryState | null {
   if (typeof window === "undefined") return null;
   const state = new URLSearchParams(window.location.search).get("studio");
   if (
@@ -13,11 +15,13 @@ function staticStudioState(): VisualAcceptanceState | null {
     state === "v15-observability-deployment" ||
     state === "pv16-product-runtime-hardening" ||
     state === "pv17-product-closed-loop" ||
+    state === "pv18-knowledge-opc" ||
     state === "agent-draft-proposal" ||
     state === "folder-debug-scan" ||
     state === "running-board" ||
     state === "artifacts-quality" ||
-    state === "governance-evidence"
+    state === "governance-evidence" ||
+    state === "workflow-console"
   ) {
     return state;
   }
@@ -25,10 +29,19 @@ function staticStudioState(): VisualAcceptanceState | null {
 }
 
 export function App() {
-  const studioState = staticStudioState();
-  if (studioState) {
-    return <WorkflowStudioLayout state={studioState} />;
+  const entryState = appEntryState();
+  if (entryState && entryState !== "workflow-console") {
+    return <WorkflowStudioLayout state={entryState} />;
   }
+
+  if (!entryState) {
+    return <WorkflowStudioLayout state="v13-editable-studio" />;
+  }
+
+  return <WorkflowConsoleApp />;
+}
+
+function WorkflowConsoleApp() {
   const data = useWorkflowConsoleData();
   if (data.loading) {
     return <div className="console-state" data-testid="workflow-console-loading">正在连接真实工作流数据…</div>;
@@ -62,10 +75,10 @@ export function App() {
       patchProposal={data.patchProposal}
       patchDiff={data.patchDiff}
       highRiskPatchDiff={data.highRiskPatchDiff}
-	      agentTalkFixture={data.agentTalkFixture}
-	      agentSession={data.agentSession}
-	      agentInteractionState={data.agentInteractionState}
-	      agentSuggestions={data.agentSuggestions}
+      agentTalkFixture={data.agentTalkFixture}
+      agentSession={data.agentSession}
+      agentInteractionState={data.agentInteractionState}
+      agentSuggestions={data.agentSuggestions}
       agentActionProposals={data.agentActionProposals}
       activeAgentHandoff={data.activeAgentHandoff}
       operationEvidence={data.operationEvidence}

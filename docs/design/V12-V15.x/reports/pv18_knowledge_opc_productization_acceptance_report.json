@@ -1,0 +1,81 @@
+{
+  "schema_version": "pv18.knowledge_opc_acceptance_report.v1",
+  "status": "PASS",
+  "stage_id": "PV18-SA",
+  "evidence_dir": "docs/design/V12-V15.x/evidence/pv18-knowledge-opc-productization",
+  "missing_artifacts": [],
+  "schema_results": [
+    {
+      "status": "PASS",
+      "reason": ""
+    }
+  ],
+  "scenario_results": {
+    "status": "PASS",
+    "missing_case_ids": [],
+    "failing_case_ids": [],
+    "missing_user_visible_result_case_ids": []
+  },
+  "route_boundary": {
+    "status": "PASS",
+    "uses_pv18": true,
+    "forbidden_matches": []
+  },
+  "dto_coverage": {
+    "status": "PASS",
+    "missing_routes": [],
+    "missing_schema_version_routes": []
+  },
+  "citation": {
+    "status": "PASS",
+    "source_ref_count": 16,
+    "verified_without_citation": false
+  },
+  "correction": {
+    "status": "PASS",
+    "requires_human_review": true,
+    "auto_publish_allowed": false
+  },
+  "real_data_service": {
+    "status": "PASS",
+    "execution_mode": "mcp_stdio",
+    "connector_id": "data_service_mcp",
+    "workspace_id": "knowledge-local-demo-default-b92a70ca"
+  },
+  "platform_generality": {
+    "status": "PASS",
+    "knowledge_only_platform_changes": [],
+    "generic_reuse_check_count": 3,
+    "review_doc_exists": true
+  },
+  "claim_to_evidence": {
+    "status": "PASS",
+    "claim_count": 5,
+    "missing_evidence_claim_ids": [],
+    "failing_claim_ids": []
+  },
+  "claim_scan": {
+    "status": "PASS",
+    "matches": []
+  },
+  "redaction_scan": {
+    "status": "PASS",
+    "matches": []
+  },
+  "allowed_claim": "PV18 complete: Knowledge OPC productization implementation ready for bounded review.",
+  "allowed_claim_check": {
+    "status": "PASS",
+    "actual": "PV18 complete: Knowledge OPC productization implementation ready for bounded review.",
+    "expected": "PV18 complete: Knowledge OPC productization implementation ready for bounded review."
+  },
+  "forbidden_positive_claims": [
+    "production ready",
+    "HarnessOS is production ready",
+    "Xpert parity complete",
+    "product-grade frontend complete",
+    "complete Workflow Studio ready",
+    "Agent executor ready",
+    "Knowledge productization complete",
+    "production data service ready"
+  ]
+}

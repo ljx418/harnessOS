@@ -1,0 +1,514 @@
+{
+  "schema_version": "pv18.knowledge_opc_acceptance_data.v1",
+  "stage_id": "PV18-SA",
+  "status": "PASS",
+  "allowed_claim": "PV18 complete: Knowledge OPC productization implementation ready for bounded review.",
+  "real_data_service": {
+    "status": "PASS",
+    "connector_id": "data_service_mcp",
+    "execution_mode": "mcp_stdio",
+    "workspace_id": "knowledge-local-demo-default-b92a70ca"
+  },
+  "scenario_results": [
+    {
+      "case_id": "knowledge_console_state_visible",
+      "status": "PASS",
+      "user_visible_result": "用户可以看到 workspace、connector、source、build、query、evidence 的工作台状态。",
+      "evidence_refs": [
+        "knowledge-console-report.json",
+        "knowledge-console-screenshot.png"
+      ],
+      "blocking_failure": false
+    },
+    {
+      "case_id": "source_import_registers_standard_artifacts",
+      "status": "PASS",
+      "user_visible_result": "用户导入真实文档后可以看到 source 与 artifact refs。",
+      "evidence_refs": [
+        "source-ingest-report.json"
+      ],
+      "blocking_failure": false
+    },
+    {
+      "case_id": "build_failed_is_visible",
+      "status": "PASS",
+      "user_visible_result": "build 状态以 DTO 形式显式返回；本次真实验收为 completed，失败字段仍在 DTO 中保留。",
+      "evidence_refs": [
+        "dto-snapshots.json"
+      ],
+      "blocking_failure": false
+    },
+    {
+      "case_id": "query_returns_citation_bundle",
+      "status": "PASS",
+      "user_visible_result": "用户提问后可以看到 citation coverage=pass 和 source refs。",
+      "evidence_refs": [
+        "knowledge-query-report.json",
+        "query-and-citation-screenshot.png"
+      ],
+      "blocking_failure": false
+    },
+    {
+      "case_id": "missing_citation_blocks_verified_answer",
+      "status": "PASS",
+      "user_visible_result": "query DTO 不把无引用答案标记为 verified。",
+      "evidence_refs": [
+        "knowledge-query-report.json"
+      ],
+      "blocking_failure": false
+    },
+    {
+      "case_id": "quality_feedback_requires_review_when_risky",
+      "status": "PASS",
+      "user_visible_result": "质量反馈进入 correction_required/human review 路径。",
+      "evidence_refs": [
+        "quality-correction-report.json"
+      ],
+      "blocking_failure": false
+    },
+    {
+      "case_id": "correction_plan_does_not_auto_publish",
+      "status": "PASS",
+      "user_visible_result": "修正计划需要人工审查，auto_publish_allowed=false。",
+      "evidence_refs": [
+        "quality-correction-report.json"
+      ],
+      "blocking_failure": false
+    },
+    {
+      "case_id": "evidence_summary_maps_claims_to_artifacts",
+      "status": "PASS",
+      "user_visible_result": "证据审查页把 claim、artifact、route boundary 关联展示。",
+      "evidence_refs": [
+        "evidence-review-report.json",
+        "evidence-review-screenshot.png"
+      ],
+      "blocking_failure": false
+    },
+    {
+      "case_id": "browser_network_denylist_passes",
+      "status": "PASS",
+      "user_visible_result": "浏览器网络请求未直连内部 runtime 或 data_service 内部路径。",
+      "evidence_refs": [
+        "browser-network-log.json",
+        "bff-route-log.json"
+      ],
+      "blocking_failure": false
+    },
+    {
+      "case_id": "platform_generality_review_passes",
+      "status": "PASS",
+      "user_visible_result": "未为知识业务新增平台定制分支，只复用通用 BFF/Gateway/Connector 结构。",
+      "evidence_refs": [
+        "platform-generality-review.md"
+      ],
+      "blocking_failure": false
+    },
+    {
+      "case_id": "no_false_green_and_redaction_pass",
+      "status": "PASS",
+      "user_visible_result": "未出现禁止的正向过度声明或敏感明文证据。",
+      "evidence_refs": [
+        "no-false-green-scan.txt",
+        "redaction-scan.txt"
+      ],
+      "blocking_failure": false
+    }
+  ],
+  "artifact_refs": [
+    {
+      "artifact_ref": "art_98d15351e8fc",
+      "kind": "source_reference",
+      "name": "HarnessOS PV18 E2E 复核资料"
+    },
+    {
+      "type": "source",
+      "source_id": "src_0b2d94a28d4cde2b",
+      "artifact_ref": "src_0b2d94a28d4cde2b"
+    },
+    {
+      "artifact_ref": "art_5a3ecbdcce90",
+      "tool": "knowledge_workspace_create"
+    },
+    {
+      "type": "workspace",
+      "artifact_ref": "artifact://8d1a3e196932a420",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-b92a70ca"
+    },
+    {
+      "artifact_ref": "art_88e9b4ab524d",
+      "tool": "knowledge_source_import"
+    },
+    {
+      "type": "source",
+      "source_id": "src_0b2d94a28d4cde2b",
+      "artifact_ref": "src_0b2d94a28d4cde2b"
+    },
+    {
+      "artifact_ref": "art_d58685f348e3",
+      "tool": "knowledge_build_start"
+    },
+    {
+      "type": "operation",
+      "operation_id": "op_d5b1eb9a1c28",
+      "artifact_ref": "op_d5b1eb9a1c28"
+    },
+    {
+      "artifact_ref": "art_3792918b0b84",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "artifact_ref": "art_00b3dd2883ba",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "artifact_ref": "art_f843c15667e5",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "artifact_ref": "art_0308d5e8cabd",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "artifact_ref": "art_63a2ee3a3df6",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "artifact_ref": "art_b83ad003e57a",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "artifact_ref": "art_865626129ade",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "artifact_ref": "art_036af80da8a9",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "artifact_ref": "art_323ac712acdc",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "artifact_ref": "art_4ca2a6782b29",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://eba314be6907a100",
+      "debug_path": "source-pv18-knowledge-opc-productization-prd-9944b5e2"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://cd186f8a1af0644c",
+      "debug_path": "pv18"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://8d27aedecc1807f0",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-b92a70ca/llmwiki/state/input_contract.json"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://4ef966f15eb6eada",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-b92a70ca/graphrag/cache/input_contract.json"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://29bbe08ecc4b6db4",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-b92a70ca/graphrag/input/distilled_units.jsonl"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://86ae44ee81d19f12",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-b92a70ca/graphrag/input/src_0b2d94a28d4cde2b.md"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://07729211b7ed34b3",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-b92a70ca/graphrag/cache/index_manifest.json"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://f6c6b355fa6eaed2",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-b92a70ca/graphrag/cache/execution_owner.json"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://964c3f95cbdd8a14",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-b92a70ca/graphrag/cache/execution_request.json"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://f8c5d784f9478651",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-b92a70ca/graphrag/state/graphrag.db"
+    },
+    {
+      "artifact_ref": "art_f31a5f9b09cb",
+      "tool": "knowledge_query_v2"
+    },
+    {
+      "type": "workspace",
+      "artifact_ref": "artifact://8d1a3e196932a420",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-b92a70ca"
+    },
+    {
+      "artifact_ref": "art_3ce8ccc2345f",
+      "tool": "knowledge_quality_feedback_v2"
+    },
+    {
+      "type": "workspace",
+      "artifact_ref": "artifact://8d1a3e196932a420",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-b92a70ca"
+    },
+    {
+      "artifact_ref": "art_4d98d8ce9848",
+      "tool": "knowledge_correction_rules_v2"
+    },
+    {
+      "type": "workspace",
+      "artifact_ref": "artifact://8d1a3e196932a420",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-b92a70ca"
+    },
+    {
+      "artifact_ref": "art_4f77351bb1fc",
+      "tool": "knowledge_review_correction_rule_v2"
+    },
+    {
+      "type": "workspace",
+      "artifact_ref": "artifact://8d1a3e196932a420",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-b92a70ca"
+    },
+    {
+      "artifact_ref": "art_e9c4b7214c81",
+      "tool": "knowledge_correction_plan_v2"
+    },
+    {
+      "type": "workspace",
+      "artifact_ref": "artifact://8d1a3e196932a420",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-b92a70ca"
+    },
+    {
+      "artifact_ref": "art_02b5323d9ac9",
+      "tool": "knowledge_workspace_archive"
+    },
+    {
+      "type": "workspace",
+      "artifact_ref": "artifact://8d1a3e196932a420",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-b92a70ca"
+    },
+    {
+      "artifact_ref": "art_fe89665b5a10",
+      "tool": "knowledge_workspace_create"
+    },
+    {
+      "type": "workspace",
+      "artifact_ref": "artifact://d41a5e1b5be5700c",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8"
+    },
+    {
+      "artifact_ref": "art_59605fdaadbd",
+      "tool": "knowledge_source_import"
+    },
+    {
+      "type": "source",
+      "source_id": "src_0b2d94a28d4cde2b",
+      "artifact_ref": "src_0b2d94a28d4cde2b"
+    },
+    {
+      "artifact_ref": "art_fef5622604dc",
+      "tool": "knowledge_build_start"
+    },
+    {
+      "type": "operation",
+      "operation_id": "op_7ae03879c6b7",
+      "artifact_ref": "op_7ae03879c6b7"
+    },
+    {
+      "artifact_ref": "art_eaa6f7caf160",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "artifact_ref": "art_8af73fb1a8e1",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "artifact_ref": "art_c27806fafc53",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "artifact_ref": "art_75a47bac55bd",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "artifact_ref": "art_46fe2a60b8e8",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "artifact_ref": "art_702832c6f1ed",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "artifact_ref": "art_5fc0f0633f12",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "artifact_ref": "art_3050827d96bd",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "artifact_ref": "art_7c7a8a0435b7",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "artifact_ref": "art_6ab9f6148454",
+      "tool": "knowledge_build_status"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://997120df6161a6a3",
+      "debug_path": "source-pv18-knowledge-opc-productization-prd-e1d591f5"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://cd186f8a1af0644c",
+      "debug_path": "pv18"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://8db19c958f20aa7d",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/llmwiki/state/input_contract.json"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://619f58cd02e82559",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/cache/input_contract.json"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://cc34397872e25e46",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/input/distilled_units.jsonl"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://25095eb6a29e8faf",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/input/src_0b2d94a28d4cde2b.md"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://3434d2b32fba8e43",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/cache/index_manifest.json"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://098673c60081b06d",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/cache/execution_owner.json"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://19c72172730c55e4",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/cache/execution_request.json"
+    },
+    {
+      "type": "artifact",
+      "artifact_ref": "artifact://d88f945da6f3e14e",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8/graphrag/state/graphrag.db"
+    },
+    {
+      "artifact_ref": "art_749d52d829b9",
+      "tool": "knowledge_query_v2"
+    },
+    {
+      "type": "workspace",
+      "artifact_ref": "artifact://d41a5e1b5be5700c",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8"
+    },
+    {
+      "artifact_ref": "art_cc3dc4a3b139",
+      "tool": "knowledge_quality_feedback_v2"
+    },
+    {
+      "type": "workspace",
+      "artifact_ref": "artifact://d41a5e1b5be5700c",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8"
+    },
+    {
+      "artifact_ref": "art_73c56af46911",
+      "tool": "knowledge_correction_rules_v2"
+    },
+    {
+      "type": "workspace",
+      "artifact_ref": "artifact://d41a5e1b5be5700c",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8"
+    },
+    {
+      "artifact_ref": "art_51cb90bbfe69",
+      "tool": "knowledge_review_correction_rule_v2"
+    },
+    {
+      "type": "workspace",
+      "artifact_ref": "artifact://d41a5e1b5be5700c",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8"
+    },
+    {
+      "artifact_ref": "art_4c370b2b3325",
+      "tool": "knowledge_correction_plan_v2"
+    },
+    {
+      "type": "workspace",
+      "artifact_ref": "artifact://d41a5e1b5be5700c",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8"
+    },
+    {
+      "artifact_ref": "art_5c01a25ad673",
+      "tool": "knowledge_workspace_archive"
+    },
+    {
+      "type": "workspace",
+      "artifact_ref": "artifact://d41a5e1b5be5700c",
+      "debug_path": "/mnt/c/workspace/data_service/harnessos-pv18-opc/knowledge-local-demo-default-363993b8"
+    }
+  ],
+  "route_boundary": {
+    "status": "PASS",
+    "allowed_prefixes": [
+      "/bff/pv18/knowledge"
+    ],
+    "forbidden_matches": []
+  },
+  "platform_generality_review": {
+    "status": "PASS",
+    "knowledge_only_platform_changes": [],
+    "generic_reuse_checks": [
+      "PV18 uses workflowConsoleClient PV18 BFF routes instead of browser runtime access.",
+      "PV18 BFF calls data_service_mcp through ConnectorExecutionRuntime and KnowledgeMcpWorkflowRunner.",
+      "Knowledge business source/query values remain request data, not platform-specific code branches."
+    ]
+  },
+  "claim_scan": {
+    "status": "PASS",
+    "matches": []
+  },
+  "redaction_scan": {
+    "status": "PASS",
+    "matches": []
+  },
+  "blocking_failures": [],
+  "prd_review": {
+    "status": "PASS",
+    "evidence_ref": "prd-spec-review.md"
+  },
+  "target_architecture_review": {
+    "status": "PASS",
+    "evidence_ref": "target-architecture-review.md"
+  },
+  "audit": {
+    "fatal_findings": 0,
+    "major_findings": 0,
+    "closure_status": "CLOSED"
+  },
+  "evidence_status": "ready_for_review",
+  "quality_status": "pending_review",
+  "correction_status": "pending_human_review",
+  "created_at": "2026-06-27T00:00:00Z"
+}

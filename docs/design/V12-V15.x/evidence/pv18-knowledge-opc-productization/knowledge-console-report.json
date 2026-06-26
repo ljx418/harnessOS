@@ -1,0 +1,98 @@
+{
+  "schema_version": "pv18.knowledge_console_report.v1",
+  "status": "PASS",
+  "connector_health": {
+    "connector_id": "data_service_mcp",
+    "status": "available",
+    "execution_mode": "mcp_stdio",
+    "real_data_service": true,
+    "capabilities": {
+      "transport": "stdio",
+      "contract_only": false,
+      "capabilities": [
+        "knowledge.lifecycle",
+        "knowledge.source",
+        "knowledge.build",
+        "knowledge.query",
+        "knowledge.summarize",
+        "knowledge.citation"
+      ],
+      "tools": [
+        "knowledge_workspace_create",
+        "knowledge_workspace_list",
+        "knowledge_workspace_describe",
+        "knowledge_source_import",
+        "knowledge_source_list",
+        "knowledge_source_remove",
+        "knowledge_build_start",
+        "knowledge_build_status",
+        "knowledge_build_cancel",
+        "knowledge_workspace_archive",
+        "knowledge_ingest_v2",
+        "knowledge_query_v2",
+        "knowledge_quality_summary_v2",
+        "knowledge_correction_plan_v2",
+        "knowledge_quality_feedback_v2",
+        "knowledge_correction_rules_v2",
+        "knowledge_review_correction_rule_v2",
+        "knowledge_query",
+        "knowledge_quality_summary",
+        "knowledge_quality_feedback",
+        "knowledge_correction_rules",
+        "knowledge_review_correction_rule",
+        "knowledge_correction_plan"
+      ],
+      "resources": [
+        "data_service://summary",
+        "data_service://layout",
+        "data_service://build-status",
+        "data_service://quality-report"
+      ],
+      "prompts": [
+        "knowledge_lifecycle_runbook",
+        "knowledge_quality_review"
+      ],
+      "health_message": "Data Service MCP stdio connector dependencies are available.",
+      "execution_enabled": true
+    },
+    "redaction_status": "redacted"
+  },
+  "workspace": {
+    "workspace_id": "knowledge:local:demo:default",
+    "display_name": "PV18 Knowledge OPC Workspace",
+    "owner": "local-reviewer",
+    "scope": {
+      "app_id": "default",
+      "project_id": null,
+      "workspace_id": null
+    },
+    "data_boundary": "BFF DTO -> Pack/Connector/Gateway/Evidence",
+    "audit_refs": [
+      {
+        "audit_ref_id": "pv18:audit:knowledge.workspace.default_projection:default||:knowledge:local:demo:default",
+        "operation": "knowledge.workspace.default_projection",
+        "scope": {
+          "app_id": "default",
+          "project_id": null,
+          "workspace_id": null
+        },
+        "entity_id": "knowledge:local:demo:default",
+        "created_at": "2026-06-26T20:14:38.321672Z",
+        "redaction_status": "redacted"
+      }
+    ],
+    "redaction_status": "redacted"
+  },
+  "user_visible_paths": [
+    "准备 Workspace",
+    "导入 Source",
+    "启动 Build",
+    "提问并生成引用",
+    "审查证据"
+  ],
+  "screenshots": [
+    "knowledge-console-screenshot.png",
+    "knowledge-opc-full-page.png"
+  ],
+  "created_at": "2026-06-27T00:00:00Z"
+}

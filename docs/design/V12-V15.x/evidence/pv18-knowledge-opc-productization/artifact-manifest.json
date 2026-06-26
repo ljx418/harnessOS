@@ -1,0 +1,145 @@
+{
+  "schema_version": "pv18.knowledge_opc_artifact_manifest.v1",
+  "stage_id": "PV18-SA",
+  "status": "PASS",
+  "artifact_root": "docs/design/V12-V15.x/evidence/pv18-knowledge-opc-productization",
+  "artifacts": [
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv18-knowledge-opc-productization/acceptance-data.json",
+      "kind": "json",
+      "sha256": "ffd09e0e121336b75a1b7f2bd20f7dc7158c5b6afcc040794dc3dafc6af40f21",
+      "evidence_role": "acceptance_data"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv18-knowledge-opc-productization/dto-snapshots.json",
+      "kind": "json",
+      "sha256": "867e89fb520d61eeeb26e496323f3cc4591338ea4f17cde960d33c0cea8bff08",
+      "evidence_role": "dto_snapshots"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv18-knowledge-opc-productization/knowledge-console-report.json",
+      "kind": "json",
+      "sha256": "e4cf2804f52c8879c9e00b5574dcf503e4a5dcf9ad3f2200f29b3e6b2675e8bd",
+      "evidence_role": "knowledge_console_report"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv18-knowledge-opc-productization/source-ingest-report.json",
+      "kind": "json",
+      "sha256": "429e3d2423cc87aebbaa7307d146cb3c39a74c33c7015a1c36a6fc3c71d057a8",
+      "evidence_role": "source_ingest_report"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv18-knowledge-opc-productization/knowledge-query-report.json",
+      "kind": "json",
+      "sha256": "89dcd8c52d9bbc6f41d67e73c78cc9f2b0a3b181be250c1ff7df85f958382e92",
+      "evidence_role": "knowledge_query_report"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv18-knowledge-opc-productization/quality-correction-report.json",
+      "kind": "json",
+      "sha256": "9f35900fb4624068d390b8e02b997c8e92ad232f605cb294396b7149b21b1c20",
+      "evidence_role": "quality_correction_report"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv18-knowledge-opc-productization/artifact-lineage-report.json",
+      "kind": "json",
+      "sha256": "45ea9abf12c06dadfa26f262564665bafbf899759f4c031b2e095b5204f7c3da",
+      "evidence_role": "artifact_lineage_report"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv18-knowledge-opc-productization/evidence-review-report.json",
+      "kind": "json",
+      "sha256": "3b20d5907fd10f736d9e18a512dee0b86be1c24634c8ad535731d673adf09a4c",
+      "evidence_role": "evidence_review_report"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv18-knowledge-opc-productization/browser-network-log.json",
+      "kind": "json",
+      "sha256": "07c8f23918079c982d6a715d8c95cacde2d437fcf9a17827bc0a5047d7b522bb",
+      "evidence_role": "browser_network_log"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv18-knowledge-opc-productization/bff-route-log.json",
+      "kind": "json",
+      "sha256": "b1094bc11370d228d329332391da0b92268459f551706bbfe39c11adf5204a31",
+      "evidence_role": "bff_route_log"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv18-knowledge-opc-productization/claim-to-evidence-matrix.json",
+      "kind": "json",
+      "sha256": "8e6c6c349c7df9c4ccd1692e19727636aea67a29d9d931d1df298111d010c092",
+      "evidence_role": "claim_to_evidence_matrix"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv18-knowledge-opc-productization/no-false-green-scan.txt",
+      "kind": "text",
+      "sha256": "6ebb3df451c9512ebe6c52ad659334a4ecdada1f86c39e06d7077af815d4a948",
+      "evidence_role": "no_false_green_scan"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv18-knowledge-opc-productization/redaction-scan.txt",
+      "kind": "text",
+      "sha256": "1aa0f834b8b4f2abbe075b3c956e690db17cd5ecd7f6646b12b4520cb9bd82dd",
+      "evidence_role": "redaction_scan"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv18-knowledge-opc-productization/prd-spec-review.md",
+      "kind": "markdown",
+      "sha256": "7a6d9ac7767a8206fcb7dbbb4e81e27cb39f5d8c49695dc9343e5d861b1b2c41",
+      "evidence_role": "prd_spec_review"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv18-knowledge-opc-productization/target-architecture-review.md",
+      "kind": "markdown",
+      "sha256": "86eb2f2604177e9cd667c0ee585619739dca2fb575b11687c8a0608d5ff678e0",
+      "evidence_role": "target_architecture_review"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv18-knowledge-opc-productization/platform-generality-review.md",
+      "kind": "markdown",
+      "sha256": "5122b9e5dea321d7d9a2f005e74661a92a243dff1740973cf731e714fb1e82d4",
+      "evidence_role": "platform_generality_review"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv18-knowledge-opc-productization/audit-closure.md",
+      "kind": "markdown",
+      "sha256": "51fbb7aeb2ad4853afce112e2f0a31838cce31bc9657b5694620a6fe8e060526",
+      "evidence_role": "audit_closure"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv18-knowledge-opc-productization/knowledge-console-screenshot.png",
+      "kind": "screenshot",
+      "sha256": "3b154cdde6c2661fcd45720d2b81da6cb2f0d741f12ae08659f6adf38982ad1e",
+      "evidence_role": "knowledge_console_screenshot"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv18-knowledge-opc-productization/query-and-citation-screenshot.png",
+      "kind": "screenshot",
+      "sha256": "a54b8da5b4aba4945059098d0179e00849aacd04d996752c261b74777bd31673",
+      "evidence_role": "query_and_citation_screenshot"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv18-knowledge-opc-productization/evidence-review-screenshot.png",
+      "kind": "screenshot",
+      "sha256": "8e9c96c68929694c44dd68f115aa5ea39911eba79ae32d4ac67c0efc93f6562c",
+      "evidence_role": "evidence_review_screenshot"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv18-knowledge-opc-productization/knowledge-opc-full-page.png",
+      "kind": "screenshot",
+      "sha256": "cbdbd15c3659ec965b29daff4853b84bb95c91c62931eda8c679467aba94c6e7",
+      "evidence_role": "knowledge_opc_full_page"
+    }
+  ],
+  "claim_boundary": {
+    "allowed_claim": "PV18 complete: Knowledge OPC productization implementation ready for bounded review.",
+    "forbidden_claims": [
+      "production ready",
+      "Xpert parity complete",
+      "product-grade frontend complete",
+      "complete Workflow Studio ready",
+      "Agent executor ready"
+    ]
+  },
+  "created_at": "2026-06-27T00:00:00Z"
+}

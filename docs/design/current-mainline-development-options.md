@@ -49,13 +49,9 @@ The restored smoke covered API runs, CLI headless, pack registry, Meeting pack a
 
 The main project gap is no longer V3.0 Core completion. V3.0 is documented as final closeout, with Meeting / Knowledge reference pack validation passed.
 
-The active gap has now been resolved for this stage: **Path A - Product Closed Loop** was selected, implemented and accepted as PV17 bounded review evidence. PV17 turns the V12-V15/PV16 bounded review slices into one mainline product path without overclaiming production, Xpert parity or Agent executor readiness.
+The active gap for the previous stage has been resolved: **Path A - Product Closed Loop** was selected, implemented and accepted as PV17 bounded review evidence. PV17 turns the V12-V15/PV16 bounded review slices into one mainline product path without overclaiming production, Xpert parity or Agent executor readiness.
 
-The alternative paths remain backlog options:
-
-- external app / SDK contract;
-- business pack productization;
-- production governance hardening.
+The selected next stage after PV17 was **Path C - Business Pack Productization**, with **Knowledge** as the first business domain. PV18 has now implemented and accepted a bounded Knowledge OPC productization review path with real `data_service_mcp` evidence. Path B external app contract, Path D production governance hardening, PV19 business pack productization and complete Workflow Studio / Agent executor work remain backlog options and must not be mixed into a new stage without a dedicated plan.
 
 `TASKS.md` has been rewritten to make this distinction explicit.
 
@@ -110,6 +106,8 @@ Best when:
 
 Goal: turn existing SDK / BFF / template / reference app assets into a coherent external app integration stage.
 
+Status: backlog option. Not selected for PV18.
+
 Implementation outline:
 
 - Freeze a protocol version and method/event/error registry subset for external apps.
@@ -134,6 +132,26 @@ Best when:
 ### Path C - Business Pack Productization
 
 Goal: choose one business domain and move it from reference/stub/planning status toward a productized workflow.
+
+Status: implemented and accepted for PV18 bounded review with Knowledge as the first domain. Canonical docs and evidence:
+
+- `docs/design/V12-V15.x/pv18_knowledge_opc_productization_prd.md`
+- `docs/design/V12-V15.x/pv18_knowledge_opc_productization_target_architecture.md`
+- `docs/design/V12-V15.x/pv18_knowledge_opc_productization_bff_dto_contract.md`
+- `docs/design/V12-V15.x/pv18_knowledge_opc_productization_acceptance_runner_spec.md`
+- `docs/design/V12-V15.x/pv18_knowledge_opc_productization_implementation_task_matrix.md`
+- `docs/design/V12-V15.x/pv18_knowledge_opc_productization_development_and_acceptance_plan.md`
+- `docs/design/V12-V15.x/pv18_knowledge_opc_productization_milestone_roadmap.md`
+- `docs/design/V12-V15.x/pv18_knowledge_opc_productization_acceptance_gate.md`
+- `docs/design/V12-V15.x/pv18_knowledge_opc_productization_current_gap_analysis.md`
+- `docs/design/V12-V15.x/pv18_knowledge_opc_productization_implementation_readiness_audit.md`
+- `docs/design/V12-V15.x/pv18_knowledge_opc_productization_gap_analysis.drawio`
+- `docs/design/V12-V15.x/schemas/pv18_knowledge_opc_acceptance_data.schema.json`
+- `docs/design/V12-V15.x/schemas/pv18_knowledge_opc_artifact_manifest.schema.json`
+- `docs/design/V12-V15.x/schemas/pv18_knowledge_opc_dto_snapshot.schema.json`
+- `docs/design/V12-V15.x/evidence/pv18-knowledge-opc-productization/acceptance-data.json`
+- `docs/design/V12-V15.x/reports/pv18_knowledge_opc_productization_acceptance_report.json`
+- `docs/design/V12-V15.x/reports/pv18_stage_execution_and_audit_closure.md`
 
 Recommended order:
 
@@ -166,6 +184,8 @@ Best when:
 
 Goal: close the platform gaps needed before any production-readiness discussion.
 
+Status: backlog option. Not selected for PV18.
+
 Implementation outline:
 
 - Tenant isolation and auth policy hardening.
@@ -191,8 +211,8 @@ Best when:
 1. Restore local validation environment.
 2. Run lightweight smoke for API, CLI, Pack Registry, Meeting assembly and Knowledge assembly.
 3. Treat PV17 as complete for bounded review only.
-4. Select the next stage from Path B, Path C or Path D with a new PRD / architecture / acceptance plan.
-5. Keep unrelated backlogs out of the selected next stage unless explicitly replanned.
+4. Treat PV18 Knowledge OPC as complete for bounded review only.
+5. Select the next stage explicitly from Path B external app contract, Path D production governance hardening, PV19 business pack productization or complete Workflow Studio / Agent executor work. Create a new PRD, architecture plan, acceptance gate and audit closure before implementation.
 
 ## 5. No-Go
 

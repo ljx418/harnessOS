@@ -1,0 +1,289 @@
+<mxfile host="Electron" agent="Codex" pages="7">
+  <diagram id="pv18-overview" name="总览">
+    <mxGraphModel dx="1800" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t1" value="PV18 Knowledge OPC 产品化目标" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#111827;fontColor=#ffffff;fontSize=28;fontStyle=1;strokeColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="60" y="50" width="1680" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="o1" value="目标体验&lt;br&gt;用户打开 ?studio=pv18-knowledge-opc&lt;br&gt;Knowledge workspace setup -&gt; source import -&gt; build status -&gt; query answer -&gt; citation review -&gt; quality feedback -&gt; correction plan -&gt; evidence review" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#2563eb;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="80" y="170" width="650" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="o2" value="当前已具备&lt;br&gt;packs/knowledge active reference pack&lt;br&gt;KnowledgeWorkflow ingest/search&lt;br&gt;KnowledgeMcpWorkflowRunner lifecycle&lt;br&gt;ConnectorExecutionRuntime&lt;br&gt;ArtifactRegistry / TraceStore&lt;br&gt;PV17 bounded product closed loop evidence" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#16a34a;fontSize=17;" vertex="1" parent="1">
+          <mxGeometry x="780" y="170" width="470" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="o3" value="PV18 待产品化&lt;br&gt;Knowledge Console&lt;br&gt;/bff/pv18/knowledge/* DTO contract&lt;br&gt;schema drafts + acceptance runner spec&lt;br&gt;source/build/query/citation/quality/correction UI&lt;br&gt;PV18 evidence package" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontSize=17;" vertex="1" parent="1">
+          <mxGeometry x="1290" y="170" width="390" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="o4" value="No-Go&lt;br&gt;不声明生产可用&lt;br&gt;不声明 Knowledge 产品化已完成&lt;br&gt;不声明完整 Workflow Studio&lt;br&gt;不声明 Agent executor ready&lt;br&gt;不把 reference pack 当最终商业产品&lt;br&gt;不为 Knowledge 定制通用平台内核" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fee2e2;strokeColor=#dc2626;fontSize=17;" vertex="1" parent="1">
+          <mxGeometry x="80" y="500" width="650" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="o5" value="文档阶段出门声明&lt;br&gt;PV18 Knowledge OPC productization development plan ready for implementation review." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3f4f6;strokeColor=#6b7280;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="780" y="540" width="900" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="legend1" value="颜色图例：绿色=已实现/可复用；蓝色=待新增；黄色=需修改/产品化；红色=No-Go/阻断；灰色=文档或只读证据" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f9fafb;strokeColor=#9ca3af;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="80" y="980" width="1600" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="pv18-diff" name="当前架构与目标差异">
+    <mxGraphModel dx="1800" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t2" value="当前架构与目标架构差异" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#111827;fontColor=#ffffff;fontSize=28;fontStyle=1;strokeColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="60" y="50" width="1680" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="c1" value="当前：Reference Pack&lt;br&gt;packs/knowledge/manifest.json&lt;br&gt;packs/knowledge/workflow.py&lt;br&gt;workflow handles ingest/search&lt;br&gt;artifacts registered after connector result" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#16a34a;fontSize=17;" vertex="1" parent="1">
+          <mxGeometry x="90" y="190" width="390" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="c2" value="当前：Gateway/MCP Runner&lt;br&gt;apps/gateway/knowledge_mcp_workflow.py&lt;br&gt;ConnectorExecutionRuntime&lt;br&gt;data_service_mcp contract&lt;br&gt;ArtifactRegistry / TraceStore" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#16a34a;fontSize=17;" vertex="1" parent="1">
+          <mxGeometry x="540" y="190" width="420" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="c3" value="差异：产品化入口缺失&lt;br&gt;没有 Knowledge Console&lt;br&gt;没有 PV18 Knowledge BFF DTO&lt;br&gt;没有 source/build/query/citation/quality/correction 连续 UI&lt;br&gt;没有 PV18 runner/evidence package" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontSize=17;" vertex="1" parent="1">
+          <mxGeometry x="1010" y="190" width="590" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="c4" value="目标：Knowledge OPC Product Flow&lt;br&gt;入口：?studio=pv18-knowledge-opc&lt;br&gt;Browser Knowledge view + WorkflowConsoleClient methods&lt;br&gt;planned /bff/pv18/knowledge/* DTO families&lt;br&gt;GatewayService -&gt; KnowledgeMcpWorkflowRunner&lt;br&gt;schema validation / artifact lineage / trace refs / claim matrix&lt;br&gt;平台通用性审查：无 Knowledge-only core 定制" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontSize=17;" vertex="1" parent="1">
+          <mxGeometry x="360" y="610" width="850" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="c1" target="c4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2563eb;endArrow=block;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="c2" target="c4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2563eb;endArrow=block;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="c3" target="c4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#d97706;endArrow=block;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="pv18-code-entities" name="代码实体与分层交互">
+    <mxGraphModel dx="1945" dy="989" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#111827;fontColor=#ffffff;fontSize=28;fontStyle=1;strokeColor=#111827;" value="具体代码实现实体与交互关系" vertex="1">
+          <mxGeometry height="70" width="1680" x="60" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="l1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontSize=16;" value="Browser&lt;br&gt;App.tsx route switch&lt;br&gt;?studio=pv18-knowledge-opc&lt;br&gt;planned KnowledgeOpcView" vertex="1">
+          <mxGeometry height="170" width="250" x="80" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="l2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontSize=16;" value="Client&lt;br&gt;WorkflowConsoleClient.ts&lt;br&gt;planned Knowledge DTO methods" vertex="1">
+          <mxGeometry height="170" width="260" x="390" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="l3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontSize=16;" value="BFF&lt;br&gt;apps/api/routers/bff.py&lt;br&gt;planned /bff/pv18/knowledge/*&lt;br&gt;State/Source/Build/Query/Quality/Evidence DTO" vertex="1">
+          <mxGeometry height="170" width="280" x="710" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="l4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#16a34a;fontSize=16;" value="Gateway&lt;br&gt;apps/gateway/service.py&lt;br&gt;PackRegistry&lt;br&gt;connector health" vertex="1">
+          <mxGeometry height="170" width="280" x="1050" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="l5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#16a34a;fontSize=16;" value="Knowledge Pack&lt;br&gt;packs/knowledge/manifest.json&lt;br&gt;packs/knowledge/workflow.py" vertex="1">
+          <mxGeometry height="170" width="290" x="1390" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="l6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#16a34a;fontSize=16;" value="MCP Runner&lt;br&gt;knowledge_mcp_workflow.py&lt;br&gt;workspace/source/build/query/quality/correction" vertex="1">
+          <mxGeometry height="190" width="360" x="1355" y="505" as="geometry" />
+        </mxCell>
+        <mxCell id="l7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#16a34a;fontSize=16;" value="Connector Runtime&lt;br&gt;connector_execution.py&lt;br&gt;data_service_mcp&lt;br&gt;approval/job/artifact boundary" vertex="1">
+          <mxGeometry height="190" width="360" x="930" y="505" as="geometry" />
+        </mxCell>
+        <mxCell id="l8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3f4f6;strokeColor=#6b7280;fontSize=16;" value="Evidence&lt;br&gt;artifacts.py&lt;br&gt;traces.py&lt;br&gt;PV18 evidence package / runner" vertex="1">
+          <mxGeometry height="160" width="360" x="720" y="840" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" edge="1" parent="1" source="l1" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#2563eb;endArrow=block;" target="l2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" edge="1" parent="1" source="l2" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#2563eb;endArrow=block;" target="l3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" edge="1" parent="1" source="l3" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#2563eb;endArrow=block;" target="l4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a4" edge="1" parent="1" source="l4" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#16a34a;endArrow=block;" target="l5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a5" edge="1" parent="1" source="l5" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#16a34a;endArrow=block;" target="l6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a6" edge="1" parent="1" source="l6" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#16a34a;endArrow=block;" target="l7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a7" edge="1" parent="1" source="l7" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#6b7280;endArrow=block;" target="l8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="pv18-business-flow" name="Knowledge OPC 业务流程">
+    <mxGraphModel dx="1740" dy="885" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#111827;fontColor=#ffffff;fontSize=28;fontStyle=1;strokeColor=#111827;" value="Knowledge OPC 用户体验流程" vertex="1">
+          <mxGeometry height="70" width="1680" x="60" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="b1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontSize=16;" value="1 创建/选择 Knowledge Workspace&lt;br&gt;显示 scope、connector health、data boundary" vertex="1">
+          <mxGeometry height="140" width="250" x="80" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="b2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontSize=16;" value="2 导入 Source / Document&lt;br&gt;产生 source_reference、note、artifact id" vertex="1">
+          <mxGeometry height="140" width="250" x="390" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="b3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontSize=16;" value="3 Build Status&lt;br&gt;started / running / completed / failed&lt;br&gt;失败显示下一步" vertex="1">
+          <mxGeometry height="160" width="250" x="700" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="b4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontSize=16;" value="4 Query Answer&lt;br&gt;answer、brief、citation bundle、source refs" vertex="1">
+          <mxGeometry height="140" width="250" x="1010" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="b5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontSize=16;" value="5 Citation Review&lt;br&gt;coverage、missing citation、low signal source" vertex="1">
+          <mxGeometry height="140" width="250" x="1320" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="b6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontSize=16;" value="6 Quality Feedback&lt;br&gt;quality report、risk、correction rules" vertex="1">
+          <mxGeometry height="150" width="280" x="1305" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="b7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fee2e2;strokeColor=#dc2626;fontSize=16;" value="7 Correction Plan&lt;br&gt;人工审查建议&lt;br&gt;不得自动改写知识库" vertex="1">
+          <mxGeometry height="150" width="280" x="760" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="b8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3f4f6;strokeColor=#6b7280;fontSize=16;" value="8 Evidence Review&lt;br&gt;artifact lineage、trace refs、redaction、claim-to-evidence" vertex="1">
+          <mxGeometry height="150" width="300" x="1130" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="be1" edge="1" parent="1" source="b1" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#2563eb;endArrow=block;" target="b2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="be2" edge="1" parent="1" source="b2" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#2563eb;endArrow=block;" target="b3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="be3" edge="1" parent="1" source="b3" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#2563eb;endArrow=block;" target="b4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="be4" edge="1" parent="1" source="b4" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#2563eb;endArrow=block;" target="b5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="be5" edge="1" parent="1" source="b5" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#d97706;endArrow=block;" target="b6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="be6" edge="1" parent="1" source="b6" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#d97706;endArrow=block;" target="b7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="be7" edge="1" parent="1" source="b7" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#6b7280;endArrow=block;" target="b8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="pv18-plan" name="开发及验收计划">
+    <mxGraphModel dx="1800" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t5" value="PV18 开发及验收计划" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#111827;fontColor=#ffffff;fontSize=28;fontStyle=1;strokeColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="60" y="50" width="1680" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="p1" value="PV18-R0/R1 文档与合约准备&lt;br&gt;PRD / 架构 / DTO contract / runner spec / schemas / task matrix / drawio / gate&lt;br&gt;验收：文件存在、页数、schema parse、No False Green" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3f4f6;strokeColor=#6b7280;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="80" y="190" width="360" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="p2" value="PV18-S1 Knowledge Console&lt;br&gt;workspace、scope、health、source/build/query 概览&lt;br&gt;验收：screenshot + DTO + route log" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="520" y="190" width="360" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="p3" value="PV18-S2 Source Ingest&lt;br&gt;source_reference、note、artifact lineage、build status&lt;br&gt;验收：ingest report + negative fixtures" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="960" y="190" width="360" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="p4" value="PV18-S3 Query/Citation&lt;br&gt;answer、brief、citation bundle、coverage&lt;br&gt;验收：query report + citation refs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="80" y="470" width="360" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="p5" value="PV18-S4 Quality/Correction&lt;br&gt;quality feedback、rules、correction plan&lt;br&gt;验收：quality report + no auto publish" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="520" y="470" width="360" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="p6" value="PV18-S5 Evidence Review&lt;br&gt;lineage、trace、route boundary、redaction、claim matrix&lt;br&gt;验收：evidence report + denylist + platform generality review" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3f4f6;strokeColor=#6b7280;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="960" y="470" width="360" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="p7" value="PV18-SA Aggregate&lt;br&gt;acceptance-data、artifact-manifest、audit closure&lt;br&gt;验收：bounded review allowed claim only" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#16a34a;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="520" y="760" width="430" height="170" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="pv18-milestone" name="项目里程碑">
+    <mxGraphModel dx="1740" dy="885" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#111827;fontColor=#ffffff;fontSize=28;fontStyle=1;strokeColor=#111827;" value="PV18 项目里程碑与依赖" vertex="1">
+          <mxGeometry height="70" width="1680" x="60" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="m1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3f4f6;strokeColor=#6b7280;fontSize=16;" value="R0 Readiness&lt;br&gt;文档验收&lt;br&gt;不进入代码实现" vertex="1">
+          <mxGeometry height="130" width="210" x="90" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="m2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontSize=16;" value="E0 Environment&lt;br&gt;API/CLI/Pack smoke&lt;br&gt;Knowledge assembly" vertex="1">
+          <mxGeometry height="130" width="210" x="360" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="m3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontSize=16;" value="S1 Console&lt;br&gt;Knowledge 上下文可见" vertex="1">
+          <mxGeometry height="130" width="210" x="630" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="m4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontSize=16;" value="S2 Ingest&lt;br&gt;source + artifacts" vertex="1">
+          <mxGeometry height="130" width="210" x="900" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="m5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontSize=16;" value="S3 Query&lt;br&gt;answer + citations" vertex="1">
+          <mxGeometry height="130" width="210" x="1170" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="m6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontSize=16;" value="S4 Quality&lt;br&gt;feedback + correction plan" vertex="1">
+          <mxGeometry height="130" width="210" x="1440" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="m7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3f4f6;strokeColor=#6b7280;fontSize=16;" value="S5 Evidence&lt;br&gt;lineage + trace + claim matrix" vertex="1">
+          <mxGeometry height="130" width="260" x="1415" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="m8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#16a34a;fontSize=16;" value="SA Aggregate&lt;br&gt;bounded review only" vertex="1">
+          <mxGeometry height="130" width="260" x="960" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="me1" edge="1" parent="1" source="m1" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#6b7280;endArrow=block;" target="m2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="me2" edge="1" parent="1" source="m2" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#6b7280;endArrow=block;" target="m3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="me3" edge="1" parent="1" source="m3" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#2563eb;endArrow=block;" target="m4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="me4" edge="1" parent="1" source="m4" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#2563eb;endArrow=block;" target="m5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="me5" edge="1" parent="1" source="m5" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#2563eb;endArrow=block;" target="m6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="me6" edge="1" parent="1" source="m6" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#d97706;endArrow=block;" target="m7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="me7" edge="1" parent="1" source="m7" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#16a34a;endArrow=block;" target="m8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="pv18-gate" name="验收门槛与出门条件">
+    <mxGraphModel dx="1800" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t7" value="验收门槛、出门条件与 No-Go" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#111827;fontColor=#ffffff;fontSize=28;fontStyle=1;strokeColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="60" y="50" width="1680" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="g1" value="文档 Gate&lt;br&gt;PV18 Markdown / drawio / schemas 存在&lt;br&gt;drawio 页数不超过 8&lt;br&gt;每份文档有用途/对象/边界&lt;br&gt;代码实体路径真实可追踪&lt;br&gt;planned contract 不等于实现证据" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3f4f6;strokeColor=#6b7280;fontSize=17;" vertex="1" parent="1">
+          <mxGeometry x="90" y="180" width="420" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="g2" value="用户体验 Gate&lt;br&gt;能看到 workspace/source/build/query/citation/quality/evidence&lt;br&gt;失败、空状态、审批、citation missing 有明确下一步" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontSize=17;" vertex="1" parent="1">
+          <mxGeometry x="560" y="180" width="520" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="g3" value="证据 Gate&lt;br&gt;browser screenshot/action log&lt;br&gt;BFF route log&lt;br&gt;DTO snapshots + schema validation&lt;br&gt;artifact lineage&lt;br&gt;trace refs&lt;br&gt;negative fixtures&lt;br&gt;platform generality review&lt;br&gt;claim-to-evidence&lt;br&gt;redaction + No False Green" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#16a34a;fontSize=17;" vertex="1" parent="1">
+          <mxGeometry x="1130" y="180" width="470" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="g4" value="阻断条件&lt;br&gt;browser 直连 /v1/rpc 或 connector runtime&lt;br&gt;无 citation 仍显示已验证答案&lt;br&gt;correction plan 自动改写知识库&lt;br&gt;raw secret/provider/artifact 泄漏&lt;br&gt;Knowledge-only 平台内核定制&lt;br&gt;任何 forbidden positive claim" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fee2e2;strokeColor=#dc2626;fontSize=17;" vertex="1" parent="1">
+          <mxGeometry x="90" y="570" width="650" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="g5" value="文档阶段出门&lt;br&gt;PV18 Knowledge OPC productization development plan ready for implementation review.&lt;br&gt;&lt;br&gt;实现阶段未来出门&lt;br&gt;只能由 real-data evidence package、schema validation 和 acceptance runner 定义 bounded claim；planned contract 不能当作 PASS 证据。" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3f4f6;strokeColor=#6b7280;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="820" y="610" width="780" height="210" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

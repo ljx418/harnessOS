@@ -1,0 +1,109 @@
+{
+  "schema_version": "pv18.knowledge_opc.v1",
+  "status": "PASS",
+  "claims": [
+    {
+      "claim_id": "pv18-bff-boundary",
+      "claim": "Knowledge OPC browser flow uses /bff/pv18/knowledge domain facade.",
+      "evidence_refs": [
+        "/bff/pv18/knowledge/state"
+      ],
+      "status": "SUPPORTED"
+    },
+    {
+      "claim_id": "pv18-citation-evidence",
+      "claim": "Knowledge answer must be reviewed with citation and artifact evidence.",
+      "evidence_refs": [
+        "art_98d15351e8fc",
+        "src_0b2d94a28d4cde2b"
+      ],
+      "status": "SUPPORTED"
+    },
+    {
+      "claim_id": "pv18-platform-generality",
+      "claim": "Knowledge-specific behavior stays in pack/domain BFF/view/runner boundary.",
+      "evidence_refs": [
+        "platform-generality-review.md"
+      ],
+      "status": "SUPPORTED"
+    }
+  ],
+  "route_boundary": {
+    "allowed_prefix": "/bff/pv18/knowledge",
+    "browser_denylist": [
+      "/v1/rpc",
+      "/internal/runtime",
+      "/runtime/store",
+      "/api/runtime",
+      "/debug/runtime",
+      "data_service_mcp/internal"
+    ],
+    "status": "specified"
+  },
+  "artifact_lineage": {
+    "artifact_refs": [
+      {
+        "artifact_ref": "art_98d15351e8fc",
+        "kind": "source_reference",
+        "name": "HarnessOS PV18 E2E 复核资料"
+      },
+      {
+        "type": "source",
+        "source_id": "src_0b2d94a28d4cde2b",
+        "artifact_ref": "src_0b2d94a28d4cde2b"
+      }
+    ],
+    "source_count": 1
+  },
+  "trace_timeline": {
+    "trace_refs": [
+      {
+        "trace_id": "pv18:trace:build:pv18-build-4d022597",
+        "event_type": "knowledge.build.failed"
+      },
+      {
+        "trace_id": "pv18:trace:query:pv18-query-b314c030",
+        "event_type": "knowledge.query.answered"
+      },
+      {
+        "trace_id": "pv18:trace:quality:pv18-quality-4588eb62",
+        "event_type": "knowledge.quality.pending_review"
+      }
+    ]
+  },
+  "redaction": {
+    "status": "redacted",
+    "provider_payload_allowed": false,
+    "artifact_content_allowed": false
+  },
+  "platform_generality": {
+    "status": "PASS",
+    "knowledge_only_platform_changes": [],
+    "generic_reuse_checks": [
+      "BFF domain facade only",
+      "GatewayService core unchanged",
+      "connector runtime reused"
+    ]
+  },
+  "quality_ref_count": 1,
+  "correction_ref_count": 1,
+  "missing_evidence": [],
+  "allowed_claim": "PV18 complete: Knowledge OPC productization implementation ready for bounded review.",
+  "audit_refs": [
+    {
+      "audit_ref_id": "pv18:audit:knowledge.evidence.summary:default||:knowledge:local:demo:default",
+      "operation": "knowledge.evidence.summary",
+      "scope": {
+        "app_id": "default",
+        "project_id": null,
+        "workspace_id": null
+      },
+      "entity_id": "knowledge:local:demo:default",
+      "created_at": "2026-06-26T20:15:47.872533Z",
+      "redaction_status": "redacted"
+    }
+  ],
+  "redaction_status": "redacted",
+  "screenshot": "evidence-review-screenshot.png",
+  "created_at": "2026-06-27T00:00:00Z"
+}

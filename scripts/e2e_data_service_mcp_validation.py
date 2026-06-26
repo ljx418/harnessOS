@@ -7,6 +7,7 @@ import json
 import os
 import sys
 from pathlib import Path
+from uuid import uuid4
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
@@ -19,7 +20,7 @@ from apps.gateway.service import GatewayService
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run Data Service MCP external Harness E2E validation.")
-    parser.add_argument("--name", default="HarnessOS Data Service MCP Acceptance")
+    parser.add_argument("--name", default=None)
     parser.add_argument("--query", default="HarnessOS external MCP acceptance")
     parser.add_argument("--text-title", default="HarnessOS Acceptance Note")
     parser.add_argument(
@@ -39,8 +40,9 @@ def main() -> int:
 
     service = GatewayService(GatewayRuntimePool(runtime_backend="simple"))
     runner = KnowledgeMcpWorkflowRunner(service.connector_execution_runtime)
+    workspace_name = args.name or f"HarnessOS Data Service MCP Acceptance {uuid4().hex[:8]}"
     result = runner.run_acceptance(
-        name=args.name,
+        name=workspace_name,
         query=args.query,
         texts=[{"title": args.text_title, "content": args.text, "metadata": {"kind": "acceptance"}}],
         poll_interval=args.poll_interval,

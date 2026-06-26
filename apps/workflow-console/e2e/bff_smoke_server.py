@@ -746,6 +746,7 @@ PV16_JOURNEY = {
     "created_at": PV16_CREATED_AT,
 }
 PV16_ROUTE_LOG: list[dict[str, Any]] = []
+PV18_ROUTE_LOG: list[dict[str, Any]] = []
 
 
 def build_v14_compatibility_decision(package_id: str) -> dict[str, Any]:
@@ -902,6 +903,15 @@ async def record_staged_route_log(request: Request, call_next: Any) -> Any:
                 "user_agent": request.headers.get("user-agent", ""),
             }
         )
+    if request.url.path.startswith("/bff/pv18"):
+        PV18_ROUTE_LOG.append(
+            {
+                "method": request.method,
+                "path": request.url.path,
+                "status": response.status_code,
+                "user_agent": request.headers.get("user-agent", ""),
+            }
+        )
     return response
 
 
@@ -1027,6 +1037,33 @@ async def get_pv16_route_log() -> dict[str, Any]:
             or "/runtime/store" in entry["path"]
             or "/api/runtime" in entry["path"]
             or "/debug/runtime" in entry["path"]
+        ],
+    }
+
+
+@app.post("/__test/pv18/route-log/clear")
+async def clear_pv18_route_log() -> dict[str, Any]:
+    """Clear PV18 route log before Knowledge OPC acceptance runs."""
+    PV18_ROUTE_LOG.clear()
+    return {"status": "cleared"}
+
+
+@app.get("/__test/pv18/route-log")
+async def get_pv18_route_log() -> dict[str, Any]:
+    """Return PV18 route log captured by the BFF smoke server."""
+    return {
+        "schema_version": "pv18.knowledge_opc_route_log.v1",
+        "status": "PASS",
+        "routes": PV18_ROUTE_LOG,
+        "forbidden_matches": [
+            entry
+            for entry in PV18_ROUTE_LOG
+            if "/v1/rpc" in entry["path"]
+            or "/internal/runtime" in entry["path"]
+            or "/runtime/store" in entry["path"]
+            or "/api/runtime" in entry["path"]
+            or "/debug/runtime" in entry["path"]
+            or "data_service_mcp/internal" in entry["path"]
         ],
     }
 

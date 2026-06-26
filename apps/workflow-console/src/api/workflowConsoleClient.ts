@@ -31,6 +31,13 @@ import type {
   PV17StudioWorkflowDTO,
   PV17SystemHealthDTO,
   PV17WorkflowPatchResultDTO,
+  PV18BuildStatusDTO,
+  PV18CorrectionPlanDTO,
+  PV18EvidenceSummaryDTO,
+  PV18KnowledgeStateDTO,
+  PV18QualityFeedbackDTO,
+  PV18QueryResultDTO,
+  PV18KnowledgeSourceDTO,
   PublishVersionResult,
   QualitySummary,
   WorkflowPatchDiff,
@@ -45,7 +52,10 @@ import type {
 } from "./types.js";
 
 export class WorkflowConsoleClient {
-  constructor(private readonly basePath = "/bff") {}
+  constructor(
+    private readonly basePath = "/bff",
+    private readonly options: { defaultScope?: Partial<Record<"app_id" | "project_id" | "workspace_id", string>> } = {},
+  ) {}
 
   getPV17SystemHealth(): Promise<PV17SystemHealthDTO> {
     return this.get<PV17SystemHealthDTO>(this.pv17Path("/pv17/system/health"));
@@ -116,12 +126,53 @@ export class WorkflowConsoleClient {
     return this.get<PV17EvidenceSummaryDTO>(this.pv17Path(`/pv17/evidence/instances/${encodeURIComponent(instanceId)}/summary`));
   }
 
+  getPV18KnowledgeState(): Promise<PV18KnowledgeStateDTO> {
+    return this.get<PV18KnowledgeStateDTO>(this.pv18Path("/pv18/knowledge/state"));
+  }
+
+  upsertPV18KnowledgeWorkspace(payload: { workspace_id?: string; display_name?: string; owner?: string }): Promise<{ status: string; workspace: PV18KnowledgeStateDTO["workspace"] }> {
+    return this.post<{ status: string; workspace: PV18KnowledgeStateDTO["workspace"] }>(this.pv18Path("/pv18/knowledge/workspaces"), payload);
+  }
+
+  importPV18KnowledgeSource(payload: { title: string; content: string }): Promise<PV18KnowledgeSourceDTO & { schema_version: string; status: string }> {
+    return this.post<PV18KnowledgeSourceDTO & { schema_version: string; status: string }>(this.pv18Path("/pv18/knowledge/sources/import"), payload);
+  }
+
+  startPV18KnowledgeBuild(payload: { mode?: string } = {}): Promise<PV18BuildStatusDTO> {
+    return this.post<PV18BuildStatusDTO>(this.pv18Path("/pv18/knowledge/builds/start"), payload);
+  }
+
+  getPV18KnowledgeBuildStatus(buildId: string): Promise<PV18BuildStatusDTO> {
+    return this.get<PV18BuildStatusDTO>(this.pv18Path(`/pv18/knowledge/builds/${encodeURIComponent(buildId)}/status`));
+  }
+
+  queryPV18Knowledge(payload: { query: string }): Promise<PV18QueryResultDTO> {
+    return this.post<PV18QueryResultDTO>(this.pv18Path("/pv18/knowledge/query"), payload);
+  }
+
+  createPV18QualityFeedback(payload: { issues?: unknown[]; low_signal_sources?: unknown[] }): Promise<PV18QualityFeedbackDTO> {
+    return this.post<PV18QualityFeedbackDTO>(this.pv18Path("/pv18/knowledge/quality-feedback"), payload);
+  }
+
+  createPV18CorrectionPlan(payload: { rules?: unknown[] }): Promise<PV18CorrectionPlanDTO> {
+    return this.post<PV18CorrectionPlanDTO>(this.pv18Path("/pv18/knowledge/correction-plan"), payload);
+  }
+
+  getPV18EvidenceSummary(): Promise<PV18EvidenceSummaryDTO> {
+    return this.get<PV18EvidenceSummaryDTO>(this.pv18Path("/pv18/knowledge/evidence/summary"));
+  }
+
   private pv17Path(path: string): string {
-    const scope = this.pv17ScopeQuery();
+    const scope = this.scopeQuery();
     return `${path}${path.includes("?") ? "&" : "?"}${scope}`;
   }
 
-  private pv17ScopeQuery(): string {
+  private pv18Path(path: string): string {
+    const scope = this.scopeQuery();
+    return `${path}${path.includes("?") ? "&" : "?"}${scope}`;
+  }
+
+  private scopeQuery(): string {
     const params = typeof window === "undefined" ? null : new URLSearchParams(window.location.search);
     const appId = params?.get("app_id") || "reference_app";
     const projectId = params?.get("project_id") || "demo_a";
@@ -549,6 +600,7 @@ export class WorkflowConsoleClient {
     if (heartbeatInterval) {
       params.set("heartbeat_interval", heartbeatInterval);
     }
+    this.appendDefaultScopeParams(params);
     const url = `${this.basePath}/events/subscribe?${params.toString()}`;
     const source = new EventSource(url);
     const handleMessage = (message: MessageEvent<string>) => {
@@ -569,7 +621,7 @@ export class WorkflowConsoleClient {
   }
 
   private async get<T>(path: string): Promise<T> {
-    const response = await fetch(`${this.basePath}${path}`, {
+    const response = await fetch(`${this.basePath}${this.withDefaultScope(path)}`, {
       headers: { accept: "application/json" },
     });
     if (!response.ok) {
@@ -579,7 +631,7 @@ export class WorkflowConsoleClient {
   }
 
   private async post<T>(path: string, payload: Record<string, unknown>): Promise<T> {
-    const response = await fetch(`${this.basePath}${path}`, {
+    const response = await fetch(`${this.basePath}${this.withDefaultScope(path)}`, {
       method: "POST",
       headers: {
         accept: "application/json",
@@ -592,12 +644,51 @@ export class WorkflowConsoleClient {
     }
     return (await response.json()) as T;
   }
+
+  private withDefaultScope(path: string): string {
+    if (path.startsWith("/pv17/") || path.startsWith("/pv18/") || !this.options.defaultScope) {
+      return path;
+    }
+    const [pathname, rawQuery = ""] = path.split("?", 2);
+    const params = new URLSearchParams(rawQuery);
+    this.appendDefaultScopeParams(params);
+    const query = params.toString();
+    return query ? `${pathname}?${query}` : pathname;
+  }
+
+  private appendDefaultScopeParams(params: URLSearchParams): void {
+    if (!this.options.defaultScope) {
+      return;
+    }
+    for (const key of ["app_id", "project_id", "workspace_id"] as const) {
+      if (params.has(key)) {
+        continue;
+      }
+      const value = currentScopeValue(key, this.options.defaultScope[key]);
+      if (value) {
+        params.set(key, value);
+      }
+    }
+  }
 }
 
 const defaultBffBasePath =
   ((import.meta as unknown as { env?: Record<string, string | undefined> }).env?.VITE_BFF_BASE_URL || "").trim() || "/bff";
 
-export const workflowConsoleClient = new WorkflowConsoleClient(defaultBffBasePath);
+const frontendEnv = (import.meta as unknown as { env?: Record<string, string | undefined> }).env || {};
+
+export const workflowConsoleClient = new WorkflowConsoleClient(defaultBffBasePath, {
+  defaultScope: {
+    app_id: frontendEnv.VITE_DEFAULT_APP_ID || frontendEnv.VITE_HARNESSOS_DEFAULT_APP_ID || "reference_app",
+    project_id: frontendEnv.VITE_DEFAULT_PROJECT_ID || frontendEnv.VITE_HARNESSOS_DEFAULT_PROJECT_ID || "demo_a",
+    workspace_id: frontendEnv.VITE_DEFAULT_WORKSPACE_ID || frontendEnv.VITE_HARNESSOS_DEFAULT_WORKSPACE_ID || "local",
+  },
+});
+
+function currentScopeValue(key: "app_id" | "project_id" | "workspace_id", fallback: string | undefined): string {
+  const queryValue = typeof window === "undefined" ? "" : new URLSearchParams(window.location.search).get(key) || "";
+  return (queryValue || fallback || "").trim();
+}
 
 const EVENT_SOURCE_TYPES = [
   "workflow.instance.started",

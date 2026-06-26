@@ -12,6 +12,7 @@
 | V3.0 development plan | `docs/design/V3.0/v3_development_plan_multi_app_core.md` |
 | V12-V15/PV16 product evidence boundary | `docs/design/V12-V15.x/v12_to_v15_current_gap_analysis.md` |
 | PV17 selected product closed loop stage | `docs/design/V12-V15.x/pv17_product_closed_loop_development_and_acceptance_plan.md` |
+| PV18 selected Knowledge OPC productization stage | `docs/design/V12-V15.x/pv18_knowledge_opc_productization_development_and_acceptance_plan.md` |
 | ChatGPT / human project intro | `docs/present/harnessos-project-introduction/00_CHATGPT_CONTEXT_INDEX.md` |
 
 ## Current Status
@@ -26,6 +27,7 @@
 - [x] Knowledge reference pack: `packs/knowledge` validates data_service MCP lifecycle, artifact set, data boundary and connector replacement.
 - [x] V12-V15/PV16 bounded product evidence: browser workbench foundation, editable Studio pilot, governed extension ecosystem pilot, observability/deployment baseline and product-runtime hardening pilot have bounded review evidence.
 - [x] PV17 Product Closed Loop bounded review: formal `/bff/pv17/*` routes, Product Console / Mission Studio / confirm run / inspect / evidence browser path and acceptance runner evidence passed.
+- [x] PV18 Knowledge OPC bounded review implementation: Path C selected Knowledge as first business domain, then implemented `/bff/pv18/knowledge/*`, the browser Knowledge OPC workbench, real `data_service_mcp` acceptance, screenshots, evidence package and acceptance runner report for bounded review.
 
 ### Bounded / Limited Completion
 
@@ -35,6 +37,7 @@
 - [ ] Production deployment is not complete. V15/PV16 prove smoke / hardening evidence only.
 - [ ] PV17 is bounded review evidence only; it does not prove production readiness, complete Workflow Studio or Agent executor readiness.
 - [ ] Meeting and Knowledge are reference packs / validation samples, not final productized business apps.
+- [x] PV18 Knowledge OPC bounded review implementation has passed. It proves a bounded Knowledge OPC productization review path only; it does not prove production readiness, complete Workflow Studio, complete Agent executor or full commercial Knowledge productization.
 - [ ] Video Studio currently generates planning and lineage artifacts; it does not prove real rendering execution.
 - [ ] Interview and Investment remain stub / planned packs.
 - [x] Local Python environment restored for current smoke: `.venv` was rebuilt with Python 3.12, `pydantic_settings` and `pytest` import successfully, and the current lightweight smoke suite passed.
@@ -55,14 +58,16 @@
 
 ### P1 - Selected Product / Platform Stage
 
-The selected current stage is Path A, documented as PV17 Product Closed Loop.
+The completed selected stage was Path A, documented as PV17 Product Closed Loop. The newly selected current stage is Path C, documented as PV18 Knowledge OPC Productization.
 
 - [x] Path A: Product closed loop.
   Built a bounded user-facing Product Console / Studio / run-inspect-evidence loop with browser evidence, BFF-only DTOs and runtime-backed inspection.
 - [ ] Path B: Platform external app contract.
   Consolidate SDK, BFF templates, reference app, auth / capability token and method/event/error registry into a current mainline stage.
-- [ ] Path C: Business pack productization.
-  Promote one reference or stub domain into a productized app flow, with clear evidence boundaries and no Core/Gateway business bypass.
+- [x] Path C-R0: Knowledge OPC productization documentation.
+  Selected Knowledge as the first business domain and completed the document package needed for implementation review.
+- [x] Path C-S1..SA: Knowledge OPC productization implementation.
+  Promote `packs/knowledge` from reference pack baseline into a bounded, browser-reviewable OPC business flow with BFF DTOs, citation/quality/evidence gates, platform generality review and acceptance runner evidence. Knowledge OPC must validate the workflow platform without introducing Knowledge-only core/runtime/Gateway/App shell customization.
 - [ ] Path D: Production governance hardening.
   Focus on tenant isolation, credential lifecycle, audit retention, deployment runbooks, smoke automation and operational recovery.
 
@@ -96,7 +101,8 @@ The selected current stage is Path A, documented as PV17 Product Closed Loop.
 - Do not claim complete Workflow Studio ready.
 - Do not claim Agent executor ready.
 - Do not treat docs, screenshots, content images or presentation pages as runtime / BFF / DTO / browser E2E / production evidence.
+- Do not customize the generic workflow platform for Knowledge OPC; Knowledge-specific behavior must stay inside the pack/domain BFF/view/runner boundary or be abstracted as reusable platform capability.
 
 ## Current Default Next Step
 
-PV17 Product Closed Loop has passed bounded review acceptance. The next implementation must be selected as a new stage before code work starts. Current backlog options are Path B Platform External App Contract, Path C Business Pack Productization and Path D Production Governance Hardening. Do not mix them into the completed PV17 scope without a new PRD, architecture plan, acceptance gate and audit closure.
+PV17 Product Closed Loop has passed bounded review acceptance. PV18 Knowledge OPC Productization has also passed bounded review acceptance with real `data_service_mcp` evidence. The next stage should be selected explicitly from Path B external app contract, Path D production governance hardening, PV19 business pack productization or complete Workflow Studio / Agent executor work; do not mix these directions without a new PRD, architecture plan, acceptance gate and audit closure.

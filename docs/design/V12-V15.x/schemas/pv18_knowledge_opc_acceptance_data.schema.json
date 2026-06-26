@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "pv18_knowledge_opc_acceptance_data.schema.json",
+  "title": "PV18 Knowledge OPC Acceptance Data",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "stage_id",
+    "status",
+    "allowed_claim",
+    "scenario_results",
+    "route_boundary",
+    "platform_generality_review",
+    "claim_scan",
+    "redaction_scan",
+    "blocking_failures"
+  ],
+  "properties": {
+    "schema_version": { "const": "pv18.knowledge_opc_acceptance_data.v1" },
+    "stage_id": { "type": "string" },
+    "status": { "enum": ["PASS", "FAIL", "BLOCKED"] },
+    "allowed_claim": { "type": "string" },
+    "scenario_results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["case_id", "status", "user_visible_result"],
+        "properties": {
+          "case_id": { "type": "string" },
+          "stage_id": { "type": "string" },
+          "status": { "enum": ["PASS", "FAIL", "BLOCKED"] },
+          "user_visible_result": { "type": "string" },
+          "evidence_refs": { "type": "array", "items": { "type": "string" } },
+          "blocking_failure": { "type": "boolean" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "artifact_refs": { "type": "array", "items": { "type": "string" } },
+    "route_boundary": {
+      "type": "object",
+      "required": ["status", "allowed_prefixes", "forbidden_matches"],
+      "properties": {
+        "status": { "enum": ["PASS", "FAIL"] },
+        "allowed_prefixes": { "type": "array", "items": { "type": "string" } },
+        "forbidden_matches": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": true
+    },
+    "platform_generality_review": {
+      "type": "object",
+      "required": [
+        "status",
+        "knowledge_only_platform_changes",
+        "generic_reuse_checks"
+      ],
+      "properties": {
+        "status": { "enum": ["PASS", "FAIL"] },
+        "knowledge_only_platform_changes": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "generic_reuse_checks": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "review_artifact_ref": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "claim_scan": {
+      "type": "object",
+      "required": ["status", "matches"],
+      "properties": {
+        "status": { "enum": ["PASS", "FAIL"] },
+        "matches": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": true
+    },
+    "redaction_scan": {
+      "type": "object",
+      "required": ["status", "matches"],
+      "properties": {
+        "status": { "enum": ["PASS", "FAIL"] },
+        "matches": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": true
+    },
+    "blocking_failures": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": true
+}

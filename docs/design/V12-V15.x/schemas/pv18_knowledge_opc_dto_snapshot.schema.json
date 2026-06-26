@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "pv18_knowledge_opc_dto_snapshot.schema.json",
+  "title": "PV18 Knowledge OPC DTO Snapshot",
+  "type": "object",
+  "required": ["schema_version", "snapshot_id", "route", "method", "dto"],
+  "properties": {
+    "schema_version": { "const": "pv18.knowledge_opc_dto_snapshot.v1" },
+    "snapshot_id": { "type": "string" },
+    "route": { "type": "string", "pattern": "^/bff/pv18/knowledge/" },
+    "method": { "enum": ["GET", "POST"] },
+    "dto": {
+      "type": "object",
+      "required": ["schema_version", "redaction_status"],
+      "properties": {
+        "schema_version": { "type": "string", "pattern": "^pv18\\.knowledge_opc\\." },
+        "redaction_status": { "const": "redacted" }
+      },
+      "additionalProperties": true
+    },
+    "route_boundary": {
+      "type": "object",
+      "properties": {
+        "browser_allowed": { "type": "boolean" },
+        "direct_runtime_access": { "const": false }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

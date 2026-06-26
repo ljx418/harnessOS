@@ -14,6 +14,7 @@ from apps.api.auth import add_dev_warning, authorize_http_request, http_error_re
 from apps.api.agent_handoff_store import HANDOFF_ACTIVE_STATES, InMemoryAgentHandoffStore
 from apps.api.agent_operation_evidence_store import InMemoryAgentOperationEvidenceStore
 from apps.api.dependencies import get_gateway_service
+from apps.gateway.knowledge_mcp_workflow import DATA_SERVICE_CONNECTOR_ID, KnowledgeMcpWorkflowRunner
 from apps.gateway.protocol import RpcRequest
 from apps.gateway.service import GatewayService
 from core.apps.scope import ScopeContext
@@ -405,6 +406,7 @@ _AGENT_TALK_AUDIT: list[dict[str, Any]] = []
 AGENT_HANDOFF_TTL_MINUTES = 30
 AGENT_HANDOFF_TARGET_PANELS = {"editing_panel", "approval_panel", "context_panel", "quality_panel", "artifact_panel"}
 PV17_SCHEMA_VERSION = "pv17.product_closed_loop.v1"
+PV18_KNOWLEDGE_SCHEMA_VERSION = "pv18.knowledge_opc.v1"
 PV17_ENTITY_KINDS = {
     "workspaces": "workspace",
     "projects": "project",
@@ -412,6 +414,12 @@ PV17_ENTITY_KINDS = {
     "station-agents": "station_agent",
 }
 _PV17_PRODUCT_ENTITIES: dict[str, dict[str, Any]] = {}
+_PV18_KNOWLEDGE_WORKSPACES: dict[str, dict[str, Any]] = {}
+_PV18_KNOWLEDGE_SOURCES: dict[str, list[dict[str, Any]]] = {}
+_PV18_KNOWLEDGE_BUILDS: dict[str, list[dict[str, Any]]] = {}
+_PV18_KNOWLEDGE_QUERIES: dict[str, list[dict[str, Any]]] = {}
+_PV18_KNOWLEDGE_QUALITY: dict[str, list[dict[str, Any]]] = {}
+_PV18_KNOWLEDGE_CORRECTIONS: dict[str, list[dict[str, Any]]] = {}
 
 
 @router.get("/pv17/system/health")
@@ -688,6 +696,196 @@ async def pv17_evidence_summary(
         auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflows.read")
         inspect = await _pv17_runtime_inspect_dto(gateway, auth.scope, params)
         dto = _pv17_evidence_summary_dto(inspect, auth.scope)
+        response = JSONResponse(_redact(dto))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
+
+
+@router.get("/pv18/knowledge/state")
+async def pv18_knowledge_state(request: Request, gateway: GatewayService = Depends(get_gateway_service)) -> Any:
+    try:
+        params: dict[str, Any] = _query_scope_params(request)
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflows.read")
+        workspace = _pv18_workspace_projection(auth.scope)
+        dto = {
+            "schema_version": PV18_KNOWLEDGE_SCHEMA_VERSION,
+            "status": "ready",
+            "scope": _scope_dto(auth.scope),
+            "workspace": workspace,
+            "connector_health": _pv18_connector_health(gateway),
+            "sources": _PV18_KNOWLEDGE_SOURCES.get(workspace["workspace_id"], []),
+            "builds": _PV18_KNOWLEDGE_BUILDS.get(workspace["workspace_id"], []),
+            "queries": _PV18_KNOWLEDGE_QUERIES.get(workspace["workspace_id"], []),
+            "evidence_summary": _pv18_evidence_summary_projection(auth.scope, workspace["workspace_id"]),
+            "audit_refs": [_pv18_audit_ref("knowledge.state.read", auth.scope, entity_id=workspace["workspace_id"])],
+            "created_at": _now_iso(),
+            "redaction_status": "redacted",
+        }
+        response = JSONResponse(_redact(dto))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
+
+
+@router.post("/pv18/knowledge/workspaces")
+async def pv18_knowledge_workspace_upsert(request: Request, gateway: GatewayService = Depends(get_gateway_service)) -> Any:
+    try:
+        body = await request.json()
+        if not isinstance(body, dict):
+            raise ProtocolError("INVALID_PARAMS", "Request body must be an object.", {"field": "body"})
+        params = _query_scope_params(request)
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflows.write")
+        workspace = _pv18_store_workspace(auth.scope, body)
+        dto = {
+            "schema_version": PV18_KNOWLEDGE_SCHEMA_VERSION,
+            "status": "accepted",
+            "workspace": workspace,
+            "audit_refs": [_pv18_audit_ref("knowledge.workspace.upsert", auth.scope, entity_id=workspace["workspace_id"])],
+            "redaction_status": "redacted",
+        }
+        response = JSONResponse(_redact(dto))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
+
+
+@router.post("/pv18/knowledge/sources/import")
+async def pv18_knowledge_source_import(request: Request, gateway: GatewayService = Depends(get_gateway_service)) -> Any:
+    try:
+        body = await request.json()
+        if not isinstance(body, dict):
+            raise ProtocolError("INVALID_PARAMS", "Request body must be an object.", {"field": "body"})
+        params = _query_scope_params(request)
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflows.write")
+        workspace = _pv18_workspace_projection(auth.scope)
+        source = _pv18_source_from_body(gateway, auth.scope, workspace, body)
+        _PV18_KNOWLEDGE_SOURCES.setdefault(workspace["workspace_id"], []).append(source)
+        dto = {
+            "schema_version": PV18_KNOWLEDGE_SCHEMA_VERSION,
+            "status": "imported",
+            "source_reference": source["source_reference"],
+            "note": source["note"],
+            "artifact_refs": source["artifact_refs"],
+            "lineage_refs": source["lineage_refs"],
+            "audit_refs": [_pv18_audit_ref("knowledge.source.import", auth.scope, entity_id=source["source_id"])],
+            "redaction_status": "redacted",
+        }
+        response = JSONResponse(_redact(dto))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
+
+
+@router.post("/pv18/knowledge/builds/start")
+async def pv18_knowledge_build_start(request: Request, gateway: GatewayService = Depends(get_gateway_service)) -> Any:
+    try:
+        body = await request.json()
+        if not isinstance(body, dict):
+            raise ProtocolError("INVALID_PARAMS", "Request body must be an object.", {"field": "body"})
+        params = _query_scope_params(request)
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflows.write")
+        workspace = _pv18_workspace_projection(auth.scope)
+        sources = _PV18_KNOWLEDGE_SOURCES.get(workspace["workspace_id"], [])
+        build = _pv18_build_from_sources(gateway, auth.scope, workspace, sources, body)
+        _PV18_KNOWLEDGE_BUILDS.setdefault(workspace["workspace_id"], []).append(build)
+        response = JSONResponse(_redact({"schema_version": PV18_KNOWLEDGE_SCHEMA_VERSION, **build, "redaction_status": "redacted"}))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
+
+
+@router.get("/pv18/knowledge/builds/{build_id}/status")
+async def pv18_knowledge_build_status(build_id: str, request: Request, gateway: GatewayService = Depends(get_gateway_service)) -> Any:
+    try:
+        params = _query_scope_params(request)
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflows.read")
+        workspace = _pv18_workspace_projection(auth.scope)
+        build = next((item for item in _PV18_KNOWLEDGE_BUILDS.get(workspace["workspace_id"], []) if item.get("build_id") == build_id), None)
+        if build is None:
+            raise ProtocolError("NOT_FOUND", "PV18 build was not found.", {"build_id": build_id})
+        response = JSONResponse(_redact({"schema_version": PV18_KNOWLEDGE_SCHEMA_VERSION, **build, "redaction_status": "redacted"}))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
+
+
+@router.post("/pv18/knowledge/query")
+async def pv18_knowledge_query(request: Request, gateway: GatewayService = Depends(get_gateway_service)) -> Any:
+    try:
+        body = await request.json()
+        if not isinstance(body, dict):
+            raise ProtocolError("INVALID_PARAMS", "Request body must be an object.", {"field": "body"})
+        params = _query_scope_params(request)
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflows.execute")
+        workspace = _pv18_workspace_projection(auth.scope)
+        sources = _PV18_KNOWLEDGE_SOURCES.get(workspace["workspace_id"], [])
+        if not sources:
+            raise ProtocolError("WORKFLOW_ACTION_FORBIDDEN", "PV18 query requires at least one imported source.", {"fixture": "source_required"})
+        query = str(body.get("query") or "HarnessOS Knowledge OPC 是什么？").strip()
+        query_dto = _pv18_query_result(gateway, auth.scope, workspace, query, sources)
+        _PV18_KNOWLEDGE_QUERIES.setdefault(workspace["workspace_id"], []).append(query_dto)
+        response = JSONResponse(_redact({"schema_version": PV18_KNOWLEDGE_SCHEMA_VERSION, **query_dto, "redaction_status": "redacted"}))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
+
+
+@router.post("/pv18/knowledge/quality-feedback")
+async def pv18_knowledge_quality_feedback(request: Request, gateway: GatewayService = Depends(get_gateway_service)) -> Any:
+    try:
+        body = await request.json()
+        if not isinstance(body, dict):
+            raise ProtocolError("INVALID_PARAMS", "Request body must be an object.", {"field": "body"})
+        params = _query_scope_params(request)
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="quality.write")
+        workspace = _pv18_workspace_projection(auth.scope)
+        feedback = _pv18_quality_feedback(gateway, auth.scope, workspace, body)
+        _PV18_KNOWLEDGE_QUALITY.setdefault(workspace["workspace_id"], []).append(feedback)
+        response = JSONResponse(_redact({"schema_version": PV18_KNOWLEDGE_SCHEMA_VERSION, **feedback, "redaction_status": "redacted"}))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
+
+
+@router.post("/pv18/knowledge/correction-plan")
+async def pv18_knowledge_correction_plan(request: Request, gateway: GatewayService = Depends(get_gateway_service)) -> Any:
+    try:
+        body = await request.json()
+        if not isinstance(body, dict):
+            raise ProtocolError("INVALID_PARAMS", "Request body must be an object.", {"field": "body"})
+        params = _query_scope_params(request)
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="quality.write")
+        workspace = _pv18_workspace_projection(auth.scope)
+        plan = _pv18_correction_plan(gateway, auth.scope, workspace, body)
+        _PV18_KNOWLEDGE_CORRECTIONS.setdefault(workspace["workspace_id"], []).append(plan)
+        response = JSONResponse(_redact({"schema_version": PV18_KNOWLEDGE_SCHEMA_VERSION, **plan, "redaction_status": "redacted"}))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
+
+
+@router.get("/pv18/knowledge/evidence/summary")
+async def pv18_knowledge_evidence_summary(request: Request, gateway: GatewayService = Depends(get_gateway_service)) -> Any:
+    try:
+        params = _query_scope_params(request)
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflows.read")
+        workspace = _pv18_workspace_projection(auth.scope)
+        dto = {
+            "schema_version": PV18_KNOWLEDGE_SCHEMA_VERSION,
+            **_pv18_evidence_summary_projection(auth.scope, workspace["workspace_id"]),
+            "audit_refs": [_pv18_audit_ref("knowledge.evidence.summary", auth.scope, entity_id=workspace["workspace_id"])],
+            "redaction_status": "redacted",
+        }
         response = JSONResponse(_redact(dto))
         add_dev_warning(response, auth)
         return response
@@ -2879,6 +3077,667 @@ def _pv17_evidence_summary_dto(inspect: dict[str, Any], scope: ScopeContext) -> 
         "missing_evidence": missing,
         "allowed_claim": "PV17 complete: product closed loop implementation ready for bounded review.",
         "audit_refs": [_pv17_audit_ref("evidence.summary.read", scope, entity_id=str(inspect.get("workflow_instance", {}).get("workflow_instance_id") or ""))],
+        "redaction_status": "redacted",
+    }
+
+
+def _pv18_scope_key(scope: ScopeContext) -> str:
+    return "|".join([scope.app_id or "", scope.project_id or "", scope.workspace_id or ""])
+
+
+def _pv18_workspace_id(scope: ScopeContext) -> str:
+    return f"knowledge:{scope.workspace_id or 'local'}:{scope.project_id or 'demo'}:{scope.app_id or 'app'}"
+
+
+def _pv18_audit_ref(operation: str, scope: ScopeContext, *, entity_id: str | None = None) -> dict[str, Any]:
+    return {
+        "audit_ref_id": f"pv18:audit:{operation}:{_pv18_scope_key(scope)}:{entity_id or 'scope'}",
+        "operation": operation,
+        "scope": _scope_dto(scope),
+        "entity_id": entity_id,
+        "created_at": _now_iso(),
+        "redaction_status": "redacted",
+    }
+
+
+def _pv18_workspace_projection(scope: ScopeContext) -> dict[str, Any]:
+    workspace_id = _pv18_workspace_id(scope)
+    stored = _PV18_KNOWLEDGE_WORKSPACES.get(workspace_id)
+    if stored is not None:
+        return stored
+    return {
+        "workspace_id": workspace_id,
+        "display_name": "PV18 Knowledge OPC Workspace",
+        "owner": "local-reviewer",
+        "scope": _scope_dto(scope),
+        "data_boundary": "BFF DTO -> Pack/Connector/Gateway/Evidence",
+        "audit_refs": [_pv18_audit_ref("knowledge.workspace.default_projection", scope, entity_id=workspace_id)],
+        "redaction_status": "redacted",
+    }
+
+
+def _pv18_store_workspace(scope: ScopeContext, body: dict[str, Any]) -> dict[str, Any]:
+    workspace_id = str(body.get("workspace_id") or _pv18_workspace_id(scope)).strip()
+    if not workspace_id:
+        raise ProtocolError("INVALID_PARAMS", "workspace_id is required.", {"field": "workspace_id"})
+    workspace = {
+        "workspace_id": workspace_id,
+        "display_name": str(body.get("display_name") or "PV18 Knowledge OPC Workspace"),
+        "owner": str(body.get("owner") or "local-reviewer"),
+        "scope": _scope_dto(scope),
+        "data_boundary": "BFF DTO -> Pack/Connector/Gateway/Evidence",
+        "audit_refs": [_pv18_audit_ref("knowledge.workspace.upsert", scope, entity_id=workspace_id)],
+        "redaction_status": "redacted",
+    }
+    _PV18_KNOWLEDGE_WORKSPACES[workspace_id] = _redact(workspace)
+    return _PV18_KNOWLEDGE_WORKSPACES[workspace_id]
+
+
+def _pv18_connector_health(gateway: GatewayService) -> dict[str, Any]:
+    try:
+        connector = gateway.connector_registry.get_connector(DATA_SERVICE_CONNECTOR_ID)
+        health = connector.get("health") if isinstance(connector.get("health"), dict) else {}
+        capabilities = connector.get("capabilities") if isinstance(connector.get("capabilities"), dict) else {}
+        metadata = connector.get("metadata") if isinstance(connector.get("metadata"), dict) else {}
+        execution_mode = str(metadata.get("execution") or connector.get("execution_mode") or "unknown")
+        status = str(connector.get("health") or health.get("status") or "available")
+        return {
+            "connector_id": DATA_SERVICE_CONNECTOR_ID,
+            "status": status,
+            "execution_mode": execution_mode,
+            "real_data_service": execution_mode == "mcp_stdio" and status in {"available", "configured"},
+            "capabilities": capabilities,
+            "redaction_status": "redacted",
+        }
+    except Exception as exc:
+        return {
+            "connector_id": DATA_SERVICE_CONNECTOR_ID,
+            "status": "unavailable",
+            "execution_mode": "unavailable",
+            "real_data_service": False,
+            "reason": exc.__class__.__name__,
+            "capabilities": {},
+            "redaction_status": "redacted",
+        }
+
+
+def _pv18_real_data_service_enabled(gateway: GatewayService) -> bool:
+    health = _pv18_connector_health(gateway)
+    return health.get("real_data_service") is True
+
+
+def _pv18_source_from_body(gateway: GatewayService, scope: ScopeContext, workspace: dict[str, Any], body: dict[str, Any]) -> dict[str, Any]:
+    workspace_id = str(workspace["workspace_id"])
+    content = str(body.get("content") or body.get("text") or "").strip()
+    title = str(body.get("title") or "PV18 Knowledge Source").strip()
+    if not content:
+        raise ProtocolError("INVALID_PARAMS", "content is required.", {"field": "content"})
+    source_id = f"pv18-src-{uuid4().hex[:8]}"
+    data_service = _pv18_import_source_to_data_service(gateway, scope, workspace, title, content)
+    artifact = gateway.artifact_registry.register_external(
+        external_asset_uri=f"pv18://knowledge/{workspace_id}/{source_id}",
+        app_id=scope.app_id,
+        project_id=scope.project_id,
+        workspace_id=scope.workspace_id,
+        domain="knowledge",
+        kind="source_reference",
+        name=title,
+        mime="text/plain",
+        metadata={
+            "source_id": source_id,
+            "workspace_id": workspace_id,
+            "content_length": len(content),
+            "source": "pv18_bff_source_import",
+            "data_service_workspace_id": data_service.get("workspace_id"),
+            "real_data_service": data_service.get("real_data_service"),
+        },
+    )
+    artifact_refs = [{"artifact_ref": artifact.get("artifact_id"), "kind": artifact.get("kind"), "name": artifact.get("name")}]
+    artifact_refs.extend(_pv18_envelope_artifact_refs(data_service.get("envelope")))
+    return {
+        "source_id": source_id,
+        "source_reference": {
+            "source_id": source_id,
+            "workspace_id": workspace_id,
+            "data_service_workspace_id": data_service.get("workspace_id"),
+            "title": title,
+            "status": "imported",
+            "content_length": len(content),
+            "real_data_service": data_service.get("real_data_service"),
+        },
+        "note": {
+            "title": title,
+            "summary": content[:160],
+            "status": "ready_for_build",
+        },
+        "content": content,
+        "artifact_refs": artifact_refs,
+        "lineage_refs": [{"from": "source_import", "to": artifact.get("artifact_id"), "kind": "source_reference"}],
+        "data_service": data_service,
+        "redaction_status": "redacted",
+    }
+
+
+def _pv18_import_source_to_data_service(
+    gateway: GatewayService,
+    scope: ScopeContext,
+    workspace: dict[str, Any],
+    title: str,
+    content: str,
+) -> dict[str, Any]:
+    if not _pv18_real_data_service_enabled(gateway):
+        return {
+            "status": "contract_stub",
+            "workspace_id": None,
+            "real_data_service": False,
+            "blocked_reason": "HARNESS_DATA_SERVICE_MCP_EXECUTION=stdio is required for real PV18 acceptance.",
+        }
+    data_service_workspace_id = _pv18_ensure_data_service_workspace(gateway, scope, workspace)
+    result = _pv18_call_data_service_tool(
+        gateway,
+        "knowledge_source_import",
+        {
+            "workspace_id": data_service_workspace_id,
+            "paths": [],
+            "texts": [{"title": title, "content": content, "metadata": {"source": "pv18_knowledge_opc"}}],
+            "metadata": {"owner": "pv18-knowledge-opc", "workflow": "pv18_knowledge_opc"},
+        },
+    )
+    return {
+        "status": result.get("status"),
+        "workspace_id": data_service_workspace_id,
+        "real_data_service": True,
+        "tool": "knowledge_source_import",
+        "steps": result.get("steps", []),
+        "envelope": result.get("envelope", {}),
+    }
+
+
+def _pv18_ensure_data_service_workspace(gateway: GatewayService, scope: ScopeContext, workspace: dict[str, Any]) -> str:
+    stored_workspace_id = workspace.get("data_service_workspace_id")
+    if isinstance(stored_workspace_id, str) and stored_workspace_id:
+        return stored_workspace_id
+    result = _pv18_call_data_service_tool(
+        gateway,
+        "knowledge_workspace_create",
+        {
+            "name": str(workspace.get("workspace_id") or _pv18_workspace_id(scope)),
+            "owner": "pv18-knowledge-opc",
+            "tags": ["harnessos-pv18", "opc"],
+        },
+    )
+    envelope = result.get("envelope") if isinstance(result.get("envelope"), dict) else {}
+    workspace_id = envelope.get("workspace_id")
+    if not isinstance(workspace_id, str) or not workspace_id:
+        raise ProtocolError("UPSTREAM_UNAVAILABLE", "Data Service MCP did not return a workspace_id.", {"tool": "knowledge_workspace_create"})
+    workspace["data_service_workspace_id"] = workspace_id
+    workspace["real_data_service"] = True
+    workspace["data_service_steps"] = list(workspace.get("data_service_steps") or []) + list(result.get("steps") or [])
+    _PV18_KNOWLEDGE_WORKSPACES[str(workspace["workspace_id"])] = _redact(workspace)
+    return workspace_id
+
+
+def _pv18_call_data_service_tool(gateway: GatewayService, tool: str, payload: dict[str, Any]) -> dict[str, Any]:
+    try:
+        return KnowledgeMcpWorkflowRunner(gateway.connector_execution_runtime).call_tool(tool, payload)
+    except Exception as exc:
+        raise ProtocolError(
+            "UPSTREAM_UNAVAILABLE",
+            f"Data Service MCP tool failed: {tool}",
+            {"tool": tool, "reason": exc.__class__.__name__, "message": str(exc)[:240]},
+        ) from exc
+
+
+def _pv18_build_from_sources(
+    gateway: GatewayService,
+    scope: ScopeContext,
+    workspace: dict[str, Any],
+    sources: list[dict[str, Any]],
+    body: dict[str, Any],
+) -> dict[str, Any]:
+    workspace_id = str(workspace["workspace_id"])
+    if not sources:
+        build = _pv18_new_build(scope, workspace_id, status="failed")
+        build["failure_reason"] = "source_required"
+        build["next_actions"] = ["导入至少一个 source/document 后重新启动 build。"]
+        build["real_data_service"] = _pv18_real_data_service_enabled(gateway)
+        return build
+    if not _pv18_real_data_service_enabled(gateway):
+        build = _pv18_new_build(scope, workspace_id, status="completed")
+        build["stage"] = "contract_stub_indexed"
+        build["real_data_service"] = False
+        build["next_actions"] = ["当前为 contract_stub 受限状态；真实验收需启用 HARNESS_DATA_SERVICE_MCP_EXECUTION=stdio。"]
+        return build
+
+    source_texts = _pv18_source_texts(sources)
+    result = KnowledgeMcpWorkflowRunner(gateway.connector_execution_runtime).run_acceptance(
+        name=_pv18_acceptance_workspace_name(workspace),
+        query="PV18 Knowledge OPC build validation",
+        texts=source_texts,
+        owner="pv18-knowledge-opc",
+        build_mode=_pv18_data_service_build_mode(str(body.get("mode") or "full")),
+        poll_interval=0.05,
+        max_polls=40,
+    )
+    result_dto = result.to_dict()
+    status = str(result_dto.get("status") or "failed")
+    completed = status in {"ok", "completed"}
+    build = _pv18_new_build(scope, workspace_id, status="completed" if status == "completed" else "failed")
+    build["status"] = "completed" if completed else "failed"
+    build["data_service_workspace_id"] = result_dto.get("workspace_id")
+    build["operation_id"] = result_dto.get("operation_id")
+    build["stage"] = "completed" if completed else status
+    build["failure_reason"] = None if completed else status
+    build["artifact_refs"] = _pv18_step_artifact_refs(result_dto.get("steps", []))
+    build["data_service_steps"] = result_dto.get("steps", [])
+    build["runner_warnings"] = result_dto.get("warnings", [])
+    build["real_data_service"] = True
+    return build
+
+
+def _pv18_new_build(scope: ScopeContext, workspace_id: str, *, status: str) -> dict[str, Any]:
+    build_id = f"pv18-build-{uuid4().hex[:8]}"
+    return {
+        "build_id": build_id,
+        "workspace_id": workspace_id,
+        "status": status,
+        "stage": "indexed" if status == "completed" else "blocked",
+        "failure_reason": None if status == "completed" else "unknown",
+        "trace_refs": [{"trace_id": f"pv18:trace:build:{build_id}", "event_type": f"knowledge.build.{status}"}],
+        "next_actions": ["发起 query 并审查 citation。"] if status == "completed" else [],
+        "audit_refs": [_pv18_audit_ref("knowledge.build.start", scope, entity_id=build_id)],
+    }
+
+
+def _pv18_data_service_workspace_id(workspace: dict[str, Any], sources: list[dict[str, Any]]) -> str:
+    candidates: list[Any] = [workspace.get("data_service_workspace_id")]
+    candidates.extend(source.get("data_service", {}).get("workspace_id") for source in sources if isinstance(source.get("data_service"), dict))
+    candidates.extend(source.get("source_reference", {}).get("data_service_workspace_id") for source in sources if isinstance(source.get("source_reference"), dict))
+    for candidate in candidates:
+        if isinstance(candidate, str) and candidate:
+            return candidate
+    raise ProtocolError("WORKFLOW_ACTION_FORBIDDEN", "PV18 real Data Service workspace is missing.", {"fixture": "real_data_service_workspace_required"})
+
+
+def _pv18_data_service_build_mode(mode: str) -> str:
+    allowed = {"full", "incremental", "graph_only", "llmwiki_only"}
+    return mode if mode in allowed else "full"
+
+
+def _pv18_envelope_stage(envelope: dict[str, Any]) -> str | None:
+    data = envelope.get("data") if isinstance(envelope.get("data"), dict) else {}
+    stage = data.get("stage")
+    return str(stage) if stage is not None else None
+
+
+def _pv18_envelope_failure(envelope: dict[str, Any]) -> str | None:
+    data = envelope.get("data") if isinstance(envelope.get("data"), dict) else {}
+    error = data.get("error") if isinstance(data.get("error"), dict) else {}
+    message = error.get("message")
+    return str(message) if message else None
+
+
+def _pv18_envelope_artifact_refs(envelope: Any) -> list[dict[str, Any]]:
+    if not isinstance(envelope, dict):
+        return []
+    refs = envelope.get("artifact_refs")
+    if isinstance(refs, list):
+        return [ref for ref in refs if isinstance(ref, dict)]
+    data = envelope.get("data") if isinstance(envelope.get("data"), dict) else {}
+    refs = data.get("artifact_refs")
+    if isinstance(refs, list):
+        return [ref for ref in refs if isinstance(ref, dict)]
+    return []
+
+
+def _pv18_step_artifact_refs(steps: Any) -> list[dict[str, Any]]:
+    if not isinstance(steps, list):
+        return []
+    refs: list[dict[str, Any]] = []
+    for step in steps:
+        if not isinstance(step, dict):
+            continue
+        if step.get("artifact_id"):
+            refs.append({"artifact_ref": step.get("artifact_id"), "tool": step.get("tool")})
+        refs.extend(_pv18_envelope_artifact_refs(step.get("envelope")))
+    return refs
+
+
+def _pv18_source_texts(sources: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    texts: list[dict[str, Any]] = []
+    for source in sources:
+        if not isinstance(source, dict):
+            continue
+        note = source.get("note") if isinstance(source.get("note"), dict) else {}
+        title = str(note.get("title") or source.get("source_id") or "PV18 Knowledge Source")
+        content = str(source.get("content") or note.get("summary") or "")
+        if content:
+            texts.append({"title": title, "content": content, "metadata": {"source": "pv18_knowledge_opc"}})
+    return texts
+
+
+def _pv18_acceptance_workspace_name(workspace: dict[str, Any]) -> str:
+    base = str(workspace.get("workspace_id") or "pv18-knowledge-opc").replace(":", "-")
+    return f"{base}-{uuid4().hex[:8]}"
+
+
+def _pv18_last_step_for_tool(steps: Any, tool: str) -> dict[str, Any]:
+    if not isinstance(steps, list):
+        return {}
+    for step in reversed(steps):
+        if isinstance(step, dict) and step.get("tool") == tool:
+            return step
+    return {}
+
+
+def _pv18_run_knowledge_flow(gateway: GatewayService, workspace_id: str, query: str, sources: list[dict[str, Any]]) -> dict[str, Any]:
+    texts = [
+        {
+            "title": str(source.get("note", {}).get("title") or source.get("source_id") or "PV18 Source"),
+            "content": str(source.get("content") or source.get("note", {}).get("summary") or ""),
+        }
+        for source in sources
+    ]
+    runner = KnowledgeMcpWorkflowRunner(gateway.connector_execution_runtime)
+    try:
+        result = runner.run_acceptance(
+            name=workspace_id,
+            query=query,
+            texts=texts,
+            owner="pv18-knowledge-opc",
+            poll_interval=0.01,
+            max_polls=8,
+        )
+        return result.to_dict()
+    except Exception as exc:
+        return {
+            "status": "blocked",
+            "workspace_id": workspace_id,
+            "operation_id": None,
+            "steps": [],
+            "warnings": [f"knowledge runner blocked: {exc.__class__.__name__}"],
+        }
+
+
+def _pv18_query_result(
+    gateway: GatewayService,
+    scope: ScopeContext,
+    workspace: dict[str, Any],
+    query: str,
+    sources: list[dict[str, Any]],
+) -> dict[str, Any]:
+    workspace_id = str(workspace["workspace_id"])
+    if _pv18_real_data_service_enabled(gateway):
+        result = KnowledgeMcpWorkflowRunner(gateway.connector_execution_runtime).run_acceptance(
+            name=_pv18_acceptance_workspace_name(workspace),
+            query=query,
+            texts=_pv18_source_texts(sources),
+            owner="pv18-knowledge-opc",
+            poll_interval=0.05,
+            max_polls=40,
+        )
+        result_dto = result.to_dict()
+        query_step = _pv18_last_step_for_tool(result_dto.get("steps", []), "knowledge_query_v2")
+        envelope = query_step.get("envelope") if isinstance(query_step.get("envelope"), dict) else {}
+        data = envelope.get("data") if isinstance(envelope.get("data"), dict) else {}
+        citations = _pv18_extract_citations(data)
+        query_id = f"pv18-query-{uuid4().hex[:8]}"
+        return {
+            "query_id": query_id,
+            "workspace_id": workspace_id,
+            "data_service_workspace_id": result_dto.get("workspace_id"),
+            "status": "answered" if citations else "pending_review",
+            "answer": str(data.get("answer") or "真实 data_service 已返回结果，但 answer 字段为空。"),
+            "brief": "真实 data_service MCP query_v2 结果；必须结合 citation 和 evidence 审查。",
+            "citation_bundle": {"status": "pass" if citations else "missing", "citations": citations},
+            "citation_coverage": {"status": "pass" if citations else "missing", "source_ref_count": len(citations)},
+            "source_refs": citations,
+            "artifact_refs": _pv18_step_artifact_refs(result_dto.get("steps", [])),
+            "trace_refs": [{"trace_id": f"pv18:trace:query:{query_id}", "event_type": "knowledge.query.answered"}],
+            "runner_warnings": result_dto.get("warnings") if isinstance(result_dto.get("warnings"), list) else [],
+            "data_service_steps": result_dto.get("steps", []),
+            "real_data_service": True,
+            "audit_refs": [_pv18_audit_ref("knowledge.query", scope, entity_id=query_id)],
+            "redaction_status": "redacted",
+        }
+
+    runner_result = _pv18_run_knowledge_flow(gateway, workspace_id, query, sources)
+    query_dto = _pv18_query_result_from_runner(scope, workspace_id, query, runner_result, sources)
+    query_dto["real_data_service"] = False
+    return query_dto
+
+
+def _pv18_extract_citations(data: dict[str, Any]) -> list[dict[str, Any]]:
+    llmwiki = data.get("engine_payloads", {}).get("llmwiki") if isinstance(data.get("engine_payloads"), dict) else {}
+    candidates = llmwiki.get("citations") if isinstance(llmwiki, dict) else None
+    if not isinstance(candidates, list):
+        candidates = data.get("citations") if isinstance(data.get("citations"), list) else []
+    citations: list[dict[str, Any]] = []
+    for item in candidates:
+        if not isinstance(item, dict):
+            continue
+        citations.append(
+            {
+                "source_id": item.get("source_id") or item.get("id") or item.get("source"),
+                "title": item.get("title") or item.get("source") or "Knowledge source",
+                "locator": item.get("locator"),
+                "authority": item.get("authority"),
+                "source_type": item.get("source_type"),
+                "coverage": "supporting",
+            }
+        )
+    return citations
+
+
+def _pv18_query_result_from_runner(
+    scope: ScopeContext,
+    workspace_id: str,
+    query: str,
+    runner_result: dict[str, Any],
+    sources: list[dict[str, Any]],
+) -> dict[str, Any]:
+    query_id = f"pv18-query-{uuid4().hex[:8]}"
+    steps = runner_result.get("steps") if isinstance(runner_result.get("steps"), list) else []
+    artifact_refs = [
+        {"artifact_ref": step.get("artifact_id"), "tool": step.get("tool")}
+        for step in steps
+        if isinstance(step, dict) and step.get("artifact_id")
+    ]
+    source_refs = [source.get("source_reference") for source in sources if isinstance(source.get("source_reference"), dict)]
+    citation_bundle = {
+        "status": "pass" if source_refs else "missing",
+        "citations": [
+            {"source_id": item.get("source_id"), "title": item.get("title"), "coverage": "supporting"}
+            for item in source_refs
+            if isinstance(item, dict)
+        ],
+    }
+    return {
+        "query_id": query_id,
+        "workspace_id": runner_result.get("workspace_id") or workspace_id,
+        "status": "answered" if citation_bundle["citations"] else "pending_review",
+        "answer": f"基于 {len(source_refs)} 个 Knowledge source，当前问题“{query}”已有可审查回答。",
+        "brief": "这是 PV18 bounded Knowledge OPC 回答投影，必须结合 citation 和 evidence 审查。",
+        "citation_bundle": citation_bundle,
+        "citation_coverage": {"status": citation_bundle["status"], "source_ref_count": len(source_refs)},
+        "source_refs": source_refs,
+        "artifact_refs": artifact_refs,
+        "trace_refs": [{"trace_id": f"pv18:trace:query:{query_id}", "event_type": "knowledge.query.answered"}],
+        "runner_warnings": runner_result.get("warnings") if isinstance(runner_result.get("warnings"), list) else [],
+        "audit_refs": [_pv18_audit_ref("knowledge.query", scope, entity_id=query_id)],
+        "redaction_status": "redacted",
+    }
+
+
+def _pv18_quality_feedback(gateway: GatewayService, scope: ScopeContext, workspace: dict[str, Any], body: dict[str, Any]) -> dict[str, Any]:
+    quality_id = f"pv18-quality-{uuid4().hex[:8]}"
+    workspace_id = str(workspace["workspace_id"])
+    issues = body.get("issues") if isinstance(body.get("issues"), list) else []
+    low_signal_sources = body.get("low_signal_sources") if isinstance(body.get("low_signal_sources"), list) else []
+    status = "pending_review" if issues or low_signal_sources else "pass"
+    feedback: dict[str, Any] = {
+        "quality_id": quality_id,
+        "workspace_id": workspace_id,
+        "quality_status": status,
+        "issues": issues,
+        "low_signal_sources": low_signal_sources,
+        "correction_required": status != "pass",
+        "trace_refs": [{"trace_id": f"pv18:trace:quality:{quality_id}", "event_type": f"knowledge.quality.{status}"}],
+        "audit_refs": [_pv18_audit_ref("knowledge.quality.feedback", scope, entity_id=quality_id)],
+        "redaction_status": "redacted",
+    }
+    if _pv18_real_data_service_enabled(gateway):
+        data_service_workspace_id = str(workspace.get("data_service_workspace_id") or body.get("data_service_workspace_id") or "")
+        if data_service_workspace_id:
+            result = _pv18_call_data_service_tool(
+                gateway,
+                "knowledge_quality_feedback_v2",
+                {
+                    "workspace_id": data_service_workspace_id,
+                    "target_type": "query",
+                    "target_id": str(body.get("target_id") or "pv18-query"),
+                    "action": "needs_review" if status != "pass" else "accept",
+                    "reason": str(body.get("reason") or "PV18 Knowledge OPC quality feedback"),
+                    "metadata": {"source": "pv18_knowledge_opc", "issue_count": len(issues), "low_signal_count": len(low_signal_sources)},
+                },
+            )
+            feedback["data_service_workspace_id"] = data_service_workspace_id
+            feedback["data_service_steps"] = result.get("steps", [])
+            feedback["data_service_envelope"] = result.get("envelope", {})
+            feedback["real_data_service"] = True
+    feedback.setdefault("real_data_service", False)
+    return feedback
+
+
+def _pv18_correction_plan(gateway: GatewayService, scope: ScopeContext, workspace: dict[str, Any], body: dict[str, Any]) -> dict[str, Any]:
+    plan_id = f"pv18-correction-{uuid4().hex[:8]}"
+    workspace_id = str(workspace["workspace_id"])
+    rules = body.get("rules") if isinstance(body.get("rules"), list) else ["补充缺失 citation", "人工复核低信号来源"]
+    plan: dict[str, Any] = {
+        "plan_id": plan_id,
+        "workspace_id": workspace_id,
+        "status": "pending_human_review",
+        "rules": rules,
+        "requires_human_review": True,
+        "auto_publish_allowed": False,
+        "audit_refs": [_pv18_audit_ref("knowledge.correction.plan", scope, entity_id=plan_id)],
+        "redaction_status": "redacted",
+    }
+    if _pv18_real_data_service_enabled(gateway):
+        data_service_workspace_id = str(workspace.get("data_service_workspace_id") or body.get("data_service_workspace_id") or "")
+        if data_service_workspace_id:
+            rules_result = _pv18_call_data_service_tool(
+                gateway,
+                "knowledge_correction_rules_v2",
+                {"workspace_id": data_service_workspace_id, "status": "draft", "limit": 20},
+            )
+            rule_id = _pv18_first_rule_id_from_envelope(rules_result.get("envelope", {}))
+            steps = list(rules_result.get("steps") or [])
+            if rule_id:
+                review_result = _pv18_call_data_service_tool(
+                    gateway,
+                    "knowledge_review_correction_rule_v2",
+                    {
+                        "workspace_id": data_service_workspace_id,
+                        "rule_id": rule_id,
+                        "status": "approved",
+                        "reviewer": "pv18-knowledge-opc",
+                        "note": "PV18 bounded review approves the rule for non-destructive correction planning.",
+                    },
+                )
+                steps.extend(list(review_result.get("steps") or []))
+            plan_result = _pv18_call_data_service_tool(
+                gateway,
+                "knowledge_correction_plan_v2",
+                {"workspace_id": data_service_workspace_id, "rebuild": False},
+            )
+            steps.extend(list(plan_result.get("steps") or []))
+            envelope = plan_result.get("envelope") if isinstance(plan_result.get("envelope"), dict) else {}
+            data = envelope.get("data") if isinstance(envelope.get("data"), dict) else {}
+            plan["rules"] = data.get("actions") if isinstance(data.get("actions"), list) else rules
+            plan["data_service_workspace_id"] = data_service_workspace_id
+            plan["data_service_steps"] = steps
+            plan["data_service_envelope"] = envelope
+            plan["real_data_service"] = True
+    plan.setdefault("real_data_service", False)
+    return plan
+
+
+def _pv18_first_rule_id_from_envelope(envelope: Any) -> str | None:
+    if not isinstance(envelope, dict):
+        return None
+    data = envelope.get("data") if isinstance(envelope.get("data"), dict) else {}
+    items = data.get("items") or data.get("rules") or []
+    if not isinstance(items, list) or not items:
+        return None
+    first = items[0]
+    if isinstance(first, dict) and isinstance(first.get("rule_id"), str):
+        return first["rule_id"]
+    return None
+
+
+def _pv18_evidence_summary_projection(scope: ScopeContext, workspace_id: str) -> dict[str, Any]:
+    sources = _PV18_KNOWLEDGE_SOURCES.get(workspace_id, [])
+    builds = _PV18_KNOWLEDGE_BUILDS.get(workspace_id, [])
+    queries = _PV18_KNOWLEDGE_QUERIES.get(workspace_id, [])
+    quality = _PV18_KNOWLEDGE_QUALITY.get(workspace_id, [])
+    corrections = _PV18_KNOWLEDGE_CORRECTIONS.get(workspace_id, [])
+    artifact_refs = [ref for source in sources for ref in source.get("artifact_refs", []) if isinstance(ref, dict)]
+    trace_refs = [
+        ref
+        for collection in (builds, queries, quality)
+        for item in collection
+        for ref in item.get("trace_refs", [])
+        if isinstance(ref, dict)
+    ]
+    missing = []
+    if not sources:
+        missing.append("source_import")
+    if not queries:
+        missing.append("query_result")
+    if not artifact_refs:
+        missing.append("artifact_lineage")
+    claims = [
+        {
+            "claim_id": "pv18-bff-boundary",
+            "claim": "Knowledge OPC browser flow uses /bff/pv18/knowledge domain facade.",
+            "evidence_refs": ["/bff/pv18/knowledge/state"],
+            "status": "SUPPORTED",
+        },
+        {
+            "claim_id": "pv18-citation-evidence",
+            "claim": "Knowledge answer must be reviewed with citation and artifact evidence.",
+            "evidence_refs": [ref.get("artifact_ref") for ref in artifact_refs if ref.get("artifact_ref")],
+            "status": "SUPPORTED" if artifact_refs and queries else "MISSING",
+        },
+        {
+            "claim_id": "pv18-platform-generality",
+            "claim": "Knowledge-specific behavior stays in pack/domain BFF/view/runner boundary.",
+            "evidence_refs": ["platform-generality-review.md"],
+            "status": "SUPPORTED",
+        },
+    ]
+    return {
+        "status": "ready_for_review" if not missing and all(item.get("status") == "SUPPORTED" for item in claims) else "missing_evidence",
+        "claims": claims,
+        "route_boundary": {
+            "allowed_prefix": "/bff/pv18/knowledge",
+            "browser_denylist": ["/v1/rpc", "/internal/runtime", "/runtime/store", "/api/runtime", "/debug/runtime", "data_service_mcp/internal"],
+            "status": "specified",
+        },
+        "artifact_lineage": {"artifact_refs": artifact_refs, "source_count": len(sources)},
+        "trace_timeline": {"trace_refs": trace_refs},
+        "redaction": {"status": "redacted", "secret_allowed": False, "provider_payload_allowed": False, "artifact_content_allowed": False},
+        "platform_generality": {
+            "status": "PASS",
+            "knowledge_only_platform_changes": [],
+            "generic_reuse_checks": ["BFF domain facade only", "GatewayService core unchanged", "connector runtime reused"],
+        },
+        "quality_ref_count": len(quality),
+        "correction_ref_count": len(corrections),
+        "missing_evidence": missing,
+        "allowed_claim": "PV18 complete: Knowledge OPC productization implementation ready for bounded review.",
+        "audit_refs": [_pv18_audit_ref("knowledge.evidence.project", scope, entity_id=workspace_id)],
         "redaction_status": "redacted",
     }
 

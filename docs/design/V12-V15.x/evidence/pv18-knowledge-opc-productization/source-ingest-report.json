@@ -1,0 +1,33 @@
+{
+  "schema_version": "pv18.source_ingest_report.v1",
+  "status": "PASS",
+  "source_reference": {
+    "source_id": "pv18-src-6e799146",
+    "workspace_id": "knowledge:local:demo:default",
+    "data_service_workspace_id": "knowledge-local-demo-default",
+    "title": "HarnessOS PV18 E2E 复核资料",
+    "status": "imported",
+    "content_length": 9614,
+    "real_data_service": true
+  },
+  "artifact_refs": [
+    {
+      "artifact_ref": "art_98d15351e8fc",
+      "kind": "source_reference",
+      "name": "HarnessOS PV18 E2E 复核资料"
+    },
+    {
+      "type": "source",
+      "source_id": "src_0b2d94a28d4cde2b",
+      "artifact_ref": "src_0b2d94a28d4cde2b"
+    }
+  ],
+  "lineage_refs": [
+    {
+      "from": "source_import",
+      "to": "art_98d15351e8fc",
+      "kind": "source_reference"
+    }
+  ],
+  "created_at": "2026-06-27T00:00:00Z"
+}

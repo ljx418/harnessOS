@@ -761,3 +761,118 @@ export interface PV17EvidenceSummaryDTO {
   audit_refs: PV17AuditRef[];
   redaction_status: "redacted";
 }
+
+export type PV18AuditRef = PV17AuditRef;
+
+export interface PV18KnowledgeWorkspaceDTO {
+  workspace_id: string;
+  display_name: string;
+  owner?: string;
+  scope: Record<string, unknown>;
+  data_boundary?: string;
+  audit_refs?: PV18AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface PV18KnowledgeSourceDTO {
+  source_id: string;
+  source_reference: Record<string, unknown>;
+  note: Record<string, unknown>;
+  artifact_refs: Array<Record<string, unknown>>;
+  lineage_refs: Array<Record<string, unknown>>;
+  redaction_status: "redacted";
+}
+
+export interface PV18BuildStatusDTO {
+  schema_version: string;
+  build_id: string;
+  workspace_id: string;
+  status: string;
+  stage: string;
+  failure_reason?: string | null;
+  trace_refs: Array<Record<string, unknown>>;
+  next_actions: string[];
+  audit_refs?: PV18AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface PV18QueryResultDTO {
+  schema_version: string;
+  query_id: string;
+  workspace_id: string;
+  status: string;
+  answer: string;
+  brief: string;
+  citation_bundle: { status: string; citations: Array<Record<string, unknown>> };
+  citation_coverage: { status: string; source_ref_count: number };
+  source_refs: Array<Record<string, unknown>>;
+  artifact_refs: Array<Record<string, unknown>>;
+  trace_refs: Array<Record<string, unknown>>;
+  runner_warnings?: string[];
+  audit_refs?: PV18AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface PV18QualityFeedbackDTO {
+  schema_version: string;
+  quality_id: string;
+  workspace_id: string;
+  quality_status: string;
+  issues: unknown[];
+  low_signal_sources: unknown[];
+  correction_required: boolean;
+  trace_refs: Array<Record<string, unknown>>;
+  audit_refs?: PV18AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface PV18CorrectionPlanDTO {
+  schema_version: string;
+  plan_id: string;
+  workspace_id: string;
+  status: string;
+  rules: unknown[];
+  requires_human_review: boolean;
+  auto_publish_allowed: boolean;
+  audit_refs?: PV18AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface PV18EvidenceSummaryDTO {
+  schema_version?: string;
+  status: string;
+  claims: Array<{ claim_id?: string; claim: string; evidence_refs: unknown[]; status: string }>;
+  route_boundary: { allowed_prefix: string; browser_denylist: string[]; status: string };
+  artifact_lineage: { artifact_refs: Array<Record<string, unknown>>; source_count?: number };
+  trace_timeline: { trace_refs: Array<Record<string, unknown>> };
+  redaction: { status: string; secret_allowed: boolean; provider_payload_allowed: boolean; artifact_content_allowed: boolean };
+  platform_generality?: { status: string; knowledge_only_platform_changes: string[]; generic_reuse_checks: string[] };
+  quality_ref_count?: number;
+  correction_ref_count?: number;
+  missing_evidence: string[];
+  allowed_claim: string;
+  audit_refs?: PV18AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface PV18KnowledgeStateDTO {
+  schema_version: string;
+  status: string;
+  scope: Record<string, unknown>;
+  workspace: PV18KnowledgeWorkspaceDTO;
+  connector_health: {
+    connector_id: string;
+    status: string;
+    execution_mode?: string;
+    real_data_service?: boolean;
+    capabilities?: Record<string, unknown>;
+    redaction_status: "redacted";
+  };
+  sources: PV18KnowledgeSourceDTO[];
+  builds: PV18BuildStatusDTO[];
+  queries: PV18QueryResultDTO[];
+  evidence_summary: PV18EvidenceSummaryDTO;
+  audit_refs: PV18AuditRef[];
+  created_at?: string;
+  redaction_status: "redacted";
+}
