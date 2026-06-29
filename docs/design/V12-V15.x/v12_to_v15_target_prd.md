@@ -119,6 +119,27 @@ runtime inspect and evidence review. PV17 evidence is recorded under
 `evidence/pv17-product-closed-loop/` and summarized in
 `reports/pv17_product_closed_loop_acceptance_report.json`.
 
+The selected post-PV18 documentation target is PV19 Runtime Workflow Platform
+Closed Loop. PV19 does not change the accepted PV18 bounded claim. It defines
+the next development target where a user can orchestrate a workflow in the
+workbench, confirm WorkflowDiff, publish WorkflowVersion, run a
+WorkflowInstance through runtime, handle at least one human interaction gate
+and review artifacts, trace, quality, audit and claim evidence from one product
+surface. PV19 planning artifacts must not be used as runtime evidence before
+implementation and acceptance.
+
+The current post-PV21/PV22 alignment target is WP-M0 Workflow Platform Main
+Entry. WP-M0 does not change the accepted PV21 bounded candidate claim and does
+not make PV22 implementation evidence. It documents that subsequent product
+implementation must make the workflow platform the first user entry: workspace,
+workflow canvas, Agent/Tool/Skill/MCP resources, WorkflowDiff, publish/run,
+human gate and evidence review must converge into one coherent product path.
+The detailed scope is recorded in
+`workflow_platform_main_entry_prd.md`,
+`workflow_platform_main_entry_target_architecture.md`,
+`workflow_platform_main_entry_development_and_acceptance_plan.md` and
+`workflow_platform_main_entry_gap_analysis.drawio`.
+
 ## Target User Experience
 
 Across the accepted V12-V15 baseline and the current PV16 target, a user can:
@@ -172,6 +193,7 @@ claims.
 | V15 | User completes the browser scenario matrix with trace, metrics, audit, deployment smoke and final interaction review. | Proves frontend interaction baseline ready for review; does not prove production GA. |
 | PV16 | User creates or updates product entities, confirms a WorkflowSpec run, inspects runtime-backed progress/evidence and verifies a local hardening smoke. | Proves product-runtime hardening pilot only; does not prove production readiness or complete Studio. |
 | PV17 | User follows one mainline browser product path from setup through Product Console, Studio, confirmed run, runtime inspect and evidence review. | Proves a bounded product closed loop ready for review; does not prove production readiness, complete Workflow Studio or Agent executor readiness. |
+| PV19 | User follows one runtime-backed platform loop from workbench orchestration through WorkflowDiff, publish, run, human interaction and evidence review. | Implemented as bounded review evidence; does not prove production readiness, complete Workflow Studio or Agent executor readiness. |
 
 ## Required User Scenarios
 

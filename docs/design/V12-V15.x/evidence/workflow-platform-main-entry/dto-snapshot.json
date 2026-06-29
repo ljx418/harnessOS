@@ -1,0 +1,14 @@
+{
+  "schema_version": "workflow_platform.dto_snapshot.v1",
+  "status": "PASS",
+  "entry": "workflow-platform",
+  "bff_route_families": [
+    "/bff/pv21",
+    "/bff/pv20"
+  ],
+  "three_required_business_scenarios": [
+    "document_summary",
+    "code_review",
+    "meeting_brief"
+  ]
+}

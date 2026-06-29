@@ -17,6 +17,426 @@ export interface WorkflowInstanceSummary {
   status: string;
 }
 
+export interface PV19AuditRef {
+  audit_ref_id?: string;
+  operation?: string;
+  entity_id?: string;
+  created_at?: string;
+  redaction_status?: "redacted";
+}
+
+export interface PV19WorkflowDraftSummary {
+  workflow_draft_id: string;
+  revision: number;
+  status: string;
+}
+
+export interface PV19GraphNode {
+  station_id: string;
+  name?: string;
+  role?: string;
+  skill_refs?: string[];
+  input_contracts?: unknown[];
+  output_contracts?: unknown[];
+  approval_required?: boolean;
+  metadata?: Record<string, unknown>;
+}
+
+export interface PV19GraphEdge {
+  edge_id: string;
+  from_station_id: string;
+  to_station_id: string;
+  order?: number;
+}
+
+export interface PV19WorkbenchStateDTO {
+  schema_version: "pv19.runtime_workflow_platform.v1";
+  scope: Record<string, string | null>;
+  entry: { route: string; root_empty_allowed: boolean; status: string };
+  workspace: { workspace_id: string; display_name: string };
+  project: { project_id: string; display_name: string };
+  workflow: WorkflowSummary;
+  draft: PV19WorkflowDraftSummary;
+  active_version?: WorkflowVersionSummary | null;
+  active_run?: WorkflowInstanceSummary | null;
+  health: Record<string, unknown>;
+  audit_refs: PV19AuditRef[];
+  evidence_refs: unknown[];
+  redaction_status: "redacted";
+}
+
+export interface PV19WorkflowGraphDTO {
+  schema_version: "pv19.runtime_workflow_platform.v1";
+  scope: Record<string, string | null>;
+  workflow: WorkflowSummary;
+  draft: PV19WorkflowDraftSummary;
+  graph: {
+    nodes: PV19GraphNode[];
+    edges: PV19GraphEdge[];
+    human_gate_nodes: string[];
+    redaction_status: "redacted";
+  };
+  platform_contract: {
+    business_pack_mode: string;
+    core_customization_allowed: boolean;
+    runtime_backed: boolean;
+  };
+  audit_refs: PV19AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface PV19GraphValidationDTO {
+  schema_version: "pv19.runtime_workflow_platform.v1";
+  scope: Record<string, string | null>;
+  workflow_id: string;
+  status: "valid" | "invalid";
+  errors: Array<Record<string, unknown>>;
+  warnings: Array<Record<string, unknown>>;
+  runtime_readiness: { can_publish: boolean; can_run_after_publish: boolean; human_gate_nodes: string[] };
+  audit_refs: PV19AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface PV19WorkflowDiffDTO {
+  schema_version: "pv19.runtime_workflow_platform.v1";
+  scope: Record<string, string | null>;
+  workflow_id: string;
+  draft_revision: number;
+  workflow_diff: {
+    workflow_patch_id: string;
+    before_graph_ref: string;
+    after_graph_ref: string;
+    change_summary?: unknown[];
+    confirmation_boundary: string;
+  };
+  workflow: WorkflowSummary;
+  audit_refs: PV19AuditRef[];
+  evidence_refs: string[];
+  redaction_status: "redacted";
+}
+
+export interface PV19PublishResultDTO {
+  schema_version: "pv19.runtime_workflow_platform.v1";
+  scope: Record<string, string | null>;
+  status: string;
+  workflow_version_id: string;
+  published_from_diff?: string | null;
+  published_by: string;
+  published_at: string;
+  version: WorkflowVersionSummary & { workflow_draft_id?: string; draft_revision?: number; draft_status?: string };
+  audit_refs: PV19AuditRef[];
+  evidence_refs: string[];
+  redaction_status: "redacted";
+}
+
+export interface PV19HumanGateRef {
+  approval_id?: string;
+  status?: string;
+  station_id?: string;
+  station_run_id?: string;
+  audit_refs?: PV19AuditRef[];
+}
+
+export interface PV19RuntimeRef {
+  event_ref?: string;
+  event_type?: string;
+  workflow_instance_id?: string;
+  station_run_id?: string;
+}
+
+export interface PV19RunDTO {
+  schema_version: "pv19.runtime_workflow_platform.v1";
+  scope: Record<string, string | null>;
+  workflow_instance: WorkflowInstanceSummary;
+  status?: WorkflowStatus;
+  station_runs: Array<Record<string, unknown>>;
+  runtime_event_refs: PV19RuntimeRef[];
+  trace_refs: Array<Record<string, unknown>>;
+  artifact_refs?: Array<Record<string, unknown>>;
+  quality_refs?: Array<Record<string, unknown>>;
+  pending_human_gates: PV19HumanGateRef[];
+  human_gate_refs?: PV19HumanGateRef[];
+  audit_refs: PV19AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface PV19HumanActionDTO {
+  schema_version: "pv19.runtime_workflow_platform.v1";
+  scope: Record<string, string | null>;
+  action_type: "approve" | "reject";
+  actor: string;
+  approval_id: string;
+  before_state: Record<string, unknown>;
+  after_state: Record<string, unknown>;
+  workflow_side_effect?: Record<string, unknown>;
+  audit_refs: PV19AuditRef[];
+  evidence_refs: string[];
+  redaction_status: "redacted";
+}
+
+export interface PV19EvidenceSummaryDTO {
+  schema_version: "pv19.runtime_workflow_platform.v1";
+  scope: Record<string, string | null>;
+  claims: Array<{ claim: string; evidence_refs: unknown[]; status: string }>;
+  route_boundary: { allowed_prefix: string; browser_denylist: string[]; status: string };
+  platform_generality: { status: string; primary_sample: string; reuse_check: string; core_customization_allowed: boolean };
+  redaction: { status: string; secret_allowed: boolean; provider_payload_allowed: boolean; artifact_content_allowed: boolean };
+  artifact_lineage: { artifact_refs: unknown[] };
+  trace_timeline: { trace_refs: unknown[] };
+  human_gate_lineage: { human_gate_refs: PV19HumanGateRef[] };
+  missing_evidence: string[];
+  allowed_claim: string;
+  audit_refs: PV19AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface PV20AgentExecutorStateDTO {
+  schema_version: "pv20.agent_executor_contract.v1";
+  stage: string;
+  status: string;
+  entry: { route: string; implementation_status: string };
+  workflow_instance: WorkflowInstanceSummary;
+  station_run: Record<string, unknown>;
+  agent_execution_contract: PV20AgentExecutionContractDTO["agent_execution_contract"];
+  agent_execution_result: PV20AgentExecutionContractDTO["agent_execution_result"];
+  allowed_claim: string;
+  audit_refs: PV19AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface PV20AgentExecutionContractDTO {
+  schema_version: "pv20.agent_executor_contract.v1";
+  stage: string;
+  workflow_instance: WorkflowInstanceSummary;
+  station_run: Record<string, unknown>;
+  agent_execution_contract: {
+    execution_envelope_id: string;
+    workflow_instance_id: string;
+    station_run_id: string;
+    station_id: string;
+    agent_id: string;
+    operation: string;
+    allowed_operation_refs: string[];
+    forbidden_operation_refs: string[];
+    execution_authority: Record<string, unknown>;
+    redaction_status: "redacted";
+  };
+  agent_execution_result: {
+    execution_result_id: string;
+    execution_status: string;
+    status: string;
+    skill_call_refs: string[];
+    tool_call_refs: string[];
+    mcp_call_refs: string[];
+    approval_refs?: string[];
+    artifact_refs?: unknown[];
+    policy_decision?: Record<string, unknown>;
+    redaction_status: "redacted";
+  };
+  audit_refs: PV19AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface PV20AgentExecutionEvidenceDTO {
+  schema_version: "pv20.agent_executor_contract.v1";
+  stage: string;
+  status: string;
+  route_boundary: { allowed_prefix: string; forbidden_direct_routes: string[]; status: string };
+  claim_matrix: Array<{ claim: string; evidence_refs: unknown[]; status: string }>;
+  missing_evidence: string[];
+  allowed_claim: string;
+  not_claimed: string[];
+  audit_refs: PV19AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface PV20AgentExecutionActionDTO {
+  schema_version: "pv20.agent_executor_contract.v1";
+  stage: string;
+  execution: {
+    status: string;
+    skill_call_refs?: string[];
+    tool_call_refs?: string[];
+    mcp_call_refs?: string[];
+    approval_refs?: string[];
+    artifact_refs?: unknown[];
+    redaction_status: "redacted";
+  };
+  redaction_status: "redacted";
+}
+
+export interface PV21ScopeDTO {
+  app_id?: string | null;
+  project_id?: string | null;
+  workspace_id?: string | null;
+  workflow_id?: string | null;
+}
+
+export interface PV21NodeDTO {
+  node_id: string;
+  station_id: string;
+  type: string;
+  label: string;
+  role?: string;
+  inputs: unknown[];
+  outputs: unknown[];
+  policy?: Record<string, unknown>;
+  executor_binding?: string | null;
+  params?: Record<string, unknown>;
+  metadata?: Record<string, unknown>;
+}
+
+export interface PV21EdgeDTO {
+  edge_id: string;
+  source: string;
+  target: string;
+  from_station_id: string;
+  to_station_id: string;
+  order?: number;
+  metadata?: Record<string, unknown>;
+}
+
+export interface PV21WorkflowGraphDTO {
+  schema_version: "pv21.complete_workflow_studio.v1";
+  scope: PV21ScopeDTO;
+  workflow_id: string;
+  draft_revision: number;
+  nodes: PV21NodeDTO[];
+  edges: PV21EdgeDTO[];
+  layout: Record<string, unknown>;
+  validation_status: string;
+  audit_refs?: PV19AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface PV21GraphValidationDTO {
+  schema_version: "pv21.complete_workflow_studio.v1";
+  scope: PV21ScopeDTO;
+  workflow_id: string;
+  status: "valid" | "invalid";
+  errors: Array<Record<string, unknown>>;
+  warnings: Array<Record<string, unknown>>;
+  affected_nodes: unknown[];
+  affected_edges: unknown[];
+  publish_blocked: boolean;
+  runtime_readiness?: Record<string, unknown>;
+  audit_refs: PV19AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface PV21WorkflowVersionDTO {
+  version_id: string;
+  workflow_version_id: string;
+  workflow_template_id: string;
+  version: string;
+  status: string;
+  created_at?: string;
+  published_by?: string;
+  graph_hash?: string;
+  rollback_allowed: boolean;
+}
+
+export interface PV21StudioStateDTO {
+  schema_version: "pv21.complete_workflow_studio.v1";
+  scope: PV21ScopeDTO;
+  entry: { route: string; root_empty_allowed: boolean; status: string };
+  workspace: { workspace_id: string; display_name: string };
+  project: { project_id: string; display_name: string };
+  app: { app_id: string; display_name: string };
+  workflow: WorkflowSummary;
+  platform_contract: {
+    workflow_core_customization_allowed: boolean;
+    gateway_core_customization_allowed: boolean;
+    app_shell_customization_allowed: boolean;
+    business_pack_allowed: boolean;
+    boundary: string;
+    status: string;
+  };
+  node_library: Array<Record<string, unknown>>;
+  draft_graph: PV21WorkflowGraphDTO;
+  published_version: PV21WorkflowVersionDTO | null;
+  version_history: PV21WorkflowVersionDTO[];
+  run_history: WorkflowInstanceSummary[];
+  evidence_health: { status: string; missing_refs: string[] };
+  route_claims: string[];
+  audit_refs: PV19AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface PV21WorkflowDiffDTO {
+  schema_version: "pv21.complete_workflow_studio.v1";
+  diff_id: string;
+  base_version_id?: string;
+  draft_revision: number;
+  added_nodes: string[];
+  removed_nodes: string[];
+  changed_nodes: string[];
+  changed_edges: string[];
+  risk_summary: string[];
+  publish_blocked: boolean;
+  user_confirmation_required: boolean;
+  audit_refs: PV19AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface PV21VersionsDTO {
+  schema_version: "pv21.complete_workflow_studio.v1";
+  versions: PV21WorkflowVersionDTO[];
+  published_version_id?: string | null;
+  rollback_candidates: string[];
+  audit_refs: PV19AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface PV21RunDTO {
+  schema_version: "pv21.complete_workflow_studio.v1";
+  run_id: string;
+  version_id: string;
+  state: string;
+  workflow_instance: WorkflowInstanceSummary;
+  station_runs: Array<Record<string, unknown>>;
+  current_human_gate?: Record<string, unknown> | null;
+  pending_human_gates: Array<Record<string, unknown>>;
+  trace_refs: unknown[];
+  artifact_refs: unknown[];
+  quality_refs: unknown[];
+  approval_refs: unknown[];
+  audit_refs: PV19AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface PV21HumanActionDTO {
+  schema_version: "pv21.complete_workflow_studio.v1";
+  action_id: string;
+  run_id: string;
+  station_id?: string;
+  decision: string;
+  before_state: Record<string, unknown>;
+  after_state: Record<string, unknown>;
+  resulting_run_state: string;
+  resulting_station_state?: string | null;
+  audit_refs: PV19AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface PV21EvidenceSummaryDTO {
+  schema_version: "pv21.complete_workflow_studio.v1";
+  artifact_refs: unknown[];
+  trace_refs: unknown[];
+  quality_refs: unknown[];
+  approval_refs: unknown[];
+  claim_refs: Array<Record<string, unknown>>;
+  redaction_refs: Array<Record<string, unknown>>;
+  missing_refs: string[];
+  no_false_green_status: "pass" | "fail" | "not_run";
+  route_boundary: { allowed_prefix: string; browser_denylist: string[]; status: string };
+  platform_generality: Record<string, unknown>;
+  allowed_claim: string;
+  not_claimed: string[];
+  audit_refs: PV19AuditRef[];
+  redaction_status: "redacted";
+}
+
 export interface WorkflowStatus {
   workflow_instance_id: string;
   status: string;

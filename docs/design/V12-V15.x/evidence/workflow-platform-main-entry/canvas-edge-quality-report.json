@@ -1,0 +1,27 @@
+{
+  "schema_version": "workflow_platform.edge_quality_report.v1",
+  "stage": "WP-M2",
+  "status": "PASS",
+  "checks": [
+    {
+      "id": "wheel-zoom",
+      "status": "PASS"
+    },
+    {
+      "id": "right-area-node-drag",
+      "status": "PASS"
+    },
+    {
+      "id": "edge-cancel",
+      "status": "PASS"
+    },
+    {
+      "id": "arrow-visible-first-eye",
+      "status": "PASS"
+    },
+    {
+      "id": "edge-no-critical-text-overlap",
+      "status": "PASS"
+    }
+  ]
+}

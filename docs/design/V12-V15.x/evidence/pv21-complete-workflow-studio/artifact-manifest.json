@@ -1,0 +1,41 @@
+{
+  "schema_version": "pv21.artifact_manifest.v1",
+  "stage_id": "PV21-SA",
+  "status": "PASS",
+  "created_at": "2026-06-27T00:00:00Z",
+  "artifacts": [
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv21-complete-workflow-studio/01-pv21-studio-loaded.png"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv21-complete-workflow-studio/02-canvas-save-validate-diff.png"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv21-complete-workflow-studio/03-version-publish-history.png"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv21-complete-workflow-studio/04-run-waiting-approval.png"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv21-complete-workflow-studio/05-human-gate-approved.png"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv21-complete-workflow-studio/06-evidence-review.png"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv21-complete-workflow-studio/07-pv21-full-page-completed.png"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv21-complete-workflow-studio/browser-network-log.json"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv21-complete-workflow-studio/acceptance-data.json"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv21-complete-workflow-studio/artifact-manifest.json"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv21-complete-workflow-studio/pv21-acceptance-report.html"
+    }
+  ]
+}

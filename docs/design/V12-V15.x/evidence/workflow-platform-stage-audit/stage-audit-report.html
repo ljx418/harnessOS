@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HarnessOS Workflow Platform 阶段性审计报告</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f8fb;
+      --panel: #ffffff;
+      --text: #172033;
+      --muted: #5b677a;
+      --line: #d8e1ee;
+      --blue: #2563eb;
+      --green: #059669;
+      --amber: #b45309;
+      --red: #dc2626;
+      --soft-blue: #eaf1ff;
+      --soft-green: #eaf8f1;
+      --soft-amber: #fff7e6;
+      --soft-red: #fff1f2;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+    header {
+      padding: 32px 40px 22px;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+    }
+    header p { max-width: 1080px; color: var(--muted); margin: 8px 0 0; }
+    h1 { margin: 0; font-size: 30px; line-height: 1.25; }
+    h2 { margin: 0 0 14px; font-size: 21px; }
+    h3 { margin: 18px 0 8px; font-size: 16px; }
+    main { padding: 24px 40px 44px; }
+    section {
+      max-width: 1280px;
+      margin: 0 auto 18px;
+      padding: 20px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+    }
+    .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    .two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .card {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfdff;
+    }
+    .card span { display: block; color: var(--muted); font-size: 12px; font-weight: 800; text-transform: uppercase; }
+    .card strong { display: block; margin-top: 6px; font-size: 20px; }
+    .pass { color: var(--green); }
+    .limited { color: var(--amber); }
+    .fail { color: var(--red); }
+    table { width: 100%; border-collapse: collapse; overflow-wrap: anywhere; }
+    th, td { padding: 11px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { background: #f8fafc; font-size: 13px; color: #334155; }
+    code { padding: 2px 5px; border-radius: 4px; background: #eef2f7; }
+    ul { padding-left: 20px; margin: 8px 0 0; }
+    li { margin: 5px 0; }
+    figure {
+      margin: 0;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+    img { display: block; width: 100%; border: 1px solid #e5e7eb; border-radius: 6px; }
+    figcaption { margin-top: 8px; color: var(--muted); font-size: 13px; }
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 12px;
+      background: var(--soft-green);
+      color: var(--green);
+      border: 1px solid #bbf7d0;
+    }
+    .badge.limited { background: var(--soft-amber); color: var(--amber); border-color: #fde68a; }
+    .badge.boundary { background: var(--soft-red); color: var(--red); border-color: #fecdd3; }
+    .note { padding: 12px 14px; border-radius: 8px; background: var(--soft-blue); border: 1px solid #c7d2fe; color: #334155; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>HarnessOS Workflow Platform 阶段性审计报告</h1>
+    <p>审计对象：WP-M1 至 WP-M4 bounded review。报告基于原始 PRD、目标架构、验收门槛、代码检视、自动化测试和 Chrome CDP 截图证据生成。本文不证明生产级、GA、外部产品对齐、无限制执行或 PV22 外部接入完成。</p>
+  </header>
+  <main>
+    <section>
+      <h2>阶段性验收结论</h2>
+      <div class="grid">
+        <div class="card"><span>WP-M1 首入口</span><strong class="pass">PASS</strong></div>
+        <div class="card"><span>WP-M2 画布交互</span><strong class="pass">PASS</strong></div>
+        <div class="card"><span>WP-M3 运行证据闭环</span><strong class="pass">PASS</strong></div>
+        <div class="card"><span>WP-M4 受治理执行器</span><strong class="pass">PASS</strong></div>
+      </div>
+      <p class="note">总体评价：当前实现可以支撑人类对 Workflow Platform MVP 候选体验进行 bounded review。仍需明确：非线性图运行、外部 App 接入、真实 ASR、生产部署、安全/租户硬化不属于本阶段完成项。</p>
+    </section>
+
+    <section>
+      <h2>目标架构与当前实现</h2>
+      <table>
+        <thead><tr><th>架构平面</th><th>目标要求</th><th>当前实现</th><th>审计结论</th></tr></thead>
+        <tbody>
+          <tr><td>入口层</td><td>根入口默认进入 Workflow Platform。</td><td><code>App</code> 与 <code>WorkflowStudioLayout</code> 默认渲染工作流平台主入口。</td><td><span class="badge">PASS</span></td></tr>
+          <tr><td>画布层</td><td>滚轮缩放、节点拖拽、自由连线、取消连线和箭头可见。</td><td>CDP 动作日志和截图覆盖缩放、拖拽、连线、取消和右侧区域拖拽。</td><td><span class="badge">PASS</span></td></tr>
+          <tr><td>BFF/DTO 边界</td><td>浏览器只访问允许的 BFF route family。</td><td>网络日志只出现 <code>/bff/pv21</code> 和 <code>/bff/pv20</code>。</td><td><span class="badge">PASS</span></td></tr>
+          <tr><td>运行闭环</td><td>WorkflowDiff -> 发布 -> 运行 -> Human Gate -> Evidence Review。</td><td>三个业务场景均完成运行与证据回读。</td><td><span class="badge">PASS</span></td></tr>
+          <tr><td>执行器融合</td><td>Skill / Tool / MCP 只能以受治理资源出现。</td><td>执行器证据报告包含 Skill、Tool、MCP，且不声明无限制执行。</td><td><span class="badge">PASS</span></td></tr>
+          <tr><td>运行器能力</td><td>不得把暂不支持能力写成已完成。</td><td>非线性图发布/运行被前置校验阻断，避免假绿。</td><td><span class="badge limited">受限完成</span></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>PRD 覆盖与未完成项</h2>
+      <table>
+        <thead><tr><th>PRD 能力</th><th>证据</th><th>状态</th><th>备注</th></tr></thead>
+        <tbody>
+          <tr><td>用户打开项目后先看到工作流平台。</td><td><code>01-wp-m1-main-entry.png</code>、route assertion。</td><td><span class="badge">PASS</span></td><td>支持人类快速理解项目入口。</td></tr>
+          <tr><td>用户能体验画布交互。</td><td><code>02-wp-m2-canvas-drag-zoom.png</code>、<code>03-wp-m2-connect-cancel.png</code>、edge quality report。</td><td><span class="badge">PASS</span></td><td>交互证据覆盖本阶段要求。</td></tr>
+          <tr><td>用户能运行基础 Agent 工作流并人工审查产物。</td><td><code>04-wp-m3-three-scenarios.png</code>、runtime inspect、evidence panel。</td><td><span class="badge">PASS</span></td><td>当前运行图为线性闭环。</td></tr>
+          <tr><td>用户能看到受治理执行资源。</td><td><code>05-wp-m4-governed-executor.png</code>、executor integration report。</td><td><span class="badge">PASS</span></td><td>仅证明受治理路径。</td></tr>
+          <tr><td>外部 App 接入。</td><td>仅有 PV22 文档与 readiness 边界。</td><td><span class="badge limited">未实现</span></td><td>不得在本阶段声明完成。</td></tr>
+          <tr><td>真实音频 ASR 会议处理。</td><td>当前使用 transcript/text 输入。</td><td><span class="badge limited">未实现</span></td><td>需后续 Meeting pack / connector 证据。</td></tr>
+          <tr><td>生产部署、安全租户硬化。</td><td>当前无生产证据。</td><td><span class="badge boundary">No-Go</span></td><td>只能作为后续目标。</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>用户场景体验路径</h2>
+      <div class="two">
+        <figure>
+          <img src="../workflow-platform-main-entry/01-wp-m1-main-entry.png" alt="Workflow Platform main entry screenshot">
+          <figcaption>用户进入项目后看到 Workflow Platform 主入口，包含工作空间、项目、工作流、图、运行和证据摘要。</figcaption>
+        </figure>
+        <figure>
+          <img src="../workflow-platform-main-entry/02-wp-m2-canvas-drag-zoom.png" alt="Canvas drag and zoom screenshot">
+          <figcaption>画布支持滚轮缩放、节点拖拽和右侧区域拖拽，满足本阶段交互验收。</figcaption>
+        </figure>
+        <figure>
+          <img src="../workflow-platform-main-entry/03-wp-m2-connect-cancel.png" alt="Canvas connect and cancel screenshot">
+          <figcaption>用户可以从节点端口发起连线，也可以取消连线；箭头和连线路径可见。</figcaption>
+        </figure>
+        <figure>
+          <img src="../workflow-platform-main-entry/04-wp-m3-three-scenarios.png" alt="Three scenarios screenshot">
+          <figcaption>文档总结、代码审查、会议整理三个业务场景完成运行、人工门禁和证据回读。</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section>
+      <h2>测试与证据结果</h2>
+      <table>
+        <thead><tr><th>检查项</th><th>命令或证据</th><th>结果</th></tr></thead>
+        <tbody>
+          <tr><td>前端单元测试</td><td><code>node node_modules/typescript/bin/tsc -p tsconfig.test.json && node --test dist-test/__tests__/*.test.js</code></td><td><span class="badge">PASS：86 tests</span></td></tr>
+          <tr><td>前端生产构建</td><td><code>node node_modules/typescript/bin/tsc -p tsconfig.json && node node_modules/vite/bin/vite.js build</code></td><td><span class="badge">PASS</span>，存在 Vite chunk-size warning</td></tr>
+          <tr><td>BFF 专项测试</td><td><code>pytest tests/test_pv19... tests/test_pv20... tests/test_pv21...</code></td><td><span class="badge">PASS：4 tests</span>，存在依赖弃用 warning</td></tr>
+          <tr><td>Chrome CDP E2E</td><td><code>workflow_platform_main_entry_cdp_acceptance.mjs</code></td><td><span class="badge">PASS</span></td></tr>
+          <tr><td>JSON 证据解析</td><td>10 个 JSON 文件全部解析，manifest 引用存在。</td><td><span class="badge">PASS</span></td></tr>
+          <tr><td>No False Green</td><td><code>no-false-green-scan.txt</code> 与源码/证据扫描。</td><td><span class="badge">PASS</span></td></tr>
+          <tr><td>脱敏扫描</td><td><code>redaction-scan.txt</code></td><td><span class="badge">PASS</span></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>代码检视与文档审计结论</h2>
+      <div class="two">
+        <div class="card">
+          <h3>代码检视</h3>
+          <ul>
+            <li>入口、画布、运行闭环和执行器面板有对应自动化证据。</li>
+            <li>BFF route boundary 有网络日志证明，未发现浏览器绕过 runtime/store。</li>
+            <li>非线性图运行能力被限制，当前处理是安全边界而非功能完成。</li>
+            <li>客户端错误信息已能保留 BFF 状态码，有利于后续审计。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>文档审计</h3>
+          <ul>
+            <li>PRD、目标架构、验收门槛和 evidence schema 能支撑 WP-M1 至 WP-M4。</li>
+            <li>文档中的禁用词命中主要位于 No-Go/风险说明，不是通过声明。</li>
+            <li>阶段命名保持 WP-M* 与 PV* 分离，未发现把 PV22 写成本阶段完成。</li>
+            <li>后续仍需为 PV22、生产硬化、真实 ASR 和非线性 runtime 生成独立计划与证据。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>最终审计意见</h2>
+      <p><strong class="pass">阶段性验收：PASS。</strong> 当前项目在 WP-M1 至 WP-M4 范围内具备可审查的 Workflow Platform MVP 候选体验：用户可以进入平台、操作画布、运行三个业务场景、经过人工审查并查看证据。</p>
+      <p><strong>保留风险：</strong>当前不是生产级交付；非线性图运行、外部 App 接入、真实音频 ASR、生产部署、安全/租户治理仍是后续阶段。</p>
+    </section>
+  </main>
+</body>
+</html>

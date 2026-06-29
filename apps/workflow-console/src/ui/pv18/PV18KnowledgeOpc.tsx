@@ -16,7 +16,7 @@ type LoadState = "loading" | "ready" | "error";
 
 const DEFAULT_SOURCE_TITLE = "HarnessOS PV18 业务验收资料";
 const DEFAULT_SOURCE_CONTENT =
-  "HarnessOS 通过 BFF DTO、Pack、Connector、Gateway、Artifact、Trace 和 Evidence 边界验证业务工作流。PV18 Knowledge OPC 只验证 bounded 业务闭环，不声明生产可用。";
+  "HarnessOS 通过 BFF DTO、Pack、Connector、Gateway、Artifact、Trace 和 Evidence 边界验证业务工作流。PV18 Knowledge OPC 只验证 bounded 业务闭环，不声明上线运营就绪。";
 const DEFAULT_QUERY = "HarnessOS 如何用业务工作流验证平台能力？";
 
 export function PV18KnowledgeOpc() {

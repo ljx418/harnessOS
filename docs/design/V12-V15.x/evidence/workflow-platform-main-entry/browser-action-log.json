@@ -1,0 +1,18 @@
+{
+  "schema_version": "workflow_platform.canvas_action_log.v1",
+  "stage": "WP-M1-WP-M4",
+  "status": "PASS",
+  "ui_log_text": "Action Log\nexecutor_action / tool / PASS\nexecutor_action / skill / PASS\nevidence_review / meeting_brief / PASS\nhuman_gate / meeting_brief / PASS\nrun / meeting_brief / PASS\nevidence_review / code_review / PASS\nhuman_gate / code_review / PASS\nrun / code_review / PASS\nevidence_review / document_summary / PASS\nhuman_gate / document_summary / PASS\nrun / document_summary / PASS\ncancel_connect / start_intake / PASS\nfree_connect / start_intake->evidence_review / PASS\nright_area_drag / evidence_review / PASS\nselect_node / evidence_review / PASS\nnode_drag / agent_analyze / PASS\nselect_node / agent_analyze / PASS\nwheel_zoom / canvas / PASS\nload / workflow-platform-main-entry / PASS",
+  "actions": [
+    "wheel_zoom",
+    "node_drag",
+    "right_area_drag",
+    "free_connect",
+    "cancel_connect",
+    "run",
+    "human_gate",
+    "evidence_review",
+    "executor_action"
+  ],
+  "created_at": "2026-06-29T00:00:00Z"
+}

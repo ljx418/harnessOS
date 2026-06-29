@@ -1,0 +1,19 @@
+{
+  "schema_version": "workflow_platform.agent_executor_integration_report.v1",
+  "status": "PASS",
+  "governed_resources": [
+    "Skill",
+    "Tool",
+    "MCP"
+  ],
+  "scenario_coverage": [
+    "document_summary",
+    "code_review",
+    "meeting_brief"
+  ],
+  "non_claims": [
+    "unrestricted automation",
+    "agent_executor_readiness",
+    "production_readiness"
+  ]
+}

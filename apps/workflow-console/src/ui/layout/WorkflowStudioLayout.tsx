@@ -8,6 +8,10 @@ import { V15ObservabilityDeployment } from "../v15/V15ObservabilityDeployment.js
 import { PV16ProductRuntimeHardening } from "../pv16/PV16ProductRuntimeHardening.js";
 import { PV17ProductClosedLoop } from "../pv17/PV17ProductClosedLoop.js";
 import { PV18KnowledgeOpc } from "../pv18/PV18KnowledgeOpc.js";
+import { PV19RuntimeWorkflowPlatform } from "../pv19/PV19RuntimeWorkflowPlatform.js";
+import { PV20AgentExecutor } from "../pv20/PV20AgentExecutor.js";
+import { PV21CompleteWorkflowStudio } from "../pv21/PV21CompleteWorkflowStudio.js";
+import { WorkflowPlatformMainEntry } from "../workflow-platform/WorkflowPlatformMainEntry.js";
 import { WorkflowCanvas } from "../workflow/WorkflowCanvas.js";
 import "./workflow-studio-layout.css";
 
@@ -20,6 +24,10 @@ export type VisualAcceptanceState =
   | "pv16-product-runtime-hardening"
   | "pv17-product-closed-loop"
   | "pv18-knowledge-opc"
+  | "pv19-runtime-workflow-platform"
+  | "pv20-agent-executor"
+  | "pv21-complete-workflow-studio"
+  | "workflow-platform"
   | "agent-draft-proposal"
   | "folder-debug-scan"
   | "running-board"
@@ -51,6 +59,18 @@ export function WorkflowStudioLayout({ state = "overview" }: WorkflowStudioLayou
   }
   if (state === "pv18-knowledge-opc") {
     return <PV18KnowledgeOpc />;
+  }
+  if (state === "pv19-runtime-workflow-platform") {
+    return <PV19RuntimeWorkflowPlatform />;
+  }
+  if (state === "pv20-agent-executor") {
+    return <PV20AgentExecutor />;
+  }
+  if (state === "pv21-complete-workflow-studio") {
+    return <PV21CompleteWorkflowStudio />;
+  }
+  if (state === "workflow-platform") {
+    return <WorkflowPlatformMainEntry />;
   }
 
   const rightPanel = state === "folder-debug-scan" ? <FolderInputInspector /> : state === "governance-evidence" ? <GovernanceEvidencePanel /> : <AgentAssistantPanel />;

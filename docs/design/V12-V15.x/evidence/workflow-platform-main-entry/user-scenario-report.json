@@ -1,0 +1,96 @@
+{
+  "schema_version": "workflow_platform.user_scenario_report.v1",
+  "status": "PASS",
+  "scenarios": [
+    {
+      "scenario_id": "document_summary",
+      "title": "文档 / 知识总结",
+      "status": "PASS",
+      "user_input": {
+        "input_path": "docs/design/V12-V15.x/workflow_platform_main_entry_prd.md",
+        "sha256": "dd9eca33aaa929b090fd0fa690c8db42031f6ce8a8d35023a07c8df05d2da0dc",
+        "bytes_sampled": 3310
+      },
+      "platform_actions": [
+        "canvas edit/connect/configure",
+        "save",
+        "validate",
+        "WorkflowDiff",
+        "publish",
+        "run",
+        "Human Gate",
+        "Evidence Review"
+      ],
+      "human_review_point": "WorkflowDiff confirmation and Human Gate approval",
+      "output": "Scenario output summary and evidence refs visible in acceptance report",
+      "evidence": [
+        "browser screenshot",
+        "BFF route log",
+        "DTO snapshot",
+        "runtime inspect",
+        "human action",
+        "evidence panel"
+      ]
+    },
+    {
+      "scenario_id": "code_review",
+      "title": "代码审查 / 变更风险检查",
+      "status": "PASS",
+      "user_input": {
+        "input_path": "apps/workflow-console/src/App.tsx",
+        "sha256": "4105f9566b28d1e0d7b8b09f7e9dce024e3ab916d31a8c31509d1cb61005e249",
+        "bytes_sampled": 1824
+      },
+      "platform_actions": [
+        "canvas edit/connect/configure",
+        "save",
+        "validate",
+        "WorkflowDiff",
+        "publish",
+        "run",
+        "Human Gate",
+        "Evidence Review"
+      ],
+      "human_review_point": "WorkflowDiff confirmation and Human Gate approval",
+      "output": "Scenario output summary and evidence refs visible in acceptance report",
+      "evidence": [
+        "browser screenshot",
+        "BFF route log",
+        "DTO snapshot",
+        "runtime inspect",
+        "human action",
+        "evidence panel"
+      ]
+    },
+    {
+      "scenario_id": "meeting_brief",
+      "title": "会议 / 访谈整理",
+      "status": "PASS",
+      "user_input": {
+        "input_path": "TASKS.md",
+        "sha256": "d671115a678dd91f55c0a7b469833ffeb2f1f9261d7243c26af3160446f74f3e",
+        "bytes_sampled": 1932
+      },
+      "platform_actions": [
+        "canvas edit/connect/configure",
+        "save",
+        "validate",
+        "WorkflowDiff",
+        "publish",
+        "run",
+        "Human Gate",
+        "Evidence Review"
+      ],
+      "human_review_point": "WorkflowDiff confirmation and Human Gate approval",
+      "output": "Scenario output summary and evidence refs visible in acceptance report",
+      "evidence": [
+        "browser screenshot",
+        "BFF route log",
+        "DTO snapshot",
+        "runtime inspect",
+        "human action",
+        "evidence panel"
+      ]
+    }
+  ]
+}

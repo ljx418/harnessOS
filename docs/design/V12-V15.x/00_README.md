@@ -99,14 +99,32 @@ observability and deployable operations.
   `data_service_mcp` evidence, screenshots and acceptance runner output. It
   does not prove production readiness, complete Workflow Studio, complete Agent
   executor or full commercial Knowledge productization.
+- PV19 Runtime Workflow Platform Closed Loop has passed bounded review
+  acceptance. It proves a bounded platform loop covering workbench
+  orchestration, WorkflowDiff, publish WorkflowVersion, runtime-backed
+  WorkflowInstance, human interaction and evidence review.
+- PV20 Complete Agent Executor bounded review path has passed through S6. It
+  proves a governed executor review path only and does not prove production
+  readiness, unrestricted automation or complete Studio implementation.
+- PV21 Complete Workflow Studio bounded candidate has passed bounded
+  acceptance. It proves default Studio entry, BFF DTO boundary,
+  graph save/validate/diff, publish/rollback, runtime run, human gate and
+  evidence review for bounded review only.
+- PV22 External App Contract documentation/readiness is complete. It defines
+  SDK, BFF template, reference app, capability token and registry targets, but
+  does not prove implementation evidence.
+- The current product-entry alignment target is WP-M0 Workflow Platform Main
+  Entry. WP-M0 documents that subsequent implementation should make the
+  workflow platform the first product entry before PV22 implementation becomes
+  the default next step. WP-M0 documents are not implementation evidence.
 - V12 design now starts with component-level prototype review before full Figma
   or real browser implementation. The required component sketch gate is defined
   in `v12_component_prototype_plan.md`; execution details, evidence paths and
   per-component acceptance are defined in
   `v12_component_prototype_execution_plan.md`.
 - This V12-V15 package is the accepted staged planning and target architecture
-  baseline for bounded productization review. The current post-V15 accepted
-  pilot is PV16 product-runtime hardening readiness and evidence.
+  baseline for bounded productization review. The current selected alignment
+  target is WP-M0 Workflow Platform Main Entry.
 
 ## Allowed Planning Claim
 
@@ -128,6 +146,22 @@ PV17 complete: product closed loop implementation ready for bounded review.
 
 PV18 complete: Knowledge OPC productization implementation ready for bounded review.
 
+## Allowed PV19 Planning Claim
+
+PV19 planning complete: runtime workflow platform closed loop development plan ready for implementation review.
+
+## Allowed PV20 Bounded Review Claim
+
+PV20 bounded review path complete through S6: governed Agent executor candidate evidence ready for bounded review.
+
+## Allowed PV21 Planning Claim
+
+PV21 planning complete: complete Workflow Studio candidate development plan ready for implementation review.
+
+## Allowed WP-M0 Documentation Claim
+
+WP-M0 complete: Workflow Platform main-entry documentation ready for implementation review.
+
 ## Forbidden Interpretations
 
 - Xpert parity complete
@@ -139,10 +173,14 @@ PV18 complete: Knowledge OPC productization implementation ready for bounded rev
 - production deployment ready
 - observability production complete
 - autonomous workflow editing ready
+- PV19 expanded into production or complete platform implementation
+- runtime workflow platform closed loop complete without evidence
 - 已完全追平 Xpert
 - 生产可用
 - 完整工作流工作台已完成
 - Agent 执行器已完成
+- WP-M0 文档证明工作流平台实现完成
+- PV22 文档证明外部接入实现完成
 
 ## Canonical Documents
 
@@ -188,6 +226,49 @@ PV18 complete: Knowledge OPC productization implementation ready for bounded rev
 - `post_v15_next_stage_development_and_acceptance_plan.md`
 - `post_v15_prd_architecture_coverage_audit.md`
 - `post_v15_acceptance_runner_spec.md`
+- `post_pv18_runtime_platform_development_route.md`
+- `pv19_runtime_workflow_platform_prd.md`
+- `pv19_runtime_workflow_platform_target_architecture.md`
+- `pv19_runtime_workflow_platform_development_and_acceptance_plan.md`
+- `pv19_runtime_workflow_platform_milestone_roadmap.md`
+- `pv19_runtime_workflow_platform_acceptance_gate.md`
+- `pv19_runtime_workflow_platform_current_gap_analysis.md`
+- `pv19_runtime_workflow_platform_bff_dto_contract.md`
+- `pv19_runtime_workflow_platform_implementation_task_matrix.md`
+- `pv19_runtime_workflow_platform_acceptance_runner_spec.md`
+- `pv19_runtime_workflow_platform_implementation_readiness_audit.md`
+- `pv19_runtime_workflow_platform_document_support_audit.md`
+- `pv19_runtime_workflow_platform_gap_analysis.drawio`
+- `pv20_complete_agent_executor_prd.md`
+- `pv20_complete_agent_executor_target_architecture.md`
+- `pv20_complete_agent_executor_development_and_acceptance_plan.md`
+- `pv20_complete_agent_executor_acceptance_gate.md`
+- `pv20_complete_agent_executor_implementation_task_matrix.md`
+- `pv20_complete_agent_executor_implementation_readiness_audit.md`
+- `pv21_complete_workflow_studio_prd.md`
+- `pv21_complete_workflow_studio_target_architecture.md`
+- `pv21_complete_workflow_studio_bff_dto_contract.md`
+- `pv21_complete_workflow_studio_acceptance_runner_spec.md`
+- `pv21_complete_workflow_studio_development_and_acceptance_plan.md`
+- `pv21_complete_workflow_studio_milestone_roadmap.md`
+- `pv21_complete_workflow_studio_acceptance_gate.md`
+- `pv21_complete_workflow_studio_current_gap_analysis.md`
+- `pv21_complete_workflow_studio_implementation_task_matrix.md`
+- `pv21_complete_workflow_studio_implementation_readiness_audit.md`
+- `pv21_complete_workflow_studio_document_support_audit.md`
+- `pv21_complete_workflow_studio_gap_analysis.drawio`
+- `workflow_platform_main_entry_prd.md`
+- `workflow_platform_main_entry_target_architecture.md`
+- `workflow_platform_main_entry_bff_dto_contract.md`
+- `workflow_platform_main_entry_development_and_acceptance_plan.md`
+- `workflow_platform_main_entry_acceptance_runner_spec.md`
+- `workflow_platform_main_entry_milestone_roadmap.md`
+- `workflow_platform_main_entry_acceptance_gate.md`
+- `workflow_platform_main_entry_current_gap_analysis.md`
+- `workflow_platform_main_entry_implementation_task_matrix.md`
+- `workflow_platform_main_entry_implementation_readiness_audit.md`
+- `workflow_platform_main_entry_document_support_audit.md`
+- `workflow_platform_main_entry_gap_analysis.drawio`
 - `post_v15_implementation_readiness_audit.md`
 - `pv17_product_closed_loop_prd.md`
 - `pv17_product_closed_loop_target_architecture.md`
@@ -334,6 +415,11 @@ PV18 complete: Knowledge OPC productization implementation ready for bounded rev
 - V14: Plugin, Skill, Tool and MCP ecosystem pilot.
 - V15: Observability, deployment and frontend interaction baseline review.
 - PV16: Product-runtime hardening pilot readiness and implementation evidence.
+- PV17: Product Closed Loop bounded review.
+- PV18: Knowledge OPC Productization bounded review.
+- PV19: Runtime Workflow Platform Closed Loop bounded review.
+- PV20: Complete Agent Executor bounded review path through S6.
+- PV21: Complete Workflow Studio documentation/readiness; implementation remains pending.
 
 ## Current Go / No-Go
 

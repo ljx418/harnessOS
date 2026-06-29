@@ -1,0 +1,25 @@
+{
+  "schema_version": "workflow_platform.runtime_inspect_report.v1",
+  "status": "PASS",
+  "required_readback": [
+    "WorkflowVersion",
+    "WorkflowInstance",
+    "StationRun",
+    "Human Gate",
+    "Evidence refs"
+  ],
+  "scenarios": [
+    {
+      "scenario_id": "document_summary",
+      "status": "PASS"
+    },
+    {
+      "scenario_id": "code_review",
+      "status": "PASS"
+    },
+    {
+      "scenario_id": "meeting_brief",
+      "status": "PASS"
+    }
+  ]
+}

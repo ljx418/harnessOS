@@ -1,0 +1,54 @@
+{
+  "schema_version": "pv19.artifact_manifest.v1",
+  "stage_id": "PV19-SA",
+  "status": "PASS",
+  "created_at": "2026-06-27T00:00:00Z",
+  "artifacts": [
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv19-runtime-workflow-platform/backend-acceptance-report.html"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv19-runtime-workflow-platform/backend-acceptance-report.json"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv19-runtime-workflow-platform/acceptance-data.json"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv19-runtime-workflow-platform/artifact-manifest.json"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv19-runtime-workflow-platform/audit-closure.md"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv19-runtime-workflow-platform/prd-spec-review.md"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv19-runtime-workflow-platform/no-false-green-scan.txt"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv19-runtime-workflow-platform/pv19-acceptance-report.html"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv19-runtime-workflow-platform/browser-network-log.json"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv19-runtime-workflow-platform/01-pv19-workbench-loaded.png"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv19-runtime-workflow-platform/02-graph-validate-and-diff.png"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv19-runtime-workflow-platform/03-publish-and-run-waiting-approval.png"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv19-runtime-workflow-platform/04-human-gate-approved.png"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv19-runtime-workflow-platform/05-evidence-review.png"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/pv19-runtime-workflow-platform/06-pv19-full-page-completed.png"
+    }
+  ],
+  "blocked_artifacts": []
+}

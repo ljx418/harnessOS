@@ -1,0 +1,349 @@
+<mxfile host="Electron" agent="Codex" pages="7">
+  <diagram id="pv21-overview" name="总览">
+    <mxGraphModel dx="1884" dy="876" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title-overview" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1f4e79;fontColor=#ffffff;strokeColor=#1f4e79;fontSize=22;fontStyle=1;" value="PV21：完整 Workflow Studio 候选能力总览" vertex="1">
+          <mxGeometry height="54" width="720" x="40" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-overview" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;fontSize=14;" value="状态图例&lt;br&gt;绿色：已实现基础&lt;br&gt;黄色：需修改接入&lt;br&gt;蓝色：待新增 PV21 能力&lt;br&gt;红色：禁止或不纳入 PV21" vertex="1">
+          <mxGeometry height="120" width="360" x="1120" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="v13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=15;" value="V13&lt;br&gt;Editable Studio pilot&lt;br&gt;已证明：可编辑试点&lt;br&gt;未证明：完整工作台" vertex="1">
+          <mxGeometry height="130" width="280" x="70" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="pv19" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=15;" value="PV19&lt;br&gt;Runtime-backed closed loop&lt;br&gt;已证明：发布、运行、人工交互、证据闭环&lt;br&gt;未证明：完整画布体验" vertex="1">
+          <mxGeometry height="130" width="330" x="420" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="pv20" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=15;" value="PV20&lt;br&gt;Governed Agent executor bounded review&lt;br&gt;已证明：skill/tool/MCP fixture、approval、timeout/cancel/retry/redaction" vertex="1">
+          <mxGeometry height="130" width="380" x="820" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="pv21" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=18;fontStyle=1;" value="PV21 目标&lt;br&gt;一个真实 Workflow Studio 候选入口&lt;br&gt;画布 + Inspector + Validation + Diff + Version + Run + Human Gate + Evidence + Rollback" vertex="1">
+          <mxGeometry height="150" width="820" x="300" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="no-prod" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=15;" value="禁止误报&lt;br&gt;不得宣称生产可用、Xpert parity、产品级前端完成、完整工作台已完成、Agent 执行器生产可用" vertex="1">
+          <mxGeometry height="100" width="820" x="300" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="v13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;" target="pv21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="pv19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;" target="pv21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="pv20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;" target="pv21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="pv21-gap" name="当前架构与目标差异">
+    <mxGraphModel dx="1200" dy="760" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title-gap" value="当前架构与 PV21 目标差异" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1f4e79;fontColor=#ffffff;strokeColor=#1f4e79;fontSize=22;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="30" width="620" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="cur-entry" value="当前入口&lt;br&gt;存在空白/割裂体验风险&lt;br&gt;V13/PV19/PV20 页面分散" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="80" y="150" width="300" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="target-entry" value="目标入口&lt;br&gt;默认进入真实 Studio&lt;br&gt;画布、节点库、Inspector、版本、运行、证据同屏" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="520" y="150" width="360" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="cur-graph" value="当前 Graph&lt;br&gt;可编辑 pilot 与 runtime graph readback 未完整统一" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="80" y="330" width="300" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="target-graph" value="目标 Graph&lt;br&gt;所有节点/边/参数变更经 BFF 后端 readback&lt;br&gt;validation 阻止无效发布" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="520" y="330" width="360" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="cur-version" value="当前版本能力&lt;br&gt;PV19 有 publish 基础&lt;br&gt;rollback、run history、版本比较需补齐" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="80" y="510" width="300" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="target-version" value="目标版本能力&lt;br&gt;WorkflowDiff + publish + rollback + run history + audit refs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="520" y="510" width="360" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="cur-evidence" value="当前证据&lt;br&gt;PV19/PV20 分阶段分页面证据" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="80" y="690" width="300" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="target-evidence" value="目标证据&lt;br&gt;artifact、trace、quality、approval、claim、redaction refs 聚合审查" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="520" y="690" width="360" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="banned-gap" value="禁止路径&lt;br&gt;业务 Pack 专用 core 分支&lt;br&gt;浏览器直连 runtime/internal&lt;br&gt;mock-only PASS&lt;br&gt;删除历史证据" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="1010" y="330" width="360" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="g1" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" edge="1" parent="1" source="cur-entry" target="target-entry">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="g2" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" edge="1" parent="1" source="cur-graph" target="target-graph">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="g3" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" edge="1" parent="1" source="cur-version" target="target-version">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="g4" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" edge="1" parent="1" source="cur-evidence" target="target-evidence">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="pv21-code" name="代码实体与分层交互">
+    <mxGraphModel dx="1884" dy="876" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title-code" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1f4e79;fontColor=#ffffff;strokeColor=#1f4e79;fontSize=22;fontStyle=1;" value="PV21 具体代码实体与分层交互" vertex="1">
+          <mxGeometry height="54" width="620" x="40" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="browser" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;" value="Browser 工作台&lt;br&gt;apps/workflow-console/src/App.tsx（需修改）&lt;br&gt;ui/pv21/PV21CompleteWorkflowStudio.tsx（待新增）&lt;br&gt;types/pv21.ts（待新增）&lt;br&gt;lib/api.ts（需修改）" vertex="1">
+          <mxGeometry height="150" width="430" x="70" y="247" as="geometry" />
+        </mxCell>
+        <mxCell id="bff" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;" value="BFF DTO Facade&lt;br&gt;apps/api/routers/bff.py（需修改）&lt;br&gt;/bff/pv21/studio/state&lt;br&gt;/graph、/validate、/diff、/versions、/runs、/evidence" vertex="1">
+          <mxGeometry height="150" width="450" x="590" y="247" as="geometry" />
+        </mxCell>
+        <mxCell id="gateway" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;" value="Gateway Facade&lt;br&gt;apps/gateway/service.py（需修改）&lt;br&gt;聚合 workflow graph、version、run、human action、evidence operations" vertex="1">
+          <mxGeometry height="150" width="380" x="625" y="447" as="geometry" />
+        </mxCell>
+        <mxCell id="workflow" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;" value="Workflow Truth&lt;br&gt;core/workflows/models.py（需修改）&lt;br&gt;core/workflows/store.py（需修改）&lt;br&gt;draft graph、validation、WorkflowVersion、rollback、run history" vertex="1">
+          <mxGeometry height="150" width="430" x="600" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="executor" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;" value="Agent Executor&lt;br&gt;core/agent_executor/*（已实现基础，需 Studio 接入）&lt;br&gt;core/station_agents/contracts.py&lt;br&gt;AgentExecutionEnvelope / Result" vertex="1">
+          <mxGeometry height="150" width="370" x="1200" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="evidence" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;" value="Evidence Stores&lt;br&gt;apps/gateway/artifacts.py（已实现基础）&lt;br&gt;traces.py、approvals.py、quality refs&lt;br&gt;PV21 evidence summary（待聚合）" vertex="1">
+          <mxGeometry height="150" width="330" x="1220" y="247" as="geometry" />
+        </mxCell>
+        <mxCell id="acceptance" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" value="Acceptance Runner（待新增）&lt;br&gt;backend runner + browser E2E + screenshots + route log + No False Green + redaction scan" vertex="1">
+          <mxGeometry height="110" width="620" x="910" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="c1" edge="1" parent="1" source="browser" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" target="bff">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c2" edge="1" parent="1" source="bff" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" target="gateway">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c3" edge="1" parent="1" source="gateway" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" target="workflow">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c4" edge="1" parent="1" source="workflow" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" target="executor">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c5" edge="1" parent="1" source="executor" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" target="evidence">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c6" edge="1" parent="1" source="evidence" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" target="bff">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c7" edge="1" parent="1" source="acceptance" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#6c8ebf;endArrow=block;dashed=1;" target="bff">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="pv21-flow" name="完整 Studio 用户路径">
+    <mxGraphModel dx="1200" dy="760" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title-flow" value="PV21 目标用户体验路径" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1f4e79;fontColor=#ffffff;strokeColor=#1f4e79;fontSize=22;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="30" width="540" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="f1" value="1 打开 Studio&lt;br&gt;默认入口非空&lt;br&gt;加载 /bff/pv21/studio/state" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="70" y="150" width="210" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="f2" value="2 编辑画布&lt;br&gt;节点库添加节点&lt;br&gt;连线、删除、布局" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="350" y="150" width="210" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="f3" value="3 Inspector&lt;br&gt;编辑参数、policy、executor binding" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="630" y="150" width="230" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="f4" value="4 Validation&lt;br&gt;错误定位到节点/边&lt;br&gt;阻止无效发布" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="930" y="150" width="230" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="f5" value="5 Diff &amp; Publish&lt;br&gt;审查 WorkflowDiff&lt;br&gt;用户确认发布版本" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1230" y="150" width="230" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="f6" value="6 Run&lt;br&gt;运行已发布 WorkflowVersion&lt;br&gt;创建 WorkflowInstance" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1230" y="390" width="230" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="f7" value="7 Inspect&lt;br&gt;查看 StationRun&lt;br&gt;Agent execution refs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="930" y="390" width="230" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="f8" value="8 Human Gate&lt;br&gt;人工确认/拒绝&lt;br&gt;后端状态改变" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="630" y="390" width="230" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="f9" value="9 Evidence&lt;br&gt;artifact、trace、quality、approval、claim、redaction" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="330" y="390" width="240" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="f10" value="10 Rollback&lt;br&gt;回滚到旧版本&lt;br&gt;历史和 audit 保留" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="70" y="390" width="210" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-redline" value="体验红线&lt;br&gt;不能用静态介绍页、截图或前端 mock 替代运行证据；每一步都必须能追踪到 BFF DTO 或 runtime/evidence readback。" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="260" y="650" width="980" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="fe1" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" edge="1" parent="1" source="f1" target="f2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fe2" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" edge="1" parent="1" source="f2" target="f3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fe3" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" edge="1" parent="1" source="f3" target="f4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fe4" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" edge="1" parent="1" source="f4" target="f5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fe5" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" edge="1" parent="1" source="f5" target="f6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fe6" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" edge="1" parent="1" source="f6" target="f7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fe7" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" edge="1" parent="1" source="f7" target="f8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fe8" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" edge="1" parent="1" source="f8" target="f9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fe9" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" edge="1" parent="1" source="f9" target="f10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="pv21-plan" name="开发及验收计划">
+    <mxGraphModel dx="1884" dy="876" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title-plan" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1f4e79;fontColor=#ffffff;strokeColor=#1f4e79;fontSize=22;fontStyle=1;" value="PV21 开发及验收计划" vertex="1">
+          <mxGeometry height="54" width="520" x="40" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="s1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" value="PV21-S1&lt;br&gt;入口与 State DTO&lt;br&gt;验收：首屏截图、state snapshot、route log" vertex="1">
+          <mxGeometry height="110" width="310" x="70" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="s2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" value="PV21-S2&lt;br&gt;Canvas / Inspector / Validation&lt;br&gt;验收：graph roundtrip、negative fixtures、编辑截图" vertex="1">
+          <mxGeometry height="110" width="360" x="470" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="s3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" value="PV21-S3&lt;br&gt;Diff / Publish / Rollback&lt;br&gt;验收：diff report、version report、audit refs" vertex="1">
+          <mxGeometry height="110" width="360" x="930" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="s4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" value="PV21-S4&lt;br&gt;Run / Inspect / Human Gate&lt;br&gt;验收：runtime report、human transition report" vertex="1">
+          <mxGeometry height="110" width="360" x="930" y="365" as="geometry" />
+        </mxCell>
+        <mxCell id="s5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" value="PV21-S5&lt;br&gt;Evidence / UX / Claim scan&lt;br&gt;验收：evidence summary、browser screenshots、No False Green、redaction" vertex="1">
+          <mxGeometry height="120" width="360" x="470" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="sa" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" value="PV21-SA&lt;br&gt;聚合验收&lt;br&gt;acceptance-data、artifact-manifest、PRD/架构/UX 审计闭环" vertex="1">
+          <mxGeometry height="120" width="310" x="70" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="audit-loop" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=16;" value="每个子阶段的强制闭环&lt;br&gt;PRD 规格检视 -&gt; 代码/文档审计 -&gt; 功能检查 -&gt; 后端验收 -&gt; 浏览器 E2E -&gt; 截图证据 -&gt; No False Green -&gt; redaction -&gt; 下一阶段准入" vertex="1">
+          <mxGeometry height="100" width="1160" x="150" y="640" as="geometry" />
+        </mxCell>
+        <mxCell id="pe1" edge="1" parent="1" source="s1" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" target="s2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pe2" edge="1" parent="1" source="s2" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" target="s3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pe3" edge="1" parent="1" source="s3" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" target="s4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pe4" edge="1" parent="1" source="s4" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" target="s5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pe5" edge="1" parent="1" source="s5" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" target="sa">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="pv21-milestone" name="项目里程碑">
+    <mxGraphModel dx="1884" dy="876" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title-mile" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1f4e79;fontColor=#ffffff;strokeColor=#1f4e79;fontSize=22;fontStyle=1;" value="PV21 项目里程碑" vertex="1">
+          <mxGeometry height="54" width="480" x="40" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="m0" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;" value="M0 文档准备&lt;br&gt;PRD / 架构 / 计划 / 门槛 / drawio / audit" vertex="1">
+          <mxGeometry height="100" width="220" x="80" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="m1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" value="M1 入口与状态&lt;br&gt;Studio state DTO&lt;br&gt;首屏截图" vertex="1">
+          <mxGeometry height="100" width="220" x="340" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="m2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" value="M2 画布编辑&lt;br&gt;Graph roundtrip&lt;br&gt;Validation" vertex="1">
+          <mxGeometry height="100" width="220" x="600" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="m3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" value="M3 版本生命周期&lt;br&gt;Diff / Publish / Rollback / Run history" vertex="1">
+          <mxGeometry height="100" width="240" x="860" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="m4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" value="M4 运行与人工交互&lt;br&gt;WorkflowInstance / StationRun / Human gate" vertex="1">
+          <mxGeometry height="100" width="260" x="1140" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="m5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" value="M5 证据与 UX 闭环&lt;br&gt;Evidence summary&lt;br&gt;Browser E2E&lt;br&gt;No False Green / redaction" vertex="1">
+          <mxGeometry height="120" width="300" x="1120" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="m6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" value="M6 聚合验收&lt;br&gt;acceptance-data&lt;br&gt;artifact-manifest&lt;br&gt;audit closure" vertex="1">
+          <mxGeometry height="120" width="270" x="360" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="future" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=15;" value="后续阶段不混入 PV21&lt;br&gt;PV22 外部应用接入&lt;br&gt;PV23 生产治理硬化&lt;br&gt;PV24 业务 Pack 产品化&lt;br&gt;PV25 开源/商业化准备" vertex="1">
+          <mxGeometry height="130" width="520" x="460" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="me1" edge="1" parent="1" source="m0" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" target="m1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="me2" edge="1" parent="1" source="m1" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" target="m2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="me3" edge="1" parent="1" source="m2" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" target="m3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="me4" edge="1" parent="1" source="m3" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" target="m4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="me5" edge="1" parent="1" source="m4" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" target="m5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="me6" edge="1" parent="1" source="m5" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" target="m6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="pv21-gate" name="验收门槛与出门条件">
+    <mxGraphModel dx="1200" dy="760" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title-gate" value="PV21 验收门槛与出门条件" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1f4e79;fontColor=#ffffff;strokeColor=#1f4e79;fontSize=22;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="30" width="560" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="gate1" value="用户体验门槛&lt;br&gt;G1 默认入口非空&lt;br&gt;G3 graph authoring&lt;br&gt;G4 validation&lt;br&gt;G8 human interaction&lt;br&gt;G9 evidence review" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="90" y="150" width="360" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="gate2" value="架构门槛&lt;br&gt;G2 BFF boundary&lt;br&gt;G5 diff/publish&lt;br&gt;G6 rollback audit&lt;br&gt;G7 runtime run&lt;br&gt;G10 platform generality" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="560" y="150" width="360" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="gate3" value="证据门槛&lt;br&gt;acceptance-data&lt;br&gt;artifact-manifest&lt;br&gt;browser screenshots&lt;br&gt;route log&lt;br&gt;claim matrix&lt;br&gt;redaction scan" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="150" width="360" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="exit" value="出门条件&lt;br&gt;G1-G12 全部 PASS&lt;br&gt;PRD F1-F10 有证据或明确非阻塞说明&lt;br&gt;目标架构代码实体均有实现或 readback 证据&lt;br&gt;截图展示真实用户路径&lt;br&gt;聚合报告可追踪" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="270" y="460" width="940" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="blockers" value="硬阻断&lt;br&gt;空白入口、mock-only PASS、绕过 WorkflowVersion、前端模拟 human gate、缺少证据聚合、业务定制污染平台核心、失败验收写 PASS、越界完成声明" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="270" y="700" width="940" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ge1" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" edge="1" parent="1" source="gate1" target="exit">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ge2" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" edge="1" parent="1" source="gate2" target="exit">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ge3" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#666666;endArrow=block;" edge="1" parent="1" source="gate3" target="exit">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

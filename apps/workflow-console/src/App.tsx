@@ -16,6 +16,10 @@ function appEntryState(): AppEntryState | null {
     state === "pv16-product-runtime-hardening" ||
     state === "pv17-product-closed-loop" ||
     state === "pv18-knowledge-opc" ||
+    state === "pv19-runtime-workflow-platform" ||
+    state === "pv20-agent-executor" ||
+    state === "pv21-complete-workflow-studio" ||
+    state === "workflow-platform" ||
     state === "agent-draft-proposal" ||
     state === "folder-debug-scan" ||
     state === "running-board" ||
@@ -35,7 +39,7 @@ export function App() {
   }
 
   if (!entryState) {
-    return <WorkflowStudioLayout state="v13-editable-studio" />;
+    return <WorkflowStudioLayout state="workflow-platform" />;
   }
 
   return <WorkflowConsoleApp />;

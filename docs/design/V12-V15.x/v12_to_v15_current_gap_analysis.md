@@ -100,6 +100,20 @@ proof. The canonical PV17 gap document is
 `pv17_product_closed_loop_gap_analysis.drawio`, and the implementation evidence
 is under `evidence/pv17-product-closed-loop/`.
 
+## Post-PV18 Selected Gap
+
+PV18 Knowledge OPC has resolved the selected post-PV17 business-pack bounded
+review gap. The current selected documentation gap is PV19 Runtime Workflow
+Platform Closed Loop: the platform still needs one coherent, runtime-backed
+path where a user can use the workbench to orchestrate a workflow, confirm
+WorkflowDiff, publish WorkflowVersion, start WorkflowInstance, handle a human
+interaction gate and review artifact/trace/quality/audit/claim evidence.
+
+The canonical PV19 gap document is
+`pv19_runtime_workflow_platform_current_gap_analysis.md`, and the drawio
+overview is `pv19_runtime_workflow_platform_gap_analysis.drawio`. These are
+planning artifacts until implementation evidence exists.
+
 ## PV16 Development And Acceptance Plan Summary
 
 | PV16 Slice | User-Visible Outcome | Required Evidence |

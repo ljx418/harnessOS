@@ -1,0 +1,132 @@
+{
+  "schema_version": "pv19.runtime_workflow_platform_acceptance_data.v1",
+  "stage_id": "PV19-SA",
+  "status": "PASS",
+  "created_at": "2026-06-27T00:00:00Z",
+  "allowed_claim": "PV19 complete: runtime-backed workflow platform closed loop ready for bounded review.",
+  "scenario_results": [
+    {
+      "scenario_id": "workbench_state_loads",
+      "status": "PASS",
+      "description": "用户可打开 PV19 工作台状态 DTO，看到 workflow、draft、active version/run 和 health。",
+      "evidence_refs": [
+        "backend-acceptance-report.json"
+      ]
+    },
+    {
+      "scenario_id": "graph_readback_contains_human_gate",
+      "status": "PASS",
+      "description": "工作流图可读回，且 human_quality_gate 以 station.approval_required 表示。",
+      "evidence_refs": [
+        "backend-acceptance-report.json"
+      ]
+    },
+    {
+      "scenario_id": "workflow_diff_requires_confirmation",
+      "status": "PASS",
+      "description": "WorkflowDiff 生成 patch id，并声明发布前需要用户确认。",
+      "evidence_refs": [
+        "backend-acceptance-report.json"
+      ]
+    },
+    {
+      "scenario_id": "publish_creates_workflow_version",
+      "status": "PASS",
+      "description": "用户确认后发布 WorkflowVersion，后续运行引用该 version id。",
+      "evidence_refs": [
+        "backend-acceptance-report.json"
+      ]
+    },
+    {
+      "scenario_id": "runtime_run_waits_for_human_gate",
+      "status": "PASS",
+      "description": "运行发布版本后真实 WorkflowInstance 进入 waiting_approval。",
+      "evidence_refs": [
+        "backend-acceptance-report.json"
+      ]
+    },
+    {
+      "scenario_id": "human_action_completes_runtime",
+      "status": "PASS",
+      "description": "人工审批通过后 approval.respond 推动 WorkflowInstance completed。",
+      "evidence_refs": [
+        "backend-acceptance-report.json"
+      ]
+    },
+    {
+      "scenario_id": "evidence_summary_has_no_missing_refs",
+      "status": "PASS",
+      "description": "证据汇总包含 runtime、trace、artifact、quality、human gate 引用。",
+      "evidence_refs": [
+        "backend-acceptance-report.json"
+      ]
+    },
+    {
+      "scenario_id": "route_boundary_and_redaction_pass",
+      "status": "PASS",
+      "description": "验收仅使用 /bff/pv19 DTO；不直连 /v1/rpc 或内部 runtime。",
+      "evidence_refs": [
+        "no-false-green-scan.txt"
+      ]
+    }
+  ],
+  "route_boundary": {
+    "allowed_prefix": "/bff/pv19",
+    "browser_denylist": [
+      "/v1/rpc",
+      "/internal/runtime",
+      "/runtime/store",
+      "/api/runtime",
+      "/debug/runtime"
+    ],
+    "status": "specified"
+  },
+  "platform_generality": {
+    "status": "pass",
+    "primary_sample": "knowledge_opc",
+    "reuse_check": "folder-summary/reference workflow",
+    "core_customization_allowed": false
+  },
+  "runtime_summary": {
+    "workflow_instance": {
+      "workflow_instance_id": "wfi_dd942d725ace",
+      "workflow_template_id": "pv19_runtime_workflow_platform_reference",
+      "workflow_version_id": "wfv_e9d57c74d212",
+      "status": "completed"
+    },
+    "status": {
+      "workflow_instance_id": "wfi_dd942d725ace",
+      "status": "completed",
+      "current_station_ids": [],
+      "station_counts": {
+        "completed": 3
+      },
+      "job_counts": {
+        "completed": 3
+      },
+      "artifact_count": 3,
+      "quality_count": 1
+    },
+    "runtime_event_ref_count": 4,
+    "trace_ref_count": 13,
+    "artifact_ref_count": 3,
+    "quality_ref_count": 1,
+    "human_gate_ref_count": 1
+  },
+  "blocking_failures": [],
+  "browser_e2e": {
+    "status": "PASS",
+    "mode": "Chrome CDP",
+    "screenshots": [
+      "01-pv19-workbench-loaded.png",
+      "02-graph-validate-and-diff.png",
+      "03-publish-and-run-waiting-approval.png",
+      "04-human-gate-approved.png",
+      "05-evidence-review.png",
+      "06-pv19-full-page-completed.png"
+    ],
+    "reason": null,
+    "spec_path": "apps/workflow-console/e2e/workflow-pv19-runtime-workflow-platform.spec.ts",
+    "cdp_script_path": "apps/workflow-console/e2e/pv19_cdp_acceptance.mjs"
+  }
+}

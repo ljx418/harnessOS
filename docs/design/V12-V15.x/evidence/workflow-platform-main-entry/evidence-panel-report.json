@@ -1,0 +1,12 @@
+{
+  "schema_version": "workflow_platform.evidence_panel_report.v1",
+  "status": "PASS",
+  "categories": [
+    "artifact",
+    "trace",
+    "quality",
+    "audit",
+    "claim",
+    "redaction"
+  ]
+}

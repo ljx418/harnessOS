@@ -1,0 +1,111 @@
+{
+  "schema_version": "pv19.browser_network_log.v1",
+  "status": "PASS",
+  "requests": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4184/?studio=pv19-runtime-workflow-platform&app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4184/assets/index-BsfyhabF.js",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4184/assets/index-IftPNhZa.css",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4184/bff/pv19/workbench/state?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4184/bff/pv19/workflows/pv19_runtime_workflow_platform_reference/graph?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4184/bff/pv19/workflows/pv19_runtime_workflow_platform_reference/graph/validate?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4184/bff/pv19/workbench/state?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4184/bff/pv19/workflows/pv19_runtime_workflow_platform_reference/diff?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4184/bff/pv19/workbench/state?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4184/bff/pv19/workflows/pv19_runtime_workflow_platform_reference/versions/publish?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4184/bff/pv19/workbench/state?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4184/bff/pv19/workflows/pv19_runtime_workflow_platform_reference/runs?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4184/bff/pv19/runs/wfi_40a6edfea3db/inspect?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4184/bff/pv19/workbench/state?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4184/bff/pv19/runs/wfi_40a6edfea3db/human-actions?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4184/bff/pv19/runs/wfi_40a6edfea3db/inspect?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4184/bff/pv19/workbench/state?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4184/bff/pv19/runs/wfi_40a6edfea3db/inspect?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4184/bff/pv19/runs/wfi_40a6edfea3db/evidence?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4184/bff/pv19/workbench/state?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    }
+  ],
+  "forbidden_route_scan": {
+    "status": "PASS",
+    "forbidden_matches": []
+  },
+  "created_at": "2026-06-27T00:00:00Z"
+}

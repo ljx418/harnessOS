@@ -1,0 +1,355 @@
+<mxfile host="Electron" agent="Codex" pages="7">
+  <diagram id="wp-m0-1" name="目标体验总览">
+    <mxGraphModel dx="1600" dy="1100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title1" value="工作流平台首入口目标体验（WP-M0 文档门禁）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1E3A8A;fontColor=#FFFFFF;strokeColor=#1E3A8A;fontSize=22;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="40" width="1440" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="u1" value="用户打开 HarnessOS&lt;br&gt;默认进入工作流平台" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="160" width="210" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="u2" value="识别 Workspace / Project&lt;br&gt;看到当前 workflow 状态" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="160" width="240" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="u3" value="工作流画布&lt;br&gt;缩放 / 拖拽 / 选择 / 连线 / 取消" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="160" width="270" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="u4" value="Inspector 与资源面板&lt;br&gt;Agent / Tool / Skill / MCP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="970" y="160" width="270" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="u5" value="运行与证据&lt;br&gt;Diff / Publish / Run / Human gate / Evidence" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0E7FF;strokeColor=#4F46E5;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1290" y="160" width="230" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="a12" style="endArrow=block;html=1;strokeColor=#2563EB;strokeWidth=2;" edge="1" parent="1" source="u1" target="u2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a23" style="endArrow=block;html=1;strokeColor=#2563EB;strokeWidth=2;" edge="1" parent="1" source="u2" target="u3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a34" style="endArrow=block;html=1;strokeColor=#2563EB;strokeWidth=2;" edge="1" parent="1" source="u3" target="u4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a45" style="endArrow=block;html=1;strokeColor=#2563EB;strokeWidth=2;" edge="1" parent="1" source="u4" target="u5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend1" value="颜色语义：绿色=已实现有界证据；橙色=需修改/需硬化；蓝色=待新增目标；红色=No-Go/阻断风险；灰色=历史参考。" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#94A3B8;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="80" y="320" width="1440" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="out1" value="阶段完成后呈现的目标体验&lt;br&gt;&lt;br&gt;1. 首屏就是工作流平台。&lt;br&gt;2. 用户能操作画布并理解节点关系。&lt;br&gt;3. 用户能看到 WorkflowDiff、发布、运行、人工确认与证据。&lt;br&gt;4. 所有受限能力都有明确原因。&lt;br&gt;5. 不声明 production ready / complete Studio GA / Agent executor ready。" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontSize=16;align=left;spacingLeft=18;" vertex="1" parent="1">
+          <mxGeometry x="80" y="430" width="680" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="scope1" value="本阶段只做文档开发&lt;br&gt;&lt;br&gt;WP-M0 输出 PRD、目标架构、开发计划、里程碑、验收门槛、任务矩阵、审计和本 drawio。&lt;br&gt;&lt;br&gt;后续代码实现从 WP-M1 开始。" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF2F2;strokeColor=#DC2626;fontSize=16;align=left;spacingLeft=18;" vertex="1" parent="1">
+          <mxGeometry x="840" y="430" width="680" height="230" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="wp-m0-2" name="当前架构与目标架构差异">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title2" value="当前架构与目标架构差异" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1E3A8A;fontColor=#FFFFFF;strokeColor=#1E3A8A;fontSize=22;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="40" width="1440" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cur" value="当前已实现/有界证据" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="140" width="420" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="mod" value="需修改/需融合" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="140" width="420" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="new" value="待新增目标" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="140" width="420" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="cur1" value="PV19 Runtime Workflow Platform&lt;br&gt;/bff/pv19/*&lt;br&gt;publish / run / human / evidence" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="80" y="230" width="420" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="cur2" value="PV20 Governed Agent Executor&lt;br&gt;/bff/pv20/*&lt;br&gt;skill / tool / MCP fixtures" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="80" y="355" width="420" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="cur3" value="PV21 Complete Workflow Studio bounded candidate&lt;br&gt;/bff/pv21/*&lt;br&gt;save / validate / diff / publish / rollback / run" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="80" y="480" width="420" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="mod1" value="Root entry 与信息架构&lt;br&gt;App.tsx + WorkflowStudioLayout.tsx&lt;br&gt;统一默认体验和阶段 fallback" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="590" y="230" width="420" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="mod2" value="画布交互硬化&lt;br&gt;缩放 / 拖拽 / 自由连线 / 取消 / 箭头可见性&lt;br&gt;不再只做静态截图" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="590" y="355" width="420" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="mod3" value="证据聚合与文案边界&lt;br&gt;artifact / trace / quality / audit / claim / redaction&lt;br&gt;禁止过度完成声明" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="590" y="480" width="420" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="new1" value="WorkflowPlatformMainEntry&lt;br&gt;首入口 product shell&lt;br&gt;承载工作空间、画布、资源、运行和证据" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="230" width="420" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="new2" value="WorkflowPlatformBffFacade（后续目标）&lt;br&gt;稳定首入口 DTO facade&lt;br&gt;内部复用 PV19/PV20/PV21 route families" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="355" width="420" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="new3" value="统一 acceptance report&lt;br&gt;浏览器截图 + route log + DTO + runtime inspect + claim scan&lt;br&gt;中文可读" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="480" width="420" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="no2" value="No-Go：不得把 WP-M0 文档当实现证据；不得声明 production ready、complete Workflow Studio GA、Agent executor ready、Xpert parity complete。" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="670" width="1440" height="75" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="wp-m0-3" name="代码实体分层与交互">
+    <mxGraphModel dx="1653" dy="842" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1E3A8A;fontColor=#FFFFFF;strokeColor=#1E3A8A;fontSize=22;fontStyle=1;" value="代码实体分层与强关联交互关系" vertex="1">
+          <mxGeometry height="60" width="1440" x="80" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="l1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=17;fontStyle=1;" value="浏览器首入口层" vertex="1">
+          <mxGeometry height="50" width="300" x="80" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2563EB;fontSize=14;" value="apps/workflow-console/src/App.tsx&lt;br&gt;决定默认进入 Workflow Platform" vertex="1">
+          <mxGeometry height="75" width="300" x="80" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2563EB;fontSize=14;" value="WorkflowStudioLayout.tsx&lt;br&gt;承载 V13 / PV19 / PV20 / PV21 fallback" vertex="1">
+          <mxGeometry height="75" width="300" x="80" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="l2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=17;fontStyle=1;" value="工作台能力层" vertex="1">
+          <mxGeometry height="50" width="360" x="480" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#D97706;fontSize=14;" value="V13EditableStudio&lt;br&gt;graph edit / inspector / WorkflowDiff pilot" vertex="1">
+          <mxGeometry height="70" width="360" x="480" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#D97706;fontSize=14;" value="PV19RuntimeWorkflowPlatform&lt;br&gt;publish / run / human / evidence loop" vertex="1">
+          <mxGeometry height="70" width="360" x="480" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#D97706;fontSize=14;" value="PV20AgentExecutor&lt;br&gt;governed skill / tool / MCP execution path" vertex="1">
+          <mxGeometry height="70" width="360" x="480" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#D97706;fontSize=14;" value="PV21CompleteWorkflowStudio&lt;br&gt;bounded candidate shell and evidence view" vertex="1">
+          <mxGeometry height="70" width="360" x="480" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="l3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=17;fontStyle=1;" value="BFF / DTO 边界层" vertex="1">
+          <mxGeometry height="50" width="260" x="940" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#16A34A;fontSize=14;" value="apps/api/routers/bff.py&lt;br&gt;/bff/pv19/*&lt;br&gt;/bff/pv20/*&lt;br&gt;/bff/pv21/*" vertex="1">
+          <mxGeometry height="140" width="260" x="940" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="l4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0E7FF;strokeColor=#4F46E5;fontSize=17;fontStyle=1;" value="运行与证据层" vertex="1">
+          <mxGeometry height="50" width="220" x="1300" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF2FF;strokeColor=#4F46E5;fontSize=14;" value="core/workflows/store.py&lt;br&gt;WorkflowSpec / WorkflowVersion / WorkflowInstance / StationRun" vertex="1">
+          <mxGeometry height="105" width="220" x="1300" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF2FF;strokeColor=#4F46E5;fontSize=14;" value="apps/gateway/service.py&lt;br&gt;RPC / runtime gateway boundary" vertex="1">
+          <mxGeometry height="80" width="220" x="1290" y="540" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF2FF;strokeColor=#4F46E5;fontSize=14;" value="evidence/*&lt;br&gt;browser logs / DTO snapshots / runtime reports / screenshots" vertex="1">
+          <mxGeometry height="95" width="220" x="1300" y="355" as="geometry" />
+        </mxCell>
+        <mxCell id="c1" edge="1" parent="1" source="e1" style="endArrow=block;html=1;strokeColor=#334155;strokeWidth=2;" target="e2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c2" edge="1" parent="1" source="e2" style="endArrow=block;html=1;strokeColor=#334155;strokeWidth=2;" target="e3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c3" edge="1" parent="1" source="e2" style="endArrow=block;html=1;strokeColor=#334155;strokeWidth=2;" target="e6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c4" edge="1" parent="1" source="e3" style="endArrow=block;html=1;strokeColor=#334155;strokeWidth=2;" target="e7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c5" edge="1" parent="1" source="e4" style="endArrow=block;html=1;strokeColor=#334155;strokeWidth=2;" target="e7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c6" edge="1" parent="1" source="e5" style="endArrow=block;html=1;strokeColor=#334155;strokeWidth=2;" target="e7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c7" edge="1" parent="1" source="e7" style="endArrow=block;html=1;strokeColor=#334155;strokeWidth=2;" target="e8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c8" edge="1" parent="1" source="e7" style="endArrow=block;html=1;strokeColor=#334155;strokeWidth=2;" target="e9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c9" edge="1" parent="1" source="e8" style="endArrow=block;html=1;strokeColor=#334155;strokeWidth=2;" target="e10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="note3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=15;" value="拒绝不明确设计：不得只写“AI 平台”“运行中心”等抽象框。后续实现必须能从图中定位到 route、component、store、runtime 和 evidence artifact。" vertex="1">
+          <mxGeometry height="70" width="1440" x="80" y="680" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="wp-m0-4" name="开发及验收计划">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title4" value="开发及验收计划：从文档门禁到工作流平台 MVP 候选" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1E3A8A;fontColor=#FFFFFF;strokeColor=#1E3A8A;fontSize=22;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="40" width="1440" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="m0" value="WP-M0 文档门禁&lt;br&gt;PRD / 架构 / 计划 / 验收 / drawio / 审计" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="170" width="220" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="m1" value="WP-M1 首入口&lt;br&gt;默认进入 Workflow Platform&lt;br&gt;首屏可理解" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="170" width="220" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="m2" value="WP-M2 画布交互&lt;br&gt;缩放 / 拖拽 / 连线 / 取消 / 箭头" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="600" y="170" width="220" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="m3" value="WP-M3 运行证据闭环&lt;br&gt;Diff / Publish / Run / Human / Evidence" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="860" y="170" width="240" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="m4" value="WP-M4 Executor 融合&lt;br&gt;Agent / Tool / Skill / MCP 受治理入口" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="170" width="220" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="m5" value="WP-M5 PV22 Handoff&lt;br&gt;外部接入对齐到平台首入口" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1400" y="170" width="120" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="p01" style="endArrow=block;html=1;strokeColor=#2563EB;strokeWidth=2;" edge="1" parent="1" source="m0" target="m1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p12" style="endArrow=block;html=1;strokeColor=#2563EB;strokeWidth=2;" edge="1" parent="1" source="m1" target="m2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p23" style="endArrow=block;html=1;strokeColor=#2563EB;strokeWidth=2;" edge="1" parent="1" source="m2" target="m3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p34" style="endArrow=block;html=1;strokeColor=#2563EB;strokeWidth=2;" edge="1" parent="1" source="m3" target="m4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p45" style="endArrow=block;html=1;strokeColor=#2563EB;strokeWidth=2;" edge="1" parent="1" source="m4" target="m5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="acc4" value="每个实现子阶段都必须独立完成&lt;br&gt;&lt;br&gt;1. 子阶段 PRD 检视。&lt;br&gt;2. 目标架构检视。&lt;br&gt;3. Browser E2E 和截图。&lt;br&gt;4. BFF route log 与 DTO snapshot。&lt;br&gt;5. No False Green 与 redaction scan。&lt;br&gt;6. 中文 HTML 验收报告。" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontSize=16;align=left;spacingLeft=18;" vertex="1" parent="1">
+          <mxGeometry x="80" y="360" width="680" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="dev4" value="本阶段开发结束后的目标体验&lt;br&gt;&lt;br&gt;WP-M0 完成后：人类和后续 Agent 能清楚知道后续代码要把“工作流平台”作为首入口。&lt;br&gt;&lt;br&gt;WP-M3 完成后：用户可审查工作流平台 MVP 候选体验。" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#94A3B8;fontSize=16;align=left;spacingLeft=18;" vertex="1" parent="1">
+          <mxGeometry x="840" y="360" width="680" height="250" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="wp-m0-5" name="项目里程碑">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title5" value="项目里程碑与阶段边界" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1E3A8A;fontColor=#FFFFFF;strokeColor=#1E3A8A;fontSize=22;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="40" width="1440" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="base5" value="已验收 bounded slices&lt;br&gt;PV19 / PV20 / PV21" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=17;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="160" width="260" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="doc5" value="当前阶段&lt;br&gt;WP-M0 文档对齐&lt;br&gt;只证明文档可支撑实现" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=17;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="420" y="160" width="260" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="mvp5" value="工作流平台 MVP 候选&lt;br&gt;WP-M1 到 WP-M3&lt;br&gt;首入口 + 画布 + 运行证据" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=17;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="160" width="300" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="int5" value="受治理 Executor 融合&lt;br&gt;WP-M4&lt;br&gt;Agent / Tool / Skill / MCP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=17;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="160" width="260" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="pv225" value="PV22 外部接入实现&lt;br&gt;SDK / Template / Reference app&lt;br&gt;必须接到稳定平台入口" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=17;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="420" y="360" width="320" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="pv235" value="PV23+ 后续&lt;br&gt;生产治理 / 业务 Pack / 开源商业化&lt;br&gt;仍属后续阶段" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#94A3B8;fontSize=17;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="860" y="360" width="360" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="e51" style="endArrow=block;html=1;strokeColor=#2563EB;strokeWidth=2;" edge="1" parent="1" source="base5" target="doc5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e52" style="endArrow=block;html=1;strokeColor=#2563EB;strokeWidth=2;" edge="1" parent="1" source="doc5" target="mvp5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e53" style="endArrow=block;html=1;strokeColor=#2563EB;strokeWidth=2;" edge="1" parent="1" source="mvp5" target="int5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e54" style="endArrow=block;html=1;strokeColor=#2563EB;strokeWidth=2;" edge="1" parent="1" source="int5" target="pv225">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e55" style="endArrow=block;html=1;strokeColor=#2563EB;strokeWidth=2;" edge="1" parent="1" source="pv225" target="pv235">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="guard5" value="里程碑口径&lt;br&gt;&lt;br&gt;WP-M0：文档可支撑实现。&lt;br&gt;WP-M1-M3：可审查 MVP 候选体验。&lt;br&gt;WP-M4：受治理 executor 产品化融合。&lt;br&gt;PV22：外部接入实现。&lt;br&gt;PV23+：生产治理和商业化前置工作。&lt;br&gt;&lt;br&gt;任何阶段均不得提前声明生产可用或 GA。" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=16;align=left;spacingLeft=18;" vertex="1" parent="1">
+          <mxGeometry x="80" y="570" width="1440" height="170" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="wp-m0-6" name="验收门槛与出门条件">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title6" value="验收门槛、出门条件与用户应用场景" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1E3A8A;fontColor=#FFFFFF;strokeColor=#1E3A8A;fontSize=22;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="40" width="1440" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="g0" value="WP-M0 文档门禁&lt;br&gt;文档齐全、互相一致、drawio 合格、claim scan PASS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="150" width="420" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="g1" value="WP-M1 用户首屏门禁&lt;br&gt;默认入口、workspace/project、状态、BFF network log、首屏截图" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="150" width="420" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="g2" value="WP-M2 画布门禁&lt;br&gt;缩放、平移、拖拽、连线、取消、箭头、首眼布局全部 PASS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="150" width="420" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="g3" value="WP-M3 运行证据门禁&lt;br&gt;WorkflowDiff、publish、run、human gate、evidence panel 可回读" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="300" width="420" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="g4" value="WP-M4 Executor 门禁&lt;br&gt;Agent/Tool/Skill/MCP 受治理展示，approval/denial/timeout/cancel 可审" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="300" width="420" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="g5" value="WP-M5 PV22 出门门禁&lt;br&gt;外部接入目标绑定 Workflow Platform，不绕过治理与 BFF boundary" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="300" width="420" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="path6" value="共同最小用户操作路径&lt;br&gt;进入工作流平台首屏 -> 选择 Workspace/Project -> 画布缩放和平移 -> 拖拽 Agent/Tool/Skill/MCP 节点 -> 拖拽节点调整布局 -> 从端口自由连线 -> 取消错误连线 -> 配置节点参数 -> 保存草稿 -> 校验 WorkflowSpecGraph -> 查看 WorkflowDiff -> 人工确认发布 -> 运行工作流 -> 在 Human Gate 审查产物 -> 在 Evidence Panel 回看截图、日志、DTO 和 runtime inspect。" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#059669;fontSize=14;fontStyle=1;align=left;spacingLeft=18;" vertex="1" parent="1">
+          <mxGeometry x="80" y="430" width="1440" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="scenario-docs6" value="场景 A：文档 / 知识总结&lt;br&gt;用户目标：把项目文档、会议材料或知识库整理成可审查摘要。&lt;br&gt;操作路径：1 导入或选择文档集合；2 在画布放置 Input、Retrieval/Read、Summarizer Agent、Human Review、Report Output；3 连接数据流和审查流；4 配置摘要维度、引用要求、脱敏规则；5 运行后审查摘要、引用和缺口；6 通过或退回修改。&lt;br&gt;出门产物：中文摘要、来源引用、缺口列表、人工审查记录。&lt;br&gt;验收证据：上传/选择截图、节点配置 DTO、运行日志、引用 evidence refs、human action report。" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#10B981;fontSize=12;align=left;spacingLeft=14;" vertex="1" parent="1">
+          <mxGeometry x="80" y="555" width="455" height="275" as="geometry" />
+        </mxCell>
+        <mxCell id="scenario-code6" value="场景 B：代码审查 / 变更风险检查&lt;br&gt;用户目标：对仓库、PR 或补丁做自动检查，并让人类确认结论。&lt;br&gt;操作路径：1 选择 repo/branch/PR 或粘贴 diff；2 放置 Code Input、Static Scan、Test Runner、Risk Agent、Human Gate、Issue Output；3 连接扫描、测试和风险总结路径；4 配置检查范围、测试命令和阻断规则；5 运行后查看文件级问题、测试输出和建议；6 人工确认 issue、退回或标记通过。&lt;br&gt;出门产物：按文件/行定位的问题、测试结果、风险等级、建议修复清单。&lt;br&gt;验收证据：BFF route log、test output、issue DTO、截图、人工确认记录。" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2563EB;fontSize=12;align=left;spacingLeft=14;" vertex="1" parent="1">
+          <mxGeometry x="572" y="555" width="455" height="275" as="geometry" />
+        </mxCell>
+        <mxCell id="scenario-meeting6" value="场景 C：会议 / 访谈整理&lt;br&gt;用户目标：把原始纪要或访谈记录转成行动项、决策和待确认问题。&lt;br&gt;操作路径：1 导入 transcript 或粘贴访谈文本；2 放置 Transcript Input、Extractor Agent、Decision Classifier、Task Planner、Human Gate、Brief Output；3 连接提取、分类、任务生成和人工审查；4 配置参会人、项目、输出模板和敏感信息规则；5 运行后审查行动项、负责人、截止时间和待追问问题；6 人工确认导出简报。&lt;br&gt;出门产物：会议简报、行动项、决策记录、开放问题。&lt;br&gt;验收证据：输入快照、节点 DTO、run trace、人工编辑记录、导出截图。" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#7C3AED;fontSize=12;align=left;spacingLeft=14;" vertex="1" parent="1">
+          <mxGeometry x="1065" y="555" width="455" height="275" as="geometry" />
+        </mxCell>
+        <mxCell id="exit6" value="出门条件&lt;br&gt;必须完整跑通 3 个业务场景：文档/知识总结、代码审查/变更风险检查、会议/访谈整理，且共同最小操作路径全部可见、可操作、可回放。每个场景必须包含真实输入数据、画布截图、edge action log、BFF route log、DTO snapshot、runtime inspect、WorkflowDiff、human action report、evidence panel report。任一场景缺失真实运行证据或人工审查记录即 FAIL，并回到开发计划修订；不允许用静态图或设计稿替代运行证据。" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#2563EB;fontSize=13;fontStyle=1;align=left;spacingLeft=16;" vertex="1" parent="1">
+          <mxGeometry x="80" y="855" width="700" height="165" as="geometry" />
+        </mxCell>
+        <mxCell id="future-nogo6" value="应用前景与 No-Go&lt;br&gt;规划中：创意分镜规划、外部工具/MCP 受治理自动化、外部 App 接入。创意分镜只能声明 storyboard spec，不声明真实视频渲染；MCP/Tool 只能声明 allowlisted 受治理执行，不声明 unrestricted automation；PV22 证据前不声明外部接入完成。阻断：Browser 绕过 BFF、UI 模拟 runtime truth、缺少真实 E2E 证据、无法取消连线或回滚 Diff、出现 production ready / complete Studio GA / Agent executor ready / Xpert parity complete。" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=13;fontStyle=1;align=left;spacingLeft=16;" vertex="1" parent="1">
+          <mxGeometry x="820" y="855" width="700" height="165" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="wp-m0-7" name="接口与证据合约">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title7" value="接口与证据合约：支撑自动化开发和出门验收" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1E3A8A;fontColor=#FFFFFF;strokeColor=#1E3A8A;fontSize=22;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="40" width="1440" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="route7" value="BFF Route Allowlist&lt;br&gt;&lt;br&gt;/bff/pv21/studio/state&lt;br&gt;/bff/pv21/workflows/{id}/graph&lt;br&gt;/bff/pv21/workflows/{id}/diff&lt;br&gt;/bff/pv21/workflows/{id}/versions&lt;br&gt;/bff/pv21/workflows/{id}/runs&lt;br&gt;/bff/pv21/runs/{id}/inspect&lt;br&gt;/bff/pv21/runs/{id}/evidence&lt;br&gt;/bff/pv20/agent-executor/state&lt;br&gt;/bff/pv20/runs/{id}/agent-*" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=15;align=left;spacingLeft=16;" vertex="1" parent="1">
+          <mxGeometry x="80" y="145" width="440" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="dto7" value="DTO Snapshot Contract&lt;br&gt;&lt;br&gt;workflow_platform.main_entry.v1&lt;br&gt;workspace / workflow / graph&lt;br&gt;run_summary&lt;br&gt;evidence_summary&lt;br&gt;&lt;br&gt;兼容复用：&lt;br&gt;PV21StudioStateDTO&lt;br&gt;PV21WorkflowGraphDTO&lt;br&gt;PV21RunDTO&lt;br&gt;PV21EvidenceSummaryDTO&lt;br&gt;PV20AgentExecution*DTO" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=15;align=left;spacingLeft=16;" vertex="1" parent="1">
+          <mxGeometry x="580" y="145" width="420" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="evidence7" value="Acceptance Runner Outputs&lt;br&gt;&lt;br&gt;acceptance-data.json&lt;br&gt;artifact-manifest.json&lt;br&gt;acceptance-report.html&lt;br&gt;browser-action-log.json&lt;br&gt;browser-network-log.json&lt;br&gt;dto-snapshot.json&lt;br&gt;canvas-edge-quality-report.json&lt;br&gt;runtime-inspect-report.json&lt;br&gt;agent-executor-integration-report.json&lt;br&gt;no-false-green-scan.txt&lt;br&gt;redaction-scan.txt" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=15;align=left;spacingLeft=16;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="145" width="460" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="deny7" value="Browser Denylist / NO-GO&lt;br&gt;&lt;br&gt;不得直接调用 runtime/store/Gateway internals。&lt;br&gt;不得用 UI 模拟 runtime truth。&lt;br&gt;不得把文档、截图、drawio 写成运行证据。&lt;br&gt;不得声明 production ready、complete Studio GA、Agent executor ready、Xpert parity complete。&lt;br&gt;缺少真实 E2E 或截图时必须 FAIL/BLOCKED。" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=16;align=left;spacingLeft=18;" vertex="1" parent="1">
+          <mxGeometry x="80" y="520" width="1440" height="145" as="geometry" />
+        </mxCell>
+        <mxCell id="edge71" style="endArrow=block;html=1;strokeColor=#2563EB;strokeWidth=2;" edge="1" parent="1" source="route7" target="dto7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge72" style="endArrow=block;html=1;strokeColor=#2563EB;strokeWidth=2;" edge="1" parent="1" source="dto7" target="evidence7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

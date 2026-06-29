@@ -4,197 +4,197 @@
   "requests": [
     {
       "method": "GET",
-      "url": "http://127.0.0.1:4176/?studio=v13-editable-studio",
+      "url": "http://127.0.0.1:4178/?studio=v13-editable-studio",
       "allowed": true
     },
     {
       "method": "GET",
-      "url": "http://127.0.0.1:4176/assets/index-DyOdZcZ-.js",
+      "url": "http://127.0.0.1:4178/assets/index-COmVwxnJ.js",
       "allowed": true
     },
     {
       "method": "GET",
-      "url": "http://127.0.0.1:4176/assets/index-BVTWCZ_l.css",
+      "url": "http://127.0.0.1:4178/assets/index-DZKbb0Hi.css",
       "allowed": true
     },
     {
       "method": "GET",
-      "url": "http://127.0.0.1:4176/bff/v13/system/health",
+      "url": "http://127.0.0.1:4178/bff/v13/system/health",
       "allowed": true
     },
     {
       "method": "GET",
-      "url": "http://127.0.0.1:4176/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph",
+      "url": "http://127.0.0.1:4178/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph",
       "allowed": true
     },
     {
       "method": "GET",
-      "url": "http://127.0.0.1:4176/bff/v13/studio/node-inspector/summary_agent",
+      "url": "http://127.0.0.1:4178/bff/v13/studio/node-inspector/summary_agent",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4176/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
+      "url": "http://127.0.0.1:4178/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4176/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
+      "url": "http://127.0.0.1:4178/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
       "allowed": true
     },
     {
       "method": "GET",
-      "url": "http://127.0.0.1:4176/bff/v13/studio/node-inspector/start_goal",
+      "url": "http://127.0.0.1:4178/bff/v13/studio/node-inspector/start_goal",
       "allowed": true
     },
     {
       "method": "GET",
-      "url": "http://127.0.0.1:4176/bff/v13/studio/node-inspector/start_goal",
+      "url": "http://127.0.0.1:4178/bff/v13/studio/node-inspector/start_goal",
       "allowed": true
     },
     {
       "method": "GET",
-      "url": "http://127.0.0.1:4176/bff/v13/studio/node-inspector/start_goal",
+      "url": "http://127.0.0.1:4178/bff/v13/studio/node-inspector/start_goal",
       "allowed": true
     },
     {
       "method": "GET",
-      "url": "http://127.0.0.1:4176/bff/v13/studio/node-inspector/start_goal",
+      "url": "http://127.0.0.1:4178/bff/v13/studio/node-inspector/start_goal",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4176/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
+      "url": "http://127.0.0.1:4178/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4176/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
+      "url": "http://127.0.0.1:4178/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4176/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
+      "url": "http://127.0.0.1:4178/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4176/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
+      "url": "http://127.0.0.1:4178/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4176/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
+      "url": "http://127.0.0.1:4178/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4176/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
+      "url": "http://127.0.0.1:4178/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4176/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
+      "url": "http://127.0.0.1:4178/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4176/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
+      "url": "http://127.0.0.1:4178/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4176/bff/v13/workflow-diff/diff-v13-editable-studio-pilot-001/revise",
+      "url": "http://127.0.0.1:4178/bff/v13/workflow-diff/diff-v13-editable-studio-pilot-001/revise",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4176/bff/v13/workflow-diff/diff-v13-editable-studio-pilot-001/reject",
+      "url": "http://127.0.0.1:4178/bff/v13/workflow-diff/diff-v13-editable-studio-pilot-001/reject",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4176/bff/v13/workflow-diff/diff-v13-editable-studio-pilot-001/confirm-publish-handoff",
+      "url": "http://127.0.0.1:4178/bff/v13/workflow-diff/diff-v13-editable-studio-pilot-001/confirm-publish-handoff",
       "allowed": true
     },
     {
       "method": "GET",
-      "url": "http://127.0.0.1:4176/bff/v13/studio/node-inspector/summary_agent",
+      "url": "http://127.0.0.1:4178/bff/v13/studio/node-inspector/summary_agent",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4176/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
+      "url": "http://127.0.0.1:4178/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4176/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
+      "url": "http://127.0.0.1:4178/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
       "allowed": true
     },
     {
       "method": "GET",
-      "url": "http://127.0.0.1:4176/bff/v13/studio/node-inspector/summary_agent",
+      "url": "http://127.0.0.1:4178/bff/v13/studio/node-inspector/summary_agent",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4176/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
+      "url": "http://127.0.0.1:4178/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4176/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
+      "url": "http://127.0.0.1:4178/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
       "allowed": true
     },
     {
       "method": "GET",
-      "url": "http://127.0.0.1:4176/bff/v13/studio/node-inspector/folder_reader",
+      "url": "http://127.0.0.1:4178/bff/v13/studio/node-inspector/folder_reader",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4176/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
+      "url": "http://127.0.0.1:4178/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
       "allowed": true
     },
     {
       "method": "GET",
-      "url": "http://127.0.0.1:4176/bff/v13/studio/node-inspector/folder_reader",
+      "url": "http://127.0.0.1:4178/bff/v13/studio/node-inspector/folder_reader",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4176/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
+      "url": "http://127.0.0.1:4178/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
       "allowed": true
     },
     {
       "method": "GET",
-      "url": "http://127.0.0.1:4176/bff/v13/studio/node-inspector/start_goal",
+      "url": "http://127.0.0.1:4178/bff/v13/studio/node-inspector/start_goal",
       "allowed": true
     },
     {
       "method": "GET",
-      "url": "http://127.0.0.1:4176/bff/v13/studio/node-inspector/quality_gate",
+      "url": "http://127.0.0.1:4178/bff/v13/studio/node-inspector/quality_gate",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4176/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
+      "url": "http://127.0.0.1:4178/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
       "allowed": true
     },
     {
       "method": "GET",
-      "url": "http://127.0.0.1:4176/bff/v13/studio/node-inspector/start_goal",
+      "url": "http://127.0.0.1:4178/bff/v13/studio/node-inspector/start_goal",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4176/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
+      "url": "http://127.0.0.1:4178/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4176/bff/v13/workflow-diff/diff-v13-editable-studio-pilot-001/confirm-publish-handoff",
+      "url": "http://127.0.0.1:4178/bff/v13/workflow-diff/diff-v13-editable-studio-pilot-001/confirm-publish-handoff",
       "allowed": true
     }
   ],

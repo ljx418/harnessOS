@@ -12,6 +12,7 @@
     "visual:acceptance": "playwright test e2e/workflow-studio-visual-acceptance.spec.ts",
     "test": "tsc -p tsconfig.test.json && node --test dist-test/__tests__/*.test.js",
     "test:e2e": "VITE_HARNESSOS_DEMO_MODE=false VITE_EVENT_HEARTBEAT_INTERVAL=0.05 npm run build && playwright test",
+    "test:e2e:workflow-platform": "VITE_HARNESSOS_DEMO_MODE=false VITE_EVENT_HEARTBEAT_INTERVAL=0.05 npm run build && playwright test e2e/workflow-platform-main-entry.spec.ts",
     "test:e2e:chrome-local": "VITE_HARNESSOS_DEMO_MODE=false VITE_EVENT_HEARTBEAT_INTERVAL=0.05 npm run build && WORKFLOW_CONSOLE_LOCAL_CHROME=1 VITE_HARNESSOS_DEMO_MODE=false VITE_EVENT_HEARTBEAT_INTERVAL=0.05 playwright test --project=chrome-local",
     "test:e2e:pv16": "python3 ../../tools/post_v15/run_product_runtime_hardening_e2e.py",
     "acceptance:chrome-open": "\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --remote-debugging-port=9222 --user-data-dir=/tmp/harnessos-chrome-acceptance http://127.0.0.1:4174/",

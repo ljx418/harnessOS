@@ -1,0 +1,261 @@
+.pv21-studio {
+  min-height: 100vh;
+  padding: 24px;
+  color: #172033;
+  background: #f3f7fb;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.pv21-studio--state {
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+}
+
+.pv21-studio--error,
+.pv21-studio__error {
+  color: #9f1239;
+}
+
+.pv21-studio__header,
+.pv21-studio__cards,
+.pv21-studio__layout {
+  width: min(100%, 1800px);
+  margin: 0 auto;
+}
+
+.pv21-studio__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 18px;
+}
+
+.pv21-studio__eyebrow {
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.pv21-studio h1 {
+  margin: 8px 0 4px;
+  font-size: 30px;
+  line-height: 1.15;
+}
+
+.pv21-studio p {
+  margin: 0;
+  color: #56657a;
+}
+
+.pv21-studio__contract,
+.pv21-card,
+.pv21-panel {
+  border: 1px solid #d7e1ee;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.pv21-studio__contract {
+  min-width: 320px;
+  padding: 14px 16px;
+}
+
+.pv21-studio__contract span,
+.pv21-card span,
+.pv21-panel dt {
+  display: block;
+  color: #687891;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.pv21-studio__contract strong,
+.pv21-card strong {
+  display: block;
+  margin-top: 5px;
+}
+
+.pv21-studio__cards {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.pv21-card {
+  min-height: 84px;
+  padding: 14px;
+}
+
+.pv21-card svg,
+.pv21-panel__heading svg,
+.pv21-panel__actions svg,
+.pv21-panel button svg {
+  color: #2563eb;
+  vertical-align: text-bottom;
+}
+
+.pv21-studio__layout {
+  display: grid;
+  grid-template-columns: 260px minmax(460px, 1.2fr) minmax(320px, 0.8fr);
+  gap: 14px;
+  align-items: stretch;
+}
+
+.pv21-panel {
+  min-height: 220px;
+  padding: 16px;
+}
+
+.pv21-panel--canvas,
+.pv21-panel--evidence {
+  grid-column: span 2;
+}
+
+.pv21-panel h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+}
+
+.pv21-panel__heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.pv21-panel__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.pv21-panel button,
+.pv21-panel__heading button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  border: 1px solid #c8d5e5;
+  border-radius: 6px;
+  padding: 7px 10px;
+  color: #172033;
+  background: #f8fafc;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.pv21-panel button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.pv21-panel--library {
+  grid-row: span 2;
+}
+
+.pv21-panel--library button {
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.pv21-panel--library small {
+  color: #64748b;
+}
+
+.pv21-canvas {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  min-height: 170px;
+  border: 1px dashed #c9d6e6;
+  border-radius: 8px;
+  padding: 12px;
+  background: #f8fbff;
+}
+
+.pv21-node {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 104px;
+  white-space: normal;
+}
+
+.pv21-node--active {
+  border-color: #2563eb !important;
+  background: #eff6ff !important;
+}
+
+.pv21-node span {
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.pv21-node strong {
+  margin: 4px 0;
+}
+
+.pv21-node small {
+  color: #64748b;
+}
+
+.pv21-node i {
+  position: absolute;
+  right: -17px;
+  top: 38px;
+  color: #64748b;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.pv21-panel dl {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+
+.pv21-panel dd {
+  margin: 3px 0 0;
+  overflow-wrap: anywhere;
+  color: #172033;
+}
+
+@media (max-width: 1100px) {
+  .pv21-studio__header {
+    display: block;
+  }
+
+  .pv21-studio__contract {
+    margin-top: 12px;
+  }
+
+  .pv21-studio__cards,
+  .pv21-studio__layout,
+  .pv21-canvas {
+    grid-template-columns: 1fr;
+  }
+
+  .pv21-panel--canvas,
+  .pv21-panel--evidence {
+    grid-column: span 1;
+  }
+
+  .pv21-node i {
+    display: none;
+  }
+}

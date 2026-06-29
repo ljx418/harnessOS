@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>PV20-S5 Agent 执行器验收报告</title>
+  <style>
+    body { margin: 0; padding: 28px; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #111827; background: #f4f7fb; }
+    h1 { margin: 0 0 8px; font-size: 30px; }
+    h2 { margin-top: 28px; font-size: 20px; }
+    p, li { color: #475569; line-height: 1.7; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 18px 0; }
+    .card { border: 1px solid #d7e0ea; border-radius: 8px; background: white; padding: 14px; }
+    .card span { display: block; color: #64748b; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+    .card strong { display: block; margin-top: 4px; }
+  </style>
+</head>
+<body>
+  <h1>PV20-S5 Agent 执行器验收报告</h1>
+  <p>本报告使用 FastAPI TestClient 和真实 GatewayService 执行，证明 AgentExecutionEnvelope / AgentExecutionResult contract read model、用户确认后的本地 allowlisted skill/read-model、本地 read-only artifact metadata tool，通过 connector.submit + approval.respond + retry context 完成的本地 stdio MCP fixture 执行，approval handoff refs / denied mutation fixtures，以及 bounded timeout/cancel/retry/redaction control evidence；不证明完整审批 UI、生产级 scheduler、unrestricted MCP、shell、外部网络或生产动作执行。</p>
+  <section class="grid">
+    <div class="card"><span>验收结论</span><strong>PASS</strong></div>
+    <div class="card"><span>允许声明</span><strong>PV20-S5 complete: timeout/cancel/retry/redaction fixtures ready for bounded review.</strong></div>
+    <div class="card"><span>Route Boundary</span><strong>/bff/pv20</strong></div>
+  </section>
+  <h2>已验证路径</h2>
+  <p>读取 PV20 state -> 读取 Agent execution contract -> 读取 evidence summary -> 用户确认执行 bundled skill -> 用户确认执行 read-only tool -> 验证拒绝 source=agent / 未确认 / unknown MCP -> 用户确认执行本地 stdio MCP fixture -> 执行 failed/cancelled control fixtures -> 读回 approval refs、contract 和 evidence。</p>
+  <h2>失败项</h2>
+  <ul><li>无</li></ul>
+</body>
+</html>

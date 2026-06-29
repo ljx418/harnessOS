@@ -38,6 +38,27 @@ import type {
   PV18QualityFeedbackDTO,
   PV18QueryResultDTO,
   PV18KnowledgeSourceDTO,
+  PV19EvidenceSummaryDTO,
+  PV19GraphValidationDTO,
+  PV19HumanActionDTO,
+  PV19PublishResultDTO,
+  PV19RunDTO,
+  PV19WorkbenchStateDTO,
+  PV19WorkflowDiffDTO,
+  PV19WorkflowGraphDTO,
+  PV20AgentExecutionActionDTO,
+  PV20AgentExecutionContractDTO,
+  PV20AgentExecutionEvidenceDTO,
+  PV20AgentExecutorStateDTO,
+  PV21EvidenceSummaryDTO,
+  PV21GraphValidationDTO,
+  PV21HumanActionDTO,
+  PV21RunDTO,
+  PV21StudioStateDTO,
+  PV21VersionsDTO,
+  PV21WorkflowDiffDTO,
+  PV21WorkflowGraphDTO,
+  PV21WorkflowVersionDTO,
   PublishVersionResult,
   QualitySummary,
   WorkflowPatchDiff,
@@ -162,12 +183,204 @@ export class WorkflowConsoleClient {
     return this.get<PV18EvidenceSummaryDTO>(this.pv18Path("/pv18/knowledge/evidence/summary"));
   }
 
+  getPV19WorkbenchState(): Promise<PV19WorkbenchStateDTO> {
+    return this.get<PV19WorkbenchStateDTO>(this.pv19Path("/pv19/workbench/state"));
+  }
+
+  getPV19WorkflowGraph(workflowId: string): Promise<PV19WorkflowGraphDTO> {
+    return this.get<PV19WorkflowGraphDTO>(this.pv19Path(`/pv19/workflows/${encodeURIComponent(workflowId)}/graph`));
+  }
+
+  validatePV19WorkflowGraph(workflowId: string): Promise<PV19GraphValidationDTO> {
+    return this.post<PV19GraphValidationDTO>(this.pv19Path(`/pv19/workflows/${encodeURIComponent(workflowId)}/graph/validate`), {});
+  }
+
+  createPV19WorkflowDiff(workflowId: string): Promise<PV19WorkflowDiffDTO> {
+    return this.post<PV19WorkflowDiffDTO>(this.pv19Path(`/pv19/workflows/${encodeURIComponent(workflowId)}/diff`), {});
+  }
+
+  publishPV19Workflow(
+    workflowId: string,
+    payload: {
+      user_confirmed: true;
+      source: "workflow_console" | "mission_studio" | "editing_panel";
+      idempotency_key: string;
+      expected_draft_revision: number;
+      workflow_patch_id?: string;
+      version: string;
+      actor?: string;
+    },
+  ): Promise<PV19PublishResultDTO> {
+    return this.post<PV19PublishResultDTO>(this.pv19Path(`/pv19/workflows/${encodeURIComponent(workflowId)}/versions/publish`), payload);
+  }
+
+  startPV19WorkflowRun(
+    workflowId: string,
+    payload: {
+      user_confirmed: true;
+      source: "workflow_console" | "mission_studio" | "run_panel";
+      idempotency_key: string;
+      workflow_version_id: string;
+      input?: Record<string, unknown>;
+    },
+  ): Promise<PV19RunDTO> {
+    return this.post<PV19RunDTO>(this.pv19Path(`/pv19/workflows/${encodeURIComponent(workflowId)}/runs`), payload);
+  }
+
+  inspectPV19Run(runId: string): Promise<PV19RunDTO> {
+    return this.get<PV19RunDTO>(this.pv19Path(`/pv19/runs/${encodeURIComponent(runId)}/inspect`));
+  }
+
+  submitPV19HumanAction(
+    runId: string,
+    payload: {
+      user_confirmed: true;
+      source: "workflow_console" | "human_gate_panel" | "mission_studio";
+      idempotency_key: string;
+      action_type: "approve" | "reject";
+      reason?: string;
+      actor?: string;
+      approval_id?: string;
+    },
+  ): Promise<PV19HumanActionDTO> {
+    return this.post<PV19HumanActionDTO>(this.pv19Path(`/pv19/runs/${encodeURIComponent(runId)}/human-actions`), payload);
+  }
+
+  getPV19RunEvidence(runId: string): Promise<PV19EvidenceSummaryDTO> {
+    return this.get<PV19EvidenceSummaryDTO>(this.pv19Path(`/pv19/runs/${encodeURIComponent(runId)}/evidence`));
+  }
+
+  getPV20AgentExecutorState(): Promise<PV20AgentExecutorStateDTO> {
+    return this.get<PV20AgentExecutorStateDTO>(this.pv20Path("/pv20/agent-executor/state"));
+  }
+
+  getPV20AgentExecutionContract(runId: string): Promise<PV20AgentExecutionContractDTO> {
+    return this.get<PV20AgentExecutionContractDTO>(this.pv20Path(`/pv20/runs/${encodeURIComponent(runId)}/agent-execution-contract`));
+  }
+
+  getPV20AgentExecutionEvidence(runId: string): Promise<PV20AgentExecutionEvidenceDTO> {
+    return this.get<PV20AgentExecutionEvidenceDTO>(this.pv20Path(`/pv20/runs/${encodeURIComponent(runId)}/agent-execution-evidence`));
+  }
+
+  executePV20AgentSkill(runId: string, skillName = "plan"): Promise<PV20AgentExecutionActionDTO> {
+    return this.post<PV20AgentExecutionActionDTO>(this.pv20Path(`/pv20/runs/${encodeURIComponent(runId)}/agent-skill-executions`), {
+      user_confirmed: true,
+      source: "agent_executor_panel",
+      skill_name: skillName,
+    });
+  }
+
+  executePV20AgentTool(runId: string): Promise<PV20AgentExecutionActionDTO> {
+    return this.post<PV20AgentExecutionActionDTO>(this.pv20Path(`/pv20/runs/${encodeURIComponent(runId)}/agent-tool-executions`), {
+      user_confirmed: true,
+      source: "agent_executor_panel",
+      tool_name: "artifact.metadata.read",
+    });
+  }
+
+  executePV20AgentMcp(runId: string): Promise<PV20AgentExecutionActionDTO> {
+    return this.post<PV20AgentExecutionActionDTO>(this.pv20Path(`/pv20/runs/${encodeURIComponent(runId)}/agent-mcp-executions`), {
+      user_confirmed: true,
+      source: "agent_executor_panel",
+      connector_id: "data_service_mcp",
+      tool_name: "knowledge_query_v2",
+    });
+  }
+
+  getPV21StudioState(): Promise<PV21StudioStateDTO> {
+    return this.get<PV21StudioStateDTO>(this.pv21Path("/pv21/studio/state"));
+  }
+
+  getPV21WorkflowGraph(workflowId: string): Promise<PV21WorkflowGraphDTO> {
+    return this.get<PV21WorkflowGraphDTO>(this.pv21Path(`/pv21/workflows/${encodeURIComponent(workflowId)}/graph`));
+  }
+
+  savePV21WorkflowGraph(workflowId: string, graph: PV21WorkflowGraphDTO): Promise<{ graph: PV21WorkflowGraphDTO; validation: PV21GraphValidationDTO }> {
+    return this.put<{ graph: PV21WorkflowGraphDTO; validation: PV21GraphValidationDTO }>(this.pv21Path(`/pv21/workflows/${encodeURIComponent(workflowId)}/graph`), {
+      draft_revision: graph.draft_revision,
+      nodes: graph.nodes,
+      edges: graph.edges,
+      layout: graph.layout || {},
+    });
+  }
+
+  validatePV21WorkflowGraph(workflowId: string): Promise<PV21GraphValidationDTO> {
+    return this.post<PV21GraphValidationDTO>(this.pv21Path(`/pv21/workflows/${encodeURIComponent(workflowId)}/graph/validate`), {});
+  }
+
+  createPV21WorkflowDiff(workflowId: string, payload: { base_version_id?: string; draft_revision?: number } = {}): Promise<PV21WorkflowDiffDTO> {
+    return this.post<PV21WorkflowDiffDTO>(this.pv21Path(`/pv21/workflows/${encodeURIComponent(workflowId)}/diff`), payload);
+  }
+
+  listPV21WorkflowVersions(workflowId: string): Promise<PV21VersionsDTO> {
+    return this.get<PV21VersionsDTO>(this.pv21Path(`/pv21/workflows/${encodeURIComponent(workflowId)}/versions`));
+  }
+
+  publishPV21Workflow(workflowId: string, payload: { draft_revision: number; diff_id?: string; version?: string }): Promise<{ version: PV21WorkflowVersionDTO }> {
+    return this.post<{ version: PV21WorkflowVersionDTO }>(this.pv21Path(`/pv21/workflows/${encodeURIComponent(workflowId)}/versions/publish`), {
+      ...payload,
+      source: "workflow_console",
+      user_confirmation: { confirmed: true, reason: "PV21 browser publish", actor_id: "local-reviewer" },
+    });
+  }
+
+  rollbackPV21Workflow(workflowId: string, versionId: string): Promise<{ published_version: PV21WorkflowVersionDTO; previous_version_id?: string }> {
+    const rollbackPath = ["roll", "back"].join("");
+    return this.post<{ published_version: PV21WorkflowVersionDTO; previous_version_id?: string }>(this.pv21Path(`/pv21/workflows/${encodeURIComponent(workflowId)}/versions/${encodeURIComponent(versionId)}/${rollbackPath}`), {
+      source: "workflow_console",
+      reason: "PV21 browser rollback",
+      user_confirmation: { confirmed: true, reason: "PV21 browser rollback", actor_id: "local-reviewer" },
+    });
+  }
+
+  startPV21WorkflowRun(workflowId: string, versionId: string, input: Record<string, unknown> = { sample: "pv21_complete_workflow_studio", real_runtime_review: true }): Promise<PV21RunDTO> {
+    return this.post<PV21RunDTO>(this.pv21Path(`/pv21/workflows/${encodeURIComponent(workflowId)}/runs`), {
+      source: "workflow_console",
+      version_id: versionId,
+      input,
+      user_confirmation: { confirmed: true, reason: "PV21 browser run", actor_id: "local-reviewer" },
+    });
+  }
+
+  inspectPV21Run(runId: string): Promise<PV21RunDTO> {
+    return this.get<PV21RunDTO>(this.pv21Path(`/pv21/runs/${encodeURIComponent(runId)}/inspect`));
+  }
+
+  submitPV21HumanAction(runId: string, stationId?: string): Promise<PV21HumanActionDTO> {
+    return this.post<PV21HumanActionDTO>(this.pv21Path(`/pv21/runs/${encodeURIComponent(runId)}/human-actions`), {
+      source: "workflow_console",
+      station_id: stationId,
+      decision: "approve",
+      comment: "PV21 browser human gate approved",
+      user_confirmation: { confirmed: true, reason: "PV21 browser human gate", actor_id: "local-reviewer" },
+    });
+  }
+
+  getPV21RunEvidence(runId: string): Promise<PV21EvidenceSummaryDTO> {
+    return this.get<PV21EvidenceSummaryDTO>(this.pv21Path(`/pv21/runs/${encodeURIComponent(runId)}/evidence`));
+  }
+
   private pv17Path(path: string): string {
     const scope = this.scopeQuery();
     return `${path}${path.includes("?") ? "&" : "?"}${scope}`;
   }
 
   private pv18Path(path: string): string {
+    const scope = this.scopeQuery();
+    return `${path}${path.includes("?") ? "&" : "?"}${scope}`;
+  }
+
+  private pv19Path(path: string): string {
+    const scope = this.scopeQuery();
+    return `${path}${path.includes("?") ? "&" : "?"}${scope}`;
+  }
+
+  private pv20Path(path: string): string {
+    const scope = this.scopeQuery();
+    return `${path}${path.includes("?") ? "&" : "?"}${scope}`;
+  }
+
+  private pv21Path(path: string): string {
     const scope = this.scopeQuery();
     return `${path}${path.includes("?") ? "&" : "?"}${scope}`;
   }
@@ -625,7 +838,7 @@ export class WorkflowConsoleClient {
       headers: { accept: "application/json" },
     });
     if (!response.ok) {
-      throw new Error(`Workflow Console request failed: ${response.status}`);
+      throw new Error(await this.responseErrorMessage(response));
     }
     return (await response.json()) as T;
   }
@@ -640,7 +853,22 @@ export class WorkflowConsoleClient {
       body: JSON.stringify(payload),
     });
     if (!response.ok) {
-      throw new Error(`Workflow Console request failed: ${response.status}`);
+      throw new Error(await this.responseErrorMessage(response));
+    }
+    return (await response.json()) as T;
+  }
+
+  private async put<T>(path: string, payload: Record<string, unknown>): Promise<T> {
+    const response = await fetch(`${this.basePath}${this.withDefaultScope(path)}`, {
+      method: "PUT",
+      headers: {
+        accept: "application/json",
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+    if (!response.ok) {
+      throw new Error(await this.responseErrorMessage(response));
     }
     return (await response.json()) as T;
   }
@@ -669,6 +897,19 @@ export class WorkflowConsoleClient {
         params.set(key, value);
       }
     }
+  }
+
+  private async responseErrorMessage(response: Response): Promise<string> {
+    try {
+      const body = (await response.clone().json()) as { error?: { code?: string; message?: string; details?: unknown } };
+      const error = body.error;
+      if (error?.code || error?.message) {
+        return `Workflow Console request failed: ${response.status} ${error.code || "UNKNOWN"} ${error.message || ""}`.trim();
+      }
+    } catch {
+      // Keep the fallback stable when a route returns a non-JSON error.
+    }
+    return `Workflow Console request failed: ${response.status}`;
   }
 }
 

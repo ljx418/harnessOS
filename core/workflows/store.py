@@ -130,6 +130,9 @@ class WorkflowStore(Protocol):
     def list_versions(self, workflow_template_id: str, *, scope: Any) -> list[WorkflowVersion]:
         ...
 
+    def set_latest_published_version(self, workflow_template_id: str, workflow_version_id: str, *, scope: Any) -> tuple[WorkflowTemplate, WorkflowVersion]:
+        ...
+
     def create_instance(self, instance: WorkflowInstance, *, scope: Any) -> WorkflowInstance:
         ...
 
@@ -304,6 +307,9 @@ class WorkflowRepository:
 
     def list_versions(self, workflow_template_id: str, *, scope: Any) -> list[WorkflowVersion]:
         return self.store.list_versions(workflow_template_id, scope=scope)
+
+    def set_latest_published_version(self, workflow_template_id: str, workflow_version_id: str, *, scope: Any) -> tuple[WorkflowTemplate, WorkflowVersion]:
+        return self.store.set_latest_published_version(workflow_template_id, workflow_version_id, scope=scope)
 
     def create_instance(self, instance: WorkflowInstance, *, scope: Any) -> WorkflowInstance:
         return self.store.create_instance(instance, scope=scope)
@@ -636,6 +642,27 @@ class InMemoryWorkflowStore:
                 if self._version_template_keys.get(version_id) == key
             ]
             return sorted(versions, key=lambda item: item.published_at.isoformat())
+
+    def set_latest_published_version(self, workflow_template_id: str, workflow_version_id: str, *, scope: Any) -> tuple[WorkflowTemplate, WorkflowVersion]:
+        with self._lock:
+            key = _key_from_scope(scope, workflow_template_id)
+            template = self._require_template(key)
+            self._ensure_not_archived(template)
+            version = self._versions.get(workflow_version_id)
+            version_key = self._version_template_keys.get(workflow_version_id)
+            if version is None or version_key is None:
+                raise _not_found("WORKFLOW_VERSION_NOT_FOUND", workflow_version_id)
+            if version_key != key or version.workflow_template_id != workflow_template_id:
+                raise ProtocolError("SCOPE_MISMATCH", "Workflow version does not match requested template.", {"resource": "workflow_version_id"})
+            updated_template = template.model_copy(
+                update={
+                    "status": WorkflowTemplateStatus.PUBLISHED,
+                    "version": version.version,
+                    "latest_published_version_id": version.workflow_version_id,
+                }
+            )
+            self._templates[key] = updated_template
+            return updated_template.model_copy(deep=True), version.model_copy(deep=True)
 
     def create_instance(self, instance: WorkflowInstance, *, scope: Any) -> WorkflowInstance:
         with self._lock:

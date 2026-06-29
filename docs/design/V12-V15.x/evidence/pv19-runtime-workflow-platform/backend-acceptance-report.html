@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>PV19 后端闭环验收报告</title>
+  <style>
+    body { margin: 0; padding: 28px; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #111827; background: #f4f7fb; }
+    h1 { margin: 0 0 8px; font-size: 30px; }
+    h2 { margin-top: 28px; font-size: 20px; }
+    p, li { color: #475569; line-height: 1.7; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 18px 0; }
+    .card { border: 1px solid #d7e0ea; border-radius: 8px; background: white; padding: 14px; }
+    .card span { display: block; color: #64748b; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+    .card strong { display: block; margin-top: 4px; }
+    code { background: #e5e7eb; padding: 2px 5px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>PV19 后端闭环验收报告</h1>
+  <p>本报告使用 FastAPI TestClient 和真实 GatewayService 执行，不依赖 mock DTO。浏览器截图验收另由 Playwright spec 负责；当前环境若缺 Chromium 系统库，可先以本报告作为后端闭环证据。</p>
+  <section class="grid">
+    <div class="card"><span>验收结论</span><strong>PASS</strong></div>
+    <div class="card"><span>允许声明</span><strong>PV19 complete: runtime-backed workflow platform closed loop ready for bounded review.</strong></div>
+    <div class="card"><span>Route Boundary</span><strong>/bff/pv19</strong></div>
+  </section>
+  <h2>已验证用户路径</h2>
+  <p>读取工作台状态 → 读取工作流图 → 校验图 → 生成 WorkflowDiff → 用户确认发布版本 → 运行工作流 → 人工审批通过 → 审查证据。</p>
+  <h2>规格检视</h2>
+  <p>已覆盖 PV19 bounded closed loop；未声明生产就绪、完整 Workflow Studio、完整 Agent executor 或 Xpert parity。</p>
+  <h2>失败项</h2>
+  <ul><li>无</li></ul>
+</body>
+</html>

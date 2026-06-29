@@ -16,15 +16,15 @@
       "artifact_id": "artifact_manifest",
       "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/artifact-manifest.json",
       "required_for_pass": true,
-      "status": "MISSING",
-      "sha256": null
+      "status": "PRESENT",
+      "sha256": "53987f42e839c7dd7fc7391ad7fe14f7eb75c3039f3e1b24f23f33a176e4f844"
     },
     {
       "artifact_id": "studio_canvas_screenshot",
       "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/studio-canvas-screenshot.png",
       "required_for_pass": true,
       "status": "PRESENT",
-      "sha256": "eb6fe686968d216cd11690b25dfc15868efffc985c521748a6d739c90d141ef9"
+      "sha256": "68ef4865f3159e569424b520793dcc05b9b5d596c7bb0181d61de5e9aca37c60"
     },
     {
       "artifact_id": "node_inspector_screenshot",
@@ -59,14 +59,14 @@
       "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/browser-action-log.json",
       "required_for_pass": true,
       "status": "PRESENT",
-      "sha256": "67aa2e974fd2eafe7e2d560296362cdd23c74585adcc90ee1d8d3a5b42f6ca17"
+      "sha256": "f397d3f70377b6a8c9a91a1e858795d1cf874dd27c70bd6d9e0bec07032c4412"
     },
     {
       "artifact_id": "browser_network_log",
       "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/browser-network-log.json",
       "required_for_pass": true,
       "status": "PRESENT",
-      "sha256": "e776685204c2ca0231b37eb8fa194ddc252a16cfef596bb0cd961ee93a9f8477"
+      "sha256": "9019cf38a3ebbe8409406485b3ccccb618bf8e3f87ce632da0d09659416f9bd3"
     },
     {
       "artifact_id": "bff_route_log",
@@ -87,7 +87,7 @@
       "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/edge-quality-report.json",
       "required_for_pass": true,
       "status": "PRESENT",
-      "sha256": "aefb20f671c7111aa886c66dcb898ae9bb48da385b226ebc43dd2a7e35cb12ad"
+      "sha256": "95c8a7b26df5ea3060a4037f39caf83b6f230f046d22fceb7c8172aa0b5998b1"
     },
     {
       "artifact_id": "canvas_defect_regression_report",
@@ -108,77 +108,77 @@
       "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/canvas-defect-wheel-zoom.png",
       "required_for_pass": true,
       "status": "PRESENT",
-      "sha256": "7971464af3f08edb66cb843e7d267e5420ed07fedbd5c67c703e1a2f3aee1bd5"
+      "sha256": "b6d0573aaacb93d1632cc5c85304e6b0ddaf0412b70b1e420150a16bb239943e"
     },
     {
       "artifact_id": "canvas_defect_right_area_drag",
       "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/canvas-defect-right-area-drag.png",
       "required_for_pass": true,
       "status": "PRESENT",
-      "sha256": "79320c6c4c367e26bed62f8476ab1ac60f233213fb5d5a12d25357b7d196624b"
+      "sha256": "87f5b1683dd89c8296087d9d92971909d277185dc483dfab70018691129815c8"
     },
     {
       "artifact_id": "canvas_defect_connect_cancel",
       "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/canvas-defect-connect-cancel.png",
       "required_for_pass": true,
       "status": "PRESENT",
-      "sha256": "3dd45732fb7bf7012df95795b80f4670ff1e71bee321056fe6b7e83f48e1b102"
+      "sha256": "d6d367f8ac6e5187b418129c43c4838d682f0043f557d615697d8692014c88ac"
     },
     {
       "artifact_id": "edge_zoom_screenshot",
       "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/edge-zoom-screenshot.png",
       "required_for_pass": true,
       "status": "PRESENT",
-      "sha256": "ee4fe24cc02d555bf0f24ee97b7afd23d4f307c537b512806c3179f6a3c36e09"
+      "sha256": "92f883dd7758423229836aac0dbf205189e81a11358712ccc19be731cdfaf519"
     },
     {
       "artifact_id": "edge_drag_screenshot",
       "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/edge-drag-screenshot.png",
       "required_for_pass": true,
       "status": "PRESENT",
-      "sha256": "0e4da5cc929405b28aaa97dd5d82c551c3bcc810043a96ca09750a9996d503c6"
+      "sha256": "2ecd9bbd8c9417f50d8dbe98b704cf01fecaf9980fc09e270ff9534a525bb21b"
     },
     {
       "artifact_id": "edge_free_connect_screenshot",
       "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/edge-free-connect-screenshot.png",
       "required_for_pass": true,
       "status": "PRESENT",
-      "sha256": "a1e3317fcc5d65e41b8ff48ac61b1cd1bca5651a39b6f8ae1b5f7d16af9ba037"
+      "sha256": "8dcd51e02aac766d304b426b0b1d8cd8ae72be4d9d2606ab8e1197fedf6f5540"
     },
     {
       "artifact_id": "simulation_edge_state_screenshot",
       "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/simulation-edge-state-screenshot.png",
       "required_for_pass": true,
       "status": "PRESENT",
-      "sha256": "5ac475dcd9c88f35d72a1de8f395443f05478e850a5bc853f047c74c852491d1"
+      "sha256": "f097f3a117a481963d88cfea358bb0760857888b9e8eaeb1c215a31f542ff6df"
     },
     {
       "artifact_id": "scenario_morph_screenshot",
       "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/scenario-morph-screenshot.png",
       "required_for_pass": true,
       "status": "PRESENT",
-      "sha256": "c4348febc49727329e92abb468a54f90f20c7a699208b3d3132a373f88959589"
+      "sha256": "50643a086ae4ec5e9d82b1d6dcbb14d2da89e9b63ce1d8a74e2f345b0ceed272"
     },
     {
       "artifact_id": "scenario_storyboard_screenshot",
       "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/scenario-storyboard-screenshot.png",
       "required_for_pass": true,
       "status": "PRESENT",
-      "sha256": "e0080b1ce7439bed6d18ca5b1a1d584741b4a03a10a50435d26ab7348184e834"
+      "sha256": "147c34bdfec5f4f177e5b8a8030b3ef2970463a67f1ee7ea5779fc600b547b41"
     },
     {
       "artifact_id": "chat_command_screenshot",
       "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/chat-command-screenshot.png",
       "required_for_pass": true,
       "status": "PRESENT",
-      "sha256": "bd5aa48815c8ed7bbe1d60e4c74bfa16110454b5aadd46cbc67e3838080cd86a"
+      "sha256": "085e885578560af45a7512e1bf4a2e01b74ead1245975cdbf64c5b3582003e3c"
     },
     {
       "artifact_id": "simulation_blocked_modal_screenshot",
       "path": "docs/design/V12-V15.x/evidence/v13-workflow-studio-pilot/simulation-blocked-modal-screenshot.png",
       "required_for_pass": true,
       "status": "PRESENT",
-      "sha256": "6f4ee905675a1e602ef6ebe0e3cda0b94d94fceb3919b5096f8e3bc92d9a9cb8"
+      "sha256": "3b3f46b11b5312050235ec171804d27e5b6c4db77e4e47a1a6912b1cf1eecbcf"
     },
     {
       "artifact_id": "confirmation_transcript",

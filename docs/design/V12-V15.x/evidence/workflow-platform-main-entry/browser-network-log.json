@@ -1,0 +1,180 @@
+{
+  "schema_version": "workflow_platform.browser_network_log.v1",
+  "status": "PASS",
+  "allowed_prefixes": [
+    "/bff/pv21",
+    "/bff/pv20"
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/bff/pv21/studio/state?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/bff/pv21/studio/state?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/bff/pv20/agent-executor/state?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/bff/pv20/agent-executor/state?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/bff/pv20/runs/wfi_d545abca2b88/agent-execution-contract?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/bff/pv20/runs/wfi_d545abca2b88/agent-execution-evidence?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/bff/pv20/runs/wfi_d545abca2b88/agent-execution-contract?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/bff/pv20/runs/wfi_d545abca2b88/agent-execution-evidence?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/bff/pv21/workflows/pv21_complete_workflow_studio_reference/graph?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4174/bff/pv21/workflows/pv21_complete_workflow_studio_reference/graph/validate?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4174/bff/pv21/workflows/pv21_complete_workflow_studio_reference/diff?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4174/bff/pv21/workflows/pv21_complete_workflow_studio_reference/versions/publish?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4174/bff/pv21/workflows/pv21_complete_workflow_studio_reference/runs?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4174/bff/pv21/runs/wfi_bead80b049e6/human-actions?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/bff/pv21/runs/wfi_bead80b049e6/inspect?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/bff/pv21/runs/wfi_bead80b049e6/evidence?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4174/bff/pv21/workflows/pv21_complete_workflow_studio_reference/runs?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4174/bff/pv21/runs/wfi_b67fcc8c7c41/human-actions?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/bff/pv21/runs/wfi_b67fcc8c7c41/inspect?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/bff/pv21/runs/wfi_b67fcc8c7c41/evidence?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4174/bff/pv21/workflows/pv21_complete_workflow_studio_reference/runs?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4174/bff/pv21/runs/wfi_993a8be6559d/human-actions?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/bff/pv21/runs/wfi_993a8be6559d/inspect?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/bff/pv21/runs/wfi_993a8be6559d/evidence?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4174/bff/pv20/runs/wfi_d545abca2b88/agent-skill-executions?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/bff/pv20/agent-executor/state?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/bff/pv20/runs/wfi_d545abca2b88/agent-execution-contract?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/bff/pv20/runs/wfi_d545abca2b88/agent-execution-evidence?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4174/bff/pv20/runs/wfi_d545abca2b88/agent-tool-executions?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/bff/pv20/agent-executor/state?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/bff/pv20/runs/wfi_d545abca2b88/agent-execution-contract?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/bff/pv20/runs/wfi_d545abca2b88/agent-execution-evidence?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4174/bff/pv20/runs/wfi_d545abca2b88/agent-mcp-executions?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    }
+  ],
+  "forbidden_route_scan": {
+    "status": "PASS",
+    "forbidden_matches": []
+  },
+  "created_at": "2026-06-29T00:00:00Z"
+}

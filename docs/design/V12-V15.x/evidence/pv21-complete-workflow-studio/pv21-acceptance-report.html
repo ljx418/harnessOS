@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>PV21 完整 Workflow Studio 阶段性自动化验收报告</title>
+  <style>
+    body { margin: 0; padding: 28px; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #111827; background: #f4f7fb; }
+    h1 { margin: 0 0 8px; font-size: 30px; }
+    h2 { margin: 28px 0 12px; font-size: 20px; }
+    p { color: #475569; line-height: 1.7; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 18px 0; }
+    .card, figure { border: 1px solid #d7e0ea; border-radius: 8px; background: white; }
+    .card { padding: 14px; }
+    .card span { display: block; color: #64748b; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+    .card strong { display: block; margin-top: 4px; overflow-wrap: anywhere; }
+    figure { margin: 0 0 16px; padding: 12px; }
+    img { max-width: 100%; border: 1px solid #e5e7eb; border-radius: 6px; }
+    figcaption { margin-top: 8px; color: #475569; font-size: 14px; }
+    code { background: #e5e7eb; padding: 2px 5px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>PV21 完整 Workflow Studio 阶段性自动化验收报告</h1>
+  <p>本报告由 Chrome CDP 自动化执行真实用户路径生成。浏览器只访问 <code>/bff/pv21</code>，未直连 <code>/v1/rpc</code> 或内部 runtime 路径。</p>
+  <section class="grid">
+    <div class="card"><span>验收结论</span><strong>PASS</strong></div>
+    <div class="card"><span>允许声明</span><strong>PV21 complete Workflow Studio candidate ready for bounded review.</strong></div>
+    <div class="card"><span>平台红线</span><strong>业务不定制 workflow core / Gateway core / App shell</strong></div>
+  </section>
+  <h2>目标架构与当前实现</h2>
+  <p>目标体验是用真实 Workflow Studio 候选页面完成打开工作台、编辑画布、校验、Diff、发布、运行、人工交互、证据审查和版本回滚。当前实现通过 <code>?studio=pv21-complete-workflow-studio</code> 页面调用 <code>/bff/pv21/*</code>，后端落到通用 <code>WorkflowTemplate</code>、<code>WorkflowDraft</code>、<code>WorkflowVersion</code>、<code>WorkflowInstance</code>、<code>StationRun</code>、<code>QualityEvaluation</code> 与审批实体。</p>
+  <p>本报告不把该阶段声明为生产可用、完整 Agent executor 或外部应用接入完成；这些仍属于后续开发目标。</p>
+  <h2>真实用户路径截图</h2>
+  <figure><img src="01-pv21-studio-loaded.png"><figcaption>工作台加载：节点库、画布、Inspector、版本运行区与平台红线可见。</figcaption></figure>
+  <figure><img src="02-canvas-save-validate-diff.png"><figcaption>保存 Draft、校验图、生成 WorkflowDiff，发布前仍要求用户确认。</figcaption></figure>
+  <figure><img src="03-version-publish-history.png"><figcaption>发布两个版本，版本历史与回滚候选进入可审查状态。</figcaption></figure>
+  <figure><img src="04-run-waiting-approval.png"><figcaption>基于发布版本启动真实 runtime run，流程停在 waiting_approval。</figcaption></figure>
+  <figure><img src="05-human-gate-approved.png"><figcaption>人工审批通过后 workflow run 进入 completed。</figcaption></figure>
+  <figure><img src="06-evidence-review.png"><figcaption>证据审查汇总 trace、artifact、quality、approval、route boundary 与 no-false-green 扫描。</figcaption></figure>
+  <figure><img src="07-pv21-full-page-completed.png"><figcaption>回滚后完整页面状态，用于人工复核目标体验是否偏移。</figcaption></figure>
+</body>
+</html>

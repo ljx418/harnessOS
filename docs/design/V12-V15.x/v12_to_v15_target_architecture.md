@@ -159,6 +159,33 @@ pilot experience away from test-only `/bff/pv16/*` routes and toward formal
 `apps/workflow-console` integration. PV17 documents are implementation
 readiness artifacts, not runtime evidence.
 
+PV19 is the selected post-PV18 documentation target for the runtime workflow
+platform closed loop. It keeps the BFF, Gateway, WorkflowStore and evidence
+boundaries, then defines the target path where `apps/workflow-console`,
+`WorkflowConsoleClient`, `apps/api/routers/bff.py`, `apps/gateway/service.py`,
+`core/workflows/models.py`, `core/workflows/store.py`, runs, approvals,
+artifacts, traces and audit read models cooperate to support graph
+orchestration, publish, runtime run, human interaction and evidence review.
+PV19 documents are planning artifacts until implementation evidence exists.
+
+WP-M0 is the current post-PV21/PV22 product-entry alignment target. It keeps
+PV19, PV20 and PV21 bounded evidence as historical proof points, then requires
+the next implementation work to converge on one Workflow Platform main entry.
+The target relationship is:
+
+```text
+apps/workflow-console/src/App.tsx
+  -> WorkflowStudioLayout.tsx
+  -> V13EditableStudio / PV19RuntimeWorkflowPlatform / PV20AgentExecutor / PV21CompleteWorkflowStudio
+  -> apps/api/routers/bff.py route families
+  -> core/workflows/store.py and apps/gateway/service.py
+  -> evidence packages and acceptance reports
+```
+
+WP-M0 documents this architecture only. It does not prove implementation,
+production readiness, product-grade frontend completion, complete Workflow
+Studio GA or Agent executor readiness.
+
 ## Target Architecture Planes
 
 ```text
@@ -183,6 +210,7 @@ User
   -> Observability / Audit / Operations Plane
   -> Deployment And Self-Hosting Plane
   -> PV16 Product-Runtime Hardening Plane
+  -> WP-M0 Workflow Platform Main Entry Alignment Plane
 ```
 
 ## Plane Responsibilities
@@ -214,6 +242,7 @@ User
 | Deployment And Self-Hosting | Compose, env, storage, queue, observability, backup/restore docs. | Production GA claim before evidence. |
 | PV16 Product-Runtime Hardening | Durable product mutation, controlled runtime run/inspect handoff, deployment hardening smoke and product journey evidence. | Direct browser runtime calls, destructive deployment changes, production GA or complete Studio claims. |
 | PV17 Product Closed Loop | Mainline setup -> Product Console -> Mission Studio -> confirm run -> inspect -> evidence implementation using concrete code entities, formal `/bff/pv17/*` routes, BFF DTOs and browser E2E evidence. | Treating PV16 test-only BFF routes, PV17 documents alone or screenshots alone as production evidence. |
+| PV19 Runtime Workflow Platform Closed Loop | Planned graph orchestration -> WorkflowDiff -> publish WorkflowVersion -> runtime-backed WorkflowInstance -> human interaction -> evidence review using `apps/workflow-console`, `WorkflowConsoleClient`, BFF, Gateway, WorkflowStore, runs, approvals, artifacts, traces and audit read models. | Treating PV19 documents alone as implementation evidence, bypassing BFF, simulating runtime in UI, or adding business-specific Core/Gateway/App shell shortcuts. |
 
 ## Core Product Entities
 

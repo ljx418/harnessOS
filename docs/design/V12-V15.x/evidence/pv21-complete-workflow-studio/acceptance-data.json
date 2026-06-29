@@ -1,0 +1,78 @@
+{
+  "schema_version": "pv21.complete_workflow_studio_acceptance_data.v1",
+  "stage_id": "PV21-SA",
+  "status": "PASS",
+  "allowed_claim": "PV21 complete Workflow Studio candidate ready for bounded review.",
+  "browser_e2e": {
+    "status": "PASS",
+    "mode": "CDP",
+    "cdp_url": "http://127.0.0.1:9351"
+  },
+  "user_visible_paths": [
+    "打开工作台",
+    "保存 Draft",
+    "校验图",
+    "生成 Diff",
+    "发布版本",
+    "运行工作流",
+    "人工审批",
+    "审查证据",
+    "回滚版本"
+  ],
+  "screenshots": [
+    "01-pv21-studio-loaded.png",
+    "02-canvas-save-validate-diff.png",
+    "03-version-publish-history.png",
+    "04-run-waiting-approval.png",
+    "05-human-gate-approved.png",
+    "06-evidence-review.png",
+    "07-pv21-full-page-completed.png"
+  ],
+  "route_boundary": {
+    "status": "PASS",
+    "allowed_prefixes": [
+      "/bff/pv21"
+    ],
+    "forbidden_matches": []
+  },
+  "target_architecture": {
+    "status": "PARTIAL_PASS",
+    "implemented": [
+      "Workflow Studio entry",
+      "BFF DTO boundary",
+      "Workflow graph save/validate/diff",
+      "version publish/rollback",
+      "runtime run",
+      "human gate",
+      "evidence summary"
+    ],
+    "not_claimed": [
+      "production-ready governance",
+      "unrestricted Agent executor",
+      "external application contract hardening"
+    ]
+  },
+  "current_architecture": {
+    "entry": "?studio=pv21-complete-workflow-studio",
+    "browser_boundary": "/bff/pv21/*",
+    "backend_entities": [
+      "WorkflowTemplate",
+      "WorkflowDraft",
+      "WorkflowVersion",
+      "WorkflowInstance",
+      "StationRun",
+      "QualityEvaluation",
+      "ApprovalDecision"
+    ]
+  },
+  "platform_generality_review": {
+    "status": "PASS",
+    "core_customization_allowed": false,
+    "finding": "业务样例以 WorkflowTemplate draft/version/input 进入通用平台，没有为单一业务修改 workflow core、Gateway core 或 App shell。"
+  },
+  "prd_review": {
+    "status": "PASS",
+    "conclusion": "已覆盖完整 Workflow Studio 候选体验的 bounded closed loop；仍不声明生产可用、完整 Agent executor 或外部应用接入完成。"
+  },
+  "created_at": "2026-06-27T00:00:00Z"
+}

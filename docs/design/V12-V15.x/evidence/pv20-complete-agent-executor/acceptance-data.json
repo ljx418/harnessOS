@@ -1,0 +1,157 @@
+{
+  "schema_version": "pv20.agent_execution_contract_acceptance_data.v1",
+  "stage_id": "PV20-S5",
+  "status": "PASS",
+  "created_at": "2026-06-27T00:00:00Z",
+  "allowed_claim": "PV20-S5 complete: timeout/cancel/retry/redaction fixtures ready for bounded review.",
+  "scenario_results": [
+    {
+      "scenario_id": "agent_executor_state_readable",
+      "status": "PASS",
+      "description": "用户可读取 PV20 Agent executor contract state。",
+      "evidence_refs": [
+        "backend-acceptance-report.json"
+      ]
+    },
+    {
+      "scenario_id": "envelope_bound_to_runtime_truth",
+      "status": "PASS",
+      "description": "AgentExecutionEnvelope 绑定 WorkflowInstance 和 StationRun。",
+      "evidence_refs": [
+        "backend-acceptance-report.json"
+      ]
+    },
+    {
+      "scenario_id": "s1_no_execution_boundary",
+      "status": "PASS",
+      "description": "S1 明确不执行 tool / skill / MCP。",
+      "evidence_refs": [
+        "backend-acceptance-report.json"
+      ]
+    },
+    {
+      "scenario_id": "s2_allowlisted_skill_execution",
+      "status": "PASS",
+      "description": "S2 用户确认后执行本地 bundled skill/read-model。",
+      "evidence_refs": [
+        "backend-acceptance-report.json"
+      ]
+    },
+    {
+      "scenario_id": "s2_no_tool_or_mcp_execution",
+      "status": "PASS",
+      "description": "S2 不执行 MCP/tool 调用，相关 refs 保持为空。",
+      "evidence_refs": [
+        "backend-acceptance-report.json"
+      ]
+    },
+    {
+      "scenario_id": "s3a_allowlisted_tool_execution",
+      "status": "PASS",
+      "description": "S3A 用户确认后执行本地 read-only artifact metadata tool。",
+      "evidence_refs": [
+        "backend-acceptance-report.json"
+      ]
+    },
+    {
+      "scenario_id": "s3b_mcp_fixture_execution",
+      "status": "PASS",
+      "description": "S3B 用户确认后通过 Gateway connector runtime 执行本地 stdio MCP fixture。",
+      "evidence_refs": [
+        "backend-acceptance-report.json"
+      ]
+    },
+    {
+      "scenario_id": "s4_approval_handoff_refs",
+      "status": "PASS",
+      "description": "S4 记录 connector approval refs，并通过 approval.respond 完成 handoff。",
+      "evidence_refs": [
+        "backend-acceptance-report.json"
+      ]
+    },
+    {
+      "scenario_id": "s4_denied_mutation_fixtures",
+      "status": "PASS",
+      "description": "S4 拒绝 source=agent、未确认执行和未知 MCP/tool。",
+      "evidence_refs": [
+        "backend-acceptance-report.json"
+      ]
+    },
+    {
+      "scenario_id": "s5_retry_context_evidence",
+      "status": "PASS",
+      "description": "S5 使用 connector approval retry context 完成 MCP fixture。",
+      "evidence_refs": [
+        "backend-acceptance-report.json"
+      ]
+    },
+    {
+      "scenario_id": "s5_timeout_failure_fixture",
+      "status": "PASS",
+      "description": "S5 timeout/failure fixture 记录为 failed，不误报成功。",
+      "evidence_refs": [
+        "backend-acceptance-report.json"
+      ]
+    },
+    {
+      "scenario_id": "s5_cancel_fixture",
+      "status": "PASS",
+      "description": "S5 cancel fixture 记录为 cancelled。",
+      "evidence_refs": [
+        "backend-acceptance-report.json"
+      ]
+    },
+    {
+      "scenario_id": "s5_redaction_scan",
+      "status": "PASS",
+      "description": "S5 PV20 DTO snapshots 未出现 forbidden raw terms。",
+      "evidence_refs": [
+        "no-false-green-scan.txt"
+      ]
+    },
+    {
+      "scenario_id": "unrestricted_mcp_not_claimed",
+      "status": "PASS",
+      "description": "S4 不声明 unrestricted MCP execution ready。",
+      "evidence_refs": [
+        "no-false-green-scan.txt"
+      ]
+    },
+    {
+      "scenario_id": "route_boundary_specified",
+      "status": "PASS",
+      "description": "PV20 只使用 /bff/pv20 route boundary。",
+      "evidence_refs": [
+        "no-false-green-scan.txt"
+      ]
+    }
+  ],
+  "route_boundary": {
+    "allowed_prefix": "/bff/pv20",
+    "forbidden_direct_routes": [
+      "/v1/rpc",
+      "/v1/internal/executor",
+      "/v1/internal/workflow-store"
+    ],
+    "status": "specified"
+  },
+  "contract_summary": {
+    "workflow_instance_id": "wfi_adadaa7c672a",
+    "station_run_id": "sr_216a27aa9e14",
+    "agent_id": "pv20_agent:source_review",
+    "execution_status": "completed",
+    "skill_call_refs": [
+      "skill-call://pv20/sr_216a27aa9e14/plan/pv20-skill-exec-a5c18f752be4"
+    ],
+    "tool_call_refs": [
+      "tool-call://pv20/sr_216a27aa9e14/artifact.metadata.read/pv20-tool-exec-6f5323401b60"
+    ],
+    "mcp_call_refs": [
+      "mcp-call://pv20/sr_216a27aa9e14/data_service_mcp/knowledge_query_v2/job_0a69f34b8d42"
+    ],
+    "approval_refs": [
+      "approval://pv20/appr_7f107cbe1330"
+    ]
+  },
+  "blocking_failures": []
+}

@@ -1,0 +1,161 @@
+{
+  "schema_version": "pv21.browser_network_log.v1",
+  "status": "PASS",
+  "requests": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4185/?studio=pv21-complete-workflow-studio&app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4185/assets/index-BNaS-sz3.js",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4185/assets/index-DS0LNPgM.css",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4185/bff/pv21/studio/state?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "PUT",
+      "url": "http://127.0.0.1:4185/bff/pv21/workflows/pv21_complete_workflow_studio_reference/graph?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4185/bff/pv21/studio/state?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4185/bff/pv21/workflows/pv21_complete_workflow_studio_reference/graph/validate?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4185/bff/pv21/studio/state?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4185/bff/pv21/workflows/pv21_complete_workflow_studio_reference/diff?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4185/bff/pv21/studio/state?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4185/bff/pv21/workflows/pv21_complete_workflow_studio_reference/versions/publish?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4185/bff/pv21/workflows/pv21_complete_workflow_studio_reference/versions?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4185/bff/pv21/studio/state?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "PUT",
+      "url": "http://127.0.0.1:4185/bff/pv21/workflows/pv21_complete_workflow_studio_reference/graph?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4185/bff/pv21/studio/state?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4185/bff/pv21/workflows/pv21_complete_workflow_studio_reference/diff?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4185/bff/pv21/studio/state?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4185/bff/pv21/workflows/pv21_complete_workflow_studio_reference/versions/publish?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4185/bff/pv21/workflows/pv21_complete_workflow_studio_reference/versions?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4185/bff/pv21/studio/state?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4185/bff/pv21/workflows/pv21_complete_workflow_studio_reference/runs?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4185/bff/pv21/studio/state?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4185/bff/pv21/runs/wfi_b642b3073bf2/human-actions?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4185/bff/pv21/runs/wfi_b642b3073bf2/inspect?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4185/bff/pv21/studio/state?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4185/bff/pv21/runs/wfi_b642b3073bf2/evidence?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4185/bff/pv21/studio/state?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4185/bff/pv21/workflows/pv21_complete_workflow_studio_reference/versions/wfv_dcf815f96f55/rollback?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4185/bff/pv21/workflows/pv21_complete_workflow_studio_reference/versions?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4185/bff/pv21/studio/state?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    }
+  ],
+  "forbidden_route_scan": {
+    "status": "PASS",
+    "forbidden_matches": []
+  },
+  "created_at": "2026-06-27T00:00:00Z"
+}

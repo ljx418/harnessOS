@@ -1,0 +1,1493 @@
+{
+  "schema_version": "pv20.agent_execution_contract_acceptance_report.v1",
+  "stage_id": "PV20-S5",
+  "status": "PASS",
+  "created_at": "2026-06-27T00:00:00Z",
+  "allowed_claim": "PV20-S5 complete: timeout/cancel/retry/redaction fixtures ready for bounded review.",
+  "failures": [],
+  "dto_snapshots": {
+    "state": {
+      "schema_version": "pv20.agent_executor_contract.v1",
+      "stage": "PV20-S1",
+      "scope": {
+        "app_id": "reference_app",
+        "project_id": "demo_a",
+        "workspace_id": "local"
+      },
+      "status": "contract_ready",
+      "entry": {
+        "route": "?studio=pv20-complete-agent-executor",
+        "implementation_status": "contract_read_model_only"
+      },
+      "workflow": {
+        "workflow_template_id": "pv19_runtime_workflow_platform_reference",
+        "name": "PV19 Runtime Workflow Platform Reference",
+        "latest_version_id": null,
+        "status": "draft"
+      },
+      "version": {
+        "workflow_version_id": "wfv_f42e8cdd828f",
+        "workflow_template_id": "pv19_runtime_workflow_platform_reference",
+        "version": "pv20-s1-contract"
+      },
+      "workflow_instance": {
+        "workflow_instance_id": "wfi_adadaa7c672a",
+        "workflow_template_id": "pv19_runtime_workflow_platform_reference",
+        "workflow_version_id": "wfv_f42e8cdd828f",
+        "status": "running"
+      },
+      "station_run": {
+        "station_run_id": "sr_216a27aa9e14",
+        "station_id": "source_review",
+        "status": "completed",
+        "attempt": 1,
+        "approval_id": null,
+        "output_artifact_ids": [
+          "art_da4fba072855"
+        ],
+        "quality_evaluation_ids": []
+      },
+      "agent_execution_contract": {
+        "schema_version": "pv20.agent_execution_envelope.v1",
+        "execution_envelope_id": "pv20-envelope:wfi_adadaa7c672a:sr_216a27aa9e14",
+        "workflow_instance_id": "wfi_adadaa7c672a",
+        "workflow_template_id": "pv19_runtime_workflow_platform_reference",
+        "workflow_version_id": "wfv_f42e8cdd828f",
+        "station_run_id": "sr_216a27aa9e14",
+        "station_id": "source_review",
+        "agent_id": "pv20_agent:source_review",
+        "operation": "agent.contract.readiness",
+        "source": "workflow_runtime",
+        "actor_type": "system_service",
+        "context_refs": {
+          "workflow_context_ref": "workflow-context://pv20/wfi_adadaa7c672a",
+          "station_input_refs": [],
+          "upstream_artifact_refs": []
+        },
+        "policy_refs": {
+          "tool_policy_ref": "tool-policy://pv20/pv20_agent:source_review/allowlist",
+          "skill_policy_ref": "skill-policy://pv20/pv20_agent:source_review/allowlist",
+          "mcp_policy_ref": "mcp-policy://pv20/pv20_agent:source_review/scope-bound",
+          "timeout_policy_ref": "timeout-policy://pv20/pv20_agent:source_review/default",
+          "kill_switch_policy_ref": "kill-switch://pv20/pv20_agent:source_review/default",
+          "redaction_policy_ref": "redaction-policy://pv20/pv20_agent:source_review/refs-only"
+        },
+        "allowed_operation_refs": [
+          "skill.read_model.preview",
+          "mcp.tool.preview_contract"
+        ],
+        "forbidden_operation_refs": [
+          "workflow.template.publish",
+          "approval.respond",
+          "git.push",
+          "production.deploy",
+          "unrestricted.shell"
+        ],
+        "execution_authority": {
+          "durable_mutation_allowed": false,
+          "requires_human_handoff_for_high_risk": true,
+          "raw_payload_allowed": false,
+          "browser_direct_execution_allowed": false
+        },
+        "audit_refs": [
+          {
+            "audit_ref_id": "pv20:audit:agent_execution.envelope.read:reference_app|demo_a|local:sr_216a27aa9e14",
+            "operation": "agent_execution.envelope.read",
+            "scope": {
+              "app_id": "reference_app",
+              "project_id": "demo_a",
+              "workspace_id": "local"
+            },
+            "entity_id": "sr_216a27aa9e14",
+            "created_at": "2026-06-27T04:32:15.480558Z",
+            "redaction_status": "redacted"
+          }
+        ],
+        "redaction_status": "redacted"
+      },
+      "agent_execution_result": {
+        "schema_version": "pv20.agent_execution_result.v1",
+        "execution_result_id": "pv20-result:wfi_adadaa7c672a:sr_216a27aa9e14",
+        "execution_envelope_id": "pv20-envelope:wfi_adadaa7c672a:sr_216a27aa9e14",
+        "workflow_instance_id": "wfi_adadaa7c672a",
+        "station_run_id": "sr_216a27aa9e14",
+        "agent_id": "pv20_agent:source_review",
+        "status": "contract_ready",
+        "execution_status": "not_executed_in_s1",
+        "tool_call_refs": [],
+        "skill_call_refs": [],
+        "mcp_call_refs": [],
+        "approval_refs": [],
+        "artifact_refs": [
+          "art_da4fba072855"
+        ],
+        "trace_refs": [
+          {
+            "trace_id": "trace_1a0a8ea0f2d8",
+            "event_type": "workflow.instance.started"
+          }
+        ],
+        "quality_refs": [],
+        "policy_decision": {
+          "status": "specified",
+          "runtime_execution_allowed_in_s1": false,
+          "runtime_execution_allowed_in_s2": false,
+          "runtime_execution_allowed_in_s3a": false,
+          "runtime_execution_allowed_in_s3b": false
+        },
+        "redaction_status": "redacted"
+      },
+      "allowed_claim": "PV20-S1 complete: governed Agent execution contract ready for bounded review.",
+      "audit_refs": [
+        {
+          "audit_ref_id": "pv20:audit:agent_executor.state.read:reference_app|demo_a|local:wfi_adadaa7c672a",
+          "operation": "agent_executor.state.read",
+          "scope": {
+            "app_id": "reference_app",
+            "project_id": "demo_a",
+            "workspace_id": "local"
+          },
+          "entity_id": "wfi_adadaa7c672a",
+          "created_at": "2026-06-27T04:32:15.480583Z",
+          "redaction_status": "redacted"
+        }
+      ],
+      "redaction_status": "redacted"
+    },
+    "contract": {
+      "schema_version": "pv20.agent_executor_contract.v1",
+      "stage": "PV20-S1",
+      "scope": {
+        "app_id": "reference_app",
+        "project_id": "demo_a",
+        "workspace_id": "local"
+      },
+      "workflow_instance": {
+        "workflow_instance_id": "wfi_adadaa7c672a",
+        "workflow_template_id": "pv19_runtime_workflow_platform_reference",
+        "workflow_version_id": "wfv_f42e8cdd828f",
+        "status": "running"
+      },
+      "station_run": {
+        "station_run_id": "sr_216a27aa9e14",
+        "station_id": "source_review",
+        "status": "completed",
+        "attempt": 1,
+        "approval_id": null,
+        "output_artifact_ids": [
+          "art_da4fba072855"
+        ],
+        "quality_evaluation_ids": []
+      },
+      "agent_execution_contract": {
+        "schema_version": "pv20.agent_execution_envelope.v1",
+        "execution_envelope_id": "pv20-envelope:wfi_adadaa7c672a:sr_216a27aa9e14",
+        "workflow_instance_id": "wfi_adadaa7c672a",
+        "workflow_template_id": "pv19_runtime_workflow_platform_reference",
+        "workflow_version_id": "wfv_f42e8cdd828f",
+        "station_run_id": "sr_216a27aa9e14",
+        "station_id": "source_review",
+        "agent_id": "pv20_agent:source_review",
+        "operation": "agent.contract.readiness",
+        "source": "workflow_runtime",
+        "actor_type": "system_service",
+        "context_refs": {
+          "workflow_context_ref": "workflow-context://pv20/wfi_adadaa7c672a",
+          "station_input_refs": [],
+          "upstream_artifact_refs": []
+        },
+        "policy_refs": {
+          "tool_policy_ref": "tool-policy://pv20/pv20_agent:source_review/allowlist",
+          "skill_policy_ref": "skill-policy://pv20/pv20_agent:source_review/allowlist",
+          "mcp_policy_ref": "mcp-policy://pv20/pv20_agent:source_review/scope-bound",
+          "timeout_policy_ref": "timeout-policy://pv20/pv20_agent:source_review/default",
+          "kill_switch_policy_ref": "kill-switch://pv20/pv20_agent:source_review/default",
+          "redaction_policy_ref": "redaction-policy://pv20/pv20_agent:source_review/refs-only"
+        },
+        "allowed_operation_refs": [
+          "skill.read_model.preview",
+          "mcp.tool.preview_contract"
+        ],
+        "forbidden_operation_refs": [
+          "workflow.template.publish",
+          "approval.respond",
+          "git.push",
+          "production.deploy",
+          "unrestricted.shell"
+        ],
+        "execution_authority": {
+          "durable_mutation_allowed": false,
+          "requires_human_handoff_for_high_risk": true,
+          "raw_payload_allowed": false,
+          "browser_direct_execution_allowed": false
+        },
+        "audit_refs": [
+          {
+            "audit_ref_id": "pv20:audit:agent_execution.envelope.read:reference_app|demo_a|local:sr_216a27aa9e14",
+            "operation": "agent_execution.envelope.read",
+            "scope": {
+              "app_id": "reference_app",
+              "project_id": "demo_a",
+              "workspace_id": "local"
+            },
+            "entity_id": "sr_216a27aa9e14",
+            "created_at": "2026-06-27T04:32:15.484648Z",
+            "redaction_status": "redacted"
+          }
+        ],
+        "redaction_status": "redacted"
+      },
+      "agent_execution_result": {
+        "schema_version": "pv20.agent_execution_result.v1",
+        "execution_result_id": "pv20-result:wfi_adadaa7c672a:sr_216a27aa9e14",
+        "execution_envelope_id": "pv20-envelope:wfi_adadaa7c672a:sr_216a27aa9e14",
+        "workflow_instance_id": "wfi_adadaa7c672a",
+        "station_run_id": "sr_216a27aa9e14",
+        "agent_id": "pv20_agent:source_review",
+        "status": "contract_ready",
+        "execution_status": "not_executed_in_s1",
+        "tool_call_refs": [],
+        "skill_call_refs": [],
+        "mcp_call_refs": [],
+        "approval_refs": [],
+        "artifact_refs": [
+          "art_da4fba072855"
+        ],
+        "trace_refs": [
+          {
+            "trace_id": "trace_1a0a8ea0f2d8",
+            "event_type": "workflow.instance.started"
+          }
+        ],
+        "quality_refs": [],
+        "policy_decision": {
+          "status": "specified",
+          "runtime_execution_allowed_in_s1": false,
+          "runtime_execution_allowed_in_s2": false,
+          "runtime_execution_allowed_in_s3a": false,
+          "runtime_execution_allowed_in_s3b": false
+        },
+        "redaction_status": "redacted"
+      },
+      "audit_refs": [
+        {
+          "audit_ref_id": "pv20:audit:agent_execution.contract.read:reference_app|demo_a|local:sr_216a27aa9e14",
+          "operation": "agent_execution.contract.read",
+          "scope": {
+            "app_id": "reference_app",
+            "project_id": "demo_a",
+            "workspace_id": "local"
+          },
+          "entity_id": "sr_216a27aa9e14",
+          "created_at": "2026-06-27T04:32:15.484661Z",
+          "redaction_status": "redacted"
+        }
+      ],
+      "redaction_status": "redacted"
+    },
+    "evidence": {
+      "schema_version": "pv20.agent_executor_contract.v1",
+      "stage": "PV20-S1",
+      "scope": {
+        "app_id": "reference_app",
+        "project_id": "demo_a",
+        "workspace_id": "local"
+      },
+      "status": "PASS",
+      "route_boundary": {
+        "allowed_prefix": "/bff/pv20",
+        "forbidden_direct_routes": [
+          "/v1/rpc",
+          "/v1/internal/executor",
+          "/v1/internal/workflow-store"
+        ],
+        "status": "specified"
+      },
+      "claim_matrix": [
+        {
+          "claim": "PV20-S1 exposes a governed AgentExecutionEnvelope bound to WorkflowInstance and StationRun.",
+          "evidence_refs": [
+            "/bff/pv20/agent-executor/state",
+            "/bff/pv20/runs/{run_id}/agent-execution-contract"
+          ],
+          "status": "PASS"
+        },
+        {
+          "claim": "PV20-S1 is contract/read-model only and does not execute tool, skill or MCP calls.",
+          "evidence_refs": [
+            "agent_execution_result.execution_status=not_executed_in_s1"
+          ],
+          "status": "PASS"
+        },
+        {
+          "claim": "PV20-S2 executes an allowlisted local skill/read-model and records backend evidence.",
+          "evidence_refs": [],
+          "status": "PENDING"
+        },
+        {
+          "claim": "PV20-S3A executes an allowlisted read-only local tool and records backend evidence.",
+          "evidence_refs": [],
+          "status": "PENDING"
+        },
+        {
+          "claim": "PV20-S3B executes an allowlisted local MCP fixture through connector runtime and records backend evidence.",
+          "evidence_refs": [],
+          "status": "PENDING"
+        },
+        {
+          "claim": "PV20-S4 records approval handoff refs and denies unconfirmed or agent-sourced execution.",
+          "evidence_refs": [],
+          "status": "PENDING"
+        }
+      ],
+      "missing_evidence": [],
+      "allowed_claim": "PV20-S1 complete: governed Agent execution contract ready for bounded review.",
+      "not_claimed": [
+        "production ready",
+        "unrestricted automation ready",
+        "complete Workflow Studio ready",
+        "unrestricted tool execution ready",
+        "unrestricted MCP execution ready"
+      ],
+      "audit_refs": [
+        {
+          "audit_ref_id": "pv20:audit:agent_execution.evidence.summary:reference_app|demo_a|local:wfi_adadaa7c672a",
+          "operation": "agent_execution.evidence.summary",
+          "scope": {
+            "app_id": "reference_app",
+            "project_id": "demo_a",
+            "workspace_id": "local"
+          },
+          "entity_id": "wfi_adadaa7c672a",
+          "created_at": "2026-06-27T04:32:15.503555Z",
+          "redaction_status": "redacted"
+        }
+      ],
+      "redaction_status": "redacted"
+    },
+    "skill_execution": {
+      "schema_version": "pv20.agent_executor_contract.v1",
+      "stage": "PV20-S2",
+      "execution": {
+        "schema_version": "pv20.agent_skill_execution_result.v1",
+        "execution_id": "pv20-skill-exec-a5c18f752be4",
+        "execution_envelope_id": "pv20-envelope:wfi_adadaa7c672a:sr_216a27aa9e14",
+        "workflow_instance_id": "wfi_adadaa7c672a",
+        "station_run_id": "sr_216a27aa9e14",
+        "station_id": "source_review",
+        "agent_id": "pv20_agent:source_review",
+        "operation": "agent.skill.execute",
+        "status": "completed",
+        "skill_call_refs": [
+          "skill-call://pv20/sr_216a27aa9e14/plan/pv20-skill-exec-a5c18f752be4"
+        ],
+        "tool_call_refs": [],
+        "mcp_call_refs": [],
+        "artifact_payload_ref": "artifact-payload-ref://pv20/sr_216a27aa9e14/pv20-skill-exec-a5c18f752be4",
+        "input_refs": [],
+        "skill_ref": "skill://bundled/plan",
+        "skill_source": "bundled",
+        "skill_content_hash": "d7a3ae6b7a6332ae",
+        "summary": "Executed bundled skill read-model: plan",
+        "created_at": "2026-06-27T04:32:15.519917Z",
+        "redaction_status": "redacted",
+        "artifact_refs": [
+          {
+            "artifact_id": "art_58ef14a77385",
+            "kind": "pv20.agent_skill_result",
+            "name": "sr_216a27aa9e14-plan-result.json"
+          }
+        ],
+        "audit_refs": [
+          {
+            "audit_ref_id": "pv20:audit:agent_skill.execute:reference_app|demo_a|local:pv20-skill-exec-a5c18f752be4",
+            "operation": "agent_skill.execute",
+            "scope": {
+              "app_id": "reference_app",
+              "project_id": "demo_a",
+              "workspace_id": "local"
+            },
+            "entity_id": "pv20-skill-exec-a5c18f752be4",
+            "created_at": "2026-06-27T04:32:15.551879Z",
+            "redaction_status": "redacted"
+          }
+        ]
+      },
+      "redaction_status": "redacted"
+    },
+    "contract_after": {
+      "schema_version": "pv20.agent_executor_contract.v1",
+      "stage": "PV20-S1",
+      "scope": {
+        "app_id": "reference_app",
+        "project_id": "demo_a",
+        "workspace_id": "local"
+      },
+      "workflow_instance": {
+        "workflow_instance_id": "wfi_adadaa7c672a",
+        "workflow_template_id": "pv19_runtime_workflow_platform_reference",
+        "workflow_version_id": "wfv_f42e8cdd828f",
+        "status": "running"
+      },
+      "station_run": {
+        "station_run_id": "sr_216a27aa9e14",
+        "station_id": "source_review",
+        "status": "completed",
+        "attempt": 1,
+        "approval_id": null,
+        "output_artifact_ids": [
+          "art_da4fba072855",
+          "art_58ef14a77385"
+        ],
+        "quality_evaluation_ids": []
+      },
+      "agent_execution_contract": {
+        "schema_version": "pv20.agent_execution_envelope.v1",
+        "execution_envelope_id": "pv20-envelope:wfi_adadaa7c672a:sr_216a27aa9e14",
+        "workflow_instance_id": "wfi_adadaa7c672a",
+        "workflow_template_id": "pv19_runtime_workflow_platform_reference",
+        "workflow_version_id": "wfv_f42e8cdd828f",
+        "station_run_id": "sr_216a27aa9e14",
+        "station_id": "source_review",
+        "agent_id": "pv20_agent:source_review",
+        "operation": "agent.contract.readiness",
+        "source": "workflow_runtime",
+        "actor_type": "system_service",
+        "context_refs": {
+          "workflow_context_ref": "workflow-context://pv20/wfi_adadaa7c672a",
+          "station_input_refs": [],
+          "upstream_artifact_refs": []
+        },
+        "policy_refs": {
+          "tool_policy_ref": "tool-policy://pv20/pv20_agent:source_review/allowlist",
+          "skill_policy_ref": "skill-policy://pv20/pv20_agent:source_review/allowlist",
+          "mcp_policy_ref": "mcp-policy://pv20/pv20_agent:source_review/scope-bound",
+          "timeout_policy_ref": "timeout-policy://pv20/pv20_agent:source_review/default",
+          "kill_switch_policy_ref": "kill-switch://pv20/pv20_agent:source_review/default",
+          "redaction_policy_ref": "redaction-policy://pv20/pv20_agent:source_review/refs-only"
+        },
+        "allowed_operation_refs": [
+          "skill.read_model.preview",
+          "mcp.tool.preview_contract"
+        ],
+        "forbidden_operation_refs": [
+          "workflow.template.publish",
+          "approval.respond",
+          "git.push",
+          "production.deploy",
+          "unrestricted.shell"
+        ],
+        "execution_authority": {
+          "durable_mutation_allowed": false,
+          "requires_human_handoff_for_high_risk": true,
+          "raw_payload_allowed": false,
+          "browser_direct_execution_allowed": false
+        },
+        "audit_refs": [
+          {
+            "audit_ref_id": "pv20:audit:agent_execution.envelope.read:reference_app|demo_a|local:sr_216a27aa9e14",
+            "operation": "agent_execution.envelope.read",
+            "scope": {
+              "app_id": "reference_app",
+              "project_id": "demo_a",
+              "workspace_id": "local"
+            },
+            "entity_id": "sr_216a27aa9e14",
+            "created_at": "2026-06-27T04:32:15.561164Z",
+            "redaction_status": "redacted"
+          }
+        ],
+        "redaction_status": "redacted"
+      },
+      "agent_execution_result": {
+        "schema_version": "pv20.agent_execution_result.v1",
+        "execution_result_id": "pv20-skill-exec-a5c18f752be4",
+        "execution_envelope_id": "pv20-envelope:wfi_adadaa7c672a:sr_216a27aa9e14",
+        "workflow_instance_id": "wfi_adadaa7c672a",
+        "station_run_id": "sr_216a27aa9e14",
+        "agent_id": "pv20_agent:source_review",
+        "status": "completed",
+        "execution_status": "completed",
+        "tool_call_refs": [],
+        "skill_call_refs": [
+          "skill-call://pv20/sr_216a27aa9e14/plan/pv20-skill-exec-a5c18f752be4"
+        ],
+        "mcp_call_refs": [],
+        "approval_refs": [],
+        "artifact_refs": [
+          {
+            "artifact_id": "art_58ef14a77385",
+            "kind": "pv20.agent_skill_result",
+            "name": "sr_216a27aa9e14-plan-result.json"
+          }
+        ],
+        "trace_refs": [
+          {
+            "trace_id": "trace_1a0a8ea0f2d8",
+            "event_type": "workflow.instance.started"
+          }
+        ],
+        "quality_refs": [],
+        "policy_decision": {
+          "status": "allowed",
+          "runtime_execution_allowed_in_s1": false,
+          "runtime_execution_allowed_in_s2": true,
+          "runtime_execution_allowed_in_s3a": false,
+          "runtime_execution_allowed_in_s3b": false
+        },
+        "redaction_status": "redacted"
+      },
+      "audit_refs": [
+        {
+          "audit_ref_id": "pv20:audit:agent_execution.contract.read:reference_app|demo_a|local:sr_216a27aa9e14",
+          "operation": "agent_execution.contract.read",
+          "scope": {
+            "app_id": "reference_app",
+            "project_id": "demo_a",
+            "workspace_id": "local"
+          },
+          "entity_id": "sr_216a27aa9e14",
+          "created_at": "2026-06-27T04:32:15.561181Z",
+          "redaction_status": "redacted"
+        }
+      ],
+      "redaction_status": "redacted"
+    },
+    "evidence_after": {
+      "schema_version": "pv20.agent_executor_contract.v1",
+      "stage": "PV20-S1",
+      "scope": {
+        "app_id": "reference_app",
+        "project_id": "demo_a",
+        "workspace_id": "local"
+      },
+      "status": "PASS",
+      "route_boundary": {
+        "allowed_prefix": "/bff/pv20",
+        "forbidden_direct_routes": [
+          "/v1/rpc",
+          "/v1/internal/executor",
+          "/v1/internal/workflow-store"
+        ],
+        "status": "specified"
+      },
+      "claim_matrix": [
+        {
+          "claim": "PV20-S1 exposes a governed AgentExecutionEnvelope bound to WorkflowInstance and StationRun.",
+          "evidence_refs": [
+            "/bff/pv20/agent-executor/state",
+            "/bff/pv20/runs/{run_id}/agent-execution-contract"
+          ],
+          "status": "PASS"
+        },
+        {
+          "claim": "PV20-S1 is contract/read-model only and does not execute tool, skill or MCP calls.",
+          "evidence_refs": [
+            "agent_execution_result.execution_status=not_executed_in_s1"
+          ],
+          "status": "SUPERSEDED_BY_S2"
+        },
+        {
+          "claim": "PV20-S2 executes an allowlisted local skill/read-model and records backend evidence.",
+          "evidence_refs": [
+            "skill-call://pv20/sr_216a27aa9e14/plan/pv20-skill-exec-a5c18f752be4"
+          ],
+          "status": "PASS"
+        },
+        {
+          "claim": "PV20-S3A executes an allowlisted read-only local tool and records backend evidence.",
+          "evidence_refs": [],
+          "status": "PENDING"
+        },
+        {
+          "claim": "PV20-S3B executes an allowlisted local MCP fixture through connector runtime and records backend evidence.",
+          "evidence_refs": [],
+          "status": "PENDING"
+        },
+        {
+          "claim": "PV20-S4 records approval handoff refs and denies unconfirmed or agent-sourced execution.",
+          "evidence_refs": [],
+          "status": "PENDING"
+        }
+      ],
+      "missing_evidence": [],
+      "allowed_claim": "PV20-S2 complete: allowlisted local skill execution ready for bounded review.",
+      "not_claimed": [
+        "production ready",
+        "unrestricted automation ready",
+        "complete Workflow Studio ready",
+        "unrestricted tool execution ready",
+        "unrestricted MCP execution ready"
+      ],
+      "audit_refs": [
+        {
+          "audit_ref_id": "pv20:audit:agent_execution.evidence.summary:reference_app|demo_a|local:wfi_adadaa7c672a",
+          "operation": "agent_execution.evidence.summary",
+          "scope": {
+            "app_id": "reference_app",
+            "project_id": "demo_a",
+            "workspace_id": "local"
+          },
+          "entity_id": "wfi_adadaa7c672a",
+          "created_at": "2026-06-27T04:32:15.563497Z",
+          "redaction_status": "redacted"
+        }
+      ],
+      "redaction_status": "redacted"
+    },
+    "tool_execution": {
+      "schema_version": "pv20.agent_executor_contract.v1",
+      "stage": "PV20-S3A",
+      "execution": {
+        "schema_version": "pv20.agent_tool_execution_result.v1",
+        "execution_id": "pv20-tool-exec-6f5323401b60",
+        "execution_envelope_id": "pv20-envelope:wfi_adadaa7c672a:sr_216a27aa9e14",
+        "workflow_instance_id": "wfi_adadaa7c672a",
+        "station_run_id": "sr_216a27aa9e14",
+        "station_id": "source_review",
+        "agent_id": "pv20_agent:source_review",
+        "operation": "agent.tool.execute",
+        "status": "completed",
+        "tool_call_refs": [
+          "tool-call://pv20/sr_216a27aa9e14/artifact.metadata.read/pv20-tool-exec-6f5323401b60"
+        ],
+        "skill_call_refs": [],
+        "mcp_call_refs": [],
+        "tool_name": "artifact.metadata.read",
+        "tool_input_refs": [
+          "artifact-metadata://pv20/art_da4fba072855"
+        ],
+        "summary": "Executed read-only artifact metadata tool.",
+        "created_at": "2026-06-27T04:32:15.573989Z",
+        "redaction_status": "redacted",
+        "audit_refs": [
+          {
+            "audit_ref_id": "pv20:audit:agent_tool.execute:reference_app|demo_a|local:pv20-tool-exec-6f5323401b60",
+            "operation": "agent_tool.execute",
+            "scope": {
+              "app_id": "reference_app",
+              "project_id": "demo_a",
+              "workspace_id": "local"
+            },
+            "entity_id": "pv20-tool-exec-6f5323401b60",
+            "created_at": "2026-06-27T04:32:15.574016Z",
+            "redaction_status": "redacted"
+          }
+        ]
+      },
+      "redaction_status": "redacted"
+    },
+    "contract_after_tool": {
+      "schema_version": "pv20.agent_executor_contract.v1",
+      "stage": "PV20-S1",
+      "scope": {
+        "app_id": "reference_app",
+        "project_id": "demo_a",
+        "workspace_id": "local"
+      },
+      "workflow_instance": {
+        "workflow_instance_id": "wfi_adadaa7c672a",
+        "workflow_template_id": "pv19_runtime_workflow_platform_reference",
+        "workflow_version_id": "wfv_f42e8cdd828f",
+        "status": "running"
+      },
+      "station_run": {
+        "station_run_id": "sr_216a27aa9e14",
+        "station_id": "source_review",
+        "status": "completed",
+        "attempt": 1,
+        "approval_id": null,
+        "output_artifact_ids": [
+          "art_da4fba072855",
+          "art_58ef14a77385"
+        ],
+        "quality_evaluation_ids": []
+      },
+      "agent_execution_contract": {
+        "schema_version": "pv20.agent_execution_envelope.v1",
+        "execution_envelope_id": "pv20-envelope:wfi_adadaa7c672a:sr_216a27aa9e14",
+        "workflow_instance_id": "wfi_adadaa7c672a",
+        "workflow_template_id": "pv19_runtime_workflow_platform_reference",
+        "workflow_version_id": "wfv_f42e8cdd828f",
+        "station_run_id": "sr_216a27aa9e14",
+        "station_id": "source_review",
+        "agent_id": "pv20_agent:source_review",
+        "operation": "agent.contract.readiness",
+        "source": "workflow_runtime",
+        "actor_type": "system_service",
+        "context_refs": {
+          "workflow_context_ref": "workflow-context://pv20/wfi_adadaa7c672a",
+          "station_input_refs": [],
+          "upstream_artifact_refs": []
+        },
+        "policy_refs": {
+          "tool_policy_ref": "tool-policy://pv20/pv20_agent:source_review/allowlist",
+          "skill_policy_ref": "skill-policy://pv20/pv20_agent:source_review/allowlist",
+          "mcp_policy_ref": "mcp-policy://pv20/pv20_agent:source_review/scope-bound",
+          "timeout_policy_ref": "timeout-policy://pv20/pv20_agent:source_review/default",
+          "kill_switch_policy_ref": "kill-switch://pv20/pv20_agent:source_review/default",
+          "redaction_policy_ref": "redaction-policy://pv20/pv20_agent:source_review/refs-only"
+        },
+        "allowed_operation_refs": [
+          "skill.read_model.preview",
+          "mcp.tool.preview_contract"
+        ],
+        "forbidden_operation_refs": [
+          "workflow.template.publish",
+          "approval.respond",
+          "git.push",
+          "production.deploy",
+          "unrestricted.shell"
+        ],
+        "execution_authority": {
+          "durable_mutation_allowed": false,
+          "requires_human_handoff_for_high_risk": true,
+          "raw_payload_allowed": false,
+          "browser_direct_execution_allowed": false
+        },
+        "audit_refs": [
+          {
+            "audit_ref_id": "pv20:audit:agent_execution.envelope.read:reference_app|demo_a|local:sr_216a27aa9e14",
+            "operation": "agent_execution.envelope.read",
+            "scope": {
+              "app_id": "reference_app",
+              "project_id": "demo_a",
+              "workspace_id": "local"
+            },
+            "entity_id": "sr_216a27aa9e14",
+            "created_at": "2026-06-27T04:32:15.576401Z",
+            "redaction_status": "redacted"
+          }
+        ],
+        "redaction_status": "redacted"
+      },
+      "agent_execution_result": {
+        "schema_version": "pv20.agent_execution_result.v1",
+        "execution_result_id": "pv20-tool-exec-6f5323401b60",
+        "execution_envelope_id": "pv20-envelope:wfi_adadaa7c672a:sr_216a27aa9e14",
+        "workflow_instance_id": "wfi_adadaa7c672a",
+        "station_run_id": "sr_216a27aa9e14",
+        "agent_id": "pv20_agent:source_review",
+        "status": "completed",
+        "execution_status": "completed",
+        "tool_call_refs": [
+          "tool-call://pv20/sr_216a27aa9e14/artifact.metadata.read/pv20-tool-exec-6f5323401b60"
+        ],
+        "skill_call_refs": [
+          "skill-call://pv20/sr_216a27aa9e14/plan/pv20-skill-exec-a5c18f752be4"
+        ],
+        "mcp_call_refs": [],
+        "approval_refs": [],
+        "artifact_refs": [
+          {
+            "artifact_id": "art_58ef14a77385",
+            "kind": "pv20.agent_skill_result",
+            "name": "sr_216a27aa9e14-plan-result.json"
+          }
+        ],
+        "trace_refs": [
+          {
+            "trace_id": "trace_1a0a8ea0f2d8",
+            "event_type": "workflow.instance.started"
+          }
+        ],
+        "quality_refs": [],
+        "policy_decision": {
+          "status": "allowed",
+          "runtime_execution_allowed_in_s1": false,
+          "runtime_execution_allowed_in_s2": true,
+          "runtime_execution_allowed_in_s3a": true,
+          "runtime_execution_allowed_in_s3b": false
+        },
+        "redaction_status": "redacted"
+      },
+      "audit_refs": [
+        {
+          "audit_ref_id": "pv20:audit:agent_execution.contract.read:reference_app|demo_a|local:sr_216a27aa9e14",
+          "operation": "agent_execution.contract.read",
+          "scope": {
+            "app_id": "reference_app",
+            "project_id": "demo_a",
+            "workspace_id": "local"
+          },
+          "entity_id": "sr_216a27aa9e14",
+          "created_at": "2026-06-27T04:32:15.576412Z",
+          "redaction_status": "redacted"
+        }
+      ],
+      "redaction_status": "redacted"
+    },
+    "evidence_after_tool": {
+      "schema_version": "pv20.agent_executor_contract.v1",
+      "stage": "PV20-S1",
+      "scope": {
+        "app_id": "reference_app",
+        "project_id": "demo_a",
+        "workspace_id": "local"
+      },
+      "status": "PASS",
+      "route_boundary": {
+        "allowed_prefix": "/bff/pv20",
+        "forbidden_direct_routes": [
+          "/v1/rpc",
+          "/v1/internal/executor",
+          "/v1/internal/workflow-store"
+        ],
+        "status": "specified"
+      },
+      "claim_matrix": [
+        {
+          "claim": "PV20-S1 exposes a governed AgentExecutionEnvelope bound to WorkflowInstance and StationRun.",
+          "evidence_refs": [
+            "/bff/pv20/agent-executor/state",
+            "/bff/pv20/runs/{run_id}/agent-execution-contract"
+          ],
+          "status": "PASS"
+        },
+        {
+          "claim": "PV20-S1 is contract/read-model only and does not execute tool, skill or MCP calls.",
+          "evidence_refs": [
+            "agent_execution_result.execution_status=not_executed_in_s1"
+          ],
+          "status": "SUPERSEDED_BY_S2"
+        },
+        {
+          "claim": "PV20-S2 executes an allowlisted local skill/read-model and records backend evidence.",
+          "evidence_refs": [
+            "skill-call://pv20/sr_216a27aa9e14/plan/pv20-skill-exec-a5c18f752be4"
+          ],
+          "status": "PASS"
+        },
+        {
+          "claim": "PV20-S3A executes an allowlisted read-only local tool and records backend evidence.",
+          "evidence_refs": [
+            "tool-call://pv20/sr_216a27aa9e14/artifact.metadata.read/pv20-tool-exec-6f5323401b60"
+          ],
+          "status": "PASS"
+        },
+        {
+          "claim": "PV20-S3B executes an allowlisted local MCP fixture through connector runtime and records backend evidence.",
+          "evidence_refs": [],
+          "status": "PENDING"
+        },
+        {
+          "claim": "PV20-S4 records approval handoff refs and denies unconfirmed or agent-sourced execution.",
+          "evidence_refs": [],
+          "status": "PENDING"
+        }
+      ],
+      "missing_evidence": [],
+      "allowed_claim": "PV20-S3A complete: allowlisted local tool execution ready for bounded review.",
+      "not_claimed": [
+        "production ready",
+        "unrestricted automation ready",
+        "complete Workflow Studio ready",
+        "unrestricted tool execution ready",
+        "unrestricted MCP execution ready"
+      ],
+      "audit_refs": [
+        {
+          "audit_ref_id": "pv20:audit:agent_execution.evidence.summary:reference_app|demo_a|local:wfi_adadaa7c672a",
+          "operation": "agent_execution.evidence.summary",
+          "scope": {
+            "app_id": "reference_app",
+            "project_id": "demo_a",
+            "workspace_id": "local"
+          },
+          "entity_id": "wfi_adadaa7c672a",
+          "created_at": "2026-06-27T04:32:15.578475Z",
+          "redaction_status": "redacted"
+        }
+      ],
+      "redaction_status": "redacted"
+    },
+    "agent_sourced_tool_denial": {
+      "error": {
+        "code": "PV20_ACTION_FORBIDDEN",
+        "message": "PV20 action source is not allowed.",
+        "data": {
+          "source": "agent"
+        }
+      }
+    },
+    "mcp_unconfirmed_denial": {
+      "error": {
+        "code": "PV20_ACTION_FORBIDDEN",
+        "message": "PV20 action requires explicit user confirmation.",
+        "data": {
+          "field": "user_confirmed"
+        }
+      }
+    },
+    "unknown_mcp_denial": {
+      "error": {
+        "code": "PV20_MCP_DENIED",
+        "message": "MCP tool is not allowlisted for PV20-S3B.",
+        "data": {
+          "code": "PV20_MCP_DENIED",
+          "message": "MCP tool is not allowlisted for PV20-S3B.",
+          "reason": "mcp_not_allowlisted",
+          "field": "connector_id"
+        }
+      }
+    },
+    "mcp_execution": {
+      "schema_version": "pv20.agent_executor_contract.v1",
+      "stage": "PV20-S3B",
+      "execution": {
+        "schema_version": "pv20.agent_mcp_execution_result.v1",
+        "execution_id": "pv20-mcp-exec-6fcc1ac0a363",
+        "execution_envelope_id": "pv20-envelope:wfi_adadaa7c672a:sr_216a27aa9e14",
+        "workflow_instance_id": "wfi_adadaa7c672a",
+        "station_run_id": "sr_216a27aa9e14",
+        "station_id": "source_review",
+        "agent_id": "pv20_agent:source_review",
+        "operation": "agent.mcp.execute",
+        "status": "completed",
+        "connector_id": "data_service_mcp",
+        "tool_name": "knowledge_query_v2",
+        "job_ref": "connector-job://pv20/job_0a69f34b8d42",
+        "approval_refs": [
+          "approval://pv20/appr_7f107cbe1330"
+        ],
+        "artifact_refs": [
+          {
+            "artifact_id": "art_d8bbe0832063",
+            "kind": "connector_result",
+            "name": "job_0a69f34b8d42_data_service_mcp_knowledge_query_v2.json"
+          }
+        ],
+        "mcp_call_refs": [
+          "mcp-call://pv20/sr_216a27aa9e14/data_service_mcp/knowledge_query_v2/job_0a69f34b8d42"
+        ],
+        "skill_call_refs": [],
+        "tool_call_refs": [],
+        "summary": "Executed allowlisted MCP connector: data_service_mcp.knowledge_query_v2",
+        "created_at": "2026-06-27T04:32:16.015588Z",
+        "redaction_status": "redacted",
+        "audit_refs": [
+          {
+            "audit_ref_id": "pv20:audit:agent_mcp.execute:reference_app|demo_a|local:pv20-mcp-exec-6fcc1ac0a363",
+            "operation": "agent_mcp.execute",
+            "scope": {
+              "app_id": "reference_app",
+              "project_id": "demo_a",
+              "workspace_id": "local"
+            },
+            "entity_id": "pv20-mcp-exec-6fcc1ac0a363",
+            "created_at": "2026-06-27T04:32:16.015617Z",
+            "redaction_status": "redacted"
+          }
+        ]
+      },
+      "redaction_status": "redacted"
+    },
+    "contract_after_mcp": {
+      "schema_version": "pv20.agent_executor_contract.v1",
+      "stage": "PV20-S1",
+      "scope": {
+        "app_id": "reference_app",
+        "project_id": "demo_a",
+        "workspace_id": "local"
+      },
+      "workflow_instance": {
+        "workflow_instance_id": "wfi_adadaa7c672a",
+        "workflow_template_id": "pv19_runtime_workflow_platform_reference",
+        "workflow_version_id": "wfv_f42e8cdd828f",
+        "status": "running"
+      },
+      "station_run": {
+        "station_run_id": "sr_216a27aa9e14",
+        "station_id": "source_review",
+        "status": "completed",
+        "attempt": 1,
+        "approval_id": null,
+        "output_artifact_ids": [
+          "art_da4fba072855",
+          "art_58ef14a77385",
+          "art_d8bbe0832063"
+        ],
+        "quality_evaluation_ids": []
+      },
+      "agent_execution_contract": {
+        "schema_version": "pv20.agent_execution_envelope.v1",
+        "execution_envelope_id": "pv20-envelope:wfi_adadaa7c672a:sr_216a27aa9e14",
+        "workflow_instance_id": "wfi_adadaa7c672a",
+        "workflow_template_id": "pv19_runtime_workflow_platform_reference",
+        "workflow_version_id": "wfv_f42e8cdd828f",
+        "station_run_id": "sr_216a27aa9e14",
+        "station_id": "source_review",
+        "agent_id": "pv20_agent:source_review",
+        "operation": "agent.contract.readiness",
+        "source": "workflow_runtime",
+        "actor_type": "system_service",
+        "context_refs": {
+          "workflow_context_ref": "workflow-context://pv20/wfi_adadaa7c672a",
+          "station_input_refs": [],
+          "upstream_artifact_refs": []
+        },
+        "policy_refs": {
+          "tool_policy_ref": "tool-policy://pv20/pv20_agent:source_review/allowlist",
+          "skill_policy_ref": "skill-policy://pv20/pv20_agent:source_review/allowlist",
+          "mcp_policy_ref": "mcp-policy://pv20/pv20_agent:source_review/scope-bound",
+          "timeout_policy_ref": "timeout-policy://pv20/pv20_agent:source_review/default",
+          "kill_switch_policy_ref": "kill-switch://pv20/pv20_agent:source_review/default",
+          "redaction_policy_ref": "redaction-policy://pv20/pv20_agent:source_review/refs-only"
+        },
+        "allowed_operation_refs": [
+          "skill.read_model.preview",
+          "mcp.tool.preview_contract"
+        ],
+        "forbidden_operation_refs": [
+          "workflow.template.publish",
+          "approval.respond",
+          "git.push",
+          "production.deploy",
+          "unrestricted.shell"
+        ],
+        "execution_authority": {
+          "durable_mutation_allowed": false,
+          "requires_human_handoff_for_high_risk": true,
+          "raw_payload_allowed": false,
+          "browser_direct_execution_allowed": false
+        },
+        "audit_refs": [
+          {
+            "audit_ref_id": "pv20:audit:agent_execution.envelope.read:reference_app|demo_a|local:sr_216a27aa9e14",
+            "operation": "agent_execution.envelope.read",
+            "scope": {
+              "app_id": "reference_app",
+              "project_id": "demo_a",
+              "workspace_id": "local"
+            },
+            "entity_id": "sr_216a27aa9e14",
+            "created_at": "2026-06-27T04:32:16.018091Z",
+            "redaction_status": "redacted"
+          }
+        ],
+        "redaction_status": "redacted"
+      },
+      "agent_execution_result": {
+        "schema_version": "pv20.agent_execution_result.v1",
+        "execution_result_id": "pv20-mcp-exec-6fcc1ac0a363",
+        "execution_envelope_id": "pv20-envelope:wfi_adadaa7c672a:sr_216a27aa9e14",
+        "workflow_instance_id": "wfi_adadaa7c672a",
+        "station_run_id": "sr_216a27aa9e14",
+        "agent_id": "pv20_agent:source_review",
+        "status": "completed",
+        "execution_status": "completed",
+        "tool_call_refs": [
+          "tool-call://pv20/sr_216a27aa9e14/artifact.metadata.read/pv20-tool-exec-6f5323401b60"
+        ],
+        "skill_call_refs": [
+          "skill-call://pv20/sr_216a27aa9e14/plan/pv20-skill-exec-a5c18f752be4"
+        ],
+        "mcp_call_refs": [
+          "mcp-call://pv20/sr_216a27aa9e14/data_service_mcp/knowledge_query_v2/job_0a69f34b8d42"
+        ],
+        "approval_refs": [
+          "approval://pv20/appr_7f107cbe1330"
+        ],
+        "artifact_refs": [
+          {
+            "artifact_id": "art_d8bbe0832063",
+            "kind": "connector_result",
+            "name": "job_0a69f34b8d42_data_service_mcp_knowledge_query_v2.json"
+          }
+        ],
+        "trace_refs": [
+          {
+            "trace_id": "trace_1a0a8ea0f2d8",
+            "event_type": "workflow.instance.started"
+          }
+        ],
+        "quality_refs": [],
+        "policy_decision": {
+          "status": "allowed",
+          "runtime_execution_allowed_in_s1": false,
+          "runtime_execution_allowed_in_s2": true,
+          "runtime_execution_allowed_in_s3a": true,
+          "runtime_execution_allowed_in_s3b": true
+        },
+        "redaction_status": "redacted"
+      },
+      "audit_refs": [
+        {
+          "audit_ref_id": "pv20:audit:agent_execution.contract.read:reference_app|demo_a|local:sr_216a27aa9e14",
+          "operation": "agent_execution.contract.read",
+          "scope": {
+            "app_id": "reference_app",
+            "project_id": "demo_a",
+            "workspace_id": "local"
+          },
+          "entity_id": "sr_216a27aa9e14",
+          "created_at": "2026-06-27T04:32:16.018102Z",
+          "redaction_status": "redacted"
+        }
+      ],
+      "redaction_status": "redacted"
+    },
+    "evidence_after_mcp": {
+      "schema_version": "pv20.agent_executor_contract.v1",
+      "stage": "PV20-S1",
+      "scope": {
+        "app_id": "reference_app",
+        "project_id": "demo_a",
+        "workspace_id": "local"
+      },
+      "status": "PASS",
+      "route_boundary": {
+        "allowed_prefix": "/bff/pv20",
+        "forbidden_direct_routes": [
+          "/v1/rpc",
+          "/v1/internal/executor",
+          "/v1/internal/workflow-store"
+        ],
+        "status": "specified"
+      },
+      "claim_matrix": [
+        {
+          "claim": "PV20-S1 exposes a governed AgentExecutionEnvelope bound to WorkflowInstance and StationRun.",
+          "evidence_refs": [
+            "/bff/pv20/agent-executor/state",
+            "/bff/pv20/runs/{run_id}/agent-execution-contract"
+          ],
+          "status": "PASS"
+        },
+        {
+          "claim": "PV20-S1 is contract/read-model only and does not execute tool, skill or MCP calls.",
+          "evidence_refs": [
+            "agent_execution_result.execution_status=not_executed_in_s1"
+          ],
+          "status": "SUPERSEDED_BY_S2"
+        },
+        {
+          "claim": "PV20-S2 executes an allowlisted local skill/read-model and records backend evidence.",
+          "evidence_refs": [
+            "skill-call://pv20/sr_216a27aa9e14/plan/pv20-skill-exec-a5c18f752be4"
+          ],
+          "status": "PASS"
+        },
+        {
+          "claim": "PV20-S3A executes an allowlisted read-only local tool and records backend evidence.",
+          "evidence_refs": [
+            "tool-call://pv20/sr_216a27aa9e14/artifact.metadata.read/pv20-tool-exec-6f5323401b60"
+          ],
+          "status": "PASS"
+        },
+        {
+          "claim": "PV20-S3B executes an allowlisted local MCP fixture through connector runtime and records backend evidence.",
+          "evidence_refs": [
+            "mcp-call://pv20/sr_216a27aa9e14/data_service_mcp/knowledge_query_v2/job_0a69f34b8d42"
+          ],
+          "status": "PASS"
+        },
+        {
+          "claim": "PV20-S4 records approval handoff refs and denies unconfirmed or agent-sourced execution.",
+          "evidence_refs": [
+            "approval://pv20/appr_7f107cbe1330"
+          ],
+          "status": "PASS"
+        }
+      ],
+      "missing_evidence": [],
+      "allowed_claim": "PV20-S4 complete: approval handoff and denied mutation fixtures ready for bounded review.",
+      "not_claimed": [
+        "production ready",
+        "unrestricted automation ready",
+        "complete Workflow Studio ready",
+        "unrestricted tool execution ready",
+        "unrestricted MCP execution ready"
+      ],
+      "audit_refs": [
+        {
+          "audit_ref_id": "pv20:audit:agent_execution.evidence.summary:reference_app|demo_a|local:wfi_adadaa7c672a",
+          "operation": "agent_execution.evidence.summary",
+          "scope": {
+            "app_id": "reference_app",
+            "project_id": "demo_a",
+            "workspace_id": "local"
+          },
+          "entity_id": "wfi_adadaa7c672a",
+          "created_at": "2026-06-27T04:32:16.033556Z",
+          "redaction_status": "redacted"
+        }
+      ],
+      "redaction_status": "redacted"
+    },
+    "timeout_failure_fixture": {
+      "job": {
+        "app_id": "reference_app",
+        "project_id": "demo_a",
+        "workspace_id": "local",
+        "created_at": "2026-06-27T12:32:16.106054",
+        "updated_at": "2026-06-27T12:32:16.319977",
+        "metadata": {
+          "connector_execution": {
+            "connector_id": "data_service_mcp",
+            "tool": "knowledge_query_v2",
+            "status": "failed",
+            "error": "[{'workspace_id': 'pv20-agent-executor-fixture', 'status': 'error', 'warnings': ['bounded timeout/failure fixture'], 'artifact_refs': [], 'data': {'tool': 'knowledge_query_v2', 'arguments': {'workspace_id': 'pv20-agent-executor-fixture', 'query': 'PV20 timeout failure fixture', 'mode': 'hybrid', 'top_k': 1}}}]"
+          },
+          "message": "connector data_service_mcp.knowledge_query_v2 failed: [{'workspace_id': 'pv20-agent-executor-fixture', 'status': 'error', 'warnings': ['bounded timeout/failure fixture'], 'artifact_refs': [], 'data': {'tool': 'knowledge_query_v2', 'arguments': {'workspace_id': 'pv20-agent-executor-fixture', 'query': 'PV20 timeout failure fixture', 'mode': 'hybrid', 'top_k': 1}}}]",
+          "failure_context": {
+            "type": "connector_execution_failed",
+            "retryable": true,
+            "message": "[{'workspace_id': 'pv20-agent-executor-fixture', 'status': 'error', 'warnings': ['bounded timeout/failure fixture'], 'artifact_refs': [], 'data': {'tool': 'knowledge_query_v2', 'arguments': {'workspace_id': 'pv20-agent-executor-fixture', 'query': 'PV20 timeout failure fixture', 'mode': 'hybrid', 'top_k': 1}}}]"
+          }
+        },
+        "job_id": "job_3f96ff4e63aa",
+        "workflow_id": "connector.data_service_mcp.knowledge_query_v2",
+        "domain": "knowledge",
+        "session_id": null,
+        "thread_id": null,
+        "turn_id": null,
+        "status": "failed",
+        "progress": 1.0,
+        "trace_id": null,
+        "artifact_ids": [],
+        "external_job_ref": null,
+        "parent_job_id": null,
+        "failure_context": {
+          "type": "connector_execution_failed",
+          "retryable": true,
+          "message": "[{'workspace_id': 'pv20-agent-executor-fixture', 'status': 'error', 'warnings': ['bounded timeout/failure fixture'], 'artifact_refs': [], 'data': {'tool': 'knowledge_query_v2', 'arguments': {'workspace_id': 'pv20-agent-executor-fixture', 'query': 'PV20 timeout failure fixture', 'mode': 'hybrid', 'top_k': 1}}}]"
+        }
+      },
+      "events": [
+        {
+          "app_id": "reference_app",
+          "project_id": "demo_a",
+          "workspace_id": "local",
+          "created_at": "2026-06-27T12:32:16.116133",
+          "updated_at": "2026-06-27T12:32:16.116138",
+          "metadata": {
+            "workflow_id": "connector.data_service_mcp.knowledge_query_v2",
+            "domain": "knowledge"
+          },
+          "event_id": "jobevt_44bef0c03b3c",
+          "job_id": "job_3f96ff4e63aa",
+          "event_type": "job.queued",
+          "status": "queued",
+          "progress": 0.0,
+          "message": "connector.data_service_mcp.knowledge_query_v2 queued"
+        },
+        {
+          "app_id": "reference_app",
+          "project_id": "demo_a",
+          "workspace_id": "local",
+          "created_at": "2026-06-27T12:32:16.248657",
+          "updated_at": "2026-06-27T12:32:16.248661",
+          "metadata": {
+            "message": "connector data_service_mcp.knowledge_query_v2 started",
+            "workflow_id": "connector.data_service_mcp.knowledge_query_v2",
+            "domain": "knowledge"
+          },
+          "event_id": "jobevt_ad2e2bbfb2a5",
+          "job_id": "job_3f96ff4e63aa",
+          "event_type": "job.running",
+          "status": "running",
+          "progress": 0.1,
+          "message": "connector data_service_mcp.knowledge_query_v2 started"
+        },
+        {
+          "app_id": "reference_app",
+          "project_id": "demo_a",
+          "workspace_id": "local",
+          "created_at": "2026-06-27T12:32:16.329731",
+          "updated_at": "2026-06-27T12:32:16.329735",
+          "metadata": {
+            "message": "connector data_service_mcp.knowledge_query_v2 failed: [{'workspace_id': 'pv20-agent-executor-fixture', 'status': 'error', 'warnings': ['bounded timeout/failure fixture'], 'artifact_refs': [], 'data': {'tool': 'knowledge_query_v2', 'arguments': {'workspace_id': 'pv20-agent-executor-fixture', 'query': 'PV20 timeout failure fixture', 'mode': 'hybrid', 'top_k': 1}}}]",
+            "connector_execution": {
+              "connector_id": "data_service_mcp",
+              "tool": "knowledge_query_v2",
+              "status": "failed",
+              "error": "[{'workspace_id': 'pv20-agent-executor-fixture', 'status': 'error', 'warnings': ['bounded timeout/failure fixture'], 'artifact_refs': [], 'data': {'tool': 'knowledge_query_v2', 'arguments': {'workspace_id': 'pv20-agent-executor-fixture', 'query': 'PV20 timeout failure fixture', 'mode': 'hybrid', 'top_k': 1}}}]"
+            },
+            "failure_context": {
+              "type": "connector_execution_failed",
+              "retryable": true,
+              "message": "[{'workspace_id': 'pv20-agent-executor-fixture', 'status': 'error', 'warnings': ['bounded timeout/failure fixture'], 'artifact_refs': [], 'data': {'tool': 'knowledge_query_v2', 'arguments': {'workspace_id': 'pv20-agent-executor-fixture', 'query': 'PV20 timeout failure fixture', 'mode': 'hybrid', 'top_k': 1}}}]"
+            },
+            "workflow_id": "connector.data_service_mcp.knowledge_query_v2",
+            "domain": "knowledge"
+          },
+          "event_id": "jobevt_ded33478aef2",
+          "job_id": "job_3f96ff4e63aa",
+          "event_type": "job.failed",
+          "status": "failed",
+          "progress": 1.0,
+          "message": "connector data_service_mcp.knowledge_query_v2 failed: [{'workspace_id': 'pv20-agent-executor-fixture', 'status': 'error', 'warnings': ['bounded timeout/failure fixture'], 'artifact_refs': [], 'data': {'tool': 'knowledge_query_v2', 'arguments': {'workspace_id': 'pv20-agent-executor-fixture', 'query': 'PV20 timeout failure fixture', 'mode': 'hybrid', 'top_k': 1}}}]"
+        }
+      ],
+      "terminal": true
+    },
+    "cancel_fixture": {
+      "job": {
+        "app_id": "reference_app",
+        "project_id": "demo_a",
+        "workspace_id": "local",
+        "created_at": "2026-06-27T12:32:16.413914",
+        "updated_at": "2026-06-27T12:32:16.594344",
+        "metadata": {
+          "connector_execution": {
+            "connector_id": "data_service_mcp",
+            "tool": "knowledge_query_v2",
+            "payload": {
+              "workspace_id": "pv20-agent-executor-fixture",
+              "query": "PV20 cancel fixture",
+              "mode": "hybrid",
+              "top_k": 1
+            },
+            "mode": "deferred"
+          },
+          "message": "connector data_service_mcp.knowledge_query_v2 started"
+        },
+        "job_id": "job_98b1999153ef",
+        "workflow_id": "connector.data_service_mcp.knowledge_query_v2",
+        "domain": "knowledge",
+        "session_id": null,
+        "thread_id": null,
+        "turn_id": null,
+        "status": "running",
+        "progress": 0.1,
+        "trace_id": null,
+        "artifact_ids": [],
+        "external_job_ref": null,
+        "parent_job_id": null,
+        "failure_context": {}
+      },
+      "events": [
+        {
+          "app_id": "reference_app",
+          "project_id": "demo_a",
+          "workspace_id": "local",
+          "created_at": "2026-06-27T12:32:16.425306",
+          "updated_at": "2026-06-27T12:32:16.425311",
+          "metadata": {
+            "workflow_id": "connector.data_service_mcp.knowledge_query_v2",
+            "domain": "knowledge"
+          },
+          "event_id": "jobevt_257e3dfd6dac",
+          "job_id": "job_98b1999153ef",
+          "event_type": "job.queued",
+          "status": "queued",
+          "progress": 0.0,
+          "message": "connector.data_service_mcp.knowledge_query_v2 queued"
+        },
+        {
+          "app_id": "reference_app",
+          "project_id": "demo_a",
+          "workspace_id": "local",
+          "created_at": "2026-06-27T12:32:16.603493",
+          "updated_at": "2026-06-27T12:32:16.603497",
+          "metadata": {
+            "message": "connector data_service_mcp.knowledge_query_v2 started",
+            "workflow_id": "connector.data_service_mcp.knowledge_query_v2",
+            "domain": "knowledge"
+          },
+          "event_id": "jobevt_6f3ac4c9f50f",
+          "job_id": "job_98b1999153ef",
+          "event_type": "job.running",
+          "status": "running",
+          "progress": 0.1,
+          "message": "connector data_service_mcp.knowledge_query_v2 started"
+        }
+      ],
+      "terminal": false
+    },
+    "cancel_result": {
+      "job": {
+        "app_id": "reference_app",
+        "project_id": "demo_a",
+        "workspace_id": "local",
+        "created_at": "2026-06-27T12:32:16.413914",
+        "updated_at": "2026-06-27T12:32:16.641453",
+        "metadata": {
+          "connector_execution": {
+            "connector_id": "data_service_mcp",
+            "tool": "knowledge_query_v2",
+            "payload": {
+              "workspace_id": "pv20-agent-executor-fixture",
+              "query": "PV20 cancel fixture",
+              "mode": "hybrid",
+              "top_k": 1
+            },
+            "mode": "deferred"
+          },
+          "message": "connector data_service_mcp.knowledge_query_v2 started",
+          "cancel_reason": "PV20-S5 bounded cancel fixture"
+        },
+        "job_id": "job_98b1999153ef",
+        "workflow_id": "connector.data_service_mcp.knowledge_query_v2",
+        "domain": "knowledge",
+        "session_id": null,
+        "thread_id": null,
+        "turn_id": null,
+        "status": "cancelled",
+        "progress": 0.1,
+        "trace_id": null,
+        "artifact_ids": [],
+        "external_job_ref": null,
+        "parent_job_id": null,
+        "failure_context": {}
+      },
+      "events": [
+        {
+          "app_id": "reference_app",
+          "project_id": "demo_a",
+          "workspace_id": "local",
+          "created_at": "2026-06-27T12:32:16.425306",
+          "updated_at": "2026-06-27T12:32:16.425311",
+          "metadata": {
+            "workflow_id": "connector.data_service_mcp.knowledge_query_v2",
+            "domain": "knowledge"
+          },
+          "event_id": "jobevt_257e3dfd6dac",
+          "job_id": "job_98b1999153ef",
+          "event_type": "job.queued",
+          "status": "queued",
+          "progress": 0.0,
+          "message": "connector.data_service_mcp.knowledge_query_v2 queued"
+        },
+        {
+          "app_id": "reference_app",
+          "project_id": "demo_a",
+          "workspace_id": "local",
+          "created_at": "2026-06-27T12:32:16.603493",
+          "updated_at": "2026-06-27T12:32:16.603497",
+          "metadata": {
+            "message": "connector data_service_mcp.knowledge_query_v2 started",
+            "workflow_id": "connector.data_service_mcp.knowledge_query_v2",
+            "domain": "knowledge"
+          },
+          "event_id": "jobevt_6f3ac4c9f50f",
+          "job_id": "job_98b1999153ef",
+          "event_type": "job.running",
+          "status": "running",
+          "progress": 0.1,
+          "message": "connector data_service_mcp.knowledge_query_v2 started"
+        },
+        {
+          "app_id": "reference_app",
+          "project_id": "demo_a",
+          "workspace_id": "local",
+          "created_at": "2026-06-27T12:32:16.651598",
+          "updated_at": "2026-06-27T12:32:16.651601",
+          "metadata": {
+            "cancel_reason": "PV20-S5 bounded cancel fixture",
+            "workflow_id": "connector.data_service_mcp.knowledge_query_v2",
+            "domain": "knowledge"
+          },
+          "event_id": "jobevt_c5cd62d68a26",
+          "job_id": "job_98b1999153ef",
+          "event_type": "job.cancelled",
+          "status": "cancelled",
+          "progress": 0.1,
+          "message": ""
+        }
+      ],
+      "terminal": true
+    }
+  }
+}

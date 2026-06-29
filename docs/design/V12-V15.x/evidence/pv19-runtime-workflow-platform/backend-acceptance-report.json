@@ -1,0 +1,1429 @@
+{
+  "schema_version": "pv19.runtime_workflow_platform_acceptance_report.v1",
+  "status": "PASS",
+  "created_at": "2026-06-27T00:00:00Z",
+  "allowed_claim": "PV19 complete: runtime-backed workflow platform closed loop ready for bounded review.",
+  "failures": [],
+  "route_boundary": {
+    "allowed_prefix": "/bff/pv19",
+    "browser_denylist": [
+      "/v1/rpc",
+      "/internal/runtime",
+      "/runtime/store",
+      "/api/runtime",
+      "/debug/runtime"
+    ],
+    "status": "specified"
+  },
+  "platform_generality": {
+    "status": "pass",
+    "primary_sample": "knowledge_opc",
+    "reuse_check": "folder-summary/reference workflow",
+    "core_customization_allowed": false
+  },
+  "prd_spec_review": {
+    "status": "PASS",
+    "covered": [
+      "BFF workbench state",
+      "runtime-backed graph read",
+      "graph validation",
+      "WorkflowDiff proposal",
+      "workflow version publish with user confirmation",
+      "workflow instance run",
+      "human approval gate",
+      "evidence read model"
+    ],
+    "not_claimed": [
+      "production ready",
+      "complete Workflow Studio ready",
+      "Agent executor ready"
+    ]
+  },
+  "dto_snapshots": {
+    "state": {
+      "schema_version": "pv19.runtime_workflow_platform.v1",
+      "scope": {
+        "app_id": "reference_app",
+        "project_id": "demo_a",
+        "workspace_id": "local"
+      },
+      "entry": {
+        "route": "?studio=pv19-runtime-workflow-platform",
+        "root_empty_allowed": false,
+        "status": "ready"
+      },
+      "workspace": {
+        "workspace_id": "local",
+        "display_name": "PV19 Runtime Workflow Workspace"
+      },
+      "project": {
+        "project_id": "demo_a",
+        "display_name": "Runtime Workflow Platform Review"
+      },
+      "workflow": {
+        "workflow_template_id": "pv19_runtime_workflow_platform_reference",
+        "name": "PV19 Runtime Workflow Platform Reference",
+        "latest_version_id": null,
+        "status": "draft"
+      },
+      "draft": {
+        "workflow_draft_id": "wfd_3463f50eda87",
+        "revision": 1,
+        "status": "editable"
+      },
+      "active_version": null,
+      "active_run": null,
+      "health": {
+        "bff": "ok",
+        "gateway": "ok",
+        "runtime_backed": true,
+        "human_gate_model": "station_approval_fields"
+      },
+      "audit_refs": [
+        {
+          "audit_ref_id": "pv19:audit:workbench.state.read:reference_app|demo_a|local:pv19_runtime_workflow_platform_reference",
+          "operation": "workbench.state.read",
+          "scope": {
+            "app_id": "reference_app",
+            "project_id": "demo_a",
+            "workspace_id": "local"
+          },
+          "entity_id": "pv19_runtime_workflow_platform_reference",
+          "created_at": "2026-06-27T03:39:29.661627Z",
+          "redaction_status": "redacted"
+        }
+      ],
+      "evidence_refs": [],
+      "redaction_status": "redacted"
+    },
+    "graph": {
+      "schema_version": "pv19.runtime_workflow_platform.v1",
+      "scope": {
+        "app_id": "reference_app",
+        "project_id": "demo_a",
+        "workspace_id": "local"
+      },
+      "workflow": {
+        "workflow_template_id": "pv19_runtime_workflow_platform_reference",
+        "name": "PV19 Runtime Workflow Platform Reference",
+        "latest_version_id": null,
+        "status": "draft"
+      },
+      "draft": {
+        "workflow_draft_id": "wfd_3463f50eda87",
+        "revision": 1,
+        "status": "editable"
+      },
+      "graph": {
+        "nodes": [
+          {
+            "station_id": "source_review",
+            "name": "Source Intake",
+            "role": "input",
+            "agent_ref": null,
+            "skill_refs": [
+              "workflow.source.review"
+            ],
+            "connector_refs": [],
+            "input_contracts": [],
+            "output_contracts": [
+              {
+                "contract_id": "source_brief",
+                "artifact_kind": "pv19.source_brief",
+                "direction": "output",
+                "required": true,
+                "cardinality": "one",
+                "kind_match_policy": "exact",
+                "schema_ref": null,
+                "metadata_schema": {},
+                "preview_policy": {},
+                "large_file_policy_ref": null,
+                "metadata": {
+                  "sample": "knowledge_opc",
+                  "platform_generic": true
+                }
+              }
+            ],
+            "approval_required": false,
+            "quality_policy": {},
+            "metadata": {
+              "node_kind": "source",
+              "sample": "knowledge_opc",
+              "prompt_ref": "pv19.prompt.source_review.v1"
+            }
+          },
+          {
+            "station_id": "human_quality_gate",
+            "name": "Human Quality Gate",
+            "role": "reviewer",
+            "agent_ref": null,
+            "skill_refs": [
+              "workflow.human.review"
+            ],
+            "connector_refs": [],
+            "input_contracts": [
+              {
+                "contract_id": "source_brief_in",
+                "artifact_kind": "pv19.source_brief",
+                "direction": "input",
+                "required": true,
+                "cardinality": "one",
+                "kind_match_policy": "exact",
+                "schema_ref": null,
+                "metadata_schema": {},
+                "preview_policy": {},
+                "large_file_policy_ref": null,
+                "metadata": {
+                  "from_station_id": "source_review"
+                }
+              }
+            ],
+            "output_contracts": [
+              {
+                "contract_id": "approved_brief",
+                "artifact_kind": "pv19.approved_brief",
+                "direction": "output",
+                "required": true,
+                "cardinality": "one",
+                "kind_match_policy": "exact",
+                "schema_ref": null,
+                "metadata_schema": {},
+                "preview_policy": {},
+                "large_file_policy_ref": null,
+                "metadata": {
+                  "requires_human_decision": true
+                }
+              }
+            ],
+            "approval_required": true,
+            "quality_policy": {},
+            "metadata": {
+              "node_kind": "human_gate",
+              "approval_policy": {
+                "mode": "explicit_user_confirmed",
+                "decisions": [
+                  "approve",
+                  "reject"
+                ]
+              }
+            }
+          },
+          {
+            "station_id": "evidence_publish",
+            "name": "Evidence Publish",
+            "role": "publisher",
+            "agent_ref": null,
+            "skill_refs": [
+              "workflow.evidence.publish"
+            ],
+            "connector_refs": [],
+            "input_contracts": [
+              {
+                "contract_id": "approved_brief_in",
+                "artifact_kind": "pv19.approved_brief",
+                "direction": "input",
+                "required": true,
+                "cardinality": "one",
+                "kind_match_policy": "exact",
+                "schema_ref": null,
+                "metadata_schema": {},
+                "preview_policy": {},
+                "large_file_policy_ref": null,
+                "metadata": {
+                  "from_station_id": "human_quality_gate"
+                }
+              }
+            ],
+            "output_contracts": [
+              {
+                "contract_id": "evidence_summary",
+                "artifact_kind": "pv19.evidence_summary",
+                "direction": "output",
+                "required": true,
+                "cardinality": "one",
+                "kind_match_policy": "exact",
+                "schema_ref": null,
+                "metadata_schema": {},
+                "preview_policy": {},
+                "large_file_policy_ref": null,
+                "metadata": {
+                  "evidence_read_model": true
+                }
+              }
+            ],
+            "approval_required": false,
+            "quality_policy": {},
+            "metadata": {
+              "node_kind": "evidence",
+              "claim_scan": true
+            }
+          }
+        ],
+        "edges": [
+          {
+            "edge_id": "source_to_gate",
+            "from_station_id": "source_review",
+            "to_station_id": "human_quality_gate",
+            "condition": {},
+            "order": 1,
+            "metadata": {}
+          },
+          {
+            "edge_id": "gate_to_evidence",
+            "from_station_id": "human_quality_gate",
+            "to_station_id": "evidence_publish",
+            "condition": {},
+            "order": 2,
+            "metadata": {}
+          }
+        ],
+        "human_gate_nodes": [
+          "human_quality_gate"
+        ],
+        "redaction_status": "redacted"
+      },
+      "platform_contract": {
+        "business_pack_mode": "data_and_template_only",
+        "core_customization_allowed": false,
+        "runtime_backed": true
+      },
+      "audit_refs": [
+        {
+          "audit_ref_id": "pv19:audit:workflow.graph.read:reference_app|demo_a|local:pv19_runtime_workflow_platform_reference",
+          "operation": "workflow.graph.read",
+          "scope": {
+            "app_id": "reference_app",
+            "project_id": "demo_a",
+            "workspace_id": "local"
+          },
+          "entity_id": "pv19_runtime_workflow_platform_reference",
+          "created_at": "2026-06-27T03:39:29.664545Z",
+          "redaction_status": "redacted"
+        }
+      ],
+      "redaction_status": "redacted"
+    },
+    "validation": {
+      "schema_version": "pv19.runtime_workflow_platform.v1",
+      "scope": {
+        "app_id": "reference_app",
+        "project_id": "demo_a",
+        "workspace_id": "local"
+      },
+      "workflow_id": "pv19_runtime_workflow_platform_reference",
+      "status": "valid",
+      "errors": [],
+      "warnings": [],
+      "runtime_readiness": {
+        "can_publish": true,
+        "can_run_after_publish": true,
+        "human_gate_nodes": [
+          "human_quality_gate"
+        ]
+      },
+      "audit_refs": [
+        {
+          "audit_ref_id": "pv19:audit:workflow.graph.validate:reference_app|demo_a|local:pv19_runtime_workflow_platform_reference",
+          "operation": "workflow.graph.validate",
+          "scope": {
+            "app_id": "reference_app",
+            "project_id": "demo_a",
+            "workspace_id": "local"
+          },
+          "entity_id": "pv19_runtime_workflow_platform_reference",
+          "created_at": "2026-06-27T03:39:29.668010Z",
+          "redaction_status": "redacted"
+        }
+      ],
+      "evidence_refs": [],
+      "redaction_status": "redacted"
+    },
+    "diff": {
+      "schema_version": "pv19.runtime_workflow_platform.v1",
+      "scope": {
+        "app_id": "reference_app",
+        "project_id": "demo_a",
+        "workspace_id": "local"
+      },
+      "workflow_id": "pv19_runtime_workflow_platform_reference",
+      "draft_revision": 1,
+      "workflow_diff": {
+        "workflow_patch_id": "wfp_48fee34a85f9",
+        "before_graph_ref": "workflow_draft:wfd_3463f50eda87:revision:1",
+        "after_graph_ref": "workflow_patch:wfp_48fee34a85f9",
+        "change_summary": null,
+        "confirmation_boundary": "user_confirmed_required_before_publish"
+      },
+      "workflow": {
+        "workflow_template_id": "pv19_runtime_workflow_platform_reference",
+        "name": "PV19 Runtime Workflow Platform Reference",
+        "latest_version_id": null,
+        "status": "draft"
+      },
+      "audit_refs": [
+        {
+          "audit_ref_id": "pv19:audit:workflow.diff.propose:reference_app|demo_a|local:wfp_48fee34a85f9",
+          "operation": "workflow.diff.propose",
+          "scope": {
+            "app_id": "reference_app",
+            "project_id": "demo_a",
+            "workspace_id": "local"
+          },
+          "entity_id": "wfp_48fee34a85f9",
+          "created_at": "2026-06-27T03:39:29.703999Z",
+          "redaction_status": "redacted"
+        }
+      ],
+      "evidence_refs": [
+        "workflow_patch:wfp_48fee34a85f9"
+      ],
+      "redaction_status": "redacted"
+    },
+    "published": {
+      "schema_version": "pv19.runtime_workflow_platform.v1",
+      "scope": {
+        "app_id": "reference_app",
+        "project_id": "demo_a",
+        "workspace_id": "local"
+      },
+      "status": "published",
+      "workflow_version_id": "wfv_e9d57c74d212",
+      "published_from_diff": "wfp_48fee34a85f9",
+      "published_by": "local-reviewer",
+      "published_at": "2026-06-27T03:39:29.725238Z",
+      "version": {
+        "workflow_template_id": "pv19_runtime_workflow_platform_reference",
+        "workflow_draft_id": "wfd_3463f50eda87",
+        "draft_status": "published",
+        "draft_revision": 1,
+        "workflow_version_id": "wfv_e9d57c74d212",
+        "version": "pv19-acceptance"
+      },
+      "audit_refs": [
+        {
+          "audit_ref_id": "pv19:audit:workflow.version.publish:reference_app|demo_a|local:wfv_e9d57c74d212",
+          "operation": "workflow.version.publish",
+          "scope": {
+            "app_id": "reference_app",
+            "project_id": "demo_a",
+            "workspace_id": "local"
+          },
+          "entity_id": "wfv_e9d57c74d212",
+          "created_at": "2026-06-27T03:39:29.725253Z",
+          "redaction_status": "redacted"
+        }
+      ],
+      "evidence_refs": [
+        "workflow_version:wfv_e9d57c74d212"
+      ],
+      "redaction_status": "redacted"
+    },
+    "run": {
+      "schema_version": "pv19.runtime_workflow_platform.v1",
+      "scope": {
+        "app_id": "reference_app",
+        "project_id": "demo_a",
+        "workspace_id": "local"
+      },
+      "workflow_instance": {
+        "workflow_instance_id": "wfi_dd942d725ace",
+        "workflow_template_id": "pv19_runtime_workflow_platform_reference",
+        "workflow_version_id": "wfv_e9d57c74d212",
+        "status": "waiting_approval"
+      },
+      "station_runs": [
+        {
+          "station_run_id": "sr_7bfda026b352",
+          "workflow_instance_id": "wfi_dd942d725ace",
+          "station_id": "source_review",
+          "status": "completed",
+          "attempt": 1,
+          "rerun_of_station_run_id": null,
+          "job_id": "job_91b43e559518",
+          "input_artifact_ids": [],
+          "output_artifact_ids": [
+            "art_d844eac9b749"
+          ],
+          "input_bindings": {},
+          "output_bindings": {
+            "source_brief": [
+              "art_d844eac9b749"
+            ]
+          },
+          "quality_evaluation_ids": [],
+          "failure_context": {},
+          "trace_id": "trace_c859b9aaaea5",
+          "started_at": "2026-06-27T03:39:29.728182Z",
+          "completed_at": "2026-06-27T03:39:29.816833Z",
+          "metadata": {
+            "station_name": "Source Intake",
+            "workflow_version_id": "wfv_e9d57c74d212",
+            "station_contracts": {
+              "input_contracts": [],
+              "output_contracts": [
+                {
+                  "contract_id": "source_brief",
+                  "artifact_kind": "pv19.source_brief",
+                  "direction": "output",
+                  "required": true,
+                  "cardinality": "one",
+                  "kind_match_policy": "exact",
+                  "schema_ref": null,
+                  "metadata_schema": {},
+                  "preview_policy": {},
+                  "large_file_policy_ref": null,
+                  "metadata": {
+                    "sample": "knowledge_opc",
+                    "platform_generic": true
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "station_run_id": "sr_58929957f0dc",
+          "workflow_instance_id": "wfi_dd942d725ace",
+          "station_id": "human_quality_gate",
+          "status": "waiting_approval",
+          "attempt": 1,
+          "rerun_of_station_run_id": null,
+          "job_id": null,
+          "input_artifact_ids": [
+            "art_d844eac9b749"
+          ],
+          "output_artifact_ids": [],
+          "input_bindings": {
+            "source_brief_in": [
+              "art_d844eac9b749"
+            ]
+          },
+          "output_bindings": {},
+          "quality_evaluation_ids": [],
+          "failure_context": {},
+          "trace_id": "trace_9662768ca589",
+          "started_at": null,
+          "completed_at": null,
+          "metadata": {
+            "station_name": "Human Quality Gate",
+            "workflow_version_id": "wfv_e9d57c74d212",
+            "station_contracts": {
+              "input_contracts": [
+                {
+                  "contract_id": "source_brief_in",
+                  "artifact_kind": "pv19.source_brief",
+                  "direction": "input",
+                  "required": true,
+                  "cardinality": "one",
+                  "kind_match_policy": "exact",
+                  "schema_ref": null,
+                  "metadata_schema": {},
+                  "preview_policy": {},
+                  "large_file_policy_ref": null,
+                  "metadata": {
+                    "from_station_id": "source_review"
+                  }
+                }
+              ],
+              "output_contracts": [
+                {
+                  "contract_id": "approved_brief",
+                  "artifact_kind": "pv19.approved_brief",
+                  "direction": "output",
+                  "required": true,
+                  "cardinality": "one",
+                  "kind_match_policy": "exact",
+                  "schema_ref": null,
+                  "metadata_schema": {},
+                  "preview_policy": {},
+                  "large_file_policy_ref": null,
+                  "metadata": {
+                    "requires_human_decision": true
+                  }
+                }
+              ]
+            },
+            "approval_id": "appr_5d31c9dce2b5"
+          }
+        }
+      ],
+      "runtime_event_refs": [
+        {
+          "event_ref": "workflow.instance:wfi_dd942d725ace",
+          "event_type": "workflow.instance.waiting_approval",
+          "workflow_instance_id": "wfi_dd942d725ace"
+        },
+        {
+          "event_ref": "station.run:sr_7bfda026b352",
+          "event_type": "station.run.completed",
+          "workflow_instance_id": "wfi_dd942d725ace",
+          "station_run_id": "sr_7bfda026b352"
+        },
+        {
+          "event_ref": "station.run:sr_58929957f0dc",
+          "event_type": "station.run.waiting_approval",
+          "workflow_instance_id": "wfi_dd942d725ace",
+          "station_run_id": "sr_58929957f0dc"
+        }
+      ],
+      "trace_refs": [
+        {
+          "trace_id": "trace_e0bb770db575",
+          "workflow_instance_id": "wfi_dd942d725ace"
+        }
+      ],
+      "pending_human_gates": [
+        {
+          "station_run_id": "sr_58929957f0dc",
+          "station_id": "human_quality_gate",
+          "approval_id": "appr_5d31c9dce2b5",
+          "status": "waiting_approval"
+        }
+      ],
+      "audit_refs": [
+        {
+          "audit_ref_id": "pv19:audit:workflow.run.start:reference_app|demo_a|local:wfi_dd942d725ace",
+          "operation": "workflow.run.start",
+          "scope": {
+            "app_id": "reference_app",
+            "project_id": "demo_a",
+            "workspace_id": "local"
+          },
+          "entity_id": "wfi_dd942d725ace",
+          "created_at": "2026-06-27T03:39:29.901201Z",
+          "redaction_status": "redacted"
+        }
+      ],
+      "redaction_status": "redacted"
+    },
+    "before": {
+      "schema_version": "pv19.runtime_workflow_platform.v1",
+      "scope": {
+        "app_id": "reference_app",
+        "project_id": "demo_a",
+        "workspace_id": "local"
+      },
+      "workflow_instance": {
+        "workflow_instance_id": "wfi_dd942d725ace",
+        "workflow_template_id": "pv19_runtime_workflow_platform_reference",
+        "workflow_version_id": "wfv_e9d57c74d212",
+        "status": "waiting_approval"
+      },
+      "status": {
+        "workflow_instance_id": "wfi_dd942d725ace",
+        "status": "waiting_approval",
+        "current_station_ids": [
+          "human_quality_gate"
+        ],
+        "station_counts": {
+          "completed": 1,
+          "waiting_approval": 1
+        },
+        "job_counts": {},
+        "artifact_count": 0,
+        "quality_count": 1
+      },
+      "station_runs": [
+        {
+          "station_run_id": "sr_7bfda026b352",
+          "workflow_instance_id": "wfi_dd942d725ace",
+          "station_id": "source_review",
+          "status": "completed",
+          "attempt": 1,
+          "rerun_of_station_run_id": null,
+          "job_id": "job_91b43e559518",
+          "input_artifact_ids": [],
+          "output_artifact_ids": [
+            "art_d844eac9b749"
+          ],
+          "input_bindings": {},
+          "output_bindings": {
+            "source_brief": [
+              "art_d844eac9b749"
+            ]
+          },
+          "quality_evaluation_ids": [
+            "qe_1e3b99b9fefc"
+          ],
+          "failure_context": {},
+          "trace_id": "trace_c859b9aaaea5",
+          "started_at": "2026-06-27T03:39:29.728182Z",
+          "completed_at": "2026-06-27T03:39:29.816833Z",
+          "metadata": {
+            "station_name": "Source Intake",
+            "workflow_version_id": "wfv_e9d57c74d212",
+            "station_contracts": {
+              "input_contracts": [],
+              "output_contracts": [
+                {
+                  "contract_id": "source_brief",
+                  "artifact_kind": "pv19.source_brief",
+                  "direction": "output",
+                  "required": true,
+                  "cardinality": "one",
+                  "kind_match_policy": "exact",
+                  "schema_ref": null,
+                  "metadata_schema": {},
+                  "preview_policy": {},
+                  "large_file_policy_ref": null,
+                  "metadata": {
+                    "sample": "knowledge_opc",
+                    "platform_generic": true
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "station_run_id": "sr_58929957f0dc",
+          "workflow_instance_id": "wfi_dd942d725ace",
+          "station_id": "human_quality_gate",
+          "status": "waiting_approval",
+          "attempt": 1,
+          "rerun_of_station_run_id": null,
+          "job_id": null,
+          "input_artifact_ids": [
+            "art_d844eac9b749"
+          ],
+          "output_artifact_ids": [],
+          "input_bindings": {
+            "source_brief_in": [
+              "art_d844eac9b749"
+            ]
+          },
+          "output_bindings": {},
+          "quality_evaluation_ids": [],
+          "failure_context": {},
+          "trace_id": "trace_9662768ca589",
+          "started_at": null,
+          "completed_at": null,
+          "metadata": {
+            "station_name": "Human Quality Gate",
+            "workflow_version_id": "wfv_e9d57c74d212",
+            "station_contracts": {
+              "input_contracts": [
+                {
+                  "contract_id": "source_brief_in",
+                  "artifact_kind": "pv19.source_brief",
+                  "direction": "input",
+                  "required": true,
+                  "cardinality": "one",
+                  "kind_match_policy": "exact",
+                  "schema_ref": null,
+                  "metadata_schema": {},
+                  "preview_policy": {},
+                  "large_file_policy_ref": null,
+                  "metadata": {
+                    "from_station_id": "source_review"
+                  }
+                }
+              ],
+              "output_contracts": [
+                {
+                  "contract_id": "approved_brief",
+                  "artifact_kind": "pv19.approved_brief",
+                  "direction": "output",
+                  "required": true,
+                  "cardinality": "one",
+                  "kind_match_policy": "exact",
+                  "schema_ref": null,
+                  "metadata_schema": {},
+                  "preview_policy": {},
+                  "large_file_policy_ref": null,
+                  "metadata": {
+                    "requires_human_decision": true
+                  }
+                }
+              ]
+            },
+            "approval_id": "appr_5d31c9dce2b5"
+          }
+        }
+      ],
+      "runtime_event_refs": [
+        {
+          "event_ref": "workflow.instance:wfi_dd942d725ace",
+          "event_type": "workflow.instance.waiting_approval",
+          "workflow_instance_id": "wfi_dd942d725ace"
+        },
+        {
+          "event_ref": "station.run:sr_7bfda026b352",
+          "event_type": "station.run.completed",
+          "workflow_instance_id": "wfi_dd942d725ace",
+          "station_run_id": "sr_7bfda026b352"
+        },
+        {
+          "event_ref": "station.run:sr_58929957f0dc",
+          "event_type": "station.run.waiting_approval",
+          "workflow_instance_id": "wfi_dd942d725ace",
+          "station_run_id": "sr_58929957f0dc"
+        }
+      ],
+      "trace_refs": [
+        {
+          "trace_id": "trace_e0bb770db575",
+          "workflow_instance_id": "wfi_dd942d725ace"
+        },
+        {
+          "trace_id": "trace_3e843d5bfee3",
+          "event_type": "workflow.patch.proposed"
+        },
+        {
+          "trace_id": "trace_fa63b79e796e",
+          "event_type": "workflow.template.published"
+        },
+        {
+          "trace_id": "trace_c01a7b700c43",
+          "event_type": "station.run.completed"
+        },
+        {
+          "trace_id": "trace_9662768ca589",
+          "event_type": "approval.request"
+        },
+        {
+          "trace_id": "trace_8ba7f2d39f29",
+          "event_type": "station.run.waiting_approval"
+        },
+        {
+          "trace_id": "trace_78a4b3b3603f",
+          "event_type": "workflow.instance.started"
+        },
+        {
+          "trace_id": "trace_2323a670d8fc",
+          "event_type": "quality.evaluation.created"
+        }
+      ],
+      "artifact_refs": [
+        {
+          "artifact_ref": "art_d844eac9b749",
+          "kind": "pv19.source_brief",
+          "name": "source_review-source_brief.json"
+        }
+      ],
+      "quality_refs": [
+        {
+          "quality_ref": "qe_1e3b99b9fefc",
+          "status": "passed",
+          "station_run_id": "sr_7bfda026b352"
+        }
+      ],
+      "pending_human_gates": [
+        {
+          "approval_id": "appr_5d31c9dce2b5",
+          "status": "pending",
+          "station_id": "human_quality_gate",
+          "station_run_id": "sr_58929957f0dc",
+          "audit_refs": [
+            {
+              "audit_ref_id": "pv19:audit:workflow.human_gate.pending:reference_app|demo_a|local:appr_5d31c9dce2b5",
+              "operation": "workflow.human_gate.pending",
+              "scope": {
+                "app_id": "reference_app",
+                "project_id": "demo_a",
+                "workspace_id": "local"
+              },
+              "entity_id": "appr_5d31c9dce2b5",
+              "created_at": "2026-06-27T03:39:29.944511Z",
+              "redaction_status": "redacted"
+            }
+          ]
+        }
+      ],
+      "human_gate_refs": [
+        {
+          "station_run_id": "sr_58929957f0dc",
+          "station_id": "human_quality_gate",
+          "approval_id": "appr_5d31c9dce2b5",
+          "status": "waiting_approval"
+        }
+      ],
+      "audit_refs": [
+        {
+          "audit_ref_id": "pv19:audit:workflow.run.inspect:reference_app|demo_a|local:wfi_dd942d725ace",
+          "operation": "workflow.run.inspect",
+          "scope": {
+            "app_id": "reference_app",
+            "project_id": "demo_a",
+            "workspace_id": "local"
+          },
+          "entity_id": "wfi_dd942d725ace",
+          "created_at": "2026-06-27T03:39:29.944541Z",
+          "redaction_status": "redacted"
+        }
+      ],
+      "redaction_status": "redacted"
+    },
+    "action": {
+      "schema_version": "pv19.runtime_workflow_platform.v1",
+      "scope": {
+        "app_id": "reference_app",
+        "project_id": "demo_a",
+        "workspace_id": "local"
+      },
+      "action_type": "approve",
+      "actor": "local-reviewer",
+      "approval_id": "appr_5d31c9dce2b5",
+      "before_state": {
+        "workflow_instance_id": "wfi_dd942d725ace",
+        "status": "waiting_approval",
+        "current_station_ids": [
+          "human_quality_gate"
+        ],
+        "pending_human_gate_count": 1,
+        "station_run_count": 2,
+        "artifact_ref_count": 1
+      },
+      "after_state": {
+        "workflow_instance_id": "wfi_dd942d725ace",
+        "status": "completed",
+        "current_station_ids": [],
+        "pending_human_gate_count": 0,
+        "station_run_count": 3,
+        "artifact_ref_count": 3
+      },
+      "workflow_side_effect": {
+        "status": "applied",
+        "replayed": false,
+        "workflow_instance_id": "wfi_dd942d725ace",
+        "station_run_id": "sr_58929957f0dc"
+      },
+      "audit_refs": [
+        {
+          "audit_ref_id": "pv19:audit:workflow.human_action:reference_app|demo_a|local:appr_5d31c9dce2b5",
+          "operation": "workflow.human_action",
+          "scope": {
+            "app_id": "reference_app",
+            "project_id": "demo_a",
+            "workspace_id": "local"
+          },
+          "entity_id": "appr_5d31c9dce2b5",
+          "created_at": "2026-06-27T03:39:30.280782Z",
+          "redaction_status": "redacted"
+        }
+      ],
+      "evidence_refs": [
+        "approval:appr_5d31c9dce2b5",
+        "workflow_instance:wfi_dd942d725ace"
+      ],
+      "redaction_status": "redacted"
+    },
+    "after": {
+      "schema_version": "pv19.runtime_workflow_platform.v1",
+      "scope": {
+        "app_id": "reference_app",
+        "project_id": "demo_a",
+        "workspace_id": "local"
+      },
+      "workflow_instance": {
+        "workflow_instance_id": "wfi_dd942d725ace",
+        "workflow_template_id": "pv19_runtime_workflow_platform_reference",
+        "workflow_version_id": "wfv_e9d57c74d212",
+        "status": "completed"
+      },
+      "status": {
+        "workflow_instance_id": "wfi_dd942d725ace",
+        "status": "completed",
+        "current_station_ids": [],
+        "station_counts": {
+          "completed": 3
+        },
+        "job_counts": {
+          "completed": 3
+        },
+        "artifact_count": 3,
+        "quality_count": 1
+      },
+      "station_runs": [
+        {
+          "station_run_id": "sr_7bfda026b352",
+          "workflow_instance_id": "wfi_dd942d725ace",
+          "station_id": "source_review",
+          "status": "completed",
+          "attempt": 1,
+          "rerun_of_station_run_id": null,
+          "job_id": "job_91b43e559518",
+          "input_artifact_ids": [],
+          "output_artifact_ids": [
+            "art_d844eac9b749"
+          ],
+          "input_bindings": {},
+          "output_bindings": {
+            "source_brief": [
+              "art_d844eac9b749"
+            ]
+          },
+          "quality_evaluation_ids": [
+            "qe_1e3b99b9fefc"
+          ],
+          "failure_context": {},
+          "trace_id": "trace_c859b9aaaea5",
+          "started_at": "2026-06-27T03:39:29.728182Z",
+          "completed_at": "2026-06-27T03:39:29.816833Z",
+          "metadata": {
+            "station_name": "Source Intake",
+            "workflow_version_id": "wfv_e9d57c74d212",
+            "station_contracts": {
+              "input_contracts": [],
+              "output_contracts": [
+                {
+                  "contract_id": "source_brief",
+                  "artifact_kind": "pv19.source_brief",
+                  "direction": "output",
+                  "required": true,
+                  "cardinality": "one",
+                  "kind_match_policy": "exact",
+                  "schema_ref": null,
+                  "metadata_schema": {},
+                  "preview_policy": {},
+                  "large_file_policy_ref": null,
+                  "metadata": {
+                    "sample": "knowledge_opc",
+                    "platform_generic": true
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "station_run_id": "sr_58929957f0dc",
+          "workflow_instance_id": "wfi_dd942d725ace",
+          "station_id": "human_quality_gate",
+          "status": "completed",
+          "attempt": 1,
+          "rerun_of_station_run_id": null,
+          "job_id": "job_2f1a016e5eb8",
+          "input_artifact_ids": [
+            "art_d844eac9b749"
+          ],
+          "output_artifact_ids": [
+            "art_b00d3cad56e3"
+          ],
+          "input_bindings": {
+            "source_brief_in": [
+              "art_d844eac9b749"
+            ]
+          },
+          "output_bindings": {
+            "approved_brief": [
+              "art_b00d3cad56e3"
+            ]
+          },
+          "quality_evaluation_ids": [],
+          "failure_context": {},
+          "trace_id": "trace_9662768ca589",
+          "started_at": "2026-06-27T03:39:29.996052Z",
+          "completed_at": "2026-06-27T03:39:30.060200Z",
+          "metadata": {
+            "station_name": "Human Quality Gate",
+            "workflow_version_id": "wfv_e9d57c74d212",
+            "station_contracts": {
+              "input_contracts": [
+                {
+                  "contract_id": "source_brief_in",
+                  "artifact_kind": "pv19.source_brief",
+                  "direction": "input",
+                  "required": true,
+                  "cardinality": "one",
+                  "kind_match_policy": "exact",
+                  "schema_ref": null,
+                  "metadata_schema": {},
+                  "preview_policy": {},
+                  "large_file_policy_ref": null,
+                  "metadata": {
+                    "from_station_id": "source_review"
+                  }
+                }
+              ],
+              "output_contracts": [
+                {
+                  "contract_id": "approved_brief",
+                  "artifact_kind": "pv19.approved_brief",
+                  "direction": "output",
+                  "required": true,
+                  "cardinality": "one",
+                  "kind_match_policy": "exact",
+                  "schema_ref": null,
+                  "metadata_schema": {},
+                  "preview_policy": {},
+                  "large_file_policy_ref": null,
+                  "metadata": {
+                    "requires_human_decision": true
+                  }
+                }
+              ]
+            },
+            "approval_id": "appr_5d31c9dce2b5"
+          }
+        },
+        {
+          "station_run_id": "sr_41526132faf2",
+          "workflow_instance_id": "wfi_dd942d725ace",
+          "station_id": "evidence_publish",
+          "status": "completed",
+          "attempt": 1,
+          "rerun_of_station_run_id": null,
+          "job_id": "job_1d356f1069c8",
+          "input_artifact_ids": [
+            "art_b00d3cad56e3"
+          ],
+          "output_artifact_ids": [
+            "art_15aab23ae23c"
+          ],
+          "input_bindings": {
+            "approved_brief_in": [
+              "art_b00d3cad56e3"
+            ]
+          },
+          "output_bindings": {
+            "evidence_summary": [
+              "art_15aab23ae23c"
+            ]
+          },
+          "quality_evaluation_ids": [],
+          "failure_context": {},
+          "trace_id": "trace_b11a4319da49",
+          "started_at": "2026-06-27T03:39:30.077806Z",
+          "completed_at": "2026-06-27T03:39:30.152871Z",
+          "metadata": {
+            "station_name": "Evidence Publish",
+            "workflow_version_id": "wfv_e9d57c74d212",
+            "station_contracts": {
+              "input_contracts": [
+                {
+                  "contract_id": "approved_brief_in",
+                  "artifact_kind": "pv19.approved_brief",
+                  "direction": "input",
+                  "required": true,
+                  "cardinality": "one",
+                  "kind_match_policy": "exact",
+                  "schema_ref": null,
+                  "metadata_schema": {},
+                  "preview_policy": {},
+                  "large_file_policy_ref": null,
+                  "metadata": {
+                    "from_station_id": "human_quality_gate"
+                  }
+                }
+              ],
+              "output_contracts": [
+                {
+                  "contract_id": "evidence_summary",
+                  "artifact_kind": "pv19.evidence_summary",
+                  "direction": "output",
+                  "required": true,
+                  "cardinality": "one",
+                  "kind_match_policy": "exact",
+                  "schema_ref": null,
+                  "metadata_schema": {},
+                  "preview_policy": {},
+                  "large_file_policy_ref": null,
+                  "metadata": {
+                    "evidence_read_model": true
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "runtime_event_refs": [
+        {
+          "event_ref": "workflow.instance:wfi_dd942d725ace",
+          "event_type": "workflow.instance.completed",
+          "workflow_instance_id": "wfi_dd942d725ace"
+        },
+        {
+          "event_ref": "station.run:sr_7bfda026b352",
+          "event_type": "station.run.completed",
+          "workflow_instance_id": "wfi_dd942d725ace",
+          "station_run_id": "sr_7bfda026b352"
+        },
+        {
+          "event_ref": "station.run:sr_58929957f0dc",
+          "event_type": "station.run.completed",
+          "workflow_instance_id": "wfi_dd942d725ace",
+          "station_run_id": "sr_58929957f0dc"
+        },
+        {
+          "event_ref": "station.run:sr_41526132faf2",
+          "event_type": "station.run.completed",
+          "workflow_instance_id": "wfi_dd942d725ace",
+          "station_run_id": "sr_41526132faf2"
+        }
+      ],
+      "trace_refs": [
+        {
+          "trace_id": "trace_e0bb770db575",
+          "workflow_instance_id": "wfi_dd942d725ace"
+        },
+        {
+          "trace_id": "trace_3e843d5bfee3",
+          "event_type": "workflow.patch.proposed"
+        },
+        {
+          "trace_id": "trace_fa63b79e796e",
+          "event_type": "workflow.template.published"
+        },
+        {
+          "trace_id": "trace_c01a7b700c43",
+          "event_type": "station.run.completed"
+        },
+        {
+          "trace_id": "trace_9662768ca589",
+          "event_type": "approval.request"
+        },
+        {
+          "trace_id": "trace_8ba7f2d39f29",
+          "event_type": "station.run.waiting_approval"
+        },
+        {
+          "trace_id": "trace_78a4b3b3603f",
+          "event_type": "workflow.instance.started"
+        },
+        {
+          "trace_id": "trace_2323a670d8fc",
+          "event_type": "quality.evaluation.created"
+        },
+        {
+          "trace_id": "trace_591ef6a9207f",
+          "event_type": "station.run.completed"
+        },
+        {
+          "trace_id": "trace_ce1aaa3ea16d",
+          "event_type": "station.run.completed"
+        },
+        {
+          "trace_id": "trace_433effb76cd7",
+          "event_type": "workflow.instance.completed"
+        },
+        {
+          "trace_id": "trace_8e2a568b4464",
+          "event_type": "workflow.instance.completed"
+        },
+        {
+          "trace_id": "trace_9662768ca589",
+          "event_type": "approval.respond"
+        }
+      ],
+      "artifact_refs": [
+        {
+          "artifact_ref": "art_d844eac9b749",
+          "kind": "pv19.source_brief",
+          "name": "source_review-source_brief.json"
+        },
+        {
+          "artifact_ref": "art_b00d3cad56e3",
+          "kind": "pv19.approved_brief",
+          "name": "human_quality_gate-approved_brief.json"
+        },
+        {
+          "artifact_ref": "art_15aab23ae23c",
+          "kind": "pv19.evidence_summary",
+          "name": "evidence_publish-evidence_summary.json"
+        }
+      ],
+      "quality_refs": [
+        {
+          "quality_ref": "qe_1e3b99b9fefc",
+          "status": "passed",
+          "station_run_id": "sr_7bfda026b352"
+        }
+      ],
+      "pending_human_gates": [],
+      "human_gate_refs": [
+        {
+          "station_run_id": "sr_58929957f0dc",
+          "station_id": "human_quality_gate",
+          "approval_id": "appr_5d31c9dce2b5",
+          "status": "completed"
+        }
+      ],
+      "audit_refs": [
+        {
+          "audit_ref_id": "pv19:audit:workflow.run.inspect:reference_app|demo_a|local:wfi_dd942d725ace",
+          "operation": "workflow.run.inspect",
+          "scope": {
+            "app_id": "reference_app",
+            "project_id": "demo_a",
+            "workspace_id": "local"
+          },
+          "entity_id": "wfi_dd942d725ace",
+          "created_at": "2026-06-27T03:39:30.344532Z",
+          "redaction_status": "redacted"
+        }
+      ],
+      "redaction_status": "redacted"
+    },
+    "evidence": {
+      "schema_version": "pv19.runtime_workflow_platform.v1",
+      "scope": {
+        "app_id": "reference_app",
+        "project_id": "demo_a",
+        "workspace_id": "local"
+      },
+      "claims": [
+        {
+          "claim": "PV19 BFF exposes workflow graph, diff, publish, run, human action and evidence routes under /bff/pv19.",
+          "evidence_refs": [
+            "/bff/pv19/workbench/state",
+            "/bff/pv19/workflows/{workflow_id}/graph",
+            "/bff/pv19/runs/{run_id}/inspect"
+          ],
+          "status": "supported"
+        },
+        {
+          "claim": "PV19 runtime run is backed by workflow version, workflow instance and station run records.",
+          "evidence_refs": [
+            "workflow.instance:wfi_dd942d725ace",
+            "station.run:sr_7bfda026b352",
+            "station.run:sr_58929957f0dc",
+            "station.run:sr_41526132faf2"
+          ],
+          "status": "supported"
+        },
+        {
+          "claim": "PV19 human interaction uses station approval fields and approval.respond side effects, not business-specific runtime branches.",
+          "evidence_refs": [
+            "appr_5d31c9dce2b5"
+          ],
+          "status": "supported"
+        },
+        {
+          "claim": "PV19 evidence review summarizes trace, artifact, quality and audit refs without fabricating production evidence.",
+          "evidence_refs": [
+            "art_d844eac9b749",
+            "art_b00d3cad56e3",
+            "art_15aab23ae23c"
+          ],
+          "status": "supported"
+        }
+      ],
+      "route_boundary": {
+        "allowed_prefix": "/bff/pv19",
+        "browser_denylist": [
+          "/v1/rpc",
+          "/internal/runtime",
+          "/runtime/store",
+          "/api/runtime",
+          "/debug/runtime"
+        ],
+        "status": "specified"
+      },
+      "platform_generality": {
+        "status": "pass",
+        "primary_sample": "knowledge_opc",
+        "reuse_check": "folder-summary/reference workflow",
+        "core_customization_allowed": false
+      },
+      "redaction": {
+        "status": "redacted",
+        "provider_payload_allowed": false,
+        "artifact_content_allowed": false
+      },
+      "artifact_lineage": {
+        "artifact_refs": [
+          {
+            "artifact_ref": "art_d844eac9b749",
+            "kind": "pv19.source_brief",
+            "name": "source_review-source_brief.json"
+          },
+          {
+            "artifact_ref": "art_b00d3cad56e3",
+            "kind": "pv19.approved_brief",
+            "name": "human_quality_gate-approved_brief.json"
+          },
+          {
+            "artifact_ref": "art_15aab23ae23c",
+            "kind": "pv19.evidence_summary",
+            "name": "evidence_publish-evidence_summary.json"
+          }
+        ]
+      },
+      "trace_timeline": {
+        "trace_refs": [
+          {
+            "trace_id": "trace_e0bb770db575",
+            "workflow_instance_id": "wfi_dd942d725ace"
+          },
+          {
+            "trace_id": "trace_3e843d5bfee3",
+            "event_type": "workflow.patch.proposed"
+          },
+          {
+            "trace_id": "trace_fa63b79e796e",
+            "event_type": "workflow.template.published"
+          },
+          {
+            "trace_id": "trace_c01a7b700c43",
+            "event_type": "station.run.completed"
+          },
+          {
+            "trace_id": "trace_9662768ca589",
+            "event_type": "approval.request"
+          },
+          {
+            "trace_id": "trace_8ba7f2d39f29",
+            "event_type": "station.run.waiting_approval"
+          },
+          {
+            "trace_id": "trace_78a4b3b3603f",
+            "event_type": "workflow.instance.started"
+          },
+          {
+            "trace_id": "trace_2323a670d8fc",
+            "event_type": "quality.evaluation.created"
+          },
+          {
+            "trace_id": "trace_591ef6a9207f",
+            "event_type": "station.run.completed"
+          },
+          {
+            "trace_id": "trace_ce1aaa3ea16d",
+            "event_type": "station.run.completed"
+          },
+          {
+            "trace_id": "trace_433effb76cd7",
+            "event_type": "workflow.instance.completed"
+          },
+          {
+            "trace_id": "trace_8e2a568b4464",
+            "event_type": "workflow.instance.completed"
+          },
+          {
+            "trace_id": "trace_9662768ca589",
+            "event_type": "approval.respond"
+          }
+        ]
+      },
+      "human_gate_lineage": {
+        "human_gate_refs": [
+          {
+            "station_run_id": "sr_58929957f0dc",
+            "station_id": "human_quality_gate",
+            "approval_id": "appr_5d31c9dce2b5",
+            "status": "completed"
+          }
+        ]
+      },
+      "missing_evidence": [],
+      "allowed_claim": "PV19 complete: runtime-backed workflow platform closed loop ready for bounded review.",
+      "audit_refs": [
+        {
+          "audit_ref_id": "pv19:audit:workflow.evidence.summary:reference_app|demo_a|local:wfi_dd942d725ace",
+          "operation": "workflow.evidence.summary",
+          "scope": {
+            "app_id": "reference_app",
+            "project_id": "demo_a",
+            "workspace_id": "local"
+          },
+          "entity_id": "wfi_dd942d725ace",
+          "created_at": "2026-06-27T03:39:30.437289Z",
+          "redaction_status": "redacted"
+        }
+      ],
+      "redaction_status": "redacted"
+    }
+  }
+}

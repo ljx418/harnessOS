@@ -66,12 +66,38 @@ test("event bridge client follows the BFF stream", () => {
   assert(urls[0].includes("follow=true"));
 });
 
-test("app shell defaults to V13 editable studio and gates legacy console behind explicit route", () => {
+test("app shell defaults to Workflow Platform and gates legacy console behind explicit route", () => {
   const source = readFileSync(new URL("../../src/App.tsx", import.meta.url), "utf8");
-  assert(source.includes('return <WorkflowStudioLayout state="v13-editable-studio" />;'));
+  assert(source.includes('return <WorkflowStudioLayout state="workflow-platform" />;'));
+  assert(source.includes('state === "workflow-platform"'));
   assert(source.includes('state === "workflow-console"'));
   assert(source.includes('state === "pv18-knowledge-opc"'));
+  assert(source.includes('state === "pv19-runtime-workflow-platform"'));
+  assert(source.includes('state === "pv20-agent-executor"'));
   assert(source.includes('entryState !== "workflow-console"'));
+});
+
+test("PV21 run client accepts workflow platform scenario input", async () => {
+  const calls: Array<{ url: string; method: string; body?: string }> = [];
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
+    calls.push({ url: String(input), method: init?.method || "GET", body: typeof init?.body === "string" ? init.body : undefined });
+    return new Response(JSON.stringify({ schema_version: "pv21.complete_workflow_studio.v1", run_id: "wfi_1", version_id: "wfv_1", state: "waiting_approval", workflow_instance: { workflow_instance_id: "wfi_1", workflow_template_id: "wf_1", workflow_version_id: "wfv_1", status: "waiting_approval" }, station_runs: [], pending_human_gates: [], trace_refs: [], artifact_refs: [], quality_refs: [], approval_refs: [], audit_refs: [], redaction_status: "redacted" }), { status: 200 });
+  }) as typeof fetch;
+  try {
+    const client = new WorkflowConsoleClient("/bff");
+    await client.startPV21WorkflowRun("wf_1", "wfv_1", {
+      scenario_id: "document_summary",
+      scenario_input_refs: ["repo://docs/design/V12-V15.x/workflow_platform_main_entry_prd.md"],
+    });
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+  assert.equal(calls.length, 1);
+  assert.equal(calls[0].method, "POST");
+  assert(calls[0].url.startsWith("/bff/pv21/workflows/wf_1/runs?"));
+  assert(calls[0].body?.includes('"scenario_id":"document_summary"'));
+  assert(calls[0].body?.includes('"user_confirmation"'));
 });
 
 test("default-scoped client appends local reference scope to homepage routes", async () => {
@@ -249,6 +275,129 @@ test("PV18 Knowledge OPC client uses formal BFF routes only", async () => {
   assert(calls.every((call) => !call.url.includes("data_service_mcp/internal")));
 });
 
+test("PV19 runtime workflow platform client uses formal BFF routes only", async () => {
+  const calls: Array<{ url: string; method: string; body?: string }> = [];
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
+    calls.push({ url: String(input), method: init?.method || "GET", body: typeof init?.body === "string" ? init.body : undefined });
+    const url = String(input);
+    const body = url.includes("/workbench/state")
+      ? pv19State()
+      : url.includes("/graph/validate")
+        ? { schema_version: "pv19.runtime_workflow_platform.v1", scope: {}, workflow_id: "wf_19", status: "valid", errors: [], warnings: [], runtime_readiness: { can_publish: true, can_run_after_publish: true, human_gate_nodes: ["human_quality_gate"] }, audit_refs: [], redaction_status: "redacted" }
+        : url.includes("/graph")
+          ? pv19Graph()
+          : url.includes("/diff")
+            ? { schema_version: "pv19.runtime_workflow_platform.v1", scope: {}, workflow_id: "wf_19", draft_revision: 1, workflow_diff: { workflow_patch_id: "wfp_19", before_graph_ref: "before", after_graph_ref: "after", confirmation_boundary: "user_confirmed_required_before_publish" }, workflow: { workflow_template_id: "wf_19", name: "PV19" }, audit_refs: [], evidence_refs: [], redaction_status: "redacted" }
+            : url.includes("/versions/publish")
+              ? { schema_version: "pv19.runtime_workflow_platform.v1", scope: {}, status: "published", workflow_version_id: "wfv_19", published_by: "tester", published_at: "now", version: { workflow_template_id: "wf_19", workflow_version_id: "wfv_19", version: "pv19" }, audit_refs: [], evidence_refs: [], redaction_status: "redacted" }
+              : url.includes("/human-actions")
+                ? { schema_version: "pv19.runtime_workflow_platform.v1", scope: {}, action_type: "approve", actor: "tester", approval_id: "appr_19", before_state: { status: "waiting_approval" }, after_state: { status: "completed" }, audit_refs: [], evidence_refs: [], redaction_status: "redacted" }
+                : url.includes("/evidence")
+                  ? pv19Evidence()
+                  : pv19Run();
+    return new Response(JSON.stringify(body), { status: 200 });
+  }) as typeof fetch;
+  try {
+    const client = new WorkflowConsoleClient("/bff");
+    await client.getPV19WorkbenchState();
+    await client.getPV19WorkflowGraph("wf_19");
+    await client.validatePV19WorkflowGraph("wf_19");
+    await client.createPV19WorkflowDiff("wf_19");
+    await client.publishPV19Workflow("wf_19", {
+      user_confirmed: true,
+      source: "workflow_console",
+      idempotency_key: "pv19-publish",
+      expected_draft_revision: 1,
+      workflow_patch_id: "wfp_19",
+      version: "pv19",
+    });
+    await client.startPV19WorkflowRun("wf_19", {
+      user_confirmed: true,
+      source: "run_panel",
+      idempotency_key: "pv19-run",
+      workflow_version_id: "wfv_19",
+    });
+    await client.inspectPV19Run("wfi_19");
+    await client.submitPV19HumanAction("wfi_19", {
+      user_confirmed: true,
+      source: "human_gate_panel",
+      idempotency_key: "pv19-approve",
+      action_type: "approve",
+    });
+    await client.getPV19RunEvidence("wfi_19");
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+  assert.equal(calls.length, 9);
+  assert(calls.every((call) => call.url.startsWith("/bff/pv19/")));
+  assert(calls.every((call) => !call.url.includes("/v1/rpc")));
+  assert(calls.some((call) => call.body?.includes('"user_confirmed":true')));
+});
+
+test("PV20 Agent executor client uses formal BFF routes only", async () => {
+  const calls: Array<{ url: string; method: string; body?: string }> = [];
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
+    calls.push({ url: String(input), method: init?.method || "GET", body: typeof init?.body === "string" ? init.body : undefined });
+    const url = String(input);
+    const result = {
+      execution_result_id: "pv20-result",
+      execution_status: "completed",
+      status: "completed",
+      skill_call_refs: [],
+      tool_call_refs: [],
+      mcp_call_refs: [],
+      approval_refs: [],
+      redaction_status: "redacted",
+    };
+    const contract = {
+      schema_version: "pv20.agent_executor_contract.v1",
+      stage: "PV20-S6",
+      workflow_instance: { workflow_instance_id: "wfi_20", workflow_template_id: "wf_20", workflow_version_id: "wfv_20", status: "completed" },
+      station_run: { station_run_id: "sr_20" },
+      agent_execution_contract: {
+        execution_envelope_id: "env_20",
+        workflow_instance_id: "wfi_20",
+        station_run_id: "sr_20",
+        station_id: "source_review",
+        agent_id: "pv20_agent:source_review",
+        operation: "agent.contract.readiness",
+        allowed_operation_refs: [],
+        forbidden_operation_refs: ["approval.respond"],
+        execution_authority: {},
+        redaction_status: "redacted",
+      },
+      agent_execution_result: result,
+      audit_refs: [],
+      redaction_status: "redacted",
+    };
+    const body = url.includes("/agent-executor/state")
+      ? { ...contract, status: "contract_ready", entry: { route: "?studio=pv20-agent-executor", implementation_status: "bounded_review" }, allowed_claim: "PV20 bounded review" }
+      : url.includes("/agent-execution-evidence")
+        ? { schema_version: "pv20.agent_executor_contract.v1", stage: "PV20-S6", status: "PASS", route_boundary: { allowed_prefix: "/bff/pv20", forbidden_direct_routes: ["/v1/rpc"], status: "specified" }, claim_matrix: [], missing_evidence: [], allowed_claim: "PV20 bounded review", not_claimed: ["production ready"], audit_refs: [], redaction_status: "redacted" }
+        : url.includes("/agent-skill-executions") || url.includes("/agent-tool-executions") || url.includes("/agent-mcp-executions")
+          ? { schema_version: "pv20.agent_executor_contract.v1", stage: "PV20-S6", execution: result, redaction_status: "redacted" }
+          : contract;
+    return new Response(JSON.stringify(body), { status: 200 });
+  }) as typeof fetch;
+  try {
+    const client = new WorkflowConsoleClient("/bff");
+    await client.getPV20AgentExecutorState();
+    await client.getPV20AgentExecutionContract("wfi_20");
+    await client.getPV20AgentExecutionEvidence("wfi_20");
+    await client.executePV20AgentSkill("wfi_20");
+    await client.executePV20AgentTool("wfi_20");
+    await client.executePV20AgentMcp("wfi_20");
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+  assert.equal(calls.length, 6);
+  assert(calls.every((call) => call.url.startsWith("/bff/pv20/")));
+  assert(calls.every((call) => !call.url.includes("/v1/rpc")));
+  assert(calls.filter((call) => call.method === "POST").every((call) => call.body?.includes('"user_confirmed":true')));
+});
+
 function pv18Evidence() {
   return {
     schema_version: "pv18.knowledge_opc.v1",
@@ -261,6 +410,78 @@ function pv18Evidence() {
     platform_generality: { status: "PASS", knowledge_only_platform_changes: [], generic_reuse_checks: ["BFF only"] },
     missing_evidence: [],
     allowed_claim: "PV18 complete: Knowledge OPC productization implementation ready for bounded review.",
+    redaction_status: "redacted",
+  };
+}
+
+function pv19State() {
+  return {
+    schema_version: "pv19.runtime_workflow_platform.v1",
+    scope: {},
+    entry: { route: "?studio=pv19-runtime-workflow-platform", root_empty_allowed: false, status: "ready" },
+    workspace: { workspace_id: "local", display_name: "Local" },
+    project: { project_id: "demo_a", display_name: "Demo" },
+    workflow: { workflow_template_id: "wf_19", name: "PV19" },
+    draft: { workflow_draft_id: "wfd_19", revision: 1, status: "draft" },
+    active_version: null,
+    active_run: null,
+    health: { runtime_backed: true },
+    audit_refs: [],
+    evidence_refs: [],
+    redaction_status: "redacted",
+  };
+}
+
+function pv19Graph() {
+  return {
+    schema_version: "pv19.runtime_workflow_platform.v1",
+    scope: {},
+    workflow: { workflow_template_id: "wf_19", name: "PV19" },
+    draft: { workflow_draft_id: "wfd_19", revision: 1, status: "draft" },
+    graph: {
+      nodes: [{ station_id: "human_quality_gate", name: "Human Gate", approval_required: true }],
+      edges: [],
+      human_gate_nodes: ["human_quality_gate"],
+      redaction_status: "redacted",
+    },
+    platform_contract: { business_pack_mode: "data_and_template_only", core_customization_allowed: false, runtime_backed: true },
+    audit_refs: [],
+    redaction_status: "redacted",
+  };
+}
+
+function pv19Run() {
+  return {
+    schema_version: "pv19.runtime_workflow_platform.v1",
+    scope: {},
+    workflow_instance: { workflow_instance_id: "wfi_19", workflow_template_id: "wf_19", workflow_version_id: "wfv_19", status: "waiting_approval" },
+    status: { workflow_instance_id: "wfi_19", status: "waiting_approval", current_station_ids: ["human_quality_gate"] },
+    station_runs: [],
+    runtime_event_refs: [],
+    trace_refs: [],
+    artifact_refs: [],
+    quality_refs: [],
+    pending_human_gates: [{ approval_id: "appr_19", status: "pending", station_id: "human_quality_gate" }],
+    human_gate_refs: [{ approval_id: "appr_19", status: "pending", station_id: "human_quality_gate" }],
+    audit_refs: [],
+    redaction_status: "redacted",
+  };
+}
+
+function pv19Evidence() {
+  return {
+    schema_version: "pv19.runtime_workflow_platform.v1",
+    scope: {},
+    claims: [],
+    route_boundary: { allowed_prefix: "/bff/pv19", browser_denylist: ["/v1/rpc"], status: "specified" },
+    platform_generality: { status: "pass", primary_sample: "knowledge_opc", reuse_check: "reference", core_customization_allowed: false },
+    redaction: { status: "redacted", secret_allowed: false, provider_payload_allowed: false, artifact_content_allowed: false },
+    artifact_lineage: { artifact_refs: [] },
+    trace_timeline: { trace_refs: [] },
+    human_gate_lineage: { human_gate_refs: [] },
+    missing_evidence: [],
+    allowed_claim: "PV19 complete: runtime-backed workflow platform closed loop ready for bounded review.",
+    audit_refs: [],
     redaction_status: "redacted",
   };
 }

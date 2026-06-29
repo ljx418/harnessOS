@@ -222,7 +222,7 @@
           "source_distance_px": 1.545,
           "target_distance_px": 1.545,
           "marker_visible": true,
-          "endpoint_gap_px": 10.924,
+          "endpoint_gap_px": 10.925,
           "state": "idle"
         },
         {
@@ -232,7 +232,7 @@
           "source_distance_px": 1.545,
           "target_distance_px": 1.545,
           "marker_visible": true,
-          "endpoint_gap_px": 10.924,
+          "endpoint_gap_px": 10.925,
           "state": "idle"
         },
         {
@@ -242,7 +242,7 @@
           "source_distance_px": 1.545,
           "target_distance_px": 1.545,
           "marker_visible": true,
-          "endpoint_gap_px": 10.924,
+          "endpoint_gap_px": 10.925,
           "state": "idle"
         },
         {
@@ -252,7 +252,7 @@
           "source_distance_px": 1.545,
           "target_distance_px": 1.545,
           "marker_visible": true,
-          "endpoint_gap_px": 10.924,
+          "endpoint_gap_px": 10.925,
           "state": "selected"
         },
         {
@@ -262,7 +262,7 @@
           "source_distance_px": 1.545,
           "target_distance_px": 1.545,
           "marker_visible": true,
-          "endpoint_gap_px": 10.924,
+          "endpoint_gap_px": 10.925,
           "state": "selected"
         },
         {
@@ -272,7 +272,7 @@
           "source_distance_px": 1.545,
           "target_distance_px": 1.545,
           "marker_visible": true,
-          "endpoint_gap_px": 10.924,
+          "endpoint_gap_px": 10.925,
           "state": "selected"
         }
       ],
