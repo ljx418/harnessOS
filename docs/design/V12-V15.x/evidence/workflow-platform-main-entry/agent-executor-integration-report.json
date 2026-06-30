@@ -12,8 +12,8 @@
     "meeting_brief"
   ],
   "non_claims": [
-    "unrestricted automation",
-    "agent_executor_readiness",
-    "production_readiness"
+    "unrestricted_automation_not_claimed",
+    "agent_executor_readiness_not_claimed",
+    "production_readiness_not_claimed"
   ]
 }

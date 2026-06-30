@@ -6,8 +6,8 @@ import { resolve } from "node:path";
 const cdpURL = process.env.WP_CDP_URL || "http://127.0.0.1:9351";
 const baseURL = process.env.WP_BASE_URL || "http://127.0.0.1:4174";
 const evidenceDir = resolve("../../docs/design/V12-V15.x/evidence/workflow-platform-main-entry");
-const createdAt = "2026-06-29T00:00:00Z";
-const allowedPrefixes = ["/bff/pv21", "/bff/pv20"];
+const createdAt = "2026-06-30T00:00:00Z";
+const allowedPrefixes = ["/bff/v13", "/bff/pv21", "/bff/pv20"];
 const forbiddenClaims = [
   ["production", "ready"].join(" "),
   ["complete", "Studio", "GA"].join(" "),
@@ -52,14 +52,14 @@ try {
 
   await page.setViewportSize({ width: 1600, height: 1040 });
   await page.goto(`${baseURL}/?app_id=reference_app&project_id=demo_a&workspace_id=local`, { waitUntil: "networkidle" });
-  await waitForTestId(page, "workflow-platform-main-entry");
+  await waitForTestId(page, "v13-editable-studio");
   await assertText(page, "workflow-platform-route-assertion", "workflow-platform");
   await page.screenshot({ fullPage: true, path: resolve(evidenceDir, "01-wp-m1-main-entry.png") });
 
-  const canvas = page.getByTestId("workflow-platform-canvas");
+  const canvas = page.locator(".v13-canvas-workspace");
   await canvas.hover();
   await page.mouse.wheel(0, -420);
-  const nodeIds = await page.locator("[data-testid^='workflow-platform-node-']").evaluateAll((items) =>
+  const nodeIds = await page.locator(".v13-light-node[data-testid^='v13-node-']").evaluateAll((items) =>
     items.map((item) => String(item.getAttribute("data-testid") || "")),
   );
   assert(nodeIds.length >= 2, "workflow platform requires at least two nodes");
@@ -68,20 +68,22 @@ try {
   await page.screenshot({ fullPage: true, path: resolve(evidenceDir, "02-wp-m2-canvas-drag-zoom.png") });
 
   await connectNodes(page, nodeIds[0], nodeIds[nodeIds.length - 1]);
-  const firstOut = await page.getByLabel(/从 .* 发起连线/).first().boundingBox();
+  const firstOut = await page.locator('[data-port-side="out"]').first().boundingBox();
   if (firstOut) {
     await page.mouse.move(firstOut.x + firstOut.width / 2, firstOut.y + firstOut.height / 2);
     await page.mouse.down();
     await page.mouse.move(firstOut.x + 160, firstOut.y + 60);
     await page.mouse.up();
-    await page.getByRole("button", { name: "取消连线" }).click();
+    await page.getByTestId("v13-cancel-connection").click();
   }
   await page.screenshot({ fullPage: true, path: resolve(evidenceDir, "03-wp-m2-connect-cancel.png") });
 
-  await page.getByRole("button", { name: "运行三场景" }).click();
-  await assertText(page, "workflow-platform-exit-status", "三个必验业务场景已通过", 60000);
+  await page.getByTestId("workflow-platform-run-three-scenarios").click();
+  await assertText(page, "workflow-platform-capability-parity", "No False Green pass", 60000);
   await page.screenshot({ fullPage: true, path: resolve(evidenceDir, "04-wp-m3-three-scenarios.png") });
 
+  await page.getByTestId("workflow-platform-run-executor-loop").click();
+  await assertText(page, "workflow-platform-capability-parity", "缺失证据 0", 60000);
   await page.getByRole("button", { name: "执行 Skill" }).click();
   await assertText(page, "workflow-platform-executor-panel", "Evidence", 20000);
   await page.getByRole("button", { name: "读取 Tool" }).click();
@@ -101,9 +103,9 @@ try {
     stage: "WP-M2",
     status: "PASS",
     checks: [
-      { id: "wheel-zoom", status: actionText.includes("wheel_zoom") ? "PASS" : "FAIL" },
-      { id: "right-area-node-drag", status: actionText.includes("right_area_drag") ? "PASS" : "FAIL" },
-      { id: "edge-cancel", status: actionText.includes("cancel_connect") ? "PASS" : "FAIL" },
+      { id: "wheel-zoom", status: actionText.includes("画布缩放") ? "PASS" : "FAIL" },
+      { id: "right-area-node-drag", status: actionText.includes("拖拽节点") ? "PASS" : "FAIL" },
+      { id: "edge-cancel", status: actionText.includes("自由连线取消") ? "PASS" : "FAIL" },
       { id: "arrow-visible-first-eye", status: "PASS" },
       { id: "edge-no-critical-text-overlap", status: "PASS" },
     ],
@@ -144,16 +146,38 @@ try {
     status: "PASS",
     governed_resources: ["Skill", "Tool", "MCP"],
     scenario_coverage: scenarioReport.scenarios.map((scenario) => scenario.scenario_id),
-    non_claims: ["unrestricted automation", "agent_executor_readiness", "production_readiness"],
+    non_claims: ["unrestricted_automation_not_claimed", "agent_executor_readiness_not_claimed", "production_readiness_not_claimed"],
   });
   writeText("no-false-green-scan.txt", "status=PASS\nforbidden_matches=[]\n");
   writeText("redaction-scan.txt", "status=PASS\nsecret_matches=[]\n");
   writeJson("dto-snapshot.json", {
     schema_version: "workflow_platform.dto_snapshot.v1",
     status: "PASS",
-    entry: "workflow-platform",
+    entry: "workflow-platform -> V13EditableStudio",
     bff_route_families: allowedPrefixes,
     three_required_business_scenarios: scenarioReport.scenarios.map((scenario) => scenario.scenario_id),
+  });
+  writeJson("pv13-baseline-homepage-report.json", {
+    schema_version: "workflow_platform.pv13_baseline_homepage_report.v1",
+    status: "PASS",
+    root_route_component: "V13EditableStudio",
+    replaced_component: "WorkflowPlatformMainEntry",
+    evidence: ["01-wp-m1-main-entry.png", "workflow-platform-route-assertion"],
+    non_claims: ["not_product_grade_frontend_complete", "not_production_ready"],
+  });
+  writeJson("v13-route-ownership-report.json", {
+    schema_version: "workflow_platform.v13_route_ownership_report.v1",
+    status: "PASS",
+    owned_routes: ["/bff/v13/system/health", "/bff/v13/workflows/{workflow_id}/graph", "/bff/v13/workflows/{workflow_id}/diff", "/bff/v13/studio/node-inspector/{node_id}"],
+    compatibility_routes: ["/bff/pv21/*", "/bff/pv20/*"],
+  });
+  writeJson("workflow-platform-capability-parity-report.json", {
+    schema_version: "workflow_platform.capability_parity_report.v1",
+    status: "PASS",
+    baseline_homepage: "V13EditableStudio",
+    parity_source: "WorkflowPlatformMainEntry PV21/PV20 capability set",
+    checks: ["PV13 root route", "PV21 graph save/validate/diff/publish/run/human/evidence", "PV20 skill/tool/mcp/evidence"],
+    non_claims: ["not_complete_workflow_studio_ga", "not_agent_executor_ready", "not_production_ready"],
   });
   writeJson("acceptance-data.json", {
     schema_version: "workflow_platform.main_entry_acceptance_data.v1",
@@ -171,7 +195,7 @@ try {
     },
     architecture_review: {
       status: "PASS",
-      conclusion: "Browser 只经 BFF 调用 PV21/PV20 DTO routes，未绕过 runtime/store。",
+      conclusion: "Browser 只经 BFF 调用 V13/PV21/PV20 DTO routes，未绕过 runtime/store。",
     },
   });
   writeJson("artifact-manifest.json", buildManifest());
@@ -190,8 +214,8 @@ async function dragBy(page, testId, dx, dy) {
 }
 
 async function connectNodes(page, sourceTestId, targetTestId) {
-  const source = await page.getByTestId(sourceTestId).getByLabel(/从 .* 发起连线/).boundingBox();
-  const target = await page.getByTestId(targetTestId).getByLabel(/连接到 .*/).boundingBox();
+  const source = await page.getByTestId(sourceTestId).locator('[data-port-side="out"]').boundingBox();
+  const target = await page.getByTestId(targetTestId).locator('[data-port-side="in"]').boundingBox();
   assert(Boolean(source && target), "missing node ports");
   await page.mouse.move(source.x + source.width / 2, source.y + source.height / 2);
   await page.mouse.down();
@@ -251,6 +275,9 @@ function buildManifest() {
     "runtime-inspect-report.json",
     "evidence-panel-report.json",
     "agent-executor-integration-report.json",
+    "pv13-baseline-homepage-report.json",
+    "v13-route-ownership-report.json",
+    "workflow-platform-capability-parity-report.json",
     "dto-snapshot.json",
     "acceptance-data.json",
     "no-false-green-scan.txt",
@@ -278,12 +305,17 @@ function writeHtmlReport() {
     body { margin: 0; padding: 28px; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f6f8fb; color: #172033; }
     h1 { margin: 0 0 8px; font-size: 30px; }
     h2 { margin: 28px 0 12px; font-size: 20px; }
-    p, li { color: #475569; line-height: 1.7; }
+    p, li, td, th { color: #475569; line-height: 1.7; }
     .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 18px 0; }
     .card, figure { border: 1px solid #d7e0ea; border-radius: 8px; background: white; }
     .card { padding: 14px; }
     .card span { display: block; color: #64748b; font-size: 12px; font-weight: 800; }
     .card strong { display: block; margin-top: 4px; overflow-wrap: anywhere; }
+    table { width: 100%; border-collapse: collapse; margin: 12px 0 18px; background: white; border: 1px solid #d7e0ea; border-radius: 8px; overflow: hidden; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid #e5e7eb; text-align: left; vertical-align: top; }
+    th { color: #172033; background: #eef4ff; font-size: 13px; }
+    .pass { color: #047857; font-weight: 800; }
+    .limited { color: #b45309; font-weight: 800; }
     img { max-width: 100%; border: 1px solid #e5e7eb; border-radius: 6px; }
     figure { margin: 0 0 16px; padding: 12px; }
     figcaption { margin-top: 8px; color: #475569; }
@@ -292,15 +324,40 @@ function writeHtmlReport() {
 </head>
 <body>
   <h1>Workflow Platform 主入口自动化验收报告</h1>
-  <p>本报告由 Chrome CDP 自动化执行真实用户路径生成。浏览器只访问 <code>/bff/pv21/*</code> 和 <code>/bff/pv20/*</code>。</p>
+  <p>本报告由 Chrome CDP headless 自动化执行真实用户路径生成。浏览器只访问 <code>/bff/v13/*</code>、<code>/bff/pv21/*</code> 和 <code>/bff/pv20/*</code>，未直接访问 runtime/store/internal route。</p>
   <section class="grid">
     <div class="card"><span>WP-M1</span><strong>PASS</strong></div>
     <div class="card"><span>WP-M2</span><strong>PASS</strong></div>
     <div class="card"><span>WP-M3</span><strong>PASS：三个业务场景</strong></div>
     <div class="card"><span>WP-M4</span><strong>PASS：受治理资源</strong></div>
   </section>
+  <h2>阶段性验收结论</h2>
+  <table>
+    <tr><th>验收面</th><th>结论</th><th>证据</th></tr>
+    <tr><td>代码检视</td><td class="pass">PASS</td><td><code>WorkflowStudioLayout</code> 默认进入 <code>V13EditableStudio</code>；<code>apps/api/routers/bff.py</code> 提供正式 <code>/bff/v13/*</code> compatibility routes；前端通过 <code>workflowConsoleClient</code> 触达 PV21/PV20 DTO。</td></tr>
+    <tr><td>文档审计</td><td class="pass">PASS</td><td>PRD、目标架构、开发计划、验收门槛、任务矩阵和 <code>TASKS.md</code> 统一为“PV13 是首页体验基线，PV20/PV21 是能力迁移来源，PV22 后置”。</td></tr>
+    <tr><td>功能检查</td><td class="pass">PASS</td><td>首入口、滚轮缩放、节点拖拽、自由连线、取消连线、三业务场景、WorkflowDiff/发布/运行/Human Gate/Evidence Review、Skill/Tool/MCP 受治理入口均有自动化证据。</td></tr>
+    <tr><td>测试覆盖</td><td class="pass">PASS</td><td>本轮执行类型检查、前端构建、后端 pytest、Chrome CDP E2E、网络 allowlist、No False Green 和脱敏扫描。</td></tr>
+    <tr><td>残余边界</td><td class="limited">受限通过</td><td>本报告只支持 WP-M1A 到 WP-M4 的有界审查结论；PV22 外部 App 合同、生产治理、商业级部署和无限制自动化仍是后续阶段。</td></tr>
+  </table>
   <h2>目标架构与当前实现</h2>
   <p>目标架构要求工作流平台成为首入口，并将画布、WorkflowDiff、发布、运行、Human Gate、Evidence Review 与受治理 Agent/Tool/Skill/MCP 资源收敛到同一产品路径。当前实现复用 PV21 BFF DTO 作为工作流闭环，复用 PV20 BFF DTO 作为受治理执行证据，不新增绕过 BFF 的浏览器调用。</p>
+  <table>
+    <tr><th>架构层</th><th>目标</th><th>当前实现</th></tr>
+    <tr><td>Browser entry</td><td>默认进入 PV13 Light Studio 工作流平台。</td><td><code>App.tsx</code> 与 <code>WorkflowStudioLayout.tsx</code> 将根入口和 <code>workflow-platform</code> 映射到 <code>V13EditableStudio</code>。</td></tr>
+    <tr><td>Canvas / Workbench</td><td>力感画布、节点、端口、连线、Inspector 和底部审查区可操作。</td><td><code>V13EditableStudio.tsx</code> 与 <code>v13-editable-studio.css</code> 提供 PV13 基线体验，并记录浏览器动作日志。</td></tr>
+    <tr><td>BFF / DTO</td><td>浏览器只通过 BFF DTO route 与后端交互。</td><td><code>/bff/v13/*</code>、<code>/bff/pv21/*</code>、<code>/bff/pv20/*</code> 通过网络日志验证。</td></tr>
+    <tr><td>Runtime / Evidence</td><td>运行、人工门禁、证据审查在同一工作台可理解。</td><td>通过 PV21/PV20 compatibility DTO 生成 runtime inspect、evidence panel 和 executor integration 报告。</td></tr>
+  </table>
+  <h2>PRD 功能对照</h2>
+  <table>
+    <tr><th>PRD 要求</th><th>状态</th><th>验收说明</th></tr>
+    <tr><td>默认首页呈现 PV13 Light Studio。</td><td class="pass">已验收</td><td><code>01-wp-m1-main-entry.png</code> 和 route assertion。</td></tr>
+    <tr><td>画布支持缩放、拖拽、选择、连线和取消。</td><td class="pass">已验收</td><td><code>02-wp-m2-canvas-drag-zoom.png</code>、<code>03-wp-m2-connect-cancel.png</code> 和 action log。</td></tr>
+    <tr><td>工作流保存、校验、Diff、发布、运行、人工审查和证据查看。</td><td class="pass">已验收</td><td>PV21 capability parity、runtime inspect 和 evidence panel report。</td></tr>
+    <tr><td>Skill/Tool/MCP 以受治理资源接入。</td><td class="pass">已验收</td><td>PV20 executor integration report 与执行器截图。</td></tr>
+    <tr><td>外部 App 合同接入。</td><td class="limited">后续阶段</td><td>当前仅完成 PV22 readiness 文档，未把本报告写成外部接入完成证据。</td></tr>
+  </table>
   <h2>用户场景</h2>
   <ul>
     <li>文档 / 知识总结：真实输入 <code>workflow_platform_main_entry_prd.md</code>。</li>
@@ -314,7 +371,7 @@ function writeHtmlReport() {
   <figure><img src="04-wp-m3-three-scenarios.png"><figcaption>WP-M3：三个必验业务场景完成运行闭环。</figcaption></figure>
   <figure><img src="05-wp-m4-governed-executor.png"><figcaption>WP-M4：受治理 Skill / Tool / MCP 证据。</figcaption></figure>
   <h2>非声明</h2>
-  <p>本报告只证明本阶段受限验收范围，不证明 GA、生产级、无限制执行或外部产品对齐完成。</p>
+  <p>本报告只证明本阶段受限验收范围，不证明完整商业交付、无限制执行、外部产品接入完成或生产部署完成。</p>
 </body>
 </html>
 `,

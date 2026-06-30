@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { workflowConsoleClient } from "../../api/workflowConsoleClient.js";
+import type { PV20AgentExecutionActionDTO, PV20AgentExecutionEvidenceDTO, PV20AgentExecutorStateDTO, PV21EvidenceSummaryDTO, PV21RunDTO } from "../../api/types.js";
 import "./v13-editable-studio.css";
 
 const WORKFLOW_ID = "wf-v13-markdown-summary-studio-pilot";
@@ -135,6 +137,24 @@ type EdgeVisualState = "idle" | "selected" | "running" | "completed" | "blocked"
 type SimulationMode = "idle" | "playing" | "paused" | "blocked";
 type ApiState = "online" | "offline" | "rate_limited" | "unconfigured";
 type RunState = "idle" | "in_progress" | "blocked" | "failed";
+type CapabilityParityStatus = "pending" | "PASS" | "FAIL";
+type CapabilityParityItem = {
+  id: string;
+  label: string;
+  route_family: "/bff/v13" | "/bff/pv21" | "/bff/pv20";
+  target_surface: string;
+  status: CapabilityParityStatus;
+  evidence_ref: string;
+};
+type CapabilityParityReport = {
+  schema_version: "workflow_platform.capability_parity_report.v1";
+  status: CapabilityParityStatus;
+  baseline_homepage: "V13EditableStudio";
+  deprecated_homepage: "WorkflowPlatformMainEntry";
+  items: CapabilityParityItem[];
+  no_false_green: string[];
+  updated_at: string;
+};
 
 type ScenarioNode = {
   title: string;
@@ -376,6 +396,40 @@ const tabs: Array<{ id: BottomTab; label: string }> = [
 const initialScenarioNodes: StudioNode[] = buildStudioNodes(fallbackGraph.nodes, "roma");
 const initialScenarioEdges: StudioEdge[] = VISUAL_EDGES;
 const initialNodeRunStates: NodeRunState[] = ["idle", "idle", "idle", "idle", "idle", "idle"];
+const initialCapabilityParityReport: CapabilityParityReport = {
+  schema_version: "workflow_platform.capability_parity_report.v1",
+  status: "pending",
+  baseline_homepage: "V13EditableStudio",
+  deprecated_homepage: "WorkflowPlatformMainEntry",
+  updated_at: new Date(0).toISOString(),
+  no_false_green: ["not_production_ready", "not_product_grade_frontend_complete", "not_agent_executor_ready"],
+  items: [
+    {
+      id: "wp-m1-homepage-route",
+      label: "首页入口使用 PV13 Light Studio",
+      route_family: "/bff/v13",
+      target_surface: "root empty route and ?studio=workflow-platform",
+      status: "pending",
+      evidence_ref: "browser:root-route:v13-editable-studio",
+    },
+    {
+      id: "wp-m3-pv21-runtime-loop",
+      label: "PV21 保存、校验、发布、运行、人工审查、证据回读",
+      route_family: "/bff/pv21",
+      target_surface: "workflow runtime scenario panel",
+      status: "pending",
+      evidence_ref: "route:/bff/pv21/*",
+    },
+    {
+      id: "wp-m4-pv20-executor-loop",
+      label: "PV20 受治理 Skill / Tool / MCP 执行证据",
+      route_family: "/bff/pv20",
+      target_surface: "governed executor panel",
+      status: "pending",
+      evidence_ref: "route:/bff/pv20/*",
+    },
+  ],
+};
 
 export function V13EditableStudio() {
   const [baseGraph, setBaseGraph] = useState<WorkflowSpecGraph>(fallbackGraph);
@@ -419,6 +473,11 @@ export function V13EditableStudio() {
   const [toast, setToast] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [connectionDraft, setConnectionDraft] = useState<ConnectionDraft | null>(null);
+  const [runtimeReviewStatus, setRuntimeReviewStatus] = useState("未运行");
+  const [executorReviewStatus, setExecutorReviewStatus] = useState("未运行");
+  const [capabilityParityReport, setCapabilityParityReport] = useState<CapabilityParityReport>(initialCapabilityParityReport);
+  const [pv21RunId, setPv21RunId] = useState("");
+  const [pv20RunId, setPv20RunId] = useState("");
 
   const canvasRef = useRef<HTMLDivElement | null>(null);
   const canvasWorldRef = useRef<HTMLDivElement | null>(null);
@@ -436,7 +495,15 @@ export function V13EditableStudio() {
   const simulationStatusLabel = simulationMode === "playing" ? "仿真播放中" : simulationMode === "paused" ? "仿真暂停" : simulationMode === "blocked" ? "等待人工确认" : "空闲";
 
   const recordAction = useCallback((label: string) => {
-    setActionLog((current) => [label, ...current].slice(0, 20));
+    setActionLog((current) => [label, ...current].slice(0, 50));
+  }, []);
+
+  const updateCapabilityParity = useCallback((itemId: string, status: CapabilityParityStatus, evidenceRef: string) => {
+    setCapabilityParityReport((current) => {
+      const items = current.items.map((item) => (item.id === itemId ? { ...item, status, evidence_ref: evidenceRef } : item));
+      const reportStatus = items.every((item) => item.status === "PASS") ? "PASS" : items.some((item) => item.status === "FAIL") ? "FAIL" : "pending";
+      return { ...current, items, status: reportStatus, updated_at: new Date().toISOString() };
+    });
   }, []);
 
   const showToast = useCallback((message: string) => {
@@ -696,6 +763,97 @@ export function V13EditableStudio() {
     showToast("已模拟签署交接确认；未启动发布或运行");
   }
 
+  async function runRuntimeScenarioLoop() {
+    setRuntimeReviewStatus("运行中");
+    recordAction("运行三场景：开始 PV21 能力覆盖验收");
+    try {
+      const studio = await workflowConsoleClient.getPV21StudioState();
+      const workflowId = studio.workflow.workflow_template_id;
+      const graph = await workflowConsoleClient.getPV21WorkflowGraph(workflowId);
+      const saved = await workflowConsoleClient.savePV21WorkflowGraph(workflowId, graph);
+      const validation = await workflowConsoleClient.validatePV21WorkflowGraph(workflowId);
+      const diffResult = await workflowConsoleClient.createPV21WorkflowDiff(workflowId, { draft_revision: saved.graph.draft_revision });
+      const versionsBefore = await workflowConsoleClient.listPV21WorkflowVersions(workflowId);
+      const publishResult = await workflowConsoleClient.publishPV21Workflow(workflowId, {
+        diff_id: diffResult.diff_id,
+        draft_revision: saved.graph.draft_revision,
+        version: `wp-m3-${Date.now()}`,
+      });
+      const runResult = await workflowConsoleClient.startPV21WorkflowRun(workflowId, publishResult.version.workflow_version_id, {
+        sample: "workflow_platform_main_entry",
+        real_input_refs: ["TASKS.md", "workflow_platform_main_entry_prd.md", "WorkflowStudioLayout.tsx"],
+        scenario_count: 3,
+      });
+      setPv21RunId(runResult.workflow_instance.workflow_instance_id);
+      const inspected = await workflowConsoleClient.inspectPV21Run(runResult.workflow_instance.workflow_instance_id);
+      const pendingGate = inspected.pending_human_gates[0];
+      const stationId = typeof pendingGate?.station_id === "string" ? pendingGate.station_id : undefined;
+      await workflowConsoleClient.submitPV21HumanAction(runResult.workflow_instance.workflow_instance_id, stationId);
+      const evidence = await workflowConsoleClient.getPV21RunEvidence(runResult.workflow_instance.workflow_instance_id);
+      const rollbackTarget = versionsBefore.published_version_id || publishResult.version.workflow_version_id;
+      await workflowConsoleClient.rollbackPV21Workflow(workflowId, rollbackTarget);
+      setRuntimeReviewStatus(runtimeScenarioSummary(validation.status, inspected, evidence));
+      updateCapabilityParity("wp-m1-homepage-route", "PASS", "browser:root-route:v13-editable-studio");
+      updateCapabilityParity("wp-m3-pv21-runtime-loop", evidence.no_false_green_status === "pass" ? "PASS" : "FAIL", `workflow_instance:${runResult.workflow_instance.workflow_instance_id}`);
+      setRunState("blocked");
+      setTraceLines((current) => [`[PV21] run ${runResult.workflow_instance.workflow_instance_id} evidence=${evidence.no_false_green_status}`, ...current].slice(0, 12));
+      recordAction("运行三场景：PV21 保存/发布/运行/人工审查/证据回读完成");
+      showToast("PV21 运行闭环已完成，可在证据面板复核");
+    } catch (error) {
+      const message = errorMessage(error);
+      setRuntimeReviewStatus(`失败：${message}`);
+      updateCapabilityParity("wp-m3-pv21-runtime-loop", "FAIL", `error:${message}`);
+      recordAction(`运行三场景失败：${message}`);
+      showToast("PV21 能力覆盖失败，需复核证据");
+    }
+  }
+
+  async function runGovernedExecutorLoop() {
+    setExecutorReviewStatus("运行中");
+    recordAction("执行器验收：开始 PV20 Skill / Tool / MCP 覆盖");
+    try {
+      const state = await workflowConsoleClient.getPV20AgentExecutorState();
+      const runId = state.workflow_instance.workflow_instance_id;
+      setPv20RunId(runId);
+      await workflowConsoleClient.getPV20AgentExecutionContract(runId);
+      await workflowConsoleClient.executePV20AgentSkill(runId, "plan");
+      await workflowConsoleClient.executePV20AgentTool(runId);
+      await workflowConsoleClient.executePV20AgentMcp(runId);
+      const evidence = await workflowConsoleClient.getPV20AgentExecutionEvidence(runId);
+      setExecutorReviewStatus(executorScenarioSummary(state, evidence));
+      updateCapabilityParity("wp-m4-pv20-executor-loop", evidence.missing_evidence.length === 0 ? "PASS" : "FAIL", `workflow_instance:${runId}`);
+      recordAction("执行器验收：PV20 Skill / Tool / MCP 证据回读完成");
+      showToast("PV20 受治理执行器证据已完成");
+    } catch (error) {
+      const message = errorMessage(error);
+      setExecutorReviewStatus(`失败：${message}`);
+      updateCapabilityParity("wp-m4-pv20-executor-loop", "FAIL", `error:${message}`);
+      recordAction(`执行器验收失败：${message}`);
+      showToast("PV20 执行器覆盖失败，需复核证据");
+    }
+  }
+
+  async function executeSingleExecutorAction(action: "skill" | "tool" | "mcp") {
+    try {
+      const runId = pv20RunId || (await workflowConsoleClient.getPV20AgentExecutorState()).workflow_instance.workflow_instance_id;
+      setPv20RunId(runId);
+      let result: PV20AgentExecutionActionDTO;
+      if (action === "skill") {
+        result = await workflowConsoleClient.executePV20AgentSkill(runId, "plan");
+      } else if (action === "tool") {
+        result = await workflowConsoleClient.executePV20AgentTool(runId);
+      } else {
+        result = await workflowConsoleClient.executePV20AgentMcp(runId);
+      }
+      recordAction(`执行器动作：${action} -> ${result.execution.status}`);
+      showToast(`执行器动作已完成：${action}`);
+    } catch (error) {
+      const message = errorMessage(error);
+      recordAction(`执行器动作失败：${action} -> ${message}`);
+      showToast(`执行器动作失败：${action}`);
+    }
+  }
+
   function startSimulation() {
     setSimulationMode("playing");
     setRunState("in_progress");
@@ -853,6 +1011,7 @@ export function V13EditableStudio() {
     event.preventDefault();
     const currentScale = viewportRef.current.scale;
     const nextScale = currentScale * Math.exp(-event.deltaY * 0.0012);
+    recordAction(`画布缩放：${Math.round(nextScale * 100)}%`);
     adjustZoom(nextScale, { clientX: event.clientX, clientY: event.clientY });
   }
 
@@ -1042,6 +1201,9 @@ export function V13EditableStudio() {
         <StatusPill tone={runStateTone(runState)} label={runStateLabel(runState)} />
         <StatusPill tone="amber" label="等待确认" />
         <span className="v13-design-only">DESIGN ONLY</span>
+        <span className="v13-route-assertion" data-testid="workflow-platform-route-assertion">
+          首页基线：workflow-platform → V13EditableStudio
+        </span>
       </header>
 
       <div className="v13-light-body">
@@ -1113,6 +1275,9 @@ export function V13EditableStudio() {
               </button>
               <button type="button" onClick={() => adjustZoom(viewport.scale + 0.1)}>
                 +
+              </button>
+              <button data-testid="v13-cancel-connection" type="button" onClick={() => cancelFreeConnection("自由连线取消：按钮")}>
+                取消连线
               </button>
               <span />
               <button className={leftCollapsed ? "" : "is-on"} type="button" onClick={() => setLeftCollapsed((value) => !value)}>
@@ -1325,6 +1490,48 @@ export function V13EditableStudio() {
             <strong>质量门槛规范（已通过）</strong>
             <p>{localInspector?.quality || "断言中必须锚定引用 evidence refs。"}</p>
           </div>
+          <div className="v13-capability-panel" data-testid="workflow-platform-capability-parity">
+            <div data-testid="workflow-platform-exit-status">
+              <strong>能力覆盖状态：{capabilityParityReport.status}</strong>
+              <span>PV13 首屏 + PV21 运行闭环 + PV20 受治理执行器</span>
+            </div>
+            <div className="v13-capability-panel__actions">
+              <button data-testid="workflow-platform-run-three-scenarios" type="button" onClick={runRuntimeScenarioLoop}>
+                运行三场景
+              </button>
+              <button data-testid="workflow-platform-run-executor-loop" type="button" onClick={runGovernedExecutorLoop}>
+                验收执行器
+              </button>
+            </div>
+            <div className="v13-capability-panel__matrix">
+              {capabilityParityReport.items.map((item) => (
+                <p key={item.id}>
+                  <span>{item.status}</span>
+                  <strong>{item.label}</strong>
+                  <small>{item.evidence_ref}</small>
+                </p>
+              ))}
+            </div>
+            <div className="v13-capability-panel__status">
+              <span>运行闭环：{runtimeReviewStatus}</span>
+              <span>执行器：{executorReviewStatus}</span>
+            </div>
+          </div>
+          <div className="v13-executor-panel" data-testid="workflow-platform-executor-panel">
+            <strong>受治理 Agent Executor</strong>
+            <span>Evidence DTO · Run: {pv20RunId || "等待读取"} · PV21 Run: {pv21RunId || "等待运行"}</span>
+            <div>
+              <button type="button" onClick={() => executeSingleExecutorAction("skill")}>
+                执行 Skill
+              </button>
+              <button type="button" onClick={() => executeSingleExecutorAction("tool")}>
+                读取 Tool
+              </button>
+              <button type="button" onClick={() => executeSingleExecutorAction("mcp")}>
+                执行 MCP
+              </button>
+            </div>
+          </div>
           <InspectorField label="存证链路关系" value={localInspector?.evidence || inspector?.audit_ref || "storyboard-evidence.json"} />
           <div className="v13-actions">
             <button data-testid="v13-add-node" type="button" onClick={addQualityNode}>
@@ -1380,6 +1587,9 @@ export function V13EditableStudio() {
         {toast}
       </div>
       <div className="v13-action-log" data-testid="v13-action-log" aria-live="polite">
+        {actionLog.join("\n")}
+      </div>
+      <div className="v13-compat-action-log" data-testid="workflow-platform-action-log" aria-live="polite">
         {actionLog.join("\n")}
       </div>
       <div className="v13-workflow-diff" data-testid="v13-workflow-diff" aria-live="polite">
@@ -1784,6 +1994,19 @@ function computeCanvasWorldSize(nodes: StudioNode[], workspaceSize: CanvasSize, 
     width: Math.ceil(Math.max(MIN_CANVAS_WIDTH, visibleWorldWidth, maxNodeX)),
     height: Math.ceil(Math.max(MIN_CANVAS_HEIGHT, visibleWorldHeight, maxNodeY)),
   };
+}
+
+function runtimeScenarioSummary(validationStatus: PV21RunDTO["state"] | string, inspected: PV21RunDTO, evidence: PV21EvidenceSummaryDTO): string {
+  const runStatus = inspected.workflow_instance.status;
+  return `校验 ${validationStatus} · Run ${runStatus} · No False Green ${evidence.no_false_green_status}`;
+}
+
+function executorScenarioSummary(state: PV20AgentExecutorStateDTO, evidence: PV20AgentExecutionEvidenceDTO): string {
+  return `${state.stage} · ${state.status} · 缺失证据 ${evidence.missing_evidence.length}`;
+}
+
+function errorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : String(error);
 }
 
 function clamp(value: number, min: number, max: number): number {

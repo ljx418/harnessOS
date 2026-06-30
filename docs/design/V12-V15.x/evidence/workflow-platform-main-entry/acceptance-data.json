@@ -2,7 +2,7 @@
   "schema_version": "workflow_platform.main_entry_acceptance_data.v1",
   "stage_id": "WP-M1-WP-M4",
   "status": "PASS",
-  "created_at": "2026-06-29T00:00:00Z",
+  "created_at": "2026-06-30T00:00:00Z",
   "wp_m1": "PASS",
   "wp_m2": "PASS",
   "wp_m3": "PASS",
@@ -10,6 +10,7 @@
   "route_boundary": {
     "status": "PASS",
     "allowed_prefixes": [
+      "/bff/v13",
       "/bff/pv21",
       "/bff/pv20"
     ],
@@ -21,6 +22,6 @@
   },
   "architecture_review": {
     "status": "PASS",
-    "conclusion": "Browser 只经 BFF 调用 PV21/PV20 DTO routes，未绕过 runtime/store。"
+    "conclusion": "Browser 只经 BFF 调用 V13/PV21/PV20 DTO routes，未绕过 runtime/store。"
   }
 }

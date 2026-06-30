@@ -1,8 +1,9 @@
 {
   "schema_version": "workflow_platform.dto_snapshot.v1",
   "status": "PASS",
-  "entry": "workflow-platform",
+  "entry": "workflow-platform -> V13EditableStudio",
   "bff_route_families": [
+    "/bff/v13",
     "/bff/pv21",
     "/bff/pv20"
   ],

@@ -8,8 +8,8 @@
       "status": "PASS",
       "user_input": {
         "input_path": "docs/design/V12-V15.x/workflow_platform_main_entry_prd.md",
-        "sha256": "dd9eca33aaa929b090fd0fa690c8db42031f6ce8a8d35023a07c8df05d2da0dc",
-        "bytes_sampled": 3310
+        "sha256": "e7fec9bdb4610e4366738c9b6689b566368089e3add7be176d79d16af29f1ab9",
+        "bytes_sampled": 2966
       },
       "platform_actions": [
         "canvas edit/connect/configure",
@@ -68,7 +68,7 @@
       "status": "PASS",
       "user_input": {
         "input_path": "TASKS.md",
-        "sha256": "d671115a678dd91f55c0a7b469833ffeb2f1f9261d7243c26af3160446f74f3e",
+        "sha256": "71edeb145ee4415f495dfd681703fc8acb505709d7dd7f3531e42c9ec973fefe",
         "bytes_sampled": 1932
       },
       "platform_actions": [

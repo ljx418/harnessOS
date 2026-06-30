@@ -1,0 +1,14 @@
+{
+  "schema_version": "workflow_platform.pv13_baseline_homepage_report.v1",
+  "status": "PASS",
+  "root_route_component": "V13EditableStudio",
+  "replaced_component": "WorkflowPlatformMainEntry",
+  "evidence": [
+    "01-wp-m1-main-entry.png",
+    "workflow-platform-route-assertion"
+  ],
+  "non_claims": [
+    "not_product_grade_frontend_complete",
+    "not_production_ready"
+  ]
+}

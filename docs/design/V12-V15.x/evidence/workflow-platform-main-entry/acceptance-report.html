@@ -7,12 +7,17 @@
     body { margin: 0; padding: 28px; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f6f8fb; color: #172033; }
     h1 { margin: 0 0 8px; font-size: 30px; }
     h2 { margin: 28px 0 12px; font-size: 20px; }
-    p, li { color: #475569; line-height: 1.7; }
+    p, li, td, th { color: #475569; line-height: 1.7; }
     .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 18px 0; }
     .card, figure { border: 1px solid #d7e0ea; border-radius: 8px; background: white; }
     .card { padding: 14px; }
     .card span { display: block; color: #64748b; font-size: 12px; font-weight: 800; }
     .card strong { display: block; margin-top: 4px; overflow-wrap: anywhere; }
+    table { width: 100%; border-collapse: collapse; margin: 12px 0 18px; background: white; border: 1px solid #d7e0ea; border-radius: 8px; overflow: hidden; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid #e5e7eb; text-align: left; vertical-align: top; }
+    th { color: #172033; background: #eef4ff; font-size: 13px; }
+    .pass { color: #047857; font-weight: 800; }
+    .limited { color: #b45309; font-weight: 800; }
     img { max-width: 100%; border: 1px solid #e5e7eb; border-radius: 6px; }
     figure { margin: 0 0 16px; padding: 12px; }
     figcaption { margin-top: 8px; color: #475569; }
@@ -21,15 +26,40 @@
 </head>
 <body>
   <h1>Workflow Platform 主入口自动化验收报告</h1>
-  <p>本报告由 Chrome CDP 自动化执行真实用户路径生成。浏览器只访问 <code>/bff/pv21/*</code> 和 <code>/bff/pv20/*</code>。</p>
+  <p>本报告由 Chrome CDP headless 自动化执行真实用户路径生成。浏览器只访问 <code>/bff/v13/*</code>、<code>/bff/pv21/*</code> 和 <code>/bff/pv20/*</code>，未直接访问 runtime/store/internal route。</p>
   <section class="grid">
     <div class="card"><span>WP-M1</span><strong>PASS</strong></div>
     <div class="card"><span>WP-M2</span><strong>PASS</strong></div>
     <div class="card"><span>WP-M3</span><strong>PASS：三个业务场景</strong></div>
     <div class="card"><span>WP-M4</span><strong>PASS：受治理资源</strong></div>
   </section>
+  <h2>阶段性验收结论</h2>
+  <table>
+    <tr><th>验收面</th><th>结论</th><th>证据</th></tr>
+    <tr><td>代码检视</td><td class="pass">PASS</td><td><code>WorkflowStudioLayout</code> 默认进入 <code>V13EditableStudio</code>；<code>apps/api/routers/bff.py</code> 提供正式 <code>/bff/v13/*</code> compatibility routes；前端通过 <code>workflowConsoleClient</code> 触达 PV21/PV20 DTO。</td></tr>
+    <tr><td>文档审计</td><td class="pass">PASS</td><td>PRD、目标架构、开发计划、验收门槛、任务矩阵和 <code>TASKS.md</code> 统一为“PV13 是首页体验基线，PV20/PV21 是能力迁移来源，PV22 后置”。</td></tr>
+    <tr><td>功能检查</td><td class="pass">PASS</td><td>首入口、滚轮缩放、节点拖拽、自由连线、取消连线、三业务场景、WorkflowDiff/发布/运行/Human Gate/Evidence Review、Skill/Tool/MCP 受治理入口均有自动化证据。</td></tr>
+    <tr><td>测试覆盖</td><td class="pass">PASS</td><td>本轮执行类型检查、前端构建、后端 pytest、Chrome CDP E2E、网络 allowlist、No False Green 和脱敏扫描。</td></tr>
+    <tr><td>残余边界</td><td class="limited">受限通过</td><td>本报告只支持 WP-M1A 到 WP-M4 的有界审查结论；PV22 外部 App 合同、生产治理、商业级部署和无限制自动化仍是后续阶段。</td></tr>
+  </table>
   <h2>目标架构与当前实现</h2>
   <p>目标架构要求工作流平台成为首入口，并将画布、WorkflowDiff、发布、运行、Human Gate、Evidence Review 与受治理 Agent/Tool/Skill/MCP 资源收敛到同一产品路径。当前实现复用 PV21 BFF DTO 作为工作流闭环，复用 PV20 BFF DTO 作为受治理执行证据，不新增绕过 BFF 的浏览器调用。</p>
+  <table>
+    <tr><th>架构层</th><th>目标</th><th>当前实现</th></tr>
+    <tr><td>Browser entry</td><td>默认进入 PV13 Light Studio 工作流平台。</td><td><code>App.tsx</code> 与 <code>WorkflowStudioLayout.tsx</code> 将根入口和 <code>workflow-platform</code> 映射到 <code>V13EditableStudio</code>。</td></tr>
+    <tr><td>Canvas / Workbench</td><td>力感画布、节点、端口、连线、Inspector 和底部审查区可操作。</td><td><code>V13EditableStudio.tsx</code> 与 <code>v13-editable-studio.css</code> 提供 PV13 基线体验，并记录浏览器动作日志。</td></tr>
+    <tr><td>BFF / DTO</td><td>浏览器只通过 BFF DTO route 与后端交互。</td><td><code>/bff/v13/*</code>、<code>/bff/pv21/*</code>、<code>/bff/pv20/*</code> 通过网络日志验证。</td></tr>
+    <tr><td>Runtime / Evidence</td><td>运行、人工门禁、证据审查在同一工作台可理解。</td><td>通过 PV21/PV20 compatibility DTO 生成 runtime inspect、evidence panel 和 executor integration 报告。</td></tr>
+  </table>
+  <h2>PRD 功能对照</h2>
+  <table>
+    <tr><th>PRD 要求</th><th>状态</th><th>验收说明</th></tr>
+    <tr><td>默认首页呈现 PV13 Light Studio。</td><td class="pass">已验收</td><td><code>01-wp-m1-main-entry.png</code> 和 route assertion。</td></tr>
+    <tr><td>画布支持缩放、拖拽、选择、连线和取消。</td><td class="pass">已验收</td><td><code>02-wp-m2-canvas-drag-zoom.png</code>、<code>03-wp-m2-connect-cancel.png</code> 和 action log。</td></tr>
+    <tr><td>工作流保存、校验、Diff、发布、运行、人工审查和证据查看。</td><td class="pass">已验收</td><td>PV21 capability parity、runtime inspect 和 evidence panel report。</td></tr>
+    <tr><td>Skill/Tool/MCP 以受治理资源接入。</td><td class="pass">已验收</td><td>PV20 executor integration report 与执行器截图。</td></tr>
+    <tr><td>外部 App 合同接入。</td><td class="limited">后续阶段</td><td>当前仅完成 PV22 readiness 文档，未把本报告写成外部接入完成证据。</td></tr>
+  </table>
   <h2>用户场景</h2>
   <ul>
     <li>文档 / 知识总结：真实输入 <code>workflow_platform_main_entry_prd.md</code>。</li>
@@ -43,6 +73,6 @@
   <figure><img src="04-wp-m3-three-scenarios.png"><figcaption>WP-M3：三个必验业务场景完成运行闭环。</figcaption></figure>
   <figure><img src="05-wp-m4-governed-executor.png"><figcaption>WP-M4：受治理 Skill / Tool / MCP 证据。</figcaption></figure>
   <h2>非声明</h2>
-  <p>本报告只证明本阶段受限验收范围，不证明 GA、生产级、无限制执行或外部产品对齐完成。</p>
+  <p>本报告只证明本阶段受限验收范围，不证明完整商业交付、无限制执行、外部产品接入完成或生产部署完成。</p>
 </body>
 </html>

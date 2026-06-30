@@ -1,6 +1,35 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { PointerEvent as ReactPointerEvent, WheelEvent } from "react";
-import { CheckCircle2, GitCompareArrows, MousePointer2, PlayCircle, Save, ShieldCheck, UserCheck, Workflow } from "lucide-react";
+import {
+  Activity,
+  Boxes,
+  CheckCircle2,
+  ChevronDown,
+  ChevronRight,
+  Clock3,
+  Code2,
+  FileText,
+  GitCompareArrows,
+  Globe2,
+  Layers3,
+  MessageSquare,
+  Minus,
+  MousePointer2,
+  PanelLeft,
+  PanelRight,
+  Play,
+  PlayCircle,
+  Plus,
+  RotateCcw,
+  Save,
+  Server,
+  Settings,
+  Shield,
+  ShieldCheck,
+  Video,
+  Workflow,
+  Zap,
+} from "lucide-react";
 import type {
   PV20AgentExecutionActionDTO,
   PV20AgentExecutionContractDTO,
@@ -118,6 +147,33 @@ const defaultPositions = [
   { x: 990, y: 170 },
 ];
 
+const NODE_CARD_WIDTH = 210;
+const NODE_PORT_Y = 56;
+
+const railNavItems = [
+  { label: "工作流", icon: Boxes, active: true },
+  { label: "空间资源", icon: Globe2, active: false },
+  { label: "运行态", icon: Activity, active: false },
+  { label: "图层", icon: Layers3, active: false },
+  { label: "服务", icon: Server, active: false },
+  { label: "治理", icon: Shield, active: false },
+  { label: "审计", icon: Clock3, active: false },
+];
+
+const prototypeSceneItems = [
+  { key: "rome-forum", scenarioId: "document_summary" as ScenarioId, label: "罗马广场讨论工作流", icon: MessageSquare, count: "6 站" },
+  { key: "storyboard", scenarioId: "meeting_brief" as ScenarioId, label: "视频分镜创作工作流", icon: Video, count: "6 站" },
+  { key: "code-review", scenarioId: "code_review" as ScenarioId, label: "代码审查工作流", icon: Code2, count: "6 站" },
+  { key: "doc-summary", scenarioId: "document_summary" as ScenarioId, label: "文档总结工作流", icon: FileText, count: "6 站" },
+];
+
+const contextStats = [
+  { label: "关联智能体", value: "6", tone: "blue" },
+  { label: "就绪技能库", value: "12", tone: "violet" },
+  { label: "MCP 服务器", value: "4", tone: "green" },
+  { label: "存证单据链", value: "18", tone: "amber" },
+];
+
 export function WorkflowPlatformMainEntry() {
   const [loadState, setLoadState] = useState<LoadState>("loading");
   const [busyAction, setBusyAction] = useState<string | null>(null);
@@ -158,6 +214,8 @@ export function WorkflowPlatformMainEntry() {
   const selectedScenario = scenarioDefinitions.find((item) => item.id === activeScenario) || scenarioDefinitions[0];
   const allScenarioPassed = scenarioDefinitions.every((scenario) => scenarioStatus[scenario.id] === "passed");
   const executorRunId = executorState?.workflow_instance.workflow_instance_id || executorContract?.workflow_instance.workflow_instance_id || "";
+  const selectedSceneTitle = prototypeSceneItems.find((item) => item.scenarioId === activeScenario)?.label || "罗马广场讨论工作流";
+  const zoomPercent = Math.round(viewport.scale * 100);
 
   const edgePaths = useMemo(
     () =>
@@ -166,10 +224,10 @@ export function WorkflowPlatformMainEntry() {
           const source = nodes.find((node) => node.id === edge.source);
           const target = nodes.find((node) => node.id === edge.target);
           if (!source || !target) return null;
-          const startX = source.x + 176;
-          const startY = source.y + 50;
+          const startX = source.x + NODE_CARD_WIDTH;
+          const startY = source.y + NODE_PORT_Y;
           const endX = target.x;
-          const endY = target.y + 50;
+          const endY = target.y + NODE_PORT_Y;
           const mid = Math.max(60, Math.abs(endX - startX) / 2);
           return { ...edge, path: `M ${startX} ${startY} C ${startX + mid} ${startY}, ${endX - mid} ${endY}, ${endX} ${endY}` };
         })
@@ -321,7 +379,7 @@ export function WorkflowPlatformMainEntry() {
     event.stopPropagation();
     const node = nodes.find((item) => item.id === nodeId);
     if (!node) return;
-    setConnectionDraft({ source: nodeId, x: node.x + 210, y: node.y + 50 });
+    setConnectionDraft({ source: nodeId, x: node.x + NODE_CARD_WIDTH, y: node.y + NODE_PORT_Y });
   }
 
   function finishConnection(event: ReactPointerEvent, targetId: string) {
@@ -522,18 +580,55 @@ export function WorkflowPlatformMainEntry() {
   }
 
   return (
-    <main className="workflow-platform" data-testid="workflow-platform-main-entry">
-      <header className="workflow-platform__topbar">
-        <div>
-          <span>HarnessOS Workflow Platform</span>
-          <h1>工作流平台主入口</h1>
-          <p>工作空间 → 画布 → Diff → 发布/运行 → Human Gate → Evidence Review</p>
+    <main className="workflow-platform workflow-platform--op" data-testid="workflow-platform-main-entry">
+      <aside className="workflow-platform__rail" aria-label="工作流平台导航">
+        <div className="workflow-platform__rail-logo">
+          <Layers3 size={26} />
         </div>
-        <div className="workflow-platform__status" data-testid="workflow-platform-route-assertion">
-          <strong>默认入口</strong>
-          <span>workflow-platform / BFF only / bounded review</span>
-        </div>
-      </header>
+        <nav>
+          {railNavItems.map((item) => {
+            const Icon = item.icon;
+            return (
+              <button key={item.label} type="button" className={item.active ? "is-active" : ""} aria-label={item.label}>
+                <Icon size={24} />
+              </button>
+            );
+          })}
+        </nav>
+        <button type="button" className="workflow-platform__rail-settings" aria-label="设置">
+          <Settings size={24} />
+        </button>
+      </aside>
+
+      <section className="workflow-platform__shell">
+        <header className="workflow-platform__appbar">
+          <div className="workflow-platform__brand">
+            <div className="workflow-platform__brand-mark">
+              <Layers3 size={24} />
+            </div>
+            <div>
+              <strong>HarnessOS</strong>
+              <span>LIGHT STUDIO</span>
+            </div>
+          </div>
+          <div className="workflow-platform__workspace-pill">
+            <span>空间: {state?.workspace.display_name || "Demo_Space"}</span>
+            <ChevronDown size={16} />
+          </div>
+          <div className="workflow-platform__appbar-spacer" />
+          <button type="button" className="workflow-platform__status-chip">
+            <Settings size={16} />
+            仿真状态调节
+            <ChevronDown size={14} />
+          </button>
+          <span className="workflow-platform__status-chip is-online">API 在线</span>
+          <span className="workflow-platform__status-chip is-ready">闲置就绪</span>
+          <span className="workflow-platform__status-chip is-waiting">等待确认</span>
+          <span className="workflow-platform__status-chip is-design">DESIGN ONLY</span>
+          <div className="workflow-platform__status" data-testid="workflow-platform-route-assertion">
+            workflow-platform / BFF only / bounded review
+          </div>
+        </header>
 
       {error ? <div className="workflow-platform__error">{error}</div> : null}
 
@@ -548,29 +643,61 @@ export function WorkflowPlatformMainEntry() {
 
       <section className="workflow-platform__main">
         <aside className="workflow-platform__left">
-          <h2>必验业务场景</h2>
-          {scenarioDefinitions.map((scenario) => (
-            <button
-              key={scenario.id}
-              type="button"
-              className={scenario.id === activeScenario ? "is-active" : ""}
-              data-testid={`workflow-platform-scenario-${scenario.id}`}
-              onClick={() => setActiveScenario(scenario.id)}
-            >
-              <strong>{scenario.title}</strong>
-              <span>{scenarioStatus[scenario.id]}</span>
-            </button>
-          ))}
+          <div className="workflow-platform__left-head">
+            <div>
+              <h1>工作流平台</h1>
+              <p>项目级工作流编排与上下文资源</p>
+            </div>
+            <span>V13-OP</span>
+            <ChevronRight size={18} />
+          </div>
+          <section className="workflow-platform__scene-list">
+            <h2>核心工作流场景 (L2)</h2>
+            {prototypeSceneItems.map((scene) => {
+              const Icon = scene.icon;
+              return (
+                <button
+                  key={scene.key}
+                  type="button"
+                  className={scene.scenarioId === activeScenario ? "is-active" : ""}
+                  data-testid={`workflow-platform-scenario-${scene.key}`}
+                  onClick={() => setActiveScenario(scene.scenarioId)}
+                >
+                  <Icon size={20} />
+                  <strong>{scene.label}</strong>
+                  <span>{scene.count}</span>
+                </button>
+              );
+            })}
+          </section>
+          <section className="workflow-platform__context-stats">
+            <h2>上下文审计数</h2>
+            {contextStats.map((item) => (
+              <div key={item.label} className={`workflow-platform__stat-dot is-${item.tone}`}>
+                <span>{item.label}</span>
+                <strong>{item.value}</strong>
+              </div>
+            ))}
+          </section>
           <div className="workflow-platform__scenario" data-testid="workflow-platform-scenario-detail">
             <strong>{selectedScenario.goal}</strong>
             <span>输入：{selectedScenario.inputLabel}</span>
             <span>路径：{selectedScenario.graphSummary}</span>
             <span>产物：{selectedScenario.output}</span>
           </div>
+          <footer>
+            <strong>HarnessOS L2 Routing</strong>
+            <span>本层资源动态随 L1 / 场景路由切换</span>
+          </footer>
         </aside>
 
         <section className="workflow-platform__center">
           <div className="workflow-platform__toolbar">
+            <span>仿真控制:</span>
+            <button type="button" className="is-icon is-play" onClick={() => void runScenario()} disabled={busyAction !== null || !workflowId} aria-label="播放当前场景"><Play size={17} /></button>
+            <button type="button" className="is-icon" onClick={() => void runAllScenarios()} disabled={busyAction !== null || !workflowId} aria-label="快进运行全部场景"><Zap size={17} /></button>
+            <button type="button" className="is-icon" onClick={cancelConnection} disabled={!connectionDraft} aria-label="撤销连线草稿"><RotateCcw size={17} /></button>
+            <span className="workflow-platform__sim-state">空闲 (Ready to Play)</span>
             <button type="button" onClick={() => void saveGraph()} disabled={busyAction !== null || !workflowId}><Save size={15} />保存</button>
             <button type="button" onClick={() => void validateGraph()} disabled={busyAction !== null || !workflowId}><CheckCircle2 size={15} />校验</button>
             <button type="button" onClick={() => void createDiff()} disabled={busyAction !== null || !workflowId}><GitCompareArrows size={15} />Diff</button>
@@ -578,6 +705,13 @@ export function WorkflowPlatformMainEntry() {
             <button type="button" onClick={() => void runScenario()} disabled={busyAction !== null || !workflowId}><PlayCircle size={15} />运行当前场景</button>
             <button type="button" onClick={() => void runAllScenarios()} disabled={busyAction !== null || !workflowId}><Workflow size={15} />运行三场景</button>
             <button type="button" onClick={cancelConnection} disabled={!connectionDraft}><MousePointer2 size={15} />取消连线</button>
+            <div className="workflow-platform__zoom">
+              <button type="button" aria-label="缩小"><Minus size={14} /></button>
+              <strong>{zoomPercent}%</strong>
+              <button type="button" aria-label="放大"><Plus size={14} /></button>
+            </div>
+            <PanelLeft size={20} className="workflow-platform__panel-icon" />
+            <PanelRight size={20} className="workflow-platform__panel-icon" />
           </div>
 
           <div
@@ -591,13 +725,13 @@ export function WorkflowPlatformMainEntry() {
               className="workflow-platform__world"
               style={{ transform: `translate(${viewport.x}px, ${viewport.y}px) scale(${viewport.scale})` }}
             >
-              <svg className="workflow-platform__edges" width="1300" height="620" data-testid="workflow-platform-edge-layer">
+              <svg className="workflow-platform__edges" width="1320" height="720" data-testid="workflow-platform-edge-layer">
                 <defs>
-                  <marker id="wp-arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
-                    <path d="M 0 0 L 12 6 L 0 12 z" fill="#16a34a" />
+                  <marker id="wp-arrow" markerWidth="16" markerHeight="16" refX="13" refY="8" orient="auto">
+                    <path d="M 0 0 L 16 8 L 0 16 z" fill="#10b981" />
                   </marker>
-                  <marker id="wp-arrow-draft" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
-                    <path d="M 0 0 L 12 6 L 0 12 z" fill="#2563eb" />
+                  <marker id="wp-arrow-draft" markerWidth="16" markerHeight="16" refX="13" refY="8" orient="auto">
+                    <path d="M 0 0 L 16 8 L 0 16 z" fill="#2563eb" />
                   </marker>
                 </defs>
                 {edgePaths.map((edge) => (
@@ -610,39 +744,68 @@ export function WorkflowPlatformMainEntry() {
                 ))}
                 {connectionDraft ? (
                   <line
-                    x1={(nodes.find((node) => node.id === connectionDraft.source)?.x || 0) + 176}
-                    y1={(nodes.find((node) => node.id === connectionDraft.source)?.y || 0) + 50}
+                    x1={(nodes.find((node) => node.id === connectionDraft.source)?.x || 0) + NODE_CARD_WIDTH}
+                    y1={(nodes.find((node) => node.id === connectionDraft.source)?.y || 0) + NODE_PORT_Y}
                     x2={connectionDraft.x}
                     y2={connectionDraft.y}
                     className="is-draft-line"
                   />
                 ) : null}
               </svg>
-              {nodes.map((node) => (
+              {nodes.map((node, index) => (
                 <article
                   key={node.id}
-                  className={`workflow-platform-node ${selectedNodeId === node.id ? "is-selected" : ""}`}
+                  className={`workflow-platform-node ${selectedNodeId === node.id ? "is-selected" : ""} ${node.status === "pending" ? "is-pending" : ""}`}
                   style={{ left: node.x, top: node.y }}
                   data-testid={`workflow-platform-node-${node.id}`}
                   onPointerDown={(event) => startNodeDrag(event, node)}
                 >
                   <button type="button" className="workflow-platform-node__in" onPointerUp={(event) => finishConnection(event, node.id)} aria-label={`连接到 ${node.label}`} />
-                  <strong>{node.label}</strong>
-                  <span>{node.type} / {node.status}</span>
-                  <small>{node.stationId}</small>
+                  <div className="workflow-platform-node__title">
+                    <span>{index + 1}</span>
+                    <strong>{node.label}</strong>
+                    <em>{node.status === "pending" ? "待人工" : "已完成"}</em>
+                  </div>
+                  <dl>
+                    <div><dt>{node.type.includes("human") ? "状态" : "角色"}</dt><dd>{node.type}</dd></div>
+                    <div><dt>证据</dt><dd>{node.stationId}</dd></div>
+                  </dl>
                   <button type="button" className="workflow-platform-node__out" onPointerDown={(event) => startConnection(event, node.id)} aria-label={`从 ${node.label} 发起连线`} />
                 </article>
               ))}
+            </div>
+            <div className="workflow-platform__minimap" aria-hidden="true">
+              <strong>MINIMAP 拓扑投影</strong>
+              <svg viewBox="0 0 170 88">
+                <polyline points="20,52 52,68 84,50 118,72 150,58" />
+                <circle cx="20" cy="52" r="7" />
+                <circle cx="52" cy="68" r="5" />
+                <circle cx="84" cy="50" r="5" />
+                <circle cx="118" cy="72" r="5" />
+                <circle cx="150" cy="58" r="5" className="is-blue" />
+                <circle cx="150" cy="40" r="5" className="is-amber" />
+              </svg>
+            </div>
+            <div className="workflow-platform__canvas-toast">
+              实时画布：已自适应 {nodes.length} / {nodes.length || 6} 磁吸边 <i /> 活动场景：{selectedSceneTitle}
             </div>
           </div>
         </section>
 
         <aside className="workflow-platform__right">
-          <section data-testid="workflow-platform-inspector">
-            <h2>Inspector</h2>
+          <section className="workflow-platform__profile-card" data-testid="workflow-platform-inspector">
+            <header>
+              <span>{Math.max(1, nodes.findIndex((node) => node.id === selectedNode?.id) + 1)}</span>
+              <div>
+                <h2>{selectedNode?.label || "总结 Agent"}</h2>
+                <p>选中节点 · PROFILE</p>
+              </div>
+              <ChevronRight size={22} />
+            </header>
             <dl>
-              <div><dt>Node</dt><dd>{selectedNode?.label || "-"}</dd></div>
-              <div><dt>Type</dt><dd>{selectedNode?.type || "-"}</dd></div>
+              <div><dt>角色定义 (ROLE)</dt><dd>{selectedNode?.type || "观点总结者 (Scribe)"}</dd></div>
+              <div><dt>目标规范 (GOAL)</dt><dd>{selectedScenario.goal}</dd></div>
+              <div><dt>记忆摘要 (MEMORY DIGEST)</dt><dd>{selectedScenario.output}</dd></div>
               <div><dt>Validation</dt><dd>{validation?.status || graph?.validation_status || "-"}</dd></div>
               <div><dt>Diff</dt><dd>{diff?.diff_id || "等待生成"}</dd></div>
               <div><dt>Version</dt><dd>{activeVersionId || "等待发布"}</dd></div>
@@ -650,9 +813,20 @@ export function WorkflowPlatformMainEntry() {
             </dl>
           </section>
 
-          <section data-testid="workflow-platform-executor-panel">
-            <h2>受治理资源</h2>
-            {selectedScenario.resourceMap.map((item) => <span key={item} className="workflow-platform__resource">{item}</span>)}
+          <section className="workflow-platform__resource-card" data-testid="workflow-platform-executor-panel">
+            <div className="workflow-platform__resource-grid">
+              <div>
+                <h2>挂载工具 (TOOLS)</h2>
+                {selectedScenario.resourceMap.slice(0, 2).map((item) => <span key={item} className="workflow-platform__resource">{item}</span>)}
+              </div>
+              <div>
+                <h2>就绪技能 (SKILLS)</h2>
+                <span className="workflow-platform__resource">insight-extraction</span>
+                <span className="workflow-platform__resource">local-review</span>
+              </div>
+            </div>
+            <h2>MCP 协议引用</h2>
+            <p>mcp://consensus-broker-server</p>
             <div className="workflow-platform__executor-actions">
               <button type="button" onClick={() => void runExecutorAction("skill")} disabled={busyAction !== null || !executorRunId}>执行 Skill</button>
               <button type="button" onClick={() => void runExecutorAction("tool")} disabled={busyAction !== null || !executorRunId}>读取 Tool</button>
@@ -661,6 +835,15 @@ export function WorkflowPlatformMainEntry() {
             <p>Contract: {executorContract?.agent_execution_contract.execution_envelope_id || "-"}</p>
             <p>Evidence: {executorEvidence?.route_boundary.status || "-"}</p>
             <p>Last action: {executorAction?.execution.status || "等待操作"}</p>
+          </section>
+
+          <section className="workflow-platform__quality-card" data-testid="workflow-platform-exit-status">
+            <ShieldCheck size={24} />
+            <div>
+              <h2>质量门槛规范 {allScenarioPassed ? "（已通过）" : "（待验收）"}</h2>
+              <p>{allScenarioPassed ? "三个必验业务场景已通过" : "等待三个必验业务场景全部通过"}</p>
+              <p>保留完整的双向分歧、禁止在未达成共识时进行人代或指令合并；断言中必须锚定引用 evidence refs。</p>
+            </div>
           </section>
         </aside>
       </section>
@@ -676,10 +859,11 @@ export function WorkflowPlatformMainEntry() {
           <h2>Action Log</h2>
           <ul>{actionLog.slice(0, 20).map((item) => <li key={item.action_id}>{item.type} / {item.target} / {item.status}</li>)}</ul>
         </article>
-        <article data-testid="workflow-platform-exit-status">
+        <article>
           <h2>出门状态</h2>
           <p>{allScenarioPassed ? "三个必验业务场景已通过" : "等待三个必验业务场景全部通过"}</p>
         </article>
+      </section>
       </section>
     </main>
   );

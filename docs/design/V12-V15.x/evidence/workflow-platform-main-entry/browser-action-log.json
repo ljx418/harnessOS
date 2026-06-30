@@ -2,7 +2,7 @@
   "schema_version": "workflow_platform.canvas_action_log.v1",
   "stage": "WP-M1-WP-M4",
   "status": "PASS",
-  "ui_log_text": "Action Log\nexecutor_action / tool / PASS\nexecutor_action / skill / PASS\nevidence_review / meeting_brief / PASS\nhuman_gate / meeting_brief / PASS\nrun / meeting_brief / PASS\nevidence_review / code_review / PASS\nhuman_gate / code_review / PASS\nrun / code_review / PASS\nevidence_review / document_summary / PASS\nhuman_gate / document_summary / PASS\nrun / document_summary / PASS\ncancel_connect / start_intake / PASS\nfree_connect / start_intake->evidence_review / PASS\nright_area_drag / evidence_review / PASS\nselect_node / evidence_review / PASS\nnode_drag / agent_analyze / PASS\nselect_node / agent_analyze / PASS\nwheel_zoom / canvas / PASS\nload / workflow-platform-main-entry / PASS",
+  "ui_log_text": "执行器动作：mcp -> completed 执行器动作：tool -> completed 执行器动作：skill -> completed 执行器验收：PV20 Skill / Tool / MCP 证据回读完成 执行器验收：开始 PV20 Skill / Tool / MCP 覆盖 运行三场景：PV21 保存/发布/运行/人工审查/证据回读完成 运行三场景：开始 PV21 能力覆盖验收 自由连线取消：按钮 选中节点：规划 Agent 拖拽节点：folder_reader 选中节点：规划 Agent 画布缩放：166% 页面初始化",
   "actions": [
     "wheel_zoom",
     "node_drag",
@@ -14,5 +14,5 @@
     "evidence_review",
     "executor_action"
   ],
-  "created_at": "2026-06-29T00:00:00Z"
+  "created_at": "2026-06-30T00:00:00Z"
 }

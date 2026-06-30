@@ -599,6 +599,13 @@
   color: var(--v13-brand-600);
 }
 
+.v13-canvas-tools [data-testid="v13-cancel-connection"] {
+  width: auto;
+  min-width: 64px;
+  padding: 0 10px;
+  font-size: 10px;
+}
+
 .v13-canvas-workspace {
   position: relative;
   flex: 1;
@@ -1322,6 +1329,118 @@
   line-height: 1.55;
 }
 
+.v13-route-assertion {
+  max-width: 240px;
+  padding: 7px 10px;
+  border: 1px solid rgba(37, 99, 235, 0.14);
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: 10px;
+  font-weight: 950;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.v13-capability-panel,
+.v13-executor-panel {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid rgba(37, 99, 235, 0.13);
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
+}
+
+.v13-capability-panel > div:first-child,
+.v13-executor-panel > strong {
+  display: grid;
+  gap: 3px;
+}
+
+.v13-capability-panel strong,
+.v13-executor-panel strong {
+  color: #172033;
+  font-size: 12px;
+  font-weight: 950;
+}
+
+.v13-capability-panel span,
+.v13-executor-panel span,
+.v13-capability-panel small {
+  color: #64748b;
+  font-size: 10px;
+  font-weight: 850;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.v13-capability-panel__actions,
+.v13-executor-panel div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.v13-executor-panel div {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.v13-capability-panel button,
+.v13-executor-panel button {
+  min-height: 32px;
+  border: 1px solid rgba(37, 99, 235, 0.18);
+  border-radius: 10px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: 10px;
+  font-weight: 950;
+  cursor: pointer;
+}
+
+.v13-capability-panel__matrix {
+  display: grid;
+  gap: 6px;
+}
+
+.v13-capability-panel__matrix p {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 2px 8px;
+  align-items: center;
+  margin: 0;
+  padding: 7px 8px;
+  border-radius: 10px;
+  background: #f8fafc;
+}
+
+.v13-capability-panel__matrix p > small {
+  grid-column: 2;
+}
+
+.v13-capability-panel__matrix p > span {
+  display: inline-grid;
+  min-height: 20px;
+  place-items: center;
+  border-radius: 999px;
+  background: #e0f2fe;
+  color: #0369a1;
+  font-size: 9px;
+}
+
+.v13-capability-panel__matrix p > strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.v13-capability-panel__status {
+  display: grid;
+  gap: 3px;
+}
+
 .v13-actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1368,6 +1487,7 @@
 }
 
 .v13-action-log,
+.v13-compat-action-log,
 .v13-workflow-diff {
   position: fixed;
   left: -9999px;

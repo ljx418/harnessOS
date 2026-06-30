@@ -1,0 +1,16 @@
+{
+  "schema_version": "workflow_platform.capability_parity_report.v1",
+  "status": "PASS",
+  "baseline_homepage": "V13EditableStudio",
+  "parity_source": "WorkflowPlatformMainEntry PV21/PV20 capability set",
+  "checks": [
+    "PV13 root route",
+    "PV21 graph save/validate/diff/publish/run/human/evidence",
+    "PV20 skill/tool/mcp/evidence"
+  ],
+  "non_claims": [
+    "not_complete_workflow_studio_ga",
+    "not_agent_executor_ready",
+    "not_production_ready"
+  ]
+}

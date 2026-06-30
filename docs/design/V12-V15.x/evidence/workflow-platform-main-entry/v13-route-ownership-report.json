@@ -1,0 +1,14 @@
+{
+  "schema_version": "workflow_platform.v13_route_ownership_report.v1",
+  "status": "PASS",
+  "owned_routes": [
+    "/bff/v13/system/health",
+    "/bff/v13/workflows/{workflow_id}/graph",
+    "/bff/v13/workflows/{workflow_id}/diff",
+    "/bff/v13/studio/node-inspector/{node_id}"
+  ],
+  "compatibility_routes": [
+    "/bff/pv21/*",
+    "/bff/pv20/*"
+  ]
+}

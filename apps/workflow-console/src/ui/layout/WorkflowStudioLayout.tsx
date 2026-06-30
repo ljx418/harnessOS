@@ -11,7 +11,6 @@ import { PV18KnowledgeOpc } from "../pv18/PV18KnowledgeOpc.js";
 import { PV19RuntimeWorkflowPlatform } from "../pv19/PV19RuntimeWorkflowPlatform.js";
 import { PV20AgentExecutor } from "../pv20/PV20AgentExecutor.js";
 import { PV21CompleteWorkflowStudio } from "../pv21/PV21CompleteWorkflowStudio.js";
-import { WorkflowPlatformMainEntry } from "../workflow-platform/WorkflowPlatformMainEntry.js";
 import { WorkflowCanvas } from "../workflow/WorkflowCanvas.js";
 import "./workflow-studio-layout.css";
 
@@ -70,7 +69,7 @@ export function WorkflowStudioLayout({ state = "overview" }: WorkflowStudioLayou
     return <PV21CompleteWorkflowStudio />;
   }
   if (state === "workflow-platform") {
-    return <WorkflowPlatformMainEntry />;
+    return <V13EditableStudio />;
   }
 
   const rightPanel = state === "folder-debug-scan" ? <FolderInputInspector /> : state === "governance-evidence" ? <GovernanceEvidencePanel /> : <AgentAssistantPanel />;

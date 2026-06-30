@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import asyncio
+import copy
 from datetime import UTC, datetime, timedelta
 from typing import Any
 from uuid import uuid4
@@ -411,6 +412,93 @@ PV18_KNOWLEDGE_SCHEMA_VERSION = "pv18.knowledge_opc.v1"
 PV19_RUNTIME_WORKFLOW_SCHEMA_VERSION = "pv19.runtime_workflow_platform.v1"
 PV20_AGENT_EXECUTOR_CONTRACT_SCHEMA_VERSION = "pv20.agent_executor_contract.v1"
 PV21_COMPLETE_WORKFLOW_STUDIO_SCHEMA_VERSION = "pv21.complete_workflow_studio.v1"
+V13_WORKFLOW_STUDIO_SCHEMA_VERSION = "v13.workflow_spec_graph.v1"
+V13_WORKFLOW_ID = "wf-v13-markdown-summary-studio-pilot"
+V13_WORKFLOW_DIFF_ID = "diff-v13-editable-studio-pilot-001"
+V13_GRAPH = {
+    "schema_version": V13_WORKFLOW_STUDIO_SCHEMA_VERSION,
+    "workflow_id": V13_WORKFLOW_ID,
+    "workspace_id": "ws-v12-technical-content-real",
+    "project_id": "proj-v12-local-knowledge-real",
+    "app_id": "app-v12-markdown-workflow-real",
+    "version_ref": "workflow-version:v13-draft-001",
+    "runtime_backed": False,
+    "nodes": [
+        {"node_id": "start_goal", "label": "目标输入", "node_kind": "start", "status": "configured", "position": {"x": 0, "y": 120}},
+        {
+            "node_id": "folder_reader",
+            "label": "读取 Markdown 文件夹",
+            "node_kind": "tool",
+            "status": "configured",
+            "capability_ref": "tool:folder.readonly_scan",
+            "position": {"x": 260, "y": 120},
+        },
+        {
+            "node_id": "summary_agent",
+            "label": "总结 Agent",
+            "node_kind": "station",
+            "status": "configured",
+            "agent_profile_ref": "agent-v12-quality-reviewer-real",
+            "position": {"x": 540, "y": 80},
+        },
+        {"node_id": "quality_branch", "label": "质量分支", "node_kind": "fan_out", "status": "configured", "position": {"x": 800, "y": 120}},
+        {
+            "node_id": "quality_gate",
+            "label": "质量检查",
+            "node_kind": "quality_gate",
+            "status": "configured",
+            "capability_ref": "tool:quality.review",
+            "position": {"x": 1060, "y": 40},
+        },
+        {"node_id": "evidence_review", "label": "证据审查", "node_kind": "evidence", "status": "configured", "position": {"x": 1060, "y": 210}},
+        {"node_id": "merge_review", "label": "审查汇合", "node_kind": "fan_in", "status": "configured", "position": {"x": 1330, "y": 120}},
+        {"node_id": "final_markdown", "label": "输出 Markdown 总结", "node_kind": "end", "status": "configured", "position": {"x": 1600, "y": 120}},
+    ],
+    "edges": [
+        {"edge_id": "start-folder", "source_node_id": "start_goal", "target_node_id": "folder_reader"},
+        {"edge_id": "folder-summary", "source_node_id": "folder_reader", "target_node_id": "summary_agent"},
+        {"edge_id": "summary-branch", "source_node_id": "summary_agent", "target_node_id": "quality_branch"},
+        {"edge_id": "branch-quality", "source_node_id": "quality_branch", "target_node_id": "quality_gate"},
+        {"edge_id": "branch-evidence", "source_node_id": "quality_branch", "target_node_id": "evidence_review"},
+        {"edge_id": "quality-merge", "source_node_id": "quality_gate", "target_node_id": "merge_review"},
+        {"edge_id": "evidence-merge", "source_node_id": "evidence_review", "target_node_id": "merge_review"},
+        {"edge_id": "merge-final", "source_node_id": "merge_review", "target_node_id": "final_markdown"},
+    ],
+    "evidence_refs": ["evidence://v13/studio-pilot/workflow-spec-graph"],
+    "audit_ref": "audit://v13/studio-pilot/workflow-spec-graph",
+    "created_at": "2026-06-24T00:00:00Z",
+}
+V13_INSPECTORS = {
+    node["node_id"]: {
+        "schema_version": "v13.studio_node_inspector.v1",
+        "workflow_id": V13_WORKFLOW_ID,
+        "selected_node_ref": node["node_id"],
+        "label": node["label"],
+        "node_kind": node["node_kind"],
+        "status": node["status"],
+        "editable_fields": ["label", "position", "status"],
+        "blocked_fields": ["runtime_truth", "publish_state", "execution_state"],
+        "agent_profile_ref": node.get("agent_profile_ref"),
+        "capability_ref": node.get("capability_ref"),
+        "runtime_backed": False,
+        "audit_ref": f"audit://v13/studio-pilot/inspector/{node['node_id']}",
+    }
+    for node in V13_GRAPH["nodes"]
+}
+V13_WORKFLOW_DIFF = {
+    "schema_version": "v13.workflow_diff_proposal.v1",
+    "proposal_id": V13_WORKFLOW_DIFF_ID,
+    "workflow_id": V13_WORKFLOW_ID,
+    "status": "awaiting_user_confirmation",
+    "before_graph_ref": "workflow-spec-graph:v13-draft-001",
+    "after_graph_ref": "workflow-spec-graph:v13-local-edit-preview",
+    "changed_node_refs": ["quality_gate", "evidence_review"],
+    "changed_edge_refs": ["quality-merge", "evidence-merge"],
+    "confirmation_boundary": "handoff_only_no_publish_no_run",
+    "runtime_backed": False,
+    "publish_or_run_started": False,
+    "audit_ref": "audit://v13/studio-pilot/workflow-diff",
+}
 PV17_ENTITY_KINDS = {
     "workspaces": "workspace",
     "projects": "project",
@@ -891,6 +979,127 @@ async def pv18_knowledge_evidence_summary(request: Request, gateway: GatewayServ
             "redaction_status": "redacted",
         }
         response = JSONResponse(_redact(dto))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
+
+
+@router.get("/v13/system/health")
+async def v13_system_health(request: Request, gateway: GatewayService = Depends(get_gateway_service)) -> Any:
+    try:
+        params = _query_scope_params(request)
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflows.read")
+        health = await gateway.health_ping()
+        dto = {
+            "schema_version": "v13.system_health.v1",
+            "status": "ok",
+            "scope": _scope_dto(auth.scope),
+            "gateway_status": health.get("status"),
+            "bff_backed": True,
+            "runtime_backed": False,
+            "evidence_scope": "bounded_review",
+            "created_at": _now_iso(),
+            "audit_ref": "audit://v13/studio-pilot/system-health",
+            "redaction_status": "redacted",
+        }
+        response = JSONResponse(_redact(dto))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
+
+
+@router.get("/v13/workflows/{workflow_id}/graph")
+async def v13_workflow_graph(workflow_id: str, request: Request, gateway: GatewayService = Depends(get_gateway_service)) -> Any:
+    try:
+        if workflow_id != V13_WORKFLOW_ID:
+            raise ProtocolError("NOT_FOUND", "V13 workflow graph was not found.", {"workflow_id": workflow_id})
+        params = {**_query_scope_params(request), "workflow_id": workflow_id}
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflows.read")
+        graph = copy.deepcopy(V13_GRAPH)
+        graph["workspace_id"] = auth.scope.workspace_id or graph["workspace_id"]
+        graph["project_id"] = auth.scope.project_id or graph["project_id"]
+        graph["app_id"] = auth.scope.app_id or graph["app_id"]
+        response = JSONResponse(_redact(graph))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
+
+
+@router.post("/v13/workflows/{workflow_id}/graph/validate")
+async def v13_validate_workflow_graph(workflow_id: str, request: Request, gateway: GatewayService = Depends(get_gateway_service)) -> Any:
+    try:
+        body = await request.json()
+        if not isinstance(body, dict):
+            raise ProtocolError("INVALID_PARAMS", "Request body must be an object.", {"field": "body"})
+        params = {**_query_scope_params(request), "workflow_id": workflow_id}
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflows.read")
+        graph = body.get("graph") if isinstance(body.get("graph"), dict) else copy.deepcopy(V13_GRAPH)
+        if str(graph.get("workflow_id") or workflow_id) != V13_WORKFLOW_ID:
+            raise ProtocolError("NOT_FOUND", "V13 workflow graph was not found.", {"workflow_id": workflow_id})
+        dto = _v13_validate_graph(graph)
+        response = JSONResponse(_redact(dto))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
+
+
+@router.post("/v13/workflows/{workflow_id}/diff")
+async def v13_workflow_diff(workflow_id: str, request: Request, gateway: GatewayService = Depends(get_gateway_service)) -> Any:
+    try:
+        body = await request.json()
+        if not isinstance(body, dict):
+            raise ProtocolError("INVALID_PARAMS", "Request body must be an object.", {"field": "body"})
+        params = {**_query_scope_params(request), "workflow_id": workflow_id}
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflow_patches.write")
+        graph = body.get("graph") if isinstance(body.get("graph"), dict) else copy.deepcopy(V13_GRAPH)
+        if str(graph.get("workflow_id") or workflow_id) != V13_WORKFLOW_ID:
+            raise ProtocolError("NOT_FOUND", "V13 workflow graph was not found.", {"workflow_id": workflow_id})
+        validation = _v13_validate_graph(graph)
+        baseline_nodes = {str(node.get("node_id")) for node in V13_GRAPH["nodes"] if isinstance(node, dict)}
+        graph_nodes = {str(node.get("node_id")) for node in graph.get("nodes", []) if isinstance(node, dict)}
+        baseline_edges = {str(edge.get("edge_id")) for edge in V13_GRAPH["edges"] if isinstance(edge, dict)}
+        graph_edges = {str(edge.get("edge_id")) for edge in graph.get("edges", []) if isinstance(edge, dict)}
+        dto = copy.deepcopy(V13_WORKFLOW_DIFF)
+        dto["status"] = "blocked" if validation["status"] == "FAIL" else "review_required"
+        dto["changed_node_refs"] = sorted(graph_nodes.symmetric_difference(baseline_nodes)) or dto["changed_node_refs"]
+        dto["changed_edge_refs"] = sorted(graph_edges.symmetric_difference(baseline_edges)) or dto["changed_edge_refs"]
+        dto["graph_validation"] = validation
+        dto["updated_at"] = _now_iso()
+        response = JSONResponse(_redact(dto))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
+
+
+@router.post("/v13/workflow-diff/{proposal_id}/revise")
+async def v13_workflow_diff_revise(proposal_id: str, request: Request, gateway: GatewayService = Depends(get_gateway_service)) -> Any:
+    return await _v13_workflow_diff_decision(proposal_id, request, gateway, decision="revise_requested")
+
+
+@router.post("/v13/workflow-diff/{proposal_id}/reject")
+async def v13_workflow_diff_reject(proposal_id: str, request: Request, gateway: GatewayService = Depends(get_gateway_service)) -> Any:
+    return await _v13_workflow_diff_decision(proposal_id, request, gateway, decision="rejected")
+
+
+@router.post("/v13/workflow-diff/{proposal_id}/confirm-publish-handoff")
+async def v13_workflow_diff_confirm_handoff(proposal_id: str, request: Request, gateway: GatewayService = Depends(get_gateway_service)) -> Any:
+    return await _v13_workflow_diff_decision(proposal_id, request, gateway, decision="handoff_confirmed")
+
+
+@router.get("/v13/studio/node-inspector/{node_id}")
+async def v13_node_inspector(node_id: str, request: Request, gateway: GatewayService = Depends(get_gateway_service)) -> Any:
+    try:
+        params = {**_query_scope_params(request), "workflow_id": V13_WORKFLOW_ID, "node_id": node_id}
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflows.read")
+        inspector = copy.deepcopy(V13_INSPECTORS.get(node_id))
+        if inspector is None:
+            raise ProtocolError("NOT_FOUND", "V13 node inspector was not found.", {"node_id": node_id})
+        response = JSONResponse(_redact(inspector))
         add_dev_warning(response, auth)
         return response
     except ProtocolError as exc:
@@ -5072,6 +5281,62 @@ def _pv20_station_run_summary(station_run: dict[str, Any]) -> dict[str, Any]:
 
 def _pv18_scope_key(scope: ScopeContext) -> str:
     return "|".join([scope.app_id or "", scope.project_id or "", scope.workspace_id or ""])
+
+
+def _v13_validate_graph(graph: dict[str, Any]) -> dict[str, Any]:
+    nodes = graph.get("nodes") if isinstance(graph.get("nodes"), list) else []
+    edges = graph.get("edges") if isinstance(graph.get("edges"), list) else []
+    node_ids = {str(node.get("node_id") or "").strip() for node in nodes if isinstance(node, dict)}
+    errors: list[dict[str, str]] = []
+    if str(graph.get("schema_version") or "") != V13_WORKFLOW_STUDIO_SCHEMA_VERSION:
+        errors.append({"code": "SCHEMA_VERSION_MISMATCH", "message": "Graph schema_version must be v13.workflow_spec_graph.v1."})
+    if str(graph.get("workflow_id") or "") != V13_WORKFLOW_ID:
+        errors.append({"code": "WORKFLOW_ID_MISMATCH", "message": "Graph workflow_id does not match the V13 pilot workflow."})
+    if len(node_ids) < 2:
+        errors.append({"code": "GRAPH_TOO_SMALL", "message": "Graph must include at least two nodes."})
+    for edge in edges:
+        if not isinstance(edge, dict):
+            errors.append({"code": "EDGE_INVALID", "message": "Each edge must be an object."})
+            continue
+        source_id = str(edge.get("source_node_id") or "").strip()
+        target_id = str(edge.get("target_node_id") or "").strip()
+        if source_id not in node_ids or target_id not in node_ids:
+            errors.append({"code": "EDGE_ENDPOINT_MISSING", "message": f"Edge {edge.get('edge_id') or 'unknown'} has missing source or target node."})
+    return {
+        "schema_version": "v13.workflow_graph_validation_result.v1",
+        "status": "FAIL" if errors else "PASS",
+        "errors": errors,
+        "runtime_backed": False,
+        "publish_or_run_started": False,
+        "audit_ref": "audit://v13/studio-pilot/graph-validation",
+        "redaction_status": "redacted",
+    }
+
+
+async def _v13_workflow_diff_decision(proposal_id: str, request: Request, gateway: GatewayService, *, decision: str) -> Any:
+    try:
+        if proposal_id != V13_WORKFLOW_DIFF_ID:
+            raise ProtocolError("NOT_FOUND", "V13 WorkflowDiff proposal was not found.", {"proposal_id": proposal_id})
+        params = {**_query_scope_params(request), "workflow_id": V13_WORKFLOW_ID, "proposal_id": proposal_id}
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflow_patches.write")
+        handoff_ref = f"handoff://v13/studio-pilot/{proposal_id}" if decision == "handoff_confirmed" else None
+        dto = {
+            "schema_version": "v13.workflow_diff_decision.v1",
+            "proposal_id": proposal_id,
+            "decision": decision,
+            "handoff_state": "ready_for_later_publish_review" if decision == "handoff_confirmed" else "not_ready_for_publish",
+            "handoff_ref": handoff_ref,
+            "runtime_backed": False,
+            "publish_or_run_started": False,
+            "human_confirmation_required": True,
+            "audit_ref": f"audit://v13/studio-pilot/workflow-diff/{decision}",
+            "redaction_status": "redacted",
+        }
+        response = JSONResponse(_redact(dto))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
 
 
 def _pv18_workspace_id(scope: ScopeContext) -> str:
