@@ -437,6 +437,75 @@ export interface PV21EvidenceSummaryDTO {
   redaction_status: "redacted";
 }
 
+export interface WorkflowPlatformScenarioProjectionDTO {
+  schema_version: "workflow_platform.scenario_projection.v1";
+  source: "bff_projection";
+  fallback_used: boolean;
+  scope: Record<string, string | null>;
+  scenario_count: number;
+  scenarios: WorkflowPlatformScenarioProjectionItemDTO[];
+  mock_reduction_boundary: Record<string, string>;
+  audit_refs: PV19AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface WorkflowPlatformScenarioProjectionItemDTO {
+  scenario_id: "document_summary" | "code_review" | "meeting_brief" | string;
+  title: string;
+  input_contract: {
+    accepted_inputs: string[];
+    required_refs: string[];
+    source_refs: string[];
+  };
+  workflow_template: {
+    node_refs: string[];
+    edge_refs: string[];
+  };
+  inspector_projection: {
+    agent_refs: string[];
+    tool_refs: string[];
+    skill_refs: string[];
+    mcp_refs: string[];
+    quality_gate_refs: string[];
+  };
+  timeline_projection: Array<{ step: string; state: string; ref: string }>;
+  evidence_categories: string[];
+  fallback_used: boolean;
+  fallback_boundary: string;
+}
+
+export interface WorkflowPlatformBusinessOutputDTO {
+  schema_version: "workflow_platform.business_output.v1";
+  scenario_id: "document_summary" | "code_review" | "meeting_brief" | string;
+  title: string;
+  status: "ready_for_human_review" | string;
+  source_refs: string[];
+  output_summary: {
+    title: string;
+    body: string;
+    artifact_refs: string[];
+    human_review_ref: string;
+    quality_status: string;
+  };
+  evidence_refs: {
+    artifact: string[];
+    trace: string[];
+    quality: string[];
+    audit: string[];
+    claim: string[];
+    redaction: string[];
+  };
+  human_review: {
+    review_ref: string;
+    state: string;
+    required_before_external_handoff: boolean;
+  };
+  non_claims: string[];
+  scope: Record<string, string | null>;
+  audit_refs: PV19AuditRef[];
+  redaction_status: "redacted";
+}
+
 export interface WorkflowStatus {
   workflow_instance_id: string;
   status: string;

@@ -1,8 +1,8 @@
 # Workflow Platform Main Entry PRD
 
-用途：把用户确认的“PV13 前端页面直接作为 HarnessOS 工作流平台首页和后续前端基线”固化为本阶段产品规格。
+用途：把用户确认的“PV13 前端页面直接作为 HarnessOS 工作流平台首页和后续前端基线”固化为产品规格，并记录 WP-M5A 业务场景产品化有界验收结果。
 阅读对象：产品、架构、开发、测试、审计人员和后续 Agent。
-边界：本文是文档开发产物，不是实现证据；不得据此声明首页替换、运行闭环、完整 Workflow Studio、Agent executor 或生产可用已经完成。
+边界：本文是产品规格和验收状态记录；实现证据以 `docs/design/V12-V15.x/evidence/workflow-platform-main-entry/` 为准。不得据此声明完整 Workflow Studio、Agent executor ready、生产可用或最终商业业务应用已经完成。
 
 ## 1. Product Goal
 
@@ -26,7 +26,11 @@ HarnessOS 的后续前端体验必须以 PV13 Light Studio 工作流平台为首
 PV13 = 首页视觉和画布交互基线
 WorkflowPlatformMainEntry = 已接入能力的迁移来源和不退化对照
 PV21/PV20/PV19 route families = 运行、执行器和证据能力来源
+WP-M5A = 将三类业务场景从验收样本升级为数据驱动产物闭环
+WP-M5B / PV22 = 外部 App 接入后置复审
 ```
+
+当前 WP-M1A 到 WP-M5A 已形成 bounded acceptance evidence。前端仍保留本地 `scenarioData`、`fallbackGraph`、静态 timeline、静态 Inspector 文案和 proposal-only chat 回复，但 WP-M5A 已将其标注为 fallback / design reference，并新增 BFF/DTO 驱动的场景投影和业务输出摘要。
 
 ## 2. Target Users
 
@@ -35,6 +39,7 @@ PV21/PV20/PV19 route families = 运行、执行器和证据能力来源
 | 人类评审者 | 快速体验 HarnessOS 是否像一个工作流平台。 | PV13 Light Studio 首页、力感画布、场景列表、节点、连线、Inspector、仿真控制。 |
 | 产品/架构审计人员 | 判断 PRD、架构、实现和验收是否一致。 | 明确的 PV13 基线、当前偏差、待集成 PV19/PV20/PV21 能力和 No-Go 边界。 |
 | 后续开发 Agent | 按明确代码实体继续开发。 | `App.tsx -> WorkflowStudioLayout.tsx -> V13EditableStudio.tsx` 的默认入口路径。 |
+| 业务使用者 | 用工作流平台完成具体任务，而不只是审查阶段演示。 | 文档总结、代码审查、会议整理的输入、运行、人工审查、产物和证据。 |
 | 潜在集成方 | 判断后续外部 App 应接入哪里。 | 稳定的 Workflow Platform host surface；PV22 只能在该 surface 稳定后继续。 |
 
 ## 3. User Experience Target
@@ -75,7 +80,7 @@ PV13 基线本身负责首页、画布和 WorkflowDiff pilot 体验。后续 WP-
 - PV20 提供 governed Agent / Tool / Skill / MCP executor evidence 来源。
 - PV21 提供 graph save / validate / diff / publish / rollback / run / evidence 的 bounded candidate 来源。
 
-这些能力必须集成进 PV13 基线工作台，而不是把 PV19/PV20/PV21 阶段页提升为新的首页视觉基线。
+这些能力必须集成进 PV13 基线工作台，而不是把 PV19/PV20/PV21 阶段页提升为新的首页视觉基线。WP-M5A 进一步要求业务场景、Inspector、timeline、输出摘要和 evidence refs 由后端 DTO / evidence package 驱动，不能继续主要依赖前端静态场景矩阵。
 
 ### 3.4 Function Non-Regression Target
 
@@ -124,16 +129,30 @@ WP-M1 至少证明 1-6。WP-M3 才能要求 7-13 完整闭环。
 | 创意分镜规划 | 从脚本生成分镜规划。 | 导演/艺术/摄影 Agent 协作，版权/合规 gate。 | Storyboard spec 和审查记录。 | 不声明真实视频渲染完成。 |
 | 外部工具/MCP 自动化 | 在受治理边界内调用工具或 MCP。 | allowlisted Tool/MCP、approval/denial、audit refs。 | Tool/MCP execution refs 和 evidence。 | 不声明 unrestricted automation。 |
 
+### 3.7 WP-M5A Productized Scenario Target
+
+WP-M5A 的目标体验是让用户在同一 PV13-based 工作台中完成三个业务场景，并看到业务产物而不仅是验收报告：
+
+| Scenario | Required input | Required output | Required evidence |
+| --- | --- | --- | --- |
+| 文档/知识总结 | 文档、Markdown 文件夹或知识材料。 | 摘要正文、引用列表、质量检查结果、人工复核记录。 | Artifact refs、source refs、quality refs、human review refs、redaction refs。 |
+| 代码审查/变更风险检查 | Git diff、PR patch、代码文件或仓库片段。 | 代码审查报告、文件级问题、风险等级、测试/静态检查结果、审批记录。 | File/line refs、test refs、audit refs、claim refs、human gate refs。 |
+| 会议/访谈整理 | transcript 或 audio-derived text。 | 会议纪要、行动项、决策、开放问题、引用证据和复核记录。 | Transcript refs、decision refs、task refs、quality refs、review refs。 |
+
+WP-M5A 通过后允许声明三个场景具备机器可读业务输出摘要和 evidence refs；仍不得把 `business-scenario-groups.json`、截图或摘要 refs 写成最终独立商业业务产物已经完成。
+
 ## 4. Current Capability Classification
 
 | Category | Capability | Current evidence / limitation |
 | --- | --- | --- |
-| 已验收 | V13 editable Studio pilot / PV13 Light Studio 前端基线。 | `apps/workflow-console/src/ui/v13/*` 和 `evidence/v13-workflow-studio-pilot/`，但不是 product-grade frontend complete；历史 `/bff/v13/*` 证据来自 bounded acceptance smoke server，后续 WP-M1A 需确认主 BFF compatibility。 |
-| 已验收 | PV19 runtime workflow platform closed loop。 | 证明有界 runtime-backed workflow loop，可作为 WP-M3 集成来源。 |
-| 已验收 | PV20 bounded Agent executor review path through S6。 | 证明受控执行路径，可作为 WP-M4 集成来源。 |
+| 已验收 | WP-M1A 到 WP-M5A PV13-based main entry bounded acceptance。 | 默认首页、画布交互、PV21 runtime/evidence parity、PV20 governed executor parity、WP-M5A 业务输出摘要已有 evidence package；仍不是完整业务平台完成。 |
+| 已验收 | PV19 runtime workflow platform closed loop。 | 证明有界 runtime-backed workflow loop，可作为运行能力来源。 |
+| 已验收 | PV20 bounded Agent executor review path through S6。 | 证明受控执行路径，可作为受治理执行能力来源。 |
 | 已验收 | PV21 bounded candidate default Studio entry。 | 可作为运行/证据能力参考，不再作为首页视觉基线。 |
+| 受限完成 | 当前 PV13 首页业务场景展示。 | 三场景具备 DTO/evidence-driven 输出摘要；`V13EditableStudio.tsx` 仍包含 fallback/design-reference 静态数据，不是最终独立业务交付物。 |
 | 需替换 | 当前 `WorkflowPlatformMainEntry` 退化版入口。 | 首屏和交互体验不符合用户已确认的 PV13 基线。 |
-| 规划中 | PV22 external app contract implementation。 | PV22-R0 文档/readiness 已有，implementation evidence 尚未生成。 |
+| 已验收 | WP-M5A 业务场景产品化与数据驱动投影。 | 已新增 DTO 合同、业务输出摘要 evidence、前端静态数据边界和三场景业务输出验收。 |
+| 规划中 | WP-M5B / PV22 external app contract readiness and implementation。 | PV22-R0 文档/readiness 已有，implementation evidence 尚未生成；必须先做 WP-M5B readiness refresh。 |
 | No-Go | 声明 production ready / product-grade frontend complete / complete Workflow Studio ready / Agent executor ready / Xpert parity complete。 | 禁止。 |
 
 ## 5. Functional Requirements
@@ -150,6 +169,9 @@ WP-M1 至少证明 1-6。WP-M3 才能要求 7-13 完整闭环。
 | WP-FR-8 | Agent/Tool/Skill/MCP 能力必须以受治理资源显示，不能暗示 unrestricted automation。 | UI copy scan 和 No False Green scan。 |
 | WP-FR-9 | PV22 外部接入必须以后续稳定的 PV13 基线工作流平台为目标 host surface。 | PV22 文档引用 WP-M0 platform entry boundary。 |
 | WP-FR-10 | WP-M3/WP-M4 必须证明相对 `WorkflowPlatformMainEntry` 的 PV21/PV20 闭环能力不退化。 | `workflow-platform-capability-parity-report.json` PASS。 |
+| WP-FR-11 | WP-M5A 必须把三个业务场景的场景定义、输入要求、输出摘要和 evidence refs 从前端静态矩阵提升为 DTO/evidence 驱动。 | Scenario projection DTO、business output DTO、前端 mock reduction scan PASS。 |
+| WP-FR-12 | WP-M5A 必须生成三个独立业务产物或明确机器可读业务输出摘要，不得只复用验收报告文本。 | `business-output-report.json`、产物 artifact refs、HTML 截图和人工复核记录 PASS。 |
+| WP-FR-13 | WP-M5A 通过后，PV22 仍需先进入 WP-M5B readiness refresh，不得直接声明外部 App implementation complete。 | Roadmap scan、claim scan 和 PV22 handoff audit PASS。 |
 
 ## 6. Non-Functional Requirements
 
@@ -159,29 +181,32 @@ WP-M1 至少证明 1-6。WP-M3 才能要求 7-13 完整闭环。
 - 所有正向完成声明必须绑定 evidence path。
 - 任何截图、drawio、介绍页、设计稿只能作为文档或 UX review evidence，不能替代 runtime/BFF/browser E2E evidence。
 - 后续实现必须优先复用 `V13EditableStudio.tsx` 和 `v13-editable-studio.css`，再集成 PV19/PV20/PV21 的 BFF/DTO 能力。
+- WP-M5A 必须逐步减少 `V13EditableStudio.tsx` 中面向业务场景的本地静态数据；保留 fallback 只能作为离线降级路径，并必须在 UI 和报告中标注。
 
 ## 7. Out Of Scope
 
-- 不在本文档阶段修改前端代码。
-- 不在本文档阶段声明首页替换已经完成。
+- 不把本文档本身当作代码实现证据；实现证据以 evidence package、测试和代码 diff 为准。
+- 不声明最终商业业务应用或独立交付物已经完成。
+- 不声明 WP-M5A 已完成超出 bounded machine-readable output summaries 的范围。
 - 不在本文档阶段声明 PV22 implementation complete。
 - 不在本文档阶段声明 production ready。
 - 不在本文档阶段声明 complete Workflow Studio GA。
 - 不在本文档阶段声明 Agent executor ready。
 - 不在本文档阶段实现完整外部 marketplace、商业计费或生产部署。
 
-## 8. Allowed Claim After This Document Stage
+## 8. Allowed Claim After WP-M5A Bounded Acceptance
 
 仅允许声明：
 
 ```text
-Workflow Platform main-entry documentation is aligned to the PV13 frontend baseline and ready for implementation review.
+Workflow Platform main-entry and WP-M5A business-scenario productization passed bounded review for PV13-based UX, governed workflow actions, machine-readable business output summaries and evidence refs.
 ```
 
 不得声明：
 
 ```text
 Workflow Platform implementation complete.
+WP-M5A final standalone business deliverables complete.
 PV13 homepage replacement complete.
 Complete Workflow Studio ready.
 Product-grade frontend complete.

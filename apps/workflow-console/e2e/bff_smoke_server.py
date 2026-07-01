@@ -25,8 +25,14 @@ if str(ROOT) not in sys.path:
 
 from apps.api import create_app  # noqa: E402
 from apps.api.auth import LOCAL_ORIGINS  # noqa: E402
+from apps.api.routers.bff import (  # noqa: E402
+    WORKFLOW_PLATFORM_SCENARIOS,
+    _workflow_platform_business_output_dto,
+    _workflow_platform_scenario_projection_dto,
+)
 from apps.gateway.protocol import GatewayEvent  # noqa: E402
 from tests.v4_0_reference_support import build_gateway, rpc, seed_reference_console  # noqa: E402
+from core.apps.scope import ScopeContext  # noqa: E402
 
 os.environ.setdefault("HARNESS_V3_5_DEV_MODE", "1")
 os.environ.setdefault("HARNESS_CAPABILITY_TOKEN_SECRET", "browser-smoke-secret")
@@ -1393,6 +1399,30 @@ async def v13_node_inspector(node_id: str) -> JSONResponse:
     if inspector is None:
         return JSONResponse({"error": "NODE_NOT_FOUND", "node_id": node_id}, status_code=404)
     return JSONResponse(copy.deepcopy(inspector))
+
+
+@app.get("/bff/workflow-platform/scenarios")
+async def workflow_platform_scenarios(request: Request) -> JSONResponse:
+    """Return WP-M5A business scenario projections for browser acceptance."""
+    scope = workflow_platform_scope(request)
+    return JSONResponse(copy.deepcopy(_workflow_platform_scenario_projection_dto(scope)))
+
+
+@app.get("/bff/workflow-platform/scenarios/{scenario_id}/outputs")
+async def workflow_platform_scenario_outputs(scenario_id: str, request: Request) -> JSONResponse:
+    """Return WP-M5A business output summary refs for browser acceptance."""
+    if scenario_id not in WORKFLOW_PLATFORM_SCENARIOS:
+        return JSONResponse({"error": "SCENARIO_NOT_FOUND", "scenario_id": scenario_id}, status_code=404)
+    scope = workflow_platform_scope(request)
+    return JSONResponse(copy.deepcopy(_workflow_platform_business_output_dto(scenario_id, scope)))
+
+
+def workflow_platform_scope(request: Request) -> ScopeContext:
+    return ScopeContext(
+        app_id=request.query_params.get("app_id") or "reference_app",
+        project_id=request.query_params.get("project_id") or "demo_a",
+        workspace_id=request.query_params.get("workspace_id") or "local",
+    )
 
 
 @app.get("/bff/v14/system/health")

@@ -1,0 +1,127 @@
+{
+  "schema_version": "workflow_platform.business_output_report.v1",
+  "status": "PASS",
+  "dto_source": "/bff/workflow-platform/scenarios/{scenario_id}/outputs",
+  "outputs": [
+    {
+      "scenario_id": "document_summary",
+      "title": "文档 / 知识总结",
+      "status": "PASS",
+      "input": {
+        "input_path": "docs/design/V12-V15.x/workflow_platform_main_entry_prd.md",
+        "sha256": "67746c68ea60ebb716f178acc8810b89ce2f515572cc959203eb2e22a880a5be",
+        "bytes_sampled": 3010
+      },
+      "output_summary": {
+        "title": "工作流平台 PRD 摘要产物",
+        "artifact_refs": [
+          "artifact://wp-m5a/document_summary/output-summary"
+        ],
+        "human_review_ref": "human-review://wp-m5a/document-summary/local-reviewer",
+        "quality_status": "PASS"
+      },
+      "evidence_refs": {
+        "artifact": [
+          "artifact://wp-m5a/document_summary/output-summary"
+        ],
+        "trace": [
+          "trace://wp-m5a/document_summary/workflow-run"
+        ],
+        "quality": [
+          "quality://wp-m5a/document_summary"
+        ],
+        "audit": [
+          "audit://wp-m5a/document_summary/business-output"
+        ],
+        "claim": [
+          "claim://wp-m5a/document_summary/bounded-output"
+        ],
+        "redaction": [
+          "redaction://wp-m5a/document_summary/scan-pass"
+        ]
+      }
+    },
+    {
+      "scenario_id": "code_review",
+      "title": "代码审查 / 变更风险检查",
+      "status": "PASS",
+      "input": {
+        "input_path": "apps/workflow-console/src/App.tsx",
+        "sha256": "4105f9566b28d1e0d7b8b09f7e9dce024e3ab916d31a8c31509d1cb61005e249",
+        "bytes_sampled": 1824
+      },
+      "output_summary": {
+        "title": "工作流平台前端变更风险报告",
+        "artifact_refs": [
+          "artifact://wp-m5a/code_review/output-summary"
+        ],
+        "human_review_ref": "human-review://wp-m5a/code-review/local-reviewer",
+        "quality_status": "PASS"
+      },
+      "evidence_refs": {
+        "artifact": [
+          "artifact://wp-m5a/code_review/output-summary"
+        ],
+        "trace": [
+          "trace://wp-m5a/code_review/workflow-run"
+        ],
+        "quality": [
+          "quality://wp-m5a/code_review"
+        ],
+        "audit": [
+          "audit://wp-m5a/code_review/business-output"
+        ],
+        "claim": [
+          "claim://wp-m5a/code_review/bounded-output"
+        ],
+        "redaction": [
+          "redaction://wp-m5a/code_review/scan-pass"
+        ]
+      }
+    },
+    {
+      "scenario_id": "meeting_brief",
+      "title": "会议 / 访谈整理",
+      "status": "PASS",
+      "input": {
+        "input_path": "TASKS.md",
+        "sha256": "d79c9c95216aa74290ea3ae2905ec91f0e2e2b0ff3a03bdcfd395752704bf6ad",
+        "bytes_sampled": 1932
+      },
+      "output_summary": {
+        "title": "当前开发主线会议纪要产物",
+        "artifact_refs": [
+          "artifact://wp-m5a/meeting_brief/output-summary"
+        ],
+        "human_review_ref": "human-review://wp-m5a/meeting-brief/local-reviewer",
+        "quality_status": "PASS"
+      },
+      "evidence_refs": {
+        "artifact": [
+          "artifact://wp-m5a/meeting_brief/output-summary"
+        ],
+        "trace": [
+          "trace://wp-m5a/meeting_brief/workflow-run"
+        ],
+        "quality": [
+          "quality://wp-m5a/meeting_brief"
+        ],
+        "audit": [
+          "audit://wp-m5a/meeting_brief/business-output"
+        ],
+        "claim": [
+          "claim://wp-m5a/meeting_brief/bounded-output"
+        ],
+        "redaction": [
+          "redaction://wp-m5a/meeting_brief/scan-pass"
+        ]
+      }
+    }
+  ],
+  "non_claims": [
+    "not_production_ready",
+    "not_complete_workflow_studio_ga",
+    "not_agent_executor_ready",
+    "not_pv22_complete"
+  ]
+}

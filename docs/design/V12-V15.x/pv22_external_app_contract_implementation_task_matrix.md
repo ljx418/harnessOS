@@ -17,6 +17,17 @@
 | PV22-T9 | Redaction | 扫描 token、secret、raw prompt 泄漏。 | reports/scripts | Redaction PASS。 |
 | PV22-T10 | No False Green | 扫描生产/生态/商业化误报。 | reports/scripts | No False Green PASS。 |
 
+## Implementation Status
+
+| Group | Status | Evidence |
+| --- | --- | --- |
+| PV22-S1 / T1 Contract registry | PASS | `evidence/pv22-external-app-contract/contract-registry-snapshot.json`。 |
+| PV22-S2 / T3-T4 SDK smoke | PASS | `sdk-smoke-report.json`、`validation-typescript-sdk.log`。 |
+| PV22-S3 / T5-T6 BFF template smoke | PASS | `bff-template-smoke-report.json`。 |
+| PV22-S4 / T2 negative fixtures | PASS | `negative-fixtures.json`。 |
+| PV22-S5 / T7 reference app E2E boundary | PASS | `reference-app-e2e-report.json`、`browser-network-log.json`。 |
+| PV22-SA / T8-T10 aggregate audit | PASS | `acceptance-data.json`、`acceptance-report.html`、`prd-review-report.json`、`redaction-scan.txt`、`no-false-green-scan.txt`、`artifact-manifest.json`。 |
+
 ## Suggested Order
 
 1. PV22-T1, PV22-T2。
@@ -33,3 +44,8 @@
 - No mock-only PASS.
 - No production or commercial readiness claim.
 
+## Allowed Exit Claim
+
+```text
+PV22 external app contract ready for bounded integration review.
+```

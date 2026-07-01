@@ -18,8 +18,9 @@
 | PV21 selected Complete Workflow Studio stage | `docs/design/V12-V15.x/pv21_complete_workflow_studio_development_and_acceptance_plan.md` |
 | PV21 stage execution closure | `docs/design/V12-V15.x/pv21_stage_execution_audit_closure.md` |
 | PV22 selected External App Contract stage | `docs/design/V12-V15.x/pv22_external_app_contract_development_and_acceptance_plan.md` |
-| WP-M0 Workflow Platform PV13 baseline main-entry alignment | `docs/design/V12-V15.x/workflow_platform_main_entry_development_and_acceptance_plan.md` |
+| WP-M0 through WP-M5A Workflow Platform PV13 baseline and business-scenario productization | `docs/design/V12-V15.x/workflow_platform_main_entry_development_and_acceptance_plan.md` |
 | WP-M0 PV13 baseline BFF/DTO contract and acceptance runner | `docs/design/V12-V15.x/workflow_platform_main_entry_bff_dto_contract.md` |
+| WP-M5A business-scenario productization substage plan | `docs/design/V12-V15.x/workflow_platform_wp_m5a_business_scenario_productization_plan_and_audit.md` |
 | Post-PV18 long-range route | `docs/design/V12-V15.x/post_pv18_runtime_platform_development_route.md` |
 | PV19 documentation support audit | `docs/design/V12-V15.x/pv19_runtime_workflow_platform_document_support_audit.md` |
 | ChatGPT / human project intro | `docs/present/harnessos-project-introduction/00_CHATGPT_CONTEXT_INDEX.md` |
@@ -44,9 +45,10 @@
 - [x] PV20-S3A allowlisted local tool execution bounded review: user-confirmed `/bff/pv20/*/agent-tool-executions` route, read-only artifact metadata tool boundary, StationRun readback and acceptance runner evidence passed.
 - [x] PV20-S3B allowlisted local MCP fixture execution bounded review: user-confirmed `/bff/pv20/*/agent-mcp-executions` route, `connector.submit`, `approval.respond`, retry context, stdio MCP fixture, StationRun readback and acceptance runner evidence passed.
 - [x] PV21 Complete Workflow Studio bounded candidate implementation: default PV21 Studio entry, `/bff/pv21/*` DTO boundary, graph save/validate/diff, publish/rollback, runtime run, human gate and evidence review passed bounded acceptance. This does not prove production readiness, product-grade frontend completion or a complete Workflow Studio GA claim.
-- [x] PV22 External App Contract documentation/readiness: PRD, target architecture, BFF/DTO contract, development plan, milestone roadmap, acceptance gate, gap analysis, implementation task matrix, readiness audit and document support audit now define the next implementation target. This is not implementation evidence.
+- [x] PV22 External App Contract bounded implementation: PRD, target architecture, BFF/DTO contract, development plan, milestone roadmap, acceptance gate, gap analysis, implementation task matrix, readiness audit, document support audit, contract registry, `reference_app` AppProfile, SDK/Gateway smoke, BFF template smoke, capability negative fixtures, reference app boundary/API path and aggregate evidence package have passed bounded acceptance. This does not prove production readiness, external ecosystem completion, commercial readiness, complete Workflow Studio GA or Agent executor readiness.
 - [x] WP-M0 Workflow Platform PV13 baseline main-entry documentation alignment: PRD, target architecture, BFF/DTO contract, acceptance runner spec, development/acceptance plan, roadmap, acceptance gate, gap analysis, task matrix, readiness/support audits and drawio now define the next product-entry implementation target. The target homepage/frontend baseline is the PV13 Light Studio workflow platform experience implemented by `V13EditableStudio.tsx` and `v13-editable-studio.css`; the current degraded `WorkflowPlatformMainEntry` surface is a deviation to replace, not the target baseline. This is documentation support only, not implementation evidence.
 - [x] WP-M1A through WP-M4 Workflow Platform PV13 baseline main-entry bounded implementation: formal `/bff/v13/*` compatibility routes, root and `?studio=workflow-platform` route remap to `V13EditableStudio`, PV13 canvas zoom/drag/connect/cancel hardening, PV21 capability parity loop and PV20 governed executor parity loop passed Chrome CDP bounded acceptance with evidence under `docs/design/V12-V15.x/evidence/workflow-platform-main-entry/`. This does not prove a production-grade workflow platform, complete Workflow Studio GA, unrestricted Agent executor or production readiness.
+- [x] WP-M5A Workflow Platform business-scenario productization bounded implementation: `/bff/workflow-platform/*` scenario projection and business output DTOs, PV13 workbench business-output panel, mock-reduction boundary, three required business scenario output summaries, Chrome CDP E2E screenshots, command logs and manifest evidence passed bounded acceptance under `docs/design/V12-V15.x/evidence/workflow-platform-main-entry/`. This proves reviewable machine-readable business output summaries and evidence refs only; it does not prove standalone final business deliverables, production readiness or complete Workflow Studio GA.
 
 ### Bounded / Limited Completion
 
@@ -57,6 +59,7 @@
 - [ ] Production deployment is not complete. V15/PV16 prove smoke / hardening evidence only.
 - [ ] PV17 is bounded review evidence only; it does not prove production readiness, complete Workflow Studio or Agent executor readiness.
 - [ ] Meeting and Knowledge are reference packs / validation samples, not final productized business apps.
+- [x] WP-M5A business-scenario productization bounded review has passed. It proves DTO/evidence-driven scenario projection, business output summaries, artifact refs and human review refs for document summary, code review and meeting brief; it does not prove final standalone commercial deliverables or production business-app completion.
 - [x] PV18 Knowledge OPC bounded review implementation has passed. It proves a bounded Knowledge OPC productization review path only; it does not prove production readiness, complete Workflow Studio, complete Agent executor or full commercial Knowledge productization.
 - [ ] Video Studio currently generates planning and lineage artifacts; it does not prove real rendering execution.
 - [ ] Interview and Investment remain stub / planned packs.
@@ -78,7 +81,7 @@
 
 ### P1 - Selected Product / Platform Stage
 
-The completed selected stage was Path A, documented as PV17 Product Closed Loop. The completed post-PV17 stage is Path C, documented as PV18 Knowledge OPC Productization. PV19 Runtime Workflow Platform Closed Loop, PV20 Complete Agent Executor bounded review path and PV21 Complete Workflow Studio bounded candidate have passed bounded review acceptance. PV22 External App Contract documentation/readiness exists. The current selected alignment stage has advanced from WP-M0 documentation to WP-M1A through WP-M4 bounded implementation evidence for the PV13-based workflow platform main entry.
+The completed selected stage was Path A, documented as PV17 Product Closed Loop. The completed post-PV17 stage is Path C, documented as PV18 Knowledge OPC Productization. PV19 Runtime Workflow Platform Closed Loop, PV20 Complete Agent Executor bounded review path, PV21 Complete Workflow Studio bounded candidate, WP-M5A Workflow Platform business-scenario productization, WP-M5B readiness refresh and PV22 External App Contract bounded implementation have passed bounded review acceptance. The next default selected stage is Path D / production governance hardening planning unless the user selects business Pack productization or open-source/commercial readiness first.
 
 - [x] Path A: Product closed loop.
   Built a bounded user-facing Product Console / Studio / run-inspect-evidence loop with browser evidence, BFF-only DTOs and runtime-backed inspection.
@@ -88,8 +91,10 @@ The completed selected stage was Path A, documented as PV17 Product Closed Loop.
   Defined the next implementation direction as a single workflow platform first entry that uses the PV13 Light Studio page as the visual and interaction baseline, while converging PV19 runtime loop, PV20 governed executor evidence, PV21 save/publish/run/readback capabilities and PV22 external app handoff. `WorkflowPlatformMainEntry` is not the target homepage baseline, but its current PV21/PV20 closed-loop capabilities are now the capability parity source and must not be silently regressed during WP-M3/WP-M4. This is not implementation evidence.
 - [x] WP-M1A..WP-M4 implementation and acceptance: Workflow Platform PV13 baseline main entry.
   Implemented main BFF `/bff/v13/*` compatibility routes, switched the default workflow platform route to `V13EditableStudio`, added explicit canvas connection cancellation, integrated PV21 save/validate/diff/publish/rollback/run/human/evidence parity and PV20 governed Skill/Tool/MCP executor parity into the PV13 page, and generated Chrome CDP acceptance evidence. This is bounded review evidence only.
-- [ ] PV22-S1..SA implementation and acceptance.
-  Consolidate SDK, BFF templates, reference app, auth / capability token and method/event/error registry into an accepted bounded integration review stage.
+- [x] WP-M5A implementation and acceptance: Business-scenario productization and data-driven projection.
+  Implemented bounded scenario projection DTOs, business output DTOs, PV13 UI projection, mock-reduction report, three required business output summaries and acceptance evidence. This is bounded review evidence only; it does not claim final standalone document summary, code review or meeting brief products.
+- [x] PV22-S1..SA implementation and acceptance.
+  Consolidated SDK, BFF templates, reference app, auth / capability token and method/event/error registry into an accepted bounded integration review stage after WP-M5A PASS and WP-M5B readiness refresh. Evidence is under `docs/design/V12-V15.x/evidence/pv22-external-app-contract/`.
 - [x] Path C-R0: Knowledge OPC productization documentation.
   Selected Knowledge as the first business domain and completed the document package needed for implementation review.
 - [x] Path C-S1..SA: Knowledge OPC productization implementation.
@@ -128,8 +133,8 @@ The completed selected stage was Path A, documented as PV17 Product Closed Loop.
   This is a bounded review completion only; it does not permit production-ready, unrestricted automation or complete Workflow Studio claims.
 - [x] Complete Workflow Studio bounded candidate implementation for PV21.
   This proves a bounded candidate closed loop only; it does not permit production-ready, product-grade frontend or complete Workflow Studio GA claims.
-- [x] External App Contract documentation/readiness package for PV22.
-  This defines the next implementation target and acceptance gates only; it does not prove external app integration acceptance.
+- [x] External App Contract bounded implementation package for PV22.
+  This proves a bounded external app contract integration review path only; it does not prove production readiness, external ecosystem completion, commercial readiness or unrestricted third-party app access.
 - [ ] Productize Meeting / Knowledge / Interview / Investment / Video Studio as real business apps.
 - [ ] External plugin / skill / tool / MCP ecosystem examples and compatibility policy.
 - [ ] Open-source / commercial readiness: contributor docs, release pipeline, license/CLA, deployment docs and billing / rate-limit strategy.
@@ -160,4 +165,4 @@ The completed selected stage was Path A, documented as PV17 Product Closed Loop.
 
 ## Current Default Next Step
 
-PV17 Product Closed Loop, PV18 Knowledge OPC Productization, PV19 Runtime Workflow Platform Closed Loop, PV20-S1 through PV20-S6, PV21 Complete Workflow Studio bounded candidate and WP-M1A through WP-M4 Workflow Platform PV13 baseline main-entry bounded implementation have passed their current bounded review acceptance. PV22-R0 documentation/readiness for External App Contract is complete. The next default implementation direction is WP-M5 / PV22 readiness update against the now accepted PV13-based workflow platform host surface, followed by PV22-S1 only if readiness audit confirms no route, claim or external-app contract blockers. Do not treat any bounded review evidence as production readiness or complete platform GA evidence.
+PV17 Product Closed Loop, PV18 Knowledge OPC Productization, PV19 Runtime Workflow Platform Closed Loop, PV20-S1 through PV20-S6, PV21 Complete Workflow Studio bounded candidate, WP-M1A through WP-M5A Workflow Platform PV13 baseline main-entry/business-scenario bounded implementation, WP-M5B readiness refresh and PV22 External App Contract bounded implementation have passed their current bounded review acceptance. The next default implementation direction is Path D / production governance hardening planning, unless the user selects business Pack productization or open-source/commercial readiness as the next bounded stage. Do not treat any bounded review evidence as production readiness, final productized business-app completion, complete platform GA evidence, external ecosystem completion or unrestricted third-party app access.

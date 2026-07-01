@@ -1,0 +1,18 @@
+{
+  "approval_id": "appr_de1820859211",
+  "approval_status": "approved",
+  "artifact_count": 5,
+  "artifact_id": "art_1aa675691729",
+  "artifact_metadata_trace_id": "trace_a26855e525d4",
+  "real_gateway_route": "/v1/rpc",
+  "session_id": "sess_b5415005039d",
+  "status": "PASS",
+  "subscription_channels": [
+    "chat",
+    "artifact",
+    "approval"
+  ],
+  "subscription_transport": "eventsource",
+  "token_redacted": true,
+  "turn_id": "turn_005364401885"
+}

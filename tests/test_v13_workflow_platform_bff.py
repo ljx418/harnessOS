@@ -59,3 +59,31 @@ def test_v13_workflow_platform_design_baseline_routes(monkeypatch, tmp_path) -> 
     assert handoff["runtime_backed"] is False
     assert handoff["publish_or_run_started"] is False
     assert_no_forbidden_text([health, graph, validation, invalid, diff, inspector, handoff])
+
+
+def test_workflow_platform_wp_m5a_business_projection_routes(monkeypatch, tmp_path) -> None:
+    client = _client(monkeypatch, tmp_path)
+
+    projection = client.get(f"/bff/workflow-platform/scenarios{SCOPE_QUERY}").json()
+    assert projection["schema_version"] == "workflow_platform.scenario_projection.v1"
+    assert projection["source"] == "bff_projection"
+    assert projection["fallback_used"] is False
+    assert projection["scenario_count"] == 3
+    assert {item["scenario_id"] for item in projection["scenarios"]} == {"document_summary", "code_review", "meeting_brief"}
+    assert projection["mock_reduction_boundary"]["scenarioData"] == "fallback_or_visual_reference_only"
+
+    outputs = []
+    for scenario_id in ["document_summary", "code_review", "meeting_brief"]:
+        output = client.get(f"/bff/workflow-platform/scenarios/{scenario_id}/outputs{SCOPE_QUERY}").json()
+        outputs.append(output)
+        assert output["schema_version"] == "workflow_platform.business_output.v1"
+        assert output["scenario_id"] == scenario_id
+        assert output["status"] == "ready_for_human_review"
+        assert output["output_summary"]["artifact_refs"]
+        assert output["output_summary"]["human_review_ref"].startswith("human-review://wp-m5a/")
+        assert set(output["evidence_refs"]) == {"artifact", "trace", "quality", "audit", "claim", "redaction"}
+        assert all(output["evidence_refs"][key] for key in output["evidence_refs"])
+        assert "not_production_ready" in output["non_claims"]
+        assert "not_complete_workflow_studio_ga" in output["non_claims"]
+
+    assert_no_forbidden_text([projection, *outputs])

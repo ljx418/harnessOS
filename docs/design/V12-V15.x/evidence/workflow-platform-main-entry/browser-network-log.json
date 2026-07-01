@@ -4,7 +4,8 @@
   "allowed_prefixes": [
     "/bff/v13",
     "/bff/pv21",
-    "/bff/pv20"
+    "/bff/pv20",
+    "/bff/workflow-platform"
   ],
   "requests": [
     {
@@ -14,7 +15,27 @@
     },
     {
       "method": "GET",
+      "url": "http://127.0.0.1:4174/bff/workflow-platform/scenarios?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
       "url": "http://127.0.0.1:4174/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/bff/workflow-platform/scenarios/document_summary/outputs?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/bff/workflow-platform/scenarios/code_review/outputs?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/bff/workflow-platform/scenarios/meeting_brief/outputs?app_id=reference_app&project_id=demo_a&workspace_id=local",
       "allowed": true
     },
     {
@@ -94,22 +115,22 @@
     },
     {
       "method": "GET",
-      "url": "http://127.0.0.1:4174/bff/pv21/runs/wfi_a16c8a14f6ae/inspect?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "url": "http://127.0.0.1:4174/bff/pv21/runs/wfi_8c06d6f2da38/inspect?app_id=reference_app&project_id=demo_a&workspace_id=local",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4174/bff/pv21/runs/wfi_a16c8a14f6ae/human-actions?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "url": "http://127.0.0.1:4174/bff/pv21/runs/wfi_8c06d6f2da38/human-actions?app_id=reference_app&project_id=demo_a&workspace_id=local",
       "allowed": true
     },
     {
       "method": "GET",
-      "url": "http://127.0.0.1:4174/bff/pv21/runs/wfi_a16c8a14f6ae/evidence?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "url": "http://127.0.0.1:4174/bff/pv21/runs/wfi_8c06d6f2da38/evidence?app_id=reference_app&project_id=demo_a&workspace_id=local",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4174/bff/pv21/workflows/pv21_complete_workflow_studio_reference/versions/wfv_113cdd2990bf/rollback?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "url": "http://127.0.0.1:4174/bff/pv21/workflows/pv21_complete_workflow_studio_reference/versions/wfv_8277f7600a61/rollback?app_id=reference_app&project_id=demo_a&workspace_id=local",
       "allowed": true
     },
     {
@@ -119,42 +140,87 @@
     },
     {
       "method": "GET",
-      "url": "http://127.0.0.1:4174/bff/pv20/runs/wfi_aed371850b25/agent-execution-contract?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "url": "http://127.0.0.1:4174/bff/pv20/runs/wfi_26e3d7b7d402/agent-execution-contract?app_id=reference_app&project_id=demo_a&workspace_id=local",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4174/bff/pv20/runs/wfi_aed371850b25/agent-skill-executions?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "url": "http://127.0.0.1:4174/bff/pv20/runs/wfi_26e3d7b7d402/agent-skill-executions?app_id=reference_app&project_id=demo_a&workspace_id=local",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4174/bff/pv20/runs/wfi_aed371850b25/agent-tool-executions?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "url": "http://127.0.0.1:4174/bff/pv20/runs/wfi_26e3d7b7d402/agent-tool-executions?app_id=reference_app&project_id=demo_a&workspace_id=local",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4174/bff/pv20/runs/wfi_aed371850b25/agent-mcp-executions?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "url": "http://127.0.0.1:4174/bff/pv20/runs/wfi_26e3d7b7d402/agent-mcp-executions?app_id=reference_app&project_id=demo_a&workspace_id=local",
       "allowed": true
     },
     {
       "method": "GET",
-      "url": "http://127.0.0.1:4174/bff/pv20/runs/wfi_aed371850b25/agent-execution-evidence?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "url": "http://127.0.0.1:4174/bff/pv20/runs/wfi_26e3d7b7d402/agent-execution-evidence?app_id=reference_app&project_id=demo_a&workspace_id=local",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4174/bff/pv20/runs/wfi_aed371850b25/agent-skill-executions?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "url": "http://127.0.0.1:4174/bff/pv20/runs/wfi_26e3d7b7d402/agent-skill-executions?app_id=reference_app&project_id=demo_a&workspace_id=local",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4174/bff/pv20/runs/wfi_aed371850b25/agent-tool-executions?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "url": "http://127.0.0.1:4174/bff/pv20/runs/wfi_26e3d7b7d402/agent-tool-executions?app_id=reference_app&project_id=demo_a&workspace_id=local",
       "allowed": true
     },
     {
       "method": "POST",
-      "url": "http://127.0.0.1:4174/bff/pv20/runs/wfi_aed371850b25/agent-mcp-executions?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "url": "http://127.0.0.1:4174/bff/pv20/runs/wfi_26e3d7b7d402/agent-mcp-executions?app_id=reference_app&project_id=demo_a&workspace_id=local",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/bff/v13/studio/node-inspector/summary_agent",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4174/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4174/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/bff/v13/studio/node-inspector/summary_agent",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4174/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4174/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
+      "allowed": true
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/bff/v13/studio/node-inspector/summary_agent",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4174/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph/validate",
+      "allowed": true
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:4174/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/diff",
       "allowed": true
     }
   ],

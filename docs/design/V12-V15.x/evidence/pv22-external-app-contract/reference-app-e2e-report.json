@@ -1,0 +1,21 @@
+{
+  "api_path": {
+    "artifact_id": "art_ea8e0f4f2f21",
+    "session_id": "sess_b54bfd68524c",
+    "turn_id": "turn_ccf30b7672c8"
+  },
+  "evidence_type": "source-bound browser boundary plus real SDK/Gateway API path",
+  "scope": {
+    "app_id": "reference_app",
+    "project_id": "demo",
+    "workspace_id": "local"
+  },
+  "source_checks": {
+    "no_browser_raw_rpc": true,
+    "no_internal_runtime": true,
+    "uses_bff_events": true,
+    "uses_bff_sessions": true,
+    "uses_bff_turns": true
+  },
+  "status": "PASS"
+}

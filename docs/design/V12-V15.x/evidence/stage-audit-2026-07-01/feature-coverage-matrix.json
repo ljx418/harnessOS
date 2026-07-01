@@ -1,0 +1,72 @@
+{
+  "schema_version": "harnessos.stage_feature_coverage.v1",
+  "status": "PASS_WITH_LIMITATIONS",
+  "items": [
+    {
+      "feature": "PV13-based Workflow Platform as main entry",
+      "classification": "已验收",
+      "evidence": [
+        "workflow-platform-main-entry/01-wp-m1-main-entry.png",
+        "pv13-baseline-homepage-report.json"
+      ]
+    },
+    {
+      "feature": "Canvas wheel zoom, node drag, free connect, cancel connect",
+      "classification": "已验收",
+      "evidence": [
+        "02-wp-m2-canvas-drag-zoom.png",
+        "03-wp-m2-connect-cancel.png",
+        "browser-action-log.json"
+      ]
+    },
+    {
+      "feature": "Workflow save/validate/diff/publish/run/human/evidence review loop",
+      "classification": "已验收",
+      "evidence": [
+        "runtime-inspect-report.json",
+        "evidence-panel-report.json",
+        "human-action-log.json"
+      ]
+    },
+    {
+      "feature": "Governed Skill/Tool/MCP executor evidence path",
+      "classification": "已验收",
+      "evidence": [
+        "05-wp-m4-governed-executor.png",
+        "agent-executor-integration-report.json"
+      ]
+    },
+    {
+      "feature": "Three business scenarios with machine-readable output summaries",
+      "classification": "受限完成",
+      "evidence": [
+        "06-wp-m5a-business-output.png",
+        "business-output-report.json",
+        "mock-reduction-report.json"
+      ]
+    },
+    {
+      "feature": "PV22 SDK/BFF template/reference app external app contract",
+      "classification": "受限完成",
+      "evidence": [
+        "pv22-external-app-contract/acceptance-data.json",
+        "contract-registry-snapshot.json"
+      ]
+    },
+    {
+      "feature": "Production governance hardening",
+      "classification": "规划中",
+      "evidence": [
+        "TASKS.md Path D backlog"
+      ]
+    },
+    {
+      "feature": "Complete Workflow Studio GA / production-ready platform / unrestricted Agent executor",
+      "classification": "No-Go",
+      "evidence": [
+        "TASKS.md No-Go",
+        "WP/PV22 non-claims"
+      ]
+    }
+  ]
+}

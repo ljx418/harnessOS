@@ -1,0 +1,76 @@
+{
+  "schema_version": "workflow_platform.business_scenario_groups.v1",
+  "status": "PASS",
+  "scope_boundary": "Acceptance-grade scenario path evidence; not standalone final business deliverables.",
+  "groups": [
+    {
+      "group_id": "document_summary",
+      "title": "文档 / 知识总结",
+      "verification_status": "PASS",
+      "real_input_path": "docs/design/V12-V15.x/workflow_platform_main_entry_prd.md",
+      "verified_user_path": [
+        "canvas edit/connect/configure",
+        "save",
+        "validate",
+        "WorkflowDiff",
+        "publish",
+        "run",
+        "Human Gate",
+        "Evidence Review"
+      ],
+      "concrete_artifacts": [
+        "user-scenario-report.json",
+        "runtime-inspect-report.json",
+        "evidence-panel-report.json",
+        "04-wp-m3-three-scenarios.png"
+      ],
+      "deliverable_boundary": "No standalone Markdown summary artifact is claimed in this stage."
+    },
+    {
+      "group_id": "code_review",
+      "title": "代码审查 / 变更风险检查",
+      "verification_status": "PASS",
+      "real_input_path": "apps/workflow-console/src/App.tsx",
+      "verified_user_path": [
+        "canvas edit/connect/configure",
+        "save",
+        "validate",
+        "WorkflowDiff",
+        "publish",
+        "run",
+        "Human Gate",
+        "Evidence Review"
+      ],
+      "concrete_artifacts": [
+        "user-scenario-report.json",
+        "browser-network-log.json",
+        "runtime-inspect-report.json",
+        "04-wp-m3-three-scenarios.png"
+      ],
+      "deliverable_boundary": "No standalone PR or code review report artifact is claimed in this stage."
+    },
+    {
+      "group_id": "meeting_brief",
+      "title": "会议 / 访谈整理",
+      "verification_status": "PASS",
+      "real_input_path": "TASKS.md",
+      "verified_user_path": [
+        "canvas edit/connect/configure",
+        "save",
+        "validate",
+        "WorkflowDiff",
+        "publish",
+        "run",
+        "Human Gate",
+        "Evidence Review"
+      ],
+      "concrete_artifacts": [
+        "user-scenario-report.json",
+        "evidence-panel-report.json",
+        "runtime-inspect-report.json",
+        "04-wp-m3-three-scenarios.png"
+      ],
+      "deliverable_boundary": "No standalone meeting minutes or action-items document is claimed in this stage."
+    }
+  ]
+}

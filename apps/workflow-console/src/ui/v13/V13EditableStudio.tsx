@@ -1,6 +1,14 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { workflowConsoleClient } from "../../api/workflowConsoleClient.js";
-import type { PV20AgentExecutionActionDTO, PV20AgentExecutionEvidenceDTO, PV20AgentExecutorStateDTO, PV21EvidenceSummaryDTO, PV21RunDTO } from "../../api/types.js";
+import type {
+  PV20AgentExecutionActionDTO,
+  PV20AgentExecutionEvidenceDTO,
+  PV20AgentExecutorStateDTO,
+  PV21EvidenceSummaryDTO,
+  PV21RunDTO,
+  WorkflowPlatformBusinessOutputDTO,
+  WorkflowPlatformScenarioProjectionDTO,
+} from "../../api/types.js";
 import "./v13-editable-studio.css";
 
 const WORKFLOW_ID = "wf-v13-markdown-summary-studio-pilot";
@@ -130,6 +138,7 @@ type CanvasSize = {
 };
 
 type ScenarioId = "roma" | "storyboard" | "codereview" | "docsummary";
+type BusinessScenarioId = "document_summary" | "code_review" | "meeting_brief";
 type L1RouteId = "workbench" | "agents" | "workflows" | "skills" | "mcp" | "evidence" | "runs" | "settings";
 type BottomTab = "timeline" | "trace" | "quality" | "evidence";
 type NodeRunState = "idle" | "active" | "completed" | "blocked";
@@ -478,6 +487,9 @@ export function V13EditableStudio() {
   const [capabilityParityReport, setCapabilityParityReport] = useState<CapabilityParityReport>(initialCapabilityParityReport);
   const [pv21RunId, setPv21RunId] = useState("");
   const [pv20RunId, setPv20RunId] = useState("");
+  const [scenarioProjection, setScenarioProjection] = useState<WorkflowPlatformScenarioProjectionDTO | null>(null);
+  const [businessOutputs, setBusinessOutputs] = useState<Partial<Record<BusinessScenarioId, WorkflowPlatformBusinessOutputDTO>>>({});
+  const [businessProjectionStatus, setBusinessProjectionStatus] = useState("加载 WP-M5A DTO 投影");
 
   const canvasRef = useRef<HTMLDivElement | null>(null);
   const canvasWorldRef = useRef<HTMLDivElement | null>(null);
@@ -490,6 +502,11 @@ export function V13EditableStudio() {
   const selectedNode = nodes.find((node) => node.id === selectedNodeId) || nodes[4] || nodes[0];
   const selectedIndex = Math.max(0, nodes.findIndex((node) => node.id === selectedNodeId));
   const scenario = scenarioData[currentScenario];
+  const currentBusinessScenarioId = scenarioToBusinessScenarioId(currentScenario);
+  const currentBusinessOutput = currentBusinessScenarioId ? businessOutputs[currentBusinessScenarioId] : undefined;
+  const currentScenarioProjection = currentBusinessScenarioId
+    ? scenarioProjection?.scenarios.find((item) => item.scenario_id === currentBusinessScenarioId)
+    : undefined;
   const localInspector = scenario.inspector[selectedIndex] || scenario.inspector[4];
   const activeRoute = l1Routes.find((route) => route.id === activeL1Route) || l1Routes[0];
   const simulationStatusLabel = simulationMode === "playing" ? "仿真播放中" : simulationMode === "paused" ? "仿真暂停" : simulationMode === "blocked" ? "等待人工确认" : "空闲";
@@ -592,6 +609,34 @@ export function V13EditableStudio() {
   }, [fetchInspector, requestDiff]);
 
   useEffect(() => {
+    let cancelled = false;
+    async function loadBusinessProjection() {
+      try {
+        const projection = await workflowConsoleClient.getWorkflowPlatformScenarioProjection();
+        const outputs = await Promise.all(
+          projection.scenarios.map(async (item) => [item.scenario_id, await workflowConsoleClient.getWorkflowPlatformBusinessOutput(item.scenario_id)] as const),
+        );
+        if (cancelled) return;
+        setScenarioProjection(projection);
+        setBusinessOutputs(Object.fromEntries(outputs) as Partial<Record<BusinessScenarioId, WorkflowPlatformBusinessOutputDTO>>);
+        setBusinessProjectionStatus("DTO/evidence projection loaded");
+        setTraceLines((current) => ["[WP-M5A] scenario projection loaded from /bff/workflow-platform/scenarios.", ...current].slice(0, 16));
+        recordAction("WP-M5A 业务场景投影已由 BFF DTO 加载");
+      } catch (error) {
+        if (cancelled) return;
+        const message = errorMessage(error);
+        setBusinessProjectionStatus(`fallback/design reference: ${message}`);
+        setTraceLines((current) => [`[WP-M5A] projection fallback active: ${message}`, ...current].slice(0, 16));
+        recordAction(`WP-M5A 业务投影加载失败，使用 fallback：${message}`);
+      }
+    }
+    void loadBusinessProjection();
+    return () => {
+      cancelled = true;
+    };
+  }, [recordAction]);
+
+  useEffect(() => {
     viewportRef.current = viewport;
   }, [viewport]);
 
@@ -666,7 +711,8 @@ export function V13EditableStudio() {
     setEdges(VISUAL_EDGES);
     resetSimulationStateOnly();
     setSelectedNodeId(nextNodes[4]?.id || "summary_agent");
-    setTraceLines((current) => [`[INFO] scenario switched to ${nextScenario}; design_only visual matrix applied.`, ...current].slice(0, 12));
+    const source = scenarioToBusinessScenarioId(nextScenario) ? "DTO-backed business projection with visual fallback" : "optional visual matrix / future scenario";
+    setTraceLines((current) => [`[INFO] scenario switched to ${nextScenario}; ${source}.`, ...current].slice(0, 12));
     recordAction(`场景转换：${scenarioData[nextScenario].name}`);
     showToast(`场景转换，拓扑配置已重组：${scenarioData[nextScenario].name}`);
     void fetchInspector(nextNodes[4]?.id || "summary_agent");
@@ -1532,6 +1578,29 @@ export function V13EditableStudio() {
               </button>
             </div>
           </div>
+          <div className="v13-business-output-panel" data-testid="workflow-platform-business-output">
+            <strong>WP-M5A 业务产物投影</strong>
+            <span data-testid="workflow-platform-business-output-status">
+              {businessProjectionStatus} · {currentBusinessScenarioId || "future_optional"}
+            </span>
+            {currentBusinessOutput ? (
+              <>
+                <p>
+                  <b>{currentBusinessOutput.output_summary.title}</b>
+                  {currentBusinessOutput.output_summary.body}
+                </p>
+                <small>Artifact: {currentBusinessOutput.output_summary.artifact_refs[0]}</small>
+                <small>Human review: {currentBusinessOutput.output_summary.human_review_ref}</small>
+                <small>Evidence: {Object.keys(currentBusinessOutput.evidence_refs).join(" / ")}</small>
+              </>
+            ) : (
+              <p>当前场景为可视化或后续扩展场景；不会被计入 WP-M5A 三类业务产物出门条件。</p>
+            )}
+            <em data-testid="workflow-platform-mock-boundary">
+              {currentScenarioProjection?.fallback_boundary ||
+                "scenarioData / fallbackGraph 仅作为视觉 fallback 或 design reference；业务出门以 BFF DTO 和 evidence refs 为准。"}
+            </em>
+          </div>
           <InspectorField label="存证链路关系" value={localInspector?.evidence || inspector?.audit_ref || "storyboard-evidence.json"} />
           <div className="v13-actions">
             <button data-testid="v13-add-node" type="button" onClick={addQualityNode}>
@@ -1745,6 +1814,13 @@ function EvidenceContent({ diff, handoffRef, scenario }: { diff: WorkflowDiff | 
       <span>runtime_backed=false</span>
     </div>
   );
+}
+
+function scenarioToBusinessScenarioId(scenarioId: ScenarioId): BusinessScenarioId | null {
+  if (scenarioId === "docsummary") return "document_summary";
+  if (scenarioId === "codereview") return "code_review";
+  if (scenarioId === "roma") return "meeting_brief";
+  return null;
 }
 
 function buildStudioNodes(graphNodes: WorkflowGraphNode[], scenarioId: ScenarioId): StudioNode[] {

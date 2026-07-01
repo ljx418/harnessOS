@@ -1344,7 +1344,8 @@
 }
 
 .v13-capability-panel,
-.v13-executor-panel {
+.v13-executor-panel,
+.v13-business-output-panel {
   display: grid;
   gap: 10px;
   padding: 12px;
@@ -1355,13 +1356,15 @@
 }
 
 .v13-capability-panel > div:first-child,
-.v13-executor-panel > strong {
+.v13-executor-panel > strong,
+.v13-business-output-panel > strong {
   display: grid;
   gap: 3px;
 }
 
 .v13-capability-panel strong,
-.v13-executor-panel strong {
+.v13-executor-panel strong,
+.v13-business-output-panel strong {
   color: #172033;
   font-size: 12px;
   font-weight: 950;
@@ -1369,12 +1372,42 @@
 
 .v13-capability-panel span,
 .v13-executor-panel span,
-.v13-capability-panel small {
+.v13-capability-panel small,
+.v13-business-output-panel span,
+.v13-business-output-panel small,
+.v13-business-output-panel em {
   color: #64748b;
   font-size: 10px;
   font-weight: 850;
   line-height: 1.45;
   overflow-wrap: anywhere;
+}
+
+.v13-business-output-panel p {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 8px;
+  border-radius: 10px;
+  background: #f0fdf4;
+  color: #31513f;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.v13-business-output-panel p b {
+  color: #166534;
+  font-size: 11px;
+}
+
+.v13-business-output-panel em {
+  padding: 7px 8px;
+  border-radius: 10px;
+  background: #fffbeb;
+  color: #92400e;
+  font-style: normal;
 }
 
 .v13-capability-panel__actions,

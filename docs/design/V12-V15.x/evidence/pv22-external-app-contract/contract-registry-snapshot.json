@@ -1,0 +1,482 @@
+{
+  "allowed_claim": "PV22 external app contract ready for bounded integration review.",
+  "capabilities": [
+    "approvals",
+    "artifact_lineage",
+    "artifacts",
+    "connectors.read",
+    "events",
+    "jobs",
+    "packs.read",
+    "sessions",
+    "turns"
+  ],
+  "contract_version": "pv22.external_app_contract.v1",
+  "default_scope": {
+    "app_id": "reference_app",
+    "project_id": "demo",
+    "workspace_id": "local"
+  },
+  "errors": [
+    {
+      "category": "rpc",
+      "code": "INVALID_PARAMS",
+      "retryable": false,
+      "status": "implemented"
+    },
+    {
+      "category": "session",
+      "code": "SESSION_NOT_FOUND",
+      "retryable": false,
+      "status": "implemented"
+    },
+    {
+      "category": "artifact",
+      "code": "ARTIFACT_READ_BLOCKED",
+      "retryable": false,
+      "status": "implemented"
+    },
+    {
+      "category": "auth",
+      "code": "AUTH_REQUIRED",
+      "retryable": false,
+      "status": "planned"
+    },
+    {
+      "category": "auth",
+      "code": "AUTH_INVALID",
+      "retryable": false,
+      "status": "planned"
+    },
+    {
+      "category": "auth",
+      "code": "AUTH_FORBIDDEN",
+      "retryable": false,
+      "status": "planned"
+    },
+    {
+      "category": "auth",
+      "code": "CAPABILITY_DENIED",
+      "retryable": false,
+      "status": "planned"
+    },
+    {
+      "category": "scope",
+      "code": "SCOPE_MISMATCH",
+      "retryable": false,
+      "status": "planned"
+    },
+    {
+      "category": "scope",
+      "code": "APP_PROFILE_NOT_FOUND",
+      "retryable": false,
+      "status": "planned"
+    },
+    {
+      "category": "event",
+      "code": "SUBSCRIPTION_TOKEN_INVALID",
+      "retryable": false,
+      "status": "planned"
+    },
+    {
+      "category": "event",
+      "code": "SUBSCRIPTION_TOKEN_SCOPE_MISMATCH",
+      "retryable": false,
+      "status": "planned"
+    },
+    {
+      "category": "event",
+      "code": "SUBSCRIPTION_TOKEN_CHANNEL_DENIED",
+      "retryable": false,
+      "status": "planned"
+    },
+    {
+      "category": "approval",
+      "code": "APPROVAL_CONFLICT",
+      "retryable": false,
+      "status": "planned"
+    },
+    {
+      "category": "approval",
+      "code": "APPROVAL_NOT_FOUND",
+      "retryable": false,
+      "status": "planned"
+    },
+    {
+      "category": "rpc",
+      "code": "METHOD_FORBIDDEN",
+      "retryable": false,
+      "status": "planned"
+    },
+    {
+      "category": "pack",
+      "code": "PACK_NOT_FOUND",
+      "retryable": false,
+      "status": "planned"
+    },
+    {
+      "category": "connector",
+      "code": "CONNECTOR_NOT_FOUND",
+      "retryable": false,
+      "status": "planned"
+    }
+  ],
+  "events": [
+    {
+      "channel": "chat",
+      "replayable": true,
+      "status": "implemented",
+      "type": "turn.started"
+    },
+    {
+      "channel": "chat",
+      "replayable": true,
+      "status": "implemented",
+      "type": "item.delta"
+    },
+    {
+      "channel": "chat",
+      "replayable": true,
+      "status": "implemented",
+      "type": "turn.completed"
+    },
+    {
+      "channel": "chat",
+      "replayable": true,
+      "status": "implemented",
+      "type": "turn.failed"
+    },
+    {
+      "channel": "job",
+      "replayable": true,
+      "status": "planned",
+      "type": "job.queued"
+    },
+    {
+      "channel": "job",
+      "replayable": true,
+      "status": "planned",
+      "type": "job.running"
+    },
+    {
+      "channel": "job",
+      "replayable": true,
+      "status": "planned",
+      "type": "job.completed"
+    },
+    {
+      "channel": "job",
+      "replayable": true,
+      "status": "planned",
+      "type": "job.failed"
+    },
+    {
+      "channel": "job",
+      "replayable": true,
+      "status": "planned",
+      "type": "job.cancelled"
+    },
+    {
+      "channel": "artifact",
+      "replayable": true,
+      "status": "planned",
+      "type": "artifact.registered"
+    },
+    {
+      "channel": "artifact",
+      "replayable": true,
+      "status": "planned",
+      "type": "artifact.updated"
+    },
+    {
+      "channel": "artifact",
+      "replayable": true,
+      "status": "planned",
+      "type": "artifact.read_blocked"
+    },
+    {
+      "channel": "approval",
+      "replayable": true,
+      "status": "implemented",
+      "type": "approval.required"
+    },
+    {
+      "channel": "approval",
+      "replayable": true,
+      "status": "implemented",
+      "type": "approval.approved"
+    },
+    {
+      "channel": "approval",
+      "replayable": true,
+      "status": "implemented",
+      "type": "approval.rejected"
+    }
+  ],
+  "forbidden_methods": [
+    {
+      "capability": "meeting",
+      "method": "meeting.*",
+      "reason": "business-specific legacy facade; use pack workflow or BFF composition"
+    },
+    {
+      "capability": "knowledge",
+      "method": "knowledge.*",
+      "reason": "business-specific facade; use data_service connector through pack/BFF"
+    },
+    {
+      "capability": "pack_execution",
+      "method": "pack.execute_stub",
+      "reason": "stub/debug execution path is not SDK default surface"
+    },
+    {
+      "capability": "pack_execution",
+      "method": "workflow.execute_stub",
+      "reason": "stub/debug execution path is not SDK default surface"
+    },
+    {
+      "capability": "debug",
+      "method": "debug.*",
+      "reason": "debug-only methods cannot be SDK default surface"
+    },
+    {
+      "capability": "admin",
+      "method": "admin.*",
+      "reason": "admin bypass methods cannot be SDK default surface"
+    },
+    {
+      "capability": "tests",
+      "method": "test.*",
+      "reason": "test-only methods cannot be SDK default surface"
+    },
+    {
+      "capability": "rpc",
+      "method": "method.list",
+      "reason": "introspection is not part of the default external SDK/BFF surface"
+    }
+  ],
+  "methods": [
+    {
+      "auth_required": true,
+      "capability": "sessions",
+      "errors": [
+        "INVALID_PARAMS",
+        "APP_PROFILE_NOT_FOUND"
+      ],
+      "handler_ref": "apps.gateway.service.GatewayService.session_start",
+      "method": "session.start",
+      "runtime_handler": true,
+      "scope_required": true,
+      "sdk_exposure": "default",
+      "stability": "stable",
+      "status": "implemented"
+    },
+    {
+      "auth_required": true,
+      "capability": "turns",
+      "errors": [
+        "INVALID_PARAMS",
+        "SESSION_NOT_FOUND",
+        "SCOPE_MISMATCH"
+      ],
+      "handler_ref": "apps.gateway.service.GatewayService.turn_start",
+      "method": "turn.start",
+      "runtime_handler": true,
+      "scope_required": true,
+      "sdk_exposure": "default",
+      "stability": "stable",
+      "status": "implemented"
+    },
+    {
+      "auth_required": true,
+      "capability": "events",
+      "errors": [
+        "INVALID_PARAMS",
+        "AUTH_REQUIRED",
+        "CAPABILITY_DENIED",
+        "SCOPE_MISMATCH",
+        "SUBSCRIPTION_TOKEN_INVALID"
+      ],
+      "handler_ref": "apps.gateway.service.GatewayService.events_subscribe",
+      "method": "events.subscribe",
+      "runtime_handler": true,
+      "scope_required": true,
+      "sdk_exposure": "default",
+      "stability": "beta",
+      "status": "implemented"
+    },
+    {
+      "auth_required": true,
+      "capability": "artifacts",
+      "errors": [
+        "INVALID_PARAMS",
+        "SCOPE_MISMATCH"
+      ],
+      "handler_ref": "apps.gateway.service.GatewayService.artifact_list",
+      "method": "artifact.list",
+      "runtime_handler": true,
+      "scope_required": true,
+      "sdk_exposure": "default",
+      "stability": "stable",
+      "status": "implemented"
+    },
+    {
+      "auth_required": true,
+      "capability": "artifacts",
+      "errors": [
+        "INVALID_PARAMS",
+        "SCOPE_MISMATCH"
+      ],
+      "handler_ref": "apps.gateway.service.GatewayService.artifact_read_metadata",
+      "method": "artifact.read_metadata",
+      "runtime_handler": true,
+      "scope_required": true,
+      "sdk_exposure": "default",
+      "stability": "stable",
+      "status": "implemented"
+    },
+    {
+      "auth_required": true,
+      "capability": "artifacts",
+      "errors": [
+        "INVALID_PARAMS",
+        "SCOPE_MISMATCH"
+      ],
+      "handler_ref": "apps.gateway.service.GatewayService.artifact_register_external",
+      "method": "artifact.register_external",
+      "runtime_handler": true,
+      "scope_required": true,
+      "sdk_exposure": "default",
+      "stability": "stable",
+      "status": "implemented"
+    },
+    {
+      "auth_required": true,
+      "capability": "artifact_lineage",
+      "errors": [
+        "INVALID_PARAMS",
+        "SCOPE_MISMATCH"
+      ],
+      "handler_ref": "apps.gateway.service.GatewayService.artifact_lineage",
+      "method": "artifact.lineage",
+      "runtime_handler": true,
+      "scope_required": true,
+      "sdk_exposure": "default",
+      "stability": "stable",
+      "status": "implemented"
+    },
+    {
+      "auth_required": true,
+      "capability": "jobs",
+      "errors": [
+        "INVALID_PARAMS",
+        "SCOPE_MISMATCH"
+      ],
+      "handler_ref": "apps.gateway.service.GatewayService.job_get",
+      "method": "job.get",
+      "runtime_handler": true,
+      "scope_required": true,
+      "sdk_exposure": "default",
+      "stability": "stable",
+      "status": "implemented"
+    },
+    {
+      "auth_required": true,
+      "capability": "jobs",
+      "errors": [
+        "INVALID_PARAMS",
+        "SCOPE_MISMATCH"
+      ],
+      "handler_ref": "apps.gateway.service.GatewayService.job_list",
+      "method": "job.list",
+      "runtime_handler": true,
+      "scope_required": true,
+      "sdk_exposure": "default",
+      "stability": "stable",
+      "status": "implemented"
+    },
+    {
+      "auth_required": true,
+      "capability": "approvals",
+      "errors": [
+        "INVALID_PARAMS",
+        "APPROVAL_CONFLICT",
+        "APPROVAL_NOT_FOUND",
+        "APPROVAL_INVALID_DECISION",
+        "WORKFLOW_APPROVAL_INACTIVE",
+        "WORKFLOW_APPROVAL_SIDE_EFFECT_FAILED",
+        "SCOPE_MISMATCH"
+      ],
+      "handler_ref": "apps.gateway.service.GatewayService.approval_respond",
+      "method": "approval.respond",
+      "runtime_handler": true,
+      "scope_required": true,
+      "sdk_exposure": "default",
+      "stability": "beta",
+      "status": "implemented"
+    },
+    {
+      "auth_required": true,
+      "capability": "connectors.read",
+      "errors": [
+        "INVALID_PARAMS",
+        "CONNECTOR_NOT_FOUND"
+      ],
+      "handler_ref": "apps.gateway.service.GatewayService.connector_health",
+      "method": "connector.health",
+      "runtime_handler": true,
+      "scope_required": false,
+      "sdk_exposure": "default",
+      "stability": "stable",
+      "status": "implemented"
+    },
+    {
+      "auth_required": true,
+      "capability": "packs.read",
+      "errors": [
+        "INVALID_PARAMS"
+      ],
+      "handler_ref": "apps.gateway.service.GatewayService.pack_list",
+      "method": "pack.list",
+      "runtime_handler": true,
+      "scope_required": false,
+      "sdk_exposure": "default",
+      "stability": "stable",
+      "status": "implemented"
+    },
+    {
+      "auth_required": true,
+      "capability": "packs.read",
+      "errors": [
+        "INVALID_PARAMS",
+        "PACK_NOT_FOUND"
+      ],
+      "handler_ref": "apps.gateway.service.GatewayService.pack_get",
+      "method": "pack.get",
+      "runtime_handler": true,
+      "scope_required": false,
+      "sdk_exposure": "default",
+      "stability": "stable",
+      "status": "implemented"
+    }
+  ],
+  "not_claimed": [
+    "production ready",
+    "external ecosystem complete",
+    "commercial readiness complete",
+    "unrestricted third-party app access",
+    "complete Workflow Studio ready",
+    "Agent executor ready"
+  ],
+  "route_boundary": {
+    "browser_allowed_prefixes": [
+      "/bff/"
+    ],
+    "browser_forbidden_prefixes": [
+      "/v1/rpc",
+      "/v1/internal/",
+      "/runtime/"
+    ],
+    "sdk_server_route": "/v1/rpc"
+  }
+}

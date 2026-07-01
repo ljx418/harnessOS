@@ -1,0 +1,15 @@
+{
+  "browser_routes": [
+    "\"/bff/artifacts",
+    "\"/bff/connectors/reference_app_connector/health",
+    "\"/bff/embed/bootstrap?channels=chat,job,artifact,approval",
+    "\"/bff/jobs",
+    "\"/bff/packs",
+    "\"/bff/sessions",
+    "\"/bff/turns"
+  ],
+  "capture_mode": "headless-source-boundary-scan",
+  "forbidden_routes_seen": [],
+  "raw_gateway_seen": false,
+  "status": "PASS"
+}

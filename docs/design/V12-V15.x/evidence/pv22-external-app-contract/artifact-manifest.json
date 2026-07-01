@@ -1,0 +1,78 @@
+{
+  "count": 18,
+  "files": [
+    {
+      "bytes": 718,
+      "file": "acceptance-data.json"
+    },
+    {
+      "bytes": 2962,
+      "file": "acceptance-report.html"
+    },
+    {
+      "bytes": 1415,
+      "file": "artifact-manifest.json"
+    },
+    {
+      "bytes": 415,
+      "file": "bff-template-smoke-report.json"
+    },
+    {
+      "bytes": 387,
+      "file": "browser-network-log.json"
+    },
+    {
+      "bytes": 11934,
+      "file": "contract-registry-snapshot.json"
+    },
+    {
+      "bytes": 1023,
+      "file": "negative-fixtures.json"
+    },
+    {
+      "bytes": 68,
+      "file": "no-false-green-scan.txt"
+    },
+    {
+      "bytes": 558,
+      "file": "prd-review-report.json"
+    },
+    {
+      "bytes": 95,
+      "file": "redaction-scan.txt"
+    },
+    {
+      "bytes": 520,
+      "file": "reference-app-e2e-report.json"
+    },
+    {
+      "bytes": 2929,
+      "file": "route-log.json"
+    },
+    {
+      "bytes": 459,
+      "file": "sdk-smoke-report.json"
+    },
+    {
+      "bytes": 1355,
+      "file": "validation-command-log.json"
+    },
+    {
+      "bytes": 1940,
+      "file": "validation-pv22-pytest.log"
+    },
+    {
+      "bytes": 4248,
+      "file": "validation-typescript-sdk.log"
+    },
+    {
+      "bytes": 1940,
+      "file": "validation-v35-regression.log"
+    },
+    {
+      "bytes": 1939,
+      "file": "validation-workflow-platform-regression.log"
+    }
+  ],
+  "status": "PASS"
+}

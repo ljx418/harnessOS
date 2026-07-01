@@ -1,0 +1,72 @@
+{
+  "schema_version": "workflow_platform.scenario_projection_report.v1",
+  "status": "PASS",
+  "dto_source": "/bff/workflow-platform/scenarios",
+  "fallback_used": false,
+  "scenarios": [
+    {
+      "scenario_id": "document_summary",
+      "title": "文档 / 知识总结",
+      "status": "PASS",
+      "accepted_inputs": [
+        "markdown_folder",
+        "document_set"
+      ],
+      "node_template_status": "DTO_DRIVEN",
+      "inspector_projection_status": "DTO_DRIVEN",
+      "timeline_projection_status": "DTO_DRIVEN",
+      "evidence_categories": [
+        "artifact",
+        "trace",
+        "quality",
+        "audit",
+        "claim",
+        "redaction"
+      ],
+      "fallback_used": false
+    },
+    {
+      "scenario_id": "code_review",
+      "title": "代码审查 / 变更风险检查",
+      "status": "PASS",
+      "accepted_inputs": [
+        "git_diff",
+        "source_file"
+      ],
+      "node_template_status": "DTO_DRIVEN",
+      "inspector_projection_status": "DTO_DRIVEN",
+      "timeline_projection_status": "DTO_DRIVEN",
+      "evidence_categories": [
+        "artifact",
+        "trace",
+        "quality",
+        "audit",
+        "claim",
+        "redaction"
+      ],
+      "fallback_used": false
+    },
+    {
+      "scenario_id": "meeting_brief",
+      "title": "会议 / 访谈整理",
+      "status": "PASS",
+      "accepted_inputs": [
+        "transcript_text",
+        "meeting_notes"
+      ],
+      "node_template_status": "DTO_DRIVEN",
+      "inspector_projection_status": "DTO_DRIVEN",
+      "timeline_projection_status": "DTO_DRIVEN",
+      "evidence_categories": [
+        "artifact",
+        "trace",
+        "quality",
+        "audit",
+        "claim",
+        "redaction"
+      ],
+      "fallback_used": false
+    }
+  ],
+  "mock_boundary": "scenarioData and fallbackGraph are visual fallback/design reference only."
+}

@@ -1,0 +1,71 @@
+{
+  "schema_version": "harnessos.stage_e2e_summary.v1",
+  "status": "PASS_WITH_LIMITATIONS",
+  "wp_acceptance_status": "PASS",
+  "wp_stage_id": "WP-M1-WP-M5A",
+  "wp_route_boundary": {
+    "status": "PASS",
+    "allowed_prefixes": [
+      "/bff/v13",
+      "/bff/pv21",
+      "/bff/pv20",
+      "/bff/workflow-platform"
+    ],
+    "forbidden_matches": []
+  },
+  "pv22_status": "PASS",
+  "scenario_status": "PASS",
+  "business_output_status": "PASS",
+  "mock_reduction_status": "PASS",
+  "commands": [
+    {
+      "command": ".venv/bin/python -m pytest tests/test_pv22_external_app_contract.py tests/test_v13_workflow_platform_bff.py tests/test_pv21_complete_workflow_studio_bff.py tests/test_pv20_agent_execution_contract_bff.py -q",
+      "scope": "PV22 + Workflow Platform bounded regression",
+      "status": "PASS",
+      "log": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-pv22-wp-regression.log",
+      "summary": "    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n8 passed, 6 warnings in 33.84s"
+    },
+    {
+      "command": ".venv/bin/python -m pytest tests/test_v3_5_python_sdk.py tests/test_v3_5_typescript_sdk.py tests/test_v3_5_bff_template_e2e.py tests/test_v3_5_bff_minimal_smoke.py tests/test_v3_5_reference_app.py -q",
+      "scope": "V3.5 SDK/template/reference app regression",
+      "status": "PASS",
+      "log": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-v35-regression.log",
+      "summary": "    class WorkflowTask(BaseModel):\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n45 passed, 6 warnings in 16.72s"
+    },
+    {
+      "command": "cd sdk/typescript && npm test",
+      "scope": "TypeScript SDK npm test",
+      "status": "PASS",
+      "log": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-typescript-sdk.log",
+      "summary": "# tests 23\n# pass 23\n# fail 0\n# duration_ms 651.422705"
+    },
+    {
+      "command": "cd apps/workflow-console && node node_modules/typescript/bin/tsc -p tsconfig.json && node node_modules/vite/bin/vite.js build",
+      "scope": "Workflow Console typecheck/build",
+      "status": "PASS",
+      "log": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-workflow-console-build.log",
+      "summary": "dist/index.html                   0.41 kB │ gzip:   0.28 kB\ndist/assets/index-CjIca3MK.css  111.64 kB │ gzip:  20.35 kB\ndist/assets/index-CPEtC2JU.js   685.43 kB │ gzip: 211.07 kB\n✓ built in 29.87s"
+    },
+    {
+      "command": "WP_CDP_URL=http://127.0.0.1:9351 WP_BASE_URL=http://127.0.0.1:4174 node e2e/workflow_platform_main_entry_cdp_acceptance.mjs",
+      "scope": "Workflow Platform headless CDP E2E",
+      "status": "PASS",
+      "log": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-workflow-platform-cdp.log",
+      "summary": "Headless CDP runner exited 0; screenshots and JSON evidence regenerated."
+    }
+  ],
+  "limitations": [
+    "WSL Playwright Chromium cannot launch because libnspr4.so is missing; this audit used Windows Chrome headless CDP instead.",
+    "Vite build emits a main chunk-size warning.",
+    "PV22 reference app browser proof is contract/source-boundary plus SDK/Gateway API evidence, not a separately screenshotted external reference UI journey."
+  ],
+  "not_claimed": [
+    "production_ready",
+    "complete_workflow_studio_ga",
+    "product_grade_frontend_complete",
+    "xpert_parity_complete",
+    "agent_executor_ready",
+    "external_ecosystem_complete",
+    "commercial_readiness_complete"
+  ]
+}

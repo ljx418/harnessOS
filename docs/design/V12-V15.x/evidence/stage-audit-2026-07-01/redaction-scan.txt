@@ -1,0 +1,6 @@
+{
+  "schema_version": "harnessos.redaction_scan.v1",
+  "status": "PASS",
+  "secret_patterns_found": [],
+  "note": "Audit artifacts contain local file paths, test routes, hashes and synthetic refs only; no API keys or credential-like tokens were found by this scoped scan."
+}

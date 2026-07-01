@@ -1,0 +1,47 @@
+{
+  "fixtures": [
+    {
+      "error_code": "AUTH_REQUIRED",
+      "expected_denial": true,
+      "name": "missing token",
+      "status_code": 200
+    },
+    {
+      "error_code": "AUTH_INVALID",
+      "expected_denial": true,
+      "name": "invalid token",
+      "status_code": 200
+    },
+    {
+      "error_code": "AUTH_FORBIDDEN",
+      "expected_denial": true,
+      "name": "origin mismatch",
+      "status_code": 200
+    },
+    {
+      "error_code": "SCOPE_MISMATCH",
+      "expected_denial": true,
+      "name": "scope mismatch",
+      "status_code": 200
+    },
+    {
+      "error_code": "CAPABILITY_DENIED",
+      "expected_denial": true,
+      "name": "capability denied",
+      "status_code": 200
+    },
+    {
+      "error_code": "METHOD_FORBIDDEN",
+      "expected_denial": true,
+      "name": "forbidden method",
+      "status_code": 200
+    },
+    {
+      "error_code": "METHOD_FORBIDDEN",
+      "expected_denial": true,
+      "name": "scope mode all",
+      "status_code": 200
+    }
+  ],
+  "status": "PASS"
+}

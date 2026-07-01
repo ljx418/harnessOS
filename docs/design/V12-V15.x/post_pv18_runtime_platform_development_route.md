@@ -139,7 +139,7 @@
 
 目标：让外部应用或新业务 App 可以按标准方式接入 HarnessOS。
 
-当前状态：PV22-R0 文档与 readiness 已完成；实质实现仍需按 PV22-S1 到 PV22-SA 顺序推进。
+当前状态：PV22-R0 文档与 readiness、WP-M5B readiness refresh 以及 PV22-S1 到 PV22-SA 有界实现验收已完成。该结论只支持外部应用接入契约进入 bounded integration review，不支持生产可用、外部生态完成或商业化完成声明。
 
 规范文档：
 

@@ -1,11 +1,11 @@
 # Workflow Platform Main Entry BFF / DTO Contract
 
-用途：定义 WP-M1 到 WP-M4 使用的 BFF、DTO、route allowlist 和兼容策略，并记录本阶段 route ownership 结果。
+用途：定义 WP-M1 到 WP-M5A 使用的 BFF、DTO、route allowlist 和兼容策略，并记录本阶段 route ownership 结果。
 边界：本文是合约和验收记录，不证明生产级 API、完整平台 GA 或生产可用。
 
 ## 1. Contract Strategy
 
-WP-M1 到 WP-M4 不应先发明一套完全独立的工作流平台 API。默认路线是先让 PV13 基线页面成为首页，再逐步集成已有 route families。
+WP-M1 到 WP-M4 不应先发明一套完全独立的工作流平台 API。默认路线是先让 PV13 基线页面成为首页，再逐步集成已有 route families。WP-M5A 已新增 additive scenario projection / business output contract，且不得破坏 V13/PV20/PV21 evidence replay routes。
 
 当前 route ownership 结论：WP-M1A 已在主 API router `apps/api/routers/bff.py` 中恢复正式 `/bff/v13/*` compatibility routes，并由 `tests/test_v13_workflow_platform_bff.py` 与 Chrome CDP browser network log 验证。历史 `apps/workflow-console/e2e/bff_smoke_server.py` 仍可作为 E2E harness 的 bounded fixture，但本阶段不再依赖 smoke-server-only route ownership。
 
@@ -16,7 +16,8 @@ PV13-based Workflow Platform UI
   -> existing /bff/pv19/* for runtime loop compatibility where PV21 delegates
   -> existing /bff/pv20/* for governed Agent executor evidence and actions
   -> existing /bff/pv21/* for graph/version/run/evidence candidate compatibility where useful
-  -> future /bff/workflow-platform/* facade only after compatibility review
+  -> implemented /bff/workflow-platform/* scenario projection and business output DTOs
+  -> future broader /bff/workflow-platform/* facade only after compatibility review
 ```
 
 该策略降低重写风险，并保留 V13/PV19/PV20/PV21 已验收 evidence 的可追踪性。
@@ -50,6 +51,8 @@ PV13-based Workflow Platform UI
 | WP-M4 | `/bff/pv20/runs/{run_id}/agent-skill-executions` | allowlisted skill action。 | approval and action report。 |
 | WP-M4 | `/bff/pv20/runs/{run_id}/agent-tool-executions` | allowlisted read-only tool action。 | tool action report。 |
 | WP-M4 | `/bff/pv20/runs/{run_id}/agent-mcp-executions` | allowlisted MCP fixture action。 | MCP action report。 |
+| WP-M5A | `/bff/workflow-platform/scenarios` | 场景目录、输入要求、节点模板、Inspector/timeline projection。 | `scenario-projection-report.json`、DTO snapshot、frontend mock reduction scan。 |
+| WP-M5A | `/bff/workflow-platform/scenarios/{scenario_id}/outputs` | 文档总结、代码审查、会议整理的业务输出摘要和 artifact refs。 | `business-output-report.json`、artifact refs、human review refs。 |
 
 ## 2.1 Implemented V13 Compatibility Routes
 
@@ -160,14 +163,78 @@ The UI may compose this state from existing PV21/PV20 DTOs. A future facade may 
 }
 ```
 
+### 4.4 `WorkflowPlatformScenarioProjectionDTO`
+
+This DTO is the WP-M5A accepted contract for replacing business-critical local `scenarioData` rendering. It is currently returned by the additive `/bff/workflow-platform/scenarios` route; a future broader facade must remain additive.
+
+```json
+{
+  "schema_version": "workflow_platform.scenario_projection.v1",
+  "source": "bff_projection",
+  "fallback_used": false,
+  "scenarios": [
+    {
+      "scenario_id": "document_summary",
+      "title": "文档/知识总结",
+      "input_contract": {
+        "accepted_inputs": ["markdown_folder", "document_set"],
+        "required_refs": ["source_refs"]
+      },
+      "workflow_template": {
+        "node_refs": ["input", "parse", "extract", "summarize", "quality", "evidence"],
+        "edge_refs": []
+      },
+      "inspector_projection": {
+        "agent_refs": [],
+        "tool_refs": [],
+        "skill_refs": [],
+        "mcp_refs": [],
+        "quality_gate_refs": []
+      },
+      "evidence_categories": ["artifact", "trace", "quality", "audit", "claim", "redaction"]
+    }
+  ]
+}
+```
+
+### 4.5 `WorkflowPlatformBusinessOutputDTO`
+
+```json
+{
+  "schema_version": "workflow_platform.business_output.v1",
+  "scenario_id": "document_summary",
+  "status": "ready_for_human_review",
+  "output_summary": {
+    "title": "摘要产物",
+    "artifact_refs": [],
+    "human_review_ref": "review://...",
+    "quality_status": "PASS"
+  },
+  "evidence_refs": {
+    "artifact": [],
+    "trace": [],
+    "quality": [],
+    "audit": [],
+    "claim": [],
+    "redaction": []
+  },
+  "non_claims": [
+    "not_production_ready",
+    "not_complete_workflow_studio_ga"
+  ]
+}
+```
+
 ## 5. Compatibility Rules
 
 - Existing V13 graph, validation, inspector and WorkflowDiff DTO shapes remain canonical for WP-M1/WP-M2 baseline homepage and canvas work.
 - Existing `PV21StudioStateDTO`, `PV21WorkflowGraphDTO`, `PV21WorkflowDiffDTO`, `PV21VersionsDTO`, `PV21RunDTO` and `PV21EvidenceSummaryDTO` remain canonical for later runtime/evidence convergence until a facade is implemented.
 - Existing `PV20AgentExecutorStateDTO`, `PV20AgentExecutionContractDTO` and `PV20AgentExecutionEvidenceDTO` remain canonical for governed executor integration.
+- WP-M5A scenario projection and business output DTOs are additive. They may compose existing PV18/PV19/PV20/PV21 data, but the UI must expose whether `fallback_used=true`.
 - A future `/bff/workflow-platform/*` facade must be additive. It cannot remove V13/PV19/PV20/PV21 evidence replay routes.
 - UI copy must say “受治理执行” or equivalent bounded wording for Agent/Tool/Skill/MCP actions.
 - Capability parity is required: if a PV21/PV20 capability is currently reachable from `WorkflowPlatformMainEntry`, the PV13-based target must either expose it with matching BFF evidence or mark it as deferred/No-Go with user confirmation. Silent removal is not allowed.
+- Business productization is required for WP-M5A: scenario path PASS alone cannot satisfy business output acceptance.
 
 ## 6. Contract Exit Criteria
 

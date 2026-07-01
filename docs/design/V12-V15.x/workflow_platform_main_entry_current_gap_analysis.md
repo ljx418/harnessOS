@@ -11,6 +11,7 @@
 | PV19 runtime workflow platform | 有界 publish/run/human/evidence loop。 | 不证明完整画布交互和 Agent executor 产品化。 |
 | PV20 bounded Agent executor | 受治理 skill/tool/MCP fixture execution path。 | 不证明 unrestricted Agent executor 或生产调度。 |
 | PV21 bounded Studio candidate | graph save/validate/diff、publish/rollback/run/human/evidence review。 | 不再作为首页视觉基线；不证明 complete Workflow Studio GA。 |
+| WP-M1A..WP-M5A main-entry evidence | 默认 PV13 首页、画布交互、PV21/PV20 parity、三业务场景路径验收和 WP-M5A DTO/evidence-driven business output summaries。 | 不证明三份最终商业业务产物已生成，不证明生产级外部接入或完整 GA。 |
 | PV22 R0 docs/readiness | 外部应用契约目标和门禁明确。 | 不证明 SDK/template/reference app implementation。 |
 
 ## 2. Gap Matrix
@@ -24,7 +25,9 @@
 | WP-G5 运行闭环融合 | 已关闭当前门槛：PV21 parity loop 在 PV13 页面可触达并通过验收。 | WorkflowDiff -> publish -> run -> human -> evidence 在 PV13 工作台中完成。 | Medium | WP-M3 runtime/evidence acceptance。 |
 | WP-G6 Executor 产品化 | 已关闭当前门槛：PV20 governed executor loop 在 PV13 页面可触达并通过验收。 | 受治理 Agent/Tool/Skill/MCP 在 PV13 资源/Inspector/证据面板中呈现。 | Medium | WP-M4 integration and copy guard。 |
 | WP-G7 能力不退化 | 已关闭当前门槛：capability parity report 记录 PV21/PV20 能力未静默丢失。 | PV13-based 工作台继承保存、校验、Diff、发布、回滚、运行、人工门禁、证据和受治理执行器能力。 | Low | WP-M3/WP-M4 capability parity report。 |
-| WP-G8 外部接入顺序 | PV22 已规划，但目标接入面可能不够稳定。 | PV22 接入稳定 PV13-based Workflow Platform，而不是分散 stage page。 | Medium | WP-M5 readiness update。 |
+| WP-G8 业务产物缺口 | 已有 WP-M5A machine-readable output summaries、artifact refs、human review refs 和 business-output report。 | 最终独立 Markdown 总结、PR/code review 报告或会议纪要仍需后续业务产品化阶段。 | Low | `business-output-report.json` + `06-wp-m5a-business-output.png`。 |
+| WP-G9 前端静态场景数据 | `V13EditableStudio.tsx` 仍保留 `scenarioData`、`fallbackGraph`、静态 timeline/chat/Inspector 文案，但 WP-M5A 已标注 fallback/design reference 边界。 | 进一步把节点模板、Inspector、timeline copy 全量迁移到 persisted DTO/artifact source。 | Medium | `scenario-projection-report.json` + `mock-reduction-report.json`。 |
+| WP-G10 外部接入顺序 | PV22 已规划，但目标接入面和业务场景产物仍需 WP-M5A 稳定。 | PV22 接入稳定 PV13-based Workflow Platform，而不是分散 stage page 或静态业务演示。 | Medium | WP-M5B readiness update。 |
 
 ## 3. Document Support Assessment
 
@@ -43,7 +46,7 @@
 - Acceptance runner 明确 WP-M3/WP-M4 必须输出 `workflow-platform-capability-parity-report.json`，证明 PV21/PV20 能力未静默退化。
 - Drawio 以代码实体和颜色状态呈现当前架构与目标架构差异。
 
-文档仍不能替代后续 WP-M5/PV22、生产治理和产品级体验验收。
+文档和证据仍不能替代后续 WP-M5B/PV22、生产治理、产品级体验验收和最终业务应用交付验收。
 
 ## 4. Claim Risk
 
@@ -54,7 +57,9 @@
 | 把画布优化写成 complete Workflow Studio ready | High | 画布体验是专项硬化，不是 GA。 |
 | 把 PV20 写成 Agent executor ready | High | PV20 是 bounded governed path，不是 unrestricted automation。 |
 | 把 WP-M1A..WP-M4 写成完整平台完成 | Medium | 当前只是 bounded review evidence。 |
+| 把三场景路径验收写成业务产物完成 | High | 当前 evidence 明确不声明独立摘要、代码审查报告或会议纪要已生成。 |
+| 把前端 `scenarioData` 写成真实业务投影 | High | 静态数据必须在 WP-M5A 被收敛或标注 fallback。 |
 
 ## 5. Conclusion
 
-WP-M1A 到 WP-M4 的当前差距已按 bounded review 范围关闭，工作流平台 MVP 候选体验已达到可让人类审查的程度。剩余主线不应继续扩张本阶段，而应进入 WP-M5/PV22 readiness update、PV22-S1 外部应用契约实现评估，以及后续生产治理/产品级体验阶段。
+WP-M1A 到 WP-M5A 的当前差距已按 bounded review 范围关闭，工作流平台 MVP 候选体验已达到可让人类审查的程度。WP-M5B/PV22 readiness update 与 PV22 外部应用契约 bounded implementation 也已完成。剩余主线应进入生产治理/产品级体验、业务 Pack 产品化或开源/商业化准备阶段；不得把现有 bounded evidence 扩张成 production ready、external ecosystem complete 或 complete Workflow Studio GA。

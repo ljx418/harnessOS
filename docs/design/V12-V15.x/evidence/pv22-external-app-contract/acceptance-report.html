@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>PV22 外部应用接入契约自动化验收报告</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 32px; color: #182235; }
+    h1, h2 { margin: 0 0 12px; }
+    section { margin: 24px 0; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid #d8e0ec; padding: 10px 12px; text-align: left; vertical-align: top; }
+    th { background: #eef4ff; }
+    .pass { color: #087443; font-weight: 700; }
+    .fail { color: #b42318; font-weight: 700; }
+    code { background: #f4f7fb; padding: 2px 6px; border-radius: 4px; }
+    .note { background: #fff8e6; border: 1px solid #f4d488; padding: 12px 14px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <h1>PV22 外部应用接入契约自动化验收报告</h1>
+  <p>总状态：<strong class="pass">PASS</strong></p>
+  <p class="note">本报告只证明 PV22 外部应用接入契约进入有界集成审查，不证明生产可用、开放生态完成、商业化完成、完整 Workflow Studio 或 Agent executor 就绪。</p>
+  <section>
+    <h2>验收分组</h2>
+    <table><thead><tr><th>分组</th><th>状态</th><th>证据键</th></tr></thead><tbody><tr><td>registry</td><td class="pass">PASS</td><td><code>registry</code></td></tr>
+<tr><td>sdk</td><td class="pass">PASS</td><td><code>sdk</code></td></tr>
+<tr><td>templates</td><td class="pass">PASS</td><td><code>templates</code></td></tr>
+<tr><td>negative_fixtures</td><td class="pass">PASS</td><td><code>negative_fixtures</code></td></tr>
+<tr><td>reference_app</td><td class="pass">PASS</td><td><code>reference_app</code></td></tr>
+<tr><td>browser_network</td><td class="pass">PASS</td><td><code>browser_network</code></td></tr>
+<tr><td>redaction</td><td class="pass">PASS</td><td><code>redaction</code></td></tr>
+<tr><td>no_false_green</td><td class="pass">PASS</td><td><code>no_false_green</code></td></tr>
+<tr><td>prd_review</td><td class="pass">PASS</td><td><code>prd_review</code></td></tr></tbody></table>
+  </section>
+  <section>
+    <h2>目标架构与当前实现</h2>
+    <p>目标架构：External UI -> App-owned BFF -> HarnessOS SDK -> Capability Token / Scope Binding -> Gateway RPC -> Evidence。</p>
+    <p>当前实现：reference app 前端只调用 <code>/bff/*</code>，BFF 通过 Python SDK 使用真实 <code>/v1/rpc</code> Gateway TestClient 路径完成 session、turn、artifact、events、approval smoke。</p>
+  </section>
+  <section>
+    <h2>用户场景路径</h2>
+    <ol>
+      <li>外部应用选择 <code>reference_app/demo/local</code> scope。</li>
+      <li>服务端 BFF 使用 capability token 调用 SDK。</li>
+      <li>SDK 创建 session、提交 turn、登记外部 artifact、订阅事件、处理人工审批。</li>
+      <li>浏览器只消费 BFF DTO 和 BFF event proxy，不直连 raw Gateway。</li>
+    </ol>
+  </section>
+</body>
+</html>

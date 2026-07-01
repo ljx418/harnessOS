@@ -1,0 +1,25 @@
+{
+  "allowed_claim": "PV22 external app contract ready for bounded integration review.",
+  "evidence_dir": "docs/design/V12-V15.x/evidence/pv22-external-app-contract",
+  "not_claimed": [
+    "production ready",
+    "external ecosystem complete",
+    "commercial readiness complete",
+    "unrestricted third-party app access",
+    "complete Workflow Studio ready",
+    "Agent executor ready"
+  ],
+  "reports": {
+    "browser_network": "PASS",
+    "negative_fixtures": "PASS",
+    "no_false_green": "PASS",
+    "prd_review": "PASS",
+    "redaction": "PASS",
+    "reference_app": "PASS",
+    "registry": "PASS",
+    "sdk": "PASS",
+    "templates": "PASS"
+  },
+  "stage": "PV22 External App Contract",
+  "status": "PASS"
+}

@@ -5,9 +5,20 @@
   "bff_route_families": [
     "/bff/v13",
     "/bff/pv21",
-    "/bff/pv20"
+    "/bff/pv20",
+    "/bff/workflow-platform"
   ],
   "three_required_business_scenarios": [
+    "document_summary",
+    "code_review",
+    "meeting_brief"
+  ],
+  "wp_m5a_projection": [
+    "document_summary",
+    "code_review",
+    "meeting_brief"
+  ],
+  "wp_m5a_outputs": [
     "document_summary",
     "code_review",
     "meeting_brief"

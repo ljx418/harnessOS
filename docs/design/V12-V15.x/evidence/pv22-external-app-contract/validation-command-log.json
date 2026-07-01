@@ -1,0 +1,34 @@
+{
+  "stage": "PV22 External App Contract",
+  "status": "PASS",
+  "commands": [
+    {
+      "name": "PV22 aggregate acceptance",
+      "command": ".venv/bin/python -m pytest tests/test_pv22_external_app_contract.py -q",
+      "status": "PASS",
+      "log": "validation-pv22-pytest.log"
+    },
+    {
+      "name": "V3.5 SDK/template/reference app regression",
+      "command": ".venv/bin/python -m pytest tests/test_v3_5_python_sdk.py tests/test_v3_5_typescript_sdk.py tests/test_v3_5_bff_template_e2e.py tests/test_v3_5_bff_minimal_smoke.py tests/test_v3_5_reference_app.py -q",
+      "status": "PASS",
+      "log": "validation-v35-regression.log"
+    },
+    {
+      "name": "TypeScript SDK npm test",
+      "command": "cd sdk/typescript && npm test",
+      "status": "PASS",
+      "log": "validation-typescript-sdk.log"
+    },
+    {
+      "name": "Workflow Platform regression",
+      "command": ".venv/bin/python -m pytest tests/test_v13_workflow_platform_bff.py tests/test_pv21_complete_workflow_studio_bff.py tests/test_pv20_agent_execution_contract_bff.py -q",
+      "status": "PASS",
+      "log": "validation-workflow-platform-regression.log"
+    }
+  ],
+  "notes": [
+    "TypeScript build uses node node_modules/typescript/bin/tsc to avoid an unreliable Windows/WSL .bin shim.",
+    "PV22 evidence is bounded integration review evidence only."
+  ]
+}

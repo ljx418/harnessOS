@@ -9,7 +9,7 @@
 | --- | --- | --- |
 | WP-M0-D1 PRD | `workflow_platform_main_entry_prd.md` | PV13 首页基线、用户目标、能力分类、No-Go 明确。 |
 | WP-M0-D2 Architecture | `workflow_platform_main_entry_target_architecture.md` | 具体代码实体和交互关系明确。 |
-| WP-M0-D3 Plan | `workflow_platform_main_entry_development_and_acceptance_plan.md` | WP-M1 到 WP-M5 顺序明确。 |
+| WP-M0-D3 Plan | `workflow_platform_main_entry_development_and_acceptance_plan.md` | WP-M1 到 WP-M5A/WP-M5B 顺序明确。 |
 | WP-M0-D3B BFF/DTO Contract | `workflow_platform_main_entry_bff_dto_contract.md` | route allowlist、DTO snapshot、browser denylist 明确。 |
 | WP-M0-D3C Runner Spec | `workflow_platform_main_entry_acceptance_runner_spec.md` | 自动化验收输出、场景和 PASS/FAIL 规则明确。 |
 | WP-M0-D4 Roadmap | `workflow_platform_main_entry_milestone_roadmap.md` | 里程碑和用户可见结果明确。 |
@@ -68,10 +68,29 @@
 | WP-M4-I7 | Governed Agent/Tool/Skill/MCP evidence for code review/risk workflow. | Scenario executor integration report PASS。 |
 | WP-M4-I8 | Governed Agent/Tool/Skill/MCP evidence for meeting/interview brief workflow. | Scenario executor integration report PASS。 |
 
-## 6. WP-M5 PV22 Handoff Tasks
+## 6. WP-M5A Closure / WP-M5B Remaining Tasks
+
+WP-M5 is split after the WP-M5A bounded acceptance update:
+
+- WP-M5A: business scenario productization and data-driven projection [PASS bounded review].
+- WP-M5B: PV22 external app handoff readiness [remaining].
+
+## 6.1 WP-M5A Business Scenario Productization Tasks
 
 | Task | Implementation target | Acceptance |
 | --- | --- | --- |
-| WP-M5-I1 | PV22 docs reference PV13-based Workflow Platform as target host surface. | Document scan PASS。 |
-| WP-M5-I2 | SDK/template/reference app acceptance paths point to platform entry. | PV22 readiness update PASS。 |
-| WP-M5-I3 | External app contract does not bypass workflow platform governance. | Architecture review PASS。 |
+| WP-M5A-I1 | Define and serve scenario projection DTO for document summary, code review and meeting brief. | PASS: `scenario-projection-report.json` proves scenario catalog, input contracts, node templates, Inspector/timeline and evidence categories are DTO/evidence-driven or explicitly fallback。 |
+| WP-M5A-I2 | Generate document/knowledge summary output. | PASS: `business-output-report.json` includes summary artifact refs, citation refs, quality status and human review refs。 |
+| WP-M5A-I3 | Generate code review/risk output. | PASS: `business-output-report.json` includes file/line findings, risk level, test/static scan refs and approval refs。 |
+| WP-M5A-I4 | Generate meeting/interview brief output. | PASS: `business-output-report.json` includes brief, action items, decisions, open questions, citation refs and review refs。 |
+| WP-M5A-I5 | Reduce or label frontend static scenario data. | PASS: `mock-reduction-report.json` lists remaining `scenarioData`, `fallbackGraph`, static chat/timeline/Inspector usages and marks them fallback/design reference。 |
+| WP-M5A-I6 | Produce Chinese HTML productization acceptance report. | PASS: Report separates scenario path evidence from business output evidence and includes screenshots, DTO snapshots, artifact refs and No False Green scan。 |
+| WP-M5A-I7 | Block PV22 if business productization fails. | PASS: WP-M5A passed; WP-M5B readiness refresh and PV22-S1..SA bounded implementation have since passed。 |
+
+## 6.2 WP-M5B PV22 Handoff Tasks
+
+| Task | Implementation target | Acceptance |
+| --- | --- | --- |
+| WP-M5B-I1 | PV22 docs reference WP-M5A-reviewed PV13-based Workflow Platform as target host surface. | Document scan PASS。 |
+| WP-M5B-I2 | SDK/template/reference app acceptance paths point to platform entry. | PV22 readiness update PASS。 |
+| WP-M5B-I3 | External app contract does not bypass workflow platform governance or business scenario evidence boundaries. | Architecture review PASS。 |

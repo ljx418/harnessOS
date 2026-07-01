@@ -15,6 +15,7 @@ open root
   -> create/review WorkflowDiff
   -> publish/run/human gate/evidence
   -> inspect governed Agent executor panel
+  -> verify WP-M5A business scenario outputs when that stage is active
   -> generate Chinese HTML acceptance report
 ```
 
@@ -35,6 +36,9 @@ open root
 | `agent-executor-integration-report.json` | WP-M4 | Governed executor actions, denial/approval/evidence refs。 |
 | `user-scenario-report.json` | WP-M3+ | Minimum Agent workflow plus document/knowledge summary, code review and meeting/interview scenario results。 |
 | `workflow-platform-capability-parity-report.json` | WP-M3+ | No-regression checklist against `WorkflowPlatformMainEntry` PV21/PV20 capabilities, with source route, target UI surface, evidence refs and PASS/FAIL status。 |
+| `scenario-projection-report.json` | WP-M5A | Scenario catalog, input contracts, node templates, Inspector/timeline projection, fallback usage and DTO source。 |
+| `business-output-report.json` | WP-M5A | Document summary, code review and meeting brief output summaries with artifact, quality, audit, human review and redaction refs。 |
+| `mock-reduction-report.json` | WP-M5A | Remaining static `scenarioData`, `fallbackGraph`, chat/timeline/Inspector usage and whether each is fallback/design-only。 |
 | `no-false-green-scan.txt` | all | Forbidden claim scan over docs, UI copy and report。 |
 | `redaction-scan.txt` | all | Secret/token/raw credential leakage scan。 |
 
@@ -69,6 +73,11 @@ open root
 | Executor action | WP-M4 | Allowlisted action has confirmation, audit refs and evidence refs。 |
 | Denied action | WP-M4 | Forbidden or missing confirmation action is denied with reason。 |
 | PV20 capability parity | WP-M4 | PV13-based workbench preserves `WorkflowPlatformMainEntry` executor state, execution contract, execution evidence, skill action, tool action, MCP action and approval/denial refs。 |
+| Scenario projection DTO | WP-M5A | Scenario list, input requirements, node templates, Inspector/timeline and evidence categories come from BFF/DTO projection or are explicitly marked fallback。 |
+| Document summary output | WP-M5A | User receives a summary artifact or machine-readable summary output with citations, quality status and human review refs。 |
+| Code review output | WP-M5A | User receives code review findings with file/line refs, risk level, test/static scan refs and human approval refs。 |
+| Meeting brief output | WP-M5A | User receives meeting brief, action items, decisions, open questions, citation refs and review refs。 |
+| Mock reduction | WP-M5A | Static scenario data is no longer used as the source of truth for accepted business output, or each remaining use is marked fallback/design reference。 |
 
 ## 4. PASS / FAIL Rules
 
@@ -91,6 +100,8 @@ The runner must mark the stage `NO_GO` if:
 - WP-M1 default homepage still renders the degraded `WorkflowPlatformMainEntry` instead of PV13 baseline.
 - Report treats smoke-server-only `/bff/v13/*` evidence as main BFF/runtime completion.
 - WP-M3/WP-M4 capability parity report misses any required `WorkflowPlatformMainEntry` PV21/PV20 capability without explicit defer/No-Go label and user confirmation.
+- WP-M5A report claims business output completion using only scenario path PASS, screenshots or acceptance report text.
+- WP-M5A UI/report treats local `scenarioData`, `fallbackGraph` or static chat/timeline as backend business projection.
 
 ## 5. Suggested Commands
 
@@ -105,6 +116,9 @@ pnpm --dir apps/workflow-console test
 
 # Browser E2E
 node apps/workflow-console/e2e/workflow_platform_main_entry_acceptance.mjs
+
+# WP-M5A business scenario productization acceptance
+node apps/workflow-console/e2e/workflow_platform_business_scenarios_acceptance.mjs
 ```
 
 ## 6. Report Structure
@@ -119,6 +133,7 @@ node apps/workflow-console/e2e/workflow_platform_main_entry_acceptance.mjs
 - Browser network log 摘要。
 - DTO snapshot 摘要。
 - Capability parity 摘要：相对 `WorkflowPlatformMainEntry` 已接入 PV21/PV20 能力的保留、迁移、延期或阻断状态。
+- WP-M5A 业务场景产品化摘要：三类业务产物、artifact refs、human review refs、mock/fallback 状态。
 - PRD 检视结果。
 - 目标架构检视结果。
 - Claim safety and redaction summary。

@@ -59,6 +59,8 @@ import type {
   PV21WorkflowDiffDTO,
   PV21WorkflowGraphDTO,
   PV21WorkflowVersionDTO,
+  WorkflowPlatformBusinessOutputDTO,
+  WorkflowPlatformScenarioProjectionDTO,
   PublishVersionResult,
   QualitySummary,
   WorkflowPatchDiff,
@@ -360,6 +362,14 @@ export class WorkflowConsoleClient {
     return this.get<PV21EvidenceSummaryDTO>(this.pv21Path(`/pv21/runs/${encodeURIComponent(runId)}/evidence`));
   }
 
+  getWorkflowPlatformScenarioProjection(): Promise<WorkflowPlatformScenarioProjectionDTO> {
+    return this.get<WorkflowPlatformScenarioProjectionDTO>(this.workflowPlatformPath("/workflow-platform/scenarios"));
+  }
+
+  getWorkflowPlatformBusinessOutput(scenarioId: string): Promise<WorkflowPlatformBusinessOutputDTO> {
+    return this.get<WorkflowPlatformBusinessOutputDTO>(this.workflowPlatformPath(`/workflow-platform/scenarios/${encodeURIComponent(scenarioId)}/outputs`));
+  }
+
   private pv17Path(path: string): string {
     const scope = this.scopeQuery();
     return `${path}${path.includes("?") ? "&" : "?"}${scope}`;
@@ -381,6 +391,11 @@ export class WorkflowConsoleClient {
   }
 
   private pv21Path(path: string): string {
+    const scope = this.scopeQuery();
+    return `${path}${path.includes("?") ? "&" : "?"}${scope}`;
+  }
+
+  private workflowPlatformPath(path: string): string {
     const scope = this.scopeQuery();
     return `${path}${path.includes("?") ? "&" : "?"}${scope}`;
   }

@@ -1,0 +1,133 @@
+{
+  "count": 16,
+  "entries": [
+    {
+      "error_code": null,
+      "has_authorization": true,
+      "method": "session.start",
+      "result": "ok",
+      "route": "/v1/rpc",
+      "status_code": 200
+    },
+    {
+      "error_code": null,
+      "has_authorization": true,
+      "method": "turn.start",
+      "result": "ok",
+      "route": "/v1/rpc",
+      "status_code": 200
+    },
+    {
+      "error_code": null,
+      "has_authorization": true,
+      "method": "artifact.register_external",
+      "result": "ok",
+      "route": "/v1/rpc",
+      "status_code": 200
+    },
+    {
+      "error_code": null,
+      "has_authorization": true,
+      "method": "artifact.read_metadata",
+      "result": "ok",
+      "route": "/v1/rpc",
+      "status_code": 200
+    },
+    {
+      "error_code": null,
+      "has_authorization": true,
+      "method": "artifact.list",
+      "result": "ok",
+      "route": "/v1/rpc",
+      "status_code": 200
+    },
+    {
+      "error_code": null,
+      "has_authorization": true,
+      "method": "events.subscribe",
+      "result": "ok",
+      "route": "/v1/rpc",
+      "status_code": 200
+    },
+    {
+      "error_code": null,
+      "has_authorization": true,
+      "method": "approval.respond",
+      "result": "ok",
+      "route": "/v1/rpc",
+      "status_code": 200
+    },
+    {
+      "error_code": null,
+      "has_authorization": true,
+      "method": "session.start",
+      "result": "ok",
+      "route": "/v1/rpc",
+      "status_code": 200
+    },
+    {
+      "error_code": null,
+      "has_authorization": true,
+      "method": "turn.start",
+      "result": "ok",
+      "route": "/v1/rpc",
+      "status_code": 200
+    },
+    {
+      "error_code": null,
+      "has_authorization": true,
+      "method": "artifact.register_external",
+      "result": "ok",
+      "route": "/v1/rpc",
+      "status_code": 200
+    },
+    {
+      "error_code": null,
+      "has_authorization": true,
+      "method": "events.subscribe",
+      "result": "ok",
+      "route": "/v1/rpc",
+      "status_code": 200
+    },
+    {
+      "error_code": null,
+      "has_authorization": true,
+      "method": "session.start",
+      "result": "ok",
+      "route": "/v1/rpc",
+      "status_code": 200
+    },
+    {
+      "error_code": null,
+      "has_authorization": true,
+      "method": "turn.start",
+      "result": "ok",
+      "route": "/v1/rpc",
+      "status_code": 200
+    },
+    {
+      "error_code": null,
+      "has_authorization": true,
+      "method": "session.start",
+      "result": "ok",
+      "route": "/v1/rpc",
+      "status_code": 200
+    },
+    {
+      "error_code": null,
+      "has_authorization": true,
+      "method": "turn.start",
+      "result": "ok",
+      "route": "/v1/rpc",
+      "status_code": 200
+    },
+    {
+      "error_code": null,
+      "has_authorization": true,
+      "method": "artifact.register_external",
+      "result": "ok",
+      "route": "/v1/rpc",
+      "status_code": 200
+    }
+  ]
+}

@@ -27,8 +27,9 @@
 | Security | Covered: token/origin/scope/capability/forbidden method。 |
 | Testing | Covered: SDK smoke, template smoke, reference app E2E, negative fixtures。 |
 | Audit | Covered: redaction, No False Green, evidence manifest。 |
+| Stage ordering | Covered: WP-M5A PASS evidence exists; PV22-S1 may start after WP-M5B readiness refresh。 |
+| Concrete acceptance runner | Covered: PV22 evidence runner writes registry, SDK, template, negative fixtures, reference app, PRD review and aggregate reports。 |
 
 ## Conclusion
 
-文档足以支撑 PV22-S1 registry freeze 和后续实现计划制定。实现阶段仍必须先生成真实 SDK/template/reference app evidence，不能把本文档当成 PV22 完成证据。
-
+文档足以支撑 PV22-R0 readiness、WP-M5B readiness refresh 和 PV22-S1..SA 的有界自动化实现。WP-M5A PASS evidence 已存在，因此 PV22-S1 不再因阶段顺序阻塞。实现阶段仍必须生成真实 SDK/Gateway、BFF template、reference app boundary、negative fixture、redaction、No False Green 与 PRD review evidence，不能把本文档当成 PV22 完成证据，也不能把 PV22 证据当成生产可用、开放生态完成或完整工作流平台 GA 证据。

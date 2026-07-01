@@ -1,0 +1,21 @@
+{
+  "full_template": {
+    "denied_rpc_status": 403,
+    "event_stream_token_redacted": true,
+    "structured_routes": [
+      "sessions",
+      "turns",
+      "artifacts/external",
+      "events/subscribe"
+    ]
+  },
+  "minimal_template": {
+    "denied_rpc_status": 403,
+    "structured_routes": [
+      "session/start",
+      "turn/start"
+    ]
+  },
+  "status": "PASS",
+  "uses_real_sdk_gateway_transport": true
+}

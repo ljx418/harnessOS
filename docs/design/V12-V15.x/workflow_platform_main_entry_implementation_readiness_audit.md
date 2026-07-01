@@ -1,6 +1,6 @@
 # Workflow Platform Main Entry Implementation Readiness Audit
 
-用途：判断 WP-M0 文档是否足以支撑以 PV13 前端页面为首页基线的 WP-M1 到 WP-M4 自动化开发和出门验收，并记录本阶段执行后审计结论。
+用途：记录以 PV13 前端页面为首页基线的 WP-M1 到 WP-M5A 自动化开发、出门验收和下一阶段 readiness 判断。
 边界：本文是实施审计记录，不证明生产级工作流平台、完整 Workflow Studio GA 或生产可用。
 
 ## 1. Audit Result
@@ -12,8 +12,10 @@ wp_m2_pv13_canvas_interaction=PASS
 wp_m3_runtime_evidence_parity=PASS
 wp_m4_governed_executor_parity=PASS
 three_required_business_scenarios=PASS
+business_outputs_productized=PASS_BOUNDED_WP_M5A
+frontend_static_scenario_data_reduction=PASS_WITH_FALLBACK_BOUNDARY
 evidence_package=docs/design/V12-V15.x/evidence/workflow-platform-main-entry/
-readiness_for_pv22_implementation_before_platform_entry=NO_GO_BY_DEFAULT
+readiness_for_pv22_implementation_before_wp_m5a=NO_GO_BY_DEFAULT
 readiness_for_complete_workflow_platform_claim=NO_GO
 ```
 
@@ -41,9 +43,11 @@ readiness_for_complete_workflow_platform_claim=NO_GO
 | `/bff/v13/*` ownership ambiguous between main BFF and smoke server | Major | Closed by implementing formal main BFF `/bff/v13/*` compatibility routes and backend test `tests/test_v13_workflow_platform_bff.py`。 |
 | Missing automated runner shape | Major | Closed by acceptance runner spec and required artifacts。 |
 | Missing canvas-specific evidence schema | Major | Closed by canvas action log and edge quality report shapes。 |
-| Missing PV22 ordering guard | Major | Closed by WP-M5 and source-of-truth updates。 |
+| Missing PV22 ordering guard | Major | Closed by WP-M5A/WP-M5B ordering and source-of-truth updates。 |
 | Stage claim drift | Major | Closed by forbidden claim gate and No False Green requirements。 |
 | Business scenario exit rule too broad | Major | Closed by requiring document/knowledge summary, code review/risk and meeting/interview scenarios to all pass for WP-M3/WP-M4 exit。 |
+| Business scenario path evidence could be mistaken for productized business outputs. | Major | Closed by WP-M5A business output summaries and explicit final-deliverable boundary。 |
+| Frontend static `scenarioData` and `fallbackGraph` could be mistaken for backend projection. | Major | Closed by WP-M5A scenario projection DTO and mock reduction report; remaining static data is fallback/design reference only。 |
 | Capability regression risk from direct PV13 replacement | Major | Closed by making `WorkflowPlatformMainEntry` the parity source for PV21/PV20 capabilities and requiring `workflow-platform-capability-parity-report.json`。 |
 
 ## 4. Residual Risk Assessment
@@ -56,9 +60,11 @@ readiness_for_complete_workflow_platform_claim=NO_GO
 | Runtime/evidence integration complexity | Medium | PV19/PV21 evidence exists but must be presented coherently in PV13 UI across three business scenarios。 | WP-M3 separate route/DTO/runtime inspect gate plus mandatory scenario report。 |
 | Capability parity complexity | Medium | `WorkflowPlatformMainEntry` currently bundles PV21/PV20 user actions that must be migrated without preserving its degraded visual shell。 | WP-M3/WP-M4 parity report maps source capability -> PV13 target surface -> BFF route -> evidence ref。 |
 | Executor productization copy risk | Medium | PV20 can be misread as unrestricted executor。 | WP-M4 copy scan and governed wording。 |
+| Business output productization | Low | WP-M5A now proves machine-readable output summaries, not final standalone deliverables. | Keep final-deliverable boundary in reports and future plans。 |
+| Static scenario projection | Medium | PV13 page still contains local static scenario data for visual experience and fallback. | Keep `scenario-projection-report.json` and `mock-reduction-report.json` as required review evidence until all copy is persisted。 |
 | Dirty worktree integration risk | Medium | Repo currently contains uncommitted frontend/evidence changes unrelated to this document update。 | Do not revert unrelated changes; review touched files before implementation。 |
 
-No residual risk is currently high enough to require a user route decision before WP-M5/PV22 readiness update.
+No residual risk is currently high enough to require a user route decision for the already completed WP-M5B/PV22 bounded review path. Future production governance, business Pack productization or open-source/commercial readiness stages still require their own readiness audits.
 
 ## 5. Fallback Technical Routes
 
@@ -71,10 +77,18 @@ No residual risk is currently high enough to require a user route decision befor
 
 Recommended route is A.
 
+## 5.1 WP-M5A Implemented Route
+
+| Route | Description | Pros | Cons | Use when |
+| --- | --- | --- | --- | --- |
+| A. Additive scenario projection DTO | Add scenario projection and business output DTOs while preserving existing V13/PV20/PV21 routes. | Lowest regression risk; keeps evidence replay stable。 | Requires mapping multiple route families into one product view。 | Default route。 |
+| B. Immediate `/bff/workflow-platform/*` facade | Introduce a consolidated facade for all workflow platform state. | Cleaner long-term API surface。 | Higher blast radius and more contract churn。 | Use only if route sprawl blocks implementation。 |
+| C. Frontend-only static refinement | Keep local `scenarioData` and polish UI copy. | Fastest visual progress。 | Would fail WP-M5A because it does not produce business output evidence。 | Remains No-Go for future business-output exits。 |
+
 ## 6. Final Readiness Opinion
 
-WP-M0 documentation was sufficient to support automated WP-M1A through WP-M4 implementation using PV13 as the homepage frontend baseline. The implemented result preserves `WorkflowPlatformMainEntry` PV21/PV20 capability parity in the PV13-based workbench and validates document/knowledge summary, code review/risk and meeting/interview brief as required scenarios.
+WP-M0 documentation was sufficient to support automated WP-M1A through WP-M4 implementation using PV13 as the homepage frontend baseline. The implemented result preserves `WorkflowPlatformMainEntry` PV21/PV20 capability parity in the PV13-based workbench and validates document/knowledge summary, code review/risk and meeting/interview brief as required scenario paths.
 
-The next implementation stage should not keep expanding WP-M1..WP-M4. It should run WP-M5/PV22 readiness update against the accepted PV13-based host surface, then decide whether PV22-S1 external app contract implementation can start.
+WP-M5A selected Route A and completed bounded implementation evidence: BFF scenario projection, business output DTOs, PV13 UI projection, E2E reports and mock-reduction boundary. WP-M5B/PV22 readiness update and PV22-S1..SA bounded implementation have since completed. The next implementation stage should not keep expanding WP-M1..WP-M5A or PV22; it should plan production governance hardening, business Pack productization or open-source/commercial readiness as a separate bounded stage.
 
 The completed evidence remains bounded review evidence. It does not remove the need for separate product-grade UX, production governance, external app contract and deployment acceptance stages.

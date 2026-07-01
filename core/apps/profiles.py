@@ -120,6 +120,20 @@ def build_default_app_registry() -> AppRegistry:
     return AppRegistry(
         [
             AppProfile(
+                app_id="reference_app",
+                display_name="外部参考应用",
+                domain="reference_app",
+                default_pack="reference_app_pack",
+                connector_refs=("reference_app_connector",),
+                allowed_origins=local_origins,
+                default_capabilities=default_capabilities,
+                embed_policy=embed_policy,
+                metadata={
+                    "status": "pv22_external_contract_reference",
+                    "contract": "pv22.external_app_contract.v1",
+                },
+            ),
+            AppProfile(
                 app_id="meeting",
                 display_name="会议助手",
                 domain="meeting",

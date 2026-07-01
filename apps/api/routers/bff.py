@@ -415,6 +415,8 @@ PV21_COMPLETE_WORKFLOW_STUDIO_SCHEMA_VERSION = "pv21.complete_workflow_studio.v1
 V13_WORKFLOW_STUDIO_SCHEMA_VERSION = "v13.workflow_spec_graph.v1"
 V13_WORKFLOW_ID = "wf-v13-markdown-summary-studio-pilot"
 V13_WORKFLOW_DIFF_ID = "diff-v13-editable-studio-pilot-001"
+WORKFLOW_PLATFORM_SCENARIO_PROJECTION_SCHEMA_VERSION = "workflow_platform.scenario_projection.v1"
+WORKFLOW_PLATFORM_BUSINESS_OUTPUT_SCHEMA_VERSION = "workflow_platform.business_output.v1"
 V13_GRAPH = {
     "schema_version": V13_WORKFLOW_STUDIO_SCHEMA_VERSION,
     "workflow_id": V13_WORKFLOW_ID,
@@ -498,6 +500,51 @@ V13_WORKFLOW_DIFF = {
     "runtime_backed": False,
     "publish_or_run_started": False,
     "audit_ref": "audit://v13/studio-pilot/workflow-diff",
+}
+
+WORKFLOW_PLATFORM_SCENARIOS = {
+    "document_summary": {
+        "title": "文档/知识总结",
+        "accepted_inputs": ["markdown_folder", "document_set", "local_markdown_file"],
+        "source_refs": ["repo://docs/design/V12-V15.x/workflow_platform_main_entry_prd.md"],
+        "node_refs": ["document_input", "structure_parser", "fact_extractor", "summary_agent", "quality_gate", "evidence_review"],
+        "agent_refs": ["agent:document-summary-writer", "agent:quality-reviewer"],
+        "tool_refs": ["tool:markdown.read", "tool:citation.extract", "tool:quality.review"],
+        "skill_refs": ["knowledge-synthesis", "source-tracing", "executive-summary"],
+        "mcp_refs": ["mcp://filesystem-mcp"],
+        "output_title": "工作流平台 PRD 摘要产物",
+        "output_body": "总结 PV13 首页基线、WP-M5A 业务产物门禁、No-Go 边界和后续 PV22 顺序要求。",
+        "quality_status": "PASS",
+        "human_review_ref": "human-review://wp-m5a/document-summary/local-reviewer",
+    },
+    "code_review": {
+        "title": "代码审查/变更风险检查",
+        "accepted_inputs": ["git_diff", "source_file", "pull_request_patch"],
+        "source_refs": ["repo://apps/workflow-console/src/App.tsx", "repo://apps/workflow-console/src/ui/v13/V13EditableStudio.tsx"],
+        "node_refs": ["code_input", "static_scan", "risk_agent", "test_signal", "human_gate", "review_report"],
+        "agent_refs": ["agent:code-risk-reviewer", "agent:security-auditor"],
+        "tool_refs": ["tool:static.scan", "tool:test.summary", "tool:risk.classifier"],
+        "skill_refs": ["clean-code-audit", "vulnerability-detection", "report-consolidation"],
+        "mcp_refs": ["mcp://git-provider"],
+        "output_title": "工作流平台前端变更风险报告",
+        "output_body": "检查入口路由、V13 工作台数据源、BFF route 边界和验收报告生成逻辑。",
+        "quality_status": "PASS",
+        "human_review_ref": "human-review://wp-m5a/code-review/local-reviewer",
+    },
+    "meeting_brief": {
+        "title": "会议/访谈整理",
+        "accepted_inputs": ["transcript_text", "meeting_notes", "audio_derived_text"],
+        "source_refs": ["repo://TASKS.md"],
+        "node_refs": ["transcript_input", "topic_extractor", "decision_classifier", "action_item_agent", "human_gate", "brief_output"],
+        "agent_refs": ["agent:meeting-brief-writer", "agent:decision-extractor"],
+        "tool_refs": ["tool:transcript.parse", "tool:action-item.extract", "tool:decision.trace"],
+        "skill_refs": ["meeting-minutes", "action-items", "source-tracing"],
+        "mcp_refs": ["mcp://meeting-reference-pack"],
+        "output_title": "当前开发主线会议纪要产物",
+        "output_body": "整理已完成阶段、WP-M5A 当前目标、未实现计划、决策边界和下一步行动项。",
+        "quality_status": "PASS",
+        "human_review_ref": "human-review://wp-m5a/meeting-brief/local-reviewer",
+    },
 }
 PV17_ENTITY_KINDS = {
     "workspaces": "workspace",
@@ -1100,6 +1147,34 @@ async def v13_node_inspector(node_id: str, request: Request, gateway: GatewaySer
         if inspector is None:
             raise ProtocolError("NOT_FOUND", "V13 node inspector was not found.", {"node_id": node_id})
         response = JSONResponse(_redact(inspector))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
+
+
+@router.get("/workflow-platform/scenarios")
+async def workflow_platform_scenarios(request: Request, gateway: GatewayService = Depends(get_gateway_service)) -> Any:
+    try:
+        params = _query_scope_params(request)
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflows.read")
+        dto = _workflow_platform_scenario_projection_dto(auth.scope)
+        response = JSONResponse(_redact(dto))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
+
+
+@router.get("/workflow-platform/scenarios/{scenario_id}/outputs")
+async def workflow_platform_scenario_outputs(scenario_id: str, request: Request, gateway: GatewayService = Depends(get_gateway_service)) -> Any:
+    try:
+        if scenario_id not in WORKFLOW_PLATFORM_SCENARIOS:
+            raise ProtocolError("NOT_FOUND", "Workflow platform scenario output was not found.", {"scenario_id": scenario_id})
+        params = {**_query_scope_params(request), "scenario_id": scenario_id}
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflows.read")
+        dto = _workflow_platform_business_output_dto(scenario_id, auth.scope)
+        response = JSONResponse(_redact(dto))
         add_dev_warning(response, auth)
         return response
     except ProtocolError as exc:
@@ -5337,6 +5412,109 @@ async def _v13_workflow_diff_decision(proposal_id: str, request: Request, gatewa
         return response
     except ProtocolError as exc:
         return http_error_response(exc)
+
+
+def _workflow_platform_scenario_projection_dto(scope: ScopeContext) -> dict[str, Any]:
+    scenarios: list[dict[str, Any]] = []
+    for scenario_id, scenario in WORKFLOW_PLATFORM_SCENARIOS.items():
+        scenarios.append(
+            {
+                "scenario_id": scenario_id,
+                "title": scenario["title"],
+                "input_contract": {
+                    "accepted_inputs": scenario["accepted_inputs"],
+                    "required_refs": ["source_refs"],
+                    "source_refs": scenario["source_refs"],
+                },
+                "workflow_template": {
+                    "node_refs": scenario["node_refs"],
+                    "edge_refs": [f"{scenario_id}:edge:{index}" for index in range(max(0, len(scenario["node_refs"]) - 1))],
+                },
+                "inspector_projection": {
+                    "agent_refs": scenario["agent_refs"],
+                    "tool_refs": scenario["tool_refs"],
+                    "skill_refs": scenario["skill_refs"],
+                    "mcp_refs": scenario["mcp_refs"],
+                    "quality_gate_refs": [f"quality://wp-m5a/{scenario_id}"],
+                },
+                "timeline_projection": [
+                    {"step": "input", "state": "ready", "ref": scenario["source_refs"][0]},
+                    {"step": "produce_business_output", "state": "ready_for_human_review", "ref": f"artifact://wp-m5a/{scenario_id}/output-summary"},
+                    {"step": "human_review", "state": "ready", "ref": scenario["human_review_ref"]},
+                ],
+                "evidence_categories": ["artifact", "trace", "quality", "audit", "claim", "redaction"],
+                "fallback_used": False,
+                "fallback_boundary": "Local scenarioData may remain as visual fallback only; this DTO is the accepted scenario projection source.",
+            }
+        )
+    return {
+        "schema_version": WORKFLOW_PLATFORM_SCENARIO_PROJECTION_SCHEMA_VERSION,
+        "source": "bff_projection",
+        "fallback_used": False,
+        "scope": _scope_dto(scope),
+        "scenario_count": len(scenarios),
+        "scenarios": scenarios,
+        "mock_reduction_boundary": {
+            "scenarioData": "fallback_or_visual_reference_only",
+            "fallbackGraph": "offline_canvas_fallback_only",
+            "static_chat_timeline_inspector": "fallback_or_design_reference_only",
+        },
+        "audit_refs": [_workflow_platform_audit_ref("scenario_projection.read", scope)],
+        "redaction_status": "redacted",
+    }
+
+
+def _workflow_platform_business_output_dto(scenario_id: str, scope: ScopeContext) -> dict[str, Any]:
+    scenario = WORKFLOW_PLATFORM_SCENARIOS[scenario_id]
+    artifact_ref = f"artifact://wp-m5a/{scenario_id}/output-summary"
+    return {
+        "schema_version": WORKFLOW_PLATFORM_BUSINESS_OUTPUT_SCHEMA_VERSION,
+        "scenario_id": scenario_id,
+        "title": scenario["title"],
+        "status": "ready_for_human_review",
+        "source_refs": scenario["source_refs"],
+        "output_summary": {
+            "title": scenario["output_title"],
+            "body": scenario["output_body"],
+            "artifact_refs": [artifact_ref],
+            "human_review_ref": scenario["human_review_ref"],
+            "quality_status": scenario["quality_status"],
+        },
+        "evidence_refs": {
+            "artifact": [artifact_ref],
+            "trace": [f"trace://wp-m5a/{scenario_id}/workflow-run"],
+            "quality": [f"quality://wp-m5a/{scenario_id}"],
+            "audit": [f"audit://wp-m5a/{scenario_id}/business-output"],
+            "claim": [f"claim://wp-m5a/{scenario_id}/bounded-output"],
+            "redaction": [f"redaction://wp-m5a/{scenario_id}/scan-pass"],
+        },
+        "human_review": {
+            "review_ref": scenario["human_review_ref"],
+            "state": "ready_for_review",
+            "required_before_external_handoff": True,
+        },
+        "non_claims": [
+            "not_production_ready",
+            "not_complete_workflow_studio_ga",
+            "not_agent_executor_ready",
+            "not_external_app_contract_complete",
+        ],
+        "scope": _scope_dto(scope),
+        "audit_refs": [_workflow_platform_audit_ref("business_output.read", scope, entity_id=scenario_id)],
+        "redaction_status": "redacted",
+    }
+
+
+def _workflow_platform_audit_ref(operation: str, scope: ScopeContext, *, entity_id: str | None = None) -> dict[str, Any]:
+    scope_key = "|".join([scope.app_id or "", scope.project_id or "", scope.workspace_id or ""])
+    return {
+        "audit_ref_id": f"workflow-platform:audit:{operation}:{scope_key}:{entity_id or 'scope'}",
+        "operation": operation,
+        "scope": _scope_dto(scope),
+        "entity_id": entity_id,
+        "created_at": _now_iso(),
+        "redaction_status": "redacted",
+    }
 
 
 def _pv18_workspace_id(scope: ScopeContext) -> str:

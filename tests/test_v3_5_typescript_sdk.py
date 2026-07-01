@@ -70,5 +70,5 @@ def test_typescript_protocol_snapshot_matches_server_default_runtime_surface() -
 
 def test_typescript_sdk_package_scripts_exist() -> None:
     package = (TS_SDK / "package.json").read_text(encoding="utf-8")
-    assert '"build": "tsc -p tsconfig.json"' in package
+    assert '"build": "node node_modules/typescript/bin/tsc -p tsconfig.json"' in package
     assert '"test": "npm run build && node --test tests/*.test.mjs"' in package

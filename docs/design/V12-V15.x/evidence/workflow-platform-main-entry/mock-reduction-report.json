@@ -1,0 +1,26 @@
+{
+  "schema_version": "workflow_platform.mock_reduction_report.v1",
+  "status": "PASS",
+  "remaining_static_sources": [
+    {
+      "source": "V13EditableStudio.tsx scenarioData",
+      "boundary": "visual fallback/design reference only",
+      "accepted_business_source": "/bff/workflow-platform/scenarios",
+      "removal_condition": "Replace all scenario labels, node templates, Inspector and timeline copy with persisted WorkflowPlatformScenarioProjectionDTO."
+    },
+    {
+      "source": "V13EditableStudio.tsx fallbackGraph",
+      "boundary": "offline canvas fallback only",
+      "accepted_business_source": "/bff/v13/workflows/{workflow_id}/graph and /bff/workflow-platform/scenarios",
+      "removal_condition": "Keep only if UI clearly marks offline fallback."
+    },
+    {
+      "source": "static chat/timeline/Inspector copy",
+      "boundary": "design reference when DTO load fails",
+      "accepted_business_source": "WorkflowPlatformBusinessOutputDTO and evidence refs",
+      "removal_condition": "All business output copy is persisted in output DTOs or artifacts."
+    }
+  ],
+  "ui_boundary_visible": true,
+  "no_static_source_used_as_accepted_business_output": true
+}

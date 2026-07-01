@@ -1,0 +1,65 @@
+{
+  "schema_version": "harnessos.stage_audit_artifact_manifest.v1",
+  "status": "PASS_WITH_LIMITATIONS",
+  "stage": "WP-M5A_WP-M5B_PV22_BOUNDED_STAGE_AUDIT",
+  "created_at": "2026-07-01T13:01:10+08:00",
+  "artifacts": [
+    {
+      "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/final-stage-audit-report.html",
+      "sha256": "eb0883dff2844fc67b340e641ed02d1fc98551082429b350009a70480d27148b"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/code-review-findings.json",
+      "sha256": "6d9d36533c2b6023c971af5d3b43fea36fe58601d7992df6bc4af30aca1bdd39"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/document-audit-report.json",
+      "sha256": "1bb88c299573715a0b073a8c69da40022ea2fa07761b211f9e81b44157a689e9"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/feature-coverage-matrix.json",
+      "sha256": "2424c2a26862847525b627f20b03125cd6034b713d1b7a301005c3b65b5c35db"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/e2e-acceptance-summary.json",
+      "sha256": "4e61191d917963ee927fe5c9ba4146e174e7b3b77b81a8298e339788931eb1aa"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-command-log.json",
+      "sha256": "d212c140c2f9de0d2cf6e8666b09a6e5b80537bbc06739733a1ceb96b6efe1d5"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/no-false-green-scan.txt",
+      "sha256": "8387bad994a8f694a7daef83ca1b682022e0be640e4889f162ff88488dce502c"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/redaction-scan.txt",
+      "sha256": "ca8c788ff64320a0bb5763c904a1fc13e1278ba6403da88019b080d515462d1d"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-pv22-wp-regression.log",
+      "sha256": "93305920d5371a0e8c17d943cb8c167ebad144c0959076fedda21b34084e751a"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-v35-regression.log",
+      "sha256": "fc3567783ab03035979ff466d25b58235b70821ce36043179d1a1d670b4198f5"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-typescript-sdk.log",
+      "sha256": "969b3a6de65bcb6399b587b5d9b79b75feaaeb5dd6c23182eb2daee8849e09b2"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-workflow-console-build.log",
+      "sha256": "278851389deca4e7d3133865c5c176e17b88deea708802ce2ca20dcbbb758d14"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-workflow-platform-cdp.log",
+      "sha256": "f19979797c243a516befea42f075d659683a7dd250b079429ab7f5c03a628d52"
+    }
+  ],
+  "source_evidence": {
+    "workflow_platform": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry",
+    "pv22_external_app_contract": "docs/design/V12-V15.x/evidence/pv22-external-app-contract"
+  },
+  "human_audit_conclusion": "The package is complete enough to audit the bounded stage implementation, with explicit limitations and No-Go statements."
+}

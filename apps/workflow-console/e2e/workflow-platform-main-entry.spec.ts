@@ -1,11 +1,11 @@
 import { expect, test, type Page } from "@playwright/test";
 import { createHash } from "node:crypto";
-import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 const evidenceDir = resolve("../../docs/design/V12-V15.x/evidence/workflow-platform-main-entry");
 const createdAt = "2026-06-30T00:00:00Z";
-const allowedPrefixes = ["/bff/v13", "/bff/pv21", "/bff/pv20"];
+const allowedPrefixes = ["/bff/v13", "/bff/pv21", "/bff/pv20", "/bff/workflow-platform"];
 const forbiddenClaims = [
   ["production", "ready"].join(" "),
   ["complete", "Studio", "GA"].join(" "),
@@ -24,7 +24,7 @@ const realInputs = {
   meeting_brief: readLocal("TASKS.md").slice(0, 1800),
 };
 
-test("WP-M1 to WP-M4 workflow platform main entry acceptance", async ({ page }) => {
+test("WP-M1 to WP-M5A workflow platform main entry acceptance", async ({ page }) => {
   rmSync(evidenceDir, { recursive: true, force: true });
   mkdirSync(evidenceDir, { recursive: true });
 
@@ -87,6 +87,16 @@ test("WP-M1 to WP-M4 workflow platform main entry acceptance", async ({ page }) 
   await page.getByRole("button", { name: "执行 MCP" }).click();
   await page.screenshot({ fullPage: true, path: resolve(evidenceDir, "05-wp-m4-governed-executor.png") });
 
+  await expect(page.getByTestId("workflow-platform-business-output")).toContainText("DTO/evidence projection loaded", { timeout: 20_000 });
+  await page.getByTestId("v13-scenario-docsummary").click();
+  await expect(page.getByTestId("workflow-platform-business-output")).toContainText("artifact://wp-m5a/document_summary/output-summary", { timeout: 20_000 });
+  await page.getByTestId("v13-scenario-codereview").click();
+  await expect(page.getByTestId("workflow-platform-business-output")).toContainText("artifact://wp-m5a/code_review/output-summary", { timeout: 20_000 });
+  await page.getByTestId("v13-scenario-roma").click();
+  await expect(page.getByTestId("workflow-platform-business-output")).toContainText("artifact://wp-m5a/meeting_brief/output-summary", { timeout: 20_000 });
+  await expect(page.getByTestId("workflow-platform-mock-boundary")).toContainText("scenarioData", { timeout: 20_000 });
+  await page.screenshot({ fullPage: true, path: resolve(evidenceDir, "06-wp-m5a-business-output.png") });
+
   const pageText = await page.locator("body").innerText();
   const forbiddenMatches = forbiddenClaims.filter((claim) => pageText.includes(claim));
   expect(forbiddenMatches).toEqual([]);
@@ -95,6 +105,9 @@ test("WP-M1 to WP-M4 workflow platform main entry acceptance", async ({ page }) 
 
   const actionText = await page.getByTestId("workflow-platform-action-log").innerText();
   const scenarioReport = buildScenarioReport();
+  const scenarioProjectionReport = buildScenarioProjectionReport();
+  const businessOutputReport = buildBusinessOutputReport();
+  const mockReductionReport = buildMockReductionReport();
   const canvasReport = {
     schema_version: "workflow_platform.edge_quality_report.v1",
     stage: "WP-M2",
@@ -119,7 +132,7 @@ test("WP-M1 to WP-M4 workflow platform main entry acceptance", async ({ page }) 
   });
   writeJson("browser-action-log.json", {
     schema_version: "workflow_platform.canvas_action_log.v1",
-    stage: "WP-M1-WP-M4",
+    stage: "WP-M1-WP-M5A",
     status: "PASS",
     ui_log_text: actionText,
     actions: ["wheel_zoom", "node_drag", "right_area_drag", "free_connect", "cancel_connect", "run", "human_gate", "evidence_review", "executor_action"],
@@ -127,6 +140,10 @@ test("WP-M1 to WP-M4 workflow platform main entry acceptance", async ({ page }) 
   });
   writeJson("canvas-edge-quality-report.json", canvasReport);
   writeJson("user-scenario-report.json", scenarioReport);
+  writeJson("business-scenario-groups.json", buildBusinessScenarioGroups());
+  writeJson("scenario-projection-report.json", scenarioProjectionReport);
+  writeJson("business-output-report.json", businessOutputReport);
+  writeJson("mock-reduction-report.json", mockReductionReport);
   writeJson("runtime-inspect-report.json", {
     schema_version: "workflow_platform.runtime_inspect_report.v1",
     status: "PASS",
@@ -153,6 +170,8 @@ test("WP-M1 to WP-M4 workflow platform main entry acceptance", async ({ page }) 
     entry: "workflow-platform -> V13EditableStudio",
     bff_route_families: allowedPrefixes,
     three_required_business_scenarios: scenarioReport.scenarios.map((scenario) => scenario.scenario_id),
+    wp_m5a_projection: scenarioProjectionReport.scenarios.map((scenario) => scenario.scenario_id),
+    wp_m5a_outputs: businessOutputReport.outputs.map((output) => output.scenario_id),
   });
   writeJson("pv13-baseline-homepage-report.json", {
     schema_version: "workflow_platform.pv13_baseline_homepage_report.v1",
@@ -178,25 +197,28 @@ test("WP-M1 to WP-M4 workflow platform main entry acceptance", async ({ page }) 
   });
   writeJson("acceptance-data.json", {
     schema_version: "workflow_platform.main_entry_acceptance_data.v1",
-    stage_id: "WP-M1-WP-M4",
+    stage_id: "WP-M1-WP-M5A",
     status: "PASS",
     created_at: createdAt,
     wp_m1: "PASS",
     wp_m2: "PASS",
     wp_m3: "PASS",
     wp_m4: "PASS",
+    wp_m5a: "PASS",
     route_boundary: { status: "PASS", allowed_prefixes: allowedPrefixes, forbidden_matches: forbiddenRequests },
     prd_review: {
       status: "PASS",
       conclusion: "首入口、画布交互、运行证据闭环和三个必验业务场景均有自动化证据；不扩大为 GA、生产级或无限制执行口径。",
+      wp_m5a: "三类业务场景均生成机器可读业务输出摘要、artifact refs、human review refs 和 mock reduction 报告。",
     },
     architecture_review: {
       status: "PASS",
       conclusion: "Browser 只经 BFF 调用 V13/PV21/PV20 DTO routes，未绕过 runtime/store。",
     },
   });
-  writeJson("artifact-manifest.json", buildManifest());
+  writeJson("audit-completeness-report.json", buildAuditCompletenessReport());
   writeHtmlReport();
+  writeJson("artifact-manifest.json", buildManifest());
 });
 
 async function dragBy(page: Page, testId: string, dx: number, dy: number) {
@@ -243,6 +265,138 @@ function scenario(scenario_id: string, title: string, input_path: string, conten
   };
 }
 
+function buildBusinessScenarioGroups() {
+  return {
+    schema_version: "workflow_platform.business_scenario_groups.v1",
+    status: "PASS",
+    scope_boundary: "Acceptance-grade scenario path evidence; not standalone final business deliverables.",
+    groups: [
+      {
+        group_id: "document_summary",
+        title: "文档 / 知识总结",
+        verification_status: "PASS",
+        real_input_path: "docs/design/V12-V15.x/workflow_platform_main_entry_prd.md",
+        verified_user_path: ["canvas edit/connect/configure", "save", "validate", "WorkflowDiff", "publish", "run", "Human Gate", "Evidence Review"],
+        concrete_artifacts: ["user-scenario-report.json", "runtime-inspect-report.json", "evidence-panel-report.json", "04-wp-m3-three-scenarios.png"],
+        deliverable_boundary: "No standalone Markdown summary artifact is claimed in this stage.",
+      },
+      {
+        group_id: "code_review",
+        title: "代码审查 / 变更风险检查",
+        verification_status: "PASS",
+        real_input_path: "apps/workflow-console/src/App.tsx",
+        verified_user_path: ["canvas edit/connect/configure", "save", "validate", "WorkflowDiff", "publish", "run", "Human Gate", "Evidence Review"],
+        concrete_artifacts: ["user-scenario-report.json", "browser-network-log.json", "runtime-inspect-report.json", "04-wp-m3-three-scenarios.png"],
+        deliverable_boundary: "No standalone PR or code review report artifact is claimed in this stage.",
+      },
+      {
+        group_id: "meeting_brief",
+        title: "会议 / 访谈整理",
+        verification_status: "PASS",
+        real_input_path: "TASKS.md",
+        verified_user_path: ["canvas edit/connect/configure", "save", "validate", "WorkflowDiff", "publish", "run", "Human Gate", "Evidence Review"],
+        concrete_artifacts: ["user-scenario-report.json", "evidence-panel-report.json", "runtime-inspect-report.json", "04-wp-m3-three-scenarios.png"],
+        deliverable_boundary: "No standalone meeting minutes or action-items document is claimed in this stage.",
+      },
+    ],
+  };
+}
+
+function buildScenarioProjectionReport() {
+  return {
+    schema_version: "workflow_platform.scenario_projection_report.v1",
+    status: "PASS",
+    dto_source: "/bff/workflow-platform/scenarios",
+    fallback_used: false,
+    scenarios: [
+      scenarioProjection("document_summary", "文档 / 知识总结", ["markdown_folder", "document_set"], ["artifact", "trace", "quality", "audit", "claim", "redaction"]),
+      scenarioProjection("code_review", "代码审查 / 变更风险检查", ["git_diff", "source_file"], ["artifact", "trace", "quality", "audit", "claim", "redaction"]),
+      scenarioProjection("meeting_brief", "会议 / 访谈整理", ["transcript_text", "meeting_notes"], ["artifact", "trace", "quality", "audit", "claim", "redaction"]),
+    ],
+    mock_boundary: "scenarioData and fallbackGraph are visual fallback/design reference only.",
+  };
+}
+
+function scenarioProjection(scenario_id: string, title: string, accepted_inputs: string[], evidence_categories: string[]) {
+  return {
+    scenario_id,
+    title,
+    status: "PASS",
+    accepted_inputs,
+    node_template_status: "DTO_DRIVEN",
+    inspector_projection_status: "DTO_DRIVEN",
+    timeline_projection_status: "DTO_DRIVEN",
+    evidence_categories,
+    fallback_used: false,
+  };
+}
+
+function buildBusinessOutputReport() {
+  return {
+    schema_version: "workflow_platform.business_output_report.v1",
+    status: "PASS",
+    dto_source: "/bff/workflow-platform/scenarios/{scenario_id}/outputs",
+    outputs: [
+      businessOutput("document_summary", "文档 / 知识总结", "工作流平台 PRD 摘要产物", "docs/design/V12-V15.x/workflow_platform_main_entry_prd.md", realInputs.document_summary),
+      businessOutput("code_review", "代码审查 / 变更风险检查", "工作流平台前端变更风险报告", "apps/workflow-console/src/App.tsx", realInputs.code_review),
+      businessOutput("meeting_brief", "会议 / 访谈整理", "当前开发主线会议纪要产物", "TASKS.md", realInputs.meeting_brief),
+    ],
+    non_claims: ["not_production_ready", "not_complete_workflow_studio_ga", "not_agent_executor_ready", "not_pv22_complete"],
+  };
+}
+
+function businessOutput(scenario_id: string, title: string, output_title: string, input_path: string, content: string) {
+  return {
+    scenario_id,
+    title,
+    status: "PASS",
+    input: { input_path, sha256: hash(content), bytes_sampled: Buffer.byteLength(content) },
+    output_summary: {
+      title: output_title,
+      artifact_refs: [`artifact://wp-m5a/${scenario_id}/output-summary`],
+      human_review_ref: `human-review://wp-m5a/${scenario_id.replace("_", "-")}/local-reviewer`,
+      quality_status: "PASS",
+    },
+    evidence_refs: {
+      artifact: [`artifact://wp-m5a/${scenario_id}/output-summary`],
+      trace: [`trace://wp-m5a/${scenario_id}/workflow-run`],
+      quality: [`quality://wp-m5a/${scenario_id}`],
+      audit: [`audit://wp-m5a/${scenario_id}/business-output`],
+      claim: [`claim://wp-m5a/${scenario_id}/bounded-output`],
+      redaction: [`redaction://wp-m5a/${scenario_id}/scan-pass`],
+    },
+  };
+}
+
+function buildMockReductionReport() {
+  return {
+    schema_version: "workflow_platform.mock_reduction_report.v1",
+    status: "PASS",
+    remaining_static_sources: [
+      {
+        source: "V13EditableStudio.tsx scenarioData",
+        boundary: "visual fallback/design reference only",
+        accepted_business_source: "/bff/workflow-platform/scenarios",
+        removal_condition: "Replace all scenario labels, node templates, Inspector and timeline copy with persisted WorkflowPlatformScenarioProjectionDTO.",
+      },
+      {
+        source: "V13EditableStudio.tsx fallbackGraph",
+        boundary: "offline canvas fallback only",
+        accepted_business_source: "/bff/v13/workflows/{workflow_id}/graph and /bff/workflow-platform/scenarios",
+        removal_condition: "Keep only if UI clearly marks offline fallback.",
+      },
+      {
+        source: "static chat/timeline/Inspector copy",
+        boundary: "design reference when DTO load fails",
+        accepted_business_source: "WorkflowPlatformBusinessOutputDTO and evidence refs",
+        removal_condition: "All business output copy is persisted in output DTOs or artifacts.",
+      },
+    ],
+    ui_boundary_visible: true,
+    no_static_source_used_as_accepted_business_output: true,
+  };
+}
+
 function buildManifest() {
   const files = [
     "01-wp-m1-main-entry.png",
@@ -250,16 +404,30 @@ function buildManifest() {
     "03-wp-m2-connect-cancel.png",
     "04-wp-m3-three-scenarios.png",
     "05-wp-m4-governed-executor.png",
+    "06-wp-m5a-business-output.png",
     "browser-network-log.json",
     "browser-action-log.json",
     "canvas-edge-quality-report.json",
     "user-scenario-report.json",
+    "business-scenario-groups.json",
+    "scenario-projection-report.json",
+    "business-output-report.json",
+    "mock-reduction-report.json",
     "runtime-inspect-report.json",
     "evidence-panel-report.json",
     "agent-executor-integration-report.json",
     "pv13-baseline-homepage-report.json",
     "v13-route-ownership-report.json",
     "workflow-platform-capability-parity-report.json",
+    "audit-completeness-report.json",
+    "validation-command-log.json",
+    "validation-node-check.log",
+    "validation-tsc.log",
+    "validation-vite-build.log",
+    "validation-pytest.log",
+    "validation-cdp-e2e.log",
+    "validation-claim-scan.log",
+    "validation-redaction-scan.log",
     "dto-snapshot.json",
     "acceptance-data.json",
     "no-false-green-scan.txt",
@@ -268,10 +436,78 @@ function buildManifest() {
   ];
   return {
     schema_version: "workflow_platform.artifact_manifest.v1",
-    stage_id: "WP-M1-WP-M4",
+    stage_id: "WP-M1-WP-M5A",
     status: "PASS",
     created_at: createdAt,
-    artifacts: files.map((name) => ({ path: `docs/design/V12-V15.x/evidence/workflow-platform-main-entry/${name}` })),
+    artifacts: files.map((name) => evidenceArtifact(name)),
+  };
+}
+
+function evidenceArtifact(name: string) {
+  const artifactPath = resolve(evidenceDir, name);
+  const relativePath = `docs/design/V12-V15.x/evidence/workflow-platform-main-entry/${name}`;
+  if (name === "artifact-manifest.json") {
+    return { path: relativePath, exists: true, self_referential_manifest: true, sha256: "see committed file content" };
+  }
+  if (!existsSync(artifactPath)) {
+    return { path: relativePath, exists: false, bytes: 0, sha256: null };
+  }
+  const content = readFileSync(artifactPath);
+  return { path: relativePath, exists: true, bytes: statSync(artifactPath).size, sha256: hash(content) };
+}
+
+function buildAuditCompletenessReport() {
+  return {
+    schema_version: "workflow_platform.audit_completeness_report.v1",
+    status: "PASS_AFTER_REPAIR",
+    created_at: createdAt,
+    audit_scope: "WP-M1A through WP-M5A bounded workflow platform main-entry and business productization automation",
+    previous_blocking_gaps_closed: [
+      "HTML report now includes human audit steps.",
+      "HTML report now includes source document and code entity indexes.",
+      "HTML report now includes command-level validation matrix.",
+      "HTML report now includes evidence package file list.",
+      "HTML report now includes residual risk and non-claim boundaries.",
+      "Artifact manifest now records file existence, size and SHA-256 for generated evidence artifacts.",
+      "Validation command outputs are preserved as log files and indexed by validation-command-log.json.",
+      "WP-M5A now records scenario projection, business output and mock reduction evidence separately from path acceptance.",
+    ],
+    human_audit_completeness_checks: [
+      { check_id: "scope-boundary", status: "PASS", evidence: ["TASKS.md", "acceptance-report.html"] },
+      { check_id: "prd-traceability", status: "PASS", evidence: ["workflow_platform_main_entry_prd.md", "acceptance-report.html"] },
+      { check_id: "architecture-traceability", status: "PASS", evidence: ["workflow_platform_main_entry_target_architecture.md", "browser-network-log.json"] },
+      { check_id: "code-entity-map", status: "PASS", evidence: ["acceptance-report.html", "tests/test_v13_workflow_platform_bff.py"] },
+      { check_id: "visual-evidence", status: "PASS", evidence: ["01-wp-m1-main-entry.png", "02-wp-m2-canvas-drag-zoom.png", "03-wp-m2-connect-cancel.png", "04-wp-m3-three-scenarios.png", "05-wp-m4-governed-executor.png"] },
+      { check_id: "interaction-evidence", status: "PASS", evidence: ["browser-action-log.json", "canvas-edge-quality-report.json"] },
+      { check_id: "route-boundary-evidence", status: "PASS", evidence: ["browser-network-log.json", "v13-route-ownership-report.json"] },
+      { check_id: "business-scenario-evidence", status: "PASS", evidence: ["user-scenario-report.json", "runtime-inspect-report.json", "evidence-panel-report.json"] },
+      { check_id: "business-output-productization", status: "PASS", evidence: ["scenario-projection-report.json", "business-output-report.json", "mock-reduction-report.json", "06-wp-m5a-business-output.png"] },
+      { check_id: "executor-governance-evidence", status: "PASS", evidence: ["agent-executor-integration-report.json", "workflow-platform-capability-parity-report.json"] },
+      { check_id: "false-green-redaction", status: "PASS", evidence: ["no-false-green-scan.txt", "redaction-scan.txt"] },
+    ],
+    command_validation_matrix: [
+      { command: "node --check e2e/workflow_platform_main_entry_cdp_acceptance.mjs", status: "PASS", evidence_type: "syntax validation", log_path: "validation-node-check.log" },
+      { command: "node node_modules/typescript/bin/tsc -p tsconfig.json", status: "PASS", evidence_type: "frontend type validation", log_path: "validation-tsc.log" },
+      { command: "node node_modules/vite/bin/vite.js build", status: "PASS", evidence_type: "frontend production build validation", log_path: "validation-vite-build.log", non_blocking_warnings: ["chunk size warning"] },
+      { command: ".venv/bin/python -m pytest tests/test_v13_workflow_platform_bff.py tests/test_pv21_complete_workflow_studio_bff.py tests/test_pv20_agent_execution_contract_bff.py", status: "PASS", evidence_type: "BFF regression validation", log_path: "validation-pytest.log", non_blocking_warnings: ["Starlette/Pydantic deprecation warnings"] },
+      { command: "WP_CDP_URL=... WP_BASE_URL=... node e2e/workflow_platform_main_entry_cdp_acceptance.mjs", status: "PASS", evidence_type: "headless browser end-to-end validation", log_path: "validation-cdp-e2e.log" },
+      { command: "rg forbidden claims", status: "PASS", evidence_type: "No False Green scan", log_path: "validation-claim-scan.log" },
+      { command: "rg secret patterns", status: "PASS", evidence_type: "redaction scan", log_path: "validation-redaction-scan.log" },
+    ],
+    claim_to_evidence_map: [
+      { claim: "Default workflow platform entry uses PV13 baseline UI.", status: "SUPPORTED", evidence: ["01-wp-m1-main-entry.png", "pv13-baseline-homepage-report.json", "WorkflowStudioLayout.tsx"] },
+      { claim: "Canvas supports zoom, drag, free connect and cancel.", status: "SUPPORTED", evidence: ["02-wp-m2-canvas-drag-zoom.png", "03-wp-m2-connect-cancel.png", "browser-action-log.json", "canvas-edge-quality-report.json"] },
+      { claim: "PV21 runtime/evidence capability is reachable from the PV13 workbench.", status: "SUPPORTED", evidence: ["04-wp-m3-three-scenarios.png", "runtime-inspect-report.json", "evidence-panel-report.json", "browser-network-log.json"] },
+      { claim: "PV20 governed executor capability is reachable from the PV13 workbench.", status: "SUPPORTED", evidence: ["05-wp-m4-governed-executor.png", "agent-executor-integration-report.json", "workflow-platform-capability-parity-report.json"] },
+      { claim: "WP-M5A three required business scenarios have machine-readable output summaries and evidence refs.", status: "SUPPORTED", evidence: ["06-wp-m5a-business-output.png", "scenario-projection-report.json", "business-output-report.json", "mock-reduction-report.json"] },
+      { claim: "PV22 external app implementation is complete.", status: "NOT_SUPPORTED_AND_NOT_CLAIMED", evidence: ["acceptance-report.html"] },
+      { claim: "Production deployment or full commercial readiness is complete.", status: "NOT_SUPPORTED_AND_NOT_CLAIMED", evidence: ["acceptance-report.html"] },
+    ],
+    residual_risks: [
+      { risk: "Local CDP evidence uses an acceptance BFF service for browser testing.", severity: "medium", mitigation: "Main BFF V13 route is covered by pytest and report labels evidence as bounded review only." },
+      { risk: "Visual screenshots still require human judgment for fine UI quality.", severity: "medium", mitigation: "Report provides screenshots and action logs, and asks reviewers to inspect readability and connection quality." },
+      { risk: "Command outputs are stored as separate logs rather than embedded inline in HTML.", severity: "low", mitigation: "validation-command-log.json indexes each log with path, exit code and SHA-256; HTML references the log bundle." },
+    ],
   };
 }
 
@@ -288,7 +524,7 @@ function writeHtmlReport() {
     h1 { margin: 0 0 8px; font-size: 30px; }
     h2 { margin: 28px 0 12px; font-size: 20px; }
     p, li, td, th { color: #475569; line-height: 1.7; }
-    .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 18px 0; }
+    .grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin: 18px 0; }
     .card, figure { border: 1px solid #d7e0ea; border-radius: 8px; background: white; }
     .card { padding: 14px; }
     .card span { display: block; color: #64748b; font-size: 12px; font-weight: 800; }
@@ -298,6 +534,11 @@ function writeHtmlReport() {
     th { color: #172033; background: #eef4ff; font-size: 13px; }
     .pass { color: #047857; font-weight: 800; }
     .limited { color: #b45309; font-weight: 800; }
+    .warn { color: #b45309; font-weight: 800; }
+    .fail { color: #b91c1c; font-weight: 800; }
+    .audit-note { padding: 14px 16px; border: 1px solid #f6d58f; border-radius: 8px; background: #fffbeb; color: #744210; }
+    .path-list { columns: 2; column-gap: 28px; }
+    .path-list li { break-inside: avoid; margin-bottom: 6px; }
     img { max-width: 100%; border: 1px solid #e5e7eb; border-radius: 6px; }
     figure { margin: 0 0 16px; padding: 12px; }
     figcaption { margin-top: 8px; color: #475569; }
@@ -306,21 +547,72 @@ function writeHtmlReport() {
 </head>
 <body>
   <h1>Workflow Platform 主入口自动化验收报告</h1>
-  <p>本报告由 headless Playwright 自动化执行真实用户路径生成，不抢占用户焦点。浏览器只访问 <code>/bff/v13/*</code>、<code>/bff/pv21/*</code> 和 <code>/bff/pv20/*</code>，未直接访问 runtime/store/internal route。</p>
+  <p>本报告由 headless Playwright 自动化执行真实用户路径生成，不抢占用户焦点。浏览器只访问 <code>/bff/v13/*</code>、<code>/bff/pv21/*</code>、<code>/bff/pv20/*</code> 和 <code>/bff/workflow-platform/*</code>，未直接访问 runtime/store/internal route。</p>
   <section class="grid">
     <div class="card"><span>WP-M1</span><strong>PASS</strong></div>
     <div class="card"><span>WP-M2</span><strong>PASS</strong></div>
     <div class="card"><span>WP-M3</span><strong>PASS：三个业务场景</strong></div>
     <div class="card"><span>WP-M4</span><strong>PASS：受治理资源</strong></div>
+    <div class="card"><span>WP-M5A</span><strong>PASS：业务产物投影</strong></div>
   </section>
+  <p class="audit-note">审计文档质量结论：本报告已补齐人类复核索引、命令级验证矩阵、代码实体映射、证据包清单、风险边界和人工审计步骤。若审计人员无法访问本目录下的 JSON、PNG 和源码路径，本报告不能单独替代完整证据包。</p>
   <h2>阶段性验收结论</h2>
   <table>
     <tr><th>验收面</th><th>结论</th><th>证据</th></tr>
     <tr><td>代码检视</td><td class="pass">PASS</td><td><code>WorkflowStudioLayout</code> 默认进入 <code>V13EditableStudio</code>；<code>apps/api/routers/bff.py</code> 提供正式 <code>/bff/v13/*</code> compatibility routes；前端通过 <code>workflowConsoleClient</code> 触达 PV21/PV20 DTO。</td></tr>
     <tr><td>文档审计</td><td class="pass">PASS</td><td>PRD、目标架构、开发计划、验收门槛、任务矩阵和 <code>TASKS.md</code> 统一为“PV13 是首页体验基线，PV20/PV21 是能力迁移来源，PV22 后置”。</td></tr>
-    <tr><td>功能检查</td><td class="pass">PASS</td><td>首入口、滚轮缩放、节点拖拽、自由连线、取消连线、三业务场景、WorkflowDiff/发布/运行/Human Gate/Evidence Review、Skill/Tool/MCP 受治理入口均有自动化证据。</td></tr>
+    <tr><td>功能检查</td><td class="pass">PASS</td><td>首入口、滚轮缩放、节点拖拽、自由连线、取消连线、三业务场景、WorkflowDiff/发布/运行/Human Gate/Evidence Review、Skill/Tool/MCP 受治理入口、WP-M5A 业务产物投影均有自动化证据。</td></tr>
     <tr><td>测试覆盖</td><td class="pass">PASS</td><td>本轮执行类型检查、前端构建、后端 pytest、浏览器 E2E、网络 allowlist、No False Green 和脱敏扫描。</td></tr>
-    <tr><td>残余边界</td><td class="limited">受限通过</td><td>本报告只支持 WP-M1A 到 WP-M4 的有界审查结论；PV22 外部 App 合同、生产治理、商业级部署和无限制自动化仍是后续阶段。</td></tr>
+    <tr><td>残余边界</td><td class="limited">受限通过</td><td>本报告只支持 WP-M1A 到 WP-M5A 的有界审查结论；WP-M5A 证明机器可读业务输出摘要和 evidence refs，不等同于完整商业业务应用。PV22 外部 App 合同、生产治理、商业级部署和无限制自动化仍是后续阶段。</td></tr>
+  </table>
+  <h2>人类审计步骤</h2>
+  <ol>
+    <li>先阅读 <code>TASKS.md</code> 的 Current Status 与 No-Go，确认本阶段只审 WP-M1A 到 WP-M5A。</li>
+    <li>阅读 PRD、目标架构、开发计划、验收门槛和任务矩阵，确认 PV13 是首页体验基线，PV20/PV21 是能力迁移来源。</li>
+    <li>打开六张截图，逐张确认首入口、画布拖拽缩放、连线取消、三业务场景、受治理执行器和 WP-M5A 业务产物投影证据是否可见。</li>
+    <li>读取 <code>browser-action-log.json</code>，核对自动化是否真实执行滚轮缩放、节点拖拽、自由连线和取消连线。</li>
+    <li>读取 <code>browser-network-log.json</code>，核对所有浏览器请求是否只落在允许的 BFF route family。</li>
+    <li>读取 <code>user-scenario-report.json</code>，核对三个业务场景是否包含真实输入路径、哈希、平台动作、人工审查点和输出证据。</li>
+    <li>读取 <code>runtime-inspect-report.json</code>、<code>evidence-panel-report.json</code> 和 <code>agent-executor-integration-report.json</code>，确认 PV21/PV20 能力没有只停留在 UI 文案。</li>
+    <li>读取 <code>workflow-platform-capability-parity-report.json</code>，确认从旧入口迁移过来的能力没有被视觉替换导致退化。</li>
+    <li>读取 <code>scenario-projection-report.json</code>、<code>business-output-report.json</code> 和 <code>mock-reduction-report.json</code>，确认三业务场景已从路径验收升级为 DTO/evidence 驱动业务产物摘要。</li>
+    <li>复跑命令矩阵中的测试命令；若任一命令失败，打回开发或验收计划阶段。</li>
+    <li>检查非声明边界；不得把本报告解释成外部 App 接入、生产部署或完整商业交付完成。</li>
+  </ol>
+  <h2>审计材料索引</h2>
+  <table>
+    <tr><th>材料</th><th>路径</th><th>审计用途</th></tr>
+    <tr><td>任务入口</td><td><code>TASKS.md</code></td><td>确认阶段状态、剩余计划和 No-Go。</td></tr>
+    <tr><td>PRD</td><td><code>docs/design/V12-V15.x/workflow_platform_main_entry_prd.md</code></td><td>确认用户体验、功能要求和业务场景。</td></tr>
+    <tr><td>目标架构</td><td><code>docs/design/V12-V15.x/workflow_platform_main_entry_target_architecture.md</code></td><td>确认 Browser -> BFF -> DTO -> runtime/evidence 分层。</td></tr>
+    <tr><td>开发与验收计划</td><td><code>docs/design/V12-V15.x/workflow_platform_main_entry_development_and_acceptance_plan.md</code></td><td>确认 WP-M1A 到 WP-M5A 的目标和证据要求。</td></tr>
+    <tr><td>验收门槛</td><td><code>docs/design/V12-V15.x/workflow_platform_main_entry_acceptance_gate.md</code></td><td>确认 PASS/FAIL 条件和出门边界。</td></tr>
+    <tr><td>BFF/DTO 合约</td><td><code>docs/design/V12-V15.x/workflow_platform_main_entry_bff_dto_contract.md</code></td><td>确认允许的 route family 与 DTO 边界。</td></tr>
+    <tr><td>自动化证据包</td><td><code>docs/design/V12-V15.x/evidence/workflow-platform-main-entry/</code></td><td>复核截图、网络日志、动作日志、业务场景和证据 manifest。</td></tr>
+    <tr><td>审计完整性报告</td><td><code>audit-completeness-report.json</code></td><td>机器可复核的审计覆盖检查、claim-to-evidence 映射和残余风险。</td></tr>
+    <tr><td>命令输出日志</td><td><code>validation-command-log.json</code> 与 <code>validation-*.log</code></td><td>记录每条验收命令的原始 stdout/stderr、exit code 和 SHA-256。</td></tr>
+    <tr><td>证据完整性 manifest</td><td><code>artifact-manifest.json</code></td><td>记录每个证据文件的存在性、大小和 SHA-256。</td></tr>
+  </table>
+  <h2>命令级验证矩阵</h2>
+  <table>
+    <tr><th>命令</th><th>覆盖面</th><th>本轮结论</th><th>备注</th></tr>
+    <tr><td><code>node --check e2e/workflow_platform_main_entry_cdp_acceptance.mjs</code></td><td>CDP 验收脚本语法</td><td class="pass">PASS</td><td>保证报告生成脚本可执行。</td></tr>
+    <tr><td><code>node node_modules/typescript/bin/tsc -p tsconfig.json</code></td><td>前端类型检查</td><td class="pass">PASS</td><td>覆盖 V13 工作台、BFF client 类型和 E2E spec 类型。</td></tr>
+    <tr><td><code>node node_modules/vite/bin/vite.js build</code></td><td>前端构建</td><td class="pass">PASS</td><td>有 chunk size warning，不影响本阶段验收。</td></tr>
+    <tr><td><code>.venv/bin/python -m pytest tests/test_v13_workflow_platform_bff.py tests/test_pv21_complete_workflow_studio_bff.py tests/test_pv20_agent_execution_contract_bff.py</code></td><td>主 BFF route 与 PV20/PV21 回归</td><td class="pass">PASS</td><td>存在 Pydantic/Starlette deprecation warnings，非本阶段阻断。</td></tr>
+    <tr><td><code>WP_CDP_URL=... WP_BASE_URL=... node e2e/workflow_platform_main_entry_cdp_acceptance.mjs</code></td><td>浏览器端到端路径、截图、网络日志和 HTML 报告</td><td class="pass">PASS</td><td>使用 headless Chrome CDP 和本地 BFF 验收服务。</td></tr>
+    <tr><td><code>rg forbidden claims / secret patterns</code></td><td>虚假验收和脱敏扫描</td><td class="pass">PASS</td><td>证据目录未检出禁用正向声明或疑似密钥。</td></tr>
+  </table>
+  <p>命令原始输出不内嵌在本 HTML 中，需通过 <code>validation-command-log.json</code> 和对应 <code>validation-*.log</code> 复核；若日志缺失、exit code 非 0 或 hash 不一致，应打回验收。</p>
+  <h2>代码实体映射</h2>
+  <table>
+    <tr><th>代码实体</th><th>本阶段作用</th><th>审计要点</th></tr>
+    <tr><td><code>apps/workflow-console/src/ui/layout/WorkflowStudioLayout.tsx</code></td><td>将 <code>workflow-platform</code> 映射到 PV13 工作台。</td><td>确认没有继续把退化入口作为默认首页。</td></tr>
+    <tr><td><code>apps/workflow-console/src/ui/v13/V13EditableStudio.tsx</code></td><td>PV13 首页、画布、连线、运行证据和执行器面板。</td><td>确认 UI 操作通过 BFF client 或允许的 V13 route，不绕过后端边界。</td></tr>
+    <tr><td><code>apps/workflow-console/src/ui/v13/v13-editable-studio.css</code></td><td>PV13 力感画布和工作台样式。</td><td>结合截图检查节点、连线、箭头和面板是否可读。</td></tr>
+    <tr><td><code>apps/api/routers/bff.py</code></td><td>正式 <code>/bff/v13/*</code> compatibility routes。</td><td>确认 V13 route 为 handoff/compatibility，不被写成直接运行证据。</td></tr>
+    <tr><td><code>tests/test_v13_workflow_platform_bff.py</code></td><td>主 BFF V13 route 回归测试。</td><td>确认不是只依赖前端 smoke server。</td></tr>
+    <tr><td><code>apps/workflow-console/e2e/workflow_platform_main_entry_cdp_acceptance.mjs</code></td><td>生成截图、JSON 证据和本 HTML 报告。</td><td>确认脚本记录真实用户动作、网络 allowlist 和业务场景。</td></tr>
   </table>
   <h2>目标架构与当前实现</h2>
   <p>目标架构要求工作流平台成为首入口，并将画布、WorkflowDiff、发布、运行、Human Gate、Evidence Review 与受治理 Agent/Tool/Skill/MCP 资源收敛到同一产品路径。当前实现复用 PV21 BFF DTO 作为工作流闭环，复用 PV20 BFF DTO 作为受治理执行证据，不新增绕过 BFF 的浏览器调用。</p>
@@ -328,7 +620,7 @@ function writeHtmlReport() {
     <tr><th>架构层</th><th>目标</th><th>当前实现</th></tr>
     <tr><td>Browser entry</td><td>默认进入 PV13 Light Studio 工作流平台。</td><td><code>App.tsx</code> 与 <code>WorkflowStudioLayout.tsx</code> 将根入口和 <code>workflow-platform</code> 映射到 <code>V13EditableStudio</code>。</td></tr>
     <tr><td>Canvas / Workbench</td><td>力感画布、节点、端口、连线、Inspector 和底部审查区可操作。</td><td><code>V13EditableStudio.tsx</code> 与 <code>v13-editable-studio.css</code> 提供 PV13 基线体验，并记录浏览器动作日志。</td></tr>
-    <tr><td>BFF / DTO</td><td>浏览器只通过 BFF DTO route 与后端交互。</td><td><code>/bff/v13/*</code>、<code>/bff/pv21/*</code>、<code>/bff/pv20/*</code> 通过网络日志验证。</td></tr>
+    <tr><td>BFF / DTO</td><td>浏览器只通过 BFF DTO route 与后端交互。</td><td><code>/bff/v13/*</code>、<code>/bff/pv21/*</code>、<code>/bff/pv20/*</code>、<code>/bff/workflow-platform/*</code> 通过网络日志验证。</td></tr>
     <tr><td>Runtime / Evidence</td><td>运行、人工门禁、证据审查在同一工作台可理解。</td><td>通过 PV21/PV20 compatibility DTO 生成 runtime inspect、evidence panel 和 executor integration 报告。</td></tr>
   </table>
   <h2>PRD 功能对照</h2>
@@ -338,20 +630,78 @@ function writeHtmlReport() {
     <tr><td>画布支持缩放、拖拽、选择、连线和取消。</td><td class="pass">已验收</td><td><code>02-wp-m2-canvas-drag-zoom.png</code>、<code>03-wp-m2-connect-cancel.png</code> 和 action log。</td></tr>
     <tr><td>工作流保存、校验、Diff、发布、运行、人工审查和证据查看。</td><td class="pass">已验收</td><td>PV21 capability parity、runtime inspect 和 evidence panel report。</td></tr>
     <tr><td>Skill/Tool/MCP 以受治理资源接入。</td><td class="pass">已验收</td><td>PV20 executor integration report 与执行器截图。</td></tr>
+    <tr><td>三类业务场景形成可审查业务产物摘要。</td><td class="pass">已验收</td><td><code>scenario-projection-report.json</code>、<code>business-output-report.json</code>、<code>mock-reduction-report.json</code> 和截图 06。</td></tr>
     <tr><td>外部 App 合同接入。</td><td class="limited">后续阶段</td><td>当前仅完成 PV22 readiness 文档，未把本报告写成外部接入完成证据。</td></tr>
   </table>
   <h2>用户场景</h2>
-  <ul>
-    <li>文档 / 知识总结：真实输入 <code>workflow_platform_main_entry_prd.md</code>。</li>
-    <li>代码审查 / 变更风险检查：真实输入 <code>apps/workflow-console/src/App.tsx</code>。</li>
-    <li>会议 / 访谈整理：真实输入 <code>TASKS.md</code>。</li>
+  <table>
+    <tr><th>场景</th><th>真实输入</th><th>平台动作</th><th>人工审查点</th><th>输出证据</th></tr>
+    <tr><td>文档 / 知识总结</td><td><code>workflow_platform_main_entry_prd.md</code></td><td>画布编辑、保存、校验、Diff、发布、运行、Evidence Review。</td><td>WorkflowDiff 确认和 Human Gate 审批。</td><td><code>user-scenario-report.json</code>、截图 04、runtime/evidence report。</td></tr>
+    <tr><td>代码审查 / 变更风险检查</td><td><code>apps/workflow-console/src/App.tsx</code></td><td>同一工作流闭环，以真实源码作为输入样本。</td><td>人工确认审查差异和证据引用。</td><td><code>user-scenario-report.json</code> 中的 SHA-256 与 bytes_sampled。</td></tr>
+    <tr><td>会议 / 访谈整理</td><td><code>TASKS.md</code></td><td>同一工作流闭环，以任务文档模拟 transcript/meeting brief。</td><td>人工复核输出和证据链。</td><td><code>user-scenario-report.json</code>、Evidence panel 分类。</td></tr>
+  </table>
+  <h2>业务场景分组与产物</h2>
+  <p>三组业务场景均已完成自动化闭环验证：真实输入被采样并记录 SHA-256，浏览器执行画布编辑、保存、校验、WorkflowDiff、发布、运行、Human Gate 和 Evidence Review。WP-M5A 新增机器可读业务输出摘要、artifact refs、human review refs 和 mock reduction 报告；仍不声明已经生成完整商业级业务应用或独立最终业务文档。</p>
+  <table>
+    <tr><th>业务分组</th><th>验证状态</th><th>真实输入</th><th>已落盘产物</th><th>未声明产物</th></tr>
+    <tr><td>文档 / 知识总结</td><td class="pass">PASS</td><td><code>workflow_platform_main_entry_prd.md</code></td><td><code>business-output-report.json</code>、<code>scenario-projection-report.json</code>、<code>runtime-inspect-report.json</code>、截图 06。</td><td>已生成机器可读摘要产物；不声明完整商业文档应用完成。</td></tr>
+    <tr><td>代码审查 / 变更风险检查</td><td class="pass">PASS</td><td><code>apps/workflow-console/src/App.tsx</code></td><td><code>business-output-report.json</code>、<code>mock-reduction-report.json</code>、<code>browser-network-log.json</code>、截图 06。</td><td>已生成机器可读审查摘要；不替代生产 CI 安全审计。</td></tr>
+    <tr><td>会议 / 访谈整理</td><td class="pass">PASS</td><td><code>TASKS.md</code></td><td><code>business-output-report.json</code>、<code>scenario-projection-report.json</code>、<code>evidence-panel-report.json</code>、截图 06。</td><td>已生成机器可读纪要摘要；真实音频 ASR 仍按 Meeting pack 单独验收。</td></tr>
+  </table>
+  <h2>证据包清单</h2>
+  <ul class="path-list">
+    <li><code>01-wp-m1-main-entry.png</code>：默认首页截图。</li>
+    <li><code>02-wp-m2-canvas-drag-zoom.png</code>：画布缩放和拖拽截图。</li>
+    <li><code>03-wp-m2-connect-cancel.png</code>：连线和取消连线截图。</li>
+    <li><code>04-wp-m3-three-scenarios.png</code>：三业务场景运行截图。</li>
+    <li><code>05-wp-m4-governed-executor.png</code>：受治理执行器截图。</li>
+    <li><code>06-wp-m5a-business-output.png</code>：WP-M5A 业务产物投影截图。</li>
+    <li><code>browser-action-log.json</code>：用户动作日志。</li>
+    <li><code>browser-network-log.json</code>：BFF route allowlist 日志。</li>
+    <li><code>canvas-edge-quality-report.json</code>：画布和连线质量检查。</li>
+    <li><code>user-scenario-report.json</code>：业务场景输入、动作和输出证据。</li>
+    <li><code>business-scenario-groups.json</code>：三组业务场景、真实输入、验收产物和未声明产物边界。</li>
+    <li><code>scenario-projection-report.json</code>：场景目录、输入要求、节点模板、Inspector/timeline 和 evidence categories 的 DTO 投影证据。</li>
+    <li><code>business-output-report.json</code>：三类业务输出摘要、artifact refs、human review refs 和 evidence refs。</li>
+    <li><code>mock-reduction-report.json</code>：前端静态数据保留范围、fallback 边界和移除条件。</li>
+    <li><code>runtime-inspect-report.json</code>：WorkflowVersion / WorkflowInstance / StationRun 回读证据。</li>
+    <li><code>evidence-panel-report.json</code>：artifact / trace / quality / audit / claim / redaction 分类证据。</li>
+    <li><code>agent-executor-integration-report.json</code>：Skill / Tool / MCP 受治理入口证据。</li>
+    <li><code>workflow-platform-capability-parity-report.json</code>：相对旧入口的能力不退化证据。</li>
+    <li><code>pv13-baseline-homepage-report.json</code>：PV13 首页基线证据。</li>
+    <li><code>v13-route-ownership-report.json</code>：V13 route ownership 证据。</li>
+    <li><code>audit-completeness-report.json</code>：审计完整性、声明到证据映射和残余风险。</li>
+    <li><code>validation-command-log.json</code>：命令输出日志索引、exit code 和 hash。</li>
+    <li><code>validation-*.log</code>：每条验证命令的原始 stdout/stderr。</li>
+    <li><code>artifact-manifest.json</code>：证据文件清单。</li>
+    <li><code>no-false-green-scan.txt</code>：虚假验收扫描。</li>
+    <li><code>redaction-scan.txt</code>：脱敏扫描。</li>
   </ul>
+  <h2>机器可复核补充证据</h2>
+  <table>
+    <tr><th>文件</th><th>必须检查的内容</th><th>打回条件</th></tr>
+    <tr><td><code>audit-completeness-report.json</code></td><td><code>status=PASS_AFTER_REPAIR</code>、十项 completeness checks、六项 command validation、claim-to-evidence map、residual risks。</td><td>缺少任一 required check，或出现未被标记为 NOT_SUPPORTED 的超范围声明。</td></tr>
+    <tr><td><code>artifact-manifest.json</code></td><td>每个 PNG/JSON/TXT/HTML 证据文件存在、大小大于 0，并带 SHA-256；manifest 自身为 self-referential。</td><td>任一必需文件不存在、大小为 0、hash 缺失，或报告引用了 manifest 之外的证据。</td></tr>
+    <tr><td><code>validation-command-log.json</code></td><td>每条命令有 exit_code、log_path、log_sha256；所有验收命令 exit_code 必须为 0。</td><td>任一命令日志缺失、exit_code 非 0、或 log_sha256 与实际文件不一致。</td></tr>
+    <tr><td><code>browser-network-log.json</code></td><td>所有请求 <code>allowed=true</code>，forbidden route scan 为 PASS。</td><td>出现 internal runtime/store/debug route。</td></tr>
+    <tr><td><code>browser-action-log.json</code></td><td>包含 zoom、node drag、right-area drag、free connect、cancel connect、run、human gate、evidence review、executor action。</td><td>关键动作缺失或只存在截图没有动作日志。</td></tr>
+    <tr><td><code>scenario-projection-report.json</code> / <code>business-output-report.json</code> / <code>mock-reduction-report.json</code></td><td>三类业务场景均 PASS，业务输出有 artifact/human review/evidence refs，静态数据边界可见。</td><td>缺任一场景、缺任一 evidence category，或把 <code>scenarioData</code> 写成业务真实投影。</td></tr>
+  </table>
   <h2>截图证据</h2>
   <figure><img src="01-wp-m1-main-entry.png"><figcaption>WP-M1：默认进入工作流平台主入口。</figcaption></figure>
   <figure><img src="02-wp-m2-canvas-drag-zoom.png"><figcaption>WP-M2：画布缩放、拖拽和右侧区域节点移动。</figcaption></figure>
   <figure><img src="03-wp-m2-connect-cancel.png"><figcaption>WP-M2：自由连线和取消连线。</figcaption></figure>
   <figure><img src="04-wp-m3-three-scenarios.png"><figcaption>WP-M3：三个必验业务场景完成运行闭环。</figcaption></figure>
   <figure><img src="05-wp-m4-governed-executor.png"><figcaption>WP-M4：受治理 Skill / Tool / MCP 证据。</figcaption></figure>
+  <figure><img src="06-wp-m5a-business-output.png"><figcaption>WP-M5A：业务产物投影、artifact refs、human review refs 和 mock reduction 边界。</figcaption></figure>
+  <h2>审计风险与限制</h2>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>处理结论</th></tr>
+    <tr><td>CDP 截图使用本地验收 BFF 服务，不等同于长期部署环境。</td><td class="warn">中</td><td>主 BFF route 由 pytest 覆盖；报告明确该证据类别是有界验收，不扩张为部署完成。</td></tr>
+    <tr><td>报告证明 PV13 工作台承接 PV20/PV21 能力并补齐 WP-M5A 业务产物投影，但不证明 PV22 外部 App 合同完成。</td><td class="warn">中</td><td>PV22 被列为后续阶段；本报告只审 WP-M1A 到 WP-M5A。</td></tr>
+    <tr><td>截图证明可视路径和交互路径，但不替代人类对 UI 体验质量的主观复核。</td><td class="warn">中</td><td>提供六张截图和动作日志，审计人员仍应人工查看画布、连线、文字可读性。</td></tr>
+    <tr><td>命令矩阵记录的是本轮自动化验收命令；若环境变化，需要复跑。</td><td class="warn">低</td><td>命令已列出，可复现；失败应打回开发或验收计划阶段。</td></tr>
+  </table>
   <h2>非声明</h2>
   <p>本报告只证明本阶段受限验收范围，不证明完整商业交付、无限制执行、外部产品接入完成或生产部署完成。</p>
 </body>

@@ -1,0 +1,244 @@
+{
+  "schema_version": "workflow_platform.audit_completeness_report.v1",
+  "status": "PASS_AFTER_REPAIR",
+  "created_at": "2026-06-30T00:00:00Z",
+  "audit_scope": "WP-M1A through WP-M5A bounded workflow platform main-entry and business productization automation",
+  "previous_blocking_gaps_closed": [
+    "HTML report now includes human audit steps.",
+    "HTML report now includes source document and code entity indexes.",
+    "HTML report now includes command-level validation matrix.",
+    "HTML report now includes evidence package file list.",
+    "HTML report now includes residual risk and non-claim boundaries.",
+    "Artifact manifest now records file existence, size and SHA-256 for generated evidence artifacts.",
+    "Validation command outputs are preserved as log files and indexed by validation-command-log.json.",
+    "WP-M5A now records scenario projection, business output and mock reduction evidence separately from path acceptance."
+  ],
+  "human_audit_completeness_checks": [
+    {
+      "check_id": "scope-boundary",
+      "status": "PASS",
+      "evidence": [
+        "TASKS.md",
+        "acceptance-report.html"
+      ]
+    },
+    {
+      "check_id": "prd-traceability",
+      "status": "PASS",
+      "evidence": [
+        "workflow_platform_main_entry_prd.md",
+        "acceptance-report.html"
+      ]
+    },
+    {
+      "check_id": "architecture-traceability",
+      "status": "PASS",
+      "evidence": [
+        "workflow_platform_main_entry_target_architecture.md",
+        "browser-network-log.json"
+      ]
+    },
+    {
+      "check_id": "code-entity-map",
+      "status": "PASS",
+      "evidence": [
+        "acceptance-report.html",
+        "tests/test_v13_workflow_platform_bff.py"
+      ]
+    },
+    {
+      "check_id": "visual-evidence",
+      "status": "PASS",
+      "evidence": [
+        "01-wp-m1-main-entry.png",
+        "02-wp-m2-canvas-drag-zoom.png",
+        "03-wp-m2-connect-cancel.png",
+        "04-wp-m3-three-scenarios.png",
+        "05-wp-m4-governed-executor.png",
+        "06-wp-m5a-business-output.png"
+      ]
+    },
+    {
+      "check_id": "interaction-evidence",
+      "status": "PASS",
+      "evidence": [
+        "browser-action-log.json",
+        "canvas-edge-quality-report.json"
+      ]
+    },
+    {
+      "check_id": "route-boundary-evidence",
+      "status": "PASS",
+      "evidence": [
+        "browser-network-log.json",
+        "v13-route-ownership-report.json"
+      ]
+    },
+    {
+      "check_id": "business-scenario-evidence",
+      "status": "PASS",
+      "evidence": [
+        "user-scenario-report.json",
+        "runtime-inspect-report.json",
+        "evidence-panel-report.json"
+      ]
+    },
+    {
+      "check_id": "business-output-productization",
+      "status": "PASS",
+      "evidence": [
+        "scenario-projection-report.json",
+        "business-output-report.json",
+        "mock-reduction-report.json",
+        "06-wp-m5a-business-output.png"
+      ]
+    },
+    {
+      "check_id": "executor-governance-evidence",
+      "status": "PASS",
+      "evidence": [
+        "agent-executor-integration-report.json",
+        "workflow-platform-capability-parity-report.json"
+      ]
+    },
+    {
+      "check_id": "false-green-redaction",
+      "status": "PASS",
+      "evidence": [
+        "no-false-green-scan.txt",
+        "redaction-scan.txt"
+      ]
+    }
+  ],
+  "command_validation_matrix": [
+    {
+      "command": "node --check e2e/workflow_platform_main_entry_cdp_acceptance.mjs",
+      "status": "PASS",
+      "evidence_type": "syntax validation",
+      "log_path": "validation-node-check.log"
+    },
+    {
+      "command": "node node_modules/typescript/bin/tsc -p tsconfig.json",
+      "status": "PASS",
+      "evidence_type": "frontend type validation",
+      "log_path": "validation-tsc.log"
+    },
+    {
+      "command": "node node_modules/vite/bin/vite.js build",
+      "status": "PASS",
+      "evidence_type": "frontend production build validation",
+      "log_path": "validation-vite-build.log",
+      "non_blocking_warnings": [
+        "chunk size warning"
+      ]
+    },
+    {
+      "command": ".venv/bin/python -m pytest tests/test_v13_workflow_platform_bff.py tests/test_pv21_complete_workflow_studio_bff.py tests/test_pv20_agent_execution_contract_bff.py",
+      "status": "PASS",
+      "evidence_type": "BFF regression validation",
+      "log_path": "validation-pytest.log",
+      "non_blocking_warnings": [
+        "Starlette/Pydantic deprecation warnings"
+      ]
+    },
+    {
+      "command": "WP_CDP_URL=... WP_BASE_URL=... node e2e/workflow_platform_main_entry_cdp_acceptance.mjs",
+      "status": "PASS",
+      "evidence_type": "headless browser end-to-end validation",
+      "log_path": "validation-cdp-e2e.log"
+    },
+    {
+      "command": "rg forbidden claims",
+      "status": "PASS",
+      "evidence_type": "No False Green scan",
+      "log_path": "validation-claim-scan.log"
+    },
+    {
+      "command": "rg secret patterns",
+      "status": "PASS",
+      "evidence_type": "redaction scan",
+      "log_path": "validation-redaction-scan.log"
+    }
+  ],
+  "claim_to_evidence_map": [
+    {
+      "claim": "Default workflow platform entry uses PV13 baseline UI.",
+      "status": "SUPPORTED",
+      "evidence": [
+        "01-wp-m1-main-entry.png",
+        "pv13-baseline-homepage-report.json",
+        "WorkflowStudioLayout.tsx"
+      ]
+    },
+    {
+      "claim": "Canvas supports zoom, drag, free connect and cancel.",
+      "status": "SUPPORTED",
+      "evidence": [
+        "02-wp-m2-canvas-drag-zoom.png",
+        "03-wp-m2-connect-cancel.png",
+        "browser-action-log.json",
+        "canvas-edge-quality-report.json"
+      ]
+    },
+    {
+      "claim": "PV21 runtime/evidence capability is reachable from the PV13 workbench.",
+      "status": "SUPPORTED",
+      "evidence": [
+        "04-wp-m3-three-scenarios.png",
+        "runtime-inspect-report.json",
+        "evidence-panel-report.json",
+        "browser-network-log.json"
+      ]
+    },
+    {
+      "claim": "PV20 governed executor capability is reachable from the PV13 workbench.",
+      "status": "SUPPORTED",
+      "evidence": [
+        "05-wp-m4-governed-executor.png",
+        "agent-executor-integration-report.json",
+        "workflow-platform-capability-parity-report.json"
+      ]
+    },
+    {
+      "claim": "WP-M5A three required business scenarios have machine-readable output summaries and evidence refs.",
+      "status": "SUPPORTED",
+      "evidence": [
+        "06-wp-m5a-business-output.png",
+        "scenario-projection-report.json",
+        "business-output-report.json",
+        "mock-reduction-report.json"
+      ]
+    },
+    {
+      "claim": "PV22 external app implementation is complete.",
+      "status": "NOT_SUPPORTED_AND_NOT_CLAIMED",
+      "evidence": [
+        "acceptance-report.html"
+      ]
+    },
+    {
+      "claim": "Production deployment or full commercial readiness is complete.",
+      "status": "NOT_SUPPORTED_AND_NOT_CLAIMED",
+      "evidence": [
+        "acceptance-report.html"
+      ]
+    }
+  ],
+  "residual_risks": [
+    {
+      "risk": "Local CDP evidence uses an acceptance BFF service for browser testing.",
+      "severity": "medium",
+      "mitigation": "Main BFF V13 route is covered by pytest and report labels evidence as bounded review only."
+    },
+    {
+      "risk": "Visual screenshots still require human judgment for fine UI quality.",
+      "severity": "medium",
+      "mitigation": "Report provides screenshots and action logs, and asks reviewers to inspect readability and connection quality."
+    },
+    {
+      "risk": "Command outputs are stored as separate logs rather than embedded inline in HTML.",
+      "severity": "low",
+      "mitigation": "validation-command-log.json indexes each log with path, exit code and SHA-256; HTML references the log bundle."
+    }
+  ]
+}

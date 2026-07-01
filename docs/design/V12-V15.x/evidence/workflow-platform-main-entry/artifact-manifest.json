@@ -1,68 +1,212 @@
 {
   "schema_version": "workflow_platform.artifact_manifest.v1",
-  "stage_id": "WP-M1-WP-M4",
+  "stage_id": "WP-M1-WP-M5A",
   "status": "PASS",
   "created_at": "2026-06-30T00:00:00Z",
   "artifacts": [
     {
-      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/01-wp-m1-main-entry.png"
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/01-wp-m1-main-entry.png",
+      "exists": true,
+      "bytes": 360531,
+      "sha256": "8f37dfa1d220aff8e28389d511798551b54cd4040eda9f3b176615172db3238e"
     },
     {
-      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/02-wp-m2-canvas-drag-zoom.png"
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/02-wp-m2-canvas-drag-zoom.png",
+      "exists": true,
+      "bytes": 426327,
+      "sha256": "fedcbb22f24b47dbb4f228e03ec5dce4b8039fc3f789734b97a562333ad9c1ad"
     },
     {
-      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/03-wp-m2-connect-cancel.png"
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/03-wp-m2-connect-cancel.png",
+      "exists": true,
+      "bytes": 430475,
+      "sha256": "92f9ebc0277a6949a9e3eea224b78f68b4f72dfa369449ee488b259ce4168253"
     },
     {
-      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/04-wp-m3-three-scenarios.png"
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/04-wp-m3-three-scenarios.png",
+      "exists": true,
+      "bytes": 430928,
+      "sha256": "79dd00b377fa89c556420d29f5054aa20a95f3ad99b7314a93ff61e72e9e93ad"
     },
     {
-      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/05-wp-m4-governed-executor.png"
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/05-wp-m4-governed-executor.png",
+      "exists": true,
+      "bytes": 438431,
+      "sha256": "6da74f18b0b0d2a69e720bec489fa31ab7a363a133e690bd2e71940b0d0df0a2"
     },
     {
-      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/browser-network-log.json"
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/06-wp-m5a-business-output.png",
+      "exists": true,
+      "bytes": 437145,
+      "sha256": "3659968fd0c32c9dcb4fd60bd4ff63d1e82e7c7f251de2bb3f5b0fad1e8efabb"
     },
     {
-      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/browser-action-log.json"
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/browser-network-log.json",
+      "exists": true,
+      "bytes": 8306,
+      "sha256": "341fcbf7511a7370853ef2b96ac397db2b0e58b30ca4788cf15c4464a0b504ef"
     },
     {
-      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/canvas-edge-quality-report.json"
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/browser-action-log.json",
+      "exists": true,
+      "bytes": 1029,
+      "sha256": "f1e883fd92248c9504c2dbcec4fdd57406e5553b60cc885d1bc16e2a4b987961"
     },
     {
-      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/user-scenario-report.json"
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/canvas-edge-quality-report.json",
+      "exists": true,
+      "bytes": 478,
+      "sha256": "aecc85fe5e5f1a454ed7676d5d2a35f859da5a56fba73021ca64d90a964bb6ab"
     },
     {
-      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/runtime-inspect-report.json"
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/user-scenario-report.json",
+      "exists": true,
+      "bytes": 2806,
+      "sha256": "06bc7d5020f439ddefda764c67f702e95a8d61f967a8f5e03a78293e9e35d8ac"
     },
     {
-      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/evidence-panel-report.json"
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/business-scenario-groups.json",
+      "exists": true,
+      "bytes": 2348,
+      "sha256": "f5ec1bf09c137deb27e6598c38aae37ec1f016a81efe7ff8e932748f87d2e819"
     },
     {
-      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/agent-executor-integration-report.json"
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/scenario-projection-report.json",
+      "exists": true,
+      "bytes": 1870,
+      "sha256": "9893776475827e109e82dfad6ca6130b993e9b8bf904d9a0f43c76f44fd4fec9"
     },
     {
-      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/pv13-baseline-homepage-report.json"
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/business-output-report.json",
+      "exists": true,
+      "bytes": 3843,
+      "sha256": "3d1c84b61e0b4fb759cd44cbfef905f5d0d52c829125c4cca376791c0548a3ef"
     },
     {
-      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/v13-route-ownership-report.json"
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/mock-reduction-report.json",
+      "exists": true,
+      "bytes": 1188,
+      "sha256": "91e8803dda347dd41acf58ca22dc7a028a7ba7a9a607102fca7e327994a7c203"
     },
     {
-      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/workflow-platform-capability-parity-report.json"
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/runtime-inspect-report.json",
+      "exists": true,
+      "bytes": 467,
+      "sha256": "b4cf5f6c86a8c55189ea82ef7cd0c29a52910472c8a01a9e2a553e4eb34caf81"
     },
     {
-      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/dto-snapshot.json"
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/evidence-panel-report.json",
+      "exists": true,
+      "bytes": 198,
+      "sha256": "4a759b9db5ca4887df0d08b2e30cc13f2e3dc964aae89f234b1719e09e6362bf"
     },
     {
-      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/acceptance-data.json"
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/agent-executor-integration-report.json",
+      "exists": true,
+      "bytes": 409,
+      "sha256": "04c6e8598dedc189beda018bc0fd769bdd4b4c67af28f79d88237dd5dba5d514"
     },
     {
-      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/no-false-green-scan.txt"
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/pv13-baseline-homepage-report.json",
+      "exists": true,
+      "bytes": 382,
+      "sha256": "f1962a03da7efe17d289a04e7dfc8e59741e0429d2912cac4236ec9fe90f0f14"
     },
     {
-      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/redaction-scan.txt"
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/v13-route-ownership-report.json",
+      "exists": true,
+      "bytes": 357,
+      "sha256": "dd791163faf8813b803664f0036b281af540863291b5259e62207ddfbe530b09"
     },
     {
-      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/acceptance-report.html"
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/workflow-platform-capability-parity-report.json",
+      "exists": true,
+      "bytes": 471,
+      "sha256": "8b280c4850014fa38800128b3c922dcea3ff475fa683c3886652283c7dc652e9"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/audit-completeness-report.json",
+      "exists": true,
+      "bytes": 7814,
+      "sha256": "655410ac2bef019c643cf2a1b89e1370a18103f229cb529605c0e2a673e9fb83"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-command-log.json",
+      "exists": false,
+      "bytes": 0,
+      "sha256": null
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-node-check.log",
+      "exists": false,
+      "bytes": 0,
+      "sha256": null
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-tsc.log",
+      "exists": false,
+      "bytes": 0,
+      "sha256": null
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-vite-build.log",
+      "exists": false,
+      "bytes": 0,
+      "sha256": null
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-pytest.log",
+      "exists": false,
+      "bytes": 0,
+      "sha256": null
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-cdp-e2e.log",
+      "exists": false,
+      "bytes": 0,
+      "sha256": null
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-claim-scan.log",
+      "exists": false,
+      "bytes": 0,
+      "sha256": null
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-redaction-scan.log",
+      "exists": false,
+      "bytes": 0,
+      "sha256": null
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/dto-snapshot.json",
+      "exists": true,
+      "bytes": 535,
+      "sha256": "9ce1cdb86769eef243147827d3b9624550b4fbbb99117f73293406e5b3222330"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/acceptance-data.json",
+      "exists": true,
+      "bytes": 967,
+      "sha256": "9f330c557da9e3501b570fc7d1e3e411a3502884d5175914d3ffead6ad1d5326"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/no-false-green-scan.txt",
+      "exists": true,
+      "bytes": 33,
+      "sha256": "1a1d49c6eaad45a5a658ebcba48482d1fdb5e72e05b171ad17564df2b9e37f7d"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/redaction-scan.txt",
+      "exists": true,
+      "bytes": 30,
+      "sha256": "e4fa6758a9d495816e6004ad547c663920b3e1f59e41667477898f6fca68b374"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/acceptance-report.html",
+      "exists": true,
+      "bytes": 23726,
+      "sha256": "22e43edd4570be830243f743874f202a9decc4e8624eab725ae9f7f0fe1b1a71"
     }
   ]
 }
