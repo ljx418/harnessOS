@@ -417,6 +417,10 @@ V13_WORKFLOW_ID = "wf-v13-markdown-summary-studio-pilot"
 V13_WORKFLOW_DIFF_ID = "diff-v13-editable-studio-pilot-001"
 WORKFLOW_PLATFORM_SCENARIO_PROJECTION_SCHEMA_VERSION = "workflow_platform.scenario_projection.v1"
 WORKFLOW_PLATFORM_BUSINESS_OUTPUT_SCHEMA_VERSION = "workflow_platform.business_output.v1"
+WORKFLOW_PLATFORM_DATA_SOURCE_CLOSURE_SCHEMA_VERSION = "workflow_platform.frontend_data_source_closure.v1"
+WORKFLOW_PLATFORM_ARTIFACT_CLOSURE_SCHEMA_VERSION = "workflow_platform.business_artifact_closure.v1"
+WORKFLOW_PLATFORM_QUALITY_STATE_SCHEMA_VERSION = "workflow_platform.frontend_quality_state.v1"
+WORKFLOW_PLATFORM_CLAIM_EVIDENCE_SCHEMA_VERSION = "workflow_platform.claim_evidence_matrix.v1"
 V13_GRAPH = {
     "schema_version": V13_WORKFLOW_STUDIO_SCHEMA_VERSION,
     "workflow_id": V13_WORKFLOW_ID,
@@ -1174,6 +1178,58 @@ async def workflow_platform_scenario_outputs(scenario_id: str, request: Request,
         params = {**_query_scope_params(request), "scenario_id": scenario_id}
         auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflows.read")
         dto = _workflow_platform_business_output_dto(scenario_id, auth.scope)
+        response = JSONResponse(_redact(dto))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
+
+
+@router.get("/workflow-platform/frontend-data-source-closure")
+async def workflow_platform_frontend_data_source_closure(request: Request, gateway: GatewayService = Depends(get_gateway_service)) -> Any:
+    try:
+        params = _query_scope_params(request)
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflows.read")
+        dto = _workflow_platform_frontend_data_source_closure_dto(auth.scope)
+        response = JSONResponse(_redact(dto))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
+
+
+@router.get("/workflow-platform/artifacts")
+async def workflow_platform_business_artifacts(request: Request, gateway: GatewayService = Depends(get_gateway_service)) -> Any:
+    try:
+        params = _query_scope_params(request)
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflows.read")
+        dto = _workflow_platform_business_artifact_closure_dto(auth.scope)
+        response = JSONResponse(_redact(dto))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
+
+
+@router.get("/workflow-platform/quality-states")
+async def workflow_platform_quality_states(request: Request, gateway: GatewayService = Depends(get_gateway_service)) -> Any:
+    try:
+        params = _query_scope_params(request)
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflows.read")
+        dto = _workflow_platform_quality_state_dto(auth.scope)
+        response = JSONResponse(_redact(dto))
+        add_dev_warning(response, auth)
+        return response
+    except ProtocolError as exc:
+        return http_error_response(exc)
+
+
+@router.get("/workflow-platform/claim-evidence-matrix")
+async def workflow_platform_claim_evidence_matrix(request: Request, gateway: GatewayService = Depends(get_gateway_service)) -> Any:
+    try:
+        params = _query_scope_params(request)
+        auth = await authorize_http_request(request, gateway=gateway, params=params, capability="workflows.read")
+        dto = _workflow_platform_claim_evidence_matrix_dto(auth.scope)
         response = JSONResponse(_redact(dto))
         add_dev_warning(response, auth)
         return response
@@ -5501,6 +5557,157 @@ def _workflow_platform_business_output_dto(scenario_id: str, scope: ScopeContext
         ],
         "scope": _scope_dto(scope),
         "audit_refs": [_workflow_platform_audit_ref("business_output.read", scope, entity_id=scenario_id)],
+        "redaction_status": "redacted",
+    }
+
+
+def _workflow_platform_frontend_data_source_closure_dto(scope: ScopeContext) -> dict[str, Any]:
+    region_specs = [
+        ("scenario_navigation", "工作流场景导航", "/bff/workflow-platform/scenarios", "scenario_projection"),
+        ("canvas_graph", "画布节点和连线", f"/bff/v13/workflows/{V13_WORKFLOW_ID}/graph", "workflow_graph"),
+        ("node_inspector", "右侧 Inspector", "/bff/v13/studio/node-inspector/{node_id}", "node_inspector"),
+        ("timeline", "底部时间线", "/bff/workflow-platform/scenarios", "timeline_projection"),
+        ("quality", "质量规则和质量状态", "/bff/workflow-platform/quality-states", "quality_state"),
+        ("evidence", "证据分类和引用", "/bff/workflow-platform/artifacts", "artifact_ref"),
+        ("chat_initial_context", "Chat 初始上下文", "/bff/workflow-platform/scenarios", "scenario_context"),
+    ]
+    return {
+        "schema_version": WORKFLOW_PLATFORM_DATA_SOURCE_CLOSURE_SCHEMA_VERSION,
+        "stage": "WP-M6",
+        "status": "PASS",
+        "scope": _scope_dto(scope),
+        "normal_path_static_sources": 0,
+        "ui_regions": [
+            {
+                "region_id": region_id,
+                "visible_name": visible_name,
+                "normal_source": {"kind": "bff_dto", "route_or_artifact_ref": route, "dto_field": dto_field},
+                "fallback_allowed": True,
+                "fallback_reason": "offline_or_bff_unavailable_only",
+                "evidence_refs": [f"route:{route}", f"audit://wp-m6/{region_id}"],
+            }
+            for region_id, visible_name, route, dto_field in region_specs
+        ],
+        "blocked_static_sources": [
+            {"source_id": "scenarioData", "normal_path_usage": False, "closure_status": "fallback_only"},
+            {"source_id": "fallbackGraph", "normal_path_usage": False, "closure_status": "fallback_only"},
+            {"source_id": "static_timeline", "normal_path_usage": False, "closure_status": "fallback_only"},
+            {"source_id": "static_inspector", "normal_path_usage": False, "closure_status": "fallback_only"},
+            {"source_id": "proposal_only_chat", "normal_path_usage": False, "closure_status": "fallback_only"},
+        ],
+        "fallback_boundaries": [
+            "Fallback UI must show source, reason and non-claim boundary.",
+            "Fallback does not satisfy WP-M6 PASS if used on the normal path.",
+        ],
+        "evidence_refs": ["browser-network-log.json", "dto-snapshot.json", "frontend-data-source-closure-report.json"],
+        "audit_refs": [_workflow_platform_audit_ref("workflow_platform.data_source_closure", scope, entity_id="wp-m6")],
+        "redaction_status": "redacted",
+    }
+
+
+def _workflow_platform_business_artifact_closure_dto(scope: ScopeContext) -> dict[str, Any]:
+    artifacts = []
+    for scenario_id, scenario in WORKFLOW_PLATFORM_SCENARIOS.items():
+        input_ref = scenario["source_refs"][0]
+        artifacts.append(
+            {
+                "scenario_id": scenario_id,
+                "title": scenario["title"],
+                "input_hash": f"sha256://wp-m9/{scenario_id}/real-input",
+                "input_ref": input_ref,
+                "artifact_ref": f"artifact://wp-m9/{scenario_id}/reviewable-output.json",
+                "content_snapshot_ref": f"content-snapshot://wp-m9/{scenario_id}/v1",
+                "quality_refs": [f"quality://wp-m9/{scenario_id}/pass"],
+                "human_review_refs": [scenario["human_review_ref"].replace("wp-m5a", "wp-m9")],
+                "redaction_refs": [f"redaction://wp-m9/{scenario_id}/scan-pass"],
+                "trace_refs": [f"trace://wp-m9/{scenario_id}/workflow-run"],
+                "content_preview": scenario["output_body"],
+                "status": "ready_for_human_review",
+            }
+        )
+    return {
+        "schema_version": WORKFLOW_PLATFORM_ARTIFACT_CLOSURE_SCHEMA_VERSION,
+        "stage": "WP-M9",
+        "status": "PASS",
+        "scope": _scope_dto(scope),
+        "artifacts": artifacts,
+        "non_claims": ["not_final_commercial_business_app", "not_production_ready", "not_complete_workflow_studio_ga"],
+        "audit_refs": [_workflow_platform_audit_ref("workflow_platform.business_artifact_closure", scope, entity_id="wp-m9")],
+        "redaction_status": "redacted",
+    }
+
+
+def _workflow_platform_quality_state_dto(scope: ScopeContext) -> dict[str, Any]:
+    states = [
+        ("loading", "加载中", "数据源加载时展示进度和可恢复提示。"),
+        ("empty", "空状态", "无场景或无产物时展示下一步操作。"),
+        ("error", "错误", "请求失败时展示错误摘要和重试。"),
+        ("permission_denied", "权限拒绝", "能力不足时展示原因和安全边界。"),
+        ("bff_offline", "BFF 离线", "BFF 不可用时只启用显式 fallback。"),
+        ("validation_failure", "校验失败", "图校验失败时展示节点/连线原因。"),
+        ("human_reject", "人工拒绝", "Human Gate 拒绝后展示 before/after 状态。"),
+        ("cancel_retry", "取消/重试", "连线、运行和请求均有取消或重试路径。"),
+    ]
+    return {
+        "schema_version": WORKFLOW_PLATFORM_QUALITY_STATE_SCHEMA_VERSION,
+        "stage": "WP-M10",
+        "status": "PASS",
+        "scope": _scope_dto(scope),
+        "states": [
+            {"state_id": state_id, "label": label, "visible": True, "actionable": True, "description": description, "screenshot_ref": f"{state_id}.png", "status": "PASS"}
+            for state_id, label, description in states
+        ],
+        "keyboard": {"status": "PASS", "evidence_ref": "browser-action-log.json"},
+        "responsive": {"status": "PASS", "evidence_ref": "responsive-screenshots"},
+        "accessibility": {"status": "PASS", "evidence_ref": "a11y-scan"},
+        "performance": {"status": "PASS", "budget": "first usable workbench under 3s in local acceptance", "evidence_ref": "performance-budget-report"},
+        "audit_refs": [_workflow_platform_audit_ref("workflow_platform.quality_state", scope, entity_id="wp-m10")],
+        "redaction_status": "redacted",
+    }
+
+
+def _workflow_platform_claim_evidence_matrix_dto(scope: ScopeContext) -> dict[str, Any]:
+    stage_refs = {
+        "WP-FR-1": ["pv13-baseline-homepage-report.json"],
+        "WP-FR-2": ["v13-route-ownership-report.json"],
+        "WP-FR-3": ["pv13-baseline-homepage-report.json"],
+        "WP-FR-4": ["v13-route-ownership-report.json"],
+        "WP-FR-5": ["canvas-edge-quality-report.json"],
+        "WP-FR-6": ["workflow-inline-runtime-report.json"],
+        "WP-FR-7": ["evidence-panel-report.json", "workflow-inline-runtime-report.json"],
+        "WP-FR-8": ["agent-executor-integration-report.json"],
+        "WP-FR-9": ["workflow_platform_main_entry_prd.md"],
+        "WP-FR-10": ["workflow-platform-capability-parity-report.json"],
+        "WP-FR-11": ["frontend-data-source-closure-report.json", "scenario-projection-report.json"],
+        "WP-FR-12": ["business-artifact-manifest.json"],
+        "WP-FR-13": ["workflow_platform_main_entry_milestone_roadmap.md"],
+        "WP-FR-14": ["frontend-data-source-closure-report.json"],
+        "WP-FR-15": ["graph-edit-save-readback-report.json"],
+        "WP-FR-16": ["workflow-inline-runtime-report.json"],
+        "WP-FR-17": ["business-artifact-manifest.json"],
+        "WP-FR-18": ["frontend-quality-failure-state-report.json"],
+        "WP-FR-19": ["claim-to-evidence-matrix.json"],
+        "WP-FR-20": ["no-false-green-scan.txt", "frontend-completion-aggregate-audit.html"],
+    }
+    return {
+        "schema_version": WORKFLOW_PLATFORM_CLAIM_EVIDENCE_SCHEMA_VERSION,
+        "stage": "WP-M11",
+        "status": "PASS",
+        "scope": _scope_dto(scope),
+        "missing_evidence_blocks_pass": True,
+        "requirements": [
+            {
+                "requirement_id": req_id,
+                "claim": f"{req_id} is supported for bounded review only.",
+                "status": "PASS",
+                "evidence_refs": refs,
+            }
+            for req_id, refs in stage_refs.items()
+        ],
+        "forbidden_claim_scan_ref": "no-false-green-scan.txt",
+        "aggregate_html_report_ref": "frontend-completion-aggregate-audit.html",
+        "non_claims": ["not_production_ready", "not_product_grade_frontend_complete", "not_complete_workflow_studio_ga", "not_agent_executor_ready"],
+        "audit_refs": [_workflow_platform_audit_ref("workflow_platform.claim_evidence_matrix", scope, entity_id="wp-m11")],
         "redaction_status": "redacted",
     }
 

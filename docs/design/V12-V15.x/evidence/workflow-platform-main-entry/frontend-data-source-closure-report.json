@@ -1,0 +1,152 @@
+{
+  "schema_version": "wp-m6-data-source-closure.v1",
+  "stage": "WP-M6",
+  "status": "PASS",
+  "normal_path_static_sources": 0,
+  "ui_regions": [
+    {
+      "region_id": "scenario_navigation",
+      "visible_name": "工作流场景导航",
+      "normal_source": {
+        "kind": "bff_dto",
+        "route_or_artifact_ref": "/bff/workflow-platform/scenarios"
+      },
+      "fallback_allowed": true,
+      "fallback_reason": "offline_or_bff_unavailable_only",
+      "evidence_refs": [
+        "route:/bff/workflow-platform/scenarios",
+        "audit://wp-m6/scenario_navigation"
+      ]
+    },
+    {
+      "region_id": "canvas_graph",
+      "visible_name": "画布节点和连线",
+      "normal_source": {
+        "kind": "bff_dto",
+        "route_or_artifact_ref": "/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph"
+      },
+      "fallback_allowed": true,
+      "fallback_reason": "offline_or_bff_unavailable_only",
+      "evidence_refs": [
+        "route:/bff/v13/workflows/wf-v13-markdown-summary-studio-pilot/graph",
+        "audit://wp-m6/canvas_graph"
+      ]
+    },
+    {
+      "region_id": "node_inspector",
+      "visible_name": "右侧 Inspector",
+      "normal_source": {
+        "kind": "bff_dto",
+        "route_or_artifact_ref": "/bff/v13/studio/node-inspector/{node_id}"
+      },
+      "fallback_allowed": true,
+      "fallback_reason": "offline_or_bff_unavailable_only",
+      "evidence_refs": [
+        "route:/bff/v13/studio/node-inspector/{node_id}",
+        "audit://wp-m6/node_inspector"
+      ]
+    },
+    {
+      "region_id": "timeline",
+      "visible_name": "底部时间线",
+      "normal_source": {
+        "kind": "bff_dto",
+        "route_or_artifact_ref": "/bff/workflow-platform/scenarios"
+      },
+      "fallback_allowed": true,
+      "fallback_reason": "offline_or_bff_unavailable_only",
+      "evidence_refs": [
+        "route:/bff/workflow-platform/scenarios",
+        "audit://wp-m6/timeline"
+      ]
+    },
+    {
+      "region_id": "quality",
+      "visible_name": "质量规则和质量状态",
+      "normal_source": {
+        "kind": "bff_dto",
+        "route_or_artifact_ref": "/bff/workflow-platform/quality-states"
+      },
+      "fallback_allowed": true,
+      "fallback_reason": "offline_or_bff_unavailable_only",
+      "evidence_refs": [
+        "route:/bff/workflow-platform/quality-states",
+        "audit://wp-m6/quality"
+      ]
+    },
+    {
+      "region_id": "evidence",
+      "visible_name": "证据分类和引用",
+      "normal_source": {
+        "kind": "bff_dto",
+        "route_or_artifact_ref": "/bff/workflow-platform/artifacts"
+      },
+      "fallback_allowed": true,
+      "fallback_reason": "offline_or_bff_unavailable_only",
+      "evidence_refs": [
+        "route:/bff/workflow-platform/artifacts",
+        "audit://wp-m6/evidence"
+      ]
+    },
+    {
+      "region_id": "chat_initial_context",
+      "visible_name": "Chat 初始上下文",
+      "normal_source": {
+        "kind": "bff_dto",
+        "route_or_artifact_ref": "/bff/workflow-platform/scenarios"
+      },
+      "fallback_allowed": true,
+      "fallback_reason": "offline_or_bff_unavailable_only",
+      "evidence_refs": [
+        "route:/bff/workflow-platform/scenarios",
+        "audit://wp-m6/chat_initial_context"
+      ]
+    }
+  ],
+  "blocked_static_sources": [
+    {
+      "source_id": "scenarioData",
+      "normal_path_usage": false,
+      "closure_status": "fallback_only"
+    },
+    {
+      "source_id": "fallbackGraph",
+      "normal_path_usage": false,
+      "closure_status": "fallback_only"
+    },
+    {
+      "source_id": "static_timeline",
+      "normal_path_usage": false,
+      "closure_status": "fallback_only"
+    },
+    {
+      "source_id": "static_inspector",
+      "normal_path_usage": false,
+      "closure_status": "fallback_only"
+    },
+    {
+      "source_id": "proposal_only_chat",
+      "normal_path_usage": false,
+      "closure_status": "fallback_only"
+    }
+  ],
+  "fallback_boundaries": [
+    "Fallback UI must show source, reason and non-claim boundary.",
+    "Fallback does not satisfy WP-M6 PASS if used on the normal path."
+  ],
+  "browser_network_log_ref": "browser-network-log.json",
+  "dto_snapshot_ref": "dto-snapshot.json",
+  "evidence_refs": [
+    "07-wp-m6-m11-frontend-completion.png",
+    "browser-network-log.json",
+    "dto-snapshot.json"
+  ],
+  "prd_review": {
+    "status": "PASS",
+    "notes": "WP-FR-14 and WP-FR-20 bounded data-source closure reviewed."
+  },
+  "target_architecture_review": {
+    "status": "PASS",
+    "notes": "Browser -> typed client -> BFF/DTO boundary preserved."
+  }
+}

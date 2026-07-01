@@ -2,7 +2,7 @@
   "schema_version": "workflow_platform.canvas_action_log.v1",
   "stage": "WP-M1-WP-M5A",
   "status": "PASS",
-  "ui_log_text": "场景转换：罗马广场讨论工作流 场景转换：代码审查工作流 场景转换：文档总结工作流 执行器动作：mcp -> completed 执行器动作：tool -> completed 执行器动作：skill -> completed 执行器验收：PV20 Skill / Tool / MCP 证据回读完成 执行器验收：开始 PV20 Skill / Tool / MCP 覆盖 运行三场景：PV21 保存/发布/运行/人工审查/证据回读完成 运行三场景：开始 PV21 能力覆盖验收 自由连线取消：按钮 选中节点：规划 Agent 拖拽节点：folder_reader 选中节点：规划 Agent 画布缩放：166% WP-M5A 业务场景投影已由 BFF DTO 加载 页面初始化",
+  "ui_log_text": "场景转换：罗马广场讨论工作流 场景转换：代码审查工作流 场景转换：文档总结工作流 执行器动作：mcp -> completed 执行器动作：tool -> completed 执行器动作：skill -> completed 执行器验收：PV20 Skill / Tool / MCP 证据回读完成 执行器验收：开始 PV20 Skill / Tool / MCP 覆盖 运行三场景：PV21 保存/发布/运行/人工审查/证据回读完成 运行三场景：开始 PV21 能力覆盖验收 配置节点：folder_reader 连接节点：人工质量复核 -> 审查汇合 添加节点：人工质量复核 自由连线取消：按钮 选中节点：规划 Agent 拖拽节点：folder_reader 选中节点：规划 Agent 画布缩放：166% WP-M6..WP-M11 前端闭环 DTO 已由 BFF 加载 页面初始化",
   "actions": [
     "wheel_zoom",
     "node_drag",

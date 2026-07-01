@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://harnessos.local/schemas/frontend-data-source-closure-report.schema.json",
+  "title": "Workflow Platform Frontend Data Source Closure Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "stage",
+    "status",
+    "normal_path_static_sources",
+    "ui_regions",
+    "blocked_static_sources",
+    "fallback_boundaries",
+    "evidence_refs",
+    "prd_review",
+    "target_architecture_review"
+  ],
+  "properties": {
+    "schema_version": { "type": "string", "const": "wp-m6-data-source-closure.v1" },
+    "stage": { "type": "string", "const": "WP-M6" },
+    "status": { "type": "string", "enum": ["PASS", "FAIL", "BLOCKED", "NO_GO"] },
+    "normal_path_static_sources": { "type": "integer", "maximum": 0 },
+    "ui_regions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["region_id", "visible_name", "normal_source", "fallback_allowed", "evidence_refs"],
+        "properties": {
+          "region_id": { "type": "string", "minLength": 1 },
+          "visible_name": { "type": "string", "minLength": 1 },
+          "normal_source": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["kind", "route_or_artifact_ref"],
+            "properties": {
+              "kind": { "type": "string", "enum": ["bff_dto", "artifact_ref", "evidence_ref"] },
+              "route_or_artifact_ref": { "type": "string", "minLength": 1 }
+            }
+          },
+          "fallback_allowed": { "type": "boolean" },
+          "fallback_reason": { "type": "string" },
+          "evidence_refs": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+        }
+      }
+    },
+    "blocked_static_sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source_id", "normal_path_usage", "closure_status"],
+        "properties": {
+          "source_id": { "type": "string", "minLength": 1 },
+          "normal_path_usage": { "type": "boolean" },
+          "closure_status": { "type": "string", "enum": ["removed", "fallback_only", "blocked"] }
+        }
+      }
+    },
+    "fallback_boundaries": { "type": "array", "items": { "type": "string" } },
+    "browser_network_log_ref": { "type": "string" },
+    "dto_snapshot_ref": { "type": "string" },
+    "evidence_refs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+    "prd_review": { "type": "object", "required": ["status"], "properties": { "status": { "type": "string" }, "notes": { "type": "string" } } },
+    "target_architecture_review": { "type": "object", "required": ["status"], "properties": { "status": { "type": "string" }, "notes": { "type": "string" } } }
+  }
+}

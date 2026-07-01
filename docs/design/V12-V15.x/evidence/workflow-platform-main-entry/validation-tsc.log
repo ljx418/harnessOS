@@ -1,0 +1,4 @@
+status=RUNNING
+command=node node_modules/typescript/bin/tsc -p tsconfig.json
+exit_code=0
+status=PASS

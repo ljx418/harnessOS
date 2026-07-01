@@ -1,56 +1,62 @@
 {
   "schema_version": "workflow_platform.artifact_manifest.v1",
-  "stage_id": "WP-M1-WP-M5A",
-  "status": "PASS_WITH_STAGE_AUDIT_REPLACEMENTS",
-  "created_at": "2026-06-30T00:00:00Z",
+  "stage_id": "WP-M1-WP-M11",
+  "status": "PASS",
+  "created_at": "2026-07-01T00:00:00Z",
   "artifacts": [
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/01-wp-m1-main-entry.png",
       "exists": true,
-      "bytes": 360531,
-      "sha256": "8f37dfa1d220aff8e28389d511798551b54cd4040eda9f3b176615172db3238e"
+      "bytes": 554419,
+      "sha256": "1e388d57832b6bf6855caf6c75bc7eca9923b2f845cc2738f99e4fc6c142c46e"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/02-wp-m2-canvas-drag-zoom.png",
       "exists": true,
-      "bytes": 426327,
-      "sha256": "fedcbb22f24b47dbb4f228e03ec5dce4b8039fc3f789734b97a562333ad9c1ad"
+      "bytes": 569587,
+      "sha256": "a0b85b1da6549bffc1b96657c46bca21c76307eeff104343f6f0998e0c28054e"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/03-wp-m2-connect-cancel.png",
       "exists": true,
-      "bytes": 430475,
-      "sha256": "92f9ebc0277a6949a9e3eea224b78f68b4f72dfa369449ee488b259ce4168253"
+      "bytes": 573997,
+      "sha256": "ad91bb36bed5611cf346f90de484783d7ffb86efaf4ad5de7c6edd74fb139636"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/04-wp-m3-three-scenarios.png",
       "exists": true,
-      "bytes": 430928,
-      "sha256": "79dd00b377fa89c556420d29f5054aa20a95f3ad99b7314a93ff61e72e9e93ad"
+      "bytes": 586200,
+      "sha256": "c0dc2df7de86e2091b37719102296559012f93e2cb0c885d1090c7619c04ec45"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/05-wp-m4-governed-executor.png",
       "exists": true,
-      "bytes": 438431,
-      "sha256": "6da74f18b0b0d2a69e720bec489fa31ab7a363a133e690bd2e71940b0d0df0a2"
+      "bytes": 584203,
+      "sha256": "b12792ea4c40e792c081516afa7e3f0572ad4337ebe83977c9ed75d315d79a26"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/06-wp-m5a-business-output.png",
       "exists": true,
-      "bytes": 437145,
-      "sha256": "3659968fd0c32c9dcb4fd60bd4ff63d1e82e7c7f251de2bb3f5b0fad1e8efabb"
+      "bytes": 579925,
+      "sha256": "fa499c0475c942f25b92911ed077d4e3db8445609cbfc03e4db574d9568cca5e"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/07-wp-m6-m11-frontend-completion.png",
+      "exists": true,
+      "bytes": 573156,
+      "sha256": "8724dfa1508b8cb669779f61f8692839def900fc8d604634554203753162339a"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/browser-network-log.json",
       "exists": true,
-      "bytes": 8306,
-      "sha256": "341fcbf7511a7370853ef2b96ac397db2b0e58b30ca4788cf15c4464a0b504ef"
+      "bytes": 10855,
+      "sha256": "b526abc8abaeee506f179dc1f3dcd30289d8aee765186a3ffb2eec6d25fb9aed"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/browser-action-log.json",
       "exists": true,
-      "bytes": 1029,
-      "sha256": "f1e883fd92248c9504c2dbcec4fdd57406e5553b60cc885d1bc16e2a4b987961"
+      "bytes": 1144,
+      "sha256": "372ed765bca9d295ccd9257bd00500359398c37437fc4c8f51f3132057af33b3"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/canvas-edge-quality-report.json",
@@ -62,7 +68,7 @@
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/user-scenario-report.json",
       "exists": true,
       "bytes": 2806,
-      "sha256": "06bc7d5020f439ddefda764c67f702e95a8d61f967a8f5e03a78293e9e35d8ac"
+      "sha256": "e02dc162e04e0258f9624f9ab186e4b4f99f68827bf81d9c85565a9f21faad76"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/business-scenario-groups.json",
@@ -80,13 +86,49 @@
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/business-output-report.json",
       "exists": true,
       "bytes": 3843,
-      "sha256": "3d1c84b61e0b4fb759cd44cbfef905f5d0d52c829125c4cca376791c0548a3ef"
+      "sha256": "520badc06caa21ea7b926cd5fd543dde8f46aaa19dfbdab8545d1ff0a6e2b4bf"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/mock-reduction-report.json",
       "exists": true,
       "bytes": 1188,
       "sha256": "91e8803dda347dd41acf58ca22dc7a028a7ba7a9a607102fca7e327994a7c203"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/frontend-data-source-closure-report.json",
+      "exists": true,
+      "bytes": 4596,
+      "sha256": "a06ff743ea46a0315e768898b2cc317fe368682457e16d5552440eef1a5b80c4"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/graph-edit-save-readback-report.json",
+      "exists": true,
+      "bytes": 1207,
+      "sha256": "7114e909cc21a1d0a433028d63e921f9c4c8cd764b1744fdbebde88929f9d9b3"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/workflow-inline-runtime-report.json",
+      "exists": true,
+      "bytes": 693,
+      "sha256": "9831889981383e91665e981c36bf25ba205e3c78003c04a471edb3967cc2744d"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/business-artifact-manifest.json",
+      "exists": true,
+      "bytes": 1967,
+      "sha256": "50495c15aff540c60da8cad699558a978a9fb855fd41542f0fa9897afface8a6"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/frontend-quality-failure-state-report.json",
+      "exists": true,
+      "bytes": 2003,
+      "sha256": "553a64fafe8b1dc49d152eaae5d9c6e562d36469bb1fdbe5e36d43179290019e"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/claim-to-evidence-matrix.json",
+      "exists": true,
+      "bytes": 4760,
+      "sha256": "91414cf9396e128ae29d0252c7bdb02e0dbbdc413fccf21a1147708747f696c2"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/runtime-inspect-report.json",
@@ -132,95 +174,69 @@
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-command-log.json",
-      "exists": false,
-      "bytes": 0,
-      "sha256": null,
-      "replaced_by": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-command-log.json",
-      "replacement_exists": true,
-      "replacement_sha256": "d212c140c2f9de0d2cf6e8666b09a6e5b80537bbc06739733a1ceb96b6efe1d5",
-      "audit_note": "Legacy per-folder validation log path superseded by the stage-audit validation package."
+      "exists": true,
+      "bytes": 3351,
+      "sha256": "39e0ef6785e18df729843269b61cc1b85e7bcb888cd82427a1e05c8685ccfc42"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-node-check.log",
-      "exists": false,
-      "bytes": 0,
-      "sha256": null,
-      "replaced_by": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-workflow-console-build.log",
-      "replacement_exists": true,
-      "replacement_sha256": "278851389deca4e7d3133865c5c176e17b88deea708802ce2ca20dcbbb758d14",
-      "audit_note": "Legacy per-folder validation log path superseded by the stage-audit validation package."
+      "exists": true,
+      "bytes": 112,
+      "sha256": "4d22c64f3b48c886445d67d140a0c5f8e8121b409168d3c00efb655231140a08"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-tsc.log",
-      "exists": false,
-      "bytes": 0,
-      "sha256": null,
-      "replaced_by": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-workflow-console-build.log",
-      "replacement_exists": true,
-      "replacement_sha256": "278851389deca4e7d3133865c5c176e17b88deea708802ce2ca20dcbbb758d14",
-      "audit_note": "Legacy per-folder validation log path superseded by the stage-audit validation package."
+      "exists": true,
+      "bytes": 101,
+      "sha256": "818f5400c840bcff037392066c4e3103fa1cd33f6ea9c74a7ced321e704b462f"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-vite-build.log",
-      "exists": false,
-      "bytes": 0,
-      "sha256": null,
-      "replaced_by": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-workflow-console-build.log",
-      "replacement_exists": true,
-      "replacement_sha256": "278851389deca4e7d3133865c5c176e17b88deea708802ce2ca20dcbbb758d14",
-      "audit_note": "Legacy per-folder validation log path superseded by the stage-audit validation package."
+      "exists": true,
+      "bytes": 755,
+      "sha256": "a4eb120b689e12d867ca65f8ded8b7649116c21f21ddbd8460adc73880ae0ff5"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-pytest.log",
-      "exists": false,
-      "bytes": 0,
-      "sha256": null,
-      "replaced_by": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-pv22-wp-regression.log",
-      "replacement_exists": true,
-      "replacement_sha256": "93305920d5371a0e8c17d943cb8c167ebad144c0959076fedda21b34084e751a",
-      "audit_note": "Legacy per-folder validation log path superseded by the stage-audit validation package."
+      "exists": true,
+      "bytes": 2152,
+      "sha256": "ddac279b19c338a789451bb7acf55e66c1782a1ea88719cf44efebcac7425be3"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-cdp-e2e.log",
-      "exists": false,
-      "bytes": 0,
-      "sha256": null,
-      "replaced_by": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-workflow-platform-cdp.log",
-      "replacement_exists": true,
-      "replacement_sha256": "f19979797c243a516befea42f075d659683a7dd250b079429ab7f5c03a628d52",
-      "audit_note": "Legacy per-folder validation log path superseded by the stage-audit validation package."
+      "exists": true,
+      "bytes": 171,
+      "sha256": "6f386001d95f530780e53d0fcc93f33435ce7547a0b9621cabf02121534eac1b"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-claim-scan.log",
-      "exists": false,
-      "bytes": 0,
-      "sha256": null,
-      "replaced_by": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/no-false-green-scan.txt",
-      "replacement_exists": true,
-      "replacement_sha256": "8387bad994a8f694a7daef83ca1b682022e0be640e4889f162ff88488dce502c",
-      "audit_note": "Legacy per-folder validation log path superseded by the stage-audit validation package."
+      "exists": true,
+      "bytes": 127,
+      "sha256": "0cf28259f786f83d382ea62ba500d308d40a8ac83e72b2547b3b7ac32450cf84"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-redaction-scan.log",
-      "exists": false,
-      "bytes": 0,
-      "sha256": null,
-      "replaced_by": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/redaction-scan.txt",
-      "replacement_exists": true,
-      "replacement_sha256": "ca8c788ff64320a0bb5763c904a1fc13e1278ba6403da88019b080d515462d1d",
-      "audit_note": "Legacy per-folder validation log path superseded by the stage-audit validation package."
+      "exists": true,
+      "bytes": 107,
+      "sha256": "f57b01a70ba42147d78c7e972fb9716d3551b27e965e18596833d2d8b237e6b5"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-schema.log",
+      "exists": true,
+      "bytes": 466,
+      "sha256": "5432b27db77e839e4411f0f92d1a1956f60d8a4568a561cfe19e39c2c0ae4a59"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/dto-snapshot.json",
       "exists": true,
-      "bytes": 535,
-      "sha256": "9ce1cdb86769eef243147827d3b9624550b4fbbb99117f73293406e5b3222330"
+      "bytes": 1348,
+      "sha256": "50123269c9e1990a0c936dde8aa97d4db83d35b94411c28de01e5641dde01b3c"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/acceptance-data.json",
       "exists": true,
-      "bytes": 967,
-      "sha256": "9f330c557da9e3501b570fc7d1e3e411a3502884d5175914d3ffead6ad1d5326"
+      "bytes": 1187,
+      "sha256": "cdfd4f235718a8a43ca8f1296305997ebd108fd5b92b4121c297ed0cfaeb1f8e"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/no-false-green-scan.txt",
@@ -239,7 +255,12 @@
       "exists": true,
       "bytes": 23726,
       "sha256": "22e43edd4570be830243f743874f202a9decc4e8624eab725ae9f7f0fe1b1a71"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/frontend-completion-aggregate-audit.html",
+      "exists": true,
+      "bytes": 3339,
+      "sha256": "bcec63343924b6caff1f95c600211c2dfb1d27bd1c7181121187b40ae93cfdab"
     }
-  ],
-  "stage_audit_replacement_note": "Missing legacy validation log entries are replaced by docs/design/V12-V15.x/evidence/stage-audit-2026-07-01 validation logs."
+  ]
 }

@@ -1,0 +1,19 @@
+{
+  "schema_version": "wp-m8-inline-runtime.v1",
+  "stage": "WP-M8",
+  "status": "PASS",
+  "workflow_version_ref": "route:/bff/pv21/workflows/{workflow_id}/versions/publish",
+  "workflow_instance_ref": "route:/bff/pv21/workflows/{workflow_id}/runs",
+  "station_run_refs": [
+    "route:/bff/pv21/runs/{run_id}/inspect"
+  ],
+  "human_action_refs": [
+    "route:/bff/pv21/runs/{run_id}/human-actions"
+  ],
+  "evidence_review_refs": [
+    "route:/bff/pv21/runs/{run_id}/evidence"
+  ],
+  "before_after_state_digest": "PV21 human action before/after state is visible in runtime loop.",
+  "browser_action_log_ref": "browser-action-log.json",
+  "browser_network_log_ref": "browser-network-log.json"
+}

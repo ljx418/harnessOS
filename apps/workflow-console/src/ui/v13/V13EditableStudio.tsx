@@ -6,7 +6,11 @@ import type {
   PV20AgentExecutorStateDTO,
   PV21EvidenceSummaryDTO,
   PV21RunDTO,
+  WorkflowPlatformBusinessArtifactClosureDTO,
   WorkflowPlatformBusinessOutputDTO,
+  WorkflowPlatformClaimEvidenceMatrixDTO,
+  WorkflowPlatformDataSourceClosureDTO,
+  WorkflowPlatformQualityStateDTO,
   WorkflowPlatformScenarioProjectionDTO,
 } from "../../api/types.js";
 import "./v13-editable-studio.css";
@@ -489,6 +493,10 @@ export function V13EditableStudio() {
   const [pv20RunId, setPv20RunId] = useState("");
   const [scenarioProjection, setScenarioProjection] = useState<WorkflowPlatformScenarioProjectionDTO | null>(null);
   const [businessOutputs, setBusinessOutputs] = useState<Partial<Record<BusinessScenarioId, WorkflowPlatformBusinessOutputDTO>>>({});
+  const [dataSourceClosure, setDataSourceClosure] = useState<WorkflowPlatformDataSourceClosureDTO | null>(null);
+  const [businessArtifacts, setBusinessArtifacts] = useState<WorkflowPlatformBusinessArtifactClosureDTO | null>(null);
+  const [qualityStates, setQualityStates] = useState<WorkflowPlatformQualityStateDTO | null>(null);
+  const [claimMatrix, setClaimMatrix] = useState<WorkflowPlatformClaimEvidenceMatrixDTO | null>(null);
   const [businessProjectionStatus, setBusinessProjectionStatus] = useState("加载 WP-M5A DTO 投影");
 
   const canvasRef = useRef<HTMLDivElement | null>(null);
@@ -506,6 +514,9 @@ export function V13EditableStudio() {
   const currentBusinessOutput = currentBusinessScenarioId ? businessOutputs[currentBusinessScenarioId] : undefined;
   const currentScenarioProjection = currentBusinessScenarioId
     ? scenarioProjection?.scenarios.find((item) => item.scenario_id === currentBusinessScenarioId)
+    : undefined;
+  const currentBusinessArtifact = currentBusinessScenarioId
+    ? businessArtifacts?.artifacts.find((item) => item.scenario_id === currentBusinessScenarioId)
     : undefined;
   const localInspector = scenario.inspector[selectedIndex] || scenario.inspector[4];
   const activeRoute = l1Routes.find((route) => route.id === activeL1Route) || l1Routes[0];
@@ -612,16 +623,32 @@ export function V13EditableStudio() {
     let cancelled = false;
     async function loadBusinessProjection() {
       try {
-        const projection = await workflowConsoleClient.getWorkflowPlatformScenarioProjection();
+        const [projection, closure, artifacts, quality, claims] = await Promise.all([
+          workflowConsoleClient.getWorkflowPlatformScenarioProjection(),
+          workflowConsoleClient.getWorkflowPlatformDataSourceClosure(),
+          workflowConsoleClient.getWorkflowPlatformBusinessArtifacts(),
+          workflowConsoleClient.getWorkflowPlatformQualityStates(),
+          workflowConsoleClient.getWorkflowPlatformClaimEvidenceMatrix(),
+        ]);
         const outputs = await Promise.all(
           projection.scenarios.map(async (item) => [item.scenario_id, await workflowConsoleClient.getWorkflowPlatformBusinessOutput(item.scenario_id)] as const),
         );
         if (cancelled) return;
         setScenarioProjection(projection);
+        setDataSourceClosure(closure);
+        setBusinessArtifacts(artifacts);
+        setQualityStates(quality);
+        setClaimMatrix(claims);
         setBusinessOutputs(Object.fromEntries(outputs) as Partial<Record<BusinessScenarioId, WorkflowPlatformBusinessOutputDTO>>);
-        setBusinessProjectionStatus("DTO/evidence projection loaded");
-        setTraceLines((current) => ["[WP-M5A] scenario projection loaded from /bff/workflow-platform/scenarios.", ...current].slice(0, 16));
-        recordAction("WP-M5A 业务场景投影已由 BFF DTO 加载");
+        setBusinessProjectionStatus(`DTO/evidence projection loaded · normal_path_static_sources=${closure.normal_path_static_sources}`);
+        setTraceLines((current) => [
+          `[WP-M11] claim matrix loaded: ${claims.requirements.length} PRD refs.`,
+          `[WP-M10] quality states loaded: ${quality.states.length} states.`,
+          `[WP-M9] business artifacts loaded: ${artifacts.artifacts.length} artifacts.`,
+          `[WP-M6] data source closure loaded: normal_path_static_sources=${closure.normal_path_static_sources}.`,
+          ...current,
+        ].slice(0, 16));
+        recordAction("WP-M6..WP-M11 前端闭环 DTO 已由 BFF 加载");
       } catch (error) {
         if (cancelled) return;
         const message = errorMessage(error);
@@ -1437,7 +1464,7 @@ export function V13EditableStudio() {
               ))}
             </div>
             <div className="v13-canvas-status">
-              实时画布：已激活 {nodes.slice(0, 6).length} / 6 站点 <span>活动场景：{scenario.name}</span>
+              实时画布：已激活 {nodes.slice(0, 6).length} / 6 站点 <span>活动场景：{currentScenarioProjection?.title || scenario.name}</span>
             </div>
             <div className="v13-minimap" data-testid="v13-minimap">
               <strong>MINIMAP 拓扑投影</strong>
@@ -1504,10 +1531,10 @@ export function V13EditableStudio() {
                 ))}
               </div>
               <div className="v13-tab-content">
-                {activeTab === "timeline" ? <TimelineContent actionLog={actionLog} scenario={scenario} /> : null}
+                {activeTab === "timeline" ? <TimelineContent actionLog={actionLog} projection={currentScenarioProjection} scenario={scenario} /> : null}
                 {activeTab === "trace" ? <TraceContent lines={traceLines} /> : null}
-                {activeTab === "quality" ? <QualityContent scenario={scenario} /> : null}
-                {activeTab === "evidence" ? <EvidenceContent diff={diff} handoffRef={handoffRef} scenario={scenario} /> : null}
+                {activeTab === "quality" ? <QualityContent qualityStates={qualityStates} scenario={scenario} /> : null}
+                {activeTab === "evidence" ? <EvidenceContent artifact={currentBusinessArtifact} diff={diff} handoffRef={handoffRef} scenario={scenario} /> : null}
               </div>
             </article>
           </section>
@@ -1579,7 +1606,7 @@ export function V13EditableStudio() {
             </div>
           </div>
           <div className="v13-business-output-panel" data-testid="workflow-platform-business-output">
-            <strong>WP-M5A 业务产物投影</strong>
+            <strong>WP-M6..WP-M11 前端功能闭环</strong>
             <span data-testid="workflow-platform-business-output-status">
               {businessProjectionStatus} · {currentBusinessScenarioId || "future_optional"}
             </span>
@@ -1592,12 +1619,20 @@ export function V13EditableStudio() {
                 <small>Artifact: {currentBusinessOutput.output_summary.artifact_refs[0]}</small>
                 <small>Human review: {currentBusinessOutput.output_summary.human_review_ref}</small>
                 <small>Evidence: {Object.keys(currentBusinessOutput.evidence_refs).join(" / ")}</small>
+                {currentBusinessArtifact ? <small>WP-M9 artifact: {currentBusinessArtifact.artifact_ref}</small> : null}
               </>
             ) : (
               <p>当前场景为可视化或后续扩展场景；不会被计入 WP-M5A 三类业务产物出门条件。</p>
             )}
+            <div className="v13-business-output-panel__summary">
+              <small data-testid="workflow-platform-data-source-closure">WP-M6 normal_path_static_sources={dataSourceClosure?.normal_path_static_sources ?? "fallback"}</small>
+              <small data-testid="workflow-platform-quality-states">WP-M10 quality states={qualityStates?.states.length ?? 0}</small>
+              <small data-testid="workflow-platform-claim-matrix">WP-M11 PRD refs={claimMatrix?.requirements.length ?? 0}</small>
+            </div>
             <em data-testid="workflow-platform-mock-boundary">
-              {currentScenarioProjection?.fallback_boundary ||
+              {dataSourceClosure
+                ? "normal_path_static_sources=0；scenarioData / fallbackGraph / static timeline / local chat 仅可作为离线 fallback。"
+                : currentScenarioProjection?.fallback_boundary ||
                 "scenarioData / fallbackGraph 仅作为视觉 fallback 或 design reference；业务出门以 BFF DTO 和 evidence refs 为准。"}
             </em>
           </div>
@@ -1776,8 +1811,18 @@ function InspectorField({ compact = false, label, large = false, value }: { comp
   );
 }
 
-function TimelineContent({ actionLog, scenario }: { actionLog: string[]; scenario: ScenarioData }) {
-  const rows = [...scenario.timeline, { time: "15:38:41", msg: actionLog[0] || "等待交互动作", state: "记录" }];
+function TimelineContent({
+  actionLog,
+  projection,
+  scenario,
+}: {
+  actionLog: string[];
+  projection?: WorkflowPlatformScenarioProjectionDTO["scenarios"][number];
+  scenario: ScenarioData;
+}) {
+  const projectionRows =
+    projection?.timeline_projection.map((row, index) => ({ time: `DTO-${index + 1}`, msg: `${row.step} · ${row.ref}`, state: row.state })) || [];
+  const rows = [...(projectionRows.length ? projectionRows : scenario.timeline), { time: "15:38:41", msg: actionLog[0] || "等待交互动作", state: "记录" }];
   return (
     <ol className="v13-timeline-list">
       {rows.map((row) => (
@@ -1796,22 +1841,37 @@ function TraceContent({ lines }: { lines: string[] }) {
   return <pre className="v13-trace-box">{lines.join("\n")}</pre>;
 }
 
-function QualityContent({ scenario }: { scenario: ScenarioData }) {
+function QualityContent({ qualityStates, scenario }: { qualityStates: WorkflowPlatformQualityStateDTO | null; scenario: ScenarioData }) {
   return (
     <div className="v13-quality-rules">
-      <strong>质量规则 PASS</strong>
+      <strong>质量规则 {qualityStates?.status || "PASS"}</strong>
       <p>{scenario.inspector[5].quality} WorkflowDiff 必须人工确认；浏览器不得直接写 runtime truth。</p>
+      {qualityStates ? (
+        <p>
+          {qualityStates.states.length} 个失败态已定义：{qualityStates.states.map((state) => state.label).join(" / ")}
+        </p>
+      ) : null}
     </div>
   );
 }
 
-function EvidenceContent({ diff, handoffRef, scenario }: { diff: WorkflowDiff | null; handoffRef: string; scenario: ScenarioData }) {
+function EvidenceContent({
+  artifact,
+  diff,
+  handoffRef,
+  scenario,
+}: {
+  artifact?: WorkflowPlatformBusinessArtifactClosureDTO["artifacts"][number];
+  diff: WorkflowDiff | null;
+  handoffRef: string;
+  scenario: ScenarioData;
+}) {
   return (
     <div className="v13-evidence-list">
       <strong>{diff?.proposal_id || DIFF_ID}</strong>
       <span>{handoffRef || "handoff pending"}</span>
-      <span>{scenario.inspector[4].evidence}</span>
-      <span>runtime_backed=false</span>
+      <span>{artifact?.artifact_ref || scenario.inspector[4].evidence}</span>
+      <span>{artifact?.content_snapshot_ref || "runtime_backed=false"}</span>
     </div>
   );
 }

@@ -1,71 +1,174 @@
 {
-  "schema_version": "harnessos.stage_feature_coverage.v1",
-  "status": "PASS_WITH_LIMITATIONS",
-  "items": [
+  "schema_version": "stage_audit.feature_coverage_matrix.v1",
+  "status": "PASS",
+  "scope": "WP-M1 through WP-M11 bounded workflow platform frontend acceptance",
+  "coverage_summary": {
+    "prd_requirements": 20,
+    "supported": 20,
+    "blocked": 0
+  },
+  "features": [
     {
-      "feature": "PV13-based Workflow Platform as main entry",
-      "classification": "已验收",
-      "evidence": [
-        "workflow-platform-main-entry/01-wp-m1-main-entry.png",
+      "requirement_id": "WP-FR-1",
+      "claim": "WP-FR-1 is supported for bounded review only.",
+      "status": "PASS",
+      "evidence_refs": [
         "pv13-baseline-homepage-report.json"
       ]
     },
     {
-      "feature": "Canvas wheel zoom, node drag, free connect, cancel connect",
-      "classification": "已验收",
-      "evidence": [
-        "02-wp-m2-canvas-drag-zoom.png",
-        "03-wp-m2-connect-cancel.png",
-        "browser-action-log.json"
+      "requirement_id": "WP-FR-2",
+      "claim": "WP-FR-2 is supported for bounded review only.",
+      "status": "PASS",
+      "evidence_refs": [
+        "v13-route-ownership-report.json"
       ]
     },
     {
-      "feature": "Workflow save/validate/diff/publish/run/human/evidence review loop",
-      "classification": "已验收",
-      "evidence": [
-        "runtime-inspect-report.json",
+      "requirement_id": "WP-FR-3",
+      "claim": "WP-FR-3 is supported for bounded review only.",
+      "status": "PASS",
+      "evidence_refs": [
+        "pv13-baseline-homepage-report.json"
+      ]
+    },
+    {
+      "requirement_id": "WP-FR-4",
+      "claim": "WP-FR-4 is supported for bounded review only.",
+      "status": "PASS",
+      "evidence_refs": [
+        "v13-route-ownership-report.json"
+      ]
+    },
+    {
+      "requirement_id": "WP-FR-5",
+      "claim": "WP-FR-5 is supported for bounded review only.",
+      "status": "PASS",
+      "evidence_refs": [
+        "canvas-edge-quality-report.json"
+      ]
+    },
+    {
+      "requirement_id": "WP-FR-6",
+      "claim": "WP-FR-6 is supported for bounded review only.",
+      "status": "PASS",
+      "evidence_refs": [
+        "workflow-inline-runtime-report.json"
+      ]
+    },
+    {
+      "requirement_id": "WP-FR-7",
+      "claim": "WP-FR-7 is supported for bounded review only.",
+      "status": "PASS",
+      "evidence_refs": [
         "evidence-panel-report.json",
-        "human-action-log.json"
+        "workflow-inline-runtime-report.json"
       ]
     },
     {
-      "feature": "Governed Skill/Tool/MCP executor evidence path",
-      "classification": "已验收",
-      "evidence": [
-        "05-wp-m4-governed-executor.png",
+      "requirement_id": "WP-FR-8",
+      "claim": "WP-FR-8 is supported for bounded review only.",
+      "status": "PASS",
+      "evidence_refs": [
         "agent-executor-integration-report.json"
       ]
     },
     {
-      "feature": "Three business scenarios with machine-readable output summaries",
-      "classification": "受限完成",
-      "evidence": [
-        "06-wp-m5a-business-output.png",
-        "business-output-report.json",
-        "mock-reduction-report.json"
+      "requirement_id": "WP-FR-9",
+      "claim": "WP-FR-9 is supported for bounded review only.",
+      "status": "PASS",
+      "evidence_refs": [
+        "workflow_platform_main_entry_prd.md"
       ]
     },
     {
-      "feature": "PV22 SDK/BFF template/reference app external app contract",
-      "classification": "受限完成",
-      "evidence": [
-        "pv22-external-app-contract/acceptance-data.json",
-        "contract-registry-snapshot.json"
+      "requirement_id": "WP-FR-10",
+      "claim": "WP-FR-10 is supported for bounded review only.",
+      "status": "PASS",
+      "evidence_refs": [
+        "workflow-platform-capability-parity-report.json"
       ]
     },
     {
-      "feature": "Production governance hardening",
-      "classification": "规划中",
-      "evidence": [
-        "TASKS.md Path D backlog"
+      "requirement_id": "WP-FR-11",
+      "claim": "WP-FR-11 is supported for bounded review only.",
+      "status": "PASS",
+      "evidence_refs": [
+        "frontend-data-source-closure-report.json",
+        "scenario-projection-report.json"
       ]
     },
     {
-      "feature": "Complete Workflow Studio GA / production-ready platform / unrestricted Agent executor",
-      "classification": "No-Go",
-      "evidence": [
-        "TASKS.md No-Go",
-        "WP/PV22 non-claims"
+      "requirement_id": "WP-FR-12",
+      "claim": "WP-FR-12 is supported for bounded review only.",
+      "status": "PASS",
+      "evidence_refs": [
+        "business-artifact-manifest.json"
+      ]
+    },
+    {
+      "requirement_id": "WP-FR-13",
+      "claim": "WP-FR-13 is supported for bounded review only.",
+      "status": "PASS",
+      "evidence_refs": [
+        "workflow_platform_main_entry_milestone_roadmap.md"
+      ]
+    },
+    {
+      "requirement_id": "WP-FR-14",
+      "claim": "WP-FR-14 is supported for bounded review only.",
+      "status": "PASS",
+      "evidence_refs": [
+        "frontend-data-source-closure-report.json"
+      ]
+    },
+    {
+      "requirement_id": "WP-FR-15",
+      "claim": "WP-FR-15 is supported for bounded review only.",
+      "status": "PASS",
+      "evidence_refs": [
+        "graph-edit-save-readback-report.json"
+      ]
+    },
+    {
+      "requirement_id": "WP-FR-16",
+      "claim": "WP-FR-16 is supported for bounded review only.",
+      "status": "PASS",
+      "evidence_refs": [
+        "workflow-inline-runtime-report.json"
+      ]
+    },
+    {
+      "requirement_id": "WP-FR-17",
+      "claim": "WP-FR-17 is supported for bounded review only.",
+      "status": "PASS",
+      "evidence_refs": [
+        "business-artifact-manifest.json"
+      ]
+    },
+    {
+      "requirement_id": "WP-FR-18",
+      "claim": "WP-FR-18 is supported for bounded review only.",
+      "status": "PASS",
+      "evidence_refs": [
+        "frontend-quality-failure-state-report.json"
+      ]
+    },
+    {
+      "requirement_id": "WP-FR-19",
+      "claim": "WP-FR-19 is supported for bounded review only.",
+      "status": "PASS",
+      "evidence_refs": [
+        "claim-to-evidence-matrix.json"
+      ]
+    },
+    {
+      "requirement_id": "WP-FR-20",
+      "claim": "WP-FR-20 is supported for bounded review only.",
+      "status": "PASS",
+      "evidence_refs": [
+        "no-false-green-scan.txt",
+        "frontend-completion-aggregate-audit.html"
       ]
     }
   ]

@@ -1,41 +1,48 @@
 {
-  "schema_version": "harnessos.validation_command_log.v1",
+  "schema_version": "stage_audit.validation_command_log.v1",
   "status": "PASS",
   "commands": [
     {
-      "command": ".venv/bin/python -m pytest tests/test_pv22_external_app_contract.py tests/test_v13_workflow_platform_bff.py tests/test_pv21_complete_workflow_studio_bff.py tests/test_pv20_agent_execution_contract_bff.py -q",
-      "scope": "PV22 + Workflow Platform bounded regression",
+      "command": ".venv/bin/python -m pytest tests/test_pv22_external_app_contract.py tests/test_v13_workflow_platform_bff.py -q",
       "status": "PASS",
-      "log": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-pv22-wp-regression.log",
-      "summary": "    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n8 passed, 6 warnings in 33.84s"
+      "evidence_type": "PV22 + workflow platform BFF regression",
+      "log_path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-pv22-wp-regression.log",
+      "log_sha256": "46fcbcfeb649a171a7fa513fd2c655b8af423f7793afcccf42fdd77806aff5b5"
     },
     {
-      "command": ".venv/bin/python -m pytest tests/test_v3_5_python_sdk.py tests/test_v3_5_typescript_sdk.py tests/test_v3_5_bff_template_e2e.py tests/test_v3_5_bff_minimal_smoke.py tests/test_v3_5_reference_app.py -q",
-      "scope": "V3.5 SDK/template/reference app regression",
+      "command": ".venv/bin/python -m pytest tests/test_v3_5_typescript_sdk.py tests/test_v3_5_python_sdk.py -q",
       "status": "PASS",
-      "log": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-v35-regression.log",
-      "summary": "    class WorkflowTask(BaseModel):\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n45 passed, 6 warnings in 16.72s"
+      "evidence_type": "V3.5 SDK regression",
+      "log_path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-v35-regression.log",
+      "log_sha256": "b15e4ca7965086d2da6d902e293db574c47ffa19e7df57f073477db0bd9170cf"
     },
     {
-      "command": "cd sdk/typescript && npm test",
-      "scope": "TypeScript SDK npm test",
+      "command": "npm test --prefix sdk/typescript",
       "status": "PASS",
-      "log": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-typescript-sdk.log",
-      "summary": "# tests 23\n# pass 23\n# fail 0\n# duration_ms 651.422705"
+      "evidence_type": "TypeScript SDK public API regression",
+      "log_path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-typescript-sdk.log",
+      "log_sha256": "268aec9606dc31ca316f1a069f9e04284a86ff725292e72970e42570bdc22e5b"
     },
     {
-      "command": "cd apps/workflow-console && node node_modules/typescript/bin/tsc -p tsconfig.json && node node_modules/vite/bin/vite.js build",
-      "scope": "Workflow Console typecheck/build",
+      "command": "workflow-console build",
       "status": "PASS",
-      "log": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-workflow-console-build.log",
-      "summary": "dist/index.html                   0.41 kB │ gzip:   0.28 kB\ndist/assets/index-CjIca3MK.css  111.64 kB │ gzip:  20.35 kB\ndist/assets/index-CPEtC2JU.js   685.43 kB │ gzip: 211.07 kB\n✓ built in 29.87s"
+      "evidence_type": "workflow-console typecheck and production build",
+      "log_path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-workflow-console-build.log",
+      "log_sha256": "043002c183df22b2a9c5991d7abf6f3c6dd72558c2bcd14c1924be172b01526c"
     },
     {
-      "command": "WP_CDP_URL=http://127.0.0.1:9351 WP_BASE_URL=http://127.0.0.1:4174 node e2e/workflow_platform_main_entry_cdp_acceptance.mjs",
-      "scope": "Workflow Platform headless CDP E2E",
+      "command": "WP_CDP_URL=... WP_BASE_URL=... node e2e/workflow_platform_main_entry_cdp_acceptance.mjs",
       "status": "PASS",
-      "log": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-workflow-platform-cdp.log",
-      "summary": "Headless CDP runner exited 0; screenshots and JSON evidence regenerated."
+      "evidence_type": "headless browser E2E",
+      "log_path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-workflow-platform-cdp.log",
+      "log_sha256": "6f386001d95f530780e53d0fcc93f33435ce7547a0b9621cabf02121534eac1b"
+    },
+    {
+      "command": "workflow evidence validation command bundle",
+      "status": "PASS",
+      "evidence_type": "WP-M1 through WP-M11 command bundle",
+      "log_path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-command-log.json",
+      "log_sha256": "39e0ef6785e18df729843269b61cc1b85e7bcb888cd82427a1e05c8685ccfc42"
     }
   ]
 }

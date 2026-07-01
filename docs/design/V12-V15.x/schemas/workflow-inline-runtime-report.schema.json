@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://harnessos.local/schemas/workflow-inline-runtime-report.schema.json",
+  "title": "Workflow Platform Inline Runtime Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "stage",
+    "status",
+    "workflow_version_ref",
+    "workflow_instance_ref",
+    "station_run_refs",
+    "human_action_refs",
+    "evidence_review_refs",
+    "browser_action_log_ref",
+    "browser_network_log_ref"
+  ],
+  "properties": {
+    "schema_version": { "type": "string", "const": "wp-m8-inline-runtime.v1" },
+    "stage": { "type": "string", "const": "WP-M8" },
+    "status": { "type": "string", "enum": ["PASS", "FAIL", "BLOCKED", "NO_GO"] },
+    "workflow_version_ref": { "type": "string", "minLength": 1 },
+    "workflow_instance_ref": { "type": "string", "minLength": 1 },
+    "station_run_refs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+    "human_action_refs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+    "evidence_review_refs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+    "before_after_state_digest": { "type": "string" },
+    "browser_action_log_ref": { "type": "string", "minLength": 1 },
+    "browser_network_log_ref": { "type": "string", "minLength": 1 }
+  }
+}

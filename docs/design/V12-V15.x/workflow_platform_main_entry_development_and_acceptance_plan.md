@@ -18,7 +18,9 @@ V13 / PV13 editable Studio frontend baseline
   -> WP-M5B / PV22 external app handoff to stable platform host
 ```
 
-WP-M0 不替代 PV22，也不把 V13/PV13、PV19、PV20 或 PV21 升级为 GA。WP-M1A 到 WP-M5A 已完成 bounded implementation evidence；WP-M5A 把三个业务场景从路径证据推进到 DTO/evidence-driven 业务输出摘要，但仍不是最终商业业务应用完成。WP-M5B/PV22 readiness refresh 与 PV22-S1..SA 有界实现已完成；后续默认方向转为 Path D / production governance hardening planning，除非另行选择业务 Pack 产品化或开源/商业化准备阶段。
+WP-M0 不替代 PV22，也不把 V13/PV13、PV19、PV20 或 PV21 升级为 GA。WP-M1A 到 WP-M5A 已完成 bounded implementation evidence；WP-M5A 把三个业务场景从路径证据推进到 DTO/evidence-driven 业务输出摘要，但仍不是最终商业业务应用完成。WP-M5B/PV22 readiness refresh 与 PV22-S1..SA 有界实现已完成。
+
+最新用户决策将下一阶段改为 WP-M6 到 WP-M11：先把 PRD 定义的前端页面功能做成真实数据驱动、可编辑、可保存、可运行、可人工审查和可证据回看的有界完成状态。Path D / production governance hardening、业务 Pack 产品化和开源/商业化准备后置，除非用户再次明确改选。
 
 ## 2. Substages
 
@@ -32,6 +34,12 @@ WP-M0 不替代 PV22，也不把 V13/PV13、PV19、PV20 或 PV21 升级为 GA。
 | WP-M4 | Agent executor 产品化融合到 PV13，且不退化 `WorkflowPlatformMainEntry` 已接入的 PV20 能力。 | Agent/Tool/Skill/MCP 资源面板和受治理执行入口接入 PV13。 | Executor evidence refs、approval/denial fixtures、capability parity、copy scan PASS。 |
 | WP-M5A | 业务场景产品化和前端静态数据收敛。 | 三个业务场景的场景定义、输入、业务输出摘要、证据和人工复核由 DTO/evidence 驱动；`scenarioData` 仅保留 fallback / design reference 边界。 | Scenario projection、business output report、mock reduction scan、业务输出截图、命令日志和 manifest PASS。 |
 | WP-M5B | 外部接入前置检查。 | PV22 以 WP-M5A 后稳定 PV13-based Workflow Platform 为接入目标重检。 | PV22 readiness update PASS。 |
+| WP-M6 | Frontend full data-driven closure。 | PV13 正常路径的场景、节点、Inspector、timeline、quality、evidence 和 chat 初始上下文由 BFF/DTO/artifact refs 驱动；本地静态数据只作显式 fallback。 | mock reduction normal path zero、network log、DTO snapshot、fallback boundary screenshots PASS。 |
+| WP-M7 | WorkflowSpecGraph edit/save/readback。 | 用户在 PV13 画布拖拽节点、增删连线、配置节点、保存草稿、刷新回读并基于后端状态生成 WorkflowDiff。 | Graph edit/save/readback E2E、BFF route log、Diff review log PASS。 |
+| WP-M8 | Publish/run/human/evidence inline loop。 | 用户在 PV13 工作台内发布版本、运行实例、查看 StationRun、执行 Human Gate、打开 Evidence Review。 | Runtime inspect、human action、evidence panel、route log PASS。 |
+| WP-M9 | Three business scenario artifact closure。 | 文档总结、代码审查、会议整理生成可审查真实产物或机器可读产物文件，绑定 input hash、quality、human review 和 redaction refs。 | Three artifact manifests、content snapshots、human review reports、redaction scan PASS。 |
+| WP-M10 | Frontend quality and failure-state gate。 | 加载、空、错误、权限拒绝、BFF 离线、校验失败、人工拒绝、取消/重试、键盘、响应式、可访问性和性能体验齐备。 | Failure-state matrix、screenshots、a11y report、performance budget PASS。 |
+| WP-M11 | PRD-defined frontend completion aggregate audit。 | 汇总 WP-M6 到 WP-M10，逐条映射 WP-FR-1 到 WP-FR-20，缺证即 BLOCKED。 | Claim-to-evidence matrix、aggregate HTML report、No False Green scan PASS。 |
 
 ## 2.1 Current Implementation Result
 
@@ -42,6 +50,7 @@ wp_m2_canvas_interaction=PASS
 wp_m3_pv21_runtime_evidence_parity=PASS
 wp_m4_pv20_governed_executor_parity=PASS
 wp_m5a_business_scenario_productization=PASS_BOUNDED_REVIEW
+wp_m6_to_wp_m11_prd_defined_frontend_completion=PLANNED_DOCUMENTATION_TARGET
 evidence_dir=docs/design/V12-V15.x/evidence/workflow-platform-main-entry/
 acceptance_report=docs/design/V12-V15.x/evidence/workflow-platform-main-entry/acceptance-report.html
 ```
@@ -70,6 +79,8 @@ acceptance_report=docs/design/V12-V15.x/evidence/workflow-platform-main-entry/ac
 - 不创建新的孤立演示页作为首入口。
 - 首入口必须服务人类审查和真实使用路径，而不是只服务阶段验收。
 - WP-M5A 已让业务场景输出摘要和 evidence refs 成为一等验收对象；静态场景矩阵只能作为 fallback 或设计参考。
+- WP-M6 到 WP-M11 的实现必须先关闭本计划和 `workflow_platform_wp_m6_to_m11_frontend_completion_plan_and_audit.md` 中的审计意见；若存在致命或重大规格偏差，不得进入实质代码开发。
+- WP-M6 到 WP-M11 验收必须使用真实 BFF/DTO、真实 artifact/evidence refs、真实浏览器动作日志和真实截图；mock 只能作为明确标注的 fallback/fixture。
 - 每个子阶段开始前必须有独立 implementation-readiness audit。
 - 每个子阶段完成后必须有 PRD review、target architecture review、E2E evidence、No False Green 和 redaction scan。
 - 每个子阶段必须按 `workflow_platform_main_entry_bff_dto_contract.md` 和 `workflow_platform_main_entry_acceptance_runner_spec.md` 生成证据。
@@ -92,6 +103,12 @@ acceptance_report=docs/design/V12-V15.x/evidence/workflow-platform-main-entry/ac
 | `scenario-projection-report.json` | WP-M5A | 证明场景列表、输入要求、节点模板、Inspector、timeline 和 evidence refs 来自 DTO/evidence projection，而不是纯前端静态数据。 |
 | `business-output-report.json` | WP-M5A | 证明文档总结、代码审查、会议整理均有业务输出、artifact refs、人工复核状态和质量结论。 |
 | `mock-reduction-report.json` | WP-M5A | 证明 `scenarioData`、`fallbackGraph`、静态 chat/timeline 的使用范围被限定为 fallback 或设计参考。 |
+| `frontend-data-source-closure-report.json` | WP-M6 | 证明正常路径静态来源为 0，所有业务事实来自 BFF/DTO/artifact refs。 |
+| `graph-edit-save-readback-report.json` | WP-M7 | 证明节点拖拽、连线、删除、配置、保存、刷新回读和 Diff 生成。 |
+| `workflow-inline-runtime-report.json` | WP-M8 | 证明 PV13 工作台内完成 publish/run/human/evidence 连续路径。 |
+| `business-artifact-manifest.json` | WP-M9 | 证明三业务场景产物文件、input hash、quality、human review、redaction refs。 |
+| `frontend-quality-failure-state-report.json` | WP-M10 | 证明失败态、权限态、离线态、响应式、键盘、a11y 和性能。 |
+| `frontend-completion-aggregate-audit.html` | WP-M11 | 中文聚合审计报告，列出 PRD、架构、代码、证据和残留风险。 |
 | `no-false-green-scan.txt` | all stages | 禁止虚假完成声明。 |
 | `acceptance-report.html` | all stages | 中文、人类可读、含截图证据。 |
 
@@ -107,6 +124,7 @@ acceptance_report=docs/design/V12-V15.x/evidence/workflow-platform-main-entry/ac
 - UI 是否把受限能力说清楚。
 - 文档是否把完成状态和后续目标混在一起。
 - 是否出现 production ready、product-grade frontend complete、complete Workflow Studio ready、Agent executor ready 或 Xpert parity complete 误报。
+- 是否把“PRD-defined frontend functionality complete for bounded review”误写成生产级或商业级完成。
 
 ## 6. Scenario Acceptance
 
@@ -141,6 +159,43 @@ WP-M5A 的出门验收已进一步证明：
 - HTML 验收报告把“已验收路径证据”和“业务输出摘要证据/最终产物边界”分开列示。
 - WP-M5A、WP-M5B/PV22 readiness refresh 与 PV22-S1..SA 已通过有界验收；不得据此声明 PV22 production/commercial/external ecosystem complete。
 
+WP-M6 的出门验收必须包含：
+
+- 正常路径不再使用 `scenarioData`、`fallbackGraph`、静态 timeline、静态 Inspector 或 proposal-only chat 作为业务事实来源。
+- UI 明确区分在线 BFF/DTO 数据和离线 fallback。
+- `frontend-data-source-closure-report.json` 记录每个页面区域的数据来源。
+- 若正常路径仍有本地 mock，必须打回开发计划阶段。
+
+WP-M7 的出门验收必须包含：
+
+- 用户在 PV13 画布中完成节点拖拽、合法连线、取消/删除连线、节点配置、保存草稿、刷新回读。
+- WorkflowDiff 必须基于后端保存状态生成，并需要人工审查。
+- 不得直接从 browser 写 WorkflowStore 或 Gateway internals。
+
+WP-M8 的出门验收必须包含：
+
+- 用户在 PV13 工作台内完成 publish、run、StationRun inspect、Human Gate approve/reject、Evidence Review。
+- 运行结果和人工动作必须可从 BFF/DTO 回读。
+- 不得只通过分散 PV19/PV21 页面完成。
+
+WP-M9 的出门验收必须包含：
+
+- 文档总结、代码审查、会议整理三场景均有真实输入、产物文件或机器可读产物、artifact refs、quality refs、human review refs 和 redaction refs。
+- HTML 报告必须展示每个产物的用户输入、平台动作、人工审查点、输出产物和证据链。
+- 若只有摘要卡片而没有可审查产物文件，仍标记为受限完成。
+
+WP-M10 的出门验收必须包含：
+
+- 加载、空、错误、权限拒绝、BFF 离线、校验失败、人工拒绝、取消/重试均有截图和状态断言。
+- 键盘操作、焦点可见性、响应式断点、可访问性扫描和性能预算均 PASS 或给出明确豁免。
+
+WP-M11 的出门验收必须包含：
+
+- WP-FR-1 到 WP-FR-20 的 claim-to-evidence matrix。
+- WP-M6 到 WP-M10 所有 evidence package manifest。
+- 文档、UI copy、验收报告 No False Green scan。
+- 明确剩余后置阶段：生产治理、业务 Pack 产品化、开源/商业化准备。
+
 ## 7. Stop Conditions
 
 出现以下任一情况必须停止进入下一阶段：
@@ -158,10 +213,21 @@ WP-M5A 的出门验收已进一步证明：
 - 只复用 acceptance report 或 scenario pass JSON，却声明已经生成独立业务产物。
 - 前端本地 `scenarioData` / `fallbackGraph` / 静态 chat/timeline 被写成后端真实业务投影。
 - 创意分镜规划被写成真实视频渲染完成。
+- WP-M6 到 WP-M11 任一阶段使用设计稿、截图、静态 mock 或 acceptance report 文本替代 BFF/DTO/browser/action/artifact evidence。
+- 正常路径 mock 未清零却声明 PRD-defined frontend functionality complete。
 
 ## 7.1 Remaining Plan
 
-当前本阶段 WP-M1A 到 WP-M5A、WP-M5B 和 PV22-S1..SA 已按 bounded review 范围完成。剩余开发计划不应继续把静态演示、业务输出摘要或外部应用契约证据当作最终业务/生产完成，而应进入：
+当前 WP-M1A 到 WP-M5A、WP-M5B 和 PV22-S1..SA 已按 bounded review 范围完成。用户已选择新的当前阶段为 WP-M6 到 WP-M11 PRD-defined frontend functionality completion。剩余开发顺序为：
+
+1. WP-M6：正常路径数据驱动闭环。
+2. WP-M7：WorkflowSpecGraph 编辑、保存、刷新回读和 Diff 审查。
+3. WP-M8：发布、运行、人工门禁和证据回看在 PV13 工作台内闭环。
+4. WP-M9：三个业务场景真实产物和证据链闭环。
+5. WP-M10：失败态、可访问性、响应式和性能体验门槛。
+6. WP-M11：PRD-defined frontend completion 聚合审计。
+
+WP-M11 之后才重新选择：
 
 - Production governance hardening：另设阶段处理 tenant isolation、credential lifecycle、audit retention、deployment runbook 和 operational smoke。
 - Business Pack productization：另设阶段把 Meeting / Knowledge / Interview / Investment / Video Studio 推进为真实业务 App。

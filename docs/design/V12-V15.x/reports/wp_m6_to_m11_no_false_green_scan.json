@@ -1,0 +1,39 @@
+{
+  "report_id": "wp-m6-to-m11-no-false-green-scan-2026-07-01",
+  "generated_at": "2026-07-01",
+  "scope": "WP-M6 through WP-M11 documentation package",
+  "status": "PASS_WITH_FORBIDDEN_TERMS_ONLY_IN_BOUNDARY_CONTEXT",
+  "scanned_documents": [
+    "TASKS.md",
+    "docs/design/V12-V15.x/00_README.md",
+    "docs/design/V12-V15.x/workflow_platform_main_entry_prd.md",
+    "docs/design/V12-V15.x/workflow_platform_main_entry_target_architecture.md",
+    "docs/design/V12-V15.x/workflow_platform_main_entry_development_and_acceptance_plan.md",
+    "docs/design/V12-V15.x/workflow_platform_main_entry_acceptance_gate.md",
+    "docs/design/V12-V15.x/workflow_platform_main_entry_bff_dto_contract.md",
+    "docs/design/V12-V15.x/workflow_platform_main_entry_acceptance_runner_spec.md",
+    "docs/design/V12-V15.x/workflow_platform_main_entry_implementation_task_matrix.md",
+    "docs/design/V12-V15.x/workflow_platform_wp_m6_to_m11_frontend_completion_plan_and_audit.md",
+    "docs/design/V12-V15.x/workflow_platform_wp_m6_to_m11_implementation_readiness_audit.md",
+    "docs/design/V12-V15.x/workflow_platform_wp_m6_to_m11_document_support_audit.md",
+    "docs/design/V12-V15.x/workflow_platform_wp_m6_substage_readiness_note.md"
+  ],
+  "forbidden_claim_terms": [
+    "production ready",
+    "product-grade frontend complete",
+    "complete Workflow Studio GA",
+    "complete Workflow Studio ready",
+    "Agent executor ready",
+    "Xpert parity complete",
+    "前端功能已经完成",
+    "生产可用",
+    "产品级前端完成"
+  ],
+  "allowed_context_rule": "Forbidden terms may appear only as explicit non-claims, forbidden interpretations, boundaries, NO_GO rules or risk controls.",
+  "positive_claim_result": "NO_UNBOUNDED_POSITIVE_COMPLETION_CLAIM_FOUND",
+  "required_next_scan": "Run again after every WP-M6 through WP-M11 implementation evidence package and final HTML report.",
+  "non_claims": [
+    "This scan is documentation review evidence only.",
+    "This scan does not prove WP-M6 through WP-M11 implementation complete."
+  ]
+}

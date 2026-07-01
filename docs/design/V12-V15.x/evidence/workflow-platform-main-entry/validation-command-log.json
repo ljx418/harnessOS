@@ -1,0 +1,72 @@
+{
+  "schema_version": "workflow_platform.validation_command_log.v1",
+  "stage_id": "WP-M1-WP-M11",
+  "status": "PASS",
+  "created_at": "2026-07-01T00:00:00Z",
+  "commands": [
+    {
+      "command": "node --check e2e/workflow_platform_main_entry_cdp_acceptance.mjs",
+      "status": "PASS",
+      "evidence_type": "syntax validation",
+      "log_path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-node-check.log",
+      "exit_code": 0,
+      "log_sha256": "4d22c64f3b48c886445d67d140a0c5f8e8121b409168d3c00efb655231140a08"
+    },
+    {
+      "command": "node node_modules/typescript/bin/tsc -p tsconfig.json",
+      "status": "PASS",
+      "evidence_type": "frontend type validation",
+      "log_path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-tsc.log",
+      "exit_code": 0,
+      "log_sha256": "818f5400c840bcff037392066c4e3103fa1cd33f6ea9c74a7ced321e704b462f"
+    },
+    {
+      "command": "node node_modules/vite/bin/vite.js build",
+      "status": "PASS",
+      "evidence_type": "frontend production build validation",
+      "log_path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-vite-build.log",
+      "exit_code": 0,
+      "log_sha256": "a4eb120b689e12d867ca65f8ded8b7649116c21f21ddbd8460adc73880ae0ff5"
+    },
+    {
+      "command": ".venv/bin/python -m pytest tests/test_v13_workflow_platform_bff.py tests/test_pv21_complete_workflow_studio_bff.py tests/test_pv20_agent_execution_contract_bff.py -q",
+      "status": "PASS",
+      "evidence_type": "BFF regression validation",
+      "log_path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-pytest.log",
+      "exit_code": 0,
+      "log_sha256": "ddac279b19c338a789451bb7acf55e66c1782a1ea88719cf44efebcac7425be3"
+    },
+    {
+      "command": "WP_CDP_URL=http://127.0.0.1:9351 WP_BASE_URL=http://127.0.0.1:4176 node e2e/workflow_platform_main_entry_cdp_acceptance.mjs",
+      "status": "PASS",
+      "evidence_type": "headless browser end-to-end validation",
+      "log_path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-cdp-e2e.log",
+      "exit_code": 0,
+      "log_sha256": "6f386001d95f530780e53d0fcc93f33435ce7547a0b9621cabf02121534eac1b"
+    },
+    {
+      "command": "python built-in structural validation for WP-M6..WP-M11 evidence reports",
+      "status": "PASS",
+      "evidence_type": "schema/structure validation",
+      "log_path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-schema.log",
+      "exit_code": 0,
+      "log_sha256": "5432b27db77e839e4411f0f92d1a1956f60d8a4568a561cfe19e39c2c0ae4a59"
+    },
+    {
+      "command": "forbidden claim contextual scan",
+      "status": "PASS",
+      "evidence_type": "No False Green scan",
+      "log_path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-claim-scan.log",
+      "exit_code": 0,
+      "log_sha256": "0cf28259f786f83d382ea62ba500d308d40a8ac83e72b2547b3b7ac32450cf84"
+    },
+    {
+      "command": "secret/redaction pattern scan",
+      "status": "PASS",
+      "evidence_type": "redaction scan",
+      "log_path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-redaction-scan.log",
+      "exit_code": 0,
+      "log_sha256": "f57b01a70ba42147d78c7e972fb9716d3551b27e965e18596833d2d8b237e6b5"
+    }
+  ]
+}

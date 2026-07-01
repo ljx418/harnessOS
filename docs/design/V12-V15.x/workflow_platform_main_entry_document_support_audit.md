@@ -70,12 +70,20 @@ document_support_for_wp_m1b_pv13_baseline_homepage=GO_AFTER_WP_M1A
 document_support_for_wp_m2_wp_m4_detailed_planning=GO
 document_support_for_wp_m5a_business_scenario_productization_planning=GO
 document_support_for_wp_m5b_pv22_handoff_after_wp_m5a=GO_WITH_ORDERING_GUARD
+document_support_for_wp_m6_to_wp_m11_frontend_completion_planning=GO
+document_support_for_wp_m6_to_wp_m11_bff_dto_contract=GO
+document_support_for_wp_m6_to_wp_m11_acceptance_runner=GO
+document_support_for_wp_m6_to_wp_m11_task_matrix=GO
+document_support_for_wp_m6_to_wp_m11_implementation_readiness=GO
 document_support_for_workflow_platform_capability_non_regression=GO
 document_support_for_three_required_business_scenarios=GO
 document_support_for_three_business_output_summaries=PASS_WITH_WP_M5A_EVIDENCE
 document_support_for_code_implementation_without_substage_acceptance=NO_GO
+document_support_for_prd_defined_frontend_completion_claim_before_wp_m11=NO_GO
 document_support_for_complete_workflow_platform_claim=NO_GO
 document_support_for_production_ready_claim=NO_GO
 ```
 
-WP-M0 文档已支撑 WP-M1A 到 WP-M5A 的自动化开发和 bounded acceptance。WP-M3/WP-M4 已覆盖基础 Agent 工作流，证明相对 `WorkflowPlatformMainEntry` 的 PV21/PV20 能力不退化，并跑通文档/知识总结、代码审查/变更风险检查、会议/访谈整理三个必验业务场景。WP-M5A 已进一步生成业务输出摘要、artifact refs、human review refs、scenario projection report、business output report 和 mock reduction report。WP-M5B/PV22 readiness refresh 与 PV22-S1..SA bounded implementation 已完成。后续每个新阶段仍必须独立完成 PRD 检视、目标架构检视、端到端验收和 No False Green 审计；下一默认方向应是 Path D / production governance hardening planning，除非用户选择业务 Pack 产品化或开源/商业化准备阶段。
+WP-M0 文档已支撑 WP-M1A 到 WP-M5A 的自动化开发和 bounded acceptance。WP-M3/WP-M4 已覆盖基础 Agent 工作流，证明相对 `WorkflowPlatformMainEntry` 的 PV21/PV20 能力不退化，并跑通文档/知识总结、代码审查/变更风险检查、会议/访谈整理三个必验业务场景。WP-M5A 已进一步生成业务输出摘要、artifact refs、human review refs、scenario projection report、business output report 和 mock reduction report。WP-M5B/PV22 readiness refresh 与 PV22-S1..SA bounded implementation 已完成。
+
+最新用户决策把下一默认方向调整为 WP-M6 到 WP-M11 PRD-defined frontend functionality completion。当前修订后的 PRD、目标架构、开发计划、里程碑、验收门槛、gap、BFF/DTO 合约、acceptance runner spec、implementation task matrix、dedicated plan/audit、implementation-readiness audit 和 drawio 已支撑该阶段完成有界实现与验收；证据包位于 `docs/design/V12-V15.x/evidence/workflow-platform-main-entry/`。后续每个新阶段仍必须独立完成 PRD 检视、目标架构检视、端到端验收和 No False Green 审计；Path D / production governance hardening planning、业务 Pack 产品化和开源/商业化准备均后置，除非用户明确改选。

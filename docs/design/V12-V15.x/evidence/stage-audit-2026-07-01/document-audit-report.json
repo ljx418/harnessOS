@@ -1,22 +1,33 @@
 {
-  "schema_version": "harnessos.stage_document_audit.v1",
-  "status": "PASS_AFTER_REPAIR",
-  "repairs": [
-    "Updated TASKS.md and workflow-platform planning docs so WP-M5B/PV22 is no longer described as the next unimplemented stage.",
-    "Updated WP-M5A/PV22 gate wording so PV22 is described as gated by current WP-M5A PASS evidence, not currently blocked.",
-    "Kept Path D / production governance hardening as the default next planning direction unless the user selects business Pack or open-source/commercial readiness."
-  ],
-  "reviewed_docs": [
+  "schema_version": "stage_audit.document_audit_report.v1",
+  "status": "PASS",
+  "checked_documents": [
     "TASKS.md",
+    "docs/design/V12-V15.x/00_README.md",
     "docs/design/V12-V15.x/workflow_platform_main_entry_prd.md",
     "docs/design/V12-V15.x/workflow_platform_main_entry_target_architecture.md",
     "docs/design/V12-V15.x/workflow_platform_main_entry_development_and_acceptance_plan.md",
-    "docs/design/V12-V15.x/pv22_external_app_contract_development_and_acceptance_plan.md",
-    "docs/design/V12-V15.x/post_pv18_runtime_platform_development_route.md"
+    "docs/design/V12-V15.x/workflow_platform_main_entry_acceptance_gate.md",
+    "docs/design/V12-V15.x/workflow_platform_wp_m6_to_m11_frontend_completion_plan_and_audit.md",
+    "docs/design/V12-V15.x/workflow_platform_wp_m6_to_m11_document_support_audit.md",
+    "docs/design/V12-V15.x/workflow_platform_wp_m6_to_m11_implementation_readiness_audit.md"
   ],
-  "concept_consistency": {
-    "workflow_platform_main_entry": "PV13-based Workflow Platform remains the front-door baseline.",
-    "bounded_stage_claim": "WP-M5A/PV22 are reviewable bounded stages, not GA/product/production claims.",
-    "next_stage": "Path D production governance hardening planning is the default next direction."
-  }
+  "consistency_checks": [
+    {
+      "check": "TASKS next-step wording no longer says WP-M6 is still the current default implementation target.",
+      "status": "PASS"
+    },
+    {
+      "check": "PRD and target architecture restrict the completion claim to bounded review.",
+      "status": "PASS"
+    },
+    {
+      "check": "Acceptance gate, runner spec and evidence package agree on WP-M6 through WP-M11 outputs.",
+      "status": "PASS"
+    },
+    {
+      "check": "Drawio and Markdown document the same architecture gap and stage plan at review level.",
+      "status": "PASS"
+    }
+  ]
 }

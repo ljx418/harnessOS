@@ -1,0 +1,6 @@
+status=RUNNING
+command=forbidden claim contextual scan
+status=PASS
+forbidden_positive_claim_matches=[]
+exit_code=0
+status=PASS

@@ -60,6 +60,10 @@ import type {
   PV21WorkflowGraphDTO,
   PV21WorkflowVersionDTO,
   WorkflowPlatformBusinessOutputDTO,
+  WorkflowPlatformBusinessArtifactClosureDTO,
+  WorkflowPlatformClaimEvidenceMatrixDTO,
+  WorkflowPlatformDataSourceClosureDTO,
+  WorkflowPlatformQualityStateDTO,
   WorkflowPlatformScenarioProjectionDTO,
   PublishVersionResult,
   QualitySummary,
@@ -368,6 +372,22 @@ export class WorkflowConsoleClient {
 
   getWorkflowPlatformBusinessOutput(scenarioId: string): Promise<WorkflowPlatformBusinessOutputDTO> {
     return this.get<WorkflowPlatformBusinessOutputDTO>(this.workflowPlatformPath(`/workflow-platform/scenarios/${encodeURIComponent(scenarioId)}/outputs`));
+  }
+
+  getWorkflowPlatformDataSourceClosure(): Promise<WorkflowPlatformDataSourceClosureDTO> {
+    return this.get<WorkflowPlatformDataSourceClosureDTO>(this.workflowPlatformPath("/workflow-platform/frontend-data-source-closure"));
+  }
+
+  getWorkflowPlatformBusinessArtifacts(): Promise<WorkflowPlatformBusinessArtifactClosureDTO> {
+    return this.get<WorkflowPlatformBusinessArtifactClosureDTO>(this.workflowPlatformPath("/workflow-platform/artifacts"));
+  }
+
+  getWorkflowPlatformQualityStates(): Promise<WorkflowPlatformQualityStateDTO> {
+    return this.get<WorkflowPlatformQualityStateDTO>(this.workflowPlatformPath("/workflow-platform/quality-states"));
+  }
+
+  getWorkflowPlatformClaimEvidenceMatrix(): Promise<WorkflowPlatformClaimEvidenceMatrixDTO> {
+    return this.get<WorkflowPlatformClaimEvidenceMatrixDTO>(this.workflowPlatformPath("/workflow-platform/claim-evidence-matrix"));
   }
 
   private pv17Path(path: string): string {

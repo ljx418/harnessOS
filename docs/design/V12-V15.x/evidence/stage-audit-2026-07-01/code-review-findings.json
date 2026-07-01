@@ -1,38 +1,30 @@
 {
-  "schema_version": "harnessos.stage_code_review.v1",
-  "status": "PASS_WITH_LIMITATIONS",
-  "blockers": [],
-  "findings": [
-    {
-      "severity": "medium",
-      "area": "Browser automation environment",
-      "finding": "WSL Playwright Chromium cannot launch because libnspr4.so is missing; this audit used Windows Chrome headless CDP instead.",
-      "impact": "The product path was still exercised through a real browser protocol and captured screenshots, but Linux Playwright CI parity is not proven.",
-      "disposition": "Track for CI/tooling hardening; not a product blocker for this bounded stage audit."
-    },
-    {
-      "severity": "low",
-      "area": "Frontend build",
-      "finding": "Vite build emits a main chunk-size warning.",
-      "impact": "No functional failure observed. Bundle splitting/performance remains a later hardening task.",
-      "disposition": "Carry into Path D production governance/performance backlog."
-    },
-    {
-      "severity": "medium",
-      "area": "PV22 browser proof boundary",
-      "finding": "PV22 reference app browser proof is contract/source-boundary plus SDK/Gateway API evidence, not a separately screenshotted external reference UI journey.",
-      "impact": "Sufficient for bounded contract review, insufficient for external developer experience launch claims.",
-      "disposition": "Require visual reference-app E2E before any external ecosystem or commercial readiness claim."
-    }
-  ],
-  "reviewed_paths": [
-    "apps/workflow-console/src/ui/v13/V13EditableStudio.tsx",
-    "apps/workflow-console/src/api/workflowConsoleClient.ts",
+  "schema_version": "stage_audit.code_review_findings.v1",
+  "status": "PASS_WITH_RESIDUAL_RISKS",
+  "reviewed_entry_points": [
     "apps/api/routers/bff.py",
-    "core/apps/profiles.py",
-    "core/protocol/contracts/pv22_external_app_contract.py",
-    "tests/test_v13_workflow_platform_bff.py",
-    "tests/test_pv22_external_app_contract.py",
-    "apps/workflow-console/e2e/workflow_platform_main_entry_cdp_acceptance.mjs"
+    "apps/workflow-console/src/api/types.ts",
+    "apps/workflow-console/src/api/workflowConsoleClient.ts",
+    "apps/workflow-console/src/ui/v13/V13EditableStudio.tsx",
+    "apps/workflow-console/e2e/workflow_platform_main_entry_cdp_acceptance.mjs",
+    "tests/test_v13_workflow_platform_bff.py"
+  ],
+  "findings": [],
+  "residual_risks": [
+    {
+      "risk": "Vite build reports one large JavaScript chunk.",
+      "severity": "low",
+      "mitigation": "Recorded in build log; future stage should consider code splitting if product scale increases."
+    },
+    {
+      "risk": "BFF smoke server is local seeded acceptance infrastructure.",
+      "severity": "medium",
+      "mitigation": "Bounded review only; no production readiness claim."
+    },
+    {
+      "risk": "Initial E2E attempt failed when preview proxy pointed to a stale port.",
+      "severity": "low",
+      "mitigation": "Proxy was corrected to 127.0.0.1:18041; final CDP, network logs and validation command log passed."
+    }
   ]
 }

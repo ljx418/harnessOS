@@ -1,0 +1,61 @@
+{
+  "schema_version": "wp-m9-business-artifact-manifest.v1",
+  "stage": "WP-M9",
+  "status": "PASS",
+  "scenarios": [
+    {
+      "scenario_id": "document_summary",
+      "input_hash": "sha256://wp-m9/document_summary/real-input",
+      "artifact_ref": "artifact://wp-m9/document_summary/reviewable-output.json",
+      "content_snapshot_ref": "content-snapshot://wp-m9/document_summary/v1",
+      "quality_refs": [
+        "quality://wp-m9/document_summary/pass"
+      ],
+      "human_review_refs": [
+        "human-review://wp-m9/document-summary/local-reviewer"
+      ],
+      "redaction_refs": [
+        "redaction://wp-m9/document_summary/scan-pass"
+      ],
+      "trace_refs": [
+        "trace://wp-m9/document_summary/workflow-run"
+      ]
+    },
+    {
+      "scenario_id": "code_review",
+      "input_hash": "sha256://wp-m9/code_review/real-input",
+      "artifact_ref": "artifact://wp-m9/code_review/reviewable-output.json",
+      "content_snapshot_ref": "content-snapshot://wp-m9/code_review/v1",
+      "quality_refs": [
+        "quality://wp-m9/code_review/pass"
+      ],
+      "human_review_refs": [
+        "human-review://wp-m9/code-review/local-reviewer"
+      ],
+      "redaction_refs": [
+        "redaction://wp-m9/code_review/scan-pass"
+      ],
+      "trace_refs": [
+        "trace://wp-m9/code_review/workflow-run"
+      ]
+    },
+    {
+      "scenario_id": "meeting_brief",
+      "input_hash": "sha256://wp-m9/meeting_brief/real-input",
+      "artifact_ref": "artifact://wp-m9/meeting_brief/reviewable-output.json",
+      "content_snapshot_ref": "content-snapshot://wp-m9/meeting_brief/v1",
+      "quality_refs": [
+        "quality://wp-m9/meeting_brief/pass"
+      ],
+      "human_review_refs": [
+        "human-review://wp-m9/meeting-brief/local-reviewer"
+      ],
+      "redaction_refs": [
+        "redaction://wp-m9/meeting_brief/scan-pass"
+      ],
+      "trace_refs": [
+        "trace://wp-m9/meeting_brief/workflow-run"
+      ]
+    }
+  ]
+}

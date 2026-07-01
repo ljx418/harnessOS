@@ -9,8 +9,8 @@
       "status": "PASS",
       "input": {
         "input_path": "docs/design/V12-V15.x/workflow_platform_main_entry_prd.md",
-        "sha256": "67746c68ea60ebb716f178acc8810b89ce2f515572cc959203eb2e22a880a5be",
-        "bytes_sampled": 3010
+        "sha256": "ba5a82641ed98a20077870fd4b8e3f60ec15c078bab0fccf94f87336bd773e53",
+        "bytes_sampled": 2958
       },
       "output_summary": {
         "title": "工作流平台 PRD 摘要产物",

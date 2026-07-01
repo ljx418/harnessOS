@@ -10,139 +10,139 @@ TAP version 13
 # Subtest: public API surface excludes business wrappers
 ok 1 - public API surface excludes business wrappers
   ---
-  duration_ms: 0.556831
+  duration_ms: 1.067533
   type: 'test'
   ...
 # Subtest: rpc injects scope and bearer token
 ok 2 - rpc injects scope and bearer token
   ---
-  duration_ms: 1.511025
+  duration_ms: 1.599725
   type: 'test'
   ...
 # Subtest: low-level rpc rejects forbidden and unknown methods
 ok 3 - low-level rpc rejects forbidden and unknown methods
   ---
-  duration_ms: 0.787301
+  duration_ms: 0.824401
   type: 'test'
   ...
 # Subtest: scope override conflict is rejected locally
 ok 4 - scope override conflict is rejected locally
   ---
-  duration_ms: 0.248832
+  duration_ms: 0.269393
   type: 'test'
   ...
 # Subtest: JSON-RPC response validation and typed error mapping
 ok 5 - JSON-RPC response validation and typed error mapping
   ---
-  duration_ms: 0.97716
+  duration_ms: 0.943903
   type: 'test'
   ...
 # Subtest: eventsSubscribe maps descriptor and redacts subscription token
 ok 6 - eventsSubscribe maps descriptor and redacts subscription token
   ---
-  duration_ms: 0.391657
+  duration_ms: 0.502301
   type: 'test'
   ...
 # Subtest: absolute EventSource URL is preserved
 ok 7 - absolute EventSource URL is preserved
   ---
-  duration_ms: 0.09776
+  duration_ms: 0.106835
   type: 'test'
   ...
 # Subtest: native EventSource helper has no Authorization header while fetch stream may use bearer
 ok 8 - native EventSource helper has no Authorization header while fetch stream may use bearer
   ---
-  duration_ms: 0.105064
+  duration_ms: 0.124563
   type: 'test'
   ...
 # Subtest: integration smoke wrappers use default methods
 ok 9 - integration smoke wrappers use default methods
   ---
-  duration_ms: 0.667723
+  duration_ms: 1.17013
   type: 'test'
   ...
 # Subtest: EmbedDefinition validates static production shape
 ok 10 - EmbedDefinition validates static production shape
   ---
-  duration_ms: 0.907031
+  duration_ms: 1.664065
   type: 'test'
   ...
 # Subtest: EmbedDefinition rejects runtime fields and forbidden actions
 ok 11 - EmbedDefinition rejects runtime fields and forbidden actions
   ---
-  duration_ms: 0.348388
+  duration_ms: 0.368855
   type: 'test'
   ...
 # Subtest: EmbedBootstrap sanitizer redacts signed URL query
 ok 12 - EmbedBootstrap sanitizer redacts signed URL query
   ---
-  duration_ms: 0.230647
+  duration_ms: 0.222287
   type: 'test'
   ...
 # Subtest: HostBusinessEvent remains in reserved business namespace
 ok 13 - HostBusinessEvent remains in reserved business namespace
   ---
-  duration_ms: 0.156782
+  duration_ms: 0.09702
   type: 'test'
   ...
 # Subtest: React public surface excludes business hooks
 ok 14 - React public surface excludes business hooks
   ---
-  duration_ms: 0.651444
+  duration_ms: 0.863203
   type: 'test'
   ...
 # Subtest: useHarnessSession and useTurn do not auto-start
 ok 15 - useHarnessSession and useTurn do not auto-start
   ---
-  duration_ms: 6.969932
+  duration_ms: 8.268589
   type: 'test'
   ...
 # Subtest: useEvents does not auto-connect unless enabled or connect is called
 ok 16 - useEvents does not auto-connect unless enabled or connect is called
   ---
-  duration_ms: 1.602184
+  duration_ms: 1.518983
   type: 'test'
   ...
 # Subtest: useEvents closes on unmount and dedupes events
 ok 17 - useEvents closes on unmount and dedupes events
   ---
-  duration_ms: 1.520053
+  duration_ms: 1.161002
   type: 'test'
   ...
 # Subtest: useEvents StrictMode enabled mount creates a single live EventSource
 ok 18 - useEvents StrictMode enabled mount creates a single live EventSource
   ---
-  duration_ms: 0.928355
+  duration_ms: 2.257027
   type: 'test'
   ...
 # Subtest: useEvents reconnect preserves cursor in URL
 ok 19 - useEvents reconnect preserves cursor in URL
   ---
-  duration_ms: 1.0403
+  duration_ms: 0.95258
   type: 'test'
   ...
 # Subtest: useApprovals only calls approval.respond
 ok 20 - useApprovals only calls approval.respond
   ---
-  duration_ms: 1.135727
+  duration_ms: 0.616692
   type: 'test'
   ...
 # Subtest: useArtifacts never calls artifact.read inline
 ok 21 - useArtifacts never calls artifact.read inline
   ---
-  duration_ms: 1.139657
+  duration_ms: 1.307808
   type: 'test'
   ...
 # Subtest: useJobs has no default polling
 ok 22 - useJobs has no default polling
   ---
-  duration_ms: 0.944607
+  duration_ms: 2.174067
   type: 'test'
   ...
 # Subtest: hook state and serialization redact subscription token
 ok 23 - hook state and serialization redact subscription token
   ---
-  duration_ms: 0.741283
+  duration_ms: 1.060809
   type: 'test'
   ...
 1..23
@@ -153,4 +153,4 @@ ok 23 - hook state and serialization redact subscription token
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 651.422705
+# duration_ms 362.350016

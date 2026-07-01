@@ -1,6 +1,6 @@
 # Workflow Platform Main Entry Acceptance Runner Spec
 
-用途：定义 WP-M1 到 WP-M4 后续自动化验收 runner 的输入、输出、场景和 PASS/FAIL 规则。
+用途：定义 WP-M1 到 WP-M11 后续自动化验收 runner 的输入、输出、场景和 PASS/FAIL 规则。
 边界：本文是 runner 规格，不是 runner 实现。
 
 ## 1. Runner Goals
@@ -16,6 +16,12 @@ open root
   -> publish/run/human gate/evidence
   -> inspect governed Agent executor panel
   -> verify WP-M5A business scenario outputs when that stage is active
+  -> verify WP-M6 normal-path data source closure
+  -> edit/save/readback WorkflowSpecGraph
+  -> publish/run/human/evidence inside the PV13 workbench
+  -> verify three business scenario artifacts
+  -> verify failure states, accessibility, responsive behavior and performance
+  -> generate WP-M11 claim-to-evidence matrix when aggregate stage is active
   -> generate Chinese HTML acceptance report
 ```
 
@@ -39,8 +45,26 @@ open root
 | `scenario-projection-report.json` | WP-M5A | Scenario catalog, input contracts, node templates, Inspector/timeline projection, fallback usage and DTO source。 |
 | `business-output-report.json` | WP-M5A | Document summary, code review and meeting brief output summaries with artifact, quality, audit, human review and redaction refs。 |
 | `mock-reduction-report.json` | WP-M5A | Remaining static `scenarioData`, `fallbackGraph`, chat/timeline/Inspector usage and whether each is fallback/design-only。 |
+| `frontend-data-source-closure-report.json` | WP-M6 | 每个 UI 区域的数据来源、fallback 条件、normal_path_static_sources 统计。 |
+| `graph-edit-save-readback-report.json` | WP-M7 | 节点拖拽、连线、取消/删除、配置、保存、刷新回读、Diff review。 |
+| `workflow-inline-runtime-report.json` | WP-M8 | PV13 工作台内 publish、run、StationRun inspect、Human Gate、Evidence Review 连续路径。 |
+| `business-artifact-manifest.json` | WP-M9 | 文档总结、代码审查、会议整理产物、input hash、content snapshot、quality/human/redaction refs。 |
+| `frontend-quality-failure-state-report.json` | WP-M10 | 加载、空、错误、权限拒绝、BFF 离线、校验失败、人工拒绝、取消/重试、a11y、响应式、性能。 |
+| `claim-to-evidence-matrix.json` | WP-M11 | WP-FR-1 到 WP-FR-20 的声明、证据、状态和阻断项。 |
+| `frontend-completion-aggregate-audit.html` | WP-M11 | 中文聚合审计报告，面向人类审查。 |
 | `no-false-green-scan.txt` | all | Forbidden claim scan over docs, UI copy and report。 |
 | `redaction-scan.txt` | all | Secret/token/raw credential leakage scan。 |
+
+WP-M6 through WP-M11 reports must validate against these minimum schemas before a substage can be marked PASS:
+
+| Report | Schema |
+| --- | --- |
+| `frontend-data-source-closure-report.json` | `docs/design/V12-V15.x/schemas/frontend-data-source-closure-report.schema.json` |
+| `graph-edit-save-readback-report.json` | `docs/design/V12-V15.x/schemas/graph-edit-save-readback-report.schema.json` |
+| `workflow-inline-runtime-report.json` | `docs/design/V12-V15.x/schemas/workflow-inline-runtime-report.schema.json` |
+| `business-artifact-manifest.json` | `docs/design/V12-V15.x/schemas/business-artifact-manifest.schema.json` |
+| `frontend-quality-failure-state-report.json` | `docs/design/V12-V15.x/schemas/frontend-quality-failure-state-report.schema.json` |
+| `claim-to-evidence-matrix.json` | `docs/design/V12-V15.x/schemas/claim-to-evidence-matrix.schema.json` |
 
 ## 3. Scenario Matrix
 
@@ -78,6 +102,25 @@ open root
 | Code review output | WP-M5A | User receives code review findings with file/line refs, risk level, test/static scan refs and human approval refs。 |
 | Meeting brief output | WP-M5A | User receives meeting brief, action items, decisions, open questions, citation refs and review refs。 |
 | Mock reduction | WP-M5A | Static scenario data is no longer used as the source of truth for accepted business output, or each remaining use is marked fallback/design reference。 |
+| Normal-path data source closure | WP-M6 | `normal_path_static_sources == 0`; scenario, graph, Inspector, timeline, quality, evidence and chat initial context come from BFF/DTO/artifact refs or explicit fallback。 |
+| Fallback visibility | WP-M6 | If fallback is used, UI and report visibly label source, reason and non-claim boundary。 |
+| Graph node drag persisted | WP-M7 | Dragging a node changes graph DTO after save and survives refresh readback。 |
+| Edge create/delete persisted | WP-M7 | Legal edge create and delete/cancel produce expected backend graph state; illegal edge is denied with visible reason。 |
+| Node configuration persisted | WP-M7 | Editing role/goal/tool/skill/MCP/quality config updates DTO and inspector readback。 |
+| WorkflowDiff from saved graph | WP-M7 | Diff is generated from backend saved graph state and requires human review。 |
+| Publish inline | WP-M8 | PV13 workbench publishes WorkflowVersion and reads it back with audit refs。 |
+| Run inline | WP-M8 | PV13 workbench starts WorkflowInstance and reads WorkflowInstance / StationRun through BFF。 |
+| Human gate inline | WP-M8 | Approve/reject changes backend state and UI reflects before/after digest。 |
+| Evidence inline | WP-M8 | Evidence Review displays artifact/trace/quality/audit/claim/redaction refs in PV13 workbench。 |
+| Document summary artifact | WP-M9 | Document scenario produces auditable artifact/content snapshot, input hash, quality refs and human review refs。 |
+| Code review artifact | WP-M9 | Code scenario produces review artifact/content snapshot, file/risk refs, test/static refs and approval refs。 |
+| Meeting brief artifact | WP-M9 | Meeting scenario produces brief/action item artifact/content snapshot and review refs。 |
+| Loading and empty states | WP-M10 | Loading and empty states are user-visible and do not block recovery actions。 |
+| Error and permission states | WP-M10 | Error, permission denied and BFF offline states are visible, actionable and screenshot-backed。 |
+| Validation and human reject states | WP-M10 | Graph validation failure and human rejection are visible with reason and next action。 |
+| Accessibility and responsive baseline | WP-M10 | Keyboard path, focus visibility, text containment, responsive screenshots and a11y scan PASS or explicit bounded exception。 |
+| Performance budget | WP-M10 | First usable workbench and key interactions meet documented budget or are blocked with risk。 |
+| Claim-to-evidence closure | WP-M11 | WP-FR-1..WP-FR-20 all have evidence refs; missing evidence marks BLOCKED。 |
 
 ## 4. PASS / FAIL Rules
 
@@ -102,6 +145,12 @@ The runner must mark the stage `NO_GO` if:
 - WP-M3/WP-M4 capability parity report misses any required `WorkflowPlatformMainEntry` PV21/PV20 capability without explicit defer/No-Go label and user confirmation.
 - WP-M5A report claims business output completion using only scenario path PASS, screenshots or acceptance report text.
 - WP-M5A UI/report treats local `scenarioData`, `fallbackGraph` or static chat/timeline as backend business projection.
+- WP-M6 normal path still uses local static business facts but the report claims data-driven closure.
+- WP-M7 graph edits are local-only and do not survive BFF save/readback.
+- WP-M8 runtime result is UI simulation without WorkflowVersion / WorkflowInstance / StationRun / HumanAction readback.
+- WP-M9 business artifacts are summary cards or report prose without auditable artifact/content snapshot refs.
+- WP-M10 omits failure states that materially affect the minimum user path.
+- WP-M11 aggregate audit marks PASS while any WP-FR item lacks evidence.
 
 ## 5. Suggested Commands
 
@@ -119,6 +168,9 @@ node apps/workflow-console/e2e/workflow_platform_main_entry_acceptance.mjs
 
 # WP-M5A business scenario productization acceptance
 node apps/workflow-console/e2e/workflow_platform_business_scenarios_acceptance.mjs
+
+# WP-M6 to WP-M11 frontend completion acceptance
+node apps/workflow-console/e2e/workflow_platform_frontend_completion_acceptance.mjs
 ```
 
 ## 6. Report Structure
@@ -134,6 +186,12 @@ node apps/workflow-console/e2e/workflow_platform_business_scenarios_acceptance.m
 - DTO snapshot 摘要。
 - Capability parity 摘要：相对 `WorkflowPlatformMainEntry` 已接入 PV21/PV20 能力的保留、迁移、延期或阻断状态。
 - WP-M5A 业务场景产品化摘要：三类业务产物、artifact refs、human review refs、mock/fallback 状态。
+- WP-M6 数据源闭环摘要：每个 UI 区域的数据来源、normal path mock scan、fallback 边界。
+- WP-M7 图编辑摘要：保存前后 DTO、刷新回读、Diff 审查。
+- WP-M8 运行闭环摘要：版本、实例、StationRun、人工动作、证据分类。
+- WP-M9 业务产物摘要：三个业务场景的输入、产物、content snapshot、质量、人审和脱敏 refs。
+- WP-M10 质量摘要：失败态、权限态、离线态、响应式、a11y、性能。
+- WP-M11 claim-to-evidence matrix 摘要：WP-FR-1 到 WP-FR-20 状态。
 - PRD 检视结果。
 - 目标架构检视结果。
 - Claim safety and redaction summary。

@@ -1,0 +1,13 @@
+status=RUNNING
+command=python built-in structural validation for WP-M6..WP-M11 evidence reports
+PASS frontend-data-source-closure-report.json
+PASS graph-edit-save-readback-report.json
+PASS workflow-inline-runtime-report.json
+PASS business-artifact-manifest.json
+PASS frontend-quality-failure-state-report.json
+PASS claim-to-evidence-matrix.json
+artifact_manifest_status=PASS
+claim_requirements=20 blocked=0
+graph_status=PASS failed_actions=0
+exit_code=0
+status=PASS

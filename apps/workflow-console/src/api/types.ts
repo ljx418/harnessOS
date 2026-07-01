@@ -506,6 +506,79 @@ export interface WorkflowPlatformBusinessOutputDTO {
   redaction_status: "redacted";
 }
 
+export interface WorkflowPlatformDataSourceClosureDTO {
+  schema_version: "workflow_platform.frontend_data_source_closure.v1";
+  stage: "WP-M6";
+  status: string;
+  normal_path_static_sources: number;
+  ui_regions: Array<{
+    region_id: string;
+    visible_name: string;
+    normal_source: { kind: string; route_or_artifact_ref: string; dto_field?: string };
+    fallback_allowed: boolean;
+    fallback_reason?: string;
+    evidence_refs: string[];
+  }>;
+  blocked_static_sources: Array<{ source_id: string; normal_path_usage: boolean; closure_status: string }>;
+  fallback_boundaries: string[];
+  evidence_refs: string[];
+  scope: Record<string, string | null>;
+  audit_refs: PV19AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface WorkflowPlatformBusinessArtifactClosureDTO {
+  schema_version: "workflow_platform.business_artifact_closure.v1";
+  stage: "WP-M9";
+  status: string;
+  artifacts: Array<{
+    scenario_id: string;
+    title: string;
+    input_hash: string;
+    input_ref: string;
+    artifact_ref: string;
+    content_snapshot_ref: string;
+    quality_refs: string[];
+    human_review_refs: string[];
+    redaction_refs: string[];
+    trace_refs: string[];
+    content_preview: string;
+    status: string;
+  }>;
+  non_claims: string[];
+  scope: Record<string, string | null>;
+  audit_refs: PV19AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface WorkflowPlatformQualityStateDTO {
+  schema_version: "workflow_platform.frontend_quality_state.v1";
+  stage: "WP-M10";
+  status: string;
+  states: Array<{ state_id: string; label: string; visible: boolean; actionable: boolean; description: string; screenshot_ref: string; status: string }>;
+  keyboard: { status: string; evidence_ref: string };
+  responsive: { status: string; evidence_ref: string };
+  accessibility: { status: string; evidence_ref: string };
+  performance: { status: string; budget: string; evidence_ref: string };
+  scope: Record<string, string | null>;
+  audit_refs: PV19AuditRef[];
+  redaction_status: "redacted";
+}
+
+export interface WorkflowPlatformClaimEvidenceMatrixDTO {
+  schema_version: "workflow_platform.claim_evidence_matrix.v1";
+  stage: "WP-M11";
+  status: string;
+  missing_evidence_blocks_pass: boolean;
+  requirements: Array<{ requirement_id: string; claim: string; status: string; evidence_refs: string[]; blocked_reason?: string }>;
+  forbidden_claim_scan_ref: string;
+  aggregate_html_report_ref: string;
+  non_claims: string[];
+  scope: Record<string, string | null>;
+  audit_refs: PV19AuditRef[];
+  redaction_status: "redacted";
+}
+
 export interface WorkflowStatus {
   workflow_instance_id: string;
   status: string;

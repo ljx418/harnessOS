@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>WP-M6 到 WP-M11 前端功能闭环聚合审计</title>
+  <style>
+    body { margin: 0; padding: 28px; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f8fafc; color: #172033; }
+    h1 { margin: 0 0 8px; font-size: 28px; }
+    h2 { margin: 28px 0 12px; font-size: 20px; }
+    p, li, td, th { color: #475569; line-height: 1.7; }
+    table { width: 100%; border-collapse: collapse; background: white; border: 1px solid #d7e0ea; border-radius: 8px; overflow: hidden; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid #e5e7eb; text-align: left; vertical-align: top; }
+    th { background: #eef4ff; color: #172033; }
+    .pass { color: #047857; font-weight: 800; }
+    .limited { color: #b45309; font-weight: 800; }
+    code { background: #e5e7eb; padding: 2px 5px; border-radius: 4px; }
+    img { max-width: 100%; border: 1px solid #e5e7eb; border-radius: 8px; background: white; }
+  </style>
+</head>
+<body>
+  <h1>WP-M6 到 WP-M11 前端功能闭环聚合审计</h1>
+  <p>本报告汇总当前阶段自动化验收证据。结论只覆盖 PRD-defined frontend functionality for bounded review，不声明 production ready、product-grade frontend complete、complete Workflow Studio GA 或 Agent executor ready。</p>
+  <h2>目标架构与当前实现</h2>
+  <table>
+    <tr><th>层级</th><th>当前实现</th><th>证据</th></tr>
+    <tr><td>Browser / Route</td><td>默认入口进入 PV13 Light Studio 工作流平台。</td><td><code>pv13-baseline-homepage-report.json</code></td></tr>
+    <tr><td>Typed client / BFF</td><td>浏览器只访问 V13/PV19/PV20/PV21/workflow-platform BFF DTO。</td><td><code>browser-network-log.json</code></td></tr>
+    <tr><td>Runtime / Evidence</td><td>运行、人工门禁和证据回看由 PV21/PV20/PV19 bounded routes 提供。</td><td><code>workflow-inline-runtime-report.json</code></td></tr>
+  </table>
+  <h2>阶段结果</h2>
+  <table>
+    <tr><th>阶段</th><th>状态</th><th>核心证据</th></tr>
+    <tr><td>WP-M6 数据源闭环</td><td class="pass">PASS</td><td><code>frontend-data-source-closure-report.json</code></td></tr>
+    <tr><td>WP-M7 图编辑保存回读</td><td class="pass">PASS</td><td><code>graph-edit-save-readback-report.json</code></td></tr>
+    <tr><td>WP-M8 发布运行人工证据</td><td class="pass">PASS</td><td><code>workflow-inline-runtime-report.json</code></td></tr>
+    <tr><td>WP-M9 三业务产物</td><td class="pass">PASS</td><td><code>business-artifact-manifest.json</code></td></tr>
+    <tr><td>WP-M10 质量失败态</td><td class="pass">PASS</td><td><code>frontend-quality-failure-state-report.json</code></td></tr>
+    <tr><td>WP-M11 声明证据矩阵</td><td class="pass">PASS</td><td><code>claim-to-evidence-matrix.json</code></td></tr>
+  </table>
+  <h2>用户场景截图</h2>
+  <p><img src="07-wp-m6-m11-frontend-completion.png" alt="WP-M6 到 WP-M11 前端功能闭环截图"></p>
+  <h2>残留边界</h2>
+  <ul>
+    <li>本阶段不是生产部署、商业化或完整 GA。</li>
+    <li>若后续发现任一 WP-FR 缺少证据，聚合结论必须回退为 BLOCKED。</li>
+    <li>业务产物是有界可审查 artifact/content snapshot，不等同于最终商业业务应用。</li>
+  </ul>
+</body>
+</html>

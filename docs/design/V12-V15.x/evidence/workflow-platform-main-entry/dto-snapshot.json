@@ -4,9 +4,56 @@
   "entry": "workflow-platform -> V13EditableStudio",
   "bff_route_families": [
     "/bff/v13",
+    "/bff/pv19",
     "/bff/pv21",
     "/bff/pv20",
     "/bff/workflow-platform"
+  ],
+  "wp_m6_data_source_regions": [
+    "scenario_navigation",
+    "canvas_graph",
+    "node_inspector",
+    "timeline",
+    "quality",
+    "evidence",
+    "chat_initial_context"
+  ],
+  "wp_m9_artifacts": [
+    "document_summary",
+    "code_review",
+    "meeting_brief"
+  ],
+  "wp_m10_quality_states": [
+    "loading",
+    "empty",
+    "error",
+    "permission_denied",
+    "bff_offline",
+    "validation_failure",
+    "human_reject",
+    "cancel_retry"
+  ],
+  "wp_m11_claim_refs": [
+    "WP-FR-1",
+    "WP-FR-2",
+    "WP-FR-3",
+    "WP-FR-4",
+    "WP-FR-5",
+    "WP-FR-6",
+    "WP-FR-7",
+    "WP-FR-8",
+    "WP-FR-9",
+    "WP-FR-10",
+    "WP-FR-11",
+    "WP-FR-12",
+    "WP-FR-13",
+    "WP-FR-14",
+    "WP-FR-15",
+    "WP-FR-16",
+    "WP-FR-17",
+    "WP-FR-18",
+    "WP-FR-19",
+    "WP-FR-20"
   ],
   "three_required_business_scenarios": [
     "document_summary",

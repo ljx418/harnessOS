@@ -149,3 +149,62 @@ WP-M5A 有界验收通过后仅允许：
 ```text
 WP-M5A business-scenario productization passed bounded review for machine-readable business output summaries and evidence refs.
 ```
+
+## 10. WP-M6 Frontend Data-Driven Closure Gate
+
+- PV13 正常路径的场景列表、节点、连线、Inspector、timeline、quality、evidence、chat 初始上下文必须来自 BFF/DTO 或 artifact refs。
+- `scenarioData`、`fallbackGraph`、静态 timeline、静态 Inspector、proposal-only chat 只能作为显式 fallback / fixture / design reference。
+- Browser network log 必须证明正常路径只使用允许 BFF routes。
+- `frontend-data-source-closure-report.json` 必须逐页面区域列出数据来源和 fallback 条件。
+- `mock-reduction-report.normal_path_static_sources` 必须为 `0`。
+- FAIL：正常路径仍从前端静态矩阵读取业务事实。
+- FAIL：报告没有区分真实 DTO 数据和离线 fallback。
+
+## 11. WP-M7 WorkflowSpecGraph Edit/Save/Readback Gate
+
+- 用户可以在 PV13 画布拖动节点、增加合法连线、取消/删除连线、更新节点配置。
+- 保存草稿必须通过 BFF DTO route，不得直接写 WorkflowStore 或 Gateway internals。
+- 刷新页面后必须能回读同一 WorkflowSpecGraph。
+- WorkflowDiff 必须基于后端保存状态生成，且需要人工审查。
+- `graph-edit-save-readback-report.json` 必须包含 before/after graph DTO、browser action log、route log 和截图。
+- FAIL：只有本地状态变化，没有 BFF 保存和刷新回读。
+- FAIL：WorkflowDiff 来自静态 fixture，却被写成保存状态差异。
+
+## 12. WP-M8 Publish/Run/Human/Evidence Gate
+
+- 用户可以在 PV13 工作台内发布 WorkflowVersion。
+- 用户可以运行已发布工作流并回读 WorkflowInstance / StationRun。
+- 用户可以在 Human Gate 中 approve 或 reject，并看到后端状态变化。
+- 用户可以打开 Evidence Review，查看 artifact、trace、quality、audit、claim、redaction refs。
+- `workflow-inline-runtime-report.json` 必须证明 publish/run/human/evidence 是同一 PV13 工作台内连续路径。
+- FAIL：通过分散 PV19/PV21 页面完成，却声明 PV13 工作台内闭环。
+- FAIL：UI 构造运行结果但没有 BFF/DTO readback。
+
+## 13. WP-M9 Business Artifact Closure Gate
+
+- 文档总结、代码审查、会议整理必须各有真实输入、input hash、产物文件或机器可读产物内容。
+- 每个产物必须绑定 artifact refs、trace refs、quality refs、audit refs、claim refs、redaction refs 和 human review refs。
+- HTML 报告必须展示每个业务场景的用户操作路径：输入 -> 编排 -> 运行 -> 人工审查 -> 输出产物 -> 证据链。
+- `business-artifact-manifest.json` 必须逐产物列出路径、摘要、hash、证据 refs 和审查结论。
+- FAIL：只有摘要卡片、验收报告摘录或截图，没有可审查产物内容。
+- FAIL：把应用前景或规划中场景写成已验收业务产物。
+
+## 14. WP-M10 Frontend Quality And Failure-State Gate
+
+- 加载、空状态、错误、权限拒绝、BFF 离线、校验失败、人工拒绝、取消/重试必须有 UI 状态和截图证据。
+- 键盘操作、焦点可见性、核心按钮状态、响应式断点和文本不溢出必须通过检查。
+- 可访问性扫描和性能预算必须有报告；无法自动化的项目必须有人工审计说明和风险等级。
+- `frontend-quality-failure-state-report.json` 必须列出每个状态的触发方式、预期 UI、截图、断言和结果。
+- FAIL：happy path 通过但关键失败态不可见。
+- FAIL：文本溢出、按钮不可操作、焦点丢失或移动端遮挡影响核心路径。
+
+## 15. WP-M11 Aggregate Frontend Completion Gate
+
+- WP-FR-1 到 WP-FR-20 必须全部有 evidence path；缺证项标记为 `BLOCKED`。
+- WP-M6 到 WP-M10 的 artifact manifest 必须存在并能互相引用。
+- PRD、目标架构、开发计划、验收门槛、gap 和 drawio 必须同步更新。
+- No False Green scan 必须覆盖 Markdown、HTML 报告、UI copy 和 JSON evidence。
+- 聚合报告必须使用中文 HTML，包含目标架构、当前架构、用户场景截图、证据索引、残留风险和后置阶段。
+- 仅允许声明 `PRD-defined frontend functionality complete for bounded review`。
+- FAIL：把 WP-M11 写成 production ready、product-grade frontend complete、complete Workflow Studio ready 或最终商业产品完成。
+- FAIL：缺少任一 WP-M6 到 WP-M10 证据包，却给出绿色结论。

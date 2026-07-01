@@ -1,0 +1,32 @@
+{
+  "report_id": "wp-m6-to-m11-drawio-validation-2026-07-01",
+  "generated_at": "2026-07-01",
+  "scope": "WP-M6 through WP-M11 documentation support",
+  "drawio_path": "docs/design/V12-V15.x/workflow_platform_main_entry_gap_analysis.drawio",
+  "sha256": "7eff343028bd68c8cf4db51ab83f6caa980fb6464417f211cb91ce190d6139cd",
+  "xml_parse_status": "PASS",
+  "page_count": 7,
+  "page_count_limit": 8,
+  "page_names": [
+    "目标体验总览",
+    "当前架构与目标架构差异",
+    "代码实体分层与交互",
+    "开发及验收计划",
+    "项目里程碑",
+    "验收门槛与出门条件",
+    "接口与证据合约"
+  ],
+  "coverage_checks": {
+    "target_vs_current_architecture_delta": "PASS",
+    "code_entity_layers_and_relationships": "PASS",
+    "development_and_acceptance_plan": "PASS",
+    "milestones": "PASS",
+    "acceptance_gate_and_exit_conditions": "PASS",
+    "bff_dto_and_evidence_contract": "PASS"
+  },
+  "non_claims": [
+    "This report is not implementation evidence.",
+    "This report does not prove frontend functionality complete.",
+    "This report does not prove production readiness."
+  ]
+}

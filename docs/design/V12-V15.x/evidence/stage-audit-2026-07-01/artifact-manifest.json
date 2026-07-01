@@ -1,84 +1,109 @@
 {
-  "schema_version": "harnessos.stage_audit_artifact_manifest.v1",
-  "status": "PASS_AFTER_READABILITY_REPAIR_WITH_LIMITATIONS",
-  "stage": "WP-M5A_WP-M5B_PV22_BOUNDED_STAGE_AUDIT",
-  "created_at": "2026-07-01T13:13:24+08:00",
+  "schema_version": "stage_audit.artifact_manifest.v1",
+  "status": "PASS",
   "artifacts": [
     {
       "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/final-stage-audit-report.html",
-      "sha256": null,
-      "hash_note": "自指文件，不在页面内声明固定 sha；以 Git 提交内容作为审计锚点。"
+      "exists": true,
+      "bytes": 27128,
+      "sha256": "73d5bab7c2525cf87974288a0aa2cc5a4a7c8cb0cea33806c768558d49180295"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/code-review-findings.json",
-      "sha256": "6d9d36533c2b6023c971af5d3b43fea36fe58601d7992df6bc4af30aca1bdd39"
+      "exists": true,
+      "bytes": 1166,
+      "sha256": "802dca6102763b434f6663dd1790d26025ed440003b4d409164811f65f7336c8"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/document-audit-report.json",
-      "sha256": "1bb88c299573715a0b073a8c69da40022ea2fa07761b211f9e81b44157a689e9"
+      "exists": true,
+      "bytes": 1360,
+      "sha256": "5da222ec30590a49dbc7df18e071b7825da0353b0fd4de910c49a03b0da6f7f2"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/feature-coverage-matrix.json",
-      "sha256": "2424c2a26862847525b627f20b03125cd6034b713d1b7a301005c3b65b5c35db"
+      "exists": true,
+      "bytes": 4743,
+      "sha256": "ac0a97ba7528180ec0dfa42bf59489267737cbcc06ea5f1b657758667e82ff05"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/e2e-acceptance-summary.json",
-      "sha256": "4e61191d917963ee927fe5c9ba4146e174e7b3b77b81a8298e339788931eb1aa"
+      "exists": true,
+      "bytes": 1638,
+      "sha256": "7748573e2607e93df7113f31e416468d41de4b4234ad14b7a0b4210be59eeb24"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-command-log.json",
-      "sha256": "d212c140c2f9de0d2cf6e8666b09a6e5b80537bbc06739733a1ceb96b6efe1d5"
+      "exists": true,
+      "bytes": 2372,
+      "sha256": "32489f80772d37e552ca416513d0efdaa29644672f875dde946cf5698c3d8ccd"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/no-false-green-scan.txt",
-      "sha256": "8387bad994a8f694a7daef83ca1b682022e0be640e4889f162ff88488dce502c"
+      "exists": true,
+      "bytes": 108,
+      "sha256": "321f7a22d55a5fddfb9634ce7386db94653b642f11edb266f5de712d4af84612"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/redaction-scan.txt",
-      "sha256": "ca8c788ff64320a0bb5763c904a1fc13e1278ba6403da88019b080d515462d1d"
+      "exists": true,
+      "bytes": 90,
+      "sha256": "cf140eafce0919629afff77835806ae5a7abf4c76483dcdc01ff4886b908e735"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-pv22-wp-regression.log",
-      "sha256": "93305920d5371a0e8c17d943cb8c167ebad144c0959076fedda21b34084e751a"
+      "exists": true,
+      "bytes": 1940,
+      "sha256": "46fcbcfeb649a171a7fa513fd2c655b8af423f7793afcccf42fdd77806aff5b5"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-v35-regression.log",
-      "sha256": "fc3567783ab03035979ff466d25b58235b70821ce36043179d1a1d670b4198f5"
+      "exists": true,
+      "bytes": 1940,
+      "sha256": "b15e4ca7965086d2da6d902e293db574c47ffa19e7df57f073477db0bd9170cf"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-typescript-sdk.log",
-      "sha256": "969b3a6de65bcb6399b587b5d9b79b75feaaeb5dd6c23182eb2daee8849e09b2"
+      "exists": true,
+      "bytes": 4247,
+      "sha256": "268aec9606dc31ca316f1a069f9e04284a86ff725292e72970e42570bdc22e5b"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-workflow-console-build.log",
-      "sha256": "278851389deca4e7d3133865c5c176e17b88deea708802ce2ca20dcbbb758d14"
+      "exists": true,
+      "bytes": 773,
+      "sha256": "043002c183df22b2a9c5991d7abf6f3c6dd72558c2bcd14c1924be172b01526c"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-workflow-platform-cdp.log",
-      "sha256": "f19979797c243a516befea42f075d659683a7dd250b079429ab7f5c03a628d52"
+      "exists": true,
+      "bytes": 171,
+      "sha256": "6f386001d95f530780e53d0fcc93f33435ce7547a0b9621cabf02121534eac1b"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/audit-completeness-review.json",
-      "sha256": "f93c9f6fa642123aab3cc00026317e8e6d25ab7b631f4bba5afa493f53f4820f"
-    },
-    {
-      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/artifact-manifest.json",
-      "sha256": "d2950cd70479a32e91657f81b82ef8dd27f6ceec502bf136211b155b987fc686"
+      "exists": true,
+      "bytes": 607,
+      "sha256": "d0e12a5e56325325f19ccc840e363c7249a96334f926d5f2abf29f393d1f92ee"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/human-audit-checklist.json",
-      "sha256": "2597c34104f7ab58ee831744534a3ff487420a92f21a0960cd9f33c3c1130e6c"
+      "exists": true,
+      "bytes": 1078,
+      "sha256": "40eb7f7f7cb556f8cb5f3b85f3d989ff02c6e997a25d009226d4532f73b7bd35"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/artifact-manifest.json",
-      "sha256": null,
-      "hash_note": "自指文件，不在页面内声明固定 sha；以 Git 提交内容作为审计锚点。"
+      "exists": true,
+      "bytes": 3964,
+      "sha256": "self-referential"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/audit-report-validation.log",
+      "exists": true,
+      "bytes": 197,
+      "sha256": "209f1873fe94f5f06cfe992c548ce704a2eb2de2f7030a838d88d20a54e60eef"
     }
   ],
-  "source_evidence": {
-    "workflow_platform": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry",
-    "pv22_external_app_contract": "docs/design/V12-V15.x/evidence/pv22-external-app-contract"
-  },
-  "human_audit_conclusion": "Report was rebuilt for high-readability human audit. It is complete enough for bounded stage review and still excludes production/GA/external-ecosystem claims.",
-  "self_hash_policy": "final-stage-audit-report.html and artifact-manifest.json are self-referential and are anchored by Git commit instead of an in-file sha."
+  "self_hash_policy": "artifact-manifest.json is self-referential and anchored by Git commit."
 }

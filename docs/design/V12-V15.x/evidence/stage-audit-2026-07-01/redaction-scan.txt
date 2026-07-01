@@ -1,6 +1,3 @@
-{
-  "schema_version": "harnessos.redaction_scan.v1",
-  "status": "PASS",
-  "secret_patterns_found": [],
-  "note": "Audit artifacts contain local file paths, test routes, hashes and synthetic refs only; no API keys or credential-like tokens were found by this scoped scan."
-}
+status=PASS
+secret_matches=[]
+scope=stage-audit-2026-07-01 + workflow-platform-main-entry

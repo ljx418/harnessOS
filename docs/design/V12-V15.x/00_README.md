@@ -110,13 +110,31 @@ observability and deployable operations.
   acceptance. It proves default Studio entry, BFF DTO boundary,
   graph save/validate/diff, publish/rollback, runtime run, human gate and
   evidence review for bounded review only.
-- PV22 External App Contract documentation/readiness is complete. It defines
-  SDK, BFF template, reference app, capability token and registry targets, but
-  does not prove implementation evidence.
+- PV22 External App Contract bounded implementation has passed review. It
+  proves SDK/template/reference-app contract integration only and does not
+  prove production readiness, external ecosystem completion or commercial
+  readiness.
 - The current product-entry alignment target is WP-M0 Workflow Platform Main
   Entry. WP-M0 documents that subsequent implementation should make the
-  workflow platform the first product entry before PV22 implementation becomes
-  the default next step. WP-M0 documents are not implementation evidence.
+  workflow platform the first product entry. WP-M0 documents are not
+  implementation evidence.
+- WP-M1A through WP-M5A Workflow Platform PV13 baseline main-entry and
+  business-scenario productization have passed bounded review. They prove a
+  PV13-based homepage, canvas interaction, PV21/PV20 capability parity and
+  machine-readable business output summaries only.
+- The current selected stage is WP-M6 through WP-M11 PRD-defined frontend
+  functionality completion for bounded review. This stage targets data-driven
+  normal paths, WorkflowSpecGraph edit/save/readback, publish/run/human/evidence
+  inside the PV13 workbench, three scenario artifacts, frontend quality states
+  and aggregate claim-to-evidence audit. The document support audit is recorded
+  in `workflow_platform_wp_m6_to_m11_document_support_audit.md`, and the
+  implementation-readiness audit is recorded in
+  `workflow_platform_wp_m6_to_m11_implementation_readiness_audit.md`.
+  The WP-M6 substage route decision is fixed in
+  `workflow_platform_wp_m6_substage_readiness_note.md`; report schemas and
+  drawio/no-false-green validation artifacts are under `schemas/` and
+  `reports/`.
+  Implementation evidence has not started.
 - V12 design now starts with component-level prototype review before full Figma
   or real browser implementation. The required component sketch gate is defined
   in `v12_component_prototype_plan.md`; execution details, evidence paths and
@@ -124,7 +142,7 @@ observability and deployable operations.
   `v12_component_prototype_execution_plan.md`.
 - This V12-V15 package is the accepted staged planning and target architecture
   baseline for bounded productization review. The current selected alignment
-  target is WP-M0 Workflow Platform Main Entry.
+  target is WP-M6 through WP-M11 Workflow Platform frontend completion planning.
 
 ## Allowed Planning Claim
 
@@ -162,6 +180,14 @@ PV21 planning complete: complete Workflow Studio candidate development plan read
 
 WP-M0 complete: Workflow Platform main-entry documentation ready for implementation review.
 
+## Allowed WP-M6 To WP-M11 Planning Claim
+
+WP-M6 to WP-M11 planning complete: PRD-defined frontend functionality completion plan ready for implementation-readiness audit.
+
+## Allowed WP-M6 Substage Readiness Claim
+
+WP-M6 readiness complete: Route A data-source-closure implementation may start; WP-M7 and later remain blocked until WP-M6 PASS evidence exists.
+
 ## Forbidden Interpretations
 
 - Xpert parity complete
@@ -181,6 +207,8 @@ WP-M0 complete: Workflow Platform main-entry documentation ready for implementat
 - Agent 执行器已完成
 - WP-M0 文档证明工作流平台实现完成
 - PV22 文档证明外部接入实现完成
+- WP-M6 到 WP-M11 文档证明前端功能已经完成
+- WP-M6 readiness 证明 WP-M7/WP-M8/WP-M9/WP-M10/WP-M11 已完成
 
 ## Canonical Documents
 
@@ -269,6 +297,10 @@ WP-M0 complete: Workflow Platform main-entry documentation ready for implementat
 - `workflow_platform_main_entry_implementation_readiness_audit.md`
 - `workflow_platform_main_entry_document_support_audit.md`
 - `workflow_platform_main_entry_gap_analysis.drawio`
+- `workflow_platform_wp_m6_to_m11_frontend_completion_plan_and_audit.md`
+- `workflow_platform_wp_m6_to_m11_implementation_readiness_audit.md`
+- `workflow_platform_wp_m6_to_m11_document_support_audit.md`
+- `workflow_platform_wp_m6_substage_readiness_note.md`
 - `post_v15_implementation_readiness_audit.md`
 - `pv17_product_closed_loop_prd.md`
 - `pv17_product_closed_loop_target_architecture.md`
@@ -324,6 +356,12 @@ WP-M0 complete: Workflow Platform main-entry documentation ready for implementat
 - `schemas/v15_observability_deployment_artifact_manifest.schema.json`
 - `schemas/post_v15_product_runtime_hardening_acceptance_data.schema.json`
 - `schemas/post_v15_product_runtime_hardening_artifact_manifest.schema.json`
+- `schemas/frontend-data-source-closure-report.schema.json`
+- `schemas/graph-edit-save-readback-report.schema.json`
+- `schemas/workflow-inline-runtime-report.schema.json`
+- `schemas/business-artifact-manifest.schema.json`
+- `schemas/frontend-quality-failure-state-report.schema.json`
+- `schemas/claim-to-evidence-matrix.schema.json`
 - `fixtures/v12/product_entity_projection.sample.json`
 - `fixtures/v12/canvas_read_model.sample.json`
 - `fixtures/v12/browser_network_log.sample.json`
@@ -336,6 +374,8 @@ WP-M0 complete: Workflow Platform main-entry documentation ready for implementat
 - `reports/v13_workflow_studio_acceptance_report.json`
 - `reports/v14_v15_document_support_audit_report.json`
 - `reports/post_v15_document_support_audit_report.json`
+- `reports/wp_m6_to_m11_drawio_validation.json`
+- `reports/wp_m6_to_m11_no_false_green_scan.json`
 - `evidence/v12-readiness/figma-prototype-url.txt`
 - `evidence/v12-readiness/figma-prototype-review.md`
 - `evidence/v12-component-prototype/index.html`

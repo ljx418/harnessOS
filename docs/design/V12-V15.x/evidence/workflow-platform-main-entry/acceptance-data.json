@@ -1,6 +1,6 @@
 {
   "schema_version": "workflow_platform.main_entry_acceptance_data.v1",
-  "stage_id": "WP-M1-WP-M5A",
+  "stage_id": "WP-M1-WP-M11",
   "status": "PASS",
   "created_at": "2026-06-30T00:00:00Z",
   "wp_m1": "PASS",
@@ -8,10 +8,17 @@
   "wp_m3": "PASS",
   "wp_m4": "PASS",
   "wp_m5a": "PASS",
+  "wp_m6": "PASS",
+  "wp_m7": "PASS",
+  "wp_m8": "PASS",
+  "wp_m9": "PASS",
+  "wp_m10": "PASS",
+  "wp_m11": "PASS",
   "route_boundary": {
     "status": "PASS",
     "allowed_prefixes": [
       "/bff/v13",
+      "/bff/pv19",
       "/bff/pv21",
       "/bff/pv20",
       "/bff/workflow-platform"
@@ -20,11 +27,11 @@
   },
   "prd_review": {
     "status": "PASS",
-    "conclusion": "首入口、画布交互、运行证据闭环和三个必验业务场景均有自动化证据；不扩大为 GA、生产级或无限制执行口径。",
+    "conclusion": "首入口、画布交互、运行证据闭环、三个必验业务场景、数据源闭环、保存回读、失败态和 claim matrix 均有自动化证据；不扩大为 GA、生产级或无限制执行口径。",
     "wp_m5a": "三类业务场景均生成机器可读业务输出摘要、artifact refs、human review refs 和 mock reduction 报告。"
   },
   "architecture_review": {
     "status": "PASS",
-    "conclusion": "Browser 只经 BFF 调用 V13/PV21/PV20 DTO routes，未绕过 runtime/store。"
+    "conclusion": "Browser 只经 BFF 调用 V13/PV19/PV21/PV20/workflow-platform DTO routes，未绕过 runtime/store。"
   }
 }

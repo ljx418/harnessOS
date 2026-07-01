@@ -1,0 +1,6 @@
+status=RUNNING
+command=secret/redaction pattern scan
+status=PASS
+secret_matches=[]
+exit_code=0
+status=PASS

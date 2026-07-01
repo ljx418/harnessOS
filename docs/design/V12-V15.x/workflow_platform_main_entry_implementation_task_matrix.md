@@ -9,9 +9,9 @@
 | --- | --- | --- |
 | WP-M0-D1 PRD | `workflow_platform_main_entry_prd.md` | PV13 首页基线、用户目标、能力分类、No-Go 明确。 |
 | WP-M0-D2 Architecture | `workflow_platform_main_entry_target_architecture.md` | 具体代码实体和交互关系明确。 |
-| WP-M0-D3 Plan | `workflow_platform_main_entry_development_and_acceptance_plan.md` | WP-M1 到 WP-M5A/WP-M5B 顺序明确。 |
-| WP-M0-D3B BFF/DTO Contract | `workflow_platform_main_entry_bff_dto_contract.md` | route allowlist、DTO snapshot、browser denylist 明确。 |
-| WP-M0-D3C Runner Spec | `workflow_platform_main_entry_acceptance_runner_spec.md` | 自动化验收输出、场景和 PASS/FAIL 规则明确。 |
+| WP-M0-D3 Plan | `workflow_platform_main_entry_development_and_acceptance_plan.md` | WP-M1 到 WP-M11 顺序明确。 |
+| WP-M0-D3B BFF/DTO Contract | `workflow_platform_main_entry_bff_dto_contract.md` | WP-M1 到 WP-M11 route allowlist、DTO snapshot、browser denylist 明确。 |
+| WP-M0-D3C Runner Spec | `workflow_platform_main_entry_acceptance_runner_spec.md` | WP-M1 到 WP-M11 自动化验收输出、场景和 PASS/FAIL 规则明确。 |
 | WP-M0-D4 Roadmap | `workflow_platform_main_entry_milestone_roadmap.md` | 里程碑和用户可见结果明确。 |
 | WP-M0-D5 Gate | `workflow_platform_main_entry_acceptance_gate.md` | 验收门槛和出门条件明确。 |
 | WP-M0-D6 Gap | `workflow_platform_main_entry_current_gap_analysis.md` | 当前差距、风险和文档支撑度明确。 |
@@ -73,7 +73,7 @@
 WP-M5 is split after the WP-M5A bounded acceptance update:
 
 - WP-M5A: business scenario productization and data-driven projection [PASS bounded review].
-- WP-M5B: PV22 external app handoff readiness [remaining].
+- WP-M5B: PV22 external app handoff readiness [PASS bounded review].
 
 ## 6.1 WP-M5A Business Scenario Productization Tasks
 
@@ -94,3 +94,70 @@ WP-M5 is split after the WP-M5A bounded acceptance update:
 | WP-M5B-I1 | PV22 docs reference WP-M5A-reviewed PV13-based Workflow Platform as target host surface. | Document scan PASS。 |
 | WP-M5B-I2 | SDK/template/reference app acceptance paths point to platform entry. | PV22 readiness update PASS。 |
 | WP-M5B-I3 | External app contract does not bypass workflow platform governance or business scenario evidence boundaries. | Architecture review PASS。 |
+
+## 7. WP-M6 Frontend Full Data-Driven Closure Tasks
+
+| Task | Implementation target | Acceptance |
+| --- | --- | --- |
+| WP-M6-I1 | Inventory every `V13EditableStudio.tsx` normal-path data source. | Source inventory identifies scenarioData, fallbackGraph, timeline, Inspector, chat and any other static business facts。 |
+| WP-M6-I2 | Define BFF/DTO source for scenario catalog, selected scenario, graph, Inspector, timeline, quality, evidence and chat initial context. | DTO snapshot maps each UI region to BFF/DTO/artifact refs。 |
+| WP-M6-I3 | Replace normal-path static rendering with typed BFF/client data. | Browser network log and UI screenshots prove BFF/DTO first rendering。 |
+| WP-M6-I4 | Preserve explicit offline fallback with user-visible boundary. | fallback-status DTO and screenshot mark fallback reason and non-claim。 |
+| WP-M6-I5 | Generate data-source closure report. | `frontend-data-source-closure-report.json` shows `normal_path_static_sources == 0`。 |
+| WP-M6-I6 | Run PRD and No False Green review. | No claim that fallback/mock is real projection。 |
+
+## 8. WP-M7 WorkflowSpecGraph Edit/Save/Readback Tasks
+
+| Task | Implementation target | Acceptance |
+| --- | --- | --- |
+| WP-M7-I1 | Bind node drag to graph mutation DTO. | Drag action changes backend graph after save and survives refresh。 |
+| WP-M7-I2 | Bind legal edge create and delete/cancel to graph mutation DTO. | Edge before/after DTO and screenshots PASS。 |
+| WP-M7-I3 | Bind node configuration updates to BFF DTO. | Role/goal/tool/skill/MCP/quality config readback PASS。 |
+| WP-M7-I4 | Validate graph and expose visible reasons for invalid edges or missing fields. | Validation DTO and failure screenshots PASS。 |
+| WP-M7-I5 | Generate WorkflowDiff from saved backend graph. | Diff DTO references saved graph revision and human review log PASS。 |
+| WP-M7-I6 | Produce graph edit/save/readback report. | `graph-edit-save-readback-report.json` PASS。 |
+
+## 9. WP-M8 Publish / Run / Human / Evidence Inline Tasks
+
+| Task | Implementation target | Acceptance |
+| --- | --- | --- |
+| WP-M8-I1 | Add PV13 inline publish action for validated graph. | WorkflowVersion readback and audit refs PASS。 |
+| WP-M8-I2 | Add PV13 inline run action for active version. | WorkflowInstance and StationRun readback PASS。 |
+| WP-M8-I3 | Add Human Gate approve/reject in PV13 workbench. | Before/after state digest PASS。 |
+| WP-M8-I4 | Add Evidence Review in PV13 workbench. | artifact/trace/quality/audit/claim/redaction categories visible。 |
+| WP-M8-I5 | Prove path does not rely on separate PV19/PV21 pages. | Browser action log shows continuous PV13 workbench path。 |
+| WP-M8-I6 | Produce inline runtime report. | `workflow-inline-runtime-report.json` PASS。 |
+
+## 10. WP-M9 Three Business Scenario Artifact Tasks
+
+| Task | Implementation target | Acceptance |
+| --- | --- | --- |
+| WP-M9-I1 | Document summary scenario artifact. | Input hash, summary artifact/content snapshot, citation/quality/human/redaction refs PASS。 |
+| WP-M9-I2 | Code review scenario artifact. | Input hash, review artifact/content snapshot, file/risk/test/audit/human refs PASS。 |
+| WP-M9-I3 | Meeting brief scenario artifact. | Input hash, brief/action item artifact/content snapshot, decision/open-question/human refs PASS。 |
+| WP-M9-I4 | Present artifacts in PV13 workbench. | User can inspect output and evidence without reading only acceptance report。 |
+| WP-M9-I5 | Produce business artifact manifest. | `business-artifact-manifest.json` lists all three scenarios and evidence refs。 |
+| WP-M9-I6 | PRD review and claim guard. | No final commercial deliverable or production business app claim。 |
+
+## 11. WP-M10 Frontend Quality And Failure-State Tasks
+
+| Task | Implementation target | Acceptance |
+| --- | --- | --- |
+| WP-M10-I1 | Loading and empty states. | Screenshots and assertions PASS。 |
+| WP-M10-I2 | Error, permission denied and BFF offline states. | Visible recovery/retry path PASS。 |
+| WP-M10-I3 | Validation failure and human reject states. | Reason and next action visible PASS。 |
+| WP-M10-I4 | Cancel/retry/timeout user states. | Deterministic fixture or BFF state setup PASS。 |
+| WP-M10-I5 | Keyboard, focus and responsive checks. | Keyboard log, focus screenshots and desktop/constrained screenshots PASS。 |
+| WP-M10-I6 | Accessibility and performance checks. | a11y report and performance budget PASS or explicit bounded exception。 |
+| WP-M10-I7 | Produce quality/failure-state report. | `frontend-quality-failure-state-report.json` PASS。 |
+
+## 12. WP-M11 Aggregate Frontend Completion Audit Tasks
+
+| Task | Implementation target | Acceptance |
+| --- | --- | --- |
+| WP-M11-I1 | Collect all WP-M6 to WP-M10 evidence manifests. | Missing evidence marks BLOCKED。 |
+| WP-M11-I2 | Map WP-FR-1 to WP-FR-20 to evidence. | `claim-to-evidence-matrix.json` PASS。 |
+| WP-M11-I3 | Re-run No False Green scan. | Forbidden positive claims absent outside No-Go/risk/prohibited contexts。 |
+| WP-M11-I4 | Re-run PRD and target architecture review. | No spec drift or architecture bypass。 |
+| WP-M11-I5 | Generate Chinese HTML aggregate audit report. | `frontend-completion-aggregate-audit.html` includes screenshots, current vs target architecture, scenarios and risks。 |
+| WP-M11-I6 | Define next-stage options. | Path D, business Pack productization and open-source/commercial readiness remain separate post-WP-M11 choices。 |

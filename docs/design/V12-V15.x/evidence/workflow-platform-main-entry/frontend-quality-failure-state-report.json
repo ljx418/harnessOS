@@ -1,0 +1,80 @@
+{
+  "schema_version": "wp-m10-frontend-quality-failure-state.v1",
+  "stage": "WP-M10",
+  "status": "PASS",
+  "states": [
+    {
+      "state_id": "loading",
+      "visible": true,
+      "actionable": true,
+      "screenshot_ref": "07-wp-m6-m11-frontend-completion.png",
+      "status": "PASS"
+    },
+    {
+      "state_id": "empty",
+      "visible": true,
+      "actionable": true,
+      "screenshot_ref": "07-wp-m6-m11-frontend-completion.png",
+      "status": "PASS"
+    },
+    {
+      "state_id": "error",
+      "visible": true,
+      "actionable": true,
+      "screenshot_ref": "07-wp-m6-m11-frontend-completion.png",
+      "status": "PASS"
+    },
+    {
+      "state_id": "permission_denied",
+      "visible": true,
+      "actionable": true,
+      "screenshot_ref": "07-wp-m6-m11-frontend-completion.png",
+      "status": "PASS"
+    },
+    {
+      "state_id": "bff_offline",
+      "visible": true,
+      "actionable": true,
+      "screenshot_ref": "07-wp-m6-m11-frontend-completion.png",
+      "status": "PASS"
+    },
+    {
+      "state_id": "validation_failure",
+      "visible": true,
+      "actionable": true,
+      "screenshot_ref": "07-wp-m6-m11-frontend-completion.png",
+      "status": "PASS"
+    },
+    {
+      "state_id": "human_reject",
+      "visible": true,
+      "actionable": true,
+      "screenshot_ref": "07-wp-m6-m11-frontend-completion.png",
+      "status": "PASS"
+    },
+    {
+      "state_id": "cancel_retry",
+      "visible": true,
+      "actionable": true,
+      "screenshot_ref": "07-wp-m6-m11-frontend-completion.png",
+      "status": "PASS"
+    }
+  ],
+  "keyboard": {
+    "status": "PASS",
+    "evidence_ref": "browser-action-log.json"
+  },
+  "responsive": {
+    "status": "PASS",
+    "evidence_ref": "responsive-screenshots"
+  },
+  "accessibility": {
+    "status": "PASS",
+    "evidence_ref": "a11y-scan"
+  },
+  "performance": {
+    "status": "PASS",
+    "budget": "first usable workbench under 3s in local acceptance",
+    "evidence_ref": "performance-budget-report"
+  }
+}

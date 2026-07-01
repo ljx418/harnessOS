@@ -1,11 +1,13 @@
 # Workflow Platform Main Entry BFF / DTO Contract
 
-用途：定义 WP-M1 到 WP-M5A 使用的 BFF、DTO、route allowlist 和兼容策略，并记录本阶段 route ownership 结果。
+用途：定义 WP-M1 到 WP-M11 使用的 BFF、DTO、route allowlist 和兼容策略，并记录本阶段 route ownership 结果。
 边界：本文是合约和验收记录，不证明生产级 API、完整平台 GA 或生产可用。
 
 ## 1. Contract Strategy
 
 WP-M1 到 WP-M4 不应先发明一套完全独立的工作流平台 API。默认路线是先让 PV13 基线页面成为首页，再逐步集成已有 route families。WP-M5A 已新增 additive scenario projection / business output contract，且不得破坏 V13/PV20/PV21 evidence replay routes。
+
+WP-M6 到 WP-M11 的合约策略是：优先复用现有 `/bff/v13/*`、`/bff/pv19/*`、`/bff/pv20/*`、`/bff/pv21/*` 和 `/bff/workflow-platform/*` route families；只有当 PV13 工作台无法形成连续用户路径时，才新增 additive `/bff/workflow-platform/*` facade。新增 facade 必须保持 typed DTO、readback、audit refs 和 evidence refs，不得让 browser 绕过 BFF 直接调用 store/runtime。
 
 当前 route ownership 结论：WP-M1A 已在主 API router `apps/api/routers/bff.py` 中恢复正式 `/bff/v13/*` compatibility routes，并由 `tests/test_v13_workflow_platform_bff.py` 与 Chrome CDP browser network log 验证。历史 `apps/workflow-console/e2e/bff_smoke_server.py` 仍可作为 E2E harness 的 bounded fixture，但本阶段不再依赖 smoke-server-only route ownership。
 
@@ -53,6 +55,18 @@ PV13-based Workflow Platform UI
 | WP-M4 | `/bff/pv20/runs/{run_id}/agent-mcp-executions` | allowlisted MCP fixture action。 | MCP action report。 |
 | WP-M5A | `/bff/workflow-platform/scenarios` | 场景目录、输入要求、节点模板、Inspector/timeline projection。 | `scenario-projection-report.json`、DTO snapshot、frontend mock reduction scan。 |
 | WP-M5A | `/bff/workflow-platform/scenarios/{scenario_id}/outputs` | 文档总结、代码审查、会议整理的业务输出摘要和 artifact refs。 | `business-output-report.json`、artifact refs、human review refs。 |
+| WP-M6 | `/bff/workflow-platform/state` or composed existing routes | PV13 正常路径首页状态、场景、图、Inspector、timeline、quality、evidence、chat 初始上下文。 | `frontend-data-source-closure-report.json`、DTO snapshot、network log。 |
+| WP-M6 | `/bff/workflow-platform/fallback-status` | 显式返回 fallback 使用状态和原因，避免静态数据被误写成真实投影。 | fallback boundary screenshot、mock scan。 |
+| WP-M7 | `/bff/workflow-platform/workflows/{workflow_id}/graph` or `/bff/pv21/workflows/{workflow_id}/graph` | WorkflowSpecGraph read/save/readback。 | before/after DTO、refresh readback report。 |
+| WP-M7 | `/bff/workflow-platform/workflows/{workflow_id}/graph/validate` or existing validate route | 图校验、非法连接、缺参、未知节点反馈。 | validation DTO、failure screenshot。 |
+| WP-M7 | `/bff/workflow-platform/workflows/{workflow_id}/diff` or existing diff route | 基于后端保存状态生成 WorkflowDiff。 | Diff DTO、human review log。 |
+| WP-M8 | `/bff/workflow-platform/workflows/{workflow_id}/versions/publish` or existing PV21 route | 发布 WorkflowVersion。 | version DTO、audit refs。 |
+| WP-M8 | `/bff/workflow-platform/workflows/{workflow_id}/runs` or existing PV21/PV19 route | 启动 WorkflowInstance。 | run DTO、StationRun readback。 |
+| WP-M8 | `/bff/workflow-platform/runs/{run_id}/human-actions` or existing PV21 route | Human Gate approve/reject。 | before/after state digest。 |
+| WP-M8 | `/bff/workflow-platform/runs/{run_id}/evidence` or existing PV21 route | Evidence Review 聚合。 | evidence panel report。 |
+| WP-M9 | `/bff/workflow-platform/scenarios/{scenario_id}/artifacts` | 三业务场景产物 manifest、content summary、input hash 和 refs。 | `business-artifact-manifest.json`、content snapshot。 |
+| WP-M10 | `/bff/workflow-platform/quality/failure-fixtures` | 加载、空、错误、权限拒绝、BFF 离线、校验失败、人工拒绝、取消/重试等可验收 fixture。 | failure-state report、screenshots。 |
+| WP-M11 | `/bff/workflow-platform/audit/claims` or generated offline evidence | PRD claim-to-evidence matrix source。 | aggregate audit、No False Green scan。 |
 
 ## 2.1 Implemented V13 Compatibility Routes
 
@@ -225,6 +239,80 @@ This DTO is the WP-M5A accepted contract for replacing business-critical local `
 }
 ```
 
+### 4.6 `WorkflowPlatformDataSourceClosureDTO`
+
+```json
+{
+  "schema_version": "workflow_platform.data_source_closure.v1",
+  "stage": "WP-M6",
+  "normal_path_static_sources": 0,
+  "regions": [
+    {
+      "region_id": "canvas",
+      "source": "bff_dto",
+      "route": "/bff/workflow-platform/state",
+      "fallback_allowed": true,
+      "fallback_visible_to_user": true
+    }
+  ],
+  "blocked_static_sources": [
+    "scenarioData",
+    "fallbackGraph",
+    "static_timeline",
+    "static_inspector",
+    "proposal_only_chat"
+  ]
+}
+```
+
+### 4.7 `WorkflowPlatformGraphMutationDTO`
+
+```json
+{
+  "schema_version": "workflow_platform.graph_mutation.v1",
+  "workflow_id": "wf-v13-markdown-summary-studio-pilot",
+  "base_revision": 3,
+  "mutation": {
+    "nodes_upserted": [],
+    "nodes_deleted": [],
+    "edges_upserted": [],
+    "edges_deleted": [],
+    "node_config_updates": []
+  },
+  "requires_validation": true,
+  "requires_human_diff_review": true
+}
+```
+
+### 4.8 `WorkflowPlatformArtifactClosureDTO`
+
+```json
+{
+  "schema_version": "workflow_platform.artifact_closure.v1",
+  "scenario_id": "document_summary",
+  "input_hash": "sha256:...",
+  "artifact_ref": "artifact://...",
+  "content_snapshot_ref": "artifact://...",
+  "quality_refs": [],
+  "human_review_refs": [],
+  "redaction_refs": [],
+  "claim_refs": []
+}
+```
+
+### 4.9 `WorkflowPlatformQualityStateDTO`
+
+```json
+{
+  "schema_version": "workflow_platform.quality_state.v1",
+  "state_id": "bff_offline",
+  "user_visible_message": "BFF 暂不可用，当前显示离线 fallback。",
+  "recoverable": true,
+  "allowed_actions": ["retry", "view_cached_refs"],
+  "evidence_ref": "screenshot://wp-m10-bff-offline.png"
+}
+```
+
 ## 5. Compatibility Rules
 
 - Existing V13 graph, validation, inspector and WorkflowDiff DTO shapes remain canonical for WP-M1/WP-M2 baseline homepage and canvas work.
@@ -235,6 +323,12 @@ This DTO is the WP-M5A accepted contract for replacing business-critical local `
 - UI copy must say “受治理执行” or equivalent bounded wording for Agent/Tool/Skill/MCP actions.
 - Capability parity is required: if a PV21/PV20 capability is currently reachable from `WorkflowPlatformMainEntry`, the PV13-based target must either expose it with matching BFF evidence or mark it as deferred/No-Go with user confirmation. Silent removal is not allowed.
 - Business productization is required for WP-M5A: scenario path PASS alone cannot satisfy business output acceptance.
+- WP-M6 normal path data-source closure is required before any frontend completion claim. `normal_path_static_sources > 0` blocks WP-M11.
+- WP-M7 graph mutation routes must support before/after DTO snapshots and refresh readback. Local-only graph state cannot satisfy acceptance.
+- WP-M8 runtime routes must provide readback for version, run, station and human action state. UI-only simulation cannot satisfy acceptance.
+- WP-M9 artifact routes must return auditable artifact refs and content snapshots. Summary cards alone cannot satisfy acceptance.
+- WP-M10 quality/failure fixtures may be bounded test fixtures, but they must be served through BFF/DTO or deterministic browser state setup and clearly labeled.
+- WP-M11 claim matrix must reference evidence files, not prose claims.
 
 ## 6. Contract Exit Criteria
 
@@ -246,3 +340,11 @@ WP-M1 implementation may start only if:
 - Browser denylist is enforced in E2E.
 - No future facade is required before WP-M1.
 - WP-M1 can prove PV13 baseline homepage using `/bff/v13/*` without waiting for PV19/PV20/PV21 integration.
+
+WP-M6 implementation may start only if:
+
+- This contract includes WP-M6 to WP-M11 route families and DTO shapes.
+- The implementation plan identifies whether each target route reuses PV13/PV19/PV20/PV21 routes or adds an additive `/bff/workflow-platform/*` facade.
+- The runner can fail on forbidden browser routes and on normal-path static source usage.
+- The evidence package can store DTO snapshots, route logs, browser action logs, screenshots and artifact manifests.
+- Any use of local fallback is user-visible and represented in DTO/report fields.

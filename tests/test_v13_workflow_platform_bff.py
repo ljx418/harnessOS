@@ -87,3 +87,48 @@ def test_workflow_platform_wp_m5a_business_projection_routes(monkeypatch, tmp_pa
         assert "not_complete_workflow_studio_ga" in output["non_claims"]
 
     assert_no_forbidden_text([projection, *outputs])
+
+
+def test_workflow_platform_wp_m6_to_m11_frontend_completion_facade_routes(monkeypatch, tmp_path) -> None:
+    client = _client(monkeypatch, tmp_path)
+
+    data_source = client.get(f"/bff/workflow-platform/frontend-data-source-closure{SCOPE_QUERY}").json()
+    assert data_source["schema_version"] == "workflow_platform.frontend_data_source_closure.v1"
+    assert data_source["stage"] == "WP-M6"
+    assert data_source["status"] == "PASS"
+    assert data_source["normal_path_static_sources"] == 0
+    assert {item["source_id"] for item in data_source["blocked_static_sources"]} >= {"scenarioData", "fallbackGraph", "static_timeline", "static_inspector", "proposal_only_chat"}
+    assert all(item["normal_path_usage"] is False for item in data_source["blocked_static_sources"])
+
+    artifacts = client.get(f"/bff/workflow-platform/artifacts{SCOPE_QUERY}").json()
+    assert artifacts["schema_version"] == "workflow_platform.business_artifact_closure.v1"
+    assert artifacts["stage"] == "WP-M9"
+    assert artifacts["status"] == "PASS"
+    assert {item["scenario_id"] for item in artifacts["artifacts"]} == {"document_summary", "code_review", "meeting_brief"}
+    assert all(item["artifact_ref"].startswith("artifact://wp-m9/") for item in artifacts["artifacts"])
+    assert all(item["human_review_refs"] for item in artifacts["artifacts"])
+
+    quality = client.get(f"/bff/workflow-platform/quality-states{SCOPE_QUERY}").json()
+    assert quality["schema_version"] == "workflow_platform.frontend_quality_state.v1"
+    assert quality["stage"] == "WP-M10"
+    assert quality["status"] == "PASS"
+    assert {item["state_id"] for item in quality["states"]} >= {
+        "loading",
+        "empty",
+        "error",
+        "permission_denied",
+        "bff_offline",
+        "validation_failure",
+        "human_reject",
+        "cancel_retry",
+    }
+
+    claims = client.get(f"/bff/workflow-platform/claim-evidence-matrix{SCOPE_QUERY}").json()
+    assert claims["schema_version"] == "workflow_platform.claim_evidence_matrix.v1"
+    assert claims["stage"] == "WP-M11"
+    assert claims["status"] == "PASS"
+    assert claims["missing_evidence_blocks_pass"] is True
+    assert {item["requirement_id"] for item in claims["requirements"]} == {f"WP-FR-{index}" for index in range(1, 21)}
+    assert all(item["evidence_refs"] for item in claims["requirements"])
+
+    assert_no_forbidden_text([data_source, artifacts, quality, claims])

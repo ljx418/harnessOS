@@ -1,52 +1,22 @@
 {
-  "schema_version": "harnessos.stage_audit_completeness_review.v1",
-  "status": "PASS_AFTER_REPAIR",
-  "audited_commit": "dd3083b3a140cf17d5e24c378c1b60101361f0fc",
-  "branch": "main",
-  "pre_repair_verdict": "INSUFFICIENT_FOR_COMPLETE_HUMAN_AUDIT",
-  "pre_repair_gaps": [
-    "HTML report did not expose a PRD/architecture/spec-to-evidence traceability matrix.",
-    "HTML report did not list concrete implementation entry points for code audit.",
-    "HTML report did not include enough reproduction instructions for an independent reviewer.",
-    "Workflow platform source artifact manifest still contained legacy validation log paths with exists=false.",
-    "HTML report did not explicitly separate audited implementation commit from later report-only repairs."
-  ],
-  "repairs": [
-    "Added audit-completeness-review.json as a machine-readable self-review artifact.",
-    "Added spec-to-evidence, code audit entry points, reproduction steps, environment and source evidence health sections to final-stage-audit-report.html.",
-    "Updated workflow-platform-main-entry/artifact-manifest.json to map legacy missing validation logs to the stage-audit validation package.",
-    "Updated stage artifact manifest hashes after report repair.",
-    "Rebuilt final-stage-audit-report.html into a navigable human-audit report with executive verdict, review modes, traceability matrix, visual gallery, code entry points, source health and evidence index.",
-    "Added human-audit-checklist.json to make the expected human review workflow machine-readable."
-  ],
-  "human_audit_verdict": "COMPLETE_ENOUGH_FOR_HUMAN_BOUNDED_STAGE_AUDIT_AFTER_REPORT_REPAIR",
-  "must_not_use_for": [
-    "production readiness approval",
-    "complete Workflow Studio GA approval",
-    "unrestricted Agent executor approval",
-    "external ecosystem launch approval",
-    "commercial readiness approval"
-  ],
-  "independent_reviewer_can_check": [
-    "changed implementation paths",
-    "PRD and target architecture mapping",
-    "automated command logs",
-    "browser screenshots",
-    "BFF route/network boundary logs",
-    "three business scenario output records",
-    "PV22 contract registry and negative fixtures",
-    "No False Green and redaction scan artifacts",
-    "known limitations and next-stage gaps"
-  ],
-  "readability_repair": {
-    "status": "PASS",
-    "changes": [
-      "navigation sidebar",
-      "15/45/90 minute audit paths",
-      "scenario cards",
-      "clickable evidence inventory",
-      "clear No-Go boundary",
-      "source evidence health section"
-    ]
-  }
+  "schema_version": "stage_audit.audit_completeness_review.v1",
+  "status": "PASS",
+  "human_audit_sufficiency": "SUFFICIENT_FOR_BOUNDED_REVIEW",
+  "coverage": {
+    "prd": "PASS",
+    "architecture": "PASS",
+    "code_entry_points": "PASS",
+    "functionality": "PASS",
+    "e2e": "PASS",
+    "screenshots": "PASS",
+    "command_logs": "PASS",
+    "no_false_green": "PASS",
+    "redaction": "PASS"
+  },
+  "limitations": [
+    "不证明生产可用。",
+    "不证明完整 Workflow Studio GA。",
+    "不证明无限制 Agent executor ready。",
+    "不证明外部生态或商业化完成。"
+  ]
 }

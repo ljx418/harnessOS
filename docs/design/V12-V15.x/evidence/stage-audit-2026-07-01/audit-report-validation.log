@@ -1,0 +1,9 @@
+status=RUNNING
+command=stage audit report completeness validation
+report_completeness=PASS
+feature_coverage=20/20
+stage_command_log=PASS
+claim_scan=PASS
+redaction_scan=PASS
+exit_code=0
+status=PASS

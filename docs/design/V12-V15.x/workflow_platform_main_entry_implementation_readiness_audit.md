@@ -15,7 +15,7 @@ three_required_business_scenarios=PASS
 business_outputs_productized=PASS_BOUNDED_WP_M5A
 frontend_static_scenario_data_reduction=PASS_WITH_FALLBACK_BOUNDARY
 evidence_package=docs/design/V12-V15.x/evidence/workflow-platform-main-entry/
-readiness_for_pv22_implementation_before_wp_m5a=NO_GO_BY_DEFAULT
+readiness_for_wp_m6_to_wp_m11_frontend_completion=READY_FOR_IMPLEMENTATION_READINESS
 readiness_for_complete_workflow_platform_claim=NO_GO
 ```
 
@@ -64,7 +64,7 @@ readiness_for_complete_workflow_platform_claim=NO_GO
 | Static scenario projection | Medium | PV13 page still contains local static scenario data for visual experience and fallback. | Keep `scenario-projection-report.json` and `mock-reduction-report.json` as required review evidence until all copy is persisted。 |
 | Dirty worktree integration risk | Medium | Repo currently contains uncommitted frontend/evidence changes unrelated to this document update。 | Do not revert unrelated changes; review touched files before implementation。 |
 
-No residual risk is currently high enough to require a user route decision for the already completed WP-M5B/PV22 bounded review path. Future production governance, business Pack productization or open-source/commercial readiness stages still require their own readiness audits.
+No residual risk is currently high enough to require a user route decision for the newly selected WP-M6 to WP-M11 frontend completion planning path. Future production governance, business Pack productization or open-source/commercial readiness stages still require their own readiness audits after WP-M11 or an explicit user reselection.
 
 ## 5. Fallback Technical Routes
 
@@ -89,6 +89,8 @@ Recommended route is A.
 
 WP-M0 documentation was sufficient to support automated WP-M1A through WP-M4 implementation using PV13 as the homepage frontend baseline. The implemented result preserves `WorkflowPlatformMainEntry` PV21/PV20 capability parity in the PV13-based workbench and validates document/knowledge summary, code review/risk and meeting/interview brief as required scenario paths.
 
-WP-M5A selected Route A and completed bounded implementation evidence: BFF scenario projection, business output DTOs, PV13 UI projection, E2E reports and mock-reduction boundary. WP-M5B/PV22 readiness update and PV22-S1..SA bounded implementation have since completed. The next implementation stage should not keep expanding WP-M1..WP-M5A or PV22; it should plan production governance hardening, business Pack productization or open-source/commercial readiness as a separate bounded stage.
+WP-M5A selected Route A and completed bounded implementation evidence: BFF scenario projection, business output DTOs, PV13 UI projection, E2E reports and mock-reduction boundary. WP-M5B/PV22 readiness update and PV22-S1..SA bounded implementation have since completed. The next implementation stage should not keep expanding WP-M1..WP-M5A or PV22; it should follow the newly selected WP-M6 to WP-M11 PRD-defined frontend functionality completion plan.
+
+The implementation-readiness decision for WP-M6 to WP-M11 is now recorded separately in `workflow_platform_wp_m6_to_m11_implementation_readiness_audit.md`.
 
 The completed evidence remains bounded review evidence. It does not remove the need for separate product-grade UX, production governance, external app contract and deployment acceptance stages.

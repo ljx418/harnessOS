@@ -1,0 +1,4 @@
+status=RUNNING
+command=node --check e2e/workflow_platform_main_entry_cdp_acceptance.mjs
+exit_code=0
+status=PASS

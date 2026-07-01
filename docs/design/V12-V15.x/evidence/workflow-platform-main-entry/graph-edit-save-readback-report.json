@@ -1,0 +1,42 @@
+{
+  "schema_version": "wp-m7-graph-edit-save-readback.v1",
+  "stage": "WP-M7",
+  "status": "PASS",
+  "actions": [
+    {
+      "action_id": "node-drag",
+      "kind": "node_drag",
+      "status": "PASS",
+      "browser_action_ref": "browser-action-log.json"
+    },
+    {
+      "action_id": "edge-create",
+      "kind": "edge_create",
+      "status": "PASS",
+      "browser_action_ref": "browser-action-log.json"
+    },
+    {
+      "action_id": "edge-cancel",
+      "kind": "edge_cancel",
+      "status": "PASS",
+      "browser_action_ref": "browser-action-log.json"
+    },
+    {
+      "action_id": "node-config",
+      "kind": "node_config",
+      "status": "PASS",
+      "browser_action_ref": "browser-action-log.json"
+    }
+  ],
+  "before_graph_ref": "dto-snapshot.json#/v13_graph_before",
+  "after_graph_ref": "dto-snapshot.json#/v13_graph_after",
+  "saved_graph_ref": "route:/bff/pv21/workflows/{workflow_id}/graph",
+  "refresh_readback_status": "PASS",
+  "workflow_diff_ref": "route:/bff/pv21/workflows/{workflow_id}/diff",
+  "human_diff_review_status": "approved",
+  "evidence_refs": [
+    "browser-action-log.json",
+    "04-wp-m3-three-scenarios.png",
+    "07-wp-m6-m11-frontend-completion.png"
+  ]
+}

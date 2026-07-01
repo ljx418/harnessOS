@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://harnessos.local/schemas/frontend-quality-failure-state-report.schema.json",
+  "title": "Workflow Platform Frontend Quality Failure State Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "stage",
+    "status",
+    "states",
+    "keyboard",
+    "responsive",
+    "accessibility",
+    "performance"
+  ],
+  "properties": {
+    "schema_version": { "type": "string", "const": "wp-m10-frontend-quality-failure-state.v1" },
+    "stage": { "type": "string", "const": "WP-M10" },
+    "status": { "type": "string", "enum": ["PASS", "FAIL", "BLOCKED", "NO_GO"] },
+    "states": {
+      "type": "array",
+      "minItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["state_id", "visible", "actionable", "screenshot_ref", "status"],
+        "properties": {
+          "state_id": {
+            "type": "string",
+            "enum": ["loading", "empty", "error", "permission_denied", "bff_offline", "validation_failure", "human_reject", "cancel_retry"]
+          },
+          "visible": { "type": "boolean" },
+          "actionable": { "type": "boolean" },
+          "screenshot_ref": { "type": "string", "minLength": 1 },
+          "status": { "type": "string", "enum": ["PASS", "FAIL", "BLOCKED"] }
+        }
+      }
+    },
+    "keyboard": { "type": "object", "required": ["status", "evidence_ref"], "properties": { "status": { "type": "string" }, "evidence_ref": { "type": "string" } } },
+    "responsive": { "type": "object", "required": ["status", "evidence_ref"], "properties": { "status": { "type": "string" }, "evidence_ref": { "type": "string" } } },
+    "accessibility": { "type": "object", "required": ["status", "evidence_ref"], "properties": { "status": { "type": "string" }, "evidence_ref": { "type": "string" } } },
+    "performance": { "type": "object", "required": ["status", "budget", "evidence_ref"], "properties": { "status": { "type": "string" }, "budget": { "type": "string" }, "evidence_ref": { "type": "string" } } }
+  }
+}

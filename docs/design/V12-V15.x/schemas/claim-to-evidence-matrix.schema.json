@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://harnessos.local/schemas/claim-to-evidence-matrix.schema.json",
+  "title": "Workflow Platform Claim To Evidence Matrix",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "stage",
+    "status",
+    "missing_evidence_blocks_pass",
+    "requirements",
+    "forbidden_claim_scan_ref"
+  ],
+  "properties": {
+    "schema_version": { "type": "string", "const": "wp-m11-claim-to-evidence-matrix.v1" },
+    "stage": { "type": "string", "const": "WP-M11" },
+    "status": { "type": "string", "enum": ["PASS", "FAIL", "BLOCKED", "NO_GO"] },
+    "missing_evidence_blocks_pass": { "type": "boolean", "const": true },
+    "requirements": {
+      "type": "array",
+      "minItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["requirement_id", "claim", "status", "evidence_refs"],
+        "properties": {
+          "requirement_id": { "type": "string", "pattern": "^WP-FR-[0-9]+$" },
+          "claim": { "type": "string", "minLength": 1 },
+          "status": { "type": "string", "enum": ["PASS", "FAIL", "BLOCKED", "NO_GO"] },
+          "evidence_refs": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "blocked_reason": { "type": "string" }
+        }
+      }
+    },
+    "forbidden_claim_scan_ref": { "type": "string", "minLength": 1 },
+    "aggregate_html_report_ref": { "type": "string" }
+  }
+}
