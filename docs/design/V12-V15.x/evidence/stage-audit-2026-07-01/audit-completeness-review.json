@@ -15,9 +15,11 @@
     "Added audit-completeness-review.json as a machine-readable self-review artifact.",
     "Added spec-to-evidence, code audit entry points, reproduction steps, environment and source evidence health sections to final-stage-audit-report.html.",
     "Updated workflow-platform-main-entry/artifact-manifest.json to map legacy missing validation logs to the stage-audit validation package.",
-    "Updated stage artifact manifest hashes after report repair."
+    "Updated stage artifact manifest hashes after report repair.",
+    "Rebuilt final-stage-audit-report.html into a navigable human-audit report with executive verdict, review modes, traceability matrix, visual gallery, code entry points, source health and evidence index.",
+    "Added human-audit-checklist.json to make the expected human review workflow machine-readable."
   ],
-  "human_audit_verdict": "COMPLETE_ENOUGH_FOR_BOUNDED_STAGE_REVIEW_WITH_LIMITATIONS",
+  "human_audit_verdict": "COMPLETE_ENOUGH_FOR_HUMAN_BOUNDED_STAGE_AUDIT_AFTER_REPORT_REPAIR",
   "must_not_use_for": [
     "production readiness approval",
     "complete Workflow Studio GA approval",
@@ -35,5 +37,16 @@
     "PV22 contract registry and negative fixtures",
     "No False Green and redaction scan artifacts",
     "known limitations and next-stage gaps"
-  ]
+  ],
+  "readability_repair": {
+    "status": "PASS",
+    "changes": [
+      "navigation sidebar",
+      "15/45/90 minute audit paths",
+      "scenario cards",
+      "clickable evidence inventory",
+      "clear No-Go boundary",
+      "source evidence health section"
+    ]
+  }
 }

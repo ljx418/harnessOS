@@ -1,0 +1,79 @@
+{
+  "schema_version": "harnessos.human_audit_checklist.v1",
+  "status": "PASS_WITH_LIMITATIONS",
+  "audited_commit": "615912dec1cbfd23cffebc117122e50550eb772f",
+  "branch": "main",
+  "review_modes": {
+    "15_minute_triage": [
+      "阅读顶部最终审计结论和 No-Go 边界",
+      "查看截图证据是否覆盖首入口、画布交互和业务输出",
+      "检查自动化命令矩阵是否全部有日志和 PASS 摘要",
+      "确认报告没有把 bounded review 写成生产/GA 批准"
+    ],
+    "45_minute_review": [
+      "逐项检查规格到证据追踪矩阵",
+      "打开三类业务场景的真实输入、输出摘要和人审引用",
+      "从代码审计入口追踪 Browser → BFF → DTO → contract/test/evidence",
+      "检查源证据健康表和证据索引是否存在缺失项"
+    ],
+    "90_minute_deep_audit": [
+      "重新运行报告中的复验命令",
+      "检查 BFF 网络日志和 route log 是否只命中允许前缀",
+      "审查 PV22 contract registry、SDK smoke、BFF smoke 和 negative fixtures",
+      "对照变更文件、PRD 和目标架构确认没有扩大阶段承诺"
+    ]
+  },
+  "checklist": [
+    {
+      "item": "报告明确 bounded scope 和 No-Go 声明",
+      "status": "PASS",
+      "evidence": "final-stage-audit-report.html#limits"
+    },
+    {
+      "item": "主要 PRD/目标架构门槛均映射到证据",
+      "status": "PASS",
+      "evidence": "规格到证据追踪矩阵"
+    },
+    {
+      "item": "浏览器截图存在且可点击打开",
+      "status": "PASS",
+      "evidence": "截图证据区 6 张 PNG"
+    },
+    {
+      "item": "自动化命令日志存在且包含通过摘要",
+      "status": "PASS",
+      "evidence": "validation-*.log"
+    },
+    {
+      "item": "三类业务场景包含真实输入 hash、业务输出摘要和人审引用",
+      "status": "PASS_WITH_LIMITATIONS",
+      "evidence": "business-output-report.json"
+    },
+    {
+      "item": "PV22 外部 App 合同包含 registry、SDK smoke、BFF smoke 和 negative fixtures",
+      "status": "PASS_WITH_LIMITATIONS",
+      "evidence": "pv22-external-app-contract/"
+    },
+    {
+      "item": "已知限制被明确列出，没有被隐藏成通过项",
+      "status": "PASS",
+      "evidence": "限制、风险与 No-Go"
+    },
+    {
+      "item": "人工审查者可以定位本阶段实现文件",
+      "status": "PASS",
+      "evidence": "代码审计入口"
+    },
+    {
+      "item": "报告不能被用于 production/GA/Agent executor ready 批准",
+      "status": "PASS",
+      "evidence": "No-Go 声明"
+    }
+  ],
+  "remaining_limits": [
+    "WSL Playwright Chromium cannot launch because libnspr4.so is missing; this audit used Windows Chrome headless CDP instead.",
+    "Vite build emits a main chunk-size warning.",
+    "PV22 reference app browser proof is contract/source-boundary plus SDK/Gateway API evidence, not a separately screenshotted external reference UI journey."
+  ],
+  "human_audit_verdict": "COMPLETE_ENOUGH_FOR_HUMAN_BOUNDED_STAGE_AUDIT_AFTER_REPORT_REPAIR"
+}

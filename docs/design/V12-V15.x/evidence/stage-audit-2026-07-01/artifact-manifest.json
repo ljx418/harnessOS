@@ -1,12 +1,13 @@
 {
   "schema_version": "harnessos.stage_audit_artifact_manifest.v1",
-  "status": "PASS_AFTER_REPAIR_WITH_LIMITATIONS",
+  "status": "PASS_AFTER_READABILITY_REPAIR_WITH_LIMITATIONS",
   "stage": "WP-M5A_WP-M5B_PV22_BOUNDED_STAGE_AUDIT",
-  "created_at": "2026-07-01T13:06:44+08:00",
+  "created_at": "2026-07-01T13:13:24+08:00",
   "artifacts": [
     {
       "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/final-stage-audit-report.html",
-      "sha256": "c931db916e4f7357cd37cd5aa1cfb670ece6f52ed744c0d2cec86c489748abe3"
+      "sha256": null,
+      "hash_note": "自指文件，不在页面内声明固定 sha；以 Git 提交内容作为审计锚点。"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/code-review-findings.json",
@@ -58,16 +59,26 @@
     },
     {
       "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/audit-completeness-review.json",
-      "sha256": "a1c75d127d380f010f81d9b551e803aa6147335e56751bcf46a54a92e4dce59d"
+      "sha256": "f93c9f6fa642123aab3cc00026317e8e6d25ab7b631f4bba5afa493f53f4820f"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/artifact-manifest.json",
       "sha256": "d2950cd70479a32e91657f81b82ef8dd27f6ceec502bf136211b155b987fc686"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/human-audit-checklist.json",
+      "sha256": "2597c34104f7ab58ee831744534a3ff487420a92f21a0960cd9f33c3c1130e6c"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/artifact-manifest.json",
+      "sha256": null,
+      "hash_note": "自指文件，不在页面内声明固定 sha；以 Git 提交内容作为审计锚点。"
     }
   ],
   "source_evidence": {
     "workflow_platform": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry",
     "pv22_external_app_contract": "docs/design/V12-V15.x/evidence/pv22-external-app-contract"
   },
-  "human_audit_conclusion": "The original HTML report was insufficient for complete human audit; after repair it includes traceability, code entry points, reproduction steps, source evidence health and limitations for bounded stage review."
+  "human_audit_conclusion": "Report was rebuilt for high-readability human audit. It is complete enough for bounded stage review and still excludes production/GA/external-ecosystem claims.",
+  "self_hash_policy": "final-stage-audit-report.html and artifact-manifest.json are self-referential and are anchored by Git commit instead of an in-file sha."
 }
