@@ -1,7 +1,7 @@
 {
   "schema_version": "workflow_platform.artifact_manifest.v1",
   "stage_id": "WP-M1-WP-M5A",
-  "status": "PASS",
+  "status": "PASS_WITH_STAGE_AUDIT_REPLACEMENTS",
   "created_at": "2026-06-30T00:00:00Z",
   "artifacts": [
     {
@@ -134,49 +134,81 @@
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-command-log.json",
       "exists": false,
       "bytes": 0,
-      "sha256": null
+      "sha256": null,
+      "replaced_by": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-command-log.json",
+      "replacement_exists": true,
+      "replacement_sha256": "d212c140c2f9de0d2cf6e8666b09a6e5b80537bbc06739733a1ceb96b6efe1d5",
+      "audit_note": "Legacy per-folder validation log path superseded by the stage-audit validation package."
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-node-check.log",
       "exists": false,
       "bytes": 0,
-      "sha256": null
+      "sha256": null,
+      "replaced_by": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-workflow-console-build.log",
+      "replacement_exists": true,
+      "replacement_sha256": "278851389deca4e7d3133865c5c176e17b88deea708802ce2ca20dcbbb758d14",
+      "audit_note": "Legacy per-folder validation log path superseded by the stage-audit validation package."
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-tsc.log",
       "exists": false,
       "bytes": 0,
-      "sha256": null
+      "sha256": null,
+      "replaced_by": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-workflow-console-build.log",
+      "replacement_exists": true,
+      "replacement_sha256": "278851389deca4e7d3133865c5c176e17b88deea708802ce2ca20dcbbb758d14",
+      "audit_note": "Legacy per-folder validation log path superseded by the stage-audit validation package."
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-vite-build.log",
       "exists": false,
       "bytes": 0,
-      "sha256": null
+      "sha256": null,
+      "replaced_by": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-workflow-console-build.log",
+      "replacement_exists": true,
+      "replacement_sha256": "278851389deca4e7d3133865c5c176e17b88deea708802ce2ca20dcbbb758d14",
+      "audit_note": "Legacy per-folder validation log path superseded by the stage-audit validation package."
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-pytest.log",
       "exists": false,
       "bytes": 0,
-      "sha256": null
+      "sha256": null,
+      "replaced_by": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-pv22-wp-regression.log",
+      "replacement_exists": true,
+      "replacement_sha256": "93305920d5371a0e8c17d943cb8c167ebad144c0959076fedda21b34084e751a",
+      "audit_note": "Legacy per-folder validation log path superseded by the stage-audit validation package."
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-cdp-e2e.log",
       "exists": false,
       "bytes": 0,
-      "sha256": null
+      "sha256": null,
+      "replaced_by": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-workflow-platform-cdp.log",
+      "replacement_exists": true,
+      "replacement_sha256": "f19979797c243a516befea42f075d659683a7dd250b079429ab7f5c03a628d52",
+      "audit_note": "Legacy per-folder validation log path superseded by the stage-audit validation package."
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-claim-scan.log",
       "exists": false,
       "bytes": 0,
-      "sha256": null
+      "sha256": null,
+      "replaced_by": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/no-false-green-scan.txt",
+      "replacement_exists": true,
+      "replacement_sha256": "8387bad994a8f694a7daef83ca1b682022e0be640e4889f162ff88488dce502c",
+      "audit_note": "Legacy per-folder validation log path superseded by the stage-audit validation package."
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-redaction-scan.log",
       "exists": false,
       "bytes": 0,
-      "sha256": null
+      "sha256": null,
+      "replaced_by": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/redaction-scan.txt",
+      "replacement_exists": true,
+      "replacement_sha256": "ca8c788ff64320a0bb5763c904a1fc13e1278ba6403da88019b080d515462d1d",
+      "audit_note": "Legacy per-folder validation log path superseded by the stage-audit validation package."
     },
     {
       "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/dto-snapshot.json",
@@ -208,5 +240,6 @@
       "bytes": 23726,
       "sha256": "22e43edd4570be830243f743874f202a9decc4e8624eab725ae9f7f0fe1b1a71"
     }
-  ]
+  ],
+  "stage_audit_replacement_note": "Missing legacy validation log entries are replaced by docs/design/V12-V15.x/evidence/stage-audit-2026-07-01 validation logs."
 }

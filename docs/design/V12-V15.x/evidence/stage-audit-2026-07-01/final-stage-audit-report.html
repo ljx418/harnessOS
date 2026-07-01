@@ -61,6 +61,127 @@ dist/assets/index-CPEtC2JU.js   685.43 kB │ gzip: 211.07 kB
   <p>三类业务场景均使用本地项目真实文件作为输入，并生成机器可读业务输出摘要。该证据证明“平台内可审查的业务输出路径”，不证明最终业务产品包完成。</p>
   <table><tr><th>业务场景</th><th>状态</th><th>真实输入</th><th>最小用户路径</th><th>输出摘要</th><th>证据引用</th><th>人工审查点</th></tr><tr><td><strong>文档 / 知识总结</strong><br><code>document_summary</code></td><td><strong class="pass">PASS</strong></td><td>docs/design/V12-V15.x/workflow_platform_main_entry_prd.md<br><code>67746c68ea60ebb716f178acc8810b89ce2f515572cc959203eb2e22a880a5be</code><br>3010 bytes sampled</td><td>canvas edit/connect/configure<br>save<br>validate<br>WorkflowDiff<br>publish<br>run<br>Human Gate<br>Evidence Review</td><td>工作流平台 PRD 摘要产物</td><td>Artifact: artifact://wp-m5a/document_summary/output-summary<br>Trace: trace://wp-m5a/document_summary/workflow-run<br>Quality: quality://wp-m5a/document_summary<br>Audit: audit://wp-m5a/document_summary/business-output<br>Claim: claim://wp-m5a/document_summary/bounded-output<br>Redaction: redaction://wp-m5a/document_summary/scan-pass</td><td>human-review://wp-m5a/document-summary/local-reviewer<br>WorkflowDiff confirmation and Human Gate approval</td></tr><tr><td><strong>代码审查 / 变更风险检查</strong><br><code>code_review</code></td><td><strong class="pass">PASS</strong></td><td>apps/workflow-console/src/App.tsx<br><code>4105f9566b28d1e0d7b8b09f7e9dce024e3ab916d31a8c31509d1cb61005e249</code><br>1824 bytes sampled</td><td>canvas edit/connect/configure<br>save<br>validate<br>WorkflowDiff<br>publish<br>run<br>Human Gate<br>Evidence Review</td><td>工作流平台前端变更风险报告</td><td>Artifact: artifact://wp-m5a/code_review/output-summary<br>Trace: trace://wp-m5a/code_review/workflow-run<br>Quality: quality://wp-m5a/code_review<br>Audit: audit://wp-m5a/code_review/business-output<br>Claim: claim://wp-m5a/code_review/bounded-output<br>Redaction: redaction://wp-m5a/code_review/scan-pass</td><td>human-review://wp-m5a/code-review/local-reviewer<br>WorkflowDiff confirmation and Human Gate approval</td></tr><tr><td><strong>会议 / 访谈整理</strong><br><code>meeting_brief</code></td><td><strong class="pass">PASS</strong></td><td>TASKS.md<br><code>d79c9c95216aa74290ea3ae2905ec91f0e2e2b0ff3a03bdcfd395752704bf6ad</code><br>1932 bytes sampled</td><td>canvas edit/connect/configure<br>save<br>validate<br>WorkflowDiff<br>publish<br>run<br>Human Gate<br>Evidence Review</td><td>当前开发主线会议纪要产物</td><td>Artifact: artifact://wp-m5a/meeting_brief/output-summary<br>Trace: trace://wp-m5a/meeting_brief/workflow-run<br>Quality: quality://wp-m5a/meeting_brief<br>Audit: audit://wp-m5a/meeting_brief/business-output<br>Claim: claim://wp-m5a/meeting_brief/bounded-output<br>Redaction: redaction://wp-m5a/meeting_brief/scan-pass</td><td>human-review://wp-m5a/meeting-brief/local-reviewer<br>WorkflowDiff confirmation and Human Gate approval</td></tr></table>
 
+
+  <h2>审计完整性复检</h2>
+  <p class="note">复检结论：原 HTML 报告不足以支撑“完整、完全、完备”的人工审计，已打回并修复。当前修复后状态为 <strong class="pass_after_repair">PASS_AFTER_REPAIR</strong>；适用范围仍然只是本阶段 bounded review。</p>
+  <table><tr><th>项目</th><th>结论</th></tr>
+    <tr><td>被审计实现提交</td><td><code>dd3083b3a140cf17d5e24c378c1b60101361f0fc</code> / branch <code>main</code></td></tr>
+    <tr><td>修复前缺口</td><td>HTML report did not expose a PRD/architecture/spec-to-evidence traceability matrix.<br>HTML report did not list concrete implementation entry points for code audit.<br>HTML report did not include enough reproduction instructions for an independent reviewer.<br>Workflow platform source artifact manifest still contained legacy validation log paths with exists=false.<br>HTML report did not explicitly separate audited implementation commit from later report-only repairs.</td></tr>
+    <tr><td>修复动作</td><td>Added audit-completeness-review.json as a machine-readable self-review artifact.<br>Added spec-to-evidence, code audit entry points, reproduction steps, environment and source evidence health sections to final-stage-audit-report.html.<br>Updated workflow-platform-main-entry/artifact-manifest.json to map legacy missing validation logs to the stage-audit validation package.<br>Updated stage artifact manifest hashes after report repair.</td></tr>
+    <tr><td>机器可读自评</td><td><a href="audit-completeness-review.json"><code>docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/audit-completeness-review.json</code></a></td></tr>
+  </table>
+
+  <h2>规格到证据追踪矩阵</h2>
+  <table><tr><th>规格/架构门槛</th><th>要求</th><th>证据与代码入口</th><th>状态</th></tr><tr><td>PRD 首入口体验</td><td>工作流平台必须以 PV13-based Light Studio 为用户首入口。</td><td>01-wp-m1-main-entry.png；pv13-baseline-homepage-report.json；V13EditableStudio.tsx</td><td><strong class="pass">PASS</strong></td></tr><tr><td>画布交互</td><td>滚轮缩放、节点拖拽、自由连线、取消连线必须可被用户体验和自动化验证。</td><td>02-wp-m2-canvas-drag-zoom.png；03-wp-m2-connect-cancel.png；browser-action-log.json；canvas-edge-quality-report.json</td><td><strong class="pass">PASS</strong></td></tr><tr><td>BFF/DTO 边界</td><td>浏览器只经 BFF/DTO，不直连 runtime/store internal routes。</td><td>browser-network-log.json；route-log.json；tests/test_v13_workflow_platform_bff.py</td><td><strong class="pass">PASS</strong></td></tr><tr><td>运行与人工审查闭环</td><td>保存、校验、WorkflowDiff、发布、运行、Human Gate、Evidence Review 形成同页闭环。</td><td>runtime-inspect-report.json；evidence-panel-report.json；human-action-log evidence in browser-action-log.json</td><td><strong class="pass">PASS</strong></td></tr><tr><td>三业务场景</td><td>文档总结、代码审查、会议整理必须有真实输入、业务输出摘要、artifact refs、human review refs。</td><td>business-output-report.json；business-scenario-groups.json；06-wp-m5a-business-output.png</td><td><strong class="pass">PASS_WITH_LIMITATIONS</strong></td></tr><tr><td>PV22 外部 App 契约</td><td>SDK、BFF template、reference app、method/event/error registry、negative fixtures 可复核。</td><td>pv22-external-app-contract/acceptance-data.json；contract-registry-snapshot.json；negative-fixtures.json</td><td><strong class="pass">PASS_WITH_LIMITATIONS</strong></td></tr><tr><td>No False Green</td><td>不得声明生产可用、完整 Workflow Studio GA、Agent executor ready、Xpert parity。</td><td>no-false-green-scan.txt；redaction-scan.txt；final-stage-audit-report.html No-Go section</td><td><strong class="pass">PASS</strong></td></tr></table>
+
+  <h2>代码审计入口</h2>
+  <p>以下文件是人工复审本阶段自动化开发工作的最小代码入口。审计者可从这些路径追踪 Browser → BFF → DTO → contract/test/evidence 的链路。</p>
+  <table><tr><th>审计区域</th><th>路径</th></tr><tr><td>Browser / main entry</td><td><a href="../../../../../apps/workflow-console/src/ui/v13/V13EditableStudio.tsx"><code>apps/workflow-console/src/ui/v13/V13EditableStudio.tsx</code></a></td></tr><tr><td>Frontend API client</td><td><a href="../../../../../apps/workflow-console/src/api/workflowConsoleClient.ts"><code>apps/workflow-console/src/api/workflowConsoleClient.ts</code></a></td></tr><tr><td>Frontend DTO types</td><td><a href="../../../../../apps/workflow-console/src/api/types.ts"><code>apps/workflow-console/src/api/types.ts</code></a></td></tr><tr><td>BFF routes</td><td><a href="../../../../../apps/api/routers/bff.py"><code>apps/api/routers/bff.py</code></a></td></tr><tr><td>PV22 contract registry</td><td><a href="../../../../../core/protocol/contracts/pv22_external_app_contract.py"><code>core/protocol/contracts/pv22_external_app_contract.py</code></a></td></tr><tr><td>Reference app profile</td><td><a href="../../../../../core/apps/profiles.py"><code>core/apps/profiles.py</code></a></td></tr><tr><td>CDP acceptance runner</td><td><a href="../../../../../apps/workflow-console/e2e/workflow_platform_main_entry_cdp_acceptance.mjs"><code>apps/workflow-console/e2e/workflow_platform_main_entry_cdp_acceptance.mjs</code></a></td></tr><tr><td>Playwright spec</td><td><a href="../../../../../apps/workflow-console/e2e/workflow-platform-main-entry.spec.ts"><code>apps/workflow-console/e2e/workflow-platform-main-entry.spec.ts</code></a></td></tr><tr><td>BFF smoke server</td><td><a href="../../../../../apps/workflow-console/e2e/bff_smoke_server.py"><code>apps/workflow-console/e2e/bff_smoke_server.py</code></a></td></tr><tr><td>PV22 acceptance script</td><td><a href="../../../../../scripts/pv22_external_app_contract_acceptance.py"><code>scripts/pv22_external_app_contract_acceptance.py</code></a></td></tr><tr><td>Workflow BFF tests</td><td><a href="../../../../../tests/test_v13_workflow_platform_bff.py"><code>tests/test_v13_workflow_platform_bff.py</code></a></td></tr><tr><td>PV22 contract tests</td><td><a href="../../../../../tests/test_pv22_external_app_contract.py"><code>tests/test_pv22_external_app_contract.py</code></a></td></tr></table>
+
+  <h2>独立复验步骤</h2>
+  <p>本报告引用的命令日志已落盘。独立复验时应先安装项目依赖并启动 Headless CDP 所需浏览器环境；WSL Playwright Linux 依赖缺失时，可复用 Windows Chrome Headless CDP 路线。</p>
+  <table><tr><th>命令</th><th>覆盖面</th><th>日志</th><th>状态</th></tr><tr><td><code>.venv/bin/python -m pytest tests/test_pv22_external_app_contract.py tests/test_v13_workflow_platform_bff.py tests/test_pv21_complete_workflow_studio_bff.py tests/test_pv20_agent_execution_contract_bff.py -q</code></td><td>PV22 + Workflow Platform bounded regression</td><td><a href="validation-pv22-wp-regression.log"><code>docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-pv22-wp-regression.log</code></a></td><td><strong class="pass">PASS</strong></td></tr><tr><td><code>.venv/bin/python -m pytest tests/test_v3_5_python_sdk.py tests/test_v3_5_typescript_sdk.py tests/test_v3_5_bff_template_e2e.py tests/test_v3_5_bff_minimal_smoke.py tests/test_v3_5_reference_app.py -q</code></td><td>V3.5 SDK/template/reference app regression</td><td><a href="validation-v35-regression.log"><code>docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-v35-regression.log</code></a></td><td><strong class="pass">PASS</strong></td></tr><tr><td><code>cd sdk/typescript &amp;&amp; npm test</code></td><td>TypeScript SDK npm test</td><td><a href="validation-typescript-sdk.log"><code>docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-typescript-sdk.log</code></a></td><td><strong class="pass">PASS</strong></td></tr><tr><td><code>cd apps/workflow-console &amp;&amp; node node_modules/typescript/bin/tsc -p tsconfig.json &amp;&amp; node node_modules/vite/bin/vite.js build</code></td><td>Workflow Console typecheck/build</td><td><a href="validation-workflow-console-build.log"><code>docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-workflow-console-build.log</code></a></td><td><strong class="pass">PASS</strong></td></tr><tr><td><code>WP_CDP_URL=http://127.0.0.1:9351 WP_BASE_URL=http://127.0.0.1:4174 node e2e/workflow_platform_main_entry_cdp_acceptance.mjs</code></td><td>Workflow Platform headless CDP E2E</td><td><a href="validation-workflow-platform-cdp.log"><code>docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-workflow-platform-cdp.log</code></a></td><td><strong class="pass">PASS</strong></td></tr></table>
+
+  <h2>源证据健康检查</h2>
+  <p>源证据包曾包含历史 validation log 路径。已将缺失条目映射到本次阶段审计日志，避免人工复核时误判为证据丢失。</p>
+  <table><tr><th>历史条目</th><th>原 exists</th><th>替代证据</th><th>替代存在</th></tr><tr><td>docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-command-log.json</td><td>False</td><td><a href="validation-command-log.json"><code>docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-command-log.json</code></a></td><td>True</td></tr><tr><td>docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-node-check.log</td><td>False</td><td><a href="validation-workflow-console-build.log"><code>docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-workflow-console-build.log</code></a></td><td>True</td></tr><tr><td>docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-tsc.log</td><td>False</td><td><a href="validation-workflow-console-build.log"><code>docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-workflow-console-build.log</code></a></td><td>True</td></tr><tr><td>docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-vite-build.log</td><td>False</td><td><a href="validation-workflow-console-build.log"><code>docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-workflow-console-build.log</code></a></td><td>True</td></tr><tr><td>docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-pytest.log</td><td>False</td><td><a href="validation-pv22-wp-regression.log"><code>docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-pv22-wp-regression.log</code></a></td><td>True</td></tr><tr><td>docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-cdp-e2e.log</td><td>False</td><td><a href="validation-workflow-platform-cdp.log"><code>docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-workflow-platform-cdp.log</code></a></td><td>True</td></tr><tr><td>docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-claim-scan.log</td><td>False</td><td><a href="no-false-green-scan.txt"><code>docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/no-false-green-scan.txt</code></a></td><td>True</td></tr><tr><td>docs/design/V12-V15.x/evidence/workflow-platform-main-entry/validation-redaction-scan.log</td><td>False</td><td><a href="redaction-scan.txt"><code>docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/redaction-scan.txt</code></a></td><td>True</td></tr></table>
+
+  <h2>变更规模摘要</h2>
+  <pre>commit dd3083b
+Author: ljx418 &lt;1173696783@qq.com&gt;
+
+    feat: add bounded workflow platform audit evidence
+
+ TASKS.md                                           |  21 +-
+ apps/api/routers/bff.py                            | 178 ++++++++
+ apps/workflow-console/e2e/bff_smoke_server.py      |  30 ++
+ .../e2e/workflow-platform-main-entry.spec.ts       | 384 +++++++++++++++-
+ ...workflow_platform_main_entry_cdp_acceptance.mjs | 382 +++++++++++++++-
+ apps/workflow-console/src/api/types.ts             |  69 +++
+ .../src/api/workflowConsoleClient.ts               |  15 +
+ .../src/ui/v13/V13EditableStudio.tsx               |  80 +++-
+ .../src/ui/v13/v13-editable-studio.css             |  41 +-
+ core/apps/profiles.py                              |  14 +
+ .../contracts/pv22_external_app_contract.py        | 156 +++++++
+ .../acceptance-data.json                           |  25 ++
+ .../acceptance-report.html                         |  50 +++
+ .../artifact-manifest.json                         |  78 ++++
+ .../bff-template-smoke-report.json                 |  21 +
+ .../browser-network-log.json                       |  15 +
+ .../contract-registry-snapshot.json                | 482 ++++++++++++++++++++
+ .../negative-fixtures.json                         |  47 ++
+ .../no-false-green-scan.txt                        |   1 +
+ .../prd-review-report.json                         |  15 +
+ .../pv22-external-app-contract/redaction-scan.txt  |   1 +
+ .../reference-app-e2e-report.json                  |  21 +
+ .../pv22-external-app-contract/route-log.json      | 133 ++++++
+ .../sdk-smoke-report.json                          |  18 +
+ .../validation-command-log.json                    |  34 ++
+ .../validation-pv22-pytest.log                     |  22 +
+ .../validation-typescript-sdk.log                  | 156 +++++++
+ .../validation-v35-regression.log                  |  22 +
+ .../validation-workflow-platform-regression.log    |  22 +
+ .../stage-audit-2026-07-01/artifact-manifest.json  |  65 +++
+ .../code-review-findings.json                      |  38 ++
+ .../document-audit-report.json                     |  22 +
+ .../e2e-acceptance-summary.json                    |  71 +++
+ .../feature-coverage-matrix.json                   |  72 +++
+ .../final-stage-audit-report.html                  |  85 ++++
+ .../stage-audit-2026-07-01/no-false-green-scan.txt |  23 +
+ .../stage-audit-2026-07-01/redaction-scan.txt      |   6 +
+ .../validation-command-log.json                    |  41 ++
+ .../validation-pv22-wp-regression.log              |  22 +
+ .../validation-typescript-sdk.log                  | 156 +++++++
+ .../validation-v35-regression.log                  |  22 +
+ .../validation-workflow-console-build.log          |   9 +
+ .../validation-workflow-platform-cdp.log           |   2 +
+ .../01-wp-m1-main-entry.png                        | Bin 359988 -&gt; 360531 bytes
+ .../02-wp-m2-canvas-drag-zoom.png                  | Bin 426652 -&gt; 426327 bytes
+ .../03-wp-m2-connect-cancel.png                    | Bin 431079 -&gt; 430475 bytes
+ .../04-wp-m3-three-scenarios.png                   | Bin 431418 -&gt; 430928 bytes
+ .../05-wp-m4-governed-executor.png                 | Bin 430085 -&gt; 438431 bytes
+ .../06-wp-m5a-business-output.png                  | Bin 0 -&gt; 437145 bytes
+ .../acceptance-data.json                           |   9 +-
+ .../acceptance-report.html                         | 132 +++++-
+ .../artifact-manifest.json                         | 186 +++++++-
+ .../audit-completeness-report.json                 | 244 ++++++++++
+ .../browser-action-log.json                        |   4 +-
+ .../browser-network-log.json                       |  92 +++-
+ .../business-output-report.json                    | 127 ++++++
+ .../business-scenario-groups.json                  |  76 ++++
+ .../workflow-platform-main-entry/dto-snapshot.json |  13 +-
+ .../mock-reduction-report.json                     |  26 ++
+ .../scenario-projection-report.json                |  72 +++
+ .../user-scenario-report.json                      |   6 +-
+ ...post_pv18_runtime_platform_development_route.md |   2 +-
+ .../pv22_external_app_contract_acceptance_gate.md  |   9 +-
+ ...app_contract_development_and_acceptance_plan.md |  55 ++-
+ ...external_app_contract_document_support_audit.md |   5 +-
+ ..._app_contract_implementation_readiness_audit.md |  14 +-
+ ...rnal_app_contract_implementation_task_matrix.md |  16 +
+ ...pv22_external_app_contract_milestone_roadmap.md |   5 +-
+ ...workflow_platform_main_entry_acceptance_gate.md |  39 +-
+ ...w_platform_main_entry_acceptance_runner_spec.md |  15 +
+ ...orkflow_platform_main_entry_bff_dto_contract.md |  73 ++-
+ ...low_platform_main_entry_current_gap_analysis.md |  11 +-
+ ...m_main_entry_development_and_acceptance_plan.md |  42 +-
+ ...w_platform_main_entry_document_support_audit.md |  14 +-
+ ...orkflow_platform_main_entry_gap_analysis.drawio | 373 ++++++++++++----
+ ...rm_main_entry_implementation_readiness_audit.md |  26 +-
+ ...atform_main_entry_implementation_task_matrix.md |  29 +-
+ ...rkflow_platform_main_entry_milestone_roadmap.md |  17 +-
+ .../V12-V15.x/workflow_platform_main_entry_prd.md  |  47 +-
+ ...flow_platform_main_entry_target_architecture.md |  42 +-
+ ...iness_scenario_productization_plan_and_audit.md |  70 +++
+ ...wp_m5b_pv22_readiness_refresh_plan_and_audit.md |  53 +++
+ scripts/pv22_external_app_contract_acceptance.py   | 492 +++++++++++++++++++++
+ sdk/typescript/package.json                        |   2 +-
+ tests/test_pv22_external_app_contract.py           |  46 ++
+ tests/test_v13_workflow_platform_bff.py            |  28 ++
+ tests/test_v3_5_typescript_sdk.py                  |   2 +-
+ 87 files changed, 5402 insertions(+), 279 deletions(-)
+</pre>
+
   <h2>截图证据</h2><figure><img src="../workflow-platform-main-entry/01-wp-m1-main-entry.png" alt="WP-M1：默认进入 PV13-based 工作流平台主入口。"><figcaption>WP-M1：默认进入 PV13-based 工作流平台主入口。</figcaption></figure><figure><img src="../workflow-platform-main-entry/02-wp-m2-canvas-drag-zoom.png" alt="WP-M2：画布缩放、节点拖拽和右侧区域可操作。"><figcaption>WP-M2：画布缩放、节点拖拽和右侧区域可操作。</figcaption></figure><figure><img src="../workflow-platform-main-entry/03-wp-m2-connect-cancel.png" alt="WP-M2：自由连线和取消连线。"><figcaption>WP-M2：自由连线和取消连线。</figcaption></figure><figure><img src="../workflow-platform-main-entry/04-wp-m3-three-scenarios.png" alt="WP-M3：三个业务场景运行闭环。"><figcaption>WP-M3：三个业务场景运行闭环。</figcaption></figure><figure><img src="../workflow-platform-main-entry/05-wp-m4-governed-executor.png" alt="WP-M4：受治理 Skill / Tool / MCP 证据面板。"><figcaption>WP-M4：受治理 Skill / Tool / MCP 证据面板。</figcaption></figure><figure><img src="../workflow-platform-main-entry/06-wp-m5a-business-output.png" alt="WP-M5A：业务输出摘要、artifact refs、human review refs 和 mock reduction 边界。"><figcaption>WP-M5A：业务输出摘要、artifact refs、human review refs 和 mock reduction 边界。</figcaption></figure>
 
   <h2>证据包与审计文件</h2>

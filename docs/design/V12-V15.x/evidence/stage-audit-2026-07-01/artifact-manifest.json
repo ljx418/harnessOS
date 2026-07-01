@@ -1,12 +1,12 @@
 {
   "schema_version": "harnessos.stage_audit_artifact_manifest.v1",
-  "status": "PASS_WITH_LIMITATIONS",
+  "status": "PASS_AFTER_REPAIR_WITH_LIMITATIONS",
   "stage": "WP-M5A_WP-M5B_PV22_BOUNDED_STAGE_AUDIT",
-  "created_at": "2026-07-01T13:01:10+08:00",
+  "created_at": "2026-07-01T13:06:44+08:00",
   "artifacts": [
     {
       "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/final-stage-audit-report.html",
-      "sha256": "eb0883dff2844fc67b340e641ed02d1fc98551082429b350009a70480d27148b"
+      "sha256": "c931db916e4f7357cd37cd5aa1cfb670ece6f52ed744c0d2cec86c489748abe3"
     },
     {
       "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/code-review-findings.json",
@@ -55,11 +55,19 @@
     {
       "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/validation-workflow-platform-cdp.log",
       "sha256": "f19979797c243a516befea42f075d659683a7dd250b079429ab7f5c03a628d52"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/stage-audit-2026-07-01/audit-completeness-review.json",
+      "sha256": "a1c75d127d380f010f81d9b551e803aa6147335e56751bcf46a54a92e4dce59d"
+    },
+    {
+      "path": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry/artifact-manifest.json",
+      "sha256": "d2950cd70479a32e91657f81b82ef8dd27f6ceec502bf136211b155b987fc686"
     }
   ],
   "source_evidence": {
     "workflow_platform": "docs/design/V12-V15.x/evidence/workflow-platform-main-entry",
     "pv22_external_app_contract": "docs/design/V12-V15.x/evidence/pv22-external-app-contract"
   },
-  "human_audit_conclusion": "The package is complete enough to audit the bounded stage implementation, with explicit limitations and No-Go statements."
+  "human_audit_conclusion": "The original HTML report was insufficient for complete human audit; after repair it includes traceability, code entry points, reproduction steps, source evidence health and limitations for bounded stage review."
 }
